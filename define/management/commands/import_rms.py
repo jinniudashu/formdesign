@@ -5,8 +5,8 @@ from django.core.management import BaseCommand
 
 # 写入文件
 def write_to_file(file_name, content, mode='w'):
-    output_path = '.\\define\\'   # views.py urls.py 导出路径
-    with open(f'{output_path}{file_name}', mode, encoding='utf-8') as f:
+    # output_path = '.\\define\\'   # views.py urls.py 导出路径
+    with open(f'{file_name}', mode, encoding='utf-8') as f:
         f.write(content)
     return      
 

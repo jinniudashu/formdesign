@@ -23,7 +23,7 @@ class Command(BaseCommand):
         OperandView.objects.all().delete()        
         
         # 导入数据
-        with open('.\\define\\design.json', encoding="utf8") as f:
+        with open('design.json', encoding="utf8") as f:
             design = json.loads(f.read())
 
         for obj in design:
