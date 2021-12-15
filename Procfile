@@ -1,1 +1,1 @@
-web: gunicorn hssc-formdesign.wsgi
+web: gunicorn formdesign.wsgi
