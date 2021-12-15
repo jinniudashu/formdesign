@@ -1,0 +1,1406 @@
+[
+    {
+        "name": "allergies_history",
+        "label": "过敏史",
+        "style": "List",
+        "icpc": "A6207",
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_drug_name",
+                "label": "药品名称",
+                "type": "CheckboxSelectMultiple",
+                "related_content": "drug_list",
+                "related_content_label": "药品清单",
+                "dic": [],
+                "related_field": "value",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "out_of_hospital_self_report_survey",
+        "label": "院外症状自述调查",
+        "style": "List",
+        "icpc": "A6202",
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_symptom_list",
+                "label": "症状",
+                "type": "CheckboxSelectMultiple",
+                "related_content": "icpc3_symptoms_and_problems",
+                "related_content_label": "症状和问题",
+                "dic": [],
+                "related_field": "iname",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_supplementary_description_of_the_condition",
+                "label": "病情补充描述",
+                "type": "CharField",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "personal_comprehensive_psychological_quality_survey",
+        "label": "个人心理综合素质调查",
+        "style": "Detail",
+        "icpc": "A6213",
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_personality_tendency",
+                "label": "性格倾向",
+                "type": "RadioSelect",
+                "related_content": "character",
+                "related_content_label": "性格",
+                "dic": [
+                    "外向",
+                    "内向"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "BoolField",
+                "name": "boolfield_is_life_fun",
+                "label": "您觉得生活是否有乐趣吗",
+                "type": "0",
+                "score": true
+            }
+        ]
+    },
+    {
+        "name": "personal_adaptability_assessment",
+        "label": "个人适应能力评估",
+        "style": "Detail",
+        "icpc": "A6215",
+        "fields": [
+            {
+                "model": "BoolField",
+                "name": "boolfield_do_you_feel_pressured_at_work",
+                "label": "是否感觉到工作压力大",
+                "type": "0",
+                "score": false
+            },
+            {
+                "model": "BoolField",
+                "name": "boolfield_do_you_often_work_overtime",
+                "label": "是否经常加班",
+                "type": "0",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_working_hours_per_day",
+                "label": "每天工作及工作往返总时长",
+                "type": "TextField",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_are_you_satisfied_with_the_job_and_life",
+                "label": "对目前生活和工作满意吗",
+                "type": "Select",
+                "related_content": "satisfaction",
+                "related_content_label": "满意度",
+                "dic": [
+                    "很满意",
+                    "满意",
+                    "既非满意也非不满意",
+                    "不满意",
+                    "很不满意"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_are_you_satisfied_with_your_adaptability",
+                "label": "对自己的适应能力满意吗",
+                "type": "Select",
+                "related_content": "satisfaction",
+                "related_content_label": "满意度",
+                "dic": [
+                    "很满意",
+                    "满意",
+                    "既非满意也非不满意",
+                    "不满意",
+                    "很不满意"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_can_you_get_encouragement_and_support_from_family_and_friends",
+                "label": "是否能得到家人朋友的鼓励和支持",
+                "type": "Select",
+                "related_content": "frequency",
+                "related_content_label": "频次",
+                "dic": [],
+                "related_field": "value",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "personal_health_behavior_survey",
+        "label": "个人健康行为调查",
+        "style": "Detail",
+        "icpc": "A6212",
+        "fields": [
+            {
+                "model": "BoolField",
+                "name": "boolfield_is_the_diet_regular",
+                "label": "饮食是否规律",
+                "type": "0",
+                "score": false
+            },
+            {
+                "model": "BoolField",
+                "name": "boolfield_is_the_diet_proportion_healthy",
+                "label": "饮食比例是否健康",
+                "type": "0",
+                "score": false
+            },
+            {
+                "model": "BoolField",
+                "name": "boolfield_whether_the_bowel_movements_are_regular",
+                "label": "大便是否规律",
+                "type": "0",
+                "score": false
+            },
+            {
+                "model": "BoolField",
+                "name": "boolfield_whether_to_drink_alcohol",
+                "label": "是否饮酒",
+                "type": "0",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_drinking_frequency",
+                "label": "饮酒频次",
+                "type": "RadioSelect",
+                "related_content": "frequency",
+                "related_content_label": "频次",
+                "dic": [],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "BoolField",
+                "name": "boolfield_do_you_smoke",
+                "label": "是否吸烟",
+                "type": "0",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_smoking_frequency",
+                "label": "吸烟频次",
+                "type": "RadioSelect",
+                "related_content": "frequency",
+                "related_content_label": "频次",
+                "dic": [],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_average_sleep_duration",
+                "label": "平均睡眠时长",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "BoolField",
+                "name": "boolfield_insomnia",
+                "label": "是否有失眠情况",
+                "type": "0",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_duration_of_insomnia",
+                "label": "持续失眠时间",
+                "type": "CharField",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "personal_health_assessment",
+        "label": "个人身体健康评估",
+        "style": "Detail",
+        "icpc": "A6214",
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_own_health",
+                "label": "觉得自身健康状况如何",
+                "type": "RadioSelect",
+                "related_content": "state_degree",
+                "related_content_label": "状态程度",
+                "dic": [],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_compared_to_last_year",
+                "label": "较之过去一年状态如何",
+                "type": "Select",
+                "related_content": "comparative_expression",
+                "related_content_label": "比较表达",
+                "dic": [],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_sports_preference",
+                "label": "运动偏好",
+                "type": "Select",
+                "related_content": "sports_preference",
+                "related_content_label": "运动类型",
+                "dic": [
+                    "有氧运动",
+                    "无氧运动",
+                    "有氧无氧交替运动",
+                    "不运动"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_exercise_time",
+                "label": "运动时长",
+                "type": "RadioSelect",
+                "related_content": "exercise_time",
+                "related_content_label": "运动时长",
+                "dic": [
+                    "半小时以内",
+                    "半小时到一个半小时",
+                    "一个半小时以上"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "BoolField",
+                "name": "boolfield_is_it_easy_to_get_sick",
+                "label": "是否比别人容易生病",
+                "type": "0",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_have_any_recent_symptoms_of_physical_discomfort",
+                "label": "近来有无身体不适症状",
+                "type": "CheckboxSelectMultiple",
+                "related_content": "icpc3_symptoms_and_problems",
+                "related_content_label": "症状和问题",
+                "dic": [],
+                "related_field": "iname",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "social_environment_assessment",
+        "label": "社会环境评估",
+        "style": "Detail",
+        "icpc": "A6216",
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_is_the_living_environment_satisfactory",
+                "label": "您对居住环境满意吗",
+                "type": "Select",
+                "related_content": "satisfaction",
+                "related_content_label": "满意度",
+                "dic": [
+                    "很满意",
+                    "满意",
+                    "既非满意也非不满意",
+                    "不满意",
+                    "很不满意"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_is_the_transportation_convenient",
+                "label": "您所在的社区交通方便吗",
+                "type": "Select",
+                "related_content": "convenience",
+                "related_content_label": "便捷程度",
+                "dic": [],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "BoolField",
+                "name": "boolfield_whether_the_living_environment_is_clean_and_hygienic",
+                "label": "居住环境是否干净卫生",
+                "type": "0",
+                "score": false
+            },
+            {
+                "model": "BoolField",
+                "name": "boolfield_is_drinking_water_healthy?",
+                "label": "饮水是否健康",
+                "type": "0",
+                "score": false
+            },
+            {
+                "model": "BoolField",
+                "name": "boolfield_whether_there_is_noise_pollution",
+                "label": "是否有噪声污染",
+                "type": "0",
+                "score": false
+            },
+            {
+                "model": "BoolField",
+                "name": "boolfield_whether_there_is_air_pollution",
+                "label": "是否有空气污染",
+                "type": "0",
+                "score": false
+            },
+            {
+                "model": "BoolField",
+                "name": "boolfield_whether_there_is_other_pollution",
+                "label": "是否有其他污染",
+                "type": "0",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "vital_signs_check",
+        "label": "生命体征检查",
+        "style": "Detail",
+        "icpc": null,
+        "fields": [
+            {
+                "model": "NumberField",
+                "name": "numberfield_body_temperature",
+                "label": "体温",
+                "type": "IntegerField",
+                "standard_value": null,
+                "up_limit": 37.4,
+                "down_limit": 36,
+                "unit": "℃"
+            },
+            {
+                "model": "NumberField",
+                "name": "numberfield_pulse",
+                "label": "脉搏",
+                "type": "IntegerField",
+                "standard_value": null,
+                "up_limit": 100,
+                "down_limit": 60,
+                "unit": "次/分钟"
+            },
+            {
+                "model": "NumberField",
+                "name": "numberfield_respiratory_rate",
+                "label": "呼吸频率",
+                "type": "IntegerField",
+                "standard_value": null,
+                "up_limit": 20,
+                "down_limit": 10,
+                "unit": "次/分钟"
+            }
+        ]
+    },
+    {
+        "name": "family_history_of_illness",
+        "label": "家族病史",
+        "style": null,
+        "icpc": "A6209",
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_diseases",
+                "label": "病名",
+                "type": "Select",
+                "related_content": "icpc5_evaluation_and_diagnoses",
+                "related_content_label": "评估和诊断",
+                "dic": [],
+                "related_field": "iname",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_family_relationship",
+                "label": "家庭成员关系",
+                "type": "Select",
+                "related_content": "family_relationship",
+                "related_content_label": "家庭成员关系",
+                "dic": [
+                    "户主",
+                    "配偶",
+                    "父母",
+                    "子女",
+                    "祖父母",
+                    "孙子女",
+                    "兄弟姐妹",
+                    "其他成员"
+                ],
+                "related_field": "value",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "physical_examination",
+        "label": "体格检查",
+        "style": "Detail",
+        "icpc": null,
+        "fields": [
+            {
+                "model": "NumberField",
+                "name": "numberfield_hight",
+                "label": "身高",
+                "type": "IntegerField",
+                "standard_value": null,
+                "up_limit": null,
+                "down_limit": null,
+                "unit": "cm"
+            },
+            {
+                "model": "NumberField",
+                "name": "numberfield_weight",
+                "label": "体重",
+                "type": "IntegerField",
+                "standard_value": null,
+                "up_limit": null,
+                "down_limit": null,
+                "unit": "kg"
+            },
+            {
+                "model": "NumberField",
+                "name": "numberfield_body_mass_index",
+                "label": "体质指数",
+                "type": "IntegerField",
+                "standard_value": null,
+                "up_limit": 23.9,
+                "down_limit": 18.5,
+                "unit": null
+            }
+        ]
+    },
+    {
+        "name": "history_of_blood_transfusion",
+        "label": "输血史",
+        "style": "List",
+        "icpc": "A6208",
+        "fields": [
+            {
+                "model": "DTField",
+                "name": "datetimefield_date",
+                "label": "日期",
+                "type": "DateTimeField"
+            },
+            {
+                "model": "NumberField",
+                "name": "numberfield_blood_transfusion",
+                "label": "输血量",
+                "type": "IntegerField",
+                "standard_value": null,
+                "up_limit": 400,
+                "down_limit": null,
+                "unit": "ml"
+            }
+        ]
+    },
+    {
+        "name": "history_of_trauma",
+        "label": "外伤史",
+        "style": "List",
+        "icpc": "A6206",
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_diseases_name",
+                "label": "病名",
+                "type": "RadioSelect",
+                "related_content": "icpc5_evaluation_and_diagnoses",
+                "related_content_label": "评估和诊断",
+                "dic": [],
+                "related_field": "iname",
+                "score": false
+            },
+            {
+                "model": "DTField",
+                "name": "datetimefield_date",
+                "label": "日期",
+                "type": "DateTimeField"
+            }
+        ]
+    },
+    {
+        "name": "fundus_examination",
+        "label": "眼底检查",
+        "style": "Detail",
+        "icpc": null,
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_fundus",
+                "label": "眼底",
+                "type": "Select",
+                "related_content": "normality",
+                "related_content_label": "正常性判断",
+                "dic": [],
+                "related_field": "value",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "medical_history",
+        "label": "疾病史",
+        "style": "List",
+        "icpc": "A6204",
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_disease_name",
+                "label": "疾病名称",
+                "type": "Select",
+                "related_content": "icpc5_evaluation_and_diagnoses",
+                "related_content_label": "评估和诊断",
+                "dic": [],
+                "related_field": "iname",
+                "score": false
+            },
+            {
+                "model": "DTField",
+                "name": "datetimefield_time_of_diagnosis",
+                "label": "确诊时间",
+                "type": "DateTimeField"
+            }
+        ]
+    },
+    {
+        "name": "doctor_registry",
+        "label": "医生注册",
+        "style": null,
+        "icpc": null,
+        "fields": [
+            {
+                "model": "CharacterField",
+                "name": "characterfield_name",
+                "label": "姓名",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_gender",
+                "label": "性别",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_age",
+                "label": "年龄",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_identification_number",
+                "label": "身份证号码",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_contact_information",
+                "label": "联系电话",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_contact_address",
+                "label": "联系地址",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_service_role",
+                "label": "服务角色",
+                "type": "CheckboxSelectMultiple",
+                "related_content": "service_role",
+                "related_content_label": "服务角色",
+                "dic": [
+                    "健康管理师",
+                    "护士",
+                    "医生助理",
+                    "医生",
+                    "化验",
+                    "质量管理",
+                    "药士",
+                    "药剂师",
+                    "公卫",
+                    "管理者",
+                    "影像医师",
+                    "康复理疗师",
+                    "中医师"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_practice_qualification",
+                "label": "执业资质",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_password_setting",
+                "label": "密码设置",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_confirm_password",
+                "label": "确认密码",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_expertise",
+                "label": "专长",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_practice_time",
+                "label": "执业时间",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_affiliation",
+                "label": "所属机构",
+                "type": "RadioSelect",
+                "related_content": "institutions_list",
+                "related_content_label": "机构清单",
+                "dic": [],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "DTField",
+                "name": "datetimefield_date_of_birth",
+                "label": "出生日期",
+                "type": "DateTimeField"
+            }
+        ]
+    },
+    {
+        "name": "user_login",
+        "label": "用户登录",
+        "style": null,
+        "icpc": null,
+        "fields": [
+            {
+                "model": "CharacterField",
+                "name": "characterfield_username",
+                "label": "用户名",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_password",
+                "label": "密码",
+                "type": "CharField",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "doctor_login",
+        "label": "医生登陆",
+        "style": null,
+        "icpc": null,
+        "fields": [
+            {
+                "model": "CharacterField",
+                "name": "characterfield_service_role",
+                "label": "服务角色",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_username",
+                "label": "用户名",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_password",
+                "label": "密码",
+                "type": "CharField",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "dorsal_artery_pulsation_examination",
+        "label": "足背动脉搏动检查",
+        "style": "Detail",
+        "icpc": null,
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_left_foot",
+                "label": "左脚",
+                "type": "RadioSelect",
+                "related_content": "dorsal_artery_pulsation",
+                "related_content_label": "足背动脉搏动情况",
+                "dic": [
+                    "触及正常",
+                    "触及正常",
+                    "减弱",
+                    "消失"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_right_foot",
+                "label": "右脚",
+                "type": "RadioSelect",
+                "related_content": "dorsal_artery_pulsation",
+                "related_content_label": "足背动脉搏动情况",
+                "dic": [
+                    "触及正常",
+                    "触及正常",
+                    "减弱",
+                    "消失"
+                ],
+                "related_field": "value",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "physical_examination_hearing",
+        "label": "查体听力",
+        "style": "Detail",
+        "icpc": null,
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_left_ear_hearing",
+                "label": "左耳听力",
+                "type": "Select",
+                "related_content": "hearing",
+                "related_content_label": "听力",
+                "dic": [
+                    "听见",
+                    "听不清或无法听见"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_right_ear_hearing",
+                "label": "右耳听力",
+                "type": "Select",
+                "related_content": "hearing",
+                "related_content_label": "听力",
+                "dic": [
+                    "听见",
+                    "听不清或无法听见"
+                ],
+                "related_field": "value",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "history_of_infectious_diseases",
+        "label": "遗传病史",
+        "style": "List",
+        "icpc": "A6210",
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_diseases",
+                "label": "病名",
+                "type": "Select",
+                "related_content": "icpc5_evaluation_and_diagnoses",
+                "related_content_label": "评估和诊断",
+                "dic": [],
+                "related_field": "iname",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_family_relationship",
+                "label": "家庭成员关系",
+                "type": "Select",
+                "related_content": "family_relationship",
+                "related_content_label": "家庭成员关系",
+                "dic": [
+                    "户主",
+                    "配偶",
+                    "父母",
+                    "子女",
+                    "祖父母",
+                    "孙子女",
+                    "兄弟姐妹",
+                    "其他成员"
+                ],
+                "related_field": "value",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "history_of_surgery",
+        "label": "手术史",
+        "style": "List",
+        "icpc": "A6205",
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_name_of_operation",
+                "label": "手术名称",
+                "type": "RadioSelect",
+                "related_content": "icpc7_treatments",
+                "related_content_label": "治疗",
+                "dic": [],
+                "related_field": "iname",
+                "score": false
+            },
+            {
+                "model": "DTField",
+                "name": "datetimefield_date",
+                "label": "日期",
+                "type": "DateTimeField"
+            }
+        ]
+    },
+    {
+        "name": "physical_examination_oral_cavity",
+        "label": "查体口腔",
+        "style": "Detail",
+        "icpc": null,
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_lips",
+                "label": "口唇",
+                "type": "RadioSelect",
+                "related_content": "lips",
+                "related_content_label": "口唇",
+                "dic": [
+                    "红润",
+                    "苍白",
+                    "发绀",
+                    "皲裂",
+                    "疱疹"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_dentition",
+                "label": "齿列",
+                "type": "RadioSelect",
+                "related_content": "dentition",
+                "related_content_label": "齿列",
+                "dic": [
+                    "正常",
+                    "缺齿",
+                    "龋齿",
+                    "义齿（假牙）"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_pharynx",
+                "label": "咽部",
+                "type": "Select",
+                "related_content": "pharynx",
+                "related_content_label": "咽部",
+                "dic": [
+                    "无充血",
+                    "充血",
+                    "淋巴滤泡增生"
+                ],
+                "related_field": "value",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "blood_pressure_monitoring",
+        "label": "血压监测",
+        "style": "Detail",
+        "icpc": null,
+        "fields": [
+            {
+                "model": "NumberField",
+                "name": "numberfield_systolic_blood_pressure",
+                "label": "收缩压",
+                "type": "IntegerField",
+                "standard_value": null,
+                "up_limit": 139,
+                "down_limit": 90,
+                "unit": "mmol/L"
+            },
+            {
+                "model": "NumberField",
+                "name": "numberfield_diastolic_blood_pressure",
+                "label": "舒张压",
+                "type": "IntegerField",
+                "standard_value": null,
+                "up_limit": 89,
+                "down_limit": 60,
+                "unit": "mmol/L"
+            }
+        ]
+    },
+    {
+        "name": "major_life_events",
+        "label": "重大生活事件调查",
+        "style": "List",
+        "icpc": "A6211",
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_major_life",
+                "label": "生活事件",
+                "type": "CheckboxSelectMultiple",
+                "related_content": "life_event",
+                "related_content_label": "生活事件",
+                "dic": [
+                    "丧偶",
+                    "父母死亡",
+                    "子女死亡",
+                    "离婚",
+                    "失业",
+                    "家属病重",
+                    "恋爱",
+                    "结婚",
+                    "生子"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "DTField",
+                "name": "datetimefield_date",
+                "label": "日期",
+                "type": "DateTimeField"
+            }
+        ]
+    },
+    {
+        "name": "physical_examination_vision",
+        "label": "查体视力",
+        "style": "Detail",
+        "icpc": null,
+        "fields": [
+            {
+                "model": "CharacterField",
+                "name": "characterfield_left_eye_vision",
+                "label": "左眼视力",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_right_eye_vision",
+                "label": "右眼视力",
+                "type": "CharField",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "lower_extremity_edema_examination",
+        "label": "下肢水肿检查",
+        "style": "Detail",
+        "icpc": null,
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_lower_extremity_edema",
+                "label": "下肢水肿",
+                "type": "RadioSelect",
+                "related_content": "edema",
+                "related_content_label": "水肿情况",
+                "dic": [
+                    "无水肿",
+                    "单侧水肿",
+                    "双侧不对称水肿",
+                    "双侧对称水肿"
+                ],
+                "related_field": "value",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "basic_personal_information",
+        "label": "个人基本情况",
+        "style": null,
+        "icpc": "A6203",
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_family_id",
+                "label": "家庭编号",
+                "type": "Select",
+                "related_content": "icpc1_register_logins",
+                "related_content_label": "注册登录（行政管理）",
+                "dic": [],
+                "related_field": "iname",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_family_relationship",
+                "label": "家庭成员关系",
+                "type": "RadioSelect",
+                "related_content": "family_relationship",
+                "related_content_label": "家庭成员关系",
+                "dic": [
+                    "户主",
+                    "配偶",
+                    "父母",
+                    "子女",
+                    "祖父母",
+                    "孙子女",
+                    "兄弟姐妹",
+                    "其他成员"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_resident_file_number",
+                "label": "居民档案号",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_name",
+                "label": "姓名",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_gender",
+                "label": "性别",
+                "type": "Select",
+                "related_content": "gender",
+                "related_content_label": "性别",
+                "dic": [],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "DTField",
+                "name": "datetimefield_date_of_birth",
+                "label": "出生日期",
+                "type": "DateField"
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_nationality",
+                "label": "民族",
+                "type": "Select",
+                "related_content": "nationality",
+                "related_content_label": "民族",
+                "dic": [],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_marital_status",
+                "label": "婚姻状况",
+                "type": "Select",
+                "related_content": "marital_status",
+                "related_content_label": "婚姻状况",
+                "dic": [
+                    "未婚",
+                    "已婚",
+                    "离异",
+                    "丧偶"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_education",
+                "label": "文化程度",
+                "type": "Select",
+                "related_content": "education",
+                "related_content_label": "文化程度",
+                "dic": [
+                    "博士",
+                    "硕士",
+                    "本科",
+                    "大专",
+                    "中专技校",
+                    "高中",
+                    "初中",
+                    "小学",
+                    "文盲或半文盲"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_occupational_status",
+                "label": "职业状况",
+                "type": "Select",
+                "related_content": "occupational_status",
+                "related_content_label": "职业状况",
+                "dic": [
+                    "在职",
+                    "失业",
+                    "退休"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_identification_number",
+                "label": "身份证号码",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_family_address",
+                "label": "家庭地址",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_contact_number",
+                "label": "联系电话",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_medical_ic_card_number",
+                "label": "医疗ic卡号",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_medical_expenses_burden",
+                "label": "医疗费用负担",
+                "type": "CheckboxSelectMultiple",
+                "related_content": "medical_expenses_burden",
+                "related_content_label": "医疗费用负担",
+                "dic": [
+                    "职工医疗保险",
+                    "城镇居民医疗保险",
+                    "商业保险",
+                    "自费",
+                    "公费",
+                    "贫困救助"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_type_of_residence",
+                "label": "居住类型",
+                "type": "Select",
+                "related_content": "type_of_residence",
+                "related_content_label": "居住类型",
+                "dic": [
+                    "常住",
+                    "非常住"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_blood_type",
+                "label": "血型",
+                "type": "Select",
+                "related_content": "blood_type",
+                "related_content_label": "血型",
+                "dic": [
+                    "A型",
+                    "B型",
+                    "O型",
+                    "AB型",
+                    "A+型",
+                    "A-型",
+                    "B+型",
+                    "B-型",
+                    "O+型",
+                    "O-型",
+                    "AB+型",
+                    "AB-型",
+                    "不详"
+                ],
+                "related_field": "value",
+                "score": false
+            },
+            {
+                "model": "BoolField",
+                "name": "boolfield_contract_signatory",
+                "label": "合同签约户",
+                "type": "1",
+                "score": false
+            },
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_signed_family_doctor",
+                "label": "签约家庭医生",
+                "type": "Select",
+                "related_content": "employee_list",
+                "related_content_label": "职员表",
+                "dic": [],
+                "related_field": "value",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "physical_examination_athletic_ability",
+        "label": "查体运动能力",
+        "style": "Detail",
+        "icpc": null,
+        "fields": [
+            {
+                "model": "RelatedField",
+                "name": "relatedfield_athletic_ability",
+                "label": "运动能力",
+                "type": "Select",
+                "related_content": "exercise_time",
+                "related_content_label": "运动时长",
+                "dic": [
+                    "半小时以内",
+                    "半小时到一个半小时",
+                    "一个半小时以上"
+                ],
+                "related_field": "value",
+                "score": false
+            }
+        ]
+    },
+    {
+        "name": "user_registry",
+        "label": "用户注册表",
+        "style": null,
+        "icpc": null,
+        "fields": [
+            {
+                "model": "CharacterField",
+                "name": "characterfield_name",
+                "label": "姓名",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_gender",
+                "label": "性别",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "DTField",
+                "name": "datetimefield_date_of_birth",
+                "label": "出生日期",
+                "type": "DateTimeField"
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_age",
+                "label": "年龄",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_identification_number",
+                "label": "身份证号码",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_contact_information",
+                "label": "联系方式",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_contact_address",
+                "label": "联系地址",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_password_setting",
+                "label": "密码设置",
+                "type": "CharField",
+                "score": false
+            },
+            {
+                "model": "CharacterField",
+                "name": "characterfield_confirm_password",
+                "label": "确认密码",
+                "type": "CharField",
+                "score": false
+            }
+        ]
+    }
+]
