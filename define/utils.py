@@ -1,22 +1,102 @@
-import os
-
 # 导入待生成脚本的文件头部设置
 from .files_head_setting import models_file_head, admins_file_head, forms_file_head, modelform_footer, views_file_head, urls_file_head, index_html_file_head
-from .models import BaseModel, BaseForm
-
-# 写入文件
-def write_to_file(file_name, content, mode='w'):
-    output_path = '.\\forms\\'   # views.py urls.py 导出路径
-    with open(f'{output_path}{file_name}', mode, encoding='utf-8') as f:
-        f.write(content)
-    return      
+from .models import BaseModel, BaseForm, OperandView, SourceCode
+from time import time
+import json
 
 
-# 被define.admin调用
-def generate_models_forms_scripts():
+# 生成视图查询副本, 被define.admin调用
+def copy_form(modeladmin, request, queryset):
+    for obj in queryset:
+        t = int(time())
+        f = BaseForm.objects.create(
+            name=f'{obj.name}_query_{t}',
+            label=f'{obj.label}_查询视图_{t}',
+            basemodel=obj.basemodel,
+            is_inquiry=True,
+            style=obj.style,
+            display_fields=obj.display_fields,
+        )
+        f.components.add(*obj.components.all())
+        f.save()
+
+copy_form.short_description = '生成查询视图副本'
+
+
+# 生成作业脚本, 被define.admin调用
+def generate_source_code(modeladmin, request, queryset):
+    # source_code = {
+    #   "models": models_script,
+    #   "admin": admins_script, 
+    #   "forms": forms_script, 
+    #   "views": views_script, 
+    #   "urls": urls_script,
+    #   "templates": [{template_name: template_content}]
+    # }
+    source_code = {}
+    source_code['models'] , source_code['admin'] = generate_models_admin_code()
+    source_code['forms'] =  generate_forms_code()
+    source_code['views'] , source_code['urls'], source_code['templates'] = generate_views_urls_templates_code()
+
+    # 写入数据库
+    s = SourceCode.objects.create(
+        name = str(int(time())),
+        code = json.dumps(source_code, ensure_ascii=False),
+    )
+    print(f'写入数据库成功, id: {s.id}')
+
+generate_source_code.short_description = '生成作业脚本'
+
+
+####################################################################################################################
+# Create models.py, admin.py
+####################################################################################################################
+def generate_models_admin_code():
+    print('生成models.py, admin.py ...')
+    models_script = ''
+    admins_script =  ''
+    models = BaseModel.objects.all()
+    for obj in models:
+        s = CreateModelsScript(obj)
+        ms, ads = s.create_scripts()
+        # construct models script
+        models_script = models_script + ms
+        # construct admin script
+        admins_script = admins_script + ads
+    return models_file_head + models_script, admins_file_head + admins_script
+
+
+class CreateModelsScript:
+    def __init__(self, model):
+        self.name = model.name
+        self.label = model.label
+        self.components = model.components.all()
+
+    def create_scripts(self):
+        # construct model script
+        model_head = f'class {self.name.capitalize()}(models.Model):'
+
+        model_fields = autocomplete_fields = ''
+        for component in self.components:
+            # construct fields script
+            script = self.__create_model_field_script(component)
+            model_fields = model_fields + script
+            
+            # construct admin autocomplete_fields script
+            if component.content_type.__dict__['model'] == 'relatedfield':
+                autocomplete_fields = autocomplete_fields + f'"{component.content_object.__dict__["name"]}", '
+
+        model_footer = self.__create_model_footer_script()
+
+        # construct model script
+        model_script = f'{model_head}{model_fields}{model_footer}\n\n'
+        # construct admin script
+        admin_script = self.__create_admin_script(autocomplete_fields)
+
+        return model_script, admin_script
 
     # 生成字符型字段定义脚本
-    def create_char_field_script(field):
+    def __create_char_field_script(self, field):
         if field['type'] == 'CharField':
             f_type = 'CharField'
         else:
@@ -36,7 +116,7 @@ def generate_models_forms_scripts():
     {field['name']} = models.{f_type}(max_length={field['length']}, {f_default}{f_required}verbose_name='{field['label']}')'''
 
     # 生成数字型字段定义脚本
-    def create_number_field_script(field):
+    def __create_number_field_script(self, field):
         if field['type'] == 'IntegerField':
             f_type = 'IntegerField'
             f_dicimal = ''
@@ -77,7 +157,7 @@ def generate_models_forms_scripts():
     {field['name']}_down_limit = models.{f_type}({f_down_limit}{f_required}verbose_name='{field['label']}下限')'''
     
     # 生成日期型字段定义脚本
-    def create_datetime_field_script(field):
+    def __create_datetime_field_script(self, field):
         f_default = ''
         if field['type'] == 'DateTimeField':
             f_type = 'DateTimeField'
@@ -95,7 +175,7 @@ def generate_models_forms_scripts():
     {field['name']} = models.{f_type}({f_default}{f_required}verbose_name='{field['label']}')'''
 
     # 生成选择型字段定义脚本
-    def create_choice_field_script(field):
+    def __create_choice_field_script(self, field):
         if field['type'] == 'Select':
             f_type = 'Select'
         elif field['type'] == 'RadioSelect':
@@ -125,7 +205,7 @@ def generate_models_forms_scripts():
     {field['name']} = models.PositiveSmallIntegerField({f_default}{f_required}choices={f_enum}, verbose_name='{field['label']}')'''
 
     # 生成外键字段定义脚本
-    def create_related_field_script(field):
+    def __create_related_field_script(self, field):
         if field['type'] == 'Select':
             f_type = 'Select'
         elif field['type'] == 'RadioSelect':
@@ -136,75 +216,55 @@ def generate_models_forms_scripts():
             f_type = 'SelectMultiple'
         
         return f'''
-    {field['name']} = models.ForeignKey({field['foreign_key'].capitalize()}, on_delete=models.CASCADE, verbose_name='{field['label']}')'''
+    {field['name']} = models.ForeignKey({field['foreign_key']}, on_delete=models.CASCADE, verbose_name='{field['label']}')'''
 
     # generate model field script
-    def create_model_field_script(component):
+    def __create_model_field_script(self, component):
+        script = ''
         field = component.content_object.__dict__
         component_type = component.content_type.__dict__['model']
         if component_type == 'characterfield':
-            script = create_char_field_script(field)
+            script = self.__create_char_field_script(field)
         elif component_type == 'numberfield':
-            script = create_number_field_script(field)
+            script = self.__create_number_field_script(field)
         elif component_type == 'dtfield':
-            script = create_datetime_field_script(field)
+            script = self.__create_datetime_field_script(field)
         elif component_type == 'choicefield':
-            script = create_choice_field_script(field)
+            script = self.__create_choice_field_script(field)
         elif component_type == 'relatedfield':
-            field['foreign_key'] = component.content_object.related_content.model
-            script = create_related_field_script(field)
+            field['foreign_key'] = component.content_object.related_content.name.capitalize()
+            script = self.__create_related_field_script(field)
         return script
 
-    ####################################################################################################################
-    # construct models and admin script
-    ####################################################################################################################
-    models_script = admins_script =  ''
-    models = BaseModel.objects.all()
-    for obj in models:
-        model_name = obj.name
-        model_label = obj.label
-
-        # construct models script
-        model_head = f'class {model_name.capitalize()}(models.Model):'
-
-        model_fields = autocomplete_fields = ''
-        for component in obj.components.all():
-            # construct fields script
-            script = create_model_field_script(component)
-            model_fields = model_fields + script
-            
-            # construct admin autocomplete_fields script
-            if component.content_type.__dict__['model'] == 'relatedfield':
-                autocomplete_fields = autocomplete_fields + f'"{component.content_object.__dict__["name"]}", '
-
-        model_body = f'''
+    # generate model footer script
+    def __create_model_footer_script(self):
+        return f'''
 
     def __str__(self):
         return str(self.customer)
 
     class Meta:
-        verbose_name = '{model_label}'
-        verbose_name_plural = '{model_label}'
+        verbose_name = '{self.label}'
+        verbose_name_plural = '{self.label}'
 
     def get_absolute_url(self):
-        return reverse('{model_name}_detail_url', kwargs={{'slug': self.slug}})
+        return reverse('{self.name}_detail_url', kwargs={{'slug': self.slug}})
 
     def get_update_url(self):
-        return reverse('{model_name}_update_url', kwargs={{'slug': self.slug}})
+        return reverse('{self.name}_update_url', kwargs={{'slug': self.slug}})
 
     def get_delete_url(self):
-        return reverse('{model_name}_delete_url', kwargs={{'slug': self.slug}})
+        return reverse('{self.name}_delete_url', kwargs={{'slug': self.slug}})
 
     def save(self, *args, **kwargs):
         if not self.id:
             self.slug = slugify(self._meta.model_name, allow_unicode=True) + f'-{{int(time())}}'
         super().save(*args, **kwargs)        
         '''
-        model_script = f'{model_head}{model_fields}{model_body}\n\n'
-        models_script = models_script + model_script
 
-        # construct admin script
-        c_model_name = model_name.capitalize()
+    # generate admin script
+    def __create_admin_script(self, autocomplete_fields):
+        c_model_name = self.name.capitalize()
         if autocomplete_fields != '':
             admin_script = f'''
 class {c_model_name}Admin(admin.ModelAdmin):
@@ -215,82 +275,82 @@ admin.site.register({c_model_name}, {c_model_name}Admin)
             admin_script = f'''
 admin.site.register({c_model_name})
 '''
-        
-        admins_script = admins_script + admin_script
-
-    # add header to models.py
-    models_script = models_file_head + models_script
-    write_to_file('models.py', models_script)
-
-    # generate admin script
-    admins_script = admins_file_head + admins_script
-    write_to_file('admin.py', admins_script)
+        return admin_script
 
 
-    ####################################################################################################################
-    # generate forms.py script
-    ####################################################################################################################
+####################################################################################################################
+# generate forms.py script
+####################################################################################################################
+def generate_forms_code():
+    print('生成forms.py ...')
     forms_script = ''
     forms = BaseForm.objects.all()
     for form in forms:
-        f_name = form.name.capitalize()
-        form_label = form.label
-        f_model = form.basemodel.name.capitalize()
-        form_style = form.style
-        f_fields = f_widgets = ''
-        for component in form.components.all():
+        s = CreateFormsScript(form)
+        fs = s.create_scripts()
+        forms_script = forms_script + fs
+    return forms_file_head + forms_script
+
+
+class CreateFormsScript:
+    def __init__(self, form):
+        self.name = form.name.capitalize()
+        self.label = form.label
+        self.model = form.basemodel.name.capitalize()
+        self.style = form.style
+        self.components = form.components.all()
+        self.fields = ''
+        self.widgets = ''
+
+    def create_scripts(self):
+        for component in self.components:
             field_name = component.content_object.__dict__['name']
             # get fields
-            f_fields = f_fields + f'\'{field_name}\', '
+            self.fields = self.fields + f'\'{self.name}\', '
 
             # get widgets
             if component.content_type.__dict__['model'] in ['choicefield', 'relatedfield']:
                 field_type = component.content_object.__dict__['type']
                 if field_type == 'Select':
-                    f_type = 'Select'
+                    self.type = 'Select'
                 elif field_type == 'RadioSelect':
-                    f_type = 'RadioSelect'
+                    self.type = 'RadioSelect'
                 elif field_type == 'CheckboxSelectMultiple':
-                    f_type = 'CheckboxSelectMultiple'
+                    self.type = 'CheckboxSelectMultiple'
                 else:
-                    f_type = 'SelectMultiple'
-                f_widgets = f_widgets + f'\'{field_name}\': {f_type}, '
+                    self.type = 'SelectMultiple'
+                self.widgets = self.widgets + f'\'{self.name}\': {self.type}, '
 
-        if f_widgets != '':
-            f_widgets = f'widgets = {{{f_widgets}}}'
+        if self.widgets != '':
+            self.widgets = f'widgets = {{{self.widgets}}}'
 
         # construct forms script
         modelform_head = f'''
-class {f_name}_ModelForm(ModelForm):'''
+class {self.name}_ModelForm(ModelForm):'''
 
         modelform_body = f'''
     class Meta:
-        model = {f_model}
-        fields = [{f_fields}]
-        {f_widgets}
+        model = {self.model}
+        fields = [{self.fields}]
+        {self.widgets}
         '''
 
-        modelform_script = f'{modelform_head}{modelform_body}{modelform_footer}'
-        forms_script = forms_script + modelform_script
-    
-    # construct forms.py script
-    forms_script =  forms_file_head + forms_script
-    write_to_file('forms.py', forms_script)
+        return f'{modelform_head}{modelform_body}{modelform_footer}'
 
 
-
-# 被define.admin调用
-def generate_views_urls_templates_scripts(modeladmin, request, queryset):
-
-    ####################################################################################################################
-    # Create models.py, admin.py, forms.py
-    ####################################################################################################################
-    print('生成models.py, admin.py, forms.py ...')
-    generate_models_forms_scripts()
-
+####################################################################################################################
+# generate views.py, urls.py, templates.html, templates\index.html script
+####################################################################################################################
+def generate_views_urls_templates_code():
     print('生成views.py, urls.py, templates.html, index.html ...')
-    views_script = urls_script = index_html_script = ''
-    for obj in queryset:
+    views_script = ''
+    urls_script = ''
+    index_html_script = ''
+    templates_code = []
+
+    views = OperandView.objects.all()
+    for obj in views:
+
         ################################################################################
         # Insert into core.models.Form (Auto generate corresponding operation)
         ################################################################################
@@ -299,42 +359,30 @@ def generate_views_urls_templates_scripts(modeladmin, request, queryset):
         inquire_forms = [(f['name'], f['style'], f['label']) for f in list(obj.inquire_forms.all().values())]
         mutate_forms = [(f['name'], f['style'], f['label']) for f in list(obj.mutate_forms.all().values())]
 
-        s = CreateViewsScripts(obj.name, obj.label, obj.axis_field, inquire_forms, mutate_forms)
+        s = CreateViewsScript(obj.name, obj.label, obj.axis_field, inquire_forms, mutate_forms)
         vs, hs, us, ihs = s.create_script()
 
         # construct views script
         views_script = views_script + vs
         # construct urls script
         urls_script = urls_script + us
-        # create template.html
-        write_to_file(f'templates\\{obj.name}_edit.html', hs)
+        # create templates.html
+        templates_code.append({f'{obj.name}_edit.html': hs})
         # construct index.html script
         index_html_script = index_html_script + ihs
 
-    # add header to views.py
-    views_script = views_file_head + views_script
-    # add header to urls.py
-    urls_script = urls_file_head + urls_script + '\n]'
-    # add header to index.html
-    index_html_script = index_html_file_head + index_html_script + '\n</section>\n{% endblock %}'
+        # generate views script
+        views_code = views_file_head + views_script
+        # generate urls script
+        urls_code = urls_file_head + urls_script + '\n]'
+        # generate index.html script, append to templates
+        index_html_code = index_html_file_head + index_html_script + '\n</section>\n{% endblock %}'
+        templates_code.append({'index.html': index_html_code})
 
-    # 写入views.py
-    write_to_file('views.py', views_script)
-    # 写入urls.py
-    write_to_file('urls.py', urls_script)
-    # 写入index.html
-    write_to_file('templates\\index.html', index_html_script)
-
-    ################################################################################
-    # 写入作业库
-    ################################################################################
-
-generate_views_urls_templates_scripts.short_description = '生成作业视图脚本'
+        return views_code, urls_code, templates_code
 
 
-
-class CreateViewsScripts:
-
+class CreateViewsScript:
     def __init__(self, operand_name, operand_label, axis_field, inquire_forms, mutate_forms):
         self.operand_name = operand_name
         self.operand_label = operand_label

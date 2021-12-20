@@ -273,6 +273,22 @@ class OperandView(models.Model):
         ordering = ['id']
 
 
+# 源代码库
+class SourceCode(models.Model):
+    name = models.CharField(max_length=255, unique=True, verbose_name="版本")
+    label = models.CharField(max_length=255, verbose_name="版本名称", null=True, blank=True)
+    description = models.TextField(max_length=255, verbose_name="描述", null=True, blank=True)
+    code = models.TextField(verbose_name="源代码")
+    create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")  
+
+    def __str__(self):
+        return str(self.create_time)
+
+    class Meta:
+        verbose_name = "源代码"
+        verbose_name_plural = "源代码"
+        ordering = ['id']
+
 
 # BaseModel变更components字段，更新相应BaseForm的components字段
 @receiver(m2m_changed, sender=BaseModel.components.through)
