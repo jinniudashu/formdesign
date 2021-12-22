@@ -14,6 +14,6 @@ class SourceCodeSerializer(serializers.ModelSerializer):
 
 @api_view(['GET'])
 def source_codes_list(request):
-    source_codes = SourceCode.objects.all()
+    source_codes = [SourceCode.objects.last()]
     serializer = SourceCodeSerializer(source_codes, many=True)
     return Response(serializer.data)
