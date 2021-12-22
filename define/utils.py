@@ -1,6 +1,6 @@
 # 导入待生成脚本的文件头部设置
 from .files_head_setting import models_file_head, admins_file_head, forms_file_head, modelform_footer, views_file_head, urls_file_head, index_html_file_head
-from .models import BaseModel, BaseForm, OperandView, SourceCode
+from .models import BaseModel, BaseForm, DicList, OperandView, SourceCode
 from time import time
 import json
 
@@ -34,6 +34,7 @@ def generate_source_code(modeladmin, request, queryset):
     #   "templates": [{template_name: template_content}]
     # }
     source_code = {}
+    source_code['dicts_models'], source_code['dicts_admin'] = generate_dicts_code()
     source_code['models'] , source_code['admin'] = generate_models_admin_code()
     source_code['forms'] =  generate_forms_code()
     source_code['views'] , source_code['urls'], source_code['templates'] = generate_views_urls_templates_code()
@@ -46,6 +47,45 @@ def generate_source_code(modeladmin, request, queryset):
     print(f'写入数据库成功, id: {s.id}')
 
 generate_source_code.short_description = '生成作业脚本'
+
+
+####################################################################################################################
+# Create dictionaries models.py, admin.py
+####################################################################################################################
+def generate_dicts_code():
+    print('生成字典 ...')
+    dicts_models_script = '''from django.db import models\n\n'''
+    dicts_admin_script = '''from django.contrib import admin
+from .models import *\n\n'''
+
+    dicts = DicList.objects.all()
+    for dic in dicts:
+        if 'icpc' not in dic.name:
+            dic_name = dic.name.capitalize()
+            # construct model script
+            model_head = f'class {dic_name}(models.Model):'
+            # construct field script
+            model_field = '''
+        value = models.CharField(max_length=60, null=True, blank=True, verbose_name="值")'''
+            # construct model footer script
+            model_footer = f'''
+        def __str__(self):
+            return self.value
+
+        class Meta:
+            verbose_name = "{dic.label}"
+            verbose_name_plural = "{dic.label}"
+            '''
+            ds =  f'{model_head}{model_field}{model_footer}\n'
+
+            ads = f'''class {dic_name}Admin(admin.ModelAdmin):
+    search_fields = ["value"]
+admin.site.register({dic_name}, {dic_name}Admin)\n\n'''
+
+            dicts_models_script = dicts_models_script + ds
+            dicts_admin_script = dicts_admin_script + ads
+
+    return dicts_models_script, dicts_admin_script
 
 
 ####################################################################################################################
@@ -95,6 +135,26 @@ class CreateModelsScript:
 
         return model_script, admin_script
 
+    # generate model field script
+    def __create_model_field_script(self, component):
+        script = ''
+        field = component.content_object.__dict__
+        component_type = component.content_type.__dict__['model']
+        if component_type == 'characterfield':
+            script = self.__create_char_field_script(field)
+        elif component_type == 'boolfield':
+            script = self.__create_bool_field_script(field)
+        elif component_type == 'numberfield':
+            script = self.__create_number_field_script(field)
+        elif component_type == 'dtfield':
+            script = self.__create_datetime_field_script(field)
+        elif component_type == 'choicefield':
+            script = self.__create_choice_field_script(field)
+        elif component_type == 'relatedfield':
+            field['foreign_key'] = component.content_object.related_content.name.capitalize()
+            script = self.__create_related_field_script(field)
+        return script
+
     # 生成字符型字段定义脚本
     def __create_char_field_script(self, field):
         if field['type'] == 'CharField':
@@ -114,6 +174,23 @@ class CreateModelsScript:
 
         return f'''
     {field['name']} = models.{f_type}(max_length={field['length']}, {f_default}{f_required}verbose_name='{field['label']}')'''
+
+    # 生成布尔型字段定义脚本
+    def __create_bool_field_script(self, field):
+        if field['type'] == '1':
+            f_required = 'null=True, blank=True, '
+        else:
+            f_required = ''
+
+        if field['default'] == '1':
+            f_default = 'default=True, '
+        elif field['default'] == '2':
+            f_default = 'default=False, '
+        else:
+            f_default = ''
+            
+        return f'''
+    {field['name']} = models.BooleanField({f_default}{f_required}verbose_name='{field['label']}')'''
 
     # 生成数字型字段定义脚本
     def __create_number_field_script(self, field):
@@ -216,25 +293,7 @@ class CreateModelsScript:
             f_type = 'SelectMultiple'
         
         return f'''
-    {field['name']} = models.ForeignKey({field['foreign_key']}, on_delete=models.CASCADE, verbose_name='{field['label']}')'''
-
-    # generate model field script
-    def __create_model_field_script(self, component):
-        script = ''
-        field = component.content_object.__dict__
-        component_type = component.content_type.__dict__['model']
-        if component_type == 'characterfield':
-            script = self.__create_char_field_script(field)
-        elif component_type == 'numberfield':
-            script = self.__create_number_field_script(field)
-        elif component_type == 'dtfield':
-            script = self.__create_datetime_field_script(field)
-        elif component_type == 'choicefield':
-            script = self.__create_choice_field_script(field)
-        elif component_type == 'relatedfield':
-            field['foreign_key'] = component.content_object.related_content.name.capitalize()
-            script = self.__create_related_field_script(field)
-        return script
+    {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, verbose_name='{field['label']}')'''
 
     # generate model footer script
     def __create_model_footer_script(self):
@@ -306,7 +365,7 @@ class CreateFormsScript:
         for component in self.components:
             field_name = component.content_object.__dict__['name']
             # get fields
-            self.fields = self.fields + f'\'{self.name}\', '
+            self.fields = self.fields + f'\'{field_name}\', '
 
             # get widgets
             if component.content_type.__dict__['model'] in ['choicefield', 'relatedfield']:
@@ -319,7 +378,7 @@ class CreateFormsScript:
                     self.type = 'CheckboxSelectMultiple'
                 else:
                     self.type = 'SelectMultiple'
-                self.widgets = self.widgets + f'\'{self.name}\': {self.type}, '
+                self.widgets = self.widgets + f'\'{field_name}\': {self.type}, '
 
         if self.widgets != '':
             self.widgets = f'widgets = {{{self.widgets}}}'

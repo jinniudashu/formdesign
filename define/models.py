@@ -21,10 +21,10 @@ class BoolField(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
     label = models.CharField(max_length=100, verbose_name="组件名称")
     CHOICES_TYPE = [('0', '是, 否'), ('1', '未知, 是, 否')]
-    type = models.CharField(max_length=100, choices=CHOICES_TYPE , default='0', verbose_name="可选值")
+    type = models.CharField(max_length=100, choices=CHOICES_TYPE , default='1', verbose_name="可选值")
     required = models.BooleanField(default=False, verbose_name="必填")
-    DEFAULT_VALUE = [('0', '是'), ('1', '否'), ('2', '未知')]
-    default = models.CharField(max_length=10, choices=DEFAULT_VALUE, null=True, blank=True, verbose_name="默认值")
+    DEFAULT_VALUE = [('0', '未知'), ('1', '是'), ('2', '否')]
+    default = models.CharField(max_length=10, choices=DEFAULT_VALUE, default='0', null=True, blank=True, verbose_name="默认值")
 
     def __str__(self):
         return self.label
@@ -183,6 +183,7 @@ class Component(models.Model):
     label = models.CharField(max_length=100, verbose_name="组件名称", null=True, blank=True)
 
     q = Q(app_label='define') & (
+        Q(model = 'boolfield') | 
         Q(model = 'characterfield') | 
         Q(model = 'numberfield') | 
         Q(model = 'dtfield') | 

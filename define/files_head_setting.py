@@ -8,7 +8,7 @@ from datetime import date
 from django.utils import timezone
 
 from icpc.models import *
-from dictionaries.enums import *
+from dictionaries.models import *
 from core.models import Staff, Customer
 
 '''
