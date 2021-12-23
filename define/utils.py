@@ -420,7 +420,7 @@ def generate_views_urls_templates_code():
 
         s = CreateViewsScript(obj.name, obj.label, obj.axis_field, inquire_forms, mutate_forms)
         vs, hs, us, ihs = s.create_script()
-
+        
         # construct views script
         views_script = views_script + vs
         # construct urls script
@@ -430,15 +430,15 @@ def generate_views_urls_templates_code():
         # construct index.html script
         index_html_script = index_html_script + ihs
 
-        # generate views script
-        views_code = views_file_head + views_script
-        # generate urls script
-        urls_code = urls_file_head + urls_script + '\n]'
-        # generate index.html script, append to templates
-        index_html_code = index_html_file_head + index_html_script + '\n</section>\n{% endblock %}'
-        templates_code.append({'index.html': index_html_code})
+    # generate views script
+    views_code = views_file_head + views_script
+    # generate urls script
+    urls_code = urls_file_head + urls_script + '\n]'
+    # generate index.html script, append to templates
+    index_html_code = index_html_file_head + index_html_script + '\n</section>\n{% endblock %}'
+    templates_code.append({'index.html': index_html_code})
 
-        return views_code, urls_code, templates_code
+    return views_code, urls_code, templates_code
 
 
 class CreateViewsScript:
