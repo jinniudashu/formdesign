@@ -298,6 +298,8 @@ class CreateModelsScript:
     # generate model footer script
     def __create_model_footer_script(self):
         return f'''
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="客户")
+    operator = models.ForeignKey(Staff, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="作业人员")
 
     def __str__(self):
         return str(self.customer)
