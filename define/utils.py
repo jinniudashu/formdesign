@@ -45,7 +45,6 @@ def generate_source_code(modeladmin, request, queryset):
         code = json.dumps(source_code, ensure_ascii=False),
     )
     print(f'写入数据库成功, id: {s.id}')
-    print(source_code['dicts_data'])
 
 generate_source_code.short_description = '生成作业脚本'
 
