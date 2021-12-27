@@ -34,7 +34,7 @@ def generate_source_code(modeladmin, request, queryset):
     #   "templates": [{template_name: template_content}]
     # }
     source_code = {}
-    source_code['dicts_models'], source_code['dicts_admin'] = generate_dicts_code()
+    source_code['dicts_models'], source_code['dicts_admin'], source_code['dicts_data'] = generate_dicts_code()
     source_code['models'] , source_code['admin'] = generate_models_admin_code()
     source_code['forms'] =  generate_forms_code()
     source_code['views'] , source_code['urls'], source_code['templates'] = generate_views_urls_templates_code()
@@ -45,6 +45,7 @@ def generate_source_code(modeladmin, request, queryset):
         code = json.dumps(source_code, ensure_ascii=False),
     )
     print(f'写入数据库成功, id: {s.id}')
+    print(source_code['dicts_data'])
 
 generate_source_code.short_description = '生成作业脚本'
 
@@ -57,6 +58,7 @@ def generate_dicts_code():
     dicts_models_script = '''from django.db import models\n\n'''
     dicts_admin_script = '''from django.contrib import admin
 from .models import *\n\n'''
+    dicts_data = []
 
     dicts = DicList.objects.all()
     for dic in dicts:
@@ -82,10 +84,14 @@ from .models import *\n\n'''
     search_fields = ["value"]
 admin.site.register({dic_name}, {dic_name}Admin)\n\n'''
 
+            # 获取字典数据
+            if dic.content:
+                dicts_data.append({dic_name: dic.content})
+
             dicts_models_script = dicts_models_script + ds
             dicts_admin_script = dicts_admin_script + ads
 
-    return dicts_models_script, dicts_admin_script
+    return dicts_models_script, dicts_admin_script, dicts_data
 
 
 ####################################################################################################################
