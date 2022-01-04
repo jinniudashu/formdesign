@@ -36,7 +36,7 @@ def generate_source_code(modeladmin, request, queryset):
     source_code['dicts_models'], source_code['dicts_admin'], source_code['dicts_data'] = generate_dicts_code()
     source_code['models'] , source_code['admin'] = generate_models_admin_code()
     source_code['forms'] =  generate_forms_code()
-    source_code['views'] , source_code['urls'], source_code['templates'] = generate_views_urls_templates_code()
+    source_code['views'] , source_code['urls'], source_code['templates'], source_code['operand_views'] = generate_views_urls_templates_code()
 
     # 写入数据库
     s = SourceCode.objects.create(
@@ -414,19 +414,15 @@ def generate_views_urls_templates_code():
     urls_script = ''
     index_html_script = ''
     templates_code = []
+    operand_views = []
 
     views = OperandView.objects.all()
     for obj in views:
-
-        ################################################################################
-        # Insert into core.models.Form (Auto generate corresponding operation)
-        ################################################################################
+        # construct core.models.Operation
+        operand_view = {'operation_name': obj.name, 'operation_label': obj.label, 'operation_forms': obj.forms.meta_data}
+        operand_views.append(operand_view)
 
         # create views.py, template.html, urls.py
-        # inquire_forms = [(f['name'], f['style'], f['label']) for f in list(obj.inquire_forms.all().values())]
-        # mutate_forms = [(f['name'], f['style'], f['label']) for f in list(obj.mutate_forms.all().values())]
-
-        # s = CreateViewsScript(obj.name, obj.label, obj.axis_field, inquire_forms, mutate_forms)
         s = CreateViewsScript(obj)
         vs, hs, us, ihs = s.create_script()
         
@@ -447,7 +443,7 @@ def generate_views_urls_templates_code():
     index_html_code = index_html_file_head + index_html_script + '\n</section>\n{% endblock %}'
     templates_code.append({'index.html': index_html_code})
 
-    return views_code, urls_code, templates_code
+    return views_code, urls_code, templates_code, operand_views
 
 
 # generate views.py, urls.py, templates.html, index.html script
