@@ -135,3 +135,49 @@ django_heroku.settings(locals())
 
 # 配置部署heroku: https://devcenter.heroku.com/articles/django-app-configuration
 # 备份数据库: heroku pg:backups:schedule DATABASE --at '02:00 Asia/Shanghai' --app hssc-formdesign
+
+# 管理面板分组排序
+# pip install django-modeladmin-reorder
+ADMIN_REORDER = (
+    {'app': 'define', 'label': '字段',
+        'models': (
+            'define.BoolField',
+            'define.CharacterField',
+            'define.NumberField',
+            'define.DTField',
+            'define.ChoiceField',
+            'define.RelateField',
+        )
+   },
+   {'app': 'define', 'label': '组件和字典',
+        'models': (
+            'define.DicList',
+            'define.Component',            
+        )
+   },
+   {'app': 'define', 'label': '表单和视图',
+        'models': (
+            'define.BaseModel',
+            'define.BaseForm',
+            'define.InquireForm',
+            'define.MutateForm',
+        )
+   },
+   {'app': 'define', 'label': '作业界面',
+        'models': (
+            'define.OperandView',
+        )
+    },
+    {
+        'app': 'define', 'label': '管理实体清单',
+        'models': (
+            'define.ManagedEntity',
+        )
+    },
+    {
+        'app': 'define', 'label': '设计脚本',
+        'models': (
+            'define.SourceCode',
+        )
+    },
+)

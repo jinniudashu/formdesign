@@ -15,8 +15,15 @@ def copy_form(modeladmin, request, queryset):
             basemodel=obj.basemodel,
             is_inquiry=True,
             style=obj.style,
-            display_fields=obj.display_fields,
         )
+
+        # 重构meta_data
+        meta_data = json.loads(obj.meta_data)
+        print('重构meta_data', type(meta_data), meta_data)
+        meta_data['name'] = f.name
+        meta_data['label'] = f.label
+        meta_data['mutate_or_inquiry'] = 'inquiry'
+        f.meta_data = json.dumps(meta_data, ensure_ascii=False)
         f.components.add(*obj.components.all())
         f.save()
 
@@ -25,14 +32,6 @@ copy_form.short_description = '生成查询视图副本'
 
 # 生成作业脚本, 被define.admin调用
 def generate_source_code(modeladmin, request, queryset):
-    # source_code = {
-    #   "models": models_script,
-    #   "admin": admins_script, 
-    #   "forms": forms_script, 
-    #   "views": views_script, 
-    #   "urls": urls_script,
-    #   "templates": [{template_name: template_content}]
-    # }
     source_code = {}
     source_code['dicts_models'], source_code['dicts_admin'], source_code['dicts_data'] = generate_dicts_code()
     source_code['models'] , source_code['admin'] = generate_models_admin_code()
@@ -182,17 +181,18 @@ class CreateModelsScript:
 
     # 生成布尔型字段定义脚本
     def __create_bool_field_script(self, field):
+
+        f_required = f_default = ''
+
         if field['type'] == '1':
             f_required = 'null=True, blank=True, '
-        else:
-            f_required = ''
 
         if field['default'] == '1':
             f_default = 'default=True, '
         elif field['default'] == '2':
             f_default = 'default=False, '
         else:
-            f_default = ''
+            f_required = 'null=True, blank=True, '            
             
         return f'''
     {field['name']} = models.BooleanField({f_default}{f_required}verbose_name='{field['label']}')'''
@@ -305,6 +305,7 @@ class CreateModelsScript:
         return f'''
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="客户")
     operator = models.ForeignKey(Staff, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="作业人员")
+    pid = models.ForeignKey(Operation_proc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="作业进程id")
 
     def __str__(self):
         return str(self.customer)
@@ -422,10 +423,11 @@ def generate_views_urls_templates_code():
         ################################################################################
 
         # create views.py, template.html, urls.py
-        inquire_forms = [(f['name'], f['style'], f['label']) for f in list(obj.inquire_forms.all().values())]
-        mutate_forms = [(f['name'], f['style'], f['label']) for f in list(obj.mutate_forms.all().values())]
+        # inquire_forms = [(f['name'], f['style'], f['label']) for f in list(obj.inquire_forms.all().values())]
+        # mutate_forms = [(f['name'], f['style'], f['label']) for f in list(obj.mutate_forms.all().values())]
 
-        s = CreateViewsScript(obj.name, obj.label, obj.axis_field, inquire_forms, mutate_forms)
+        # s = CreateViewsScript(obj.name, obj.label, obj.axis_field, inquire_forms, mutate_forms)
+        s = CreateViewsScript(obj)
         vs, hs, us, ihs = s.create_script()
         
         # construct views script
@@ -448,41 +450,52 @@ def generate_views_urls_templates_code():
     return views_code, urls_code, templates_code
 
 
+# generate views.py, urls.py, templates.html, index.html script
 class CreateViewsScript:
-    def __init__(self, operand_name, operand_label, axis_field, inquire_forms, mutate_forms):
-        self.operand_name = operand_name
-        self.operand_label = operand_label
-        self.axis_field = axis_field
-        self.inquire_forms = inquire_forms
-        self.mutate_forms = mutate_forms
+    # def __init__(self, operand_name, operand_label, axis_field, inquire_forms, mutate_forms):
+    def __init__(self, obj):
+        self.operand_name = obj.name
+        self.operand_label = obj.label
+        self.managed_entity = obj.managed_entity
+        forms = json.loads(obj.forms.meta_data)
+        self.inquire_forms, self.mutate_forms = self.__get_forms_list(forms)
 
-        self.view_name = operand_name.capitalize() + '_CreateView'
-        self.template_name = operand_name + '_edit.html'
+        self.view_name = self.operand_name.capitalize() + '_CreateView'
+        self.template_name = self.operand_name + '_edit.html'
         self.success_url = '/'
-        self.form_class = mutate_forms[0][0].capitalize() + '_ModelForm'
+        self.form_class = self.mutate_forms[0][0].capitalize() + '_ModelForm'
 
         self.url = self.operand_name + '_create_url'
 
+
+    def __get_forms_list(self, forms):
+        inquire_forms = []
+        mutate_forms = []
+        for form in forms:
+            if form['mutate_or_inquiry'] == 'inquiry':
+                inquire_forms.append((form['name'], form['style'], form['label']))
+            else:
+                mutate_forms.append((form['name'], form['style'], form['label']))
+        return inquire_forms, mutate_forms
+
+    # create views.py, template.html, urls.py, index.html script
     def create_script(self):
 
         # 迭代获得各部分构造参数
         vs, hs = self.__iterate_forms()
-
         # views.py
         view_script = self.__construct_view_script(vs)
-
         # .html
         html_script = self.__construct_html_script(hs)
-
         # urls.py
         url_script = self.__construct_url_script()
-        
         # index.html
         index_html_script = self.__construct_index_html_script()
 
         return view_script, html_script, url_script, index_html_script
 
 
+    # 迭代forms列表获得各部分构造参数
     def __iterate_forms(self):
         i = 0       # count forms
 
@@ -584,6 +597,7 @@ class CreateViewsScript:
         return vs, s6
 
 
+    # 构造views脚本
     def __construct_view_script(self, vs):
 
         script_head = f'''
@@ -623,6 +637,7 @@ class {self.view_name}(CreateView):
         s = f'{script_head}{script_body}{script_foot}'
         return s
 
+    # 构造html脚本
     def __construct_html_script(self, hs):
         script_head = f'''{{% extends "base.html" %}}
 
@@ -647,11 +662,13 @@ class {self.view_name}(CreateView):
         return s
 
     
+    # 构造urls脚本
     def __construct_url_script(self):
         return f'''
     path('{self.operand_name}', {self.view_name}.as_view(), name='{self.url}'),'''
 
 
+    # 构造index.html脚本
     def __construct_index_html_script(self):
         return f'''<a class='list-group-item' href='{{% url "{self.url}" %}}'>
 		{self.operand_label}

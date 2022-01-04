@@ -141,7 +141,11 @@
                 "type": "Select",
                 "related_content": "frequency",
                 "related_content_label": "频次",
-                "dic": [],
+                "dic": [
+                    "经常",
+                    "偶尔",
+                    "从无"
+                ],
                 "related_field": "value",
                 "score": false
             }
@@ -188,7 +192,11 @@
                 "type": "RadioSelect",
                 "related_content": "frequency",
                 "related_content_label": "频次",
-                "dic": [],
+                "dic": [
+                    "经常",
+                    "偶尔",
+                    "从无"
+                ],
                 "related_field": "value",
                 "score": false
             },
@@ -206,7 +214,11 @@
                 "type": "RadioSelect",
                 "related_content": "frequency",
                 "related_content_label": "频次",
-                "dic": [],
+                "dic": [
+                    "经常",
+                    "偶尔",
+                    "从无"
+                ],
                 "related_field": "value",
                 "score": false
             },
@@ -246,7 +258,12 @@
                 "type": "RadioSelect",
                 "related_content": "state_degree",
                 "related_content_label": "状态程度",
-                "dic": [],
+                "dic": [
+                    "非常好",
+                    "还不错",
+                    "不太好",
+                    "非常糟"
+                ],
                 "related_field": "value",
                 "score": false
             },
@@ -257,7 +274,12 @@
                 "type": "Select",
                 "related_content": "comparative_expression",
                 "related_content_label": "比较表达",
-                "dic": [],
+                "dic": [
+                    "改善很大",
+                    "有一定改善",
+                    "没变化",
+                    "变更差了"
+                ],
                 "related_field": "value",
                 "score": false
             },
@@ -342,7 +364,12 @@
                 "type": "Select",
                 "related_content": "convenience",
                 "related_content_label": "便捷程度",
-                "dic": [],
+                "dic": [
+                    "非常不方便",
+                    "不方便",
+                    "比较方便",
+                    "非常方便"
+                ],
                 "related_field": "value",
                 "score": false
             },
@@ -355,7 +382,7 @@
             },
             {
                 "model": "BoolField",
-                "name": "boolfield_is_drinking_water_healthy?",
+                "name": "boolfield_is_drinking_water_healthy",
                 "label": "饮水是否健康",
                 "type": "0",
                 "score": false
@@ -560,7 +587,10 @@
                 "type": "Select",
                 "related_content": "normality",
                 "related_content_label": "正常性判断",
-                "dic": [],
+                "dic": [
+                    "正常",
+                    "异常"
+                ],
                 "related_field": "value",
                 "score": false
             }
@@ -1132,7 +1162,10 @@
                 "type": "Select",
                 "related_content": "gender",
                 "related_content_label": "性别",
-                "dic": [],
+                "dic": [
+                    "男",
+                    "女"
+                ],
                 "related_field": "value",
                 "score": false
             },
@@ -1149,7 +1182,10 @@
                 "type": "Select",
                 "related_content": "nationality",
                 "related_content_label": "民族",
-                "dic": [],
+                "dic": [
+                    "汉族",
+                    "少数民族"
+                ],
                 "related_field": "value",
                 "score": false
             },

@@ -4,7 +4,8 @@ from django.db.models.fields import related
 
 from pypinyin import lazy_pinyin
 
-from define.models import BoolField, CharacterField, DicList, NumberField, DTField, ChoiceField, RelatedField, Component, BaseModel, BaseForm, OperandView
+from define.models import BoolField, CharacterField, CombineForm, DicList, NumberField, DTField, ChoiceField, RelatedField, Component
+from define.models import ManagedEntity, BaseModel, BaseForm, OperandView
 
 class Command(BaseCommand):
     help = 'Import design from json file'
@@ -18,10 +19,21 @@ class Command(BaseCommand):
         ChoiceField.objects.all().delete()
         RelatedField.objects.all().delete()
         Component.objects.all().delete()
+        DicList.objects.all().delete()
+        ManagedEntity.objects.all().delete()
         BaseModel.objects.all().delete()
         BaseForm.objects.all().delete()
+        CombineForm.objects.all().delete()
         OperandView.objects.all().delete()        
         
+        # 初始化管理实体清单数据
+        managed_entities = [('customer', '客户'), ('staff', '员工'), ('medicine', '药品'), ('device', '设备')]
+        for entity in managed_entities:
+            ManagedEntity.objects.create(
+                name=entity[0],
+                label=entity[1],
+            )
+
         # 导入数据
         with open('design.json', encoding="utf8") as f:
             design = json.loads(f.read())
@@ -98,4 +110,3 @@ class Command(BaseCommand):
             # basemodel.components.add(*model_components)
             # print(model_components)
 
-            # 创建BaseModel

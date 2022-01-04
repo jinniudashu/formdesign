@@ -85,7 +85,7 @@ class Command(BaseCommand):
                     type = self._get_input_style(input_style)
                     related_content = auxiliary_input['name'].replace(' ', '')
                     related_content_label = auxiliary_input['label'].replace(' ', '')
-                    dic = self._get_dic(related_content)
+                    dic = self._get_dic(auxiliary_input['name'])    # 需求系统中的auxiliary_input['name']值有空格，保留空格以确保匹配字典值
                     return {'model': 'RelatedField', 'name': f'relatedfield_{name}', 'label': label, 'type': type, 'related_content': related_content, 'related_content_label': related_content_label, 'dic': dic, 'related_field': 'value', 'score': score}
 
             # RelatedField

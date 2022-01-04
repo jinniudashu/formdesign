@@ -9,7 +9,7 @@ from django.utils import timezone
 
 from icpc.models import *
 from dictionaries.models import *
-from core.models import Staff, Customer
+from core.models import Staff, Customer, Operation_proc
 
 '''
 
