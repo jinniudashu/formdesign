@@ -419,7 +419,10 @@ def generate_views_urls_templates_code():
     views = OperandView.objects.all()
     for obj in views:
         # construct core.models.Operation
-        operand_view = {'operation_name': obj.name, 'operation_label': obj.label, 'operation_forms': obj.forms.meta_data}
+        operand_view = {
+            'name': obj.name,
+            'label': obj.label,
+            'forms': obj.forms.meta_data}
         operand_views.append(operand_view)
 
         # create views.py, template.html, urls.py
