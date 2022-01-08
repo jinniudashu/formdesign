@@ -551,8 +551,8 @@ class CreateViewsScript:
         context['form{i}'] = form{i}'''
                 s_5 = f'''
         f = context['form{i}'].save(commit=False)
-        f.customer = self.customer
-        f.operator = self.operator
+        f.customer = customer
+        f.operator = operator
         f.save()
                 '''
                 h = f'''
@@ -572,8 +572,8 @@ class CreateViewsScript:
                 s_5 = f'''
         for form in context['formset{i}']:
             f = form.save(commit=False)
-            f.customer = self.customer
-            f.operator = self.operator
+            f.customer = customer
+            f.operator = operator
             f.save()
                 '''
                 h = f'''
@@ -605,10 +605,6 @@ class {self.view_name}(CreateView):
     success_url = '{self.success_url}'
     form_class = {self.form_class}
 
-    user = User.objects.get(id=1)
-    customer = Customer.objects.get(user=user)
-    operator = Staff.objects.get(user=user)
-
     def get_context_data(self, **kwargs):
         context = super({self.view_name}, self).get_context_data(**kwargs)
         '''
@@ -621,10 +617,15 @@ class {self.view_name}(CreateView):
         else:''' + vs[3] + f'''
         # context''' + vs[4] + f'''
 
+        context['user'] = self.request.user
+
         return context
 
     def form_valid(self, form):
         context = self.get_context_data()
+        context = self.get_context_data()
+        customer = Customer.objects.get(user=context['user'])
+        operator = Staff.objects.get(user=context['user'])
 
         # form_valid''' + vs[5]
         

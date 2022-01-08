@@ -52,7 +52,9 @@ views_file_head = f'''from django.views.generic import ListView, CreateView, Upd
 from django.views.generic.detail import DetailView
 from django.contrib.auth.models import User
 from django.forms import modelformset_factory, inlineformset_factory
+
 from core.models import Operation_proc, Staff, Customer
+from core.signals import operand_finished
 
 from django.contrib.messages.views import SuccessMessageMixin
 from forms.utils import *
