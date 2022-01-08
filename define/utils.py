@@ -513,7 +513,7 @@ class CreateViewsScript:
             s = c = h = ''
             if form[1] == 'detail':
                 s = f'''
-        form{i} = {form[0].capitalize()}_ModelForm(instance=self.customer, prefix="form{i}")'''
+        form{i} = {form[0].capitalize()}_ModelForm(instance=customer, prefix="form{i}")'''
                 c = f'''
         context['form{i}'] = form{i}'''
                 h = f'''
@@ -524,7 +524,7 @@ class CreateViewsScript:
             else:
                 s = f'''
         Formset{i} = modelformset_factory({form[0].capitalize()}, form={form[0].capitalize()}_ModelForm, extra=2)
-        # formset{i} = Formset{i}(queryset=self.customer.{form[0].lower()}.all(), prefix="formset{i}")
+        # formset{i} = Formset{i}(queryset=customer.{form[0].lower()}.all(), prefix="formset{i}")
         formset{i} = Formset{i}(prefix="formset{i}")'''
                 c = f'''
         context['formset{i}'] = formset{i}'''
@@ -607,6 +607,7 @@ class {self.view_name}(CreateView):
 
     def get_context_data(self, **kwargs):
         context = super({self.view_name}, self).get_context_data(**kwargs)
+        customer = Customer.objects.get(user=self.request.user)
         '''
 
         script_body = f'''
