@@ -328,7 +328,26 @@ def basemodel_m2m_changed_handler(sender, instance, action, **kwargs):
 @receiver(m2m_changed, sender=BaseForm.components.through)
 def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
         # 根据components的变更生成字段记录
-        fields = list(instance.components.values_list('name', flat=True))
+        # fields = list(instance.components.values_list('name', flat=True))
+        fields = []
+        for component in instance.components.all():
+            field = {}
+            field['name'] = component.name
+            field['label'] = component.label
+            _type = component.content_object._meta.object_name
+            if _type == 'CharacterField':
+              field['type'] = 'string'
+            elif _type == 'BoolField':
+              field['type'] = 'boolean'
+            elif _type == 'NumberField':
+              field['type'] = 'number'
+            elif _type == 'DTField':
+              field['type'] = 'datetime'
+            elif _type == 'ChoiceField' or _type == 'RelatedField':
+              field['type'] = 'dict'
+              field['dict_name'] = component.content_object.related_content.name
+            fields.append(field)
+
         meta_data = {}
         meta_data['name'] = instance.name
         meta_data['label'] = instance.label
