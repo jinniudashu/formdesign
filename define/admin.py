@@ -36,7 +36,7 @@ class BaseFormAdmin(admin.ModelAdmin):
     actions = [copy_form]
 
 class CombineFormAdmin(admin.ModelAdmin):
-    readonly_fields = ['is_base']
+    readonly_fields = ['name', 'is_base', 'meta_data']
 
 class OperandViewAdmin(admin.ModelAdmin):
     readonly_fields = ['name']

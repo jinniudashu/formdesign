@@ -170,6 +170,7 @@ class CreateModelsScript:
             f_required = ''
         else:
             f_required = 'null=True, blank=True, '
+        f_required = 'null=True, blank=True, '
 
         if field['default']:
             f_default = f'default="{field["default"]}", '
@@ -186,6 +187,8 @@ class CreateModelsScript:
 
         if field['type'] == '1':
             f_required = 'null=True, blank=True, '
+        else:
+            f_required = 'null=True, '
 
         if field['default'] == '1':
             f_default = 'default=True, '
@@ -228,9 +231,10 @@ class CreateModelsScript:
             f_default = ''
 
         if field['required']:
-            f_required = ''
+            f_required = 'null=True, '
         else:
             f_required = 'null=True, blank=True, '
+        f_required = 'null=True, blank=True, '
 
         return f'''
     {field['name']} = models.{f_type}({f_dicimal}{f_default}{f_required}verbose_name='{field['label']}')
@@ -249,7 +253,7 @@ class CreateModelsScript:
             if field['default_now']: f_default = 'default=date.today(), '
         
         if field['required']:
-            f_required = ''
+            f_required = 'null=True, '
         else:
             f_required = 'null=True, blank=True, '
 
@@ -278,7 +282,7 @@ class CreateModelsScript:
             f_default = ''
 
         if field['required']:
-            f_required = ''
+            f_required = 'null=True, '
         else:
             f_required = 'null=True, blank=True, '
 
@@ -296,9 +300,11 @@ class CreateModelsScript:
             f_type = 'CheckboxSelectMultiple'
         else:
             f_type = 'SelectMultiple'
-        
+
+        f_required = 'null=True, blank=True, '
+
         return f'''
-    {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, verbose_name='{field['label']}')'''
+    {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, {f_required}verbose_name='{field['label']}')'''
 
     # generate model footer script
     def __create_model_footer_script(self):
@@ -306,6 +312,7 @@ class CreateModelsScript:
     customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="客户")
     operator = models.ForeignKey(Staff, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="作业人员")
     pid = models.ForeignKey(Operation_proc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="作业进程id")
+    slug = models.SlugField(max_length=250, blank=True, null=True, verbose_name="slug")
 
     def __str__(self):
         return str(self.customer)
@@ -427,14 +434,15 @@ def generate_views_urls_templates_code():
 
         # create views.py, template.html, urls.py
         s = CreateViewsScript(obj)
-        vs, hs, us, ihs = s.create_script()
+        vs, us, chs, uhs, ihs = s.create_script()
         
         # construct views script
         views_script = views_script + vs
         # construct urls script
         urls_script = urls_script + us
         # create templates.html
-        templates_code.append({f'{obj.name}_edit.html': hs})
+        templates_code.append({f'{obj.name}_create.html': chs})
+        templates_code.append({f'{obj.name}_update.html': uhs})
         # construct index.html script
         index_html_script = index_html_script + ihs
 
@@ -464,7 +472,7 @@ class CreateViewsScript:
         self.success_url = '/'
         self.form_class = self.mutate_forms[0][0].capitalize() + '_ModelForm'
 
-        self.url = self.operand_name + '_create_url'
+        self.url = self.operand_name + '_update_url'
 
 
     def __get_forms_list(self, forms):
@@ -472,9 +480,9 @@ class CreateViewsScript:
         mutate_forms = []
         for form in forms:
             if form['mutate_or_inquiry'] == 'inquiry':
-                inquire_forms.append((form['name'], form['style'], form['label']))
+                inquire_forms.append((form['name'], form['style'], form['label'], form['basemodel']))
             else:
-                mutate_forms.append((form['name'], form['style'], form['label']))
+                mutate_forms.append((form['name'], form['style'], form['label'], form['basemodel']))
         return inquire_forms, mutate_forms
 
     # create views.py, template.html, urls.py, index.html script
@@ -485,16 +493,16 @@ class CreateViewsScript:
         # views.py
         view_script = self.__construct_view_script(vs)
         # .html
-        html_script = self.__construct_html_script(hs)
+        create_html_script, update_html_script = self.__construct_html_script(hs)
         # urls.py
         url_script = self.__construct_url_script()
         # index.html
         index_html_script = self.__construct_index_html_script()
 
-        return view_script, html_script, url_script, index_html_script
+        return view_script, url_script, create_html_script, update_html_script, index_html_script
 
 
-    # 迭代forms列表获得各部分构造参数
+    # 迭代forms列表获得各部分构造参数(视图函数版本)
     def __iterate_forms(self):
         i = 0       # count forms
 
@@ -504,139 +512,183 @@ class CreateViewsScript:
         s2 = ''     # POST mutate_forms
         s3 = ''     # GET mutate_forms
         s4 = ''     # context
-        s5 = ''     # form_valid
-
+        s5_if = []  # form_valid if
+        s5 = ''     # form_valid save
         s6 = ''     # template scripts
+        s7 = ''     # 获取表单实例
+        s2_create = s3_create = ''
 
         # Iterate inquire_forms
         for form in self.inquire_forms:
             s = c = h = ''
+            # s = c = h = p = ''
+            
+    #         p = f'''
+    # proc_{form[3]} = {form[3].capitalize()}.objects.get(pid=operation_proc)'''
+
             if form[1] == 'detail':
                 s = f'''
-        form{i} = {form[0].capitalize()}_ModelForm(instance=customer, prefix="form{i}")'''
+    {form[3]} = {form[0].capitalize()}_ModelForm(instance=customer, prefix="{form[3]}")'''
                 c = f'''
-        context['form{i}'] = form{i}'''
+    context['{form[3]}'] = {form[3]}'''
                 h = f'''
         <h5>{form[2]}</h5>
-        {{{{ form{i}.as_p }}}}
+        {{{{ {form[3]}.as_p }}}}
         <hr>'''
 
             else:
                 s = f'''
-        Formset{i} = modelformset_factory({form[0].capitalize()}, form={form[0].capitalize()}_ModelForm, extra=2)
-        # formset{i} = Formset{i}(queryset=customer.{form[0].lower()}.all(), prefix="formset{i}")
-        formset{i} = Formset{i}(prefix="formset{i}")'''
+    {form[3].capitalize()}_set = modelformset_factory({form[0].capitalize()}, form={form[0].capitalize()}_ModelForm, extra=2)
+    # {form[3]}_set = {form[3].capitalize()}_set(queryset=customer.{form[0].lower()}.all(), prefix="{form[3]}_set")
+    {form[3]}_set = {form[3].capitalize()}_set(prefix="{form[3]}_set")'''
                 c = f'''
-        context['formset{i}'] = formset{i}'''
+    context['{form[3]}_set'] = {form[3]}_set'''
                 h = f'''
         <h5>{form[2]}</h5>
-        {{{{ formset{i}.as_p }}}}
+        {{{{ {form[3]}_set.as_p }}}}
         <hr>'''
 
             s0 = s0 + s
             s4 = s4 + c
             s6 = s6 + h
+
             i += 1
         
         # Iterate mutate_formsets
         for form in self.mutate_forms:
-            s_1=s_2=s_3=c=s_5= h =''
+            s_1=s_2=s_3=c=s_5=s_5_if=h=p=''
+            s_2_c=s_3_c = ''
+
+            p = f'''
+    proc_{form[3]} = {form[3].capitalize()}.objects.get(pid=operation_proc)'''
 
             if form[1] == 'detail':
                 s_2 = f'''
-            form{i} = {form[0].capitalize()}_ModelForm(self.request.POST, prefix="form{i}")'''
+        {form[3]} = {form[0].capitalize()}_ModelForm(instance=proc_{form[3]}, data=request.POST, prefix="{form[3]}")'''
                 s_3 = f'''
-            form{i} = {form[0].capitalize()}_ModelForm(prefix="form{i}")'''
+        {form[3]} = {form[0].capitalize()}_ModelForm(instance=proc_{form[3]}, prefix="{form[3]}")'''
+                s_2_c = f'''
+        {form[3]} = {form[0].capitalize()}_ModelForm(request.POST, prefix="{form[3]}")'''
+                s_3_c = f'''
+        {form[3]} = {form[0].capitalize()}_ModelForm(prefix="{form[3]}")'''
                 c = f'''
-        context['form{i}'] = form{i}'''
+    context['{form[3]}'] = {form[3]}'''
+                s_5_if = f'''{form[3]}.is_valid()'''
                 s_5 = f'''
-        f = context['form{i}'].save(commit=False)
-        f.customer = customer
-        f.operator = operator
-        f.save()
-                '''
+            {form[3]}.save()'''
                 h = f'''
         <h5>{form[2]}</h5>
-        {{{{ form{i}.as_p }}}}
+        {{{{ {form[3]}.as_p }}}}
         <hr>'''
 
             else:
                 s_1 = f'''
-        Formset{i} = modelformset_factory({form[0].capitalize()}, form={form[0].capitalize()}_ModelForm, extra=2)'''
+        {form[3].capitalize()}_set = modelformset_factory({form[0].capitalize()}, form={form[0].capitalize()}_ModelForm, extra=2)'''
                 s_2 = f'''
-            formset{i} = Formset{i}(self.request.POST, prefix="formset{i}")'''
+            {form[3]}_set = {form[3].capitalize()}_set(instance=proc_{form[3]}, data=request.POST, prefix="{form[3]}_set")'''
                 s_3 = f'''
-            formset{i} = Formset{i}(prefix="formset{i}")'''
+            {form[3]}_set = {form[3].capitalize()}_set(instance=proc_{form[3]}, prefix="{form[3]}_set")'''
+                s_2_c = f'''
+            {form[3]}_set = {form[3].capitalize()}_set(request.POST, prefix="{form[3]}_set")'''
+                s_3_c = f'''
+            {form[3]}_set = {form[3].capitalize()}_set(prefix="{form[3]}_set")'''
                 c = f'''
-        context['formset{i}'] = formset{i}'''
+    context['{form[3]}_set'] = {form[3]}_set'''
+                s_5_if = f'''{form[3]}_set.is_valid()'''
                 s_5 = f'''
-        for form in context['formset{i}']:
-            f = form.save(commit=False)
-            f.customer = customer
-            f.operator = operator
-            f.save()
-                '''
+            for form in {form[3]}_set:
+                form.save()'''
                 h = f'''
         <h5>{form[2]}</h5>
-        {{{{ formset{i}.as_p }}}}
+        {{{{ {form[3]}_set.as_p }}}}
         <hr>'''
 
             s1 = s1 + s_1
             s2 = s2 + s_2
             s3 = s3 + s_3
             s4 = s4 + c
+            s5_if.append(s_5_if)
             s5 = s5 + s_5
 
             s6 = s6 + h
+            s7 = s7 + p
+
+            s2_create = s2_create + s_2_c
+            s3_create = s3_create + s_3_c
 
             i += 1
 
-        vs = [s0, s1, s2, s3, s4, s5]
+        s5if = ''
+        for i, s in enumerate(s5_if):
+            if i == 0:
+                s5if = 'if ' + s
+            else:
+                s5if = s5if + ' and ' + s
+        s5if = s5if + ':'
+
+        vs = [s0, s1, s2, s3, s4, s5, s5if, s7, s2_create, s3_create]
         
         return vs, s6
 
 
-    # 构造views脚本
+    # 构造views脚本（函数版本）
     def __construct_view_script(self, vs):
 
-        script_head = f'''
-class {self.view_name}(CreateView):
-    template_name = '{self.template_name}'
-    success_url = '{self.success_url}'
-    form_class = {self.form_class}
+        # create view
+        create_script_head = f'''
+def {self.operand_name}_create(request):
+    customer = Customer.objects.get(user=request.user)
+    operator = Staff.objects.get(user=request.user)
+    context = {{}}
+    '''
 
-    def get_context_data(self, **kwargs):
-        context = super({self.view_name}, self).get_context_data(**kwargs)
-        customer = Customer.objects.get(user=self.request.user)
-        '''
+        create_script_body = f'''
+    # inquire_forms''' + vs[0] + f'''
+    # mutate_formsets''' + vs[1] + f'''
+    # mutate_forms
+    if request.method == 'POST':'''+ vs[8] + f'''
+        ''' + vs[6] + vs[5] + f'''
+            return redirect(reverse('index'))
+    else:''' + vs[9] + f'''
+    # context''' + vs[4]
 
-        script_body = f'''
-        # inquire_forms''' + vs[0] + f'''
-        # mutate_formsets''' + vs[1] + f'''
-        # mutate_forms
-        if self.request.method == 'POST':'''+ vs[2] + f'''
-        else:''' + vs[3] + f'''
-        # context''' + vs[4] + f'''
+        create_script_foot = f'''
+    return render(request, '{self.operand_name}_create.html', context)
 
-        context['user'] = self.request.user
+    '''
 
-        return context
+        # update view
+        update_script_head = f'''
+def {self.operand_name}_update(request, *args, **kwargs):
+    operation_proc = get_object_or_404(Operation_proc, id=kwargs['id'])
+    customer = operation_proc.customer
+    operator = operation_proc.operator
+    context = {{}}
+    '''
 
-    def form_valid(self, form):
-        context = self.get_context_data()
-        context = self.get_context_data()
-        customer = Customer.objects.get(user=context['user'])
-        operator = Staff.objects.get(user=context['user'])
+        update_script_body = vs[7] + f'''
+    # inquire_forms''' + vs[0] + f'''
+    # mutate_formsets''' + vs[1] + f'''
+    # mutate_forms
+    if request.method == 'POST':'''+ vs[2] + f'''
+        ''' + vs[6] + vs[5] + f'''
+            # 构造作业完成消息参数
+            post_fields = request.POST.dict()
+            post_fields.pop('csrfmiddlewaretoken')
+            operand_finished.send(sender={self.operand_name}_update, pid=kwargs['id'], ocode='rtc', field_values=post_fields)
+            return redirect(reverse('index'))
+    else:''' + vs[3] + f'''
+    # context''' + vs[4]
 
-        # form_valid''' + vs[5]
-        
-        script_foot = f'''
-        return super({self.view_name}, self).form_valid(form)
+        update_script_foot = f'''
+    context['proc_id'] = kwargs['id']
+    return render(request, '{self.operand_name}_update.html', context)
 
-        '''
+    '''
 
-        s = f'{script_head}{script_body}{script_foot}'
+        s = f'{create_script_head}{create_script_body}{create_script_foot}\n\n{update_script_head}{update_script_body}{update_script_foot}'
         return s
+
 
     # 构造html脚本
     def __construct_html_script(self, hs):
@@ -647,8 +699,13 @@ class {self.view_name}(CreateView):
 {{% block content %}}
 '''
 
-        script_body = f'''
-	<form action={{% url '{self.url}' %}} method='POST' enctype='multipart/form-data'> 
+        create_script_body = f'''
+	<form action={{% url '{self.operand_name}_create_url' %}} method='POST' enctype='multipart/form-data'> 
+		{{% csrf_token %}}
+            ''' + hs
+
+        update_script_body = f'''
+	<form action={{% url '{self.operand_name}_update_url' proc_id %}} method='POST' enctype='multipart/form-data'> 
 		{{% csrf_token %}}
             ''' + hs
 
@@ -659,19 +716,21 @@ class {self.view_name}(CreateView):
 {{% endblock %}}
 '''
 
-        s = f'{script_head}{script_body}{script_foot}'
-        return s
+        s_create = f'{script_head}{create_script_body}{script_foot}'
+        s_update = f'{script_head}{update_script_body}{script_foot}'
+        return s_create, s_update
 
     
     # 构造urls脚本
     def __construct_url_script(self):
         return f'''
-    path('{self.operand_name}', {self.view_name}.as_view(), name='{self.url}'),'''
+    path('{self.operand_name}/create', {self.operand_name}_create, name='{self.operand_name}_create_url'),
+    path('{self.operand_name}/<int:id>/update', {self.operand_name}_update, name='{self.operand_name}_update_url'),'''
 
 
     # 构造index.html脚本
     def __construct_index_html_script(self):
-        return f'''<a class='list-group-item' href='{{% url "{self.url}" %}}'>
+        return f'''<a class='list-group-item' href='{{% url "{self.operand_name}_create_url" %}}'>
 		{self.operand_label}
 	</a>
         '''

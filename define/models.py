@@ -153,8 +153,8 @@ class DicList(models.Model):
 
 # 关联字段
 class RelatedField(models.Model):
-    name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
-    label = models.CharField(max_length=100, verbose_name="组件名称")
+    name = models.CharField(max_length=100, unique=True, verbose_name="name")
+    label = models.CharField(max_length=100, unique=True, verbose_name="组件名称")
     CHOICE_TYPE = [('Select', '下拉单选'), ('RadioSelect', '单选按钮列表'), ('CheckboxSelectMultiple', '复选框列表'), ('SelectMultiple', '下拉多选')]
     type = models.CharField(max_length=50, choices=CHOICE_TYPE, default='ChoiceField', verbose_name="类型")
     related_content = models.ForeignKey(DicList, on_delete=models.CASCADE, verbose_name="关联内容")
@@ -222,7 +222,7 @@ class ManagedEntity(models.Model):
 # 基础表单定义
 class BaseModel(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
-    label = models.CharField(max_length=100, verbose_name="表单名称", null=True, blank=True)
+    label = models.CharField(max_length=100, unique=True, verbose_name="表单名称")
     description = models.TextField(max_length=255, verbose_name="描述", null=True, blank=True)
     components = models.ManyToManyField(Component, verbose_name="组件清单")
     managed_entity = models.ManyToManyField(ManagedEntity, verbose_name="关联实体", null=True, blank=True)
@@ -245,7 +245,7 @@ class BaseModel(models.Model):
 # 基础视图定义
 class BaseForm(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
-    label = models.CharField(max_length=100, null=True, blank=True, verbose_name="视图名称")
+    label = models.CharField(max_length=100, unique=True, verbose_name="视图名称")
     basemodel = models.ForeignKey(BaseModel, on_delete=models.CASCADE, verbose_name="基础表单")
     is_inquiry = models.BooleanField(default=False, verbose_name="仅用于查询")
     FORM_STYLE = [('detail', '详情'),('list', '列表')]
@@ -257,6 +257,11 @@ class BaseForm(models.Model):
     def __str__(self):
         return str(self.label)
 
+    def save(self, *args, **kwargs):
+        if not self.name:
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
+
     class Meta:
         verbose_name = "基础视图"
         verbose_name_plural = "基础视图"
@@ -265,7 +270,7 @@ class BaseForm(models.Model):
 # 组合视图定义
 class CombineForm(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
-    label = models.CharField(max_length=100, blank=True, null=True, verbose_name="表单名称")
+    label = models.CharField(max_length=100, unique=True, verbose_name="表单名称")
     forms = models.ManyToManyField('self', blank=True, verbose_name="可组合的视图")
     is_base = models.BooleanField(default=False, verbose_name="基础视图")
     managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, null=True, blank=True, verbose_name="实体类型")
@@ -273,6 +278,11 @@ class CombineForm(models.Model):
 
     def __str__(self):
         return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if not self.name:
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "组合视图"

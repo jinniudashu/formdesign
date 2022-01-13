@@ -52,6 +52,7 @@ views_file_head = f'''from django.views.generic import ListView, CreateView, Upd
 from django.views.generic.detail import DetailView
 from django.contrib.auth.models import User
 from django.forms import modelformset_factory, inlineformset_factory
+import json
 
 from core.models import Operation_proc, Staff, Customer
 from core.signals import operand_finished
@@ -76,7 +77,7 @@ class Index_view(ListView):
 			todo = {{}}
 			todo['operation'] = proc.operation.label
 			todo['url'] = f'{{proc.operation.name}}_update_url'
-			todo['slug'] = proc.entry
+			todo['proc_id'] = proc.id
 			todos.append(todo)
 		context = super().get_context_data(**kwargs)
 		context['todos'] = todos
@@ -99,10 +100,10 @@ index_html_file_head = f'''{{% extends "base.html" %}}
 
 <br>
 
-<h4>当前任务</h4>
+<h5>当前任务</h5>
 	<section class="list-group">
 	{{% for todo in todos %}}
-		<a class="list-group-item" href="{{% url todo.url todo.slug %}}">
+		<a class="list-group-item" href="{{% url todo.url todo.proc_id %}}">
 		{{{{ todo.operation }}}}
 		</a>
 	{{% endfor %}}
@@ -114,7 +115,7 @@ index_html_file_head = f'''{{% extends "base.html" %}}
 
 <br>
 
-<h4>表单目录</h4>
+<h5>系统菜单</h5>
 
 <section class="list-group">
 '''
