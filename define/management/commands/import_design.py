@@ -44,6 +44,7 @@ class Command(BaseCommand):
             basemodel = BaseModel.objects.create(name=model_name, label=model_label)
             model_components = []
             for field in obj['fields']:
+                print('inserting:', model_name, field['name'], field['label'])
                 # _name = "_".join(lazy_pinyin(field['label']))
                 if field['model'] == 'CharacterField':
                     if CharacterField.objects.filter(name=field['name']).count() == 0:

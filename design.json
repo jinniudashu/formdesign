@@ -557,9 +557,9 @@
         "fields": [
             {
                 "model": "RelatedField",
-                "name": "relatedfield_diseases_name",
-                "label": "病名",
-                "type": "RadioSelect",
+                "name": "relatedfield_disease_name",
+                "label": "疾病名称",
+                "type": "Select",
                 "related_content": "icpc5_evaluation_and_diagnoses",
                 "related_content_label": "评估和诊断",
                 "dic": [],
