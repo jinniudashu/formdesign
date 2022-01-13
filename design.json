@@ -136,7 +136,7 @@
             },
             {
                 "model": "RelatedField",
-                "name": "relatedfield_can_you_get_encouragement_and_support_from_family_and_friends",
+                "name": "relatedfield_can_you_get_encouragement_and_support_from_family",
                 "label": "是否能得到家人朋友的鼓励和支持",
                 "type": "Select",
                 "related_content": "frequency",
