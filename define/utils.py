@@ -300,7 +300,7 @@ class CreateModelsScript:
             f_required = 'null=True, blank=True, '
 
             return f'''
-        {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, {f_required}verbose_name='{field['label']}')'''
+    {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, {f_required}verbose_name='{field['label']}')'''
 
         elif field['type'] in ['SelectMultiple', 'CheckboxSelectMultiple']:
             if field['type'] == 'SelectMultiple':
@@ -309,7 +309,7 @@ class CreateModelsScript:
                 f_type = 'CheckboxSelectMultiple'
 
             return f'''
-        {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', verbose_name='{field['label']}')'''
+    {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', verbose_name='{field['label']}')'''
 
 
     # generate model footer script
