@@ -512,7 +512,7 @@ class CreateViewsScript:
     def __iterate_forms(self):
         i = 0       # count forms
 
-        # 把view分为11个部分
+        # 把view分为10个部分
         s0 = ''     # inquire_forms
         s1 = ''     # mutate_formsets
         s2 = ''     # POST mutate_forms
@@ -650,7 +650,7 @@ def {self.operand_name}_create(request):
     context = {{}}
     '''
 
-        create_script_body = f'''
+        create_script_body = vs[7] + f'''
     # inquire_forms''' + vs[0] + f'''
     # mutate_formsets''' + vs[1] + f'''
     # mutate_forms
