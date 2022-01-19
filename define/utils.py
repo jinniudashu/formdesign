@@ -292,19 +292,25 @@ class CreateModelsScript:
 
     # 生成外键字段定义脚本
     def __create_related_field_script(self, field):
-        if field['type'] == 'Select':
-            f_type = 'Select'
-        elif field['type'] == 'RadioSelect':
-            f_type = 'RadioSelect'
-        elif field['type'] == 'CheckboxSelectMultiple':
-            f_type = 'CheckboxSelectMultiple'
-        else:
-            f_type = 'SelectMultiple'
+        if field['type'] in ['Select', 'RadioSelect']:
+            if field['type'] == 'Select':
+                f_type = 'Select'
+            else:
+                f_type = 'RadioSelect'
+            f_required = 'null=True, blank=True, '
 
-        f_required = 'null=True, blank=True, '
+            return f'''
+        {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, {f_required}verbose_name='{field['label']}')'''
 
-        return f'''
-    {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, {f_required}verbose_name='{field['label']}')'''
+        elif field['type'] in ['SelectMultiple', 'CheckboxSelectMultiple']:
+            if field['type'] == 'SelectMultiple':
+                f_type = 'SelectMultiple'
+            else:
+                f_type = 'CheckboxSelectMultiple'
+
+            return f'''
+        {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', verbose_name='{field['label']}')'''
+
 
     # generate model footer script
     def __create_model_footer_script(self):
