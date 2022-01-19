@@ -512,7 +512,7 @@ class CreateViewsScript:
     def __iterate_forms(self):
         i = 0       # count forms
 
-        # 把view分为6个部分
+        # 把view分为11个部分
         s0 = ''     # inquire_forms
         s1 = ''     # mutate_formsets
         s2 = ''     # POST mutate_forms
@@ -530,16 +530,16 @@ class CreateViewsScript:
             # s = c = h = p = ''
             
     #         p = f'''
-    # proc_{form[3]} = {form[3].capitalize()}.objects.get(pid=operation_proc)'''
+    # {form[3]} = {form[3].capitalize()}.objects.get(pid=operation_proc)'''
 
             if form[1] == 'detail':
                 s = f'''
-    {form[3]} = {form[0].capitalize()}_ModelForm(instance={form[3]}, prefix="{form[3]}")'''
+    form_{form[3]} = {form[0].capitalize()}_ModelForm(instance={form[3]}, prefix="{form[3]}")'''
                 c = f'''
-    context['{form[3]}'] = {form[3]}'''
+    context['form_{form[3]}'] = form_{form[3]}'''
                 h = f'''
         <h5>{form[2]}</h5>
-        {{{{ {form[3]}.as_p }}}}
+        {{{{ form_{form[3]}.as_p }}}}
         <hr>'''
 
             else:
@@ -557,6 +557,7 @@ class CreateViewsScript:
             s0 = s0 + s
             s4 = s4 + c
             s6 = s6 + h
+            # s7 = s7 + p
 
             i += 1
         
@@ -566,34 +567,34 @@ class CreateViewsScript:
             s_2_c=s_3_c = ''
 
             p = f'''
-    proc_{form[3]} = {form[3].capitalize()}.objects.get(pid=operation_proc)'''
+    {form[3]} = {form[3].capitalize()}.objects.get(pid=operation_proc)'''
 
             if form[1] == 'detail':
                 s_2 = f'''
-        {form[3]} = {form[0].capitalize()}_ModelForm(instance=proc_{form[3]}, data=request.POST, prefix="{form[3]}")'''
+        form_{form[3]} = {form[0].capitalize()}_ModelForm(instance={form[3]}, data=request.POST, prefix="{form[3]}")'''
                 s_3 = f'''
-        {form[3]} = {form[0].capitalize()}_ModelForm(instance=proc_{form[3]}, prefix="{form[3]}")'''
+        form_{form[3]} = {form[0].capitalize()}_ModelForm(instance={form[3]}, prefix="{form[3]}")'''
                 s_2_c = f'''
-        {form[3]} = {form[0].capitalize()}_ModelForm(request.POST, prefix="{form[3]}")'''
+        form_{form[3]} = {form[0].capitalize()}_ModelForm(request.POST, prefix="{form[3]}")'''
                 s_3_c = f'''
-        {form[3]} = {form[0].capitalize()}_ModelForm(prefix="{form[3]}")'''
+        form_{form[3]} = {form[0].capitalize()}_ModelForm(prefix="{form[3]}")'''
                 c = f'''
-    context['{form[3]}'] = {form[3]}'''
-                s_5_if = f'''{form[3]}.is_valid()'''
+    context['form_{form[3]}'] = form_{form[3]}'''
+                s_5_if = f'''form_{form[3]}.is_valid()'''
                 s_5 = f'''
-            {form[3]}.save()'''
+            form_{form[3]}.save()'''
                 h = f'''
         <h5>{form[2]}</h5>
-        {{{{ {form[3]}.as_p }}}}
+        {{{{ form_{form[3]}.as_p }}}}
         <hr>'''
 
             else:
                 s_1 = f'''
         {form[3].capitalize()}_set = modelformset_factory({form[0].capitalize()}, form={form[0].capitalize()}_ModelForm, extra=2)'''
                 s_2 = f'''
-            {form[3]}_set = {form[3].capitalize()}_set(instance=proc_{form[3]}, data=request.POST, prefix="{form[3]}_set")'''
+            {form[3]}_set = {form[3].capitalize()}_set(instance={form[3]}, data=request.POST, prefix="{form[3]}_set")'''
                 s_3 = f'''
-            {form[3]}_set = {form[3].capitalize()}_set(instance=proc_{form[3]}, prefix="{form[3]}_set")'''
+            {form[3]}_set = {form[3].capitalize()}_set(instance={form[3]}, prefix="{form[3]}_set")'''
                 s_2_c = f'''
             {form[3]}_set = {form[3].capitalize()}_set(request.POST, prefix="{form[3]}_set")'''
                 s_3_c = f'''
