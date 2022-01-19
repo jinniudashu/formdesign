@@ -682,9 +682,9 @@ def {self.operand_name}_update(request, *args, **kwargs):
     if request.method == 'POST':'''+ vs[2] + f'''
         ''' + vs[6] + vs[5] + f'''
             # 构造作业完成消息参数
-            post_fields = request.POST.dict()
-            post_fields.pop('csrfmiddlewaretoken')
-            operand_finished.send(sender={self.operand_name}_update, pid=kwargs['id'], ocode='rtc', field_values=post_fields)
+            copy_post = request.POST.copy()
+            copy_post.pop('csrfmiddlewaretoken')
+            operand_finished.send(sender=yuan_qian_zheng_zhuang_diao_cha_biao_update, pid=kwargs['id'], ocode='rtc', field_values=copy_post)
             return redirect(reverse('index'))
     else:''' + vs[3] + f'''
     # context''' + vs[4]
