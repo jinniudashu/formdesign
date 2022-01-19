@@ -534,7 +534,7 @@ class CreateViewsScript:
 
             if form[1] == 'detail':
                 s = f'''
-    {form[3]} = {form[0].capitalize()}_ModelForm(instance=customer, prefix="{form[3]}")'''
+    {form[3]} = {form[0].capitalize()}_ModelForm(instance=basic_personal_information, prefix="{form[3]}")'''
                 c = f'''
     context['{form[3]}'] = {form[3]}'''
                 h = f'''
@@ -545,7 +545,7 @@ class CreateViewsScript:
             else:
                 s = f'''
     {form[3].capitalize()}_set = modelformset_factory({form[0].capitalize()}, form={form[0].capitalize()}_ModelForm, extra=2)
-    # {form[3]}_set = {form[3].capitalize()}_set(queryset=customer.{form[0].lower()}.all(), prefix="{form[3]}_set")
+    # {form[3]}_set = {form[3].capitalize()}_set(queryset=basic_personal_information.{form[0].lower()}.all(), prefix="{form[3]}_set")
     {form[3]}_set = {form[3].capitalize()}_set(prefix="{form[3]}_set")'''
                 c = f'''
     context['{form[3]}_set'] = {form[3]}_set'''
@@ -645,6 +645,7 @@ class CreateViewsScript:
 def {self.operand_name}_create(request):
     customer = Customer.objects.get(user=request.user)
     operator = Staff.objects.get(user=request.user)
+    basic_personal_information = Basic_personal_information.objects.get(customer=customer)
     context = {{}}
     '''
 
@@ -669,6 +670,7 @@ def {self.operand_name}_update(request, *args, **kwargs):
     operation_proc = get_object_or_404(Operation_proc, id=kwargs['id'])
     customer = operation_proc.customer
     operator = operation_proc.operator
+    basic_personal_information = Basic_personal_information.objects.get(customer=customer)
     context = {{}}
     '''
 
