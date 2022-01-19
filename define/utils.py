@@ -526,11 +526,11 @@ class CreateViewsScript:
 
         # Iterate inquire_forms
         for form in self.inquire_forms:
-            # s = c = h = ''
-            s = c = h = p = ''
+            s = c = h = ''
+            # s = c = h = p = ''
             
-            p = f'''
-    {form[3]} = {form[3].capitalize()}.objects.get(pid=operation_proc)'''
+    #         p = f'''
+    # {form[3]} = {form[3].capitalize()}.objects.get(pid=operation_proc)'''
 
             if form[1] == 'detail':
                 s = f'''
@@ -557,7 +557,7 @@ class CreateViewsScript:
             s0 = s0 + s
             s4 = s4 + c
             s6 = s6 + h
-            s7 = s7 + p
+            # s7 = s7 + p
 
             i += 1
         
@@ -650,7 +650,7 @@ def {self.operand_name}_create(request):
     context = {{}}
     '''
 
-        create_script_body = vs[7] + f'''
+        create_script_body = f'''
     # inquire_forms''' + vs[0] + f'''
     # mutate_formsets''' + vs[1] + f'''
     # mutate_forms
