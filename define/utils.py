@@ -534,7 +534,7 @@ class CreateViewsScript:
 
             if form[1] == 'detail':
                 s = f'''
-    {form[3]} = {form[0].capitalize()}_ModelForm(instance=basic_personal_information, prefix="{form[3]}")'''
+    {form[3]} = {form[0].capitalize()}_ModelForm(instance={form[3]}, prefix="{form[3]}")'''
                 c = f'''
     context['{form[3]}'] = {form[3]}'''
                 h = f'''
@@ -545,7 +545,7 @@ class CreateViewsScript:
             else:
                 s = f'''
     {form[3].capitalize()}_set = modelformset_factory({form[0].capitalize()}, form={form[0].capitalize()}_ModelForm, extra=2)
-    # {form[3]}_set = {form[3].capitalize()}_set(queryset=basic_personal_information.{form[0].lower()}.all(), prefix="{form[3]}_set")
+    # {form[3]}_set = {form[3].capitalize()}_set(queryset={form[3]}_set.{form[0].lower()}.all(), prefix="{form[3]}_set")
     {form[3]}_set = {form[3].capitalize()}_set(prefix="{form[3]}_set")'''
                 c = f'''
     context['{form[3]}_set'] = {form[3]}_set'''
