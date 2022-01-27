@@ -311,7 +311,6 @@ class CreateModelsScript:
             return f'''
     {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', verbose_name='{field['label']}')'''
 
-
     # generate model footer script
     def __create_model_footer_script(self):
         return f'''
@@ -465,7 +464,6 @@ def generate_views_urls_templates_code():
 
 # generate views.py, urls.py, templates.html, index.html script
 class CreateViewsScript:
-    # def __init__(self, operand_name, operand_label, axis_field, inquire_forms, mutate_forms):
     def __init__(self, obj):
         self.operand_name = obj.name
         self.operand_label = obj.label
@@ -479,7 +477,6 @@ class CreateViewsScript:
         self.form_class = self.mutate_forms[0][0].capitalize() + '_ModelForm'
 
         self.url = self.operand_name + '_update_url'
-
 
     def __get_forms_list(self, forms):
         inquire_forms = []
@@ -506,7 +503,6 @@ class CreateViewsScript:
         index_html_script = self.__construct_index_html_script()
 
         return view_script, url_script, create_html_script, update_html_script, index_html_script
-
 
     # 迭代forms列表获得各部分构造参数(视图函数版本)
     def __iterate_forms(self):
@@ -637,7 +633,6 @@ class CreateViewsScript:
         
         return vs, s6
 
-
     # 构造views脚本（函数版本）
     def __construct_view_script(self, vs):
 
@@ -661,9 +656,7 @@ def {self.operand_name}_create(request):
     # context''' + vs[4]
 
         create_script_foot = f'''
-    return render(request, '{self.operand_name}_create.html', context)
-
-    '''
+    return render(request, '{self.operand_name}_create.html', context)'''
 
         # update view
         update_script_head = f'''
@@ -682,9 +675,7 @@ def {self.operand_name}_update(request, *args, **kwargs):
     if request.method == 'POST':'''+ vs[2] + f'''
         ''' + vs[6] + vs[5] + f'''
             # 构造作业完成消息参数
-            copy_post = request.POST.copy()
-            copy_post.pop('csrfmiddlewaretoken')
-            operand_finished.send(sender=yuan_qian_zheng_zhuang_diao_cha_biao_update, pid=kwargs['id'], ocode='rtc', field_values=copy_post)
+            operand_finished.send(sender=yuan_qian_zheng_zhuang_diao_cha_biao_update, pid=kwargs['id'], ocode='rtc', field_values=request.POST)
             return redirect(reverse('index'))
     else:''' + vs[3] + f'''
     # context''' + vs[4]
@@ -697,7 +688,6 @@ def {self.operand_name}_update(request, *args, **kwargs):
 
         s = f'{create_script_head}{create_script_body}{create_script_foot}\n\n{update_script_head}{update_script_body}{update_script_foot}'
         return s
-
 
     # 构造html脚本
     def __construct_html_script(self, hs):
@@ -729,7 +719,6 @@ def {self.operand_name}_update(request, *args, **kwargs):
         s_update = f'{script_head}{update_script_body}{script_foot}'
         return s_create, s_update
 
-    
     # 构造urls脚本
     def __construct_url_script(self):
         return f'''
