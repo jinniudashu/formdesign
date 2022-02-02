@@ -1,11 +1,10 @@
 from django.core.management import BaseCommand
 import json
-from django.db.models.fields import related
 
-from pypinyin import lazy_pinyin
-
-from define.models import BoolField, CharacterField, CombineForm, DicList, NumberField, DTField, ChoiceField, RelatedField, Component
-from define.models import ManagedEntity, BaseModel, BaseForm, OperandView
+from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelatedField, Component
+from define_form.models import ManagedEntity, BaseModel, BaseForm, CombineForm
+from define_operand.models import OperandView
+from define_dict.models import DicList
 
 class Command(BaseCommand):
     help = 'Import design from json file'

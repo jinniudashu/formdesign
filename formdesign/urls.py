@@ -3,9 +3,9 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('define/', include('define.urls')),
+    path('define_operand/', include('define_operand.urls')),
 ]
 
 admin.site.site_header = '智益医养服务供应链管理系统'
 admin.site.site_title = 'HSSC'
-admin.site.index_title = '表单设计系统'
+admin.site.index_title = '业务设计系统'

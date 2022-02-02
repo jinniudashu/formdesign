@@ -1,36 +1,13 @@
 # 导入待生成脚本的文件头部设置
-from .files_head_setting import models_file_head, admins_file_head, forms_file_head, modelform_footer, views_file_head, urls_file_head, index_html_file_head
-from .models import BaseModel, BaseForm, DicList, OperandView, SourceCode
+from define_dict.models import DicList
+from define_form.models import BaseModel, BaseForm
+from define_operand.models import OperandView, SourceCode
+from define_operand.files_head_setting import models_file_head, admins_file_head, forms_file_head, modelform_footer, views_file_head, urls_file_head, index_html_file_head
 from time import time
 import json
 
 
-# 生成视图查询副本, 被define.admin调用
-def copy_form(modeladmin, request, queryset):
-    for obj in queryset:
-        t = int(time())
-        f = BaseForm.objects.create(
-            name=f'{obj.name}_query_{t}',
-            label=f'{obj.label}_查询视图_{t}',
-            basemodel=obj.basemodel,
-            is_inquiry=True,
-            style=obj.style,
-        )
-
-        # 重构meta_data
-        meta_data = json.loads(obj.meta_data)
-        print('重构meta_data', type(meta_data), meta_data)
-        meta_data['name'] = f.name
-        meta_data['label'] = f.label
-        meta_data['mutate_or_inquiry'] = 'inquiry'
-        f.meta_data = json.dumps(meta_data, ensure_ascii=False)
-        f.components.add(*obj.components.all())
-        f.save()
-
-copy_form.short_description = '生成查询视图副本'
-
-
-# 生成作业脚本, 被define.admin调用
+# 生成作业脚本, 被define_operand.admin调用
 def generate_source_code(modeladmin, request, queryset):
     source_code = {}
     source_code['dicts_models'], source_code['dicts_admin'], source_code['dicts_data'] = generate_dicts_code()
@@ -479,6 +456,8 @@ class CreateViewsScript:
         self.url = self.operand_name + '_update_url'
 
     def __get_forms_list(self, forms):
+        print(self.operand_name)
+        print(forms)
         inquire_forms = []
         mutate_forms = []
         for form in forms:
