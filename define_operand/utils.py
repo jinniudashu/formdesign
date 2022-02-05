@@ -1,7 +1,7 @@
 # 导入待生成脚本的文件头部设置
 from define_dict.models import DicList
 from define_form.models import BaseModel, BaseForm
-from define_operand.models import OperandView, SourceCode
+from define_operand.models import Operation, SourceCode
 from define_operand.files_head_setting import models_file_head, admins_file_head, forms_file_head, modelform_footer, views_file_head, urls_file_head, index_html_file_head
 from time import time
 import json
@@ -405,7 +405,7 @@ def generate_views_urls_templates_code():
     templates_code = []
     operand_views = []
 
-    views = OperandView.objects.all()
+    views = Operation.objects.all()
     for obj in views:
         # construct core.models.Operation
         operand_view = {
@@ -444,7 +444,7 @@ class CreateViewsScript:
     def __init__(self, obj):
         self.operand_name = obj.name
         self.operand_label = obj.label
-        self.managed_entity = obj.managed_entity
+        self.managed_entity = obj.forms.managed_entity
         forms = json.loads(obj.forms.meta_data)
         self.inquire_forms, self.mutate_forms = self.__get_forms_list(forms)
 
@@ -711,3 +711,124 @@ def {self.operand_name}_update(request, *args, **kwargs):
 		{self.operand_label}
 	</a>
         '''
+
+
+########################################################################################################################
+# 设计数据备份
+########################################################################################################################
+from django.forms.models import model_to_dict
+from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelatedField, Component
+from define_form.models import ManagedEntity, CombineForm
+from define_operand.models import Event, Instruction, DesignBackup
+
+def design_backup(modeladmin, request, queryset):
+    design_data = {
+        'boolfields': [],
+        'characterfields': [],
+        'numberfields': [],
+        'dtfields': [],
+        'relatedfields': [],
+        'choicefields': [],
+        'components': [],
+        'diclists': [],
+        'managedentities': [],
+        'basemodels': [],
+        'baseforms': [],
+        'combineforms': [],
+        'operations': [],
+        'instructions': [],
+        'events': [],
+    }
+
+    for item in BoolField.objects.all():
+        design_data['boolfields'].append(model_to_dict(item))
+
+    for item in CharacterField.objects.all():
+        design_data['characterfields'].append(model_to_dict(item))
+
+    for item in NumberField.objects.all():
+        design_data['numberfields'].append(model_to_dict(item))
+
+    for item in DTField.objects.all():
+        design_data['dtfields'].append(model_to_dict(item))
+
+    for item in RelatedField.objects.all():
+        model = model_to_dict(item)
+        related_content_id = model['related_content']
+        model['related_content'] = DicList.objects.get(id=related_content_id).name
+        design_data['relatedfields'].append(model)
+
+    for item in ChoiceField.objects.all():
+        design_data['choicefields'].append(model_to_dict(item))
+
+    for item in Component.objects.all():
+        design_data['components'].append(model_to_dict(item))
+
+    for item in DicList.objects.all():
+        design_data['diclists'].append(model_to_dict(item))
+
+    for item in ManagedEntity.objects.all():
+        design_data['managedentities'].append(model_to_dict(item))
+
+    for item in BaseModel.objects.all():
+        components = []
+        for component in item.components.all():
+            components.append(model_to_dict(component))
+        model = model_to_dict(item)
+        model['components'] = components
+        design_data['basemodels'].append(model)
+
+    for item in BaseForm.objects.filter(is_inquiry=True):
+        components = []
+        for component in item.components.all():
+            components.append(model_to_dict(component))
+        model = model_to_dict(item)
+        model['components'] = components
+        basemodel_id = model['basemodel']
+        model['basemodel'] = BaseModel.objects.get(id=basemodel_id).name
+        model.pop('meta_data')
+        design_data['baseforms'].append(model)
+
+    for item in CombineForm.objects.filter(is_base=False):
+        forms = []
+        for form in item.forms.all():
+            _form = model_to_dict(form)
+            forms.append(_form['name'])
+        model = model_to_dict(item)
+        model['forms'] = forms
+        managed_entity_id = model['managed_entity']
+        if managed_entity_id:
+            model['managed_entity'] = ManagedEntity.objects.get(id=managed_entity_id).name
+        model.pop('meta_data')
+        design_data['combineforms'].append(model)
+
+    for item in Operation.objects.all():
+        model = model_to_dict(item)
+        if model['forms']:
+            forms_id = model['forms']
+            model['forms'] = CombineForm.objects.get(id=forms_id).name
+        design_data['operations'].append(model)
+
+    for item in Instruction.objects.all():
+        model = model_to_dict(item)
+        design_data['instructions'].append(model)
+
+    for item in Event.objects.all():
+        next_operations = []
+        for operation in item.next.all():
+            _operation = model_to_dict(operation)
+            next_operations.append(_operation['name'])
+        model = model_to_dict(item)
+        model['next'] = next_operations
+        operation_id = model['operation']
+        model['operation'] = Operation.objects.get(id=operation_id).name
+        design_data['events'].append(model)
+
+    # 写入数据库
+    s = DesignBackup.objects.create(
+        name = str(int(time())),
+        code = json.dumps(design_data, indent=4, ensure_ascii=False),
+    )
+    print(f'设计数据备份成功, id: {s.id}')
+
+design_backup.short_description = '备份设计数据'

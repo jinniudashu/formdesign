@@ -3,7 +3,6 @@ import json
 
 from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelatedField, Component
 from define_form.models import ManagedEntity, BaseModel, BaseForm, CombineForm
-from define_operand.models import OperandView
 from define_dict.models import DicList
 
 class Command(BaseCommand):
@@ -23,7 +22,6 @@ class Command(BaseCommand):
         BaseModel.objects.all().delete()
         BaseForm.objects.all().delete()
         CombineForm.objects.all().delete()
-        OperandView.objects.all().delete()        
         
         # 初始化管理实体清单数据
         managed_entities = [('customer', '客户'), ('staff', '员工'), ('medicine', '药品'), ('device', '设备')]

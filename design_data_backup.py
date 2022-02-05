@@ -1,4 +1,5 @@
 design_data = {
+
     'index': [
         {'boolfields': 'BoolField'}, 
         {'characterfields': 'CharacterField'}, 
@@ -12,7 +13,9 @@ design_data = {
         {'basemodels': 'BaseModel'}, 
         {'baseforms': 'BaseForm'}, 
         {'combineforms': 'CombineForm'}, 
-        {'operandviews': 'OperandVie}'},
+        {'operations': 'Operation}'},
+        {'instructions': 'Instruction'},
+        {'events': 'Event'},
     ],
 
     'managedentities': [
@@ -224,7 +227,7 @@ design_data = {
         {'id': 98, 'name': 'men_zhen_chu_fang_dan', 'label': '门诊处方单', 'is_base': False, 'managed_entity': None, 'forms': ['basic_personal_information_baseform_query_1642159528', 'yong_yao_chu_fang_baseform']}
     ],
 
-    'operandviews': [
+    'operations': [
         {'id': 15, 'name': 'yuan_qian_zheng_zhuang_diao_cha_biao', 'label': '院前症状调查表', 'managed_entity': None, 'forms': 'yuan_qian_zheng_zhuang_diao_cha_biao'}, 
         {'id': 17, 'name': 'ge_ren_ji_bing_shi_diao_cha_biao', 'label': '个人疾病史调查表', 'managed_entity': None, 'forms': 'ge_ren_ji_bing_shi_diao_cha_biao'}, 
         {'id': 18, 'name': 'kong_fu_xue_tang_jian_cha_biao', 'label': '空腹血糖检查表', 'managed_entity': None, 'forms': 'kong_fu_xue_tang_jian_cha_biao'}, 
@@ -235,4 +238,21 @@ design_data = {
         {'id': 23, 'name': 'ge_ren_guo_min_shi_diao_cha_biao', 'label': '个人过敏史调查表', 'managed_entity': None, 'forms': 'guo_min_shi_diao_cha_biao'}, 
         {'id': 25, 'name': 'men_zhen_chu_fang_biao', 'label': '门诊处方表', 'managed_entity': None, 'forms': 'men_zhen_chu_fang_dan'},
     ],
+
+    'instructions': [
+        {'id': 4, 'name': 'create_operation_proc', 'label': '创建作业进程', 'code': 'cop', 'func': 'create_operation_proc', 'description': '新建一个人工作业进程'}
+    ],
+
+    'events': [
+        {'id': 23, 'operation': 'user_registry', 'name': 'user_registry_completed', 'label': '用户注册_完成', 'description': None, 'expression': 'completed', 'parameters': None, 'fields': None, 'next': []}, 
+        {'id': 24, 'operation': 'user_login', 'name': 'user_login_completed', 'label': '用户登录_完成', 'description': None, 'expression': 'completed', 'parameters': None, 'fields': None, 'next': []}, 
+        {'id': 25, 'operation': 'doctor_login', 'name': 'doctor_login_completed', 'label': '员工登录_完成', 'description': None, 'expression': 'completed', 'parameters': None, 'fields': '', 'next': ['yuan_qian_zheng_zhuang_diao_cha_biao']}, 
+        {'id': 26, 'operation': 'yuan_qian_zheng_zhuang_diao_cha_biao', 'name': 'yuan_qian_zheng_zhuang_diao_cha_biao_completed', 'label': '院前症状调查完成', 'description': None, 'expression': 'completed', 'parameters': None, 'fields': "('out_of_hospital_self_report_survey-relatedfield_symptom_list', '症状', 'dict')\n('out_of_hospital_self_report_survey-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')", 'next': ['ge_ren_ji_bing_shi_diao_cha_biao']}, 
+        {'id': 27, 'operation': 'ge_ren_ji_bing_shi_diao_cha_biao', 'name': 'ge_ren_ji_bing_shi_diao_cha_biao_completed', 'label': '疾病史调查完成', 'description': None, 'expression': 'medical_history-relatedfield_disease_name=="胰腺炎"', 'parameters': 'medical_history-relatedfield_disease_name', 'fields': "('medical_history-relatedfield_disease_name', '疾病名称', 'dict')\n('medical_history-datetimefield_time_of_diagnosis', '确诊时间', 'datetime')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')", 'next': ['kong_fu_xue_tang_jian_cha_biao']}, 
+        {'id': 28, 'operation': 'kong_fu_xue_tang_jian_cha_biao', 'name': 'kong_fu_xue_tang_jian_cha_biao_空腹血糖超标', 'label': '空腹血糖超标', 'description': None, 'expression': 'kong_fu_xue_tang_jian_cha-numberfield_kong_fu_xue_tang >=7.0', 'parameters': 'kong_fu_xue_tang_jian_cha-numberfield_kong_fu_xue_tang', 'fields': "('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('kong_fu_xue_tang_jian_cha-numberfield_kong_fu_xue_tang', '空腹血糖', 'number')", 'next': ['tang_hua_xue_hong_dan_bai_jian_cha_biao', 'tang_niao_bing_cha_ti_biao']}, 
+        {'id': 29, 'operation': 'tang_hua_xue_hong_dan_bai_jian_cha_biao', 'name': 'tang_hua_xue_hong_dan_bai_jian_cha_biao_糖化血红蛋白超标', 'label': '糖化血红蛋白超标', 'description': None, 'expression': 'tang_hua_xue_hong_dan_bai_jian_cha_biao-numberfield_tang_hua_xue_hong_dan_bai >6.0', 'parameters': 'tang_hua_xue_hong_dan_bai_jian_cha_biao-numberfield_tang_hua_xue_hong_dan_bai', 'fields': "('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('tang_hua_xue_hong_dan_bai_jian_cha_biao-numberfield_tang_hua_xue_hong_dan_bai', '糖化血红蛋白', 'number')", 'next': ['men_zhen_zhen_duan_biao']}, 
+        {'id': 31, 'operation': 'tang_niao_bing_cha_ti_biao', 'name': 'tang_niao_bing_cha_ti_biao_糖尿病查体完成', 'label': '糖尿病查体完成', 'description': None, 'expression': 'fundus_examination-relatedfield_fundus=="异常"', 'parameters': 'fundus_examination-relatedfield_fundus', 'fields': "('fundus_examination-relatedfield_fundus', '眼底', 'dict')\n('dorsal_artery_pulsation_examination-relatedfield_left_foot', '左脚', 'dict')\n('dorsal_artery_pulsation_examination-relatedfield_right_foot', '右脚', 'dict')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')", 'next': []}, 
+        {'id': 33, 'operation': 'yuan_qian_zheng_zhuang_diao_cha_biao', 'name': 'yuan_qian_zheng_zhuang_diao_cha_biao_test', 'label': '院前症状调查test', 'description': None, 'expression': 'out_of_hospital_self_report_survey-relatedfield_symptom_list == 6114', 'parameters': 'out_of_hospital_self_report_survey-relatedfield_symptom_list', 'fields': "('out_of_hospital_self_report_survey-relatedfield_symptom_list', '症状', 'dict')\n('out_of_hospital_self_report_survey-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')", 'next': ['kong_fu_xue_tang_jian_cha_biao']},
+    ],
+
 }

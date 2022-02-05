@@ -43,6 +43,7 @@ class CombineFormAdmin(admin.ModelAdmin):
 
 
 admin.site.register(ManagedEntity)
+
 admin.site.register(BaseModel, BaseModelAdmin)
 admin.site.register(BaseForm, BaseFormAdmin)
 admin.site.register(CombineForm, CombineFormAdmin)
