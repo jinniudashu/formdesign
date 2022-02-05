@@ -10,7 +10,8 @@ class Command(BaseCommand):
 
         # 获取脚本源码，创建文件
         print('开始导入设计数据备份...')
-        res = requests.get('http://127.0.0.1:8000/define_operand/design_backup/')
+        res = requests.get('https://hssc-formdesign.herokuapp.com/define_operand/design_backup/')
+        # res = requests.get('http://127.0.0.1:8000/define_operand/design_backup/')
         res_json = res.json()[0]
         code =res_json['code']
 

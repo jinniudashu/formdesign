@@ -52,12 +52,18 @@ class Operation(models.Model):
 
 # 服务类型信息表
 class Service(models.Model):
-    name = models.CharField(max_length=255, verbose_name="服务名称")
+    name = models.CharField(max_length=255, verbose_name="名称")
+    label = models.CharField(max_length=255, verbose_name="显示名称")
     # icpc = models.OneToOneField(Icpc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="ICPC")
     first_operation = models.ForeignKey(Operation, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="起始作业")
     
     def __str__(self):
-        return str(self.name)
+        return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if not self.name:
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "服务"
@@ -160,6 +166,25 @@ class Event_instructions(models.Model):
         ordering = ['event', 'order']
 
 
+# 角色表
+class Role(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name="角色名")
+    label = models.CharField(max_length=255, verbose_name="显示名称")
+    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="角色描述")
+
+    def __str__(self):
+        return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if not self.name:
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "角色"
+        verbose_name_plural = "角色"
+        ordering = ['id']
+
 
 # 输出脚本
 class SourceCode(models.Model):
@@ -232,5 +257,3 @@ def event_m2m_changed_handler(sender, instance, action, **kwargs):
 @receiver(post_delete, sender=Event)
 def event_post_delete_handler(sender, instance, **kwargs):
     Event_instructions.objects.filter(event=instance).delete()
-
-

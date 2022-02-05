@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Service, Operation, Event, Instruction, Event_instructions, SourceCode, DesignBackup
+from .models import Service, Operation, Event, Instruction, Event_instructions, Role, SourceCode, DesignBackup
 from .utils import generate_source_code, design_backup
 
 
@@ -29,6 +29,8 @@ class OperationAdmin(admin.ModelAdmin):
     readonly_fields = ['name']
     actions = [generate_source_code]
 
+admin.site.register(Operation, OperationAdmin)
+
 
 class EventAdmin(admin.ModelAdmin):
 #     change_form_template = "core/templates/change_form.html"
@@ -38,8 +40,6 @@ class EventAdmin(admin.ModelAdmin):
     readonly_fields = ['parameters']
     ordering = ['id']
 
-
-admin.site.register(Operation, OperationAdmin)
 admin.site.register(Event, EventAdmin)
 
 
@@ -49,12 +49,16 @@ class Event_instructionsAdmin(admin.ModelAdmin):
     search_fields = ['event']
     ordering = ['id']
 
+admin.site.register(Event_instructions, Event_instructionsAdmin)
+
 
 class InstructionAdmin(admin.ModelAdmin):
     list_display = ['label', 'name', 'code', 'func', 'description', 'id']
     list_display_links = ['label', 'name', 'code', 'func']
     search_fields = ['name']
     ordering = ['id']
+
+admin.site.register(Instruction, InstructionAdmin)
 
 
 class ServiceAdmin(admin.ModelAdmin):
@@ -63,13 +67,15 @@ class ServiceAdmin(admin.ModelAdmin):
     search_fields = ['name']
     ordering = ['id']
 
-
-admin.site.register(Instruction, InstructionAdmin)
-admin.site.register(Event_instructions, Event_instructionsAdmin)
 admin.site.register(Service, ServiceAdmin)
+
+
+admin.site.register(Role)
 
 admin.site.register(SourceCode)
 
+
 class DesignBackupAdmin(admin.ModelAdmin):
     actions = [design_backup]
+
 admin.site.register(DesignBackup, DesignBackupAdmin)

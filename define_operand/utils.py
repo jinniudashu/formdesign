@@ -719,7 +719,7 @@ def {self.operand_name}_update(request, *args, **kwargs):
 from django.forms.models import model_to_dict
 from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelatedField, Component
 from define_form.models import ManagedEntity, CombineForm
-from define_operand.models import Event, Instruction, DesignBackup
+from define_operand.models import Event, Instruction, Role, DesignBackup
 
 def design_backup(modeladmin, request, queryset):
     design_data = {
@@ -738,6 +738,7 @@ def design_backup(modeladmin, request, queryset):
         'operations': [],
         'instructions': [],
         'events': [],
+        'roles': [],
     }
 
     for item in BoolField.objects.all():
@@ -823,6 +824,10 @@ def design_backup(modeladmin, request, queryset):
         operation_id = model['operation']
         model['operation'] = Operation.objects.get(id=operation_id).name
         design_data['events'].append(model)
+
+    for item in Role.objects.all():
+        model = model_to_dict(item)
+        design_data['roles'].append(model)
 
     # 写入数据库
     s = DesignBackup.objects.create(
