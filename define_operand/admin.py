@@ -62,15 +62,24 @@ admin.site.register(Instruction, InstructionAdmin)
 
 
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['name', 'id']
-    list_display_links = ['name', ]
-    search_fields = ['name']
+    list_display = ['label', 'id']
+    list_display_links = ['label', ]
+    search_fields = ['label']
+    readonly_fields = ['name']
     ordering = ['id']
 
 admin.site.register(Service, ServiceAdmin)
 
 
-admin.site.register(Role)
+class RoleAdmin(admin.ModelAdmin):
+    list_display = ['label', 'id']
+    list_display_links = ['label', ]
+    search_fields = ['label']
+    readonly_fields = ['name']
+    ordering = ['id']
+
+admin.site.register(Role, RoleAdmin)
+
 
 admin.site.register(SourceCode)
 

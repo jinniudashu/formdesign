@@ -52,7 +52,7 @@ class Operation(models.Model):
 
 # 服务类型信息表
 class Service(models.Model):
-    name = models.CharField(max_length=255, verbose_name="名称")
+    name = models.CharField(max_length=255, unique=True, verbose_name="名称")
     label = models.CharField(max_length=255, verbose_name="显示名称")
     # icpc = models.OneToOneField(Icpc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="ICPC")
     first_operation = models.ForeignKey(Operation, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="起始作业")

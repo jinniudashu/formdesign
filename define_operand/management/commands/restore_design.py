@@ -4,7 +4,7 @@ import json
 from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelatedField, Component
 from define_dict.models import DicList
 from define_form.models import ManagedEntity, BaseModel, BaseForm, CombineForm
-from define_operand.models import Operation, Event, Instruction, Event_instructions, Role
+from define_operand.models import Service, Operation, Event, Instruction, Event_instructions, Role
 
 class Command(BaseCommand):
     help = 'Import design from json file'
@@ -29,6 +29,7 @@ class Command(BaseCommand):
         BaseForm.objects.all().delete()
         CombineForm.objects.all().delete()
         Operation.objects.all().delete()
+        Service.objects.all().delete()
         Instruction.objects.all().delete()
         Event.objects.all().delete()
         Event_instructions.objects.all().delete()
@@ -201,6 +202,18 @@ class Command(BaseCommand):
         #         label=item['label'],
         #     )
 
+        # 导入服务表
+        for item in design_data['services']:
+            print('Service:', item)
+            if item['first_operation']:
+                first_operation = Operation.objects.get(name=item['first_operation'])
+            else:
+                first_operation = None
+            Service.objects.create(
+                name=item['name'],
+                label=item['label'],
+                first_operation=first_operation,
+            )
         
         # 导入指令表
         for item in design_data['instructions']:
