@@ -8,7 +8,6 @@ class EventInline(admin.TabularInline):
     model = Event
     extra = 0
 
-
 class OperationAdmin(admin.ModelAdmin):
     list_display = ['label', 'name', 'id']
     list_display_links = ['label', 'name',]
@@ -43,24 +42,6 @@ class EventAdmin(admin.ModelAdmin):
 admin.site.register(Event, EventAdmin)
 
 
-class Event_instructionsAdmin(admin.ModelAdmin):
-    list_display = ['event', 'instruction', 'order', 'params', 'id']
-    list_display_links = ['event', 'instruction', 'order', 'params']
-    search_fields = ['event']
-    ordering = ['id']
-
-admin.site.register(Event_instructions, Event_instructionsAdmin)
-
-
-class InstructionAdmin(admin.ModelAdmin):
-    list_display = ['label', 'name', 'code', 'func', 'description', 'id']
-    list_display_links = ['label', 'name', 'code', 'func']
-    search_fields = ['name']
-    ordering = ['id']
-
-admin.site.register(Instruction, InstructionAdmin)
-
-
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ['label', 'id']
     list_display_links = ['label', ]
@@ -81,10 +62,28 @@ class RoleAdmin(admin.ModelAdmin):
 admin.site.register(Role, RoleAdmin)
 
 
-admin.site.register(SourceCode)
-
-
 class DesignBackupAdmin(admin.ModelAdmin):
     actions = [design_backup]
 
 admin.site.register(DesignBackup, DesignBackupAdmin)
+
+
+admin.site.register(SourceCode)
+
+
+# class Event_instructionsAdmin(admin.ModelAdmin):
+#     list_display = ['event', 'instruction', 'order', 'params', 'id']
+#     list_display_links = ['event', 'instruction', 'order', 'params']
+#     search_fields = ['event']
+#     ordering = ['id']
+
+# admin.site.register(Event_instructions, Event_instructionsAdmin)
+
+
+# class InstructionAdmin(admin.ModelAdmin):
+#     list_display = ['label', 'name', 'code', 'func', 'description', 'id']
+#     list_display_links = ['label', 'name', 'code', 'func']
+#     search_fields = ['name']
+#     ordering = ['id']
+
+# admin.site.register(Instruction, InstructionAdmin)
