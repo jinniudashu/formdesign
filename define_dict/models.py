@@ -13,3 +13,17 @@ class DicList(models.Model):
     class Meta:
         verbose_name = "字典列表"
         verbose_name_plural = "字典列表"
+
+
+# 字典列表
+# 删除多余字典：
+# 1. 职员表
+# 2. 注册登录（行政管理）
+# 3. 治疗
+# 4. 机构清单
+# 5. 评估和诊断
+# 6. 症状和问题
+# 7. 药品清单
+# 8. 服务角色
+
+# 以上建立专用字段

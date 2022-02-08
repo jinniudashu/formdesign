@@ -10,6 +10,26 @@ from define_form.models import CombineForm
 from .keyword_search import keyword_search
 
 
+# 角色表
+class Role(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name="角色名")
+    label = models.CharField(max_length=255, verbose_name="显示名称")
+    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="角色描述")
+
+    def __str__(self):
+        return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if not self.name:
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "角色"
+        verbose_name_plural = "角色"
+        ordering = ['id']
+
+
 # 作业信息表
 class Operation(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="作业名称")
@@ -24,7 +44,7 @@ class Operation(models.Model):
         (3, '一般'),
     ]
     priority = models.PositiveSmallIntegerField(choices=Operation_priority, default=3, verbose_name='优先级')
-    group = models.ManyToManyField(Group, verbose_name="作业角色")
+    group = models.ManyToManyField(Role, verbose_name="作业角色")
     suppliers = models.CharField(max_length=255, blank=True, null=True, verbose_name="供应商")
     not_suitable = models.CharField(max_length=255, blank=True, null=True, verbose_name='不适用对象')
     time_limits = models.DurationField(blank=True, null=True, verbose_name='完成时限')
@@ -55,7 +75,7 @@ class Service(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="名称")
     label = models.CharField(max_length=255, verbose_name="显示名称")
     # icpc = models.OneToOneField(Icpc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="ICPC")
-    first_operation = models.ForeignKey(Operation, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="起始作业")
+    first_operation = models.ForeignKey(Operation, on_delete=models.SET_NULL, related_name='first_operation',blank=True, null=True, verbose_name="起始作业")
     
     def __str__(self):
         return str(self.label)
@@ -158,32 +178,12 @@ class Event_instructions(models.Model):
     params = models.CharField(max_length=255, blank=True, null=True, verbose_name="创建作业")
 
     def __str__(self):
-        return str(self.instruction.name)
+        return self.instruction.name
 
     class Meta:
         verbose_name = "事件指令集"
         verbose_name_plural = "事件指令集"
         ordering = ['event', 'order']
-
-
-# 角色表
-class Role(models.Model):
-    name = models.CharField(max_length=100, unique=True, verbose_name="角色名")
-    label = models.CharField(max_length=255, verbose_name="显示名称")
-    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="角色描述")
-
-    def __str__(self):
-        return str(self.label)
-
-    def save(self, *args, **kwargs):
-        if not self.name:
-            self.name = f'{"_".join(lazy_pinyin(self.label))}'
-        super().save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = "角色"
-        verbose_name_plural = "角色"
-        ordering = ['id']
 
 
 # 输出脚本

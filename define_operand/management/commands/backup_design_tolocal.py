@@ -1,6 +1,5 @@
 from django.core.management import BaseCommand
 import requests
-import json
 
 
 class Command(BaseCommand):
