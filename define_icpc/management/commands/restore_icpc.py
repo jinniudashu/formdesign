@@ -19,6 +19,5 @@ class Command(BaseCommand):
             Icpc_model.objects.all().delete()  # 删除ICPC数据
             print(f'正在导入{icpc["name"]}，共{_l}条记录...')
             for item in icpc_data[_key]:  # 导入ICPC数据
-                print(item)
                 Icpc_model.objects.create(**item)
             print(f'{icpc["name"]} 数据导入成功')
