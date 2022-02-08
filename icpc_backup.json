@@ -1400,21 +1400,6 @@
             "pym": "yhfqdqttzjh"
         },
         {
-            "id": 1280,
-            "icpc_code": "P0801",
-            "icode": "P08",
-            "iname": "性能力减退SEXUAL FULFILMENT REDUCED 完成",
-            "iename": "Sexual fulfilment redused",
-            "include": "非器质性的阳痿或性交困难，早泄，心因性阴道痉挛",
-            "criteria": "并非由器质性疾病引起的性能力fulfilment问题，它反映了病人无能力参与他/她愿意参与的性活动，且原因为性反应或功能障碍、或性发育问题。",
-            "exclude": "性欲问题 P07，担心性取向 P09，器质性性无能和性问题 Y07，阴道痉挛 NOS X04",
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": "F52.1 至 F52.9",
-            "pym": "xnljt                          wc"
-        },
-        {
             "id": 1281,
             "icpc_code": "K0102",
             "icode": "K01",

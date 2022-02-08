@@ -63,13 +63,13 @@ class Icpc3_symptoms_and_problems(models.Model):
 	icode = models.CharField(max_length=3, blank=True, null=True, verbose_name="分类码")
 	iname = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
 	iename = models.CharField(max_length=255, blank=True, null=True, verbose_name="English Name")
-	include = models.TextField(blank=True, null=True, verbose_name="包含")
-	criteria = models.TextField(blank=True, null=True, verbose_name="准则")
-	exclude = models.TextField(blank=True, null=True, verbose_name="排除")
-	consider = models.TextField(blank=True, null=True, verbose_name="考虑")
+	include = models.CharField(max_length=255, blank=True, null=True, verbose_name="包含")
+	criteria = models.CharField(max_length=255, blank=True, null=True, verbose_name="准则")
+	exclude = models.CharField(max_length=255, blank=True, null=True, verbose_name="排除")
+	consider = models.CharField(max_length=255, blank=True, null=True, verbose_name="考虑")
 	icd10 = models.CharField(max_length=8, blank=True, null=True, verbose_name="ICD10")
 	icpc2 = models.CharField(max_length=10, blank=True, null=True, verbose_name="ICPC2")
-	note = models.TextField(blank=True, null=True, verbose_name="备注")
+	note = models.CharField(max_length=255, blank=True, null=True, verbose_name="备注")
 	pym = models.CharField(max_length=25, blank=True, null=True, verbose_name="拼音码")
 
 	def __str__(self):
