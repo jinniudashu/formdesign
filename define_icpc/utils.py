@@ -12,9 +12,11 @@ def icpc_backup(modeladmin, request, queryset):
         _key = icpc['name'].lower()
         icpc_data[_key] = []
         Icpc_model = eval(icpc['name'])
-        for item in Icpc_model.objects.all():            
-            icpc_data[_key].append(model_to_dict(item))
-    # print(icpc_data)
+        for item in Icpc_model.objects.all():
+            _item = model_to_dict(item)
+            if _item['pym'] is not None: 
+                _item['pym'] = _item['pym'].replace(' ', '')
+            icpc_data[_key].append(_item)
 
     # 写入数据库
     s = IcpcBackup.objects.create(
