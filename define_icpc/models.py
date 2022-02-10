@@ -14,6 +14,7 @@ icpc_list=[
 	{'name': 'Icpc10_test_results_and_statistics', 'label': '检查结果和统计', 'url': 'icpc-10-test-results-and-statistics'},  # 5
 ]
 
+
 class Icpc1_register_logins(models.Model):
 	icpc_code = models.CharField(max_length=5, blank=True, null=True, verbose_name="icpc码")
 	icode = models.CharField(max_length=3, blank=True, null=True, verbose_name="分类码")
