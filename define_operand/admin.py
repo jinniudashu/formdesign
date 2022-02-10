@@ -71,19 +71,19 @@ admin.site.register(DesignBackup, DesignBackupAdmin)
 admin.site.register(SourceCode)
 
 
-# class Event_instructionsAdmin(admin.ModelAdmin):
-#     list_display = ['event', 'instruction', 'order', 'params', 'id']
-#     list_display_links = ['event', 'instruction', 'order', 'params']
-#     search_fields = ['event']
-#     ordering = ['id']
+class Event_instructionsAdmin(admin.ModelAdmin):
+    list_display = ['event', 'instruction', 'order', 'params', 'id']
+    list_display_links = ['event', 'instruction', 'order', 'params']
+    search_fields = ['event']
+    ordering = ['id']
 
-# admin.site.register(Event_instructions, Event_instructionsAdmin)
+admin.site.register(Event_instructions, Event_instructionsAdmin)
 
 
-# class InstructionAdmin(admin.ModelAdmin):
-#     list_display = ['label', 'name', 'code', 'func', 'description', 'id']
-#     list_display_links = ['label', 'name', 'code', 'func']
-#     search_fields = ['name']
-#     ordering = ['id']
+class InstructionAdmin(admin.ModelAdmin):
+    list_display = ['label', 'name', 'code', 'func', 'description', 'id']
+    list_display_links = ['label', 'name', 'code', 'func']
+    search_fields = ['name']
+    ordering = ['id']
 
-# admin.site.register(Instruction, InstructionAdmin)
+admin.site.register(Instruction, InstructionAdmin)

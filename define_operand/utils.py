@@ -642,8 +642,14 @@ def {self.operand_name}_create(request):
         update_script_head = f'''
 def {self.operand_name}_update(request, *args, **kwargs):
     operation_proc = get_object_or_404(Operation_proc, id=kwargs['id'])
+
+    if operation_proc.group is None:  # 如果进程角色已经被置为空，说明已有其他人处理，退出本修改作业进程
+        return redirect(reverse('index'))
+    operation_proc.group.set([])  # 设置作业进程所属角色组为空
+    # 构造作业开始消息参数
+    operand_started.send(sender={self.operand_name}_update, operation_proc=operation_proc, ocode='rtr', operator=request.user)
+
     customer = operation_proc.customer
-    operator = operation_proc.operator
     basic_personal_information = Basic_personal_information.objects.get(customer=customer)
     context = {{}}
     '''
@@ -655,7 +661,7 @@ def {self.operand_name}_update(request, *args, **kwargs):
     if request.method == 'POST':'''+ vs[2] + f'''
         ''' + vs[6] + vs[5] + f'''
             # 构造作业完成消息参数
-            operand_finished.send(sender=yuan_qian_zheng_zhuang_diao_cha_biao_update, pid=kwargs['id'], ocode='rtc', field_values=request.POST)
+            operand_finished.send(sender={self.operand_name}_update, pid=kwargs['id'], ocode='rtc', field_values=request.POST)
             return redirect(reverse('index'))
     else:''' + vs[3] + f'''
     # context''' + vs[4]

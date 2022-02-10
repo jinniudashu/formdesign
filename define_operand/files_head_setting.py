@@ -50,12 +50,13 @@ modelform_footer = '''
 # views.py文件头部设置
 views_file_head = f'''from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View, RedirectView, TemplateView
 from django.views.generic.detail import DetailView
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
+from django.db.models import Q
 from django.forms import modelformset_factory, inlineformset_factory
 import json
 
 from core.models import Operation_proc, Staff, Customer
-from core.signals import operand_finished
+from core.signals import operand_started, operand_finished
 
 from django.contrib.messages.views import SuccessMessageMixin
 from forms.utils import *
@@ -64,24 +65,29 @@ from forms.models import *
 from forms.forms import *
 
 class Index_view(ListView):
-	model = Operation_proc
-	template_name = 'index.html'
+    model = Operation_proc
+    template_name = 'index.html'
 
-	# def get(self, request, *args, **kwargs):
-	# 	self.object = self.get_object(queryset=Operation_proc.objects.exclude(state=4))
+    # def get(self, request, *args, **kwargs):
+    #     self.object = self.get_object(queryset=Operation_proc.objects.exclude(state=4))
 
-	def get_context_data(self, **kwargs):
-		procs = Operation_proc.objects.exclude(state=4)
-		todos = []
-		for proc in procs:
-			todo = {{}}
-			todo['operation'] = proc.operation.label
-			todo['url'] = f'{{proc.operation.name}}_update_url'
-			todo['proc_id'] = proc.id
-			todos.append(todo)
-		context = super().get_context_data(**kwargs)
-		context['todos'] = todos
-		return context
+    def get_context_data(self, **kwargs):
+        # 如果用户当前未登录，request.user将被设置为AnonymousUser。用user.is_authenticated()判断用户登录状态：
+        operator=Staff.objects.get(user=self.request.user)
+        group = Group.objects.filter(user=self.request.user)
+        # 获取当前用户所属角色组的所有作业进程
+        procs = Operation_proc.objects.exclude(state=4).filter(Q(group__in=group) | Q(operator=operator)).distinct()
+
+        todos = []
+        for proc in procs:
+            todo = {{}}
+            todo['operation'] = proc.operation.label
+            todo['url'] = f'{{proc.operation.name}}_update_url'
+            todo['proc_id'] = proc.id
+            todos.append(todo)
+        context = super().get_context_data(**kwargs)
+        context['todos'] = todos
+        return context
 
 '''
 
