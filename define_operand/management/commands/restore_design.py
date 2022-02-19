@@ -60,38 +60,33 @@ class Command(BaseCommand):
         # 导入管理实体表和字典表时自动插入RelateFieldModel表内容
         # ******************************************************
         # 导入管理实体表，自动插入RelateFieldModel表内容
-        # for item in design_data['managedentities']:
-        #     ManagedEntity.objects.create(
-        #         name=item['name'],
-        #         label=item['label'],
-        #         description=item['description'],
-        #     )
+        for item in design_data['managedentities']:
+            ManagedEntity.objects.create(**item)
 
         # 初始化管理实体表，自动插入RelateFieldModel表内容
         # 创建ICPC类实体
-        for icpc in icpc_list:
-            ManagedEntity.objects.create(
-                name=icpc['name'].lower(),
-                label=icpc['label'],
-                app_name='define_icpc',
-                model_name=icpc['name'],
-                display_field='iname',
-                related_field='icpc_code',
-            )
+        # for icpc in icpc_list:
+        #     ManagedEntity.objects.create(
+        #         name=icpc['name'].lower(),
+        #         label=icpc['label'],
+        #         app_name='define_icpc',
+        #         model_name=icpc['name'],
+        #         display_field='iname',
+        #         related_field='icpc_code',
+        #     )
 
         # 创建管理实体
-        entities_list = [
-            {'name': 'staff', 'label': '职员', 'app_name': 'core', 'model_name': 'Staff', 'display_field': 'name', 'related_field': 'staff_code'},
-            {'name': 'customer', 'label': '客户', 'app_name': 'core', 'model_name': 'Customer', 'display_field': 'name', 'related_field': 'customer_code'},
-            {'name': 'supplier', 'label': '供应商', 'app_name': 'core', 'model_name': 'Supplier', 'display_field': 'name', 'related_field': 'supplier_code'},
-            {'name': 'medicine', 'label': '药品', 'app_name': 'core', 'model_name': 'Medicine', 'display_field': 'name', 'related_field': 'medicine_code'},
-            {'name': 'device', 'label': '设备', 'app_name': 'core', 'model_name': 'Device', 'display_field': 'name', 'related_field': 'device_code'},
-            {'name': 'role', 'label': '角色', 'app_name': 'core', 'model_name': 'Role', 'display_field': 'name', 'related_field': 'role_code'},
-            {'name': 'institution', 'label': '机构', 'app_name': 'core', 'model_name': 'Institution', 'display_field': 'name', 'related_field': 'institution_code'},
-        ]
-        # 创建ICPC类实体
-        for entity in entities_list:
-            ManagedEntity.objects.create(**entity)
+        # entities_list = [
+        #     {'name': 'staff', 'label': '职员', 'app_name': 'core', 'model_name': 'Staff', 'display_field': 'name', 'related_field': 'staff_code'},
+        #     {'name': 'customer', 'label': '客户', 'app_name': 'core', 'model_name': 'Customer', 'display_field': 'name', 'related_field': 'customer_code'},
+        #     {'name': 'supplier', 'label': '供应商', 'app_name': 'core', 'model_name': 'Supplier', 'display_field': 'name', 'related_field': 'supplier_code'},
+        #     {'name': 'medicine', 'label': '药品', 'app_name': 'core', 'model_name': 'Medicine', 'display_field': 'name', 'related_field': 'medicine_code'},
+        #     {'name': 'device', 'label': '设备', 'app_name': 'core', 'model_name': 'Device', 'display_field': 'name', 'related_field': 'device_code'},
+        #     {'name': 'role', 'label': '角色', 'app_name': 'core', 'model_name': 'Role', 'display_field': 'name', 'related_field': 'role_code'},
+        #     {'name': 'institution', 'label': '机构', 'app_name': 'core', 'model_name': 'Institution', 'display_field': 'name', 'related_field': 'institution_code'},
+        # ]
+        # for entity in entities_list:
+        #     ManagedEntity.objects.create(**entity)
 
         print('导入管理实体表完成')
 
