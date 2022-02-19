@@ -732,70 +732,70 @@ from define_operand.models import Service, Event, Instruction, Role, DesignBacku
 # 不备份再其他表新增内容时自动插入内容的表，RelateFieldModel
 def design_backup(modeladmin, request, queryset):
 
-    class Object:
-        def toJSON(self):
-            return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4, ensure_ascii=False)
+    # class Object:
+    #     def toJSON(self):
+    #         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4, ensure_ascii=False)
 
-    design_data = Object()
-    design_data.roles = []
-    design_data.managedentities = []
-    design_data.diclists = []
-    design_data.boolfields = []
-    design_data.characterfields = []
-    design_data.numberfields = []
-    design_data.dtfields = []
-    design_data.relatedfields = []
-    design_data.choicefields = []
-    design_data.components = []
-    design_data.basemodels = []
-    design_data.baseforms = []
-    design_data.combineforms = []
-    design_data.operations = []
-    design_data.services = []
-    design_data.instructions = []
-    design_data.events = []
+    # design_data = Object()
+    # design_data.roles = []
+    # design_data.managedentities = []
+    # design_data.diclists = []
+    # design_data.boolfields = []
+    # design_data.characterfields = []
+    # design_data.numberfields = []
+    # design_data.dtfields = []
+    # design_data.relatedfields = []
+    # design_data.choicefields = []
+    # design_data.components = []
+    # design_data.basemodels = []
+    # design_data.baseforms = []
+    # design_data.combineforms = []
+    # design_data.operations = []
+    # design_data.services = []
+    # design_data.instructions = []
+    # design_data.events = []
 
-    # design_data = {
-    #     'roles': [],
-    #     'managedentities': [],
-    #     'diclists': [],
-    #     'boolfields': [],
-    #     'characterfields': [],
-    #     'numberfields': [],
-    #     'dtfields': [],
-    #     'relatedfields': [],
-    #     'choicefields': [],
-    #     'components': [],
-    #     'basemodels': [],
-    #     'baseforms': [],
-    #     'combineforms': [],
-    #     'operations': [],
-    #     'services': [],
-    #     'instructions': [],
-    #     'events': [],
-    # }
+    design_data = {
+        'roles': [],
+        'managedentities': [],
+        'diclists': [],
+        'boolfields': [],
+        'characterfields': [],
+        'numberfields': [],
+        'dtfields': [],
+        'relatedfields': [],
+        'choicefields': [],
+        'components': [],
+        'basemodels': [],
+        'baseforms': [],
+        'combineforms': [],
+        'operations': [],
+        'services': [],
+        'instructions': [],
+        'events': [],
+    }
 
     for item in Role.objects.all():
         model = model_to_dict(item)
-        design_data.roles.append(model)
+        design_data['roles'].append(model)
 
     for item in ManagedEntity.objects.all():
-        design_data.managedentities.append(model_to_dict(item))
+        design_data['managedentities'].append(model_to_dict(item))
 
     for item in DicList.objects.all():
-        design_data.diclists.append(model_to_dict(item))
+        design_data['diclists'].append(model_to_dict(item))
 
     for item in BoolField.objects.all():
-        design_data.boolfields.append(model_to_dict(item))
+        design_data['boolfields'].append(model_to_dict(item))
 
     for item in CharacterField.objects.all():
-        design_data.characterfields.append(model_to_dict(item))
+        design_data['characterfields'].append(model_to_dict(item))
 
     for item in NumberField.objects.all():
-        design_data.numberfields.append(model_to_dict(item))
+        design_data['numberfields'].append(model_to_dict(item))
 
     for item in DTField.objects.all():
-        design_data.dtfields.append(model_to_dict(item))
+        design_data['dtfields'].append(model_to_dict(item))
 
     for item in RelatedField.objects.all():
         model = model_to_dict(item)
@@ -804,13 +804,13 @@ def design_backup(modeladmin, request, queryset):
         # 获取关联字段值???
         # model['related_content'] = DicList.objects.get(id=related_content_id).name
         model['related_content'] = RelateFieldModel.objects.get(id=related_content_id).name
-        design_data.relatedfields.append(model)
+        design_data['relatedfields'].append(model)
 
     for item in ChoiceField.objects.all():
-        design_data.choicefields.append(model_to_dict(item))
+        design_data['choicefields'].append(model_to_dict(item))
 
     for item in Component.objects.all():
-        design_data.components.append(model_to_dict(item))
+        design_data['components'].append(model_to_dict(item))
 
     for item in BaseModel.objects.all():
         components = []
@@ -818,7 +818,7 @@ def design_backup(modeladmin, request, queryset):
             components.append(model_to_dict(component))
         model = model_to_dict(item)
         model['components'] = components
-        design_data.basemodels.append(model)
+        design_data['basemodels'].append(model)
 
     for item in BaseForm.objects.filter(is_inquiry=True):
         components = []
@@ -829,7 +829,7 @@ def design_backup(modeladmin, request, queryset):
         basemodel_id = model['basemodel']
         model['basemodel'] = BaseModel.objects.get(id=basemodel_id).name
         model.pop('meta_data')
-        design_data.baseforms.append(model)
+        design_data['baseforms'].append(model)
 
     for item in CombineForm.objects.filter(is_base=False):
         forms = []
@@ -842,25 +842,30 @@ def design_backup(modeladmin, request, queryset):
         if managed_entity_id:
             model['managed_entity'] = ManagedEntity.objects.get(id=managed_entity_id).name
         model.pop('meta_data')
-        design_data.combineforms.append(model)
+        design_data['combineforms'].append(model)
 
     for item in Operation.objects.all():
         model = model_to_dict(item)
         if model['forms']:
             forms_id = model['forms']
             model['forms'] = CombineForm.objects.get(id=forms_id).name
-        design_data.operations.append(model)
+        if model['group']:
+            group_name = []
+            for group in model['group']:
+                group_name.append(group.name)
+            model['group'] = group_name
+        design_data['operations'].append(model)
 
     for item in Service.objects.all():
         model = model_to_dict(item)
         if model['first_operation']:
             operation_id = model['first_operation']
             model['first_operation'] = Operation.objects.get(id=operation_id).name
-        design_data.services.append(model)
+        design_data['services'].append(model)
 
     for item in Instruction.objects.all():
         model = model_to_dict(item)
-        design_data.instructions.append(model)
+        design_data['instructions'].append(model)
 
     for item in Event.objects.all():
         next_operations = []
@@ -871,18 +876,14 @@ def design_backup(modeladmin, request, queryset):
         model['next'] = next_operations
         operation_id = model['operation']
         model['operation'] = Operation.objects.get(id=operation_id).name
-        design_data.events.append(model)
+        design_data['events'].append(model)
 
 
     # 写入数据库
     s = DesignBackup.objects.create(
         name = str(int(time())),
-        code = design_data.toJSON(),
+        code = json.dumps(design_data, indent=4, ensure_ascii=False),
     )
-    # s = DesignBackup.objects.create(
-    #     name = str(int(time())),
-    #     code = json.dumps(design_data.__dict__, indent=4, ensure_ascii=False),
-    # )
     print(f'设计数据备份成功, id: {s.id}')
 
 design_backup.short_description = '备份设计数据'

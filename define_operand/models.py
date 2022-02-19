@@ -195,7 +195,7 @@ class SourceCode(models.Model):
     create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")  
 
     def __str__(self):
-        return str(self.create_time)
+        return self.name
 
     class Meta:
         verbose_name = "输出脚本"
@@ -212,7 +212,7 @@ class DesignBackup(models.Model):
     create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")  
 
     def __str__(self):
-        return str(self.create_time)
+        return self.name
 
     class Meta:
         verbose_name = "设计备份"

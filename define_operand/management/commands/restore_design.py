@@ -245,8 +245,14 @@ class Command(BaseCommand):
                 label=item['label'],
                 forms=forms,  
             )
-            # 导入角色???
-            # operation.group.set(item['group'])
+            # 写入Operation.group 多对多字段
+            if item['group']:
+                groups = []
+                for _role in item['group']:
+                    group = Role.objects.get(name=_role)  # 使用角色中文名称查询角色
+                    groups.append(group)
+                operation.group.set(groups)
+
 
         print('导入作业表完成')
 
