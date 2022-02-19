@@ -1,109 +1,109 @@
 {
     "roles": [
         {
-            "id": 71,
+            "id": 51,
             "name": "jian_kang_guan_li_shi",
             "label": "健康管理师",
             "description": null
         },
         {
-            "id": 72,
+            "id": 52,
             "name": "hu_shi",
             "label": "护士",
             "description": null
         },
         {
-            "id": 73,
+            "id": 53,
             "name": "yi_sheng_zhu_li",
             "label": "医生助理",
             "description": null
         },
         {
-            "id": 74,
+            "id": 54,
             "name": "yi_sheng",
             "label": "医生",
             "description": null
         },
         {
-            "id": 75,
+            "id": 55,
             "name": "zhi_liang_guan_li",
             "label": "质量管理",
             "description": null
         },
         {
-            "id": 76,
+            "id": 56,
             "name": "yao_shi",
             "label": "药士",
             "description": null
         },
         {
-            "id": 77,
+            "id": 57,
             "name": "yao_ji_shi",
             "label": "药剂师",
             "description": null
         },
         {
-            "id": 78,
+            "id": 58,
             "name": "gong_wei",
             "label": "公卫",
             "description": null
         },
         {
-            "id": 79,
+            "id": 59,
             "name": "guan_li_zhe",
             "label": "管理者",
             "description": null
         },
         {
-            "id": 80,
+            "id": 60,
             "name": "ying_xiang_yi_shi",
             "label": "影像医师",
             "description": null
         },
         {
-            "id": 81,
+            "id": 61,
             "name": "kang_fu_li_liao_shi",
             "label": "康复理疗师",
             "description": null
         },
         {
-            "id": 82,
+            "id": 62,
             "name": "zhong_yi_shi",
             "label": "中医师",
             "description": null
         },
         {
-            "id": 83,
+            "id": 63,
             "name": "huan_zhe",
             "label": "患者",
             "description": null
         },
         {
-            "id": 84,
+            "id": 64,
             "name": "huan_zhe_jia_shu",
             "label": "患者家属",
             "description": null
         },
         {
-            "id": 85,
+            "id": 65,
             "name": "jian_yan_shi",
             "label": "检验师",
             "description": null
         },
         {
-            "id": 86,
+            "id": 66,
             "name": "xi_tong_guan_li_yuan",
             "label": "系统管理员",
             "description": null
         },
         {
-            "id": 87,
+            "id": 67,
             "name": "gong_ying_shang",
             "label": "供应商",
             "description": null
         },
         {
-            "id": 88,
+            "id": 68,
             "name": "bao_xian_ren_yuan",
             "label": "保险人员",
             "description": null
@@ -283,175 +283,175 @@
     ],
     "diclists": [
         {
-            "id": 150,
+            "id": 125,
             "name": "character",
             "label": "性格",
             "related_field": "value",
             "content": "外向\n内向"
         },
         {
-            "id": 151,
+            "id": 126,
             "name": "satisfaction",
             "label": "满意度",
             "related_field": "value",
             "content": "很满意\n满意\n既非满意也非不满意\n不满意\n很不满意"
         },
         {
-            "id": 152,
+            "id": 127,
             "name": "frequency",
             "label": "频次",
             "related_field": "value",
             "content": "经常\n偶尔\n从无"
         },
         {
-            "id": 153,
+            "id": 128,
             "name": "state_degree",
             "label": "状态程度",
             "related_field": "value",
             "content": "非常好\n还不错\n不太好\n非常糟"
         },
         {
-            "id": 154,
+            "id": 129,
             "name": "comparative_expression",
             "label": "比较表达",
             "related_field": "value",
             "content": "改善很大\n有一定改善\n没变化\n变更差了"
         },
         {
-            "id": 155,
+            "id": 130,
             "name": "sports_preference",
             "label": "运动类型",
             "related_field": "value",
             "content": "有氧运动\n无氧运动\n有氧无氧交替运动\n不运动"
         },
         {
-            "id": 156,
+            "id": 131,
             "name": "exercise_time",
             "label": "运动时长",
             "related_field": "value",
             "content": "半小时以内\n半小时到一个半小时\n一个半小时以上"
         },
         {
-            "id": 157,
+            "id": 132,
             "name": "convenience",
             "label": "便捷程度",
             "related_field": "value",
             "content": "非常不方便\n不方便\n比较方便\n非常方便"
         },
         {
-            "id": 158,
+            "id": 133,
             "name": "family_relationship",
             "label": "家庭成员关系",
             "related_field": "value",
             "content": "户主\n配偶\n父母\n子女\n祖父母\n孙子女\n兄弟姐妹\n其他成员"
         },
         {
-            "id": 159,
+            "id": 134,
             "name": "normality",
             "label": "正常性判断",
             "related_field": "value",
             "content": "正常\n异常"
         },
         {
-            "id": 160,
+            "id": 135,
             "name": "dorsal_artery_pulsation",
             "label": "足背动脉搏动情况",
             "related_field": "value",
             "content": "触及正常\n触及正常\n减弱\n消失"
         },
         {
-            "id": 161,
+            "id": 136,
             "name": "hearing",
             "label": "听力",
             "related_field": "value",
             "content": "听见\n听不清或无法听见"
         },
         {
-            "id": 162,
+            "id": 137,
             "name": "lips",
             "label": "口唇",
             "related_field": "value",
             "content": "红润\n苍白\n发绀\n皲裂\n疱疹"
         },
         {
-            "id": 163,
+            "id": 138,
             "name": "dentition",
             "label": "齿列",
             "related_field": "value",
             "content": "正常\n缺齿\n龋齿\n义齿（假牙）"
         },
         {
-            "id": 164,
+            "id": 139,
             "name": "pharynx",
             "label": "咽部",
             "related_field": "value",
             "content": "无充血\n充血\n淋巴滤泡增生"
         },
         {
-            "id": 165,
+            "id": 140,
             "name": "life_event",
             "label": "生活事件",
             "related_field": "value",
             "content": "丧偶\n父母死亡\n子女死亡\n离婚\n失业\n家属病重\n恋爱\n结婚\n生子"
         },
         {
-            "id": 166,
+            "id": 141,
             "name": "edema",
             "label": "水肿情况",
             "related_field": "value",
             "content": "无水肿\n单侧水肿\n双侧不对称水肿\n双侧对称水肿"
         },
         {
-            "id": 167,
+            "id": 142,
             "name": "gender",
             "label": "性别",
             "related_field": "value",
             "content": "男\n女"
         },
         {
-            "id": 168,
+            "id": 143,
             "name": "nationality",
             "label": "民族",
             "related_field": "value",
             "content": "汉族\n少数民族"
         },
         {
-            "id": 169,
+            "id": 144,
             "name": "marital_status",
             "label": "婚姻状况",
             "related_field": "value",
             "content": "未婚\n已婚\n离异\n丧偶"
         },
         {
-            "id": 170,
+            "id": 145,
             "name": "education",
             "label": "文化程度",
             "related_field": "value",
             "content": "博士\n硕士\n本科\n大专\n中专技校\n高中\n初中\n小学\n文盲或半文盲"
         },
         {
-            "id": 171,
+            "id": 146,
             "name": "occupational_status",
             "label": "职业状况",
             "related_field": "value",
             "content": "在职\n失业\n退休"
         },
         {
-            "id": 172,
+            "id": 147,
             "name": "medical_expenses_burden",
             "label": "医疗费用负担",
             "related_field": "value",
             "content": "职工医疗保险\n城镇居民医疗保险\n商业保险\n自费\n公费\n贫困救助"
         },
         {
-            "id": 173,
+            "id": 148,
             "name": "type_of_residence",
             "label": "居住类型",
             "related_field": "value",
             "content": "常住\n非常住"
         },
         {
-            "id": 174,
+            "id": 149,
             "name": "blood_type",
             "label": "血型",
             "related_field": "value",
@@ -995,7 +995,7 @@
             "label": "药品名称",
             "type": "SelectMultiple",
             "related_content": "medicine",
-            "related_content_new": 189,
+            "related_content_new": 81,
             "related_field": "medicine_code"
         },
         {
@@ -1004,7 +1004,7 @@
             "label": "症状",
             "type": "SelectMultiple",
             "related_content": "icpc3_symptoms_and_problems",
-            "related_content_new": 178,
+            "related_content_new": 70,
             "related_field": "icpc_code"
         },
         {
@@ -1013,7 +1013,7 @@
             "label": "性格倾向",
             "type": "RadioSelect",
             "related_content": "character",
-            "related_content_new": 151,
+            "related_content_new": 43,
             "related_field": "id"
         },
         {
@@ -1022,7 +1022,7 @@
             "label": "对目前生活和工作满意吗",
             "type": "Select",
             "related_content": "satisfaction",
-            "related_content_new": 152,
+            "related_content_new": 44,
             "related_field": "id"
         },
         {
@@ -1031,7 +1031,7 @@
             "label": "对自己的适应能力满意吗",
             "type": "Select",
             "related_content": "satisfaction",
-            "related_content_new": 152,
+            "related_content_new": 44,
             "related_field": "id"
         },
         {
@@ -1040,7 +1040,7 @@
             "label": "是否能得到家人朋友的鼓励和支持",
             "type": "Select",
             "related_content": "frequency",
-            "related_content_new": 153,
+            "related_content_new": 45,
             "related_field": "id"
         },
         {
@@ -1049,7 +1049,7 @@
             "label": "饮酒频次",
             "type": "RadioSelect",
             "related_content": "frequency",
-            "related_content_new": 153,
+            "related_content_new": 45,
             "related_field": "id"
         },
         {
@@ -1058,7 +1058,7 @@
             "label": "吸烟频次",
             "type": "RadioSelect",
             "related_content": "frequency",
-            "related_content_new": 153,
+            "related_content_new": 45,
             "related_field": "id"
         },
         {
@@ -1067,7 +1067,7 @@
             "label": "觉得自身健康状况如何",
             "type": "RadioSelect",
             "related_content": "state_degree",
-            "related_content_new": 154,
+            "related_content_new": 46,
             "related_field": "id"
         },
         {
@@ -1076,7 +1076,7 @@
             "label": "较之过去一年状态如何",
             "type": "Select",
             "related_content": "comparative_expression",
-            "related_content_new": 155,
+            "related_content_new": 47,
             "related_field": "id"
         },
         {
@@ -1085,7 +1085,7 @@
             "label": "运动偏好",
             "type": "Select",
             "related_content": "sports_preference",
-            "related_content_new": 156,
+            "related_content_new": 48,
             "related_field": "id"
         },
         {
@@ -1094,7 +1094,7 @@
             "label": "运动时长",
             "type": "RadioSelect",
             "related_content": "exercise_time",
-            "related_content_new": 157,
+            "related_content_new": 49,
             "related_field": "id"
         },
         {
@@ -1103,7 +1103,7 @@
             "label": "近来有无身体不适症状",
             "type": "CheckboxSelectMultiple",
             "related_content": "icpc3_symptoms_and_problems",
-            "related_content_new": 178,
+            "related_content_new": 70,
             "related_field": "icpc_code"
         },
         {
@@ -1112,7 +1112,7 @@
             "label": "您对居住环境满意吗",
             "type": "Select",
             "related_content": "satisfaction",
-            "related_content_new": 152,
+            "related_content_new": 44,
             "related_field": "id"
         },
         {
@@ -1121,7 +1121,7 @@
             "label": "您所在的社区交通方便吗",
             "type": "Select",
             "related_content": "convenience",
-            "related_content_new": 158,
+            "related_content_new": 50,
             "related_field": "id"
         },
         {
@@ -1130,7 +1130,7 @@
             "label": "病名",
             "type": "Select",
             "related_content": "icpc5_evaluation_and_diagnoses",
-            "related_content_new": 180,
+            "related_content_new": 72,
             "related_field": "icpc_code"
         },
         {
@@ -1139,7 +1139,7 @@
             "label": "家庭成员关系",
             "type": "Select",
             "related_content": "family_relationship",
-            "related_content_new": 159,
+            "related_content_new": 51,
             "related_field": "id"
         },
         {
@@ -1148,7 +1148,7 @@
             "label": "疾病名称",
             "type": "Select",
             "related_content": "icpc5_evaluation_and_diagnoses",
-            "related_content_new": 180,
+            "related_content_new": 72,
             "related_field": "icpc_code"
         },
         {
@@ -1157,7 +1157,7 @@
             "label": "眼底",
             "type": "Select",
             "related_content": "normality",
-            "related_content_new": 160,
+            "related_content_new": 52,
             "related_field": "id"
         },
         {
@@ -1166,7 +1166,7 @@
             "label": "服务角色",
             "type": "CheckboxSelectMultiple",
             "related_content": "role",
-            "related_content_new": 191,
+            "related_content_new": 83,
             "related_field": "role_code"
         },
         {
@@ -1175,7 +1175,7 @@
             "label": "所属机构",
             "type": "RadioSelect",
             "related_content": "institution",
-            "related_content_new": 192,
+            "related_content_new": 84,
             "related_field": "institution_code"
         },
         {
@@ -1184,7 +1184,7 @@
             "label": "左脚",
             "type": "RadioSelect",
             "related_content": "dorsal_artery_pulsation",
-            "related_content_new": 161,
+            "related_content_new": 53,
             "related_field": "id"
         },
         {
@@ -1193,7 +1193,7 @@
             "label": "右脚",
             "type": "RadioSelect",
             "related_content": "dorsal_artery_pulsation",
-            "related_content_new": 161,
+            "related_content_new": 53,
             "related_field": "id"
         },
         {
@@ -1202,7 +1202,7 @@
             "label": "左耳听力",
             "type": "Select",
             "related_content": "hearing",
-            "related_content_new": 162,
+            "related_content_new": 54,
             "related_field": "id"
         },
         {
@@ -1211,7 +1211,7 @@
             "label": "右耳听力",
             "type": "Select",
             "related_content": "hearing",
-            "related_content_new": 162,
+            "related_content_new": 54,
             "related_field": "id"
         },
         {
@@ -1220,7 +1220,7 @@
             "label": "手术名称",
             "type": "RadioSelect",
             "related_content": "icpc7_treatments",
-            "related_content_new": 182,
+            "related_content_new": 74,
             "related_field": "icpc_code"
         },
         {
@@ -1229,7 +1229,7 @@
             "label": "口唇",
             "type": "RadioSelect",
             "related_content": "lips",
-            "related_content_new": 163,
+            "related_content_new": 55,
             "related_field": "id"
         },
         {
@@ -1238,7 +1238,7 @@
             "label": "齿列",
             "type": "RadioSelect",
             "related_content": "dentition",
-            "related_content_new": 164,
+            "related_content_new": 56,
             "related_field": "id"
         },
         {
@@ -1247,7 +1247,7 @@
             "label": "咽部",
             "type": "Select",
             "related_content": "pharynx",
-            "related_content_new": 165,
+            "related_content_new": 57,
             "related_field": "id"
         },
         {
@@ -1256,7 +1256,7 @@
             "label": "生活事件",
             "type": "CheckboxSelectMultiple",
             "related_content": "life_event",
-            "related_content_new": 166,
+            "related_content_new": 58,
             "related_field": "id"
         },
         {
@@ -1265,7 +1265,7 @@
             "label": "下肢水肿",
             "type": "RadioSelect",
             "related_content": "edema",
-            "related_content_new": 167,
+            "related_content_new": 59,
             "related_field": "id"
         },
         {
@@ -1274,7 +1274,7 @@
             "label": "家庭编号",
             "type": "Select",
             "related_content": "icpc1_register_logins",
-            "related_content_new": 176,
+            "related_content_new": 68,
             "related_field": "icpc_code"
         },
         {
@@ -1283,7 +1283,7 @@
             "label": "性别",
             "type": "Select",
             "related_content": "gender",
-            "related_content_new": 168,
+            "related_content_new": 60,
             "related_field": "id"
         },
         {
@@ -1292,7 +1292,7 @@
             "label": "民族",
             "type": "Select",
             "related_content": "nationality",
-            "related_content_new": 169,
+            "related_content_new": 61,
             "related_field": "id"
         },
         {
@@ -1301,7 +1301,7 @@
             "label": "婚姻状况",
             "type": "Select",
             "related_content": "marital_status",
-            "related_content_new": 170,
+            "related_content_new": 62,
             "related_field": "id"
         },
         {
@@ -1310,7 +1310,7 @@
             "label": "文化程度",
             "type": "Select",
             "related_content": "education",
-            "related_content_new": 171,
+            "related_content_new": 63,
             "related_field": "id"
         },
         {
@@ -1319,7 +1319,7 @@
             "label": "职业状况",
             "type": "Select",
             "related_content": "occupational_status",
-            "related_content_new": 172,
+            "related_content_new": 64,
             "related_field": "id"
         },
         {
@@ -1328,7 +1328,7 @@
             "label": "医疗费用负担",
             "type": "CheckboxSelectMultiple",
             "related_content": "medical_expenses_burden",
-            "related_content_new": 173,
+            "related_content_new": 65,
             "related_field": "id"
         },
         {
@@ -1337,7 +1337,7 @@
             "label": "居住类型",
             "type": "Select",
             "related_content": "type_of_residence",
-            "related_content_new": 174,
+            "related_content_new": 66,
             "related_field": "id"
         },
         {
@@ -1346,7 +1346,7 @@
             "label": "血型",
             "type": "Select",
             "related_content": "blood_type",
-            "related_content_new": 175,
+            "related_content_new": 67,
             "related_field": "id"
         },
         {
@@ -1355,7 +1355,7 @@
             "label": "签约家庭医生",
             "type": "Select",
             "related_content": "staff",
-            "related_content_new": 186,
+            "related_content_new": 78,
             "related_field": "staff_code"
         },
         {
@@ -1364,7 +1364,7 @@
             "label": "运动能力",
             "type": "Select",
             "related_content": "exercise_time",
-            "related_content_new": 157,
+            "related_content_new": 49,
             "related_field": "id"
         }
     ],
@@ -3588,8 +3588,7 @@
             "resource_devices": null,
             "resource_knowledge": null,
             "group": [
-                "hu_shi",
-                "yi_sheng"
+                "huan_zhe"
             ]
         },
         {
@@ -3631,19 +3630,19 @@
     ],
     "services": [
         {
-            "id": 10,
+            "id": 9,
             "name": "pu_tong_men_zhen",
             "label": "普通门诊",
             "first_operation": null
         },
         {
-            "id": 11,
+            "id": 10,
             "name": "men_zhen_ji_zhen",
             "label": "门诊急诊",
             "first_operation": null
         },
         {
-            "id": 12,
+            "id": 11,
             "name": "yuan_wai_fu_wu",
             "label": "院外服务",
             "first_operation": null
