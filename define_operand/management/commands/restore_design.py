@@ -5,6 +5,7 @@ from define.models import ManagedEntity, BoolField, CharacterField, NumberField,
 from define_dict.models import DicList
 from define_form.models import BaseModel, BaseForm, CombineForm
 from define_operand.models import Service, Operation, Event, Instruction, Event_instructions, Role
+from define_icpc.models import icpc_list
 
 class Command(BaseCommand):
     help = 'Import design from json file'
@@ -43,14 +44,7 @@ class Command(BaseCommand):
                 label=item['label'],
                 description=item['description'],
             )
-
-        # 导入管理实体表，自动插入RelateFieldModel表内容
-        for item in design_data['managedentities']:
-            ManagedEntity.objects.create(
-                name=item['name'],
-                label=item['label'],
-                description=item['description'],
-            )
+        print('导入角色表完成')
 
         # 导入字典表，自动插入RelateFieldModel表内容
         for item in design_data['diclists']:
@@ -60,11 +54,50 @@ class Command(BaseCommand):
                 related_field=item['related_field'],
                 content=item['content'],
             )
+        print('导入字典表完成')
 
         # ******************************************************
         # 导入管理实体表和字典表时自动插入RelateFieldModel表内容
         # ******************************************************
+        # 导入管理实体表，自动插入RelateFieldModel表内容
+        # for item in design_data['managedentities']:
+        #     ManagedEntity.objects.create(
+        #         name=item['name'],
+        #         label=item['label'],
+        #         description=item['description'],
+        #     )
 
+        # 初始化管理实体表，自动插入RelateFieldModel表内容
+        # 创建ICPC类实体
+        for icpc in icpc_list:
+            ManagedEntity.objects.create(
+                name=icpc['name'].lower(),
+                label=icpc['label'],
+                app_name='define_icpc',
+                model_name=icpc['name'],
+                display_field='iname',
+                related_field='icpc_code',
+            )
+
+        # 创建管理实体
+        entities_list = [
+            {'name': 'staff', 'label': '职员', 'app_name': 'core', 'model_name': 'Staff', 'display_field': 'name', 'related_field': 'staff_code'},
+            {'name': 'customer', 'label': '客户', 'app_name': 'core', 'model_name': 'Customer', 'display_field': 'name', 'related_field': 'customer_code'},
+            {'name': 'supplier', 'label': '供应商', 'app_name': 'core', 'model_name': 'Supplier', 'display_field': 'name', 'related_field': 'supplier_code'},
+            {'name': 'medicine', 'label': '药品', 'app_name': 'core', 'model_name': 'Medicine', 'display_field': 'name', 'related_field': 'medicine_code'},
+            {'name': 'device', 'label': '设备', 'app_name': 'core', 'model_name': 'Device', 'display_field': 'name', 'related_field': 'device_code'},
+            {'name': 'role', 'label': '角色', 'app_name': 'core', 'model_name': 'Role', 'display_field': 'name', 'related_field': 'role_code'},
+            {'name': 'institution', 'label': '机构', 'app_name': 'core', 'model_name': 'Institution', 'display_field': 'name', 'related_field': 'institution_code'},
+        ]
+        # 创建ICPC类实体
+        for entity in entities_list:
+            ManagedEntity.objects.create(**entity)
+
+        print('导入管理实体表完成')
+
+        # ******************************************************
+        # 导入字段表、表单表、组合表、操作表、服务表、指令表、事件表
+        # ******************************************************
         # 导入字段表
         for item in design_data['boolfields']:
             BoolField.objects.create(
@@ -74,6 +107,7 @@ class Command(BaseCommand):
                 required=item['required'],
                 default=item['default'],
             )
+        print('导入布尔型字段表完成')
 
         for item in design_data['characterfields']:
             CharacterField.objects.create(
@@ -84,6 +118,7 @@ class Command(BaseCommand):
                 required=item['required'],
                 default=item['default'],
             )
+        print('导入字符型字段表完成')
 
         for item in design_data['numberfields']:
             NumberField.objects.create(
@@ -99,6 +134,7 @@ class Command(BaseCommand):
                 default=item['default'],
                 required=item['required'],
             )
+        print('导入数值型字段表完成')
 
         for item in design_data['dtfields']:
             DTField.objects.create(
@@ -108,6 +144,7 @@ class Command(BaseCommand):
                 default_now=item['default_now'],
                 required=item['required'],
             )
+        print('导入日期型字段表完成')
 
         for item in design_data['choicefields']:
             ChoiceField.objects.create(
@@ -118,16 +155,22 @@ class Command(BaseCommand):
                 default_first=item['default_first'],
                 required=item['required'],
             )
+        print('导入选择型字段表完成')
 
         for item in design_data['relatedfields']:
-            dic=DicList.objects.get(name=item['related_content'])
+            # 创建关联字段???
+            # dic=DicList.objects.get(name=item['related_content'])
+            print('relatedfields:',item)
+            related_content=RelateFieldModel.objects.get(name=item['related_content'])
+            print('related_content:',related_content)
             RelatedField.objects.create(
                 name=item['name'],
                 label=item['label'],
                 type=item['type'],
-                related_content=dic,
-                related_field=item['related_field'],
+                related_content_new=related_content,
+                related_field=related_content.related_field,
             )
+        print('导入关联型字段表完成')
 
         # 导入模型表
         for item in design_data['basemodels']:
@@ -150,6 +193,8 @@ class Command(BaseCommand):
                 managedentity = ManagedEntity.objects.get(name=_managedentity['name'])
                 model_managedentities.append(managedentity)
             basemodel.managed_entity.set(model_managedentities)
+        
+        print('导入基础模型表完成')
 
         # 导入表单表
         for item in design_data['baseforms']:
@@ -166,6 +211,8 @@ class Command(BaseCommand):
                 component = Component.objects.get(name=_component['name'])
                 form_components.append(component)
             baseform.components.set(form_components)
+        
+        print('导入基础表单表完成')
 
         # 导入组合表单表
         for item in design_data['combineforms']:
@@ -190,6 +237,8 @@ class Command(BaseCommand):
                 forms.append(form)
             combineform.forms.set(forms)
 
+        print('导入组合表单表完成')
+
         # 导入作业表
         for item in design_data['operations']:
             print('Operation:', item)
@@ -202,6 +251,8 @@ class Command(BaseCommand):
                 label=item['label'],
                 forms=forms,  
             )
+
+        print('导入作业表完成')
 
         # # 导入系统保留作业
         # SYSTEM_OPERAND = [
@@ -228,6 +279,8 @@ class Command(BaseCommand):
                 first_operation=first_operation,
             )
         
+        print('导入服务表完成')
+        
         # 导入指令表
         for item in design_data['instructions']:
             print('Instruction:', item)
@@ -238,6 +291,8 @@ class Command(BaseCommand):
                 func=item['func'],
                 description=item['description'],
             )
+        
+        print('导入指令表完成')
         
         # 导入事件表
         for item in design_data['events']:
@@ -258,6 +313,8 @@ class Command(BaseCommand):
                 operation = Operation.objects.get(name=_operation)
                 next_operations.append(operation)
             event.next.set(next_operations)
+        
+        print('导入事件表完成')
 
         # 系统保留事件(form, event_name)
         # SYSTEM_EVENTS = [

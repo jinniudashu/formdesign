@@ -109,6 +109,7 @@ def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
                 field['type'] = 'datetime'
             elif _type == 'ChoiceField' or _type == 'RelatedField':
                 # 获取关联字段的模型???
+                print('component', component)
                 field['type'] = 'dict'
                 field['dict_name'] = component.content_object.related_content_new.related_content
             fields.append(field)

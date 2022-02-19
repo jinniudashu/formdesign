@@ -535,7 +535,7 @@
             "name": "relatedfield_drug_name",
             "label": "药品名称",
             "type": "SelectMultiple",
-            "related_content": "drug_list",
+            "related_content": "medicine",
             "related_field": "value"
         },
         {
@@ -687,7 +687,7 @@
             "name": "relatedfield_service_role",
             "label": "服务角色",
             "type": "CheckboxSelectMultiple",
-            "related_content": "service_role",
+            "related_content": "role",
             "related_field": "value"
         },
         {
@@ -695,7 +695,7 @@
             "name": "relatedfield_affiliation",
             "label": "所属机构",
             "type": "RadioSelect",
-            "related_content": "institutions_list",
+            "related_content": "institution",
             "related_field": "value"
         },
         {
@@ -855,7 +855,7 @@
             "name": "relatedfield_signed_family_doctor",
             "label": "签约家庭医生",
             "type": "Select",
-            "related_content": "employee_list",
+            "related_content": "staff",
             "related_field": "value"
         },
         {
@@ -1544,20 +1544,6 @@
     ],
     "diclists": [
         {
-            "id": 67,
-            "name": "drug_list",
-            "label": "药品清单",
-            "related_field": "value",
-            "content": ""
-        },
-        {
-            "id": 68,
-            "name": "icpc3_symptoms_and_problems",
-            "label": "症状和问题",
-            "related_field": "iname",
-            "content": ""
-        },
-        {
             "id": 69,
             "name": "character",
             "label": "性格",
@@ -1614,13 +1600,6 @@
             "content": "非常不方便\n不方便\n比较方便\n非常方便"
         },
         {
-            "id": 77,
-            "name": "icpc5_evaluation_and_diagnoses",
-            "label": "评估和诊断",
-            "related_field": "iname",
-            "content": ""
-        },
-        {
             "id": 78,
             "name": "family_relationship",
             "label": "家庭成员关系",
@@ -1635,20 +1614,6 @@
             "content": "正常\n异常"
         },
         {
-            "id": 80,
-            "name": "service_role",
-            "label": "服务角色",
-            "related_field": "value",
-            "content": "健康管理师\n护士\n医生助理\n医生\n化验\n质量管理\n药士\n药剂师\n公卫\n管理者\n影像医师\n康复理疗师\n中医师"
-        },
-        {
-            "id": 81,
-            "name": "institutions_list",
-            "label": "机构清单",
-            "related_field": "value",
-            "content": ""
-        },
-        {
             "id": 82,
             "name": "dorsal_artery_pulsation",
             "label": "足背动脉搏动情况",
@@ -1661,13 +1626,6 @@
             "label": "听力",
             "related_field": "value",
             "content": "听见\n听不清或无法听见"
-        },
-        {
-            "id": 84,
-            "name": "icpc7_treatments",
-            "label": "治疗",
-            "related_field": "iname",
-            "content": ""
         },
         {
             "id": 85,
@@ -1703,13 +1661,6 @@
             "label": "水肿情况",
             "related_field": "value",
             "content": "无水肿\n单侧水肿\n双侧不对称水肿\n双侧对称水肿"
-        },
-        {
-            "id": 90,
-            "name": "icpc1_register_logins",
-            "label": "注册登录（行政管理）",
-            "related_field": "iname",
-            "content": ""
         },
         {
             "id": 91,
@@ -1766,13 +1717,6 @@
             "label": "血型",
             "related_field": "value",
             "content": "A型\nB型\nO型\nAB型\nA+型\nA-型\nB+型\nB-型\nO+型\nO-型\nAB+型\nAB-型\n不详"
-        },
-        {
-            "id": 99,
-            "name": "employee_list",
-            "label": "职员表",
-            "related_field": "value",
-            "content": ""
         }
     ],
     "managedentities": [

@@ -29,6 +29,35 @@ class ManagedEntity(models.Model):
         verbose_name_plural = "管理实体清单"
 
 
+# 关联字段模型
+# 内容由DicList和ManagedEntity生成内容时自动维护
+class RelateFieldModel(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name="name")
+    label = models.CharField(max_length=100, verbose_name="关联模型名称")
+    related_content = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联内容")
+    display_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="显示字段")
+    related_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联字段")
+    q = Q(app_label='define_dict' ) & Q(model = 'diclist') | Q(app_label='define_form') & Q(model = 'managedentity')
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=q, null=True, blank=True, verbose_name="关联基本信息")
+    object_id = models.PositiveIntegerField(null=True, blank=True)
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    def __str__(self):
+        return str(self.label)
+
+    class Meta:
+        verbose_name = "关联字段表"
+        verbose_name_plural = "关联字段表"
+
+# RelationField关联Model
+#     1. 所有字典表
+#     2. 所有ICPC表
+#     3. 角色基本信息表
+#     4. 职员基本信息表?
+#     5. 个人基本信息表?
+#     6. 药品基本信息表?
+
+
 ###############################################################################
 # 业务字段类型定义
 ###############################################################################
@@ -152,43 +181,6 @@ class ChoiceField(models.Model):
         verbose_name_plural = "选择字段"
 
 
-# 关联字段模型
-# 内容由DicList和ManagedEntity组成，并自动维护
-class RelateFieldModel(models.Model):
-    name = models.CharField(max_length=100, unique=True, verbose_name="name")
-    label = models.CharField(max_length=100, verbose_name="关联模型名称")
-    q = Q(app_label='define_dict' ) & Q(model = 'diclist') | Q(app_label='define_form') & Q(model = 'managedentity')
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=q, null=True, blank=True, verbose_name="关联基本信息")
-    object_id = models.PositiveIntegerField(null=True, blank=True)
-    content_object = GenericForeignKey('content_type', 'object_id')
-    # related_dict = models.ForeignKey(DicList, on_delete=models.CASCADE, null=True, blank=True, verbose_name="关联字典")
-    related_content = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联内容")
-    display_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="显示字段")
-    related_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联字段")
-
-    def __str__(self):
-        return str(self.label)
-
-    def save(self, *args, **kwargs):
-        if self.content_type:
-            self.related_content = self.content_type.model_class().__name__
-        elif self.related_dict:
-            self.related_content = self.related_dict.name.capitalize()
-        super().save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = "关联字段表"
-        verbose_name_plural = "关联字段表"
-
-# RelationField关联Model
-#     1. 所有字典表
-#     2. 所有ICPC表
-#     3. 角色基本信息表
-#     4. 职员基本信息表?
-#     5. 个人基本信息表?
-#     6. 药品基本信息表?
-
-
 # 关联字段
 class RelatedField(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
@@ -276,43 +268,40 @@ def fields_post_save_handler(sender, instance, created, **kwargs):
 
 # Sync Create and update RelateFieldModel
 @receiver(post_save, sender=DicList, weak=True, dispatch_uid=None)
-def diclist_post_save_handler(sender, instance, created, **kwargs):
-    if created:
-        RelateFieldModel.objects.create(
-            name=instance.name,
-            label=instance.label,
-            related_dict=instance,
-            related_content=instance.name.capitalize(),
-            display_field='value',
-            related_field='id',
-        )
-    else:
-        RelateFieldModel.objects.filter(name=instance.name).update(
-            label=instance.label,
-            related_dict=instance,
-            related_content=instance.name.capitalize(),
-            display_field='value',
-            related_field='id',
-        )
-
-
-# Sync Create and update RelateFieldModel
 @receiver(post_save, sender=ManagedEntity, weak=True, dispatch_uid=None)
-def diclist_post_save_handler(sender, instance, created, **kwargs):
+def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
+    if sender==DicList:
+        _app='define_dict'
+        _model='diclist'
+        related_content=instance.name.capitalize()
+        display_field='value'
+        related_field='id'
+    elif sender==ManagedEntity:
+        _app='define'
+        _model='managedentity'
+        related_content=instance.model_name
+        display_field=instance.display_field
+        related_field=instance.related_field
+
+    content_type = ContentType.objects.get(app_label=_app, model=_model)
+    print(sender, instance)
+
     if created:
         RelateFieldModel.objects.create(
             name=instance.name,
             label=instance.label,
-            related_dict=instance,
-            related_content=instance.name.capitalize(),
-            display_field='value',
-            related_field='id',
+            related_content=related_content,
+            display_field=display_field,
+            related_field=related_field,
+            content_type = content_type, 
+            object_id = instance.id, 
         )
     else:
         RelateFieldModel.objects.filter(name=instance.name).update(
             label=instance.label,
-            related_dict=instance,
-            related_content=instance.name.capitalize(),
-            display_field='value',
-            related_field='id',
+            related_content=related_content,
+            display_field=display_field,
+            related_field=related_field,
+            content_type = content_type, 
+            object_id = instance.id, 
         )
