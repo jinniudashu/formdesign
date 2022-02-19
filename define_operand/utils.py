@@ -725,7 +725,7 @@ def {self.operand_name}_update(request, *args, **kwargs):
 # 设计数据备份
 ########################################################################################################################
 from django.forms.models import model_to_dict
-from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelatedField, Component, ManagedEntity
+from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelateFieldModel, RelatedField, Component, ManagedEntity
 from define_form.models import CombineForm
 from define_operand.models import Service, Event, Instruction, Role, DesignBackup
 
@@ -776,7 +776,10 @@ def design_backup(modeladmin, request, queryset):
     for item in RelatedField.objects.all():
         model = model_to_dict(item)
         related_content_id = model['related_content']
+        # related_content_id = model['related_content_new']
+        # 获取关联字段值???
         model['related_content'] = DicList.objects.get(id=related_content_id).name
+        # model['related_content'] = RelateFieldModel.objects.get(id=related_content_id).name
         design_data['relatedfields'].append(model)
 
     for item in ChoiceField.objects.all():

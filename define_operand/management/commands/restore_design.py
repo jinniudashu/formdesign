@@ -162,7 +162,6 @@ class Command(BaseCommand):
             # dic=DicList.objects.get(name=item['related_content'])
             print('relatedfields:',item)
             related_content=RelateFieldModel.objects.get(name=item['related_content'])
-            print('related_content:',related_content)
             RelatedField.objects.create(
                 name=item['name'],
                 label=item['label'],
