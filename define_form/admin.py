@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import ManagedEntity, BaseModel, BaseForm, CombineForm
+from .models import BaseModel, BaseForm, CombineForm
 
 from time import time
 import json
@@ -41,8 +41,6 @@ class BaseFormAdmin(admin.ModelAdmin):
 class CombineFormAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'is_base', 'meta_data']
 
-
-admin.site.register(ManagedEntity)
 
 admin.site.register(BaseModel, BaseModelAdmin)
 admin.site.register(BaseForm, BaseFormAdmin)

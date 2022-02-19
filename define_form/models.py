@@ -6,21 +6,7 @@ import json
 
 from pypinyin import lazy_pinyin
 
-from define.models import Component
-
-
-# 管理实体定义
-class ManagedEntity(models.Model):
-    name = models.CharField(max_length=100, unique=True, verbose_name="name")
-    label = models.CharField(max_length=100, verbose_name="管理实体类型", null=True, blank=True)
-    description = models.TextField(max_length=255, verbose_name="描述", null=True, blank=True)
-
-    def __str__(self):
-        return str(self.label)
-
-    class Meta:
-        verbose_name = "管理实体清单"
-        verbose_name_plural = "管理实体清单"
+from define.models import Component, ManagedEntity
 
 
 # 基础表单定义
@@ -114,16 +100,17 @@ def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
             field['label'] = component.label
             _type = component.content_object._meta.object_name
             if _type == 'CharacterField':
-              field['type'] = 'string'
+                field['type'] = 'string'
             elif _type == 'BoolField':
-              field['type'] = 'boolean'
+                field['type'] = 'boolean'
             elif _type == 'NumberField':
-              field['type'] = 'number'
+                field['type'] = 'number'
             elif _type == 'DTField':
-              field['type'] = 'datetime'
+                field['type'] = 'datetime'
             elif _type == 'ChoiceField' or _type == 'RelatedField':
-              field['type'] = 'dict'
-              field['dict_name'] = component.content_object.related_content.name
+                # 获取关联字段的模型???
+                field['type'] = 'dict'
+                field['dict_name'] = component.content_object.related_content_new.related_content
             fields.append(field)
 
         meta_data = {}

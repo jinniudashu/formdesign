@@ -10,6 +10,25 @@ from django.db.models.signals import post_save
 
 from define_dict.models import DicList
 
+
+# 管理实体定义
+class ManagedEntity(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name="Entity name")
+    label = models.CharField(max_length=100, verbose_name="管理实体名称", null=True, blank=True)
+    app_name = models.CharField(max_length=100, verbose_name="实体app名", null=True, blank=True)
+    model_name = models.CharField(max_length=100, verbose_name="实体model名", null=True, blank=True)
+    display_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="显示字段")
+    related_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联字段")
+    description = models.TextField(max_length=255, verbose_name="描述", null=True, blank=True)
+
+    def __str__(self):
+        return str(self.label)
+
+    class Meta:
+        verbose_name = "管理实体清单"
+        verbose_name_plural = "管理实体清单"
+
+
 ###############################################################################
 # 业务字段类型定义
 ###############################################################################
@@ -133,13 +152,52 @@ class ChoiceField(models.Model):
         verbose_name_plural = "选择字段"
 
 
+# 关联字段模型
+# 内容由DicList和ManagedEntity组成，并自动维护
+class RelateFieldModel(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name="name")
+    label = models.CharField(max_length=100, verbose_name="关联模型名称")
+    q = Q(app_label='define_dict' ) & Q(model = 'diclist') | Q(app_label='define_form') & Q(model = 'managedentity')
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=q, null=True, blank=True, verbose_name="关联基本信息")
+    object_id = models.PositiveIntegerField(null=True, blank=True)
+    content_object = GenericForeignKey('content_type', 'object_id')
+    # related_dict = models.ForeignKey(DicList, on_delete=models.CASCADE, null=True, blank=True, verbose_name="关联字典")
+    related_content = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联内容")
+    display_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="显示字段")
+    related_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联字段")
+
+    def __str__(self):
+        return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if self.content_type:
+            self.related_content = self.content_type.model_class().__name__
+        elif self.related_dict:
+            self.related_content = self.related_dict.name.capitalize()
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "关联字段表"
+        verbose_name_plural = "关联字段表"
+
+# RelationField关联Model
+#     1. 所有字典表
+#     2. 所有ICPC表
+#     3. 角色基本信息表
+#     4. 职员基本信息表?
+#     5. 个人基本信息表?
+#     6. 药品基本信息表?
+
+
 # 关联字段
 class RelatedField(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
     label = models.CharField(max_length=100, unique=True, verbose_name="组件名称")
     CHOICE_TYPE = [('Select', '下拉单选'), ('RadioSelect', '单选按钮列表'), ('CheckboxSelectMultiple', '复选框列表'), ('SelectMultiple', '下拉多选')]
     type = models.CharField(max_length=50, choices=CHOICE_TYPE, default='ChoiceField', verbose_name="类型")
-    related_content = models.ForeignKey(DicList, on_delete=models.CASCADE, verbose_name="关联内容")
+    # related_content是弃用的旧字段，待完成升级后清理
+    related_content = models.ForeignKey(DicList, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="关联内容-旧版")
+    related_content_new = models.ForeignKey(RelateFieldModel, on_delete=models.CASCADE, null=True, blank=True, verbose_name="关联内容")
     related_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联字段")
 
     def __str__(self):
@@ -154,6 +212,10 @@ class RelatedField(models.Model):
         verbose_name = "关联字段"
         verbose_name_plural = "关联字段"
 
+# Updated items:
+# 服务角色
+# 病名-评估和诊断
+# 症状-症状和问题
 
 # 计算字段
 class ComputeField(models.Model):
@@ -165,7 +227,7 @@ class Component(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
     label = models.CharField(max_length=100, verbose_name="组件名称", null=True, blank=True)
 
-    q = Q(app_label='define') & (
+    q  = Q(app_label='define') & (
         Q(model = 'boolfield') | 
         Q(model = 'characterfield') | 
         Q(model = 'numberfield') | 
@@ -174,7 +236,7 @@ class Component(models.Model):
         Q(model = 'relatedfield') | 
         Q(model = 'computefield')
     )
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=q, null=True, blank=True)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=q , null=True, blank=True)
     object_id = models.PositiveIntegerField(null=True, blank=True)
     content_object = GenericForeignKey('content_type', 'object_id')
 
@@ -194,18 +256,63 @@ class Component(models.Model):
 @receiver(post_save, sender=DTField, weak=True, dispatch_uid=None)
 @receiver(post_save, sender=ChoiceField, weak=True, dispatch_uid=None)
 @receiver(post_save, sender=RelatedField, weak=True, dispatch_uid=None)
-def form_post_save_handler(sender, instance, created, **kwargs):
-    charfield_type = ContentType.objects.get(app_label='define', model=sender.__name__.lower())
+def fields_post_save_handler(sender, instance, created, **kwargs):
+    content_type = ContentType.objects.get(app_label='define', model=sender.__name__.lower())
+    print(content_type, ':', instance.name)
     if created:
-        print(charfield_type, ':', instance.name)
         Component.objects.create(
-            content_type = charfield_type, 
+            content_type = content_type, 
             object_id = instance.id, 
             name = instance.name, 
             label = instance.label, 
         )
     else:
-        Component.objects.filter(content_type=charfield_type, object_id=instance.id).update(
-            name = instance.name, 
+        Component.objects.filter(name=instance.name).update(
+            content_type = content_type,
+            object_id = instance.id,
             label = instance.label, 
+        )
+        
+
+# Sync Create and update RelateFieldModel
+@receiver(post_save, sender=DicList, weak=True, dispatch_uid=None)
+def diclist_post_save_handler(sender, instance, created, **kwargs):
+    if created:
+        RelateFieldModel.objects.create(
+            name=instance.name,
+            label=instance.label,
+            related_dict=instance,
+            related_content=instance.name.capitalize(),
+            display_field='value',
+            related_field='id',
+        )
+    else:
+        RelateFieldModel.objects.filter(name=instance.name).update(
+            label=instance.label,
+            related_dict=instance,
+            related_content=instance.name.capitalize(),
+            display_field='value',
+            related_field='id',
+        )
+
+
+# Sync Create and update RelateFieldModel
+@receiver(post_save, sender=ManagedEntity, weak=True, dispatch_uid=None)
+def diclist_post_save_handler(sender, instance, created, **kwargs):
+    if created:
+        RelateFieldModel.objects.create(
+            name=instance.name,
+            label=instance.label,
+            related_dict=instance,
+            related_content=instance.name.capitalize(),
+            display_field='value',
+            related_field='id',
+        )
+    else:
+        RelateFieldModel.objects.filter(name=instance.name).update(
+            label=instance.label,
+            related_dict=instance,
+            related_content=instance.name.capitalize(),
+            display_field='value',
+            related_field='id',
         )
