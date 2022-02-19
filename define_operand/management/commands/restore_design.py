@@ -245,11 +245,13 @@ class Command(BaseCommand):
                 forms = CombineForm.objects.get(name=item['forms'])
             else:
                 forms = None
-            Operation.objects.create(
+            operation = Operation.objects.create(
                 name=item['name'],
                 label=item['label'],
                 forms=forms,  
             )
+            # 导入角色???
+            # operation.group.set(item['group'])
 
         print('导入作业表完成')
 

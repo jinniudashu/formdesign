@@ -1743,6 +1743,12 @@
             "name": "device",
             "label": "设备",
             "description": null
+        },
+        {
+            "id": 13,
+            "name": "supplier",
+            "label": "供应商",
+            "description": ""
         }
     ],
     "basemodels": [
@@ -3340,6 +3346,12 @@
             "name": "men_zhen_ji_zhen",
             "label": "门诊急诊",
             "first_operation": null
+        },
+        {
+            "id": 5,
+            "name": "yuan_wai_fu_wu",
+            "label": "院外服务",
+            "first_operation": null
         }
     ],
     "instructions": [
@@ -3361,8 +3373,11 @@
             "description": null,
             "expression": "completed",
             "parameters": null,
-            "fields": null,
-            "next": []
+            "fields": "",
+            "next": [
+                "ge_ren_ji_bing_shi_diao_cha_biao",
+                "ge_ren_guo_min_shi_diao_cha_biao"
+            ]
         },
         {
             "id": 20,
@@ -3492,12 +3507,6 @@
             "description": null
         },
         {
-            "id": 18,
-            "name": "hua_yan",
-            "label": "化验",
-            "description": null
-        },
-        {
             "id": 19,
             "name": "zhi_liang_guan_li",
             "label": "质量管理",
@@ -3543,6 +3552,42 @@
             "id": 26,
             "name": "zhong_yi_shi",
             "label": "中医师",
+            "description": null
+        },
+        {
+            "id": 27,
+            "name": "huan_zhe",
+            "label": "患者",
+            "description": null
+        },
+        {
+            "id": 28,
+            "name": "huan_zhe_jia_shu",
+            "label": "患者家属",
+            "description": null
+        },
+        {
+            "id": 29,
+            "name": "jian_yan_shi",
+            "label": "检验师",
+            "description": null
+        },
+        {
+            "id": 30,
+            "name": "xi_tong_guan_li_yuan",
+            "label": "系统管理员",
+            "description": null
+        },
+        {
+            "id": 31,
+            "name": "gong_ying_shang",
+            "label": "供应商",
+            "description": null
+        },
+        {
+            "id": 32,
+            "name": "bao_xian_ren_yuan",
+            "label": "保险人员",
             "description": null
         }
     ]
