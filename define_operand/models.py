@@ -35,8 +35,6 @@ class Operation(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="作业名称")
     label = models.CharField(max_length=255, blank=True, null=True, verbose_name="显示名称")
     forms = models.ForeignKey(CombineForm, on_delete=models.CASCADE, null=True, blank=True, verbose_name="组合视图")
-    # forms = models.JSONField(null=True, blank=True, verbose_name="视图元数据")
-    # icpc = models.OneToOneField(Icpc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="ICPC")
     Operation_priority = [
         (0, '0级'),
         (1, '紧急'),
@@ -44,7 +42,7 @@ class Operation(models.Model):
         (3, '一般'),
     ]
     priority = models.PositiveSmallIntegerField(choices=Operation_priority, default=3, verbose_name='优先级')
-    group = models.ManyToManyField(Role, verbose_name="作业角色")
+    group = models.ManyToManyField(Role, blank=True, verbose_name="作业角色")
     suppliers = models.CharField(max_length=255, blank=True, null=True, verbose_name="供应商")
     not_suitable = models.CharField(max_length=255, blank=True, null=True, verbose_name='不适用对象')
     time_limits = models.DurationField(blank=True, null=True, verbose_name='完成时限')
@@ -74,9 +72,27 @@ class Operation(models.Model):
 class Service(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="名称")
     label = models.CharField(max_length=255, verbose_name="显示名称")
-    # icpc = models.OneToOneField(Icpc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="ICPC")
-    first_operation = models.ForeignKey(Operation, on_delete=models.SET_NULL, related_name='first_operation',blank=True, null=True, verbose_name="起始作业")
-    
+    first_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='first_operation', blank=True, null=True, verbose_name="起始作业")
+    operations = models.ManyToManyField(Operation, blank=True, verbose_name="包含作业")
+    Operation_priority = [
+        (0, '0级'),
+        (1, '紧急'),
+        (2, '优先'),
+        (3, '一般'),
+    ]
+    priority = models.PositiveSmallIntegerField(choices=Operation_priority, default=3, verbose_name='优先级')
+    group = models.ManyToManyField(Role, blank=True, verbose_name="服务角色")
+    suppliers = models.CharField(max_length=255, blank=True, null=True, verbose_name="供应商")
+    not_suitable = models.CharField(max_length=255, blank=True, null=True, verbose_name='不适用对象')
+    time_limits = models.DurationField(blank=True, null=True, verbose_name='完成时限')
+    working_hours = models.DurationField(blank=True, null=True, verbose_name='工时')
+    frequency = models.CharField(max_length=255, blank=True, null=True, verbose_name='频次')
+    cost = models.DecimalField(blank=True, null=True, max_digits=9, decimal_places=2, verbose_name='成本')
+    load_feedback = models.BooleanField(default=False, verbose_name='是否反馈负荷数量')
+    resource_materials = models.CharField(max_length=255, blank=True, null=True, verbose_name='配套物料')
+    resource_devices = models.CharField(max_length=255, blank=True, null=True, verbose_name='配套设备')
+    resource_knowledge = models.CharField(max_length=255, blank=True, null=True, verbose_name='服务知识')
+
     def __str__(self):
         return str(self.label)
 
@@ -88,6 +104,26 @@ class Service(models.Model):
     class Meta:
         verbose_name = "服务"
         verbose_name_plural = "服务"
+        ordering = ['id']
+
+
+class ServicePackage(models.Model):
+    name = models.CharField(max_length=255, unique=True, verbose_name="名称")
+    label = models.CharField(max_length=255, verbose_name="显示名称")
+    first_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='first_service', blank=True, null=True, verbose_name="起始作业")
+    services = models.ManyToManyField(Service, blank=True, verbose_name="包含服务")
+
+    def __str__(self):
+        return self.label
+
+    def save(self, *args, **kwargs):
+        if not self.name:
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "服务包"
+        verbose_name_plural = "服务包"
         ordering = ['id']
 
 

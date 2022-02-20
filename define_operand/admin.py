@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Service, Operation, Event, Instruction, Event_instructions, Role, SourceCode, DesignBackup
+from .models import Service, ServicePackage, Operation, Event, Instruction, Event_instructions, Role, SourceCode, DesignBackup
 from .utils import generate_source_code, design_backup
 
 
@@ -49,6 +49,16 @@ class ServiceAdmin(admin.ModelAdmin):
     ordering = ['id']
 
 admin.site.register(Service, ServiceAdmin)
+
+
+class ServicePackageAdmin(admin.ModelAdmin):
+    list_display = ['label', 'id']
+    list_display_links = ['label', ]
+    search_fields = ['label']
+    readonly_fields = ['name']
+    ordering = ['id']
+
+admin.site.register(ServicePackage, ServicePackageAdmin)
 
 
 class RoleAdmin(admin.ModelAdmin):
