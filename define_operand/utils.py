@@ -727,35 +727,11 @@ def {self.operand_name}_update(request, *args, **kwargs):
 from django.forms.models import model_to_dict
 from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelateFieldModel, RelatedField, Component
 from define_form.models import CombineForm
-from define_operand.models import Service, Event, Instruction, Role, DesignBackup
+from define_operand.models import Service, ServicePackage, Event, Instruction, Role, DesignBackup
 from define_dict.models import ManagedEntity
 
 # 不备份再其他表新增内容时自动插入内容的表，RelateFieldModel
 def design_backup(modeladmin, request, queryset):
-
-    # class Object:
-    #     def toJSON(self):
-    #         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4, ensure_ascii=False)
-
-    # design_data = Object()
-    # design_data.roles = []
-    # design_data.managedentities = []
-    # design_data.diclists = []
-    # design_data.boolfields = []
-    # design_data.characterfields = []
-    # design_data.numberfields = []
-    # design_data.dtfields = []
-    # design_data.relatedfields = []
-    # design_data.choicefields = []
-    # design_data.components = []
-    # design_data.basemodels = []
-    # design_data.baseforms = []
-    # design_data.combineforms = []
-    # design_data.operations = []
-    # design_data.services = []
-    # design_data.instructions = []
-    # design_data.events = []
-
     design_data = {
         'roles': [],
         'managedentities': [],
@@ -772,6 +748,7 @@ def design_backup(modeladmin, request, queryset):
         'combineforms': [],
         'operations': [],
         'services': [],
+        'service_packages': [],
         'instructions': [],
         'events': [],
     }
@@ -862,7 +839,29 @@ def design_backup(modeladmin, request, queryset):
         if model['first_operation']:
             operation_id = model['first_operation']
             model['first_operation'] = Operation.objects.get(id=operation_id).name
+        if model['operations']:
+            operations_name = []
+            for operation in model['operations']:
+                operations_name.append(operation.name)
+            model['operations'] = operations_name
+        if model['group']:
+            group_name = []
+            for group in model['group']:
+                group_name.append(group.name)
+            model['group'] = group_name
         design_data['services'].append(model)
+
+    for item in ServicePackage.objects.all():
+        model = model_to_dict(item)
+        if model['first_service']:
+            service_id = model['first_service']
+            model['first_service'] = Service.objects.get(id=service_id).name
+        if model['services']:
+            services_name = []
+            for service in model['services']:
+                services_name.append(service.name)
+            model['services'] = services_name
+        design_data['service_packages'].append(model)
 
     for item in Instruction.objects.all():
         model = model_to_dict(item)

@@ -4,7 +4,7 @@ import json
 from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelatedField, Component, RelateFieldModel
 from define_dict.models import DicList, ManagedEntity
 from define_form.models import BaseModel, BaseForm, CombineForm
-from define_operand.models import Service, Operation, Event, Instruction, Event_instructions, Role
+from define_operand.models import ServicePackage, Service, Operation, Event, Instruction, Event_instructions, Role
 from define_icpc.models import icpc_list
 
 class Command(BaseCommand):
@@ -31,8 +31,9 @@ class Command(BaseCommand):
         BaseModel.objects.all().delete()
         BaseForm.objects.all().delete()
         CombineForm.objects.all().delete()
-        Operation.objects.all().delete()
+        ServicePackage.objects.all().delete()
         Service.objects.all().delete()
+        Operation.objects.all().delete()
         Instruction.objects.all().delete()
         Event.objects.all().delete()
         Event_instructions.objects.all().delete()
@@ -256,33 +257,66 @@ class Command(BaseCommand):
 
         print('导入作业表完成')
 
-        # # 导入系统保留作业
-        # SYSTEM_OPERAND = [
-        #     {'name': 'user_registry', 'label': '用户注册', 'forms': None},     # 用户注册
-        #     {'name': 'user_login', 'label': '用户登录', 'forms': None},        # 用户登录
-        #     {'name': 'doctor_login', 'label': '员工登录', 'forms': None},      # 员工登录
-        # ]
-        # for item in SYSTEM_OPERAND:
-        #     Operation.objects.create(
-        #         name=item['name'],
-        #         label=item['label'],
-        #     )
 
         # 导入服务表
         for item in design_data['services']:
             print('Service:', item)
+
             if item['first_operation']:
                 first_operation = Operation.objects.get(name=item['first_operation'])
             else:
                 first_operation = None
-            Service.objects.create(
+            
+            service = Service.objects.create(
                 name=item['name'],
                 label=item['label'],
                 first_operation=first_operation,
             )
+
+            # 写入Service.operations 多对多字段
+            if item['operations']:
+                operations = []
+                for _operation in item['operations']:
+                    operation = Operation.objects.get(name=_operation)
+                    operations.append(operation)
+                service.operations.set(operations)
+
+            # 写入Service.group 多对多字段
+            if item['group']:
+                groups = []
+                for _role in item['group']:
+                    group = Role.objects.get(name=_role)  # 使用角色中文名称查询角色
+                    groups.append(group)
+                service.group.set(groups)
         
         print('导入服务表完成')
         
+        # 导入服务包表
+        for item in design_data['service_packages']:
+            print('ServicePackage:', item)
+
+            if item['first_service']:
+                first_service = Service.objects.get(name=item['first_service'])
+            else:
+                first_service = None
+
+            service_package = ServicePackage.objects.create(
+                name=item['name'],
+                label=item['label'],
+                first_service=first_service,
+            )
+
+            # 写入ServicePackage.services 多对多字段
+            if item['services']:
+                services = []
+                for _service in item['services']:
+                    service = Service.objects.get(name=_service)
+                    services.append(service)
+                service_package.services.set(services)
+        
+        print('导入服务包表完成')
+
+
         # 导入指令表
         for item in design_data['instructions']:
             print('Instruction:', item)

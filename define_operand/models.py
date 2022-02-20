@@ -110,7 +110,7 @@ class Service(models.Model):
 class ServicePackage(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="名称")
     label = models.CharField(max_length=255, verbose_name="显示名称")
-    first_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='first_service', blank=True, null=True, verbose_name="起始作业")
+    first_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='first_service', blank=True, null=True, verbose_name="起始服务")
     services = models.ManyToManyField(Service, blank=True, verbose_name="包含服务")
 
     def __str__(self):
