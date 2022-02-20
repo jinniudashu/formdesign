@@ -28,8 +28,8 @@ class RelateFieldModel(models.Model):
         return str(self.label)
 
     class Meta:
-        verbose_name = "关联字段表"
-        verbose_name_plural = "关联字段表"
+        verbose_name = "关联字段基础表"
+        verbose_name_plural = "关联字段基础表"
 
 # RelationField关联Model
 #     1. 所有字典表
@@ -218,8 +218,8 @@ class Component(models.Model):
         return str(self.label)
 
     class Meta:
-        verbose_name = "字段列表"
-        verbose_name_plural = "字段列表"
+        verbose_name = "字段汇总清单"
+        verbose_name_plural = "字段汇总清单"
         ordering = ['id']
 
 

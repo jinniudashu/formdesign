@@ -244,7 +244,7 @@ class IcpcBackup(models.Model):
     create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")  
 
     def __str__(self):
-        return str(self.create_time)
+        return self.name
 
     class Meta:
         verbose_name = "ICPC数据备份"
