@@ -26,7 +26,6 @@ class OperationAdmin(admin.ModelAdmin):
     inlines = [EventInline]
     ordering = ['id']
     readonly_fields = ['name']
-    actions = [generate_source_code]
 
 admin.site.register(Operation, OperationAdmin)
 
@@ -68,7 +67,10 @@ class DesignBackupAdmin(admin.ModelAdmin):
 admin.site.register(DesignBackup, DesignBackupAdmin)
 
 
-admin.site.register(SourceCode)
+class SourceCodeAdmin(admin.ModelAdmin):
+    actions = [generate_source_code]
+
+admin.site.register(SourceCode, SourceCodeAdmin)
 
 
 class Event_instructionsAdmin(admin.ModelAdmin):
