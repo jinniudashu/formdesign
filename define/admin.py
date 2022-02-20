@@ -14,8 +14,8 @@ class NumberFieldAdmin(admin.ModelAdmin):
 class DTFieldAdmin(admin.ModelAdmin):
     readonly_fields = ['name']
 
-class ChoiceFieldAdmin(admin.ModelAdmin):
-    readonly_fields = ['name']
+# class ChoiceFieldAdmin(admin.ModelAdmin):
+#     readonly_fields = ['name']
 
 class RelatedFieldAdmin(admin.ModelAdmin):
     readonly_fields = ['name']
@@ -30,7 +30,7 @@ admin.site.register(BoolField, BoolFieldAdmin)
 admin.site.register(CharacterField, CharacterFieldAdmin)
 admin.site.register(NumberField, NumberFieldAdmin)
 admin.site.register(DTField, DTFieldAdmin)
-admin.site.register(ChoiceField, ChoiceFieldAdmin)
+# admin.site.register(ChoiceField, ChoiceFieldAdmin)
 admin.site.register(RelatedField, RelatedFieldAdmin)
 admin.site.register(Component, ComponentAdmin)
 
