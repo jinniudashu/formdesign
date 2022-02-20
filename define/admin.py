@@ -1,8 +1,6 @@
 from django.contrib import admin
 
-from define.models import ManagedEntity, BoolField, CharacterField, NumberField, DTField, ChoiceField, RelatedField, Component, RelateFieldModel
-
-admin.site.register(ManagedEntity)
+from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelatedField, Component, RelateFieldModel
 
 class BoolFieldAdmin(admin.ModelAdmin):
     readonly_fields = ['name']

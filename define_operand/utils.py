@@ -725,9 +725,10 @@ def {self.operand_name}_update(request, *args, **kwargs):
 # 设计数据备份
 ########################################################################################################################
 from django.forms.models import model_to_dict
-from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelateFieldModel, RelatedField, Component, ManagedEntity
+from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelateFieldModel, RelatedField, Component
 from define_form.models import CombineForm
 from define_operand.models import Service, Event, Instruction, Role, DesignBackup
+from define_dict.models import ManagedEntity
 
 # 不备份再其他表新增内容时自动插入内容的表，RelateFieldModel
 def design_backup(modeladmin, request, queryset):

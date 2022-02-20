@@ -6,7 +6,8 @@ import json
 
 from pypinyin import lazy_pinyin
 
-from define.models import Component, ManagedEntity
+from define.models import Component
+from define_dict.models import ManagedEntity
 
 
 # 基础表单定义

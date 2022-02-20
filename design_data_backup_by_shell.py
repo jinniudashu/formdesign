@@ -1,11 +1,11 @@
-from define_dict.models import DicList
+from define_dict.models import DicList, ManagedEntity
 from define_form.models import BaseModel, BaseForm
 from define_operand.models import Operation, SourceCode
 from time import time
 import json
 
 from django.forms.models import model_to_dict
-from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelateFieldModel, RelatedField, Component, ManagedEntity
+from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelateFieldModel, RelatedField, Component
 from define_form.models import CombineForm
 from define_operand.models import Service, Event, Instruction, Role, DesignBackup
 
