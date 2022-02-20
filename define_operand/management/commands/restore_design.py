@@ -185,7 +185,7 @@ class Command(BaseCommand):
 
             model_managedentities = []
             for _managedentity in item['managed_entity']:
-                managedentity = ManagedEntity.objects.get(name=_managedentity['name'])
+                managedentity = ManagedEntity.objects.get(name=_managedentity)
                 model_managedentities.append(managedentity)
             basemodel.managed_entity.set(model_managedentities)
         
