@@ -796,6 +796,11 @@ def design_backup(modeladmin, request, queryset):
             components.append(model_to_dict(component))
         model = model_to_dict(item)
         model['components'] = components
+        if model['managed_entity']:
+            managed_entity_name = []
+            for managed_entity in model['managed_entity']:
+                managed_entity_name.append(managed_entity.name)
+            model['managed_entity'] = managed_entity_name
         design_data['basemodels'].append(model)
 
     for item in BaseForm.objects.filter(is_inquiry=True):
