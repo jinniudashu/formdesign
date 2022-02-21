@@ -136,9 +136,12 @@ def combineform_m2m_changed_handler(sender, instance, action, **kwargs):
     # 合成每个组合视图的meta_data
     meta_data = []
     for item in instance.forms.all():
-        print('item', item)
-        print('item.meta_data', item.meta_data)
-        meta_data.append(json.loads(item.meta_data))
+        _meta_data = json.loads(item.meta_data)
+        if isinstance(_meta_data, list):  # forms中可能包含CombineForm，这时item.meta_data是数组，需要先解包
+            for i, v in enumerate(_meta_data):
+                meta_data.append(v)
+        else:
+            meta_data.append(_meta_data)
     instance.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
     instance.save()
 

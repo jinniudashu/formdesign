@@ -590,10 +590,18 @@
         {
             "id": 113,
             "name": "boolfield_yu_yue_que_ren",
-            "label": "确认",
+            "label": "签到确认",
             "type": "1",
             "required": true,
             "default": "1"
+        },
+        {
+            "id": 114,
+            "name": "boolfield_shi_fou_ji_xu_shi_yong",
+            "label": "是否继续使用",
+            "type": "1",
+            "required": true,
+            "default": "0"
         }
     ],
     "characterfields": [
@@ -820,6 +828,15 @@
             "type": "CharField",
             "length": 255,
             "required": true,
+            "default": null
+        },
+        {
+            "id": 170,
+            "name": "characterfield_jian_kang_jiao_yu",
+            "label": "健康教育",
+            "type": "TextField",
+            "length": 255,
+            "required": false,
             "default": null
         }
     ],
@@ -2084,9 +2101,23 @@
         {
             "id": 677,
             "name": "boolfield_yu_yue_que_ren",
-            "label": "确认",
+            "label": "签到确认",
             "content_type": 7,
             "object_id": 113
+        },
+        {
+            "id": 678,
+            "name": "boolfield_shi_fou_ji_xu_shi_yong",
+            "label": "是否继续使用",
+            "content_type": 7,
+            "object_id": 114
+        },
+        {
+            "id": 679,
+            "name": "characterfield_jian_kang_jiao_yu",
+            "label": "健康教育",
+            "content_type": 8,
+            "object_id": 170
         }
     ],
     "basemodels": [
@@ -2103,30 +2134,6 @@
                     "label": "药品名称",
                     "content_type": 13,
                     "object_id": 264
-                }
-            ],
-            "managed_entity": []
-        },
-        {
-            "id": 206,
-            "name": "out_of_hospital_self_report_survey",
-            "label": "院外症状自述调查",
-            "description": null,
-            "is_base_infomation": false,
-            "components": [
-                {
-                    "id": 593,
-                    "name": "characterfield_supplementary_description_of_the_condition",
-                    "label": "病情补充描述",
-                    "content_type": 8,
-                    "object_id": 145
-                },
-                {
-                    "id": 643,
-                    "name": "relatedfield_symptom_list",
-                    "label": "症状",
-                    "content_type": 13,
-                    "object_id": 265
                 }
             ],
             "managed_entity": []
@@ -3179,30 +3186,6 @@
             "managed_entity": []
         },
         {
-            "id": 234,
-            "name": "men_zhen_wen_zhen_diao_cha_biao",
-            "label": "门诊问诊调查表",
-            "description": "",
-            "is_base_infomation": false,
-            "components": [
-                {
-                    "id": 593,
-                    "name": "characterfield_supplementary_description_of_the_condition",
-                    "label": "病情补充描述",
-                    "content_type": 8,
-                    "object_id": 145
-                },
-                {
-                    "id": 643,
-                    "name": "relatedfield_symptom_list",
-                    "label": "症状",
-                    "content_type": 13,
-                    "object_id": 265
-                }
-            ],
-            "managed_entity": []
-        },
-        {
             "id": 235,
             "name": "kong_fu_xue_tang_jian_cha",
             "label": "空腹血糖检查",
@@ -3232,23 +3215,6 @@
                     "label": "糖化血红蛋白",
                     "content_type": 12,
                     "object_id": 77
-                }
-            ],
-            "managed_entity": []
-        },
-        {
-            "id": 237,
-            "name": "men_zhen_zhen_duan_biao",
-            "label": "门诊诊断表",
-            "description": "",
-            "is_base_infomation": false,
-            "components": [
-                {
-                    "id": 659,
-                    "name": "relatedfield_disease_name",
-                    "label": "疾病名称",
-                    "content_type": 13,
-                    "object_id": 281
                 }
             ],
             "managed_entity": []
@@ -3368,7 +3334,7 @@
                 {
                     "id": 677,
                     "name": "boolfield_yu_yue_que_ren",
-                    "label": "确认",
+                    "label": "签到确认",
                     "content_type": 7,
                     "object_id": 113
                 }
@@ -3379,6 +3345,138 @@
             "id": 247,
             "name": "tang_niao_bing_zhuan_yong_wen_zhen_biao",
             "label": "糖尿病专用问诊表",
+            "description": "",
+            "is_base_infomation": false,
+            "components": [
+                {
+                    "id": 593,
+                    "name": "characterfield_supplementary_description_of_the_condition",
+                    "label": "病情补充描述",
+                    "content_type": 8,
+                    "object_id": 145
+                },
+                {
+                    "id": 643,
+                    "name": "relatedfield_symptom_list",
+                    "label": "症状",
+                    "content_type": 13,
+                    "object_id": 265
+                }
+            ],
+            "managed_entity": []
+        },
+        {
+            "id": 248,
+            "name": "yong_yao_ti_xing_dan",
+            "label": "用药提醒单",
+            "description": "",
+            "is_base_infomation": false,
+            "components": [
+                {
+                    "id": 678,
+                    "name": "boolfield_shi_fou_ji_xu_shi_yong",
+                    "label": "是否继续使用",
+                    "content_type": 7,
+                    "object_id": 114
+                }
+            ],
+            "managed_entity": [
+                "icpc6_prescribe_medicines"
+            ]
+        },
+        {
+            "id": 251,
+            "name": "yuan_qian_fu_zhu_wen_zhen_biao",
+            "label": "院前辅助问诊表",
+            "description": "院外调查",
+            "is_base_infomation": false,
+            "components": [
+                {
+                    "id": 593,
+                    "name": "characterfield_supplementary_description_of_the_condition",
+                    "label": "病情补充描述",
+                    "content_type": 8,
+                    "object_id": 145
+                },
+                {
+                    "id": 643,
+                    "name": "relatedfield_symptom_list",
+                    "label": "症状",
+                    "content_type": 13,
+                    "object_id": 265
+                }
+            ],
+            "managed_entity": []
+        },
+        {
+            "id": 252,
+            "name": "men_zhen_yi_sheng_wen_zhen_biao",
+            "label": "门诊医生问诊表",
+            "description": "",
+            "is_base_infomation": false,
+            "components": [
+                {
+                    "id": 593,
+                    "name": "characterfield_supplementary_description_of_the_condition",
+                    "label": "病情补充描述",
+                    "content_type": 8,
+                    "object_id": 145
+                },
+                {
+                    "id": 643,
+                    "name": "relatedfield_symptom_list",
+                    "label": "症状",
+                    "content_type": 13,
+                    "object_id": 265
+                }
+            ],
+            "managed_entity": []
+        },
+        {
+            "id": 253,
+            "name": "tang_niao_bing_zhen_duan_biao",
+            "label": "糖尿病诊断表",
+            "description": "",
+            "is_base_infomation": false,
+            "components": [
+                {
+                    "id": 659,
+                    "name": "relatedfield_disease_name",
+                    "label": "疾病名称",
+                    "content_type": 13,
+                    "object_id": 281
+                }
+            ],
+            "managed_entity": []
+        },
+        {
+            "id": 254,
+            "name": "yuan_nei_fu_zhu_wen_zhen_biao",
+            "label": "院内辅助问诊表",
+            "description": "院内诊前辅助问诊",
+            "is_base_infomation": false,
+            "components": [
+                {
+                    "id": 593,
+                    "name": "characterfield_supplementary_description_of_the_condition",
+                    "label": "病情补充描述",
+                    "content_type": 8,
+                    "object_id": 145
+                },
+                {
+                    "id": 643,
+                    "name": "relatedfield_symptom_list",
+                    "label": "症状",
+                    "content_type": 13,
+                    "object_id": 265
+                }
+            ],
+            "managed_entity": []
+        },
+        {
+            "id": 255,
+            "name": "yuan_wai_zi_xun_biao",
+            "label": "院外咨询表",
             "description": "",
             "is_base_infomation": false,
             "components": [
@@ -3440,42 +3538,41 @@
             ]
         },
         {
-            "id": 252,
-            "name": "out_of_hospital_self_report_survey_baseform_query_1642212281",
-            "label": "院外症状自述调查_查询视图_1642212281",
-            "basemodel": "out_of_hospital_self_report_survey",
+            "id": 263,
+            "name": "yong_yao_chu_fang_baseform_query_1645404404",
+            "label": "用药处方_查询视图_1645404404",
+            "basemodel": "yong_yao_chu_fang",
             "is_inquiry": true,
             "style": "detail",
             "components": [
                 {
-                    "id": 593,
-                    "name": "characterfield_supplementary_description_of_the_condition",
-                    "label": "病情补充描述",
-                    "content_type": 8,
-                    "object_id": 145
-                },
-                {
-                    "id": 643,
-                    "name": "relatedfield_symptom_list",
-                    "label": "症状",
+                    "id": 642,
+                    "name": "relatedfield_drug_name",
+                    "label": "药品名称",
                     "content_type": 13,
-                    "object_id": 265
+                    "object_id": 264
+                }
+            ]
+        },
+        {
+            "id": 270,
+            "name": "tang_niao_bing_zhen_duan_biao_baseform_query_1645431372",
+            "label": "糖尿病诊断表_查询视图_1645431372",
+            "basemodel": "tang_niao_bing_zhen_duan_biao",
+            "is_inquiry": true,
+            "style": "detail",
+            "components": [
+                {
+                    "id": 659,
+                    "name": "relatedfield_disease_name",
+                    "label": "疾病名称",
+                    "content_type": 13,
+                    "object_id": 281
                 }
             ]
         }
     ],
     "combineforms": [
-        {
-            "id": 313,
-            "name": "yuan_qian_zheng_zhuang_diao_cha_biao",
-            "label": "院前症状调查表",
-            "is_base": false,
-            "managed_entity": null,
-            "forms": [
-                "out_of_hospital_self_report_survey_baseform",
-                "basic_personal_information_baseform_query_1642159528"
-            ]
-        },
         {
             "id": 314,
             "name": "ge_ren_ji_bing_shi_diao_cha_biao",
@@ -3488,17 +3585,6 @@
             ]
         },
         {
-            "id": 315,
-            "name": "men_zhen_wen_zhen_biao",
-            "label": "门诊问诊表",
-            "is_base": false,
-            "managed_entity": null,
-            "forms": [
-                "basic_personal_information_baseform_query_1642159528",
-                "yuan_qian_zheng_zhuang_diao_cha_biao"
-            ]
-        },
-        {
             "id": 316,
             "name": "kong_fu_xue_tang_jian_cha_biao",
             "label": "空腹血糖检查表",
@@ -3506,17 +3592,6 @@
             "managed_entity": null,
             "forms": [
                 "kong_fu_xue_tang_jian_cha_baseform",
-                "basic_personal_information_baseform_query_1642159528"
-            ]
-        },
-        {
-            "id": 317,
-            "name": "men_zhen_zhen_duan_biao_1",
-            "label": "门诊诊断表1",
-            "is_base": false,
-            "managed_entity": null,
-            "forms": [
-                "men_zhen_zhen_duan_biao_baseform",
                 "basic_personal_information_baseform_query_1642159528"
             ]
         },
@@ -3573,9 +3648,9 @@
         {
             "id": 322,
             "name": "men_zhen_chu_fang_dan",
-            "label": "门诊处方单",
+            "label": "药物干预表",
             "is_base": false,
-            "managed_entity": null,
+            "managed_entity": "icpc6_prescribe_medicines",
             "forms": [
                 "yong_yao_chu_fang_baseform",
                 "basic_personal_information_baseform_query_1642159528"
@@ -3614,30 +3689,47 @@
             "is_base": false,
             "managed_entity": "icpc2_reservation_investigations",
             "forms": [
-                "que_ren_dan_baseform",
-                "men_zhen_yu_yue"
+                "que_ren_dan_baseform"
+            ]
+        },
+        {
+            "id": 338,
+            "name": "yao_shi_fu_wu_ti_xing_biao",
+            "label": "药事服务提醒表",
+            "is_base": false,
+            "managed_entity": "icpc6_prescribe_medicines",
+            "forms": [
+                "yong_yao_ti_xing_dan_baseform",
+                "yong_yao_chu_fang_baseform_query_1645404404",
+                "tang_niao_bing_zhen_duan_biao_baseform_query_1645431372"
+            ]
+        },
+        {
+            "id": 339,
+            "name": "tang_niao_bing_zi_wo_jian_ce_biao",
+            "label": "糖尿病自我监测表",
+            "is_base": false,
+            "managed_entity": "icpc8_other_health_interventions",
+            "forms": [
+                "blood_pressure_monitoring_baseform",
+                "kong_fu_xue_tang_jian_cha_baseform",
+                "basic_personal_information_baseform_query_1642159528"
+            ]
+        },
+        {
+            "id": 340,
+            "name": "tang_niao_bing_tong_yong_sui_fang_biao",
+            "label": "糖尿病通用随访表",
+            "is_base": false,
+            "managed_entity": null,
+            "forms": [
+                "personal_health_behavior_survey_baseform",
+                "fundus_examination_baseform",
+                "dorsal_artery_pulsation_examination_baseform"
             ]
         }
     ],
     "operations": [
-        {
-            "id": 73,
-            "name": "yuan_qian_zheng_zhuang_diao_cha_biao",
-            "label": "院前症状调查表",
-            "forms": "yuan_qian_zheng_zhuang_diao_cha_biao",
-            "priority": 3,
-            "suppliers": null,
-            "not_suitable": null,
-            "time_limits": null,
-            "working_hours": null,
-            "frequency": null,
-            "cost": null,
-            "load_feedback": false,
-            "resource_materials": null,
-            "resource_devices": null,
-            "resource_knowledge": null,
-            "group": []
-        },
         {
             "id": 74,
             "name": "ge_ren_ji_bing_shi_diao_cha_biao",
@@ -3672,7 +3764,9 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "group": []
+            "group": [
+                "jian_yan_shi"
+            ]
         },
         {
             "id": 77,
@@ -3749,7 +3843,7 @@
         {
             "id": 81,
             "name": "men_zhen_chu_fang_biao",
-            "label": "门诊处方表",
+            "label": "药物干预",
             "forms": "men_zhen_chu_fang_dan",
             "priority": 3,
             "suppliers": null,
@@ -3902,26 +3996,6 @@
             ]
         },
         {
-            "id": 90,
-            "name": "men_zhen_fu_zhu_wen_zhen",
-            "label": "门诊辅助问诊",
-            "forms": "men_zhen_wen_zhen_biao",
-            "priority": 3,
-            "suppliers": null,
-            "not_suitable": null,
-            "time_limits": null,
-            "working_hours": null,
-            "frequency": null,
-            "cost": null,
-            "load_feedback": false,
-            "resource_materials": null,
-            "resource_devices": null,
-            "resource_knowledge": null,
-            "group": [
-                "hu_shi"
-            ]
-        },
-        {
             "id": 91,
             "name": "men_zhen_fu_zhu_jian_cha",
             "label": "门诊辅助检查",
@@ -3939,26 +4013,6 @@
             "resource_knowledge": null,
             "group": [
                 "hu_shi"
-            ]
-        },
-        {
-            "id": 92,
-            "name": "men_zhen_yi_sheng_wen_zhen",
-            "label": "门诊常规问诊",
-            "forms": "men_zhen_wen_zhen_biao",
-            "priority": 3,
-            "suppliers": null,
-            "not_suitable": null,
-            "time_limits": null,
-            "working_hours": null,
-            "frequency": null,
-            "cost": null,
-            "load_feedback": false,
-            "resource_materials": null,
-            "resource_devices": null,
-            "resource_knowledge": null,
-            "group": [
-                "yi_sheng"
             ]
         },
         {
@@ -3982,10 +4036,70 @@
             ]
         },
         {
-            "id": 94,
-            "name": "yuan_qian_fu_zhu_wen_zhen",
-            "label": "院前辅助问诊",
-            "forms": "yuan_qian_zheng_zhuang_diao_cha_biao",
+            "id": 96,
+            "name": "yao_shi_fu_wu",
+            "label": "药事服务",
+            "forms": "yao_shi_fu_wu_ti_xing_biao",
+            "priority": 3,
+            "suppliers": null,
+            "not_suitable": null,
+            "time_limits": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "group": [
+                "yi_sheng"
+            ]
+        },
+        {
+            "id": 97,
+            "name": "tang_niao_bing_zi_wo_jian_ce",
+            "label": "糖尿病自我监测",
+            "forms": "tang_niao_bing_zi_wo_jian_ce_biao",
+            "priority": 3,
+            "suppliers": null,
+            "not_suitable": null,
+            "time_limits": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "group": [
+                "huan_zhe"
+            ]
+        },
+        {
+            "id": 98,
+            "name": "tang_niao_bing_sui_fang",
+            "label": "糖尿病随访",
+            "forms": "tang_niao_bing_tong_yong_sui_fang_biao",
+            "priority": 3,
+            "suppliers": null,
+            "not_suitable": null,
+            "time_limits": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "group": [
+                "gong_wei"
+            ]
+        },
+        {
+            "id": 100,
+            "name": "yuan_wai_fu_zhu_wen_zhen",
+            "label": "院外辅助问诊",
+            "forms": "yuan_qian_fu_zhu_wen_zhen_biao_baseform",
             "priority": 3,
             "suppliers": null,
             "not_suitable": null,
@@ -4002,10 +4116,10 @@
             ]
         },
         {
-            "id": 95,
-            "name": "men_zhen_zhen_duan",
-            "label": "门诊诊断",
-            "forms": "men_zhen_zhen_duan_biao_baseform",
+            "id": 101,
+            "name": "yuan_nei_fu_zhu_wen_zhen",
+            "label": "院内辅助问诊",
+            "forms": "yuan_nei_fu_zhu_wen_zhen_biao_baseform",
             "priority": 3,
             "suppliers": null,
             "not_suitable": null,
@@ -4018,7 +4132,27 @@
             "resource_devices": null,
             "resource_knowledge": null,
             "group": [
-                "yi_sheng"
+                "hu_shi"
+            ]
+        },
+        {
+            "id": 102,
+            "name": "yuan_wai_zi_xun",
+            "label": "院外咨询",
+            "forms": "yuan_wai_zi_xun_biao_baseform",
+            "priority": 3,
+            "suppliers": null,
+            "not_suitable": null,
+            "time_limits": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "group": [
+                "huan_zhe"
             ]
         }
     ],
@@ -4103,8 +4237,6 @@
             "parameters": null,
             "fields": "",
             "next": [
-                "ge_ren_ji_bing_shi_diao_cha_biao",
-                "ge_ren_guo_min_shi_diao_cha_biao",
                 "ge_ren_ji_ben_xin_xi_diao_cha"
             ]
         },
@@ -4128,22 +4260,7 @@
             "expression": "completed",
             "parameters": null,
             "fields": "",
-            "next": [
-                "yuan_qian_zheng_zhuang_diao_cha_biao"
-            ]
-        },
-        {
-            "id": 58,
-            "name": "yuan_qian_zheng_zhuang_diao_cha_biao_completed",
-            "label": "院前症状调查完成",
-            "operation": "yuan_qian_zheng_zhuang_diao_cha_biao",
-            "description": null,
-            "expression": "completed",
-            "parameters": null,
-            "fields": "('out_of_hospital_self_report_survey-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string')\n('out_of_hospital_self_report_survey-relatedfield_symptom_list', '症状', 'dict')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')",
-            "next": [
-                "yuan_qian_fu_zhu_wen_zhen"
-            ]
+            "next": []
         },
         {
             "id": 60,
@@ -4154,10 +4271,7 @@
             "expression": "kong_fu_xue_tang_jian_cha-numberfield_kong_fu_xue_tang >=7.0",
             "parameters": "kong_fu_xue_tang_jian_cha-numberfield_kong_fu_xue_tang",
             "fields": "('kong_fu_xue_tang_jian_cha-numberfield_kong_fu_xue_tang', '空腹血糖', 'number')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')",
-            "next": [
-                "tang_hua_xue_hong_dan_bai_jian_cha_biao",
-                "tang_niao_bing_cha_ti_biao"
-            ]
+            "next": []
         },
         {
             "id": 61,
@@ -4179,9 +4293,7 @@
             "expression": "completed",
             "parameters": "",
             "fields": "('vital_signs_check-numberfield_body_temperature', '体温', 'number')\n('vital_signs_check-numberfield_pulse', '脉搏', 'number')\n('vital_signs_check-numberfield_respiratory_rate', '呼吸频率', 'number')\n('physical_examination-numberfield_hight', '身高', 'number')\n('physical_examination-numberfield_weight', '体重', 'number')\n('physical_examination-numberfield_body_mass_index', '体质指数', 'number')\n('physical_examination_hearing-relatedfield_left_ear_hearing', '左耳听力', 'dict')\n('physical_examination_hearing-relatedfield_right_ear_hearing', '右耳听力', 'dict')\n('physical_examination_oral_cavity-relatedfield_lips', '口唇', 'dict')\n('physical_examination_oral_cavity-relatedfield_dentition', '齿列', 'dict')\n('physical_examination_oral_cavity-relatedfield_pharynx', '咽部', 'dict')\n('physical_examination_vision-characterfield_left_eye_vision', '左眼视力', 'string')\n('physical_examination_vision-characterfield_right_eye_vision', '右眼视力', 'string')\n('physical_examination_athletic_ability-relatedfield_athletic_ability', '运动能力', 'dict')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')",
-            "next": [
-                "men_zhen_yi_sheng_wen_zhen"
-            ]
+            "next": []
         },
         {
             "id": 64,
@@ -4193,46 +4305,33 @@
             "parameters": null,
             "fields": "('que_ren_dan-boolfield_yu_yue_que_ren', '确认', 'boolean')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('yu_yue_biao-datetimefield_ri_qi_shi_jian', '日期时间', 'datetime')",
             "next": [
-                "men_zhen_fu_zhu_wen_zhen",
                 "men_zhen_fu_zhu_jian_cha"
             ]
         },
         {
-            "id": 65,
-            "name": "men_zhen_yi_sheng_wen_zhen_门诊常规问诊完成",
-            "label": "门诊常规问诊完成",
-            "operation": "men_zhen_yi_sheng_wen_zhen",
+            "id": 68,
+            "name": "men_zhen_yu_yue_门诊预约完成",
+            "label": "门诊预约完成",
+            "operation": "men_zhen_yu_yue",
             "description": null,
             "expression": "completed",
             "parameters": null,
-            "fields": "('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('out_of_hospital_self_report_survey-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string')\n('out_of_hospital_self_report_survey-relatedfield_symptom_list', '症状', 'dict')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')",
-            "next": []
-        },
-        {
-            "id": 66,
-            "name": "men_zhen_fu_zhu_wen_zhen_门诊辅助问诊完成",
-            "label": "门诊辅助问诊完成",
-            "operation": "men_zhen_fu_zhu_wen_zhen",
-            "description": null,
-            "expression": "completed",
-            "parameters": null,
-            "fields": "('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('out_of_hospital_self_report_survey-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string')\n('out_of_hospital_self_report_survey-relatedfield_symptom_list', '症状', 'dict')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')",
+            "fields": "('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('yu_yue_biao-datetimefield_ri_qi_shi_jian', '日期时间', 'datetime')",
             "next": [
-                "men_zhen_yi_sheng_wen_zhen"
+                "fen_zhen_que_ren"
             ]
         },
         {
-            "id": 67,
-            "name": "men_zhen_yi_sheng_wen_zhen_问诊发现糖尿病症状",
-            "label": "问诊发现糖尿病症状",
-            "operation": "men_zhen_yi_sheng_wen_zhen",
+            "id": 69,
+            "name": "men_zhen_chu_fang_biao_药物干预有风险",
+            "label": "药物干预有风险",
+            "operation": "men_zhen_chu_fang_biao",
             "description": null,
-            "expression": "symptom_list==\"眼感觉异常\"",
-            "parameters": "",
-            "fields": "('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('out_of_hospital_self_report_survey-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string')\n('out_of_hospital_self_report_survey-relatedfield_symptom_list', '症状', 'dict')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')",
+            "expression": "yong_yao_chu_fang-relatedfield_drug_name==“5%葡萄糖”",
+            "parameters": "yong_yao_chu_fang-relatedfield_drug_name",
+            "fields": "('yong_yao_chu_fang-relatedfield_drug_name', '药品名称', 'dict')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')",
             "next": [
-                "kong_fu_xue_tang_jian_cha_biao",
-                "tang_niao_bing_zhuan_yong_wen_zhen"
+                "yao_shi_fu_wu"
             ]
         }
     ]
