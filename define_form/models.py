@@ -125,10 +125,14 @@ def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
         meta_data['style'] = instance.style
         meta_data['basemodel'] = instance.basemodel.name
         meta_data['fields'] = fields
-        _meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
-        instance.meta_data = _meta_data
+        
+        # 更新基础视图的meta_data，类型为dict
+        instance.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
         instance.save()
-        CombineForm.objects.filter(name=instance.name).update(meta_data=_meta_data)
+
+        # 更新组合视图的meta_data字段, 类型为list
+        combine_form_meta_data = json.dumps([meta_data], ensure_ascii=False, indent=4)
+        CombineForm.objects.filter(name=instance.name).update(meta_data=combine_form_meta_data)
 
 
 @receiver(m2m_changed, sender=CombineForm.forms.through)
