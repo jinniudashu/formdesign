@@ -226,10 +226,13 @@ class Command(BaseCommand):
         for item in design_data['combineforms']:
             combineform = CombineForm.objects.get(name=item['name'])                
             forms = []
+            print('item:',item)
+            print('item_forms:', item['forms'])
             for _form in item['forms']:
                 print(_form)
                 form = CombineForm.objects.get(name=_form)
                 forms.append(form)
+            print('restore_design:', forms)
             combineform.forms.set(forms)
 
         print('导入组合表单表完成')

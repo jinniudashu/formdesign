@@ -3473,8 +3473,7 @@
             "managed_entity": null,
             "forms": [
                 "out_of_hospital_self_report_survey_baseform",
-                "basic_personal_information_baseform_query_1642159528",
-                "men_zhen_wen_zhen_biao"
+                "basic_personal_information_baseform_query_1642159528"
             ]
         },
         {
@@ -3605,8 +3604,7 @@
             "managed_entity": "icpc2_reservation_investigations",
             "forms": [
                 "basic_personal_information_baseform_query_1642159528",
-                "yu_yue_biao_baseform",
-                "fen_zhen_que_ren"
+                "yu_yue_biao_baseform"
             ]
         },
         {

@@ -458,11 +458,13 @@ class CreateViewsScript:
         self.url = self.operand_name + '_update_url'
 
     def __get_forms_list(self, forms):
-        print(self.operand_name)
-        print(forms)
         inquire_forms = []
         mutate_forms = []
+        print('operand_name', self.operand_name)
+        print('forms:', forms)
         for form in forms:
+            print('form:', form)
+            print("form['mutate_or_inquiry']:", form['mutate_or_inquiry'])
             if form['mutate_or_inquiry'] == 'inquiry':
                 inquire_forms.append((form['name'], form['style'], form['label'], form['basemodel']))
             else:
@@ -777,11 +779,8 @@ def design_backup(modeladmin, request, queryset):
 
     for item in RelatedField.objects.all():
         model = model_to_dict(item)
-        # related_content_id = model['related_content']
-        related_content_id = model['related_content_new']
         # 获取关联字段值???
-        # model['related_content'] = DicList.objects.get(id=related_content_id).name
-        model['related_content'] = RelateFieldModel.objects.get(id=related_content_id).name
+        model['related_content'] = item.related_content_new.name
         design_data['relatedfields'].append(model)
 
     for item in ChoiceField.objects.all():
@@ -809,8 +808,7 @@ def design_backup(modeladmin, request, queryset):
             components.append(model_to_dict(component))
         model = model_to_dict(item)
         model['components'] = components
-        basemodel_id = model['basemodel']
-        model['basemodel'] = BaseModel.objects.get(id=basemodel_id).name
+        model['basemodel'] = item.basemodel.name
         model.pop('meta_data')
         design_data['baseforms'].append(model)
 
@@ -821,17 +819,15 @@ def design_backup(modeladmin, request, queryset):
             forms.append(_form['name'])
         model = model_to_dict(item)
         model['forms'] = forms
-        managed_entity_id = model['managed_entity']
-        if managed_entity_id:
-            model['managed_entity'] = ManagedEntity.objects.get(id=managed_entity_id).name
+        if model['managed_entity']:
+            model['managed_entity'] = item.managed_entity.name
         model.pop('meta_data')
         design_data['combineforms'].append(model)
 
     for item in Operation.objects.all():
         model = model_to_dict(item)
         if model['forms']:
-            forms_id = model['forms']
-            model['forms'] = CombineForm.objects.get(id=forms_id).name
+            model['forms'] = item.forms.name
         if model['group']:
             group_name = []
             for group in model['group']:
@@ -842,8 +838,7 @@ def design_backup(modeladmin, request, queryset):
     for item in Service.objects.all():
         model = model_to_dict(item)
         if model['first_operation']:
-            operation_id = model['first_operation']
-            model['first_operation'] = Operation.objects.get(id=operation_id).name
+            model['first_operation'] = item.first_operation.name
         if model['operations']:
             operations_name = []
             for operation in model['operations']:
@@ -859,8 +854,7 @@ def design_backup(modeladmin, request, queryset):
     for item in ServicePackage.objects.all():
         model = model_to_dict(item)
         if model['first_service']:
-            service_id = model['first_service']
-            model['first_service'] = Service.objects.get(id=service_id).name
+            model['first_service'] = item.first_service.name
         if model['services']:
             services_name = []
             for service in model['services']:
@@ -873,14 +867,14 @@ def design_backup(modeladmin, request, queryset):
         design_data['instructions'].append(model)
 
     for item in Event.objects.all():
-        next_operations = []
-        for operation in item.next.all():
-            _operation = model_to_dict(operation)
-            next_operations.append(_operation['name'])
         model = model_to_dict(item)
-        model['next'] = next_operations
-        operation_id = model['operation']
-        model['operation'] = Operation.objects.get(id=operation_id).name
+        model['operation'] = item.operation.name
+        if model['next']:
+            next_operations = []
+            for operation in item.next.all():
+                _operation = model_to_dict(operation)
+                next_operations.append(_operation['name'])
+            model['next'] = next_operations
         design_data['events'].append(model)
 
 

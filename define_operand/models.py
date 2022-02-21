@@ -166,8 +166,9 @@ class Event(models.Model):
             forms = json.loads(self.operation.forms.meta_data)
             fields = []
             field_names = []
-
+            print('forms:', forms)
             for form in forms:
+                print('*********************form:########################', form)
                 form_name = form['basemodel']
                 _fields = form['fields']
                 for _field in _fields:
