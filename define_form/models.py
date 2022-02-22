@@ -112,7 +112,7 @@ def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
                 # 获取关联字段的模型???
                 print('component', component)
                 field['type'] = 'dict'
-                field['dict_name'] = component.content_object.related_content_new.related_content
+                field['dict_name'] = component.content_object.related_content.related_content
             fields.append(field)
 
         meta_data = {}

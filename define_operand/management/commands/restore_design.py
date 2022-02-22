@@ -167,7 +167,7 @@ class Command(BaseCommand):
                     name=item['name'],
                     label=item['label'],
                     type=item['type'],
-                    related_content_new=related_content,
+                    related_content=related_content,
                     related_field=related_content.related_field,
                 )
             print('导入关联型字段表完成')

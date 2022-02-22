@@ -171,7 +171,7 @@ class RelatedField(models.Model):
     type = models.CharField(max_length=50, choices=CHOICE_TYPE, default='ChoiceField', verbose_name="类型")
     # related_content是弃用的旧字段，待完成升级后清理
     # related_content = models.ForeignKey(DicList, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="关联内容-旧版")
-    related_content_new = models.ForeignKey(RelateFieldModel, on_delete=models.CASCADE, null=True, blank=True, verbose_name="关联内容")
+    related_content = models.ForeignKey(RelateFieldModel, on_delete=models.CASCADE, null=True, blank=True, verbose_name="关联内容")
     related_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联字段")
 
     def __str__(self):
