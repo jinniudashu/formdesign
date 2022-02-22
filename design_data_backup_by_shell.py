@@ -1,3 +1,4 @@
+# 本脚本用于在生产环境中shell手工备份数据
 from define_dict.models import DicList, ManagedEntity
 from define_form.models import BaseModel, BaseForm
 from define_operand.models import Operation, SourceCode
