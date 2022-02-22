@@ -56,10 +56,7 @@ for item in DTField.objects.all():
 for item in RelatedField.objects.all():
     model = model_to_dict(item)
     related_content_id = model['related_content']
-    # related_content_id = model['related_content_new']
-    # 获取关联字段值???
-    model['related_content'] = DicList.objects.get(id=related_content_id).name
-    # model['related_content'] = RelateFieldModel.objects.get(id=related_content_id).name
+    model['related_content'] = item.related_content.name
     design_data['relatedfields'].append(model)
 
 for item in ChoiceField.objects.all():
@@ -82,8 +79,7 @@ for item in BaseForm.objects.filter(is_inquiry=True):
         components.append(model_to_dict(component))
     model = model_to_dict(item)
     model['components'] = components
-    basemodel_id = model['basemodel']
-    model['basemodel'] = BaseModel.objects.get(id=basemodel_id).name
+    model['basemodel'] = item.basemodel.name
     model.pop('meta_data')
     design_data['baseforms'].append(model)
 
@@ -94,24 +90,22 @@ for item in CombineForm.objects.filter(is_base=False):
         forms.append(_form['name'])
     model = model_to_dict(item)
     model['forms'] = forms
-    managed_entity_id = model['managed_entity']
-    if managed_entity_id:
-        model['managed_entity'] = ManagedEntity.objects.get(id=managed_entity_id).name
+    if model['managed_entity']:
+        model['managed_entity'] = item.managed_entity.name
     model.pop('meta_data')
     design_data['combineforms'].append(model)
 
 for item in Operation.objects.all():
     model = model_to_dict(item)
     if model['forms']:
-        forms_id = model['forms']
-        model['forms'] = CombineForm.objects.get(id=forms_id).name
+        model['forms'] = item.forms.name
     design_data['operations'].append(model)
 
 for item in Service.objects.all():
     model = model_to_dict(item)
     if model['first_operation']:
         operation_id = model['first_operation']
-        model['first_operation'] = Operation.objects.get(id=operation_id).name
+        model['first_operation'] = item.first_operation.name
     design_data['services'].append(model)
 
 for item in Instruction.objects.all():
@@ -126,7 +120,7 @@ for item in Event.objects.all():
     model = model_to_dict(item)
     model['next'] = next_operations
     operation_id = model['operation']
-    model['operation'] = Operation.objects.get(id=operation_id).name
+    model['operation'] = item.operation.name
     design_data['events'].append(model)
 
 # 写入数据库
