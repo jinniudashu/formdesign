@@ -453,6 +453,7 @@ class CreateViewsScript:
         self.view_name = self.operand_name.capitalize() + '_CreateView'
         self.template_name = self.operand_name + '_edit.html'
         self.success_url = '/'
+        # 如果作业不包含可修改表单，self.mutate_forms=[]，会报错IndexError: list index out of range
         self.form_class = self.mutate_forms[0][0].capitalize() + '_ModelForm'
 
         self.url = self.operand_name + '_update_url'
