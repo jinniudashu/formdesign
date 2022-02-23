@@ -33,6 +33,7 @@ copy_form.short_description = '生成查询视图副本'
 
 class BaseModelAdmin(admin.ModelAdmin):
     readonly_fields = ['name']
+    autocomplete_fields = ["name_new", ]
 
 class BaseFormAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'basemodel', 'meta_data']
@@ -40,6 +41,7 @@ class BaseFormAdmin(admin.ModelAdmin):
 
 class CombineFormAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'is_base', 'meta_data']
+    autocomplete_fields = ["name_new", ]
 
 
 admin.site.register(BaseModel, BaseModelAdmin)

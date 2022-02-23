@@ -6,6 +6,7 @@ from django.contrib.auth.models import Group
 
 from pypinyin import lazy_pinyin
 
+from define_icpc.models import Icpc
 from define_form.models import CombineForm
 from .keyword_search import keyword_search
 
@@ -33,6 +34,7 @@ class Role(models.Model):
 # 作业信息表
 class Operation(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="作业名称")
+    name_new = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="作业名称")
     label = models.CharField(max_length=255, blank=True, null=True, verbose_name="显示名称")
     forms = models.ForeignKey(CombineForm, on_delete=models.CASCADE, null=True, blank=True, verbose_name="组合视图")
     Operation_priority = [
@@ -102,8 +104,8 @@ class Service(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name = "服务"
-        verbose_name_plural = "服务"
+        verbose_name = "单元服务"
+        verbose_name_plural = "单元服务"
         ordering = ['id']
 
 
@@ -149,8 +151,8 @@ class Event(models.Model):
         return str(self.label)
 
     class Meta:
-        verbose_name = "事件"
-        verbose_name_plural = "事件"
+        verbose_name = "规则"
+        verbose_name_plural = "规则"
         ordering = ['id']
 
     def save(self, *args, **kwargs):

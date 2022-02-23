@@ -9,11 +9,11 @@ class EventInline(admin.TabularInline):
     extra = 0
 
 class OperationAdmin(admin.ModelAdmin):
-    list_display = ['label', 'name', 'id']
+    list_display = ['name_new', 'label', 'name', 'id']
     list_display_links = ['label', 'name',]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name'), ('forms', 'priority'), 'group',)
+            'fields': (('name_new', 'label', 'name'), ('forms', 'priority'), 'group',)
         }),
         ('作业管理', {
             'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
@@ -26,6 +26,7 @@ class OperationAdmin(admin.ModelAdmin):
     inlines = [EventInline]
     ordering = ['id']
     readonly_fields = ['name']
+    autocomplete_fields = ["name_new", ]
 
 admin.site.register(Operation, OperationAdmin)
 
