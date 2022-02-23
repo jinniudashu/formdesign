@@ -159,9 +159,6 @@ class Command(BaseCommand):
             print('导入选择型字段表完成')
 
             for item in design_data['relatedfields']:
-                # 创建关联字段???
-                # dic=DicList.objects.get(name=item['related_content'])
-                print('relatedfields:',item)
                 related_content=RelateFieldModel.objects.get(name=item['related_content'])
                 RelatedField.objects.create(
                     name=item['name'],
@@ -174,7 +171,6 @@ class Command(BaseCommand):
 
             # 导入模型表
             for item in design_data['basemodels']:
-                print(item)
                 basemodel = BaseModel.objects.create(
                     name=item['name'],
                     label=item['label'],
@@ -231,13 +227,9 @@ class Command(BaseCommand):
             for item in design_data['combineforms']:
                 combineform = CombineForm.objects.get(name=item['name'])                
                 forms = []
-                print('item:',item)
-                print('item_forms:', item['forms'])
                 for _form in item['forms']:
-                    print(_form)
                     form = CombineForm.objects.get(name=_form)
                     forms.append(form)
-                print('restore_design:', forms)
                 combineform.forms.set(forms)
 
             print('导入组合表单表完成')
@@ -353,7 +345,6 @@ class Command(BaseCommand):
 
                 next_operations = []
                 for _operation in item['next']:
-                    print('Next:', _operation)
                     operation = Operation.objects.get(name=_operation)
                     next_operations.append(operation)
                 event.next.set(next_operations)

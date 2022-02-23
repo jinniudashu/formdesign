@@ -132,7 +132,6 @@ class CreateModelsScript:
         elif component_type == 'choicefield':
             script = self.__create_choice_field_script(field)
         elif component_type == 'relatedfield':
-            # 获取关联字段的模型???
             field['foreign_key'] = component.content_object.related_content.related_content
             script = self.__create_related_field_script(field)
         return script
@@ -780,7 +779,6 @@ def design_backup(modeladmin, request, queryset):
 
     for item in RelatedField.objects.all():
         model = model_to_dict(item)
-        # 获取关联字段值???
         model['related_content'] = item.related_content.name
         design_data['relatedfields'].append(model)
 

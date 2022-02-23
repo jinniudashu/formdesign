@@ -47,7 +47,7 @@ class RelateFieldModel(models.Model):
 # 布尔字段
 class BoolField(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
-    label = models.CharField(max_length=100, verbose_name="组件名称")
+    label = models.CharField(max_length=100, verbose_name="表单字段")
     CHOICES_TYPE = [('0', '是, 否'), ('1', '未知, 是, 否')]
     type = models.CharField(max_length=100, choices=CHOICES_TYPE , default='1', verbose_name="可选值")
     required = models.BooleanField(default=False, verbose_name="必填")
@@ -69,7 +69,7 @@ class BoolField(models.Model):
 # 字符字段
 class CharacterField(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
-    label = models.CharField(max_length=100, verbose_name="组件名称")
+    label = models.CharField(max_length=100, verbose_name="表单字段")
     CHAR_TYPE = [('CharField', '单行文本'), ('TextField', '多行文本')]
     type = models.CharField(max_length=50, choices=CHAR_TYPE, default='CharField', verbose_name="类型")
     length = models.PositiveSmallIntegerField(default=255, verbose_name="字符长度")
@@ -93,7 +93,7 @@ class CharacterField(models.Model):
 # 数值字段
 class NumberField(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
-    label = models.CharField(max_length=100, verbose_name="组件名称")
+    label = models.CharField(max_length=100, verbose_name="表单字段")
     NUMBER_TYPE = [('IntegerField', '整数'), ('DecimalField', '固定精度小数'), ('FloatField', '浮点数')]
     type = models.CharField(max_length=50, choices=NUMBER_TYPE, default='IntegerField', verbose_name="类型")
     max_digits = models.PositiveSmallIntegerField(default=10, verbose_name="最大位数", null=True, blank=True)
@@ -121,7 +121,7 @@ class NumberField(models.Model):
 # 日期时间字段
 class DTField(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
-    label = models.CharField(max_length=100, verbose_name="组件名称")
+    label = models.CharField(max_length=100, verbose_name="表单字段")
     DT_TYPE = [('DateTimeField', '日期时间'), ('DateField', '日期')]
     type = models.CharField(max_length=50, choices=DT_TYPE, default='DateTimeField', verbose_name="类型")
     default_now = models.BooleanField(default=False, verbose_name="默认为当前时间")
@@ -143,7 +143,7 @@ class DTField(models.Model):
 # 选择字段
 class ChoiceField(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
-    label = models.CharField(max_length=100, verbose_name="组件名称")
+    label = models.CharField(max_length=100, verbose_name="表单字段")
     CHOICE_TYPE = [('Select', '下拉单选'), ('RadioSelect', '单选按钮列表'), ('CheckboxSelectMultiple', '复选框列表'), ('SelectMultiple', '下拉多选')]
     type = models.CharField(max_length=50, choices=CHOICE_TYPE, default='ChoiceField', verbose_name="类型")
     options = models.TextField(max_length=1024, null=True, blank=True, verbose_name="选项", help_text="每行一个选项, 最多100个")
@@ -166,13 +166,13 @@ class ChoiceField(models.Model):
 # 关联字段
 class RelatedField(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
-    label = models.CharField(max_length=100, unique=True, verbose_name="组件名称")
+    label = models.CharField(max_length=100, unique=True, verbose_name="表单字段")
     CHOICE_TYPE = [('Select', '下拉单选'), ('RadioSelect', '单选按钮列表'), ('CheckboxSelectMultiple', '复选框列表'), ('SelectMultiple', '下拉多选')]
     type = models.CharField(max_length=50, choices=CHOICE_TYPE, default='ChoiceField', verbose_name="类型")
     # related_content是弃用的旧字段，待完成升级后清理
     # related_content = models.ForeignKey(DicList, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="关联内容-旧版")
     related_content = models.ForeignKey(RelateFieldModel, on_delete=models.CASCADE, null=True, blank=True, verbose_name="关联内容")
-    related_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联字段")
+    # related_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联字段")
 
     def __str__(self):
         return str(self.label)
@@ -199,7 +199,7 @@ class ComputeField(models.Model):
 # 字段列表
 class Component(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
-    label = models.CharField(max_length=100, verbose_name="组件名称", null=True, blank=True)
+    label = models.CharField(max_length=100, verbose_name="表单字段", null=True, blank=True)
 
     q  = Q(app_label='define') & (
         Q(model = 'boolfield') | 
@@ -218,8 +218,8 @@ class Component(models.Model):
         return str(self.label)
 
     class Meta:
-        verbose_name = "字段汇总清单"
-        verbose_name_plural = "字段汇总清单"
+        verbose_name = "表单字段汇总"
+        verbose_name_plural = "表单字段汇总"
         ordering = ['id']
 
 
