@@ -1,109 +1,109 @@
 {
     "roles": [
         {
-            "id": 123,
+            "id": 141,
             "name": "jian_kang_guan_li_shi",
             "label": "健康管理师",
             "description": null
         },
         {
-            "id": 124,
+            "id": 142,
             "name": "hu_shi",
             "label": "护士",
             "description": null
         },
         {
-            "id": 125,
+            "id": 143,
             "name": "yi_sheng_zhu_li",
             "label": "医生助理",
             "description": null
         },
         {
-            "id": 126,
+            "id": 144,
             "name": "yi_sheng",
             "label": "医生",
             "description": null
         },
         {
-            "id": 127,
+            "id": 145,
             "name": "zhi_liang_guan_li",
             "label": "质量管理",
             "description": null
         },
         {
-            "id": 128,
+            "id": 146,
             "name": "yao_shi",
             "label": "药士",
             "description": null
         },
         {
-            "id": 129,
+            "id": 147,
             "name": "yao_ji_shi",
             "label": "药剂师",
             "description": null
         },
         {
-            "id": 130,
+            "id": 148,
             "name": "gong_wei",
             "label": "公卫",
             "description": null
         },
         {
-            "id": 131,
+            "id": 149,
             "name": "guan_li_zhe",
             "label": "管理者",
             "description": null
         },
         {
-            "id": 132,
+            "id": 150,
             "name": "ying_xiang_yi_shi",
             "label": "影像医师",
             "description": null
         },
         {
-            "id": 133,
+            "id": 151,
             "name": "kang_fu_li_liao_shi",
             "label": "康复理疗师",
             "description": null
         },
         {
-            "id": 134,
+            "id": 152,
             "name": "zhong_yi_shi",
             "label": "中医师",
             "description": null
         },
         {
-            "id": 135,
+            "id": 153,
             "name": "huan_zhe",
             "label": "患者",
             "description": null
         },
         {
-            "id": 136,
+            "id": 154,
             "name": "huan_zhe_jia_shu",
             "label": "患者家属",
             "description": null
         },
         {
-            "id": 137,
+            "id": 155,
             "name": "jian_yan_shi",
             "label": "检验师",
             "description": null
         },
         {
-            "id": 138,
+            "id": 156,
             "name": "xi_tong_guan_li_yuan",
             "label": "系统管理员",
             "description": null
         },
         {
-            "id": 139,
+            "id": 157,
             "name": "gong_ying_shang",
             "label": "供应商",
             "description": null
         },
         {
-            "id": 140,
+            "id": 158,
             "name": "bao_xian_ren_yuan",
             "label": "保险人员",
             "description": null
@@ -261,16 +261,6 @@
             "description": null
         },
         {
-            "id": 16,
-            "name": "role",
-            "label": "角色",
-            "app_name": "core",
-            "model_name": "Role",
-            "display_field": "name",
-            "related_field": "role_code",
-            "description": null
-        },
-        {
             "id": 17,
             "name": "institution",
             "label": "机构",
@@ -279,179 +269,189 @@
             "display_field": "name",
             "related_field": "institution_code",
             "description": null
+        },
+        {
+            "id": 16,
+            "name": "role",
+            "label": "角色",
+            "app_name": "core",
+            "model_name": "Group",
+            "display_field": "name",
+            "related_field": "role_code",
+            "description": ""
         }
     ],
     "diclists": [
         {
-            "id": 225,
+            "id": 250,
             "name": "character",
             "label": "性格",
             "related_field": "value",
             "content": "外向\n内向"
         },
         {
-            "id": 226,
+            "id": 251,
             "name": "satisfaction",
             "label": "满意度",
             "related_field": "value",
             "content": "很满意\n满意\n既非满意也非不满意\n不满意\n很不满意"
         },
         {
-            "id": 227,
+            "id": 252,
             "name": "frequency",
             "label": "频次",
             "related_field": "value",
             "content": "经常\n偶尔\n从无"
         },
         {
-            "id": 228,
+            "id": 253,
             "name": "state_degree",
             "label": "状态程度",
             "related_field": "value",
             "content": "非常好\n还不错\n不太好\n非常糟"
         },
         {
-            "id": 229,
+            "id": 254,
             "name": "comparative_expression",
             "label": "比较表达",
             "related_field": "value",
             "content": "改善很大\n有一定改善\n没变化\n变更差了"
         },
         {
-            "id": 230,
+            "id": 255,
             "name": "sports_preference",
             "label": "运动类型",
             "related_field": "value",
             "content": "有氧运动\n无氧运动\n有氧无氧交替运动\n不运动"
         },
         {
-            "id": 231,
+            "id": 256,
             "name": "exercise_time",
             "label": "运动时长",
             "related_field": "value",
             "content": "半小时以内\n半小时到一个半小时\n一个半小时以上"
         },
         {
-            "id": 232,
+            "id": 257,
             "name": "convenience",
             "label": "便捷程度",
             "related_field": "value",
             "content": "非常不方便\n不方便\n比较方便\n非常方便"
         },
         {
-            "id": 233,
+            "id": 258,
             "name": "family_relationship",
             "label": "家庭成员关系",
             "related_field": "value",
             "content": "户主\n配偶\n父母\n子女\n祖父母\n孙子女\n兄弟姐妹\n其他成员"
         },
         {
-            "id": 234,
+            "id": 259,
             "name": "normality",
             "label": "正常性判断",
             "related_field": "value",
             "content": "正常\n异常"
         },
         {
-            "id": 235,
+            "id": 260,
             "name": "dorsal_artery_pulsation",
             "label": "足背动脉搏动情况",
             "related_field": "value",
             "content": "触及正常\n触及正常\n减弱\n消失"
         },
         {
-            "id": 236,
+            "id": 261,
             "name": "hearing",
             "label": "听力",
             "related_field": "value",
             "content": "听见\n听不清或无法听见"
         },
         {
-            "id": 237,
+            "id": 262,
             "name": "lips",
             "label": "口唇",
             "related_field": "value",
             "content": "红润\n苍白\n发绀\n皲裂\n疱疹"
         },
         {
-            "id": 238,
+            "id": 263,
             "name": "dentition",
             "label": "齿列",
             "related_field": "value",
             "content": "正常\n缺齿\n龋齿\n义齿（假牙）"
         },
         {
-            "id": 239,
+            "id": 264,
             "name": "pharynx",
             "label": "咽部",
             "related_field": "value",
             "content": "无充血\n充血\n淋巴滤泡增生"
         },
         {
-            "id": 240,
+            "id": 265,
             "name": "life_event",
             "label": "生活事件",
             "related_field": "value",
             "content": "丧偶\n父母死亡\n子女死亡\n离婚\n失业\n家属病重\n恋爱\n结婚\n生子"
         },
         {
-            "id": 241,
+            "id": 266,
             "name": "edema",
             "label": "水肿情况",
             "related_field": "value",
             "content": "无水肿\n单侧水肿\n双侧不对称水肿\n双侧对称水肿"
         },
         {
-            "id": 242,
+            "id": 267,
             "name": "gender",
             "label": "性别",
             "related_field": "value",
             "content": "男\n女"
         },
         {
-            "id": 243,
+            "id": 268,
             "name": "nationality",
             "label": "民族",
             "related_field": "value",
             "content": "汉族\n少数民族"
         },
         {
-            "id": 244,
+            "id": 269,
             "name": "marital_status",
             "label": "婚姻状况",
             "related_field": "value",
             "content": "未婚\n已婚\n离异\n丧偶"
         },
         {
-            "id": 245,
+            "id": 270,
             "name": "education",
             "label": "文化程度",
             "related_field": "value",
             "content": "博士\n硕士\n本科\n大专\n中专技校\n高中\n初中\n小学\n文盲或半文盲"
         },
         {
-            "id": 246,
+            "id": 271,
             "name": "occupational_status",
             "label": "职业状况",
             "related_field": "value",
             "content": "在职\n失业\n退休"
         },
         {
-            "id": 247,
+            "id": 272,
             "name": "medical_expenses_burden",
             "label": "医疗费用负担",
             "related_field": "value",
             "content": "职工医疗保险\n城镇居民医疗保险\n商业保险\n自费\n公费\n贫困救助"
         },
         {
-            "id": 248,
+            "id": 273,
             "name": "type_of_residence",
             "label": "居住类型",
             "related_field": "value",
             "content": "常住\n非常住"
         },
         {
-            "id": 249,
+            "id": 274,
             "name": "blood_type",
             "label": "血型",
             "related_field": "value",
@@ -460,152 +460,171 @@
     ],
     "boolfields": [
         {
-            "id": 151,
+            "id": 152,
             "name": "boolfield_shi_fou_you_man_xing_ji_bing",
+            "name_new": null,
             "label": "是否有慢性疾病",
             "type": "1",
             "required": true,
             "default": "0"
         },
         {
-            "id": 135,
+            "id": 153,
             "name": "boolfield_do_you_often_work_overtime",
+            "name_new": null,
             "label": "是否经常加班",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 136,
+            "id": 154,
             "name": "boolfield_is_the_diet_regular",
+            "name_new": null,
             "label": "饮食是否规律",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 133,
+            "id": 155,
             "name": "boolfield_is_life_fun",
+            "name_new": null,
             "label": "您觉得生活是否有乐趣吗",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 134,
+            "id": 156,
             "name": "boolfield_do_you_feel_pressured_at_work",
+            "name_new": null,
             "label": "是否感觉到工作压力大",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 137,
+            "id": 157,
             "name": "boolfield_is_the_diet_proportion_healthy",
+            "name_new": null,
             "label": "饮食比例是否健康",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 138,
+            "id": 158,
             "name": "boolfield_whether_the_bowel_movements_are_regular",
+            "name_new": null,
             "label": "大便是否规律",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 139,
+            "id": 159,
             "name": "boolfield_whether_to_drink_alcohol",
+            "name_new": null,
             "label": "是否饮酒",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 140,
+            "id": 160,
             "name": "boolfield_do_you_smoke",
+            "name_new": null,
             "label": "是否吸烟",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 141,
+            "id": 161,
             "name": "boolfield_insomnia",
+            "name_new": null,
             "label": "是否有失眠情况",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 142,
+            "id": 162,
             "name": "boolfield_is_it_easy_to_get_sick",
+            "name_new": null,
             "label": "是否比别人容易生病",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 143,
+            "id": 163,
             "name": "boolfield_whether_the_living_environment_is_clean_and_hygienic",
+            "name_new": null,
             "label": "居住环境是否干净卫生",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 144,
+            "id": 164,
             "name": "boolfield_is_drinking_water_healthy",
+            "name_new": null,
             "label": "饮水是否健康",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 145,
+            "id": 165,
             "name": "boolfield_whether_there_is_noise_pollution",
+            "name_new": null,
             "label": "是否有噪声污染",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 146,
+            "id": 166,
             "name": "boolfield_whether_there_is_air_pollution",
+            "name_new": null,
             "label": "是否有空气污染",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 147,
+            "id": 167,
             "name": "boolfield_whether_there_is_other_pollution",
+            "name_new": null,
             "label": "是否有其他污染",
             "type": "0",
             "required": false,
             "default": "0"
         },
         {
-            "id": 148,
+            "id": 168,
             "name": "boolfield_contract_signatory",
+            "name_new": null,
             "label": "合同签约户",
             "type": "1",
             "required": false,
             "default": "0"
         },
         {
-            "id": 149,
+            "id": 169,
             "name": "boolfield_yu_yue_que_ren",
+            "name_new": null,
             "label": "签到确认",
             "type": "1",
             "required": true,
             "default": "1"
         },
         {
-            "id": 150,
+            "id": 170,
             "name": "boolfield_shi_fou_ji_xu_shi_yong",
+            "name_new": null,
             "label": "是否继续使用",
             "type": "1",
             "required": true,
@@ -614,8 +633,9 @@
     ],
     "characterfields": [
         {
-            "id": 197,
+            "id": 223,
             "name": "characterfield_supplementary_description_of_the_condition",
+            "name_new": null,
             "label": "病情补充描述",
             "type": "CharField",
             "length": 255,
@@ -623,8 +643,9 @@
             "default": null
         },
         {
-            "id": 198,
+            "id": 224,
             "name": "characterfield_working_hours_per_day",
+            "name_new": null,
             "label": "每天工作及工作往返总时长",
             "type": "TextField",
             "length": 255,
@@ -632,8 +653,9 @@
             "default": null
         },
         {
-            "id": 199,
+            "id": 225,
             "name": "characterfield_average_sleep_duration",
+            "name_new": null,
             "label": "平均睡眠时长",
             "type": "CharField",
             "length": 255,
@@ -641,8 +663,9 @@
             "default": null
         },
         {
-            "id": 200,
+            "id": 226,
             "name": "characterfield_duration_of_insomnia",
+            "name_new": null,
             "label": "持续失眠时间",
             "type": "CharField",
             "length": 255,
@@ -650,8 +673,9 @@
             "default": null
         },
         {
-            "id": 201,
+            "id": 227,
             "name": "characterfield_name",
+            "name_new": null,
             "label": "姓名",
             "type": "CharField",
             "length": 255,
@@ -659,8 +683,9 @@
             "default": null
         },
         {
-            "id": 202,
+            "id": 228,
             "name": "characterfield_gender",
+            "name_new": null,
             "label": "性别",
             "type": "CharField",
             "length": 255,
@@ -668,8 +693,9 @@
             "default": null
         },
         {
-            "id": 203,
+            "id": 229,
             "name": "characterfield_age",
+            "name_new": null,
             "label": "年龄",
             "type": "CharField",
             "length": 255,
@@ -677,8 +703,9 @@
             "default": null
         },
         {
-            "id": 204,
+            "id": 230,
             "name": "characterfield_identification_number",
+            "name_new": null,
             "label": "身份证号码",
             "type": "CharField",
             "length": 255,
@@ -686,8 +713,9 @@
             "default": null
         },
         {
-            "id": 205,
+            "id": 231,
             "name": "characterfield_contact_information",
+            "name_new": null,
             "label": "联系电话",
             "type": "CharField",
             "length": 255,
@@ -695,8 +723,9 @@
             "default": null
         },
         {
-            "id": 206,
+            "id": 232,
             "name": "characterfield_contact_address",
+            "name_new": null,
             "label": "联系地址",
             "type": "CharField",
             "length": 255,
@@ -704,8 +733,9 @@
             "default": null
         },
         {
-            "id": 207,
+            "id": 233,
             "name": "characterfield_practice_qualification",
+            "name_new": null,
             "label": "执业资质",
             "type": "CharField",
             "length": 255,
@@ -713,8 +743,9 @@
             "default": null
         },
         {
-            "id": 208,
+            "id": 234,
             "name": "characterfield_password_setting",
+            "name_new": null,
             "label": "密码设置",
             "type": "CharField",
             "length": 255,
@@ -722,8 +753,9 @@
             "default": null
         },
         {
-            "id": 209,
+            "id": 235,
             "name": "characterfield_confirm_password",
+            "name_new": null,
             "label": "确认密码",
             "type": "CharField",
             "length": 255,
@@ -731,8 +763,9 @@
             "default": null
         },
         {
-            "id": 210,
+            "id": 236,
             "name": "characterfield_expertise",
+            "name_new": null,
             "label": "专长",
             "type": "CharField",
             "length": 255,
@@ -740,8 +773,9 @@
             "default": null
         },
         {
-            "id": 211,
+            "id": 237,
             "name": "characterfield_practice_time",
+            "name_new": null,
             "label": "执业时间",
             "type": "CharField",
             "length": 255,
@@ -749,8 +783,9 @@
             "default": null
         },
         {
-            "id": 212,
+            "id": 238,
             "name": "characterfield_username",
+            "name_new": null,
             "label": "用户名",
             "type": "CharField",
             "length": 255,
@@ -758,8 +793,9 @@
             "default": null
         },
         {
-            "id": 213,
+            "id": 239,
             "name": "characterfield_password",
+            "name_new": null,
             "label": "密码",
             "type": "CharField",
             "length": 255,
@@ -767,8 +803,9 @@
             "default": null
         },
         {
-            "id": 214,
+            "id": 240,
             "name": "characterfield_service_role",
+            "name_new": null,
             "label": "服务角色",
             "type": "CharField",
             "length": 255,
@@ -776,8 +813,9 @@
             "default": null
         },
         {
-            "id": 215,
+            "id": 241,
             "name": "characterfield_left_eye_vision",
+            "name_new": null,
             "label": "左眼视力",
             "type": "CharField",
             "length": 255,
@@ -785,8 +823,9 @@
             "default": null
         },
         {
-            "id": 216,
+            "id": 242,
             "name": "characterfield_right_eye_vision",
+            "name_new": null,
             "label": "右眼视力",
             "type": "CharField",
             "length": 255,
@@ -794,8 +833,9 @@
             "default": null
         },
         {
-            "id": 217,
+            "id": 243,
             "name": "characterfield_resident_file_number",
+            "name_new": null,
             "label": "居民档案号",
             "type": "CharField",
             "length": 255,
@@ -803,8 +843,9 @@
             "default": null
         },
         {
-            "id": 218,
+            "id": 244,
             "name": "characterfield_family_address",
+            "name_new": null,
             "label": "家庭地址",
             "type": "CharField",
             "length": 255,
@@ -812,8 +853,9 @@
             "default": null
         },
         {
-            "id": 219,
+            "id": 245,
             "name": "characterfield_contact_number",
+            "name_new": null,
             "label": "联系电话",
             "type": "CharField",
             "length": 255,
@@ -821,8 +863,9 @@
             "default": null
         },
         {
-            "id": 220,
+            "id": 246,
             "name": "characterfield_medical_ic_card_number",
+            "name_new": null,
             "label": "医疗ic卡号",
             "type": "CharField",
             "length": 255,
@@ -830,8 +873,9 @@
             "default": null
         },
         {
-            "id": 221,
+            "id": 247,
             "name": "characterfield_yong_yao_ji_liang",
+            "name_new": null,
             "label": "用药剂量",
             "type": "CharField",
             "length": 255,
@@ -839,8 +883,9 @@
             "default": null
         },
         {
-            "id": 222,
+            "id": 248,
             "name": "characterfield_jian_kang_jiao_yu",
+            "name_new": null,
             "label": "健康教育",
             "type": "TextField",
             "length": 255,
@@ -850,8 +895,9 @@
     ],
     "numberfields": [
         {
-            "id": 89,
+            "id": 100,
             "name": "numberfield_body_temperature",
+            "name_new": null,
             "label": "体温",
             "type": "IntegerField",
             "max_digits": 10,
@@ -864,8 +910,9 @@
             "required": false
         },
         {
-            "id": 90,
+            "id": 101,
             "name": "numberfield_pulse",
+            "name_new": null,
             "label": "脉搏",
             "type": "IntegerField",
             "max_digits": 10,
@@ -878,8 +925,9 @@
             "required": false
         },
         {
-            "id": 91,
+            "id": 102,
             "name": "numberfield_respiratory_rate",
+            "name_new": null,
             "label": "呼吸频率",
             "type": "IntegerField",
             "max_digits": 10,
@@ -892,8 +940,9 @@
             "required": false
         },
         {
-            "id": 92,
+            "id": 103,
             "name": "numberfield_hight",
+            "name_new": null,
             "label": "身高",
             "type": "IntegerField",
             "max_digits": 10,
@@ -906,8 +955,9 @@
             "required": false
         },
         {
-            "id": 93,
+            "id": 104,
             "name": "numberfield_weight",
+            "name_new": null,
             "label": "体重",
             "type": "IntegerField",
             "max_digits": 10,
@@ -920,8 +970,9 @@
             "required": false
         },
         {
-            "id": 94,
+            "id": 105,
             "name": "numberfield_body_mass_index",
+            "name_new": null,
             "label": "体质指数",
             "type": "IntegerField",
             "max_digits": 10,
@@ -934,8 +985,9 @@
             "required": false
         },
         {
-            "id": 95,
+            "id": 106,
             "name": "numberfield_blood_transfusion",
+            "name_new": null,
             "label": "输血量",
             "type": "IntegerField",
             "max_digits": 10,
@@ -948,8 +1000,9 @@
             "required": false
         },
         {
-            "id": 96,
+            "id": 107,
             "name": "numberfield_systolic_blood_pressure",
+            "name_new": null,
             "label": "收缩压",
             "type": "IntegerField",
             "max_digits": 10,
@@ -962,8 +1015,9 @@
             "required": false
         },
         {
-            "id": 97,
+            "id": 108,
             "name": "numberfield_diastolic_blood_pressure",
+            "name_new": null,
             "label": "舒张压",
             "type": "IntegerField",
             "max_digits": 10,
@@ -976,8 +1030,9 @@
             "required": false
         },
         {
-            "id": 98,
+            "id": 109,
             "name": "numberfield_kong_fu_xue_tang",
+            "name_new": null,
             "label": "空腹血糖",
             "type": "DecimalField",
             "max_digits": 10,
@@ -990,8 +1045,9 @@
             "required": false
         },
         {
-            "id": 99,
+            "id": 110,
             "name": "numberfield_tang_hua_xue_hong_dan_bai",
+            "name_new": null,
             "label": "糖化血红蛋白",
             "type": "DecimalField",
             "max_digits": 10,
@@ -1006,32 +1062,36 @@
     ],
     "dtfields": [
         {
-            "id": 27,
+            "id": 31,
             "name": "datetimefield_date",
+            "name_new": null,
             "label": "日期",
             "type": "DateTimeField",
             "default_now": false,
             "required": false
         },
         {
-            "id": 28,
+            "id": 32,
             "name": "datetimefield_time_of_diagnosis",
+            "name_new": null,
             "label": "确诊时间",
             "type": "DateTimeField",
             "default_now": false,
             "required": false
         },
         {
-            "id": 29,
+            "id": 33,
             "name": "datetimefield_date_of_birth",
+            "name_new": null,
             "label": "出生日期",
             "type": "DateTimeField",
             "default_now": false,
             "required": false
         },
         {
-            "id": 30,
+            "id": 34,
             "name": "datetimefield_ri_qi_shi_jian",
+            "name_new": null,
             "label": "日期时间",
             "type": "DateTimeField",
             "default_now": false,
@@ -1040,1515 +1100,1543 @@
     ],
     "relatedfields": [
         {
-            "id": 337,
+            "id": 391,
+            "name": "relatedfield_symptom_list",
+            "name_new": null,
+            "label": "症状",
+            "type": "CheckboxSelectMultiple",
+            "related_content": "icpc3_symptoms_and_problems"
+        },
+        {
+            "id": 421,
+            "name": "relatedfield_chang_yong_zheng_zhuang",
+            "name_new": null,
+            "label": "常用症状",
+            "type": "CheckboxSelectMultiple",
+            "related_content": "icpc3_symptoms_and_problems"
+        },
+        {
+            "id": 379,
             "name": "relatedfield_family_id",
+            "name_new": null,
             "label": "家庭编号",
             "type": "Select",
-            "related_content": "icpc1_register_logins",
-            "related_field": "icpc_code"
+            "related_content": "icpc1_register_logins"
         },
         {
-            "id": 338,
+            "id": 380,
             "name": "relatedfield_gender",
+            "name_new": null,
             "label": "性别",
             "type": "Select",
-            "related_content": "gender",
-            "related_field": "id"
+            "related_content": "gender"
         },
         {
-            "id": 339,
+            "id": 381,
             "name": "relatedfield_nationality",
+            "name_new": null,
             "label": "民族",
             "type": "Select",
-            "related_content": "nationality",
-            "related_field": "id"
+            "related_content": "nationality"
         },
         {
-            "id": 340,
+            "id": 382,
             "name": "relatedfield_marital_status",
+            "name_new": null,
             "label": "婚姻状况",
             "type": "Select",
-            "related_content": "marital_status",
-            "related_field": "id"
+            "related_content": "marital_status"
         },
         {
-            "id": 341,
+            "id": 383,
             "name": "relatedfield_education",
+            "name_new": null,
             "label": "文化程度",
             "type": "Select",
-            "related_content": "education",
-            "related_field": "id"
+            "related_content": "education"
         },
         {
-            "id": 342,
+            "id": 384,
             "name": "relatedfield_occupational_status",
+            "name_new": null,
             "label": "职业状况",
             "type": "Select",
-            "related_content": "occupational_status",
-            "related_field": "id"
+            "related_content": "occupational_status"
         },
         {
-            "id": 343,
+            "id": 385,
             "name": "relatedfield_medical_expenses_burden",
+            "name_new": null,
             "label": "医疗费用负担",
             "type": "CheckboxSelectMultiple",
-            "related_content": "medical_expenses_burden",
-            "related_field": "id"
+            "related_content": "medical_expenses_burden"
         },
         {
-            "id": 344,
+            "id": 386,
             "name": "relatedfield_type_of_residence",
+            "name_new": null,
             "label": "居住类型",
             "type": "Select",
-            "related_content": "type_of_residence",
-            "related_field": "id"
+            "related_content": "type_of_residence"
         },
         {
-            "id": 345,
+            "id": 387,
             "name": "relatedfield_blood_type",
+            "name_new": null,
             "label": "血型",
             "type": "Select",
-            "related_content": "blood_type",
-            "related_field": "id"
+            "related_content": "blood_type"
         },
         {
-            "id": 346,
+            "id": 388,
             "name": "relatedfield_signed_family_doctor",
+            "name_new": null,
             "label": "签约家庭医生",
             "type": "Select",
-            "related_content": "staff",
-            "related_field": "staff_code"
+            "related_content": "staff"
         },
         {
-            "id": 347,
+            "id": 389,
             "name": "relatedfield_athletic_ability",
+            "name_new": null,
             "label": "运动能力",
             "type": "Select",
-            "related_content": "exercise_time",
-            "related_field": "id"
+            "related_content": "exercise_time"
         },
         {
-            "id": 348,
+            "id": 390,
             "name": "relatedfield_drug_name",
+            "name_new": null,
             "label": "药品名称",
             "type": "SelectMultiple",
-            "related_content": "medicine",
-            "related_field": "medicine_code"
+            "related_content": "medicine"
         },
         {
-            "id": 349,
-            "name": "relatedfield_symptom_list",
-            "label": "症状",
-            "type": "SelectMultiple",
-            "related_content": "icpc3_symptoms_and_problems",
-            "related_field": "icpc_code"
-        },
-        {
-            "id": 350,
+            "id": 392,
             "name": "relatedfield_personality_tendency",
+            "name_new": null,
             "label": "性格倾向",
             "type": "RadioSelect",
-            "related_content": "character",
-            "related_field": "id"
+            "related_content": "character"
         },
         {
-            "id": 351,
+            "id": 393,
             "name": "relatedfield_are_you_satisfied_with_the_job_and_life",
+            "name_new": null,
             "label": "对目前生活和工作满意吗",
             "type": "Select",
-            "related_content": "satisfaction",
-            "related_field": "id"
+            "related_content": "satisfaction"
         },
         {
-            "id": 352,
+            "id": 394,
             "name": "relatedfield_are_you_satisfied_with_your_adaptability",
+            "name_new": null,
             "label": "对自己的适应能力满意吗",
             "type": "Select",
-            "related_content": "satisfaction",
-            "related_field": "id"
+            "related_content": "satisfaction"
         },
         {
-            "id": 353,
+            "id": 395,
             "name": "relatedfield_can_you_get_encouragement_and_support_from_family",
+            "name_new": null,
             "label": "是否能得到家人朋友的鼓励和支持",
             "type": "Select",
-            "related_content": "frequency",
-            "related_field": "id"
+            "related_content": "frequency"
         },
         {
-            "id": 354,
+            "id": 396,
             "name": "relatedfield_drinking_frequency",
+            "name_new": null,
             "label": "饮酒频次",
             "type": "RadioSelect",
-            "related_content": "frequency",
-            "related_field": "id"
+            "related_content": "frequency"
         },
         {
-            "id": 355,
+            "id": 397,
             "name": "relatedfield_smoking_frequency",
+            "name_new": null,
             "label": "吸烟频次",
             "type": "RadioSelect",
-            "related_content": "frequency",
-            "related_field": "id"
+            "related_content": "frequency"
         },
         {
-            "id": 356,
+            "id": 398,
             "name": "relatedfield_own_health",
+            "name_new": null,
             "label": "觉得自身健康状况如何",
             "type": "RadioSelect",
-            "related_content": "state_degree",
-            "related_field": "id"
+            "related_content": "state_degree"
         },
         {
-            "id": 357,
+            "id": 399,
             "name": "relatedfield_compared_to_last_year",
+            "name_new": null,
             "label": "较之过去一年状态如何",
             "type": "Select",
-            "related_content": "comparative_expression",
-            "related_field": "id"
+            "related_content": "comparative_expression"
         },
         {
-            "id": 358,
+            "id": 400,
             "name": "relatedfield_sports_preference",
+            "name_new": null,
             "label": "运动偏好",
             "type": "Select",
-            "related_content": "sports_preference",
-            "related_field": "id"
+            "related_content": "sports_preference"
         },
         {
-            "id": 359,
+            "id": 401,
             "name": "relatedfield_exercise_time",
+            "name_new": null,
             "label": "运动时长",
             "type": "RadioSelect",
-            "related_content": "exercise_time",
-            "related_field": "id"
+            "related_content": "exercise_time"
         },
         {
-            "id": 360,
+            "id": 402,
             "name": "relatedfield_have_any_recent_symptoms_of_physical_discomfort",
+            "name_new": null,
             "label": "近来有无身体不适症状",
             "type": "CheckboxSelectMultiple",
-            "related_content": "icpc3_symptoms_and_problems",
-            "related_field": "icpc_code"
+            "related_content": "icpc3_symptoms_and_problems"
         },
         {
-            "id": 361,
+            "id": 403,
             "name": "relatedfield_is_the_living_environment_satisfactory",
+            "name_new": null,
             "label": "您对居住环境满意吗",
             "type": "Select",
-            "related_content": "satisfaction",
-            "related_field": "id"
+            "related_content": "satisfaction"
         },
         {
-            "id": 362,
+            "id": 404,
             "name": "relatedfield_is_the_transportation_convenient",
+            "name_new": null,
             "label": "您所在的社区交通方便吗",
             "type": "Select",
-            "related_content": "convenience",
-            "related_field": "id"
+            "related_content": "convenience"
         },
         {
-            "id": 363,
+            "id": 405,
             "name": "relatedfield_diseases",
+            "name_new": null,
             "label": "病名",
             "type": "Select",
-            "related_content": "icpc5_evaluation_and_diagnoses",
-            "related_field": "icpc_code"
+            "related_content": "icpc5_evaluation_and_diagnoses"
         },
         {
-            "id": 364,
+            "id": 406,
             "name": "relatedfield_family_relationship",
+            "name_new": null,
             "label": "家庭成员关系",
             "type": "Select",
-            "related_content": "family_relationship",
-            "related_field": "id"
+            "related_content": "family_relationship"
         },
         {
-            "id": 365,
+            "id": 407,
             "name": "relatedfield_disease_name",
+            "name_new": null,
             "label": "疾病名称",
             "type": "Select",
-            "related_content": "icpc5_evaluation_and_diagnoses",
-            "related_field": "icpc_code"
+            "related_content": "icpc5_evaluation_and_diagnoses"
         },
         {
-            "id": 366,
+            "id": 408,
             "name": "relatedfield_fundus",
+            "name_new": null,
             "label": "眼底",
             "type": "Select",
-            "related_content": "normality",
-            "related_field": "id"
+            "related_content": "normality"
         },
         {
-            "id": 367,
+            "id": 409,
             "name": "relatedfield_service_role",
+            "name_new": null,
             "label": "服务角色",
             "type": "CheckboxSelectMultiple",
-            "related_content": "role",
-            "related_field": "role_code"
+            "related_content": "role"
         },
         {
-            "id": 368,
+            "id": 410,
             "name": "relatedfield_affiliation",
+            "name_new": null,
             "label": "所属机构",
             "type": "RadioSelect",
-            "related_content": "institution",
-            "related_field": "institution_code"
+            "related_content": "institution"
         },
         {
-            "id": 369,
+            "id": 411,
             "name": "relatedfield_left_foot",
+            "name_new": null,
             "label": "左脚",
             "type": "RadioSelect",
-            "related_content": "dorsal_artery_pulsation",
-            "related_field": "id"
+            "related_content": "dorsal_artery_pulsation"
         },
         {
-            "id": 370,
+            "id": 412,
             "name": "relatedfield_right_foot",
+            "name_new": null,
             "label": "右脚",
             "type": "RadioSelect",
-            "related_content": "dorsal_artery_pulsation",
-            "related_field": "id"
+            "related_content": "dorsal_artery_pulsation"
         },
         {
-            "id": 371,
+            "id": 413,
             "name": "relatedfield_left_ear_hearing",
+            "name_new": null,
             "label": "左耳听力",
             "type": "Select",
-            "related_content": "hearing",
-            "related_field": "id"
+            "related_content": "hearing"
         },
         {
-            "id": 372,
+            "id": 414,
             "name": "relatedfield_right_ear_hearing",
+            "name_new": null,
             "label": "右耳听力",
             "type": "Select",
-            "related_content": "hearing",
-            "related_field": "id"
+            "related_content": "hearing"
         },
         {
-            "id": 373,
+            "id": 415,
             "name": "relatedfield_name_of_operation",
+            "name_new": null,
             "label": "手术名称",
             "type": "RadioSelect",
-            "related_content": "icpc7_treatments",
-            "related_field": "icpc_code"
+            "related_content": "icpc7_treatments"
         },
         {
-            "id": 374,
+            "id": 416,
             "name": "relatedfield_lips",
+            "name_new": null,
             "label": "口唇",
             "type": "RadioSelect",
-            "related_content": "lips",
-            "related_field": "id"
+            "related_content": "lips"
         },
         {
-            "id": 375,
+            "id": 417,
             "name": "relatedfield_dentition",
+            "name_new": null,
             "label": "齿列",
             "type": "RadioSelect",
-            "related_content": "dentition",
-            "related_field": "id"
+            "related_content": "dentition"
         },
         {
-            "id": 376,
+            "id": 418,
             "name": "relatedfield_pharynx",
+            "name_new": null,
             "label": "咽部",
             "type": "Select",
-            "related_content": "pharynx",
-            "related_field": "id"
+            "related_content": "pharynx"
         },
         {
-            "id": 377,
+            "id": 419,
             "name": "relatedfield_major_life",
+            "name_new": null,
             "label": "生活事件",
             "type": "CheckboxSelectMultiple",
-            "related_content": "life_event",
-            "related_field": "id"
+            "related_content": "life_event"
         },
         {
-            "id": 378,
+            "id": 420,
             "name": "relatedfield_lower_extremity_edema",
+            "name_new": null,
             "label": "下肢水肿",
             "type": "RadioSelect",
-            "related_content": "edema",
-            "related_field": "id"
+            "related_content": "edema"
         }
     ],
     "choicefields": [],
     "components": [
         {
-            "id": 781,
-            "name": "boolfield_is_life_fun",
-            "label": "您觉得生活是否有乐趣吗",
-            "content_type": 7,
-            "object_id": 133
-        },
-        {
-            "id": 782,
-            "name": "boolfield_do_you_feel_pressured_at_work",
-            "label": "是否感觉到工作压力大",
-            "content_type": 7,
-            "object_id": 134
-        },
-        {
-            "id": 783,
-            "name": "boolfield_do_you_often_work_overtime",
-            "label": "是否经常加班",
-            "content_type": 7,
-            "object_id": 135
-        },
-        {
-            "id": 784,
-            "name": "boolfield_is_the_diet_regular",
-            "label": "饮食是否规律",
-            "content_type": 7,
-            "object_id": 136
-        },
-        {
-            "id": 785,
-            "name": "boolfield_is_the_diet_proportion_healthy",
-            "label": "饮食比例是否健康",
-            "content_type": 7,
-            "object_id": 137
-        },
-        {
-            "id": 786,
-            "name": "boolfield_whether_the_bowel_movements_are_regular",
-            "label": "大便是否规律",
-            "content_type": 7,
-            "object_id": 138
-        },
-        {
-            "id": 787,
-            "name": "boolfield_whether_to_drink_alcohol",
-            "label": "是否饮酒",
-            "content_type": 7,
-            "object_id": 139
-        },
-        {
-            "id": 788,
-            "name": "boolfield_do_you_smoke",
-            "label": "是否吸烟",
-            "content_type": 7,
-            "object_id": 140
-        },
-        {
-            "id": 789,
-            "name": "boolfield_insomnia",
-            "label": "是否有失眠情况",
-            "content_type": 7,
-            "object_id": 141
-        },
-        {
-            "id": 790,
-            "name": "boolfield_is_it_easy_to_get_sick",
-            "label": "是否比别人容易生病",
-            "content_type": 7,
-            "object_id": 142
-        },
-        {
-            "id": 791,
-            "name": "boolfield_whether_the_living_environment_is_clean_and_hygienic",
-            "label": "居住环境是否干净卫生",
-            "content_type": 7,
-            "object_id": 143
-        },
-        {
-            "id": 792,
-            "name": "boolfield_is_drinking_water_healthy",
-            "label": "饮水是否健康",
-            "content_type": 7,
-            "object_id": 144
-        },
-        {
-            "id": 793,
-            "name": "boolfield_whether_there_is_noise_pollution",
-            "label": "是否有噪声污染",
-            "content_type": 7,
-            "object_id": 145
-        },
-        {
-            "id": 794,
-            "name": "boolfield_whether_there_is_air_pollution",
-            "label": "是否有空气污染",
-            "content_type": 7,
-            "object_id": 146
-        },
-        {
-            "id": 795,
-            "name": "boolfield_whether_there_is_other_pollution",
-            "label": "是否有其他污染",
-            "content_type": 7,
-            "object_id": 147
-        },
-        {
-            "id": 796,
-            "name": "boolfield_contract_signatory",
-            "label": "合同签约户",
-            "content_type": 7,
-            "object_id": 148
-        },
-        {
-            "id": 797,
-            "name": "boolfield_yu_yue_que_ren",
-            "label": "签到确认",
-            "content_type": 7,
-            "object_id": 149
-        },
-        {
-            "id": 798,
-            "name": "boolfield_shi_fou_ji_xu_shi_yong",
-            "label": "是否继续使用",
-            "content_type": 7,
-            "object_id": 150
-        },
-        {
-            "id": 799,
-            "name": "characterfield_supplementary_description_of_the_condition",
-            "label": "病情补充描述",
-            "content_type": 8,
-            "object_id": 197
-        },
-        {
-            "id": 800,
-            "name": "characterfield_working_hours_per_day",
-            "label": "每天工作及工作往返总时长",
-            "content_type": 8,
-            "object_id": 198
-        },
-        {
-            "id": 801,
-            "name": "characterfield_average_sleep_duration",
-            "label": "平均睡眠时长",
-            "content_type": 8,
-            "object_id": 199
-        },
-        {
-            "id": 802,
-            "name": "characterfield_duration_of_insomnia",
-            "label": "持续失眠时间",
-            "content_type": 8,
-            "object_id": 200
-        },
-        {
-            "id": 803,
-            "name": "characterfield_name",
-            "label": "姓名",
-            "content_type": 8,
-            "object_id": 201
-        },
-        {
-            "id": 804,
-            "name": "characterfield_gender",
-            "label": "性别",
-            "content_type": 8,
-            "object_id": 202
-        },
-        {
-            "id": 805,
-            "name": "characterfield_age",
-            "label": "年龄",
-            "content_type": 8,
-            "object_id": 203
-        },
-        {
-            "id": 806,
-            "name": "characterfield_identification_number",
-            "label": "身份证号码",
-            "content_type": 8,
-            "object_id": 204
-        },
-        {
-            "id": 807,
-            "name": "characterfield_contact_information",
-            "label": "联系电话",
-            "content_type": 8,
-            "object_id": 205
-        },
-        {
-            "id": 808,
-            "name": "characterfield_contact_address",
-            "label": "联系地址",
-            "content_type": 8,
-            "object_id": 206
-        },
-        {
-            "id": 809,
-            "name": "characterfield_practice_qualification",
-            "label": "执业资质",
-            "content_type": 8,
-            "object_id": 207
-        },
-        {
-            "id": 810,
-            "name": "characterfield_password_setting",
-            "label": "密码设置",
-            "content_type": 8,
-            "object_id": 208
-        },
-        {
-            "id": 811,
-            "name": "characterfield_confirm_password",
-            "label": "确认密码",
-            "content_type": 8,
-            "object_id": 209
-        },
-        {
-            "id": 812,
-            "name": "characterfield_expertise",
-            "label": "专长",
-            "content_type": 8,
-            "object_id": 210
-        },
-        {
-            "id": 813,
-            "name": "characterfield_practice_time",
-            "label": "执业时间",
-            "content_type": 8,
-            "object_id": 211
-        },
-        {
-            "id": 814,
-            "name": "characterfield_username",
-            "label": "用户名",
-            "content_type": 8,
-            "object_id": 212
-        },
-        {
-            "id": 815,
-            "name": "characterfield_password",
-            "label": "密码",
-            "content_type": 8,
-            "object_id": 213
-        },
-        {
-            "id": 816,
-            "name": "characterfield_service_role",
-            "label": "服务角色",
-            "content_type": 8,
-            "object_id": 214
-        },
-        {
-            "id": 817,
-            "name": "characterfield_left_eye_vision",
-            "label": "左眼视力",
-            "content_type": 8,
-            "object_id": 215
-        },
-        {
-            "id": 818,
-            "name": "characterfield_right_eye_vision",
-            "label": "右眼视力",
-            "content_type": 8,
-            "object_id": 216
-        },
-        {
-            "id": 819,
-            "name": "characterfield_resident_file_number",
-            "label": "居民档案号",
-            "content_type": 8,
-            "object_id": 217
-        },
-        {
-            "id": 820,
-            "name": "characterfield_family_address",
-            "label": "家庭地址",
-            "content_type": 8,
-            "object_id": 218
-        },
-        {
-            "id": 821,
-            "name": "characterfield_contact_number",
-            "label": "联系电话",
-            "content_type": 8,
-            "object_id": 219
-        },
-        {
-            "id": 822,
-            "name": "characterfield_medical_ic_card_number",
-            "label": "医疗ic卡号",
-            "content_type": 8,
-            "object_id": 220
-        },
-        {
-            "id": 823,
-            "name": "characterfield_yong_yao_ji_liang",
-            "label": "用药剂量",
-            "content_type": 8,
-            "object_id": 221
-        },
-        {
-            "id": 824,
-            "name": "characterfield_jian_kang_jiao_yu",
-            "label": "健康教育",
-            "content_type": 8,
-            "object_id": 222
-        },
-        {
-            "id": 825,
-            "name": "numberfield_body_temperature",
-            "label": "体温",
-            "content_type": 12,
-            "object_id": 89
-        },
-        {
-            "id": 826,
-            "name": "numberfield_pulse",
-            "label": "脉搏",
-            "content_type": 12,
-            "object_id": 90
-        },
-        {
-            "id": 827,
-            "name": "numberfield_respiratory_rate",
-            "label": "呼吸频率",
-            "content_type": 12,
-            "object_id": 91
-        },
-        {
-            "id": 828,
-            "name": "numberfield_hight",
-            "label": "身高",
-            "content_type": 12,
-            "object_id": 92
-        },
-        {
-            "id": 829,
-            "name": "numberfield_weight",
-            "label": "体重",
-            "content_type": 12,
-            "object_id": 93
-        },
-        {
-            "id": 830,
-            "name": "numberfield_body_mass_index",
-            "label": "体质指数",
-            "content_type": 12,
-            "object_id": 94
-        },
-        {
-            "id": 831,
-            "name": "numberfield_blood_transfusion",
-            "label": "输血量",
-            "content_type": 12,
-            "object_id": 95
-        },
-        {
-            "id": 832,
-            "name": "numberfield_systolic_blood_pressure",
-            "label": "收缩压",
-            "content_type": 12,
-            "object_id": 96
-        },
-        {
-            "id": 833,
-            "name": "numberfield_diastolic_blood_pressure",
-            "label": "舒张压",
-            "content_type": 12,
-            "object_id": 97
-        },
-        {
-            "id": 834,
-            "name": "numberfield_kong_fu_xue_tang",
-            "label": "空腹血糖",
-            "content_type": 12,
-            "object_id": 98
-        },
-        {
-            "id": 835,
-            "name": "numberfield_tang_hua_xue_hong_dan_bai",
-            "label": "糖化血红蛋白",
-            "content_type": 12,
-            "object_id": 99
-        },
-        {
-            "id": 836,
-            "name": "datetimefield_date",
-            "label": "日期",
-            "content_type": 11,
-            "object_id": 27
-        },
-        {
-            "id": 837,
-            "name": "datetimefield_time_of_diagnosis",
-            "label": "确诊时间",
-            "content_type": 11,
-            "object_id": 28
-        },
-        {
-            "id": 838,
-            "name": "datetimefield_date_of_birth",
-            "label": "出生日期",
-            "content_type": 11,
-            "object_id": 29
-        },
-        {
-            "id": 839,
-            "name": "datetimefield_ri_qi_shi_jian",
-            "label": "日期时间",
-            "content_type": 11,
-            "object_id": 30
-        },
-        {
-            "id": 840,
-            "name": "relatedfield_family_id",
-            "label": "家庭编号",
-            "content_type": 13,
-            "object_id": 337
-        },
-        {
-            "id": 841,
-            "name": "relatedfield_gender",
-            "label": "性别",
-            "content_type": 13,
-            "object_id": 338
-        },
-        {
-            "id": 842,
-            "name": "relatedfield_nationality",
-            "label": "民族",
-            "content_type": 13,
-            "object_id": 339
-        },
-        {
-            "id": 843,
-            "name": "relatedfield_marital_status",
-            "label": "婚姻状况",
-            "content_type": 13,
-            "object_id": 340
-        },
-        {
-            "id": 844,
-            "name": "relatedfield_education",
-            "label": "文化程度",
-            "content_type": 13,
-            "object_id": 341
-        },
-        {
-            "id": 845,
-            "name": "relatedfield_occupational_status",
-            "label": "职业状况",
-            "content_type": 13,
-            "object_id": 342
-        },
-        {
-            "id": 846,
-            "name": "relatedfield_medical_expenses_burden",
-            "label": "医疗费用负担",
-            "content_type": 13,
-            "object_id": 343
-        },
-        {
-            "id": 847,
-            "name": "relatedfield_type_of_residence",
-            "label": "居住类型",
-            "content_type": 13,
-            "object_id": 344
-        },
-        {
-            "id": 848,
-            "name": "relatedfield_blood_type",
-            "label": "血型",
-            "content_type": 13,
-            "object_id": 345
-        },
-        {
-            "id": 849,
-            "name": "relatedfield_signed_family_doctor",
-            "label": "签约家庭医生",
-            "content_type": 13,
-            "object_id": 346
-        },
-        {
-            "id": 850,
-            "name": "relatedfield_athletic_ability",
-            "label": "运动能力",
-            "content_type": 13,
-            "object_id": 347
-        },
-        {
-            "id": 851,
-            "name": "relatedfield_drug_name",
-            "label": "药品名称",
-            "content_type": 13,
-            "object_id": 348
-        },
-        {
-            "id": 852,
-            "name": "relatedfield_symptom_list",
-            "label": "症状",
-            "content_type": 13,
-            "object_id": 349
-        },
-        {
-            "id": 853,
-            "name": "relatedfield_personality_tendency",
-            "label": "性格倾向",
-            "content_type": 13,
-            "object_id": 350
-        },
-        {
-            "id": 854,
-            "name": "relatedfield_are_you_satisfied_with_the_job_and_life",
-            "label": "对目前生活和工作满意吗",
-            "content_type": 13,
-            "object_id": 351
-        },
-        {
-            "id": 855,
-            "name": "relatedfield_are_you_satisfied_with_your_adaptability",
-            "label": "对自己的适应能力满意吗",
-            "content_type": 13,
-            "object_id": 352
-        },
-        {
-            "id": 856,
-            "name": "relatedfield_can_you_get_encouragement_and_support_from_family",
-            "label": "是否能得到家人朋友的鼓励和支持",
-            "content_type": 13,
-            "object_id": 353
-        },
-        {
-            "id": 857,
-            "name": "relatedfield_drinking_frequency",
-            "label": "饮酒频次",
-            "content_type": 13,
-            "object_id": 354
-        },
-        {
-            "id": 858,
-            "name": "relatedfield_smoking_frequency",
-            "label": "吸烟频次",
-            "content_type": 13,
-            "object_id": 355
-        },
-        {
-            "id": 859,
-            "name": "relatedfield_own_health",
-            "label": "觉得自身健康状况如何",
-            "content_type": 13,
-            "object_id": 356
-        },
-        {
-            "id": 860,
-            "name": "relatedfield_compared_to_last_year",
-            "label": "较之过去一年状态如何",
-            "content_type": 13,
-            "object_id": 357
-        },
-        {
-            "id": 861,
-            "name": "relatedfield_sports_preference",
-            "label": "运动偏好",
-            "content_type": 13,
-            "object_id": 358
-        },
-        {
-            "id": 862,
-            "name": "relatedfield_exercise_time",
-            "label": "运动时长",
-            "content_type": 13,
-            "object_id": 359
-        },
-        {
-            "id": 863,
-            "name": "relatedfield_have_any_recent_symptoms_of_physical_discomfort",
-            "label": "近来有无身体不适症状",
-            "content_type": 13,
-            "object_id": 360
-        },
-        {
-            "id": 864,
-            "name": "relatedfield_is_the_living_environment_satisfactory",
-            "label": "您对居住环境满意吗",
-            "content_type": 13,
-            "object_id": 361
-        },
-        {
-            "id": 865,
-            "name": "relatedfield_is_the_transportation_convenient",
-            "label": "您所在的社区交通方便吗",
-            "content_type": 13,
-            "object_id": 362
-        },
-        {
-            "id": 866,
-            "name": "relatedfield_diseases",
-            "label": "病名",
-            "content_type": 13,
-            "object_id": 363
-        },
-        {
-            "id": 867,
-            "name": "relatedfield_family_relationship",
-            "label": "家庭成员关系",
-            "content_type": 13,
-            "object_id": 364
-        },
-        {
-            "id": 868,
-            "name": "relatedfield_disease_name",
-            "label": "疾病名称",
-            "content_type": 13,
-            "object_id": 365
-        },
-        {
-            "id": 869,
-            "name": "relatedfield_fundus",
-            "label": "眼底",
-            "content_type": 13,
-            "object_id": 366
-        },
-        {
-            "id": 870,
-            "name": "relatedfield_service_role",
-            "label": "服务角色",
-            "content_type": 13,
-            "object_id": 367
-        },
-        {
-            "id": 871,
-            "name": "relatedfield_affiliation",
-            "label": "所属机构",
-            "content_type": 13,
-            "object_id": 368
-        },
-        {
-            "id": 872,
-            "name": "relatedfield_left_foot",
-            "label": "左脚",
-            "content_type": 13,
-            "object_id": 369
-        },
-        {
-            "id": 873,
-            "name": "relatedfield_right_foot",
-            "label": "右脚",
-            "content_type": 13,
-            "object_id": 370
-        },
-        {
-            "id": 874,
-            "name": "relatedfield_left_ear_hearing",
-            "label": "左耳听力",
-            "content_type": 13,
-            "object_id": 371
-        },
-        {
-            "id": 875,
-            "name": "relatedfield_right_ear_hearing",
-            "label": "右耳听力",
-            "content_type": 13,
-            "object_id": 372
-        },
-        {
-            "id": 876,
-            "name": "relatedfield_name_of_operation",
-            "label": "手术名称",
-            "content_type": 13,
-            "object_id": 373
-        },
-        {
-            "id": 877,
-            "name": "relatedfield_lips",
-            "label": "口唇",
-            "content_type": 13,
-            "object_id": 374
-        },
-        {
-            "id": 878,
-            "name": "relatedfield_dentition",
-            "label": "齿列",
-            "content_type": 13,
-            "object_id": 375
-        },
-        {
-            "id": 879,
-            "name": "relatedfield_pharynx",
-            "label": "咽部",
-            "content_type": 13,
-            "object_id": 376
-        },
-        {
-            "id": 880,
-            "name": "relatedfield_major_life",
-            "label": "生活事件",
-            "content_type": 13,
-            "object_id": 377
-        },
-        {
-            "id": 881,
-            "name": "relatedfield_lower_extremity_edema",
-            "label": "下肢水肿",
-            "content_type": 13,
-            "object_id": 378
-        },
-        {
-            "id": 882,
+            "id": 883,
             "name": "boolfield_shi_fou_you_man_xing_ji_bing",
             "label": "是否有慢性疾病",
             "content_type": 7,
-            "object_id": 151
+            "object_id": 152
+        },
+        {
+            "id": 884,
+            "name": "boolfield_do_you_often_work_overtime",
+            "label": "是否经常加班",
+            "content_type": 7,
+            "object_id": 153
+        },
+        {
+            "id": 885,
+            "name": "boolfield_is_the_diet_regular",
+            "label": "饮食是否规律",
+            "content_type": 7,
+            "object_id": 154
+        },
+        {
+            "id": 886,
+            "name": "boolfield_is_life_fun",
+            "label": "您觉得生活是否有乐趣吗",
+            "content_type": 7,
+            "object_id": 155
+        },
+        {
+            "id": 887,
+            "name": "boolfield_do_you_feel_pressured_at_work",
+            "label": "是否感觉到工作压力大",
+            "content_type": 7,
+            "object_id": 156
+        },
+        {
+            "id": 888,
+            "name": "boolfield_is_the_diet_proportion_healthy",
+            "label": "饮食比例是否健康",
+            "content_type": 7,
+            "object_id": 157
+        },
+        {
+            "id": 889,
+            "name": "boolfield_whether_the_bowel_movements_are_regular",
+            "label": "大便是否规律",
+            "content_type": 7,
+            "object_id": 158
+        },
+        {
+            "id": 890,
+            "name": "boolfield_whether_to_drink_alcohol",
+            "label": "是否饮酒",
+            "content_type": 7,
+            "object_id": 159
+        },
+        {
+            "id": 891,
+            "name": "boolfield_do_you_smoke",
+            "label": "是否吸烟",
+            "content_type": 7,
+            "object_id": 160
+        },
+        {
+            "id": 892,
+            "name": "boolfield_insomnia",
+            "label": "是否有失眠情况",
+            "content_type": 7,
+            "object_id": 161
+        },
+        {
+            "id": 893,
+            "name": "boolfield_is_it_easy_to_get_sick",
+            "label": "是否比别人容易生病",
+            "content_type": 7,
+            "object_id": 162
+        },
+        {
+            "id": 894,
+            "name": "boolfield_whether_the_living_environment_is_clean_and_hygienic",
+            "label": "居住环境是否干净卫生",
+            "content_type": 7,
+            "object_id": 163
+        },
+        {
+            "id": 895,
+            "name": "boolfield_is_drinking_water_healthy",
+            "label": "饮水是否健康",
+            "content_type": 7,
+            "object_id": 164
+        },
+        {
+            "id": 896,
+            "name": "boolfield_whether_there_is_noise_pollution",
+            "label": "是否有噪声污染",
+            "content_type": 7,
+            "object_id": 165
+        },
+        {
+            "id": 897,
+            "name": "boolfield_whether_there_is_air_pollution",
+            "label": "是否有空气污染",
+            "content_type": 7,
+            "object_id": 166
+        },
+        {
+            "id": 898,
+            "name": "boolfield_whether_there_is_other_pollution",
+            "label": "是否有其他污染",
+            "content_type": 7,
+            "object_id": 167
+        },
+        {
+            "id": 899,
+            "name": "boolfield_contract_signatory",
+            "label": "合同签约户",
+            "content_type": 7,
+            "object_id": 168
+        },
+        {
+            "id": 900,
+            "name": "boolfield_yu_yue_que_ren",
+            "label": "签到确认",
+            "content_type": 7,
+            "object_id": 169
+        },
+        {
+            "id": 901,
+            "name": "boolfield_shi_fou_ji_xu_shi_yong",
+            "label": "是否继续使用",
+            "content_type": 7,
+            "object_id": 170
+        },
+        {
+            "id": 902,
+            "name": "characterfield_supplementary_description_of_the_condition",
+            "label": "病情补充描述",
+            "content_type": 8,
+            "object_id": 223
+        },
+        {
+            "id": 903,
+            "name": "characterfield_working_hours_per_day",
+            "label": "每天工作及工作往返总时长",
+            "content_type": 8,
+            "object_id": 224
+        },
+        {
+            "id": 904,
+            "name": "characterfield_average_sleep_duration",
+            "label": "平均睡眠时长",
+            "content_type": 8,
+            "object_id": 225
+        },
+        {
+            "id": 905,
+            "name": "characterfield_duration_of_insomnia",
+            "label": "持续失眠时间",
+            "content_type": 8,
+            "object_id": 226
+        },
+        {
+            "id": 906,
+            "name": "characterfield_name",
+            "label": "姓名",
+            "content_type": 8,
+            "object_id": 227
+        },
+        {
+            "id": 907,
+            "name": "characterfield_gender",
+            "label": "性别",
+            "content_type": 8,
+            "object_id": 228
+        },
+        {
+            "id": 908,
+            "name": "characterfield_age",
+            "label": "年龄",
+            "content_type": 8,
+            "object_id": 229
+        },
+        {
+            "id": 909,
+            "name": "characterfield_identification_number",
+            "label": "身份证号码",
+            "content_type": 8,
+            "object_id": 230
+        },
+        {
+            "id": 910,
+            "name": "characterfield_contact_information",
+            "label": "联系电话",
+            "content_type": 8,
+            "object_id": 231
+        },
+        {
+            "id": 911,
+            "name": "characterfield_contact_address",
+            "label": "联系地址",
+            "content_type": 8,
+            "object_id": 232
+        },
+        {
+            "id": 912,
+            "name": "characterfield_practice_qualification",
+            "label": "执业资质",
+            "content_type": 8,
+            "object_id": 233
+        },
+        {
+            "id": 913,
+            "name": "characterfield_password_setting",
+            "label": "密码设置",
+            "content_type": 8,
+            "object_id": 234
+        },
+        {
+            "id": 914,
+            "name": "characterfield_confirm_password",
+            "label": "确认密码",
+            "content_type": 8,
+            "object_id": 235
+        },
+        {
+            "id": 915,
+            "name": "characterfield_expertise",
+            "label": "专长",
+            "content_type": 8,
+            "object_id": 236
+        },
+        {
+            "id": 916,
+            "name": "characterfield_practice_time",
+            "label": "执业时间",
+            "content_type": 8,
+            "object_id": 237
+        },
+        {
+            "id": 917,
+            "name": "characterfield_username",
+            "label": "用户名",
+            "content_type": 8,
+            "object_id": 238
+        },
+        {
+            "id": 918,
+            "name": "characterfield_password",
+            "label": "密码",
+            "content_type": 8,
+            "object_id": 239
+        },
+        {
+            "id": 919,
+            "name": "characterfield_service_role",
+            "label": "服务角色",
+            "content_type": 8,
+            "object_id": 240
+        },
+        {
+            "id": 920,
+            "name": "characterfield_left_eye_vision",
+            "label": "左眼视力",
+            "content_type": 8,
+            "object_id": 241
+        },
+        {
+            "id": 921,
+            "name": "characterfield_right_eye_vision",
+            "label": "右眼视力",
+            "content_type": 8,
+            "object_id": 242
+        },
+        {
+            "id": 922,
+            "name": "characterfield_resident_file_number",
+            "label": "居民档案号",
+            "content_type": 8,
+            "object_id": 243
+        },
+        {
+            "id": 923,
+            "name": "characterfield_family_address",
+            "label": "家庭地址",
+            "content_type": 8,
+            "object_id": 244
+        },
+        {
+            "id": 924,
+            "name": "characterfield_contact_number",
+            "label": "联系电话",
+            "content_type": 8,
+            "object_id": 245
+        },
+        {
+            "id": 925,
+            "name": "characterfield_medical_ic_card_number",
+            "label": "医疗ic卡号",
+            "content_type": 8,
+            "object_id": 246
+        },
+        {
+            "id": 926,
+            "name": "characterfield_yong_yao_ji_liang",
+            "label": "用药剂量",
+            "content_type": 8,
+            "object_id": 247
+        },
+        {
+            "id": 927,
+            "name": "characterfield_jian_kang_jiao_yu",
+            "label": "健康教育",
+            "content_type": 8,
+            "object_id": 248
+        },
+        {
+            "id": 928,
+            "name": "numberfield_body_temperature",
+            "label": "体温",
+            "content_type": 12,
+            "object_id": 100
+        },
+        {
+            "id": 929,
+            "name": "numberfield_pulse",
+            "label": "脉搏",
+            "content_type": 12,
+            "object_id": 101
+        },
+        {
+            "id": 930,
+            "name": "numberfield_respiratory_rate",
+            "label": "呼吸频率",
+            "content_type": 12,
+            "object_id": 102
+        },
+        {
+            "id": 931,
+            "name": "numberfield_hight",
+            "label": "身高",
+            "content_type": 12,
+            "object_id": 103
+        },
+        {
+            "id": 932,
+            "name": "numberfield_weight",
+            "label": "体重",
+            "content_type": 12,
+            "object_id": 104
+        },
+        {
+            "id": 933,
+            "name": "numberfield_body_mass_index",
+            "label": "体质指数",
+            "content_type": 12,
+            "object_id": 105
+        },
+        {
+            "id": 934,
+            "name": "numberfield_blood_transfusion",
+            "label": "输血量",
+            "content_type": 12,
+            "object_id": 106
+        },
+        {
+            "id": 935,
+            "name": "numberfield_systolic_blood_pressure",
+            "label": "收缩压",
+            "content_type": 12,
+            "object_id": 107
+        },
+        {
+            "id": 936,
+            "name": "numberfield_diastolic_blood_pressure",
+            "label": "舒张压",
+            "content_type": 12,
+            "object_id": 108
+        },
+        {
+            "id": 937,
+            "name": "numberfield_kong_fu_xue_tang",
+            "label": "空腹血糖",
+            "content_type": 12,
+            "object_id": 109
+        },
+        {
+            "id": 938,
+            "name": "numberfield_tang_hua_xue_hong_dan_bai",
+            "label": "糖化血红蛋白",
+            "content_type": 12,
+            "object_id": 110
+        },
+        {
+            "id": 939,
+            "name": "datetimefield_date",
+            "label": "日期",
+            "content_type": 11,
+            "object_id": 31
+        },
+        {
+            "id": 940,
+            "name": "datetimefield_time_of_diagnosis",
+            "label": "确诊时间",
+            "content_type": 11,
+            "object_id": 32
+        },
+        {
+            "id": 941,
+            "name": "datetimefield_date_of_birth",
+            "label": "出生日期",
+            "content_type": 11,
+            "object_id": 33
+        },
+        {
+            "id": 942,
+            "name": "datetimefield_ri_qi_shi_jian",
+            "label": "日期时间",
+            "content_type": 11,
+            "object_id": 34
+        },
+        {
+            "id": 943,
+            "name": "relatedfield_family_id",
+            "label": "家庭编号",
+            "content_type": 13,
+            "object_id": 379
+        },
+        {
+            "id": 944,
+            "name": "relatedfield_gender",
+            "label": "性别",
+            "content_type": 13,
+            "object_id": 380
+        },
+        {
+            "id": 945,
+            "name": "relatedfield_nationality",
+            "label": "民族",
+            "content_type": 13,
+            "object_id": 381
+        },
+        {
+            "id": 946,
+            "name": "relatedfield_marital_status",
+            "label": "婚姻状况",
+            "content_type": 13,
+            "object_id": 382
+        },
+        {
+            "id": 947,
+            "name": "relatedfield_education",
+            "label": "文化程度",
+            "content_type": 13,
+            "object_id": 383
+        },
+        {
+            "id": 948,
+            "name": "relatedfield_occupational_status",
+            "label": "职业状况",
+            "content_type": 13,
+            "object_id": 384
+        },
+        {
+            "id": 949,
+            "name": "relatedfield_medical_expenses_burden",
+            "label": "医疗费用负担",
+            "content_type": 13,
+            "object_id": 385
+        },
+        {
+            "id": 950,
+            "name": "relatedfield_type_of_residence",
+            "label": "居住类型",
+            "content_type": 13,
+            "object_id": 386
+        },
+        {
+            "id": 951,
+            "name": "relatedfield_blood_type",
+            "label": "血型",
+            "content_type": 13,
+            "object_id": 387
+        },
+        {
+            "id": 952,
+            "name": "relatedfield_signed_family_doctor",
+            "label": "签约家庭医生",
+            "content_type": 13,
+            "object_id": 388
+        },
+        {
+            "id": 953,
+            "name": "relatedfield_athletic_ability",
+            "label": "运动能力",
+            "content_type": 13,
+            "object_id": 389
+        },
+        {
+            "id": 954,
+            "name": "relatedfield_drug_name",
+            "label": "药品名称",
+            "content_type": 13,
+            "object_id": 390
+        },
+        {
+            "id": 955,
+            "name": "relatedfield_symptom_list",
+            "label": "症状",
+            "content_type": 13,
+            "object_id": 391
+        },
+        {
+            "id": 956,
+            "name": "relatedfield_personality_tendency",
+            "label": "性格倾向",
+            "content_type": 13,
+            "object_id": 392
+        },
+        {
+            "id": 957,
+            "name": "relatedfield_are_you_satisfied_with_the_job_and_life",
+            "label": "对目前生活和工作满意吗",
+            "content_type": 13,
+            "object_id": 393
+        },
+        {
+            "id": 958,
+            "name": "relatedfield_are_you_satisfied_with_your_adaptability",
+            "label": "对自己的适应能力满意吗",
+            "content_type": 13,
+            "object_id": 394
+        },
+        {
+            "id": 959,
+            "name": "relatedfield_can_you_get_encouragement_and_support_from_family",
+            "label": "是否能得到家人朋友的鼓励和支持",
+            "content_type": 13,
+            "object_id": 395
+        },
+        {
+            "id": 960,
+            "name": "relatedfield_drinking_frequency",
+            "label": "饮酒频次",
+            "content_type": 13,
+            "object_id": 396
+        },
+        {
+            "id": 961,
+            "name": "relatedfield_smoking_frequency",
+            "label": "吸烟频次",
+            "content_type": 13,
+            "object_id": 397
+        },
+        {
+            "id": 962,
+            "name": "relatedfield_own_health",
+            "label": "觉得自身健康状况如何",
+            "content_type": 13,
+            "object_id": 398
+        },
+        {
+            "id": 963,
+            "name": "relatedfield_compared_to_last_year",
+            "label": "较之过去一年状态如何",
+            "content_type": 13,
+            "object_id": 399
+        },
+        {
+            "id": 964,
+            "name": "relatedfield_sports_preference",
+            "label": "运动偏好",
+            "content_type": 13,
+            "object_id": 400
+        },
+        {
+            "id": 965,
+            "name": "relatedfield_exercise_time",
+            "label": "运动时长",
+            "content_type": 13,
+            "object_id": 401
+        },
+        {
+            "id": 966,
+            "name": "relatedfield_have_any_recent_symptoms_of_physical_discomfort",
+            "label": "近来有无身体不适症状",
+            "content_type": 13,
+            "object_id": 402
+        },
+        {
+            "id": 967,
+            "name": "relatedfield_is_the_living_environment_satisfactory",
+            "label": "您对居住环境满意吗",
+            "content_type": 13,
+            "object_id": 403
+        },
+        {
+            "id": 968,
+            "name": "relatedfield_is_the_transportation_convenient",
+            "label": "您所在的社区交通方便吗",
+            "content_type": 13,
+            "object_id": 404
+        },
+        {
+            "id": 969,
+            "name": "relatedfield_diseases",
+            "label": "病名",
+            "content_type": 13,
+            "object_id": 405
+        },
+        {
+            "id": 970,
+            "name": "relatedfield_family_relationship",
+            "label": "家庭成员关系",
+            "content_type": 13,
+            "object_id": 406
+        },
+        {
+            "id": 971,
+            "name": "relatedfield_disease_name",
+            "label": "疾病名称",
+            "content_type": 13,
+            "object_id": 407
+        },
+        {
+            "id": 972,
+            "name": "relatedfield_fundus",
+            "label": "眼底",
+            "content_type": 13,
+            "object_id": 408
+        },
+        {
+            "id": 973,
+            "name": "relatedfield_service_role",
+            "label": "服务角色",
+            "content_type": 13,
+            "object_id": 409
+        },
+        {
+            "id": 974,
+            "name": "relatedfield_affiliation",
+            "label": "所属机构",
+            "content_type": 13,
+            "object_id": 410
+        },
+        {
+            "id": 975,
+            "name": "relatedfield_left_foot",
+            "label": "左脚",
+            "content_type": 13,
+            "object_id": 411
+        },
+        {
+            "id": 976,
+            "name": "relatedfield_right_foot",
+            "label": "右脚",
+            "content_type": 13,
+            "object_id": 412
+        },
+        {
+            "id": 977,
+            "name": "relatedfield_left_ear_hearing",
+            "label": "左耳听力",
+            "content_type": 13,
+            "object_id": 413
+        },
+        {
+            "id": 978,
+            "name": "relatedfield_right_ear_hearing",
+            "label": "右耳听力",
+            "content_type": 13,
+            "object_id": 414
+        },
+        {
+            "id": 979,
+            "name": "relatedfield_name_of_operation",
+            "label": "手术名称",
+            "content_type": 13,
+            "object_id": 415
+        },
+        {
+            "id": 980,
+            "name": "relatedfield_lips",
+            "label": "口唇",
+            "content_type": 13,
+            "object_id": 416
+        },
+        {
+            "id": 981,
+            "name": "relatedfield_dentition",
+            "label": "齿列",
+            "content_type": 13,
+            "object_id": 417
+        },
+        {
+            "id": 982,
+            "name": "relatedfield_pharynx",
+            "label": "咽部",
+            "content_type": 13,
+            "object_id": 418
+        },
+        {
+            "id": 983,
+            "name": "relatedfield_major_life",
+            "label": "生活事件",
+            "content_type": 13,
+            "object_id": 419
+        },
+        {
+            "id": 984,
+            "name": "relatedfield_lower_extremity_edema",
+            "label": "下肢水肿",
+            "content_type": 13,
+            "object_id": 420
+        },
+        {
+            "id": 985,
+            "name": "relatedfield_chang_yong_zheng_zhuang",
+            "label": "常用症状",
+            "content_type": 13,
+            "object_id": 421
         }
     ],
     "basemodels": [
         {
-            "id": 298,
+            "id": 340,
             "name": "allergies_history",
+            "name_new": null,
             "label": "过敏史",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 851,
+                    "id": 954,
                     "name": "relatedfield_drug_name",
                     "label": "药品名称",
                     "content_type": 13,
-                    "object_id": 348
+                    "object_id": 390
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 299,
+            "id": 341,
             "name": "personal_comprehensive_psychological_quality_survey",
+            "name_new": null,
             "label": "个人心理综合素质调查",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 781,
+                    "id": 886,
                     "name": "boolfield_is_life_fun",
                     "label": "您觉得生活是否有乐趣吗",
                     "content_type": 7,
-                    "object_id": 133
+                    "object_id": 155
                 },
                 {
-                    "id": 853,
+                    "id": 956,
                     "name": "relatedfield_personality_tendency",
                     "label": "性格倾向",
                     "content_type": 13,
-                    "object_id": 350
+                    "object_id": 392
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 300,
+            "id": 342,
             "name": "personal_adaptability_assessment",
+            "name_new": null,
             "label": "个人适应能力评估",
             "description": "",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 782,
-                    "name": "boolfield_do_you_feel_pressured_at_work",
-                    "label": "是否感觉到工作压力大",
-                    "content_type": 7,
-                    "object_id": 134
-                },
-                {
-                    "id": 783,
+                    "id": 884,
                     "name": "boolfield_do_you_often_work_overtime",
                     "label": "是否经常加班",
                     "content_type": 7,
-                    "object_id": 135
+                    "object_id": 153
                 },
                 {
-                    "id": 800,
+                    "id": 887,
+                    "name": "boolfield_do_you_feel_pressured_at_work",
+                    "label": "是否感觉到工作压力大",
+                    "content_type": 7,
+                    "object_id": 156
+                },
+                {
+                    "id": 903,
                     "name": "characterfield_working_hours_per_day",
                     "label": "每天工作及工作往返总时长",
                     "content_type": 8,
-                    "object_id": 198
+                    "object_id": 224
                 },
                 {
-                    "id": 854,
+                    "id": 957,
                     "name": "relatedfield_are_you_satisfied_with_the_job_and_life",
                     "label": "对目前生活和工作满意吗",
                     "content_type": 13,
-                    "object_id": 351
+                    "object_id": 393
                 },
                 {
-                    "id": 855,
+                    "id": 958,
                     "name": "relatedfield_are_you_satisfied_with_your_adaptability",
                     "label": "对自己的适应能力满意吗",
                     "content_type": 13,
-                    "object_id": 352
+                    "object_id": 394
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 301,
+            "id": 343,
             "name": "personal_health_behavior_survey",
+            "name_new": null,
             "label": "个人健康行为调查",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 784,
+                    "id": 885,
                     "name": "boolfield_is_the_diet_regular",
                     "label": "饮食是否规律",
                     "content_type": 7,
-                    "object_id": 136
+                    "object_id": 154
                 },
                 {
-                    "id": 785,
+                    "id": 888,
                     "name": "boolfield_is_the_diet_proportion_healthy",
                     "label": "饮食比例是否健康",
                     "content_type": 7,
-                    "object_id": 137
+                    "object_id": 157
                 },
                 {
-                    "id": 786,
+                    "id": 889,
                     "name": "boolfield_whether_the_bowel_movements_are_regular",
                     "label": "大便是否规律",
                     "content_type": 7,
-                    "object_id": 138
+                    "object_id": 158
                 },
                 {
-                    "id": 787,
+                    "id": 890,
                     "name": "boolfield_whether_to_drink_alcohol",
                     "label": "是否饮酒",
                     "content_type": 7,
-                    "object_id": 139
+                    "object_id": 159
                 },
                 {
-                    "id": 788,
+                    "id": 891,
                     "name": "boolfield_do_you_smoke",
                     "label": "是否吸烟",
                     "content_type": 7,
-                    "object_id": 140
+                    "object_id": 160
                 },
                 {
-                    "id": 789,
+                    "id": 892,
                     "name": "boolfield_insomnia",
                     "label": "是否有失眠情况",
                     "content_type": 7,
-                    "object_id": 141
+                    "object_id": 161
                 },
                 {
-                    "id": 801,
+                    "id": 904,
                     "name": "characterfield_average_sleep_duration",
                     "label": "平均睡眠时长",
                     "content_type": 8,
-                    "object_id": 199
+                    "object_id": 225
                 },
                 {
-                    "id": 802,
+                    "id": 905,
                     "name": "characterfield_duration_of_insomnia",
                     "label": "持续失眠时间",
                     "content_type": 8,
-                    "object_id": 200
+                    "object_id": 226
                 },
                 {
-                    "id": 857,
+                    "id": 960,
                     "name": "relatedfield_drinking_frequency",
                     "label": "饮酒频次",
                     "content_type": 13,
-                    "object_id": 354
+                    "object_id": 396
                 },
                 {
-                    "id": 858,
+                    "id": 961,
                     "name": "relatedfield_smoking_frequency",
                     "label": "吸烟频次",
                     "content_type": 13,
-                    "object_id": 355
+                    "object_id": 397
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 302,
+            "id": 344,
             "name": "personal_health_assessment",
+            "name_new": null,
             "label": "个人身体健康评估",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 790,
+                    "id": 893,
                     "name": "boolfield_is_it_easy_to_get_sick",
                     "label": "是否比别人容易生病",
                     "content_type": 7,
-                    "object_id": 142
+                    "object_id": 162
                 },
                 {
-                    "id": 859,
+                    "id": 962,
                     "name": "relatedfield_own_health",
                     "label": "觉得自身健康状况如何",
                     "content_type": 13,
-                    "object_id": 356
+                    "object_id": 398
                 },
                 {
-                    "id": 860,
+                    "id": 963,
                     "name": "relatedfield_compared_to_last_year",
                     "label": "较之过去一年状态如何",
                     "content_type": 13,
-                    "object_id": 357
+                    "object_id": 399
                 },
                 {
-                    "id": 861,
+                    "id": 964,
                     "name": "relatedfield_sports_preference",
                     "label": "运动偏好",
                     "content_type": 13,
-                    "object_id": 358
+                    "object_id": 400
                 },
                 {
-                    "id": 862,
+                    "id": 965,
                     "name": "relatedfield_exercise_time",
                     "label": "运动时长",
                     "content_type": 13,
-                    "object_id": 359
+                    "object_id": 401
                 },
                 {
-                    "id": 863,
+                    "id": 966,
                     "name": "relatedfield_have_any_recent_symptoms_of_physical_discomfort",
                     "label": "近来有无身体不适症状",
                     "content_type": 13,
-                    "object_id": 360
+                    "object_id": 402
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 303,
+            "id": 345,
             "name": "social_environment_assessment",
+            "name_new": null,
             "label": "社会环境评估",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 791,
+                    "id": 894,
                     "name": "boolfield_whether_the_living_environment_is_clean_and_hygienic",
                     "label": "居住环境是否干净卫生",
                     "content_type": 7,
-                    "object_id": 143
+                    "object_id": 163
                 },
                 {
-                    "id": 792,
+                    "id": 895,
                     "name": "boolfield_is_drinking_water_healthy",
                     "label": "饮水是否健康",
                     "content_type": 7,
-                    "object_id": 144
+                    "object_id": 164
                 },
                 {
-                    "id": 793,
+                    "id": 896,
                     "name": "boolfield_whether_there_is_noise_pollution",
                     "label": "是否有噪声污染",
                     "content_type": 7,
-                    "object_id": 145
+                    "object_id": 165
                 },
                 {
-                    "id": 794,
+                    "id": 897,
                     "name": "boolfield_whether_there_is_air_pollution",
                     "label": "是否有空气污染",
                     "content_type": 7,
-                    "object_id": 146
+                    "object_id": 166
                 },
                 {
-                    "id": 795,
+                    "id": 898,
                     "name": "boolfield_whether_there_is_other_pollution",
                     "label": "是否有其他污染",
                     "content_type": 7,
-                    "object_id": 147
+                    "object_id": 167
                 },
                 {
-                    "id": 864,
+                    "id": 967,
                     "name": "relatedfield_is_the_living_environment_satisfactory",
                     "label": "您对居住环境满意吗",
                     "content_type": 13,
-                    "object_id": 361
+                    "object_id": 403
                 },
                 {
-                    "id": 865,
+                    "id": 968,
                     "name": "relatedfield_is_the_transportation_convenient",
                     "label": "您所在的社区交通方便吗",
                     "content_type": 13,
-                    "object_id": 362
+                    "object_id": 404
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 304,
+            "id": 346,
             "name": "vital_signs_check",
+            "name_new": null,
             "label": "生命体征检查",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 825,
+                    "id": 928,
                     "name": "numberfield_body_temperature",
                     "label": "体温",
                     "content_type": 12,
-                    "object_id": 89
+                    "object_id": 100
                 },
                 {
-                    "id": 826,
+                    "id": 929,
                     "name": "numberfield_pulse",
                     "label": "脉搏",
                     "content_type": 12,
-                    "object_id": 90
+                    "object_id": 101
                 },
                 {
-                    "id": 827,
+                    "id": 930,
                     "name": "numberfield_respiratory_rate",
                     "label": "呼吸频率",
                     "content_type": 12,
-                    "object_id": 91
+                    "object_id": 102
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 305,
+            "id": 347,
             "name": "family_history_of_illness",
+            "name_new": null,
             "label": "家族病史",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 866,
+                    "id": 969,
                     "name": "relatedfield_diseases",
                     "label": "病名",
                     "content_type": 13,
-                    "object_id": 363
+                    "object_id": 405
                 },
                 {
-                    "id": 867,
+                    "id": 970,
                     "name": "relatedfield_family_relationship",
                     "label": "家庭成员关系",
                     "content_type": 13,
-                    "object_id": 364
+                    "object_id": 406
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 306,
+            "id": 348,
             "name": "physical_examination",
+            "name_new": null,
             "label": "体格检查",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 828,
+                    "id": 931,
                     "name": "numberfield_hight",
                     "label": "身高",
                     "content_type": 12,
-                    "object_id": 92
+                    "object_id": 103
                 },
                 {
-                    "id": 829,
+                    "id": 932,
                     "name": "numberfield_weight",
                     "label": "体重",
                     "content_type": 12,
-                    "object_id": 93
+                    "object_id": 104
                 },
                 {
-                    "id": 830,
+                    "id": 933,
                     "name": "numberfield_body_mass_index",
                     "label": "体质指数",
                     "content_type": 12,
-                    "object_id": 94
+                    "object_id": 105
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 307,
+            "id": 349,
             "name": "history_of_blood_transfusion",
+            "name_new": null,
             "label": "输血史",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 831,
+                    "id": 934,
                     "name": "numberfield_blood_transfusion",
                     "label": "输血量",
                     "content_type": 12,
-                    "object_id": 95
+                    "object_id": 106
                 },
                 {
-                    "id": 836,
+                    "id": 939,
                     "name": "datetimefield_date",
                     "label": "日期",
                     "content_type": 11,
-                    "object_id": 27
+                    "object_id": 31
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 308,
+            "id": 350,
             "name": "history_of_trauma",
+            "name_new": null,
             "label": "外伤史",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 836,
+                    "id": 939,
                     "name": "datetimefield_date",
                     "label": "日期",
                     "content_type": 11,
-                    "object_id": 27
+                    "object_id": 31
                 },
                 {
-                    "id": 868,
+                    "id": 971,
                     "name": "relatedfield_disease_name",
                     "label": "疾病名称",
                     "content_type": 13,
-                    "object_id": 365
+                    "object_id": 407
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 309,
+            "id": 351,
             "name": "fundus_examination",
+            "name_new": null,
             "label": "眼底检查",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 869,
+                    "id": 972,
                     "name": "relatedfield_fundus",
                     "label": "眼底",
                     "content_type": 13,
-                    "object_id": 366
+                    "object_id": 408
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 310,
+            "id": 352,
             "name": "medical_history",
+            "name_new": null,
             "label": "疾病史",
             "description": "",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 837,
-                    "name": "datetimefield_time_of_diagnosis",
-                    "label": "确诊时间",
-                    "content_type": 11,
-                    "object_id": 28
-                },
-                {
-                    "id": 868,
-                    "name": "relatedfield_disease_name",
-                    "label": "疾病名称",
-                    "content_type": 13,
-                    "object_id": 365
-                },
-                {
-                    "id": 882,
+                    "id": 883,
                     "name": "boolfield_shi_fou_you_man_xing_ji_bing",
                     "label": "是否有慢性疾病",
                     "content_type": 7,
-                    "object_id": 151
+                    "object_id": 152
+                },
+                {
+                    "id": 940,
+                    "name": "datetimefield_time_of_diagnosis",
+                    "label": "确诊时间",
+                    "content_type": 11,
+                    "object_id": 32
+                },
+                {
+                    "id": 971,
+                    "name": "relatedfield_disease_name",
+                    "label": "疾病名称",
+                    "content_type": 13,
+                    "object_id": 407
                 }
             ],
             "managed_entity": [
@@ -2556,688 +2644,709 @@
             ]
         },
         {
-            "id": 311,
+            "id": 353,
             "name": "doctor_registry",
+            "name_new": null,
             "label": "医生注册",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 803,
+                    "id": 906,
                     "name": "characterfield_name",
                     "label": "姓名",
                     "content_type": 8,
-                    "object_id": 201
+                    "object_id": 227
                 },
                 {
-                    "id": 804,
+                    "id": 907,
                     "name": "characterfield_gender",
                     "label": "性别",
                     "content_type": 8,
-                    "object_id": 202
+                    "object_id": 228
                 },
                 {
-                    "id": 805,
+                    "id": 908,
                     "name": "characterfield_age",
                     "label": "年龄",
                     "content_type": 8,
-                    "object_id": 203
+                    "object_id": 229
                 },
                 {
-                    "id": 806,
+                    "id": 909,
                     "name": "characterfield_identification_number",
                     "label": "身份证号码",
                     "content_type": 8,
-                    "object_id": 204
+                    "object_id": 230
                 },
                 {
-                    "id": 807,
+                    "id": 910,
                     "name": "characterfield_contact_information",
                     "label": "联系电话",
                     "content_type": 8,
-                    "object_id": 205
+                    "object_id": 231
                 },
                 {
-                    "id": 808,
+                    "id": 911,
                     "name": "characterfield_contact_address",
                     "label": "联系地址",
                     "content_type": 8,
-                    "object_id": 206
+                    "object_id": 232
                 },
                 {
-                    "id": 809,
+                    "id": 912,
                     "name": "characterfield_practice_qualification",
                     "label": "执业资质",
                     "content_type": 8,
-                    "object_id": 207
+                    "object_id": 233
                 },
                 {
-                    "id": 810,
+                    "id": 913,
                     "name": "characterfield_password_setting",
                     "label": "密码设置",
                     "content_type": 8,
-                    "object_id": 208
+                    "object_id": 234
                 },
                 {
-                    "id": 811,
+                    "id": 914,
                     "name": "characterfield_confirm_password",
                     "label": "确认密码",
                     "content_type": 8,
-                    "object_id": 209
+                    "object_id": 235
                 },
                 {
-                    "id": 812,
+                    "id": 915,
                     "name": "characterfield_expertise",
                     "label": "专长",
                     "content_type": 8,
-                    "object_id": 210
+                    "object_id": 236
                 },
                 {
-                    "id": 813,
+                    "id": 916,
                     "name": "characterfield_practice_time",
                     "label": "执业时间",
                     "content_type": 8,
-                    "object_id": 211
+                    "object_id": 237
                 },
                 {
-                    "id": 838,
+                    "id": 941,
                     "name": "datetimefield_date_of_birth",
                     "label": "出生日期",
                     "content_type": 11,
-                    "object_id": 29
+                    "object_id": 33
                 },
                 {
-                    "id": 870,
+                    "id": 973,
                     "name": "relatedfield_service_role",
                     "label": "服务角色",
                     "content_type": 13,
-                    "object_id": 367
+                    "object_id": 409
                 },
                 {
-                    "id": 871,
+                    "id": 974,
                     "name": "relatedfield_affiliation",
                     "label": "所属机构",
                     "content_type": 13,
-                    "object_id": 368
+                    "object_id": 410
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 312,
+            "id": 354,
             "name": "user_login",
+            "name_new": null,
             "label": "用户登录",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 814,
+                    "id": 917,
                     "name": "characterfield_username",
                     "label": "用户名",
                     "content_type": 8,
-                    "object_id": 212
+                    "object_id": 238
                 },
                 {
-                    "id": 815,
+                    "id": 918,
                     "name": "characterfield_password",
                     "label": "密码",
                     "content_type": 8,
-                    "object_id": 213
+                    "object_id": 239
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 313,
+            "id": 355,
             "name": "doctor_login",
+            "name_new": null,
             "label": "医生登陆",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 814,
+                    "id": 917,
                     "name": "characterfield_username",
                     "label": "用户名",
                     "content_type": 8,
-                    "object_id": 212
+                    "object_id": 238
                 },
                 {
-                    "id": 815,
+                    "id": 918,
                     "name": "characterfield_password",
                     "label": "密码",
                     "content_type": 8,
-                    "object_id": 213
+                    "object_id": 239
                 },
                 {
-                    "id": 816,
+                    "id": 919,
                     "name": "characterfield_service_role",
                     "label": "服务角色",
                     "content_type": 8,
-                    "object_id": 214
+                    "object_id": 240
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 314,
+            "id": 356,
             "name": "dorsal_artery_pulsation_examination",
+            "name_new": null,
             "label": "足背动脉搏动检查",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 872,
+                    "id": 975,
                     "name": "relatedfield_left_foot",
                     "label": "左脚",
                     "content_type": 13,
-                    "object_id": 369
+                    "object_id": 411
                 },
                 {
-                    "id": 873,
+                    "id": 976,
                     "name": "relatedfield_right_foot",
                     "label": "右脚",
                     "content_type": 13,
-                    "object_id": 370
+                    "object_id": 412
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 315,
+            "id": 357,
             "name": "physical_examination_hearing",
+            "name_new": null,
             "label": "查体听力",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 874,
+                    "id": 977,
                     "name": "relatedfield_left_ear_hearing",
                     "label": "左耳听力",
                     "content_type": 13,
-                    "object_id": 371
+                    "object_id": 413
                 },
                 {
-                    "id": 875,
+                    "id": 978,
                     "name": "relatedfield_right_ear_hearing",
                     "label": "右耳听力",
                     "content_type": 13,
-                    "object_id": 372
+                    "object_id": 414
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 316,
+            "id": 358,
             "name": "history_of_infectious_diseases",
+            "name_new": null,
             "label": "遗传病史",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 866,
+                    "id": 969,
                     "name": "relatedfield_diseases",
                     "label": "病名",
                     "content_type": 13,
-                    "object_id": 363
+                    "object_id": 405
                 },
                 {
-                    "id": 867,
+                    "id": 970,
                     "name": "relatedfield_family_relationship",
                     "label": "家庭成员关系",
                     "content_type": 13,
-                    "object_id": 364
+                    "object_id": 406
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 317,
+            "id": 359,
             "name": "history_of_surgery",
+            "name_new": null,
             "label": "手术史",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 836,
+                    "id": 939,
                     "name": "datetimefield_date",
                     "label": "日期",
                     "content_type": 11,
-                    "object_id": 27
+                    "object_id": 31
                 },
                 {
-                    "id": 876,
+                    "id": 979,
                     "name": "relatedfield_name_of_operation",
                     "label": "手术名称",
                     "content_type": 13,
-                    "object_id": 373
+                    "object_id": 415
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 318,
+            "id": 360,
             "name": "physical_examination_oral_cavity",
+            "name_new": null,
             "label": "查体口腔",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 877,
+                    "id": 980,
                     "name": "relatedfield_lips",
                     "label": "口唇",
                     "content_type": 13,
-                    "object_id": 374
+                    "object_id": 416
                 },
                 {
-                    "id": 878,
+                    "id": 981,
                     "name": "relatedfield_dentition",
                     "label": "齿列",
                     "content_type": 13,
-                    "object_id": 375
+                    "object_id": 417
                 },
                 {
-                    "id": 879,
+                    "id": 982,
                     "name": "relatedfield_pharynx",
                     "label": "咽部",
                     "content_type": 13,
-                    "object_id": 376
+                    "object_id": 418
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 320,
+            "id": 361,
             "name": "major_life_events",
+            "name_new": null,
             "label": "重大生活事件调查",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 836,
+                    "id": 939,
                     "name": "datetimefield_date",
                     "label": "日期",
                     "content_type": 11,
-                    "object_id": 27
+                    "object_id": 31
                 },
                 {
-                    "id": 880,
+                    "id": 983,
                     "name": "relatedfield_major_life",
                     "label": "生活事件",
                     "content_type": 13,
-                    "object_id": 377
+                    "object_id": 419
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 321,
+            "id": 362,
             "name": "physical_examination_vision",
+            "name_new": null,
             "label": "查体视力",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 817,
+                    "id": 920,
                     "name": "characterfield_left_eye_vision",
                     "label": "左眼视力",
                     "content_type": 8,
-                    "object_id": 215
+                    "object_id": 241
                 },
                 {
-                    "id": 818,
+                    "id": 921,
                     "name": "characterfield_right_eye_vision",
                     "label": "右眼视力",
                     "content_type": 8,
-                    "object_id": 216
+                    "object_id": 242
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 322,
+            "id": 363,
             "name": "lower_extremity_edema_examination",
+            "name_new": null,
             "label": "下肢水肿检查",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 881,
+                    "id": 984,
                     "name": "relatedfield_lower_extremity_edema",
                     "label": "下肢水肿",
                     "content_type": 13,
-                    "object_id": 378
+                    "object_id": 420
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 323,
+            "id": 364,
             "name": "basic_personal_information",
+            "name_new": null,
             "label": "个人基本情况",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 796,
+                    "id": 899,
                     "name": "boolfield_contract_signatory",
                     "label": "合同签约户",
                     "content_type": 7,
-                    "object_id": 148
+                    "object_id": 168
                 },
                 {
-                    "id": 803,
+                    "id": 906,
                     "name": "characterfield_name",
                     "label": "姓名",
                     "content_type": 8,
-                    "object_id": 201
+                    "object_id": 227
                 },
                 {
-                    "id": 806,
+                    "id": 909,
                     "name": "characterfield_identification_number",
                     "label": "身份证号码",
                     "content_type": 8,
-                    "object_id": 204
+                    "object_id": 230
                 },
                 {
-                    "id": 819,
+                    "id": 922,
                     "name": "characterfield_resident_file_number",
                     "label": "居民档案号",
                     "content_type": 8,
-                    "object_id": 217
+                    "object_id": 243
                 },
                 {
-                    "id": 820,
+                    "id": 923,
                     "name": "characterfield_family_address",
                     "label": "家庭地址",
                     "content_type": 8,
-                    "object_id": 218
+                    "object_id": 244
                 },
                 {
-                    "id": 821,
+                    "id": 924,
                     "name": "characterfield_contact_number",
                     "label": "联系电话",
                     "content_type": 8,
-                    "object_id": 219
+                    "object_id": 245
                 },
                 {
-                    "id": 822,
+                    "id": 925,
                     "name": "characterfield_medical_ic_card_number",
                     "label": "医疗ic卡号",
                     "content_type": 8,
-                    "object_id": 220
+                    "object_id": 246
                 },
                 {
-                    "id": 838,
+                    "id": 941,
                     "name": "datetimefield_date_of_birth",
                     "label": "出生日期",
                     "content_type": 11,
-                    "object_id": 29
+                    "object_id": 33
                 },
                 {
-                    "id": 840,
+                    "id": 943,
                     "name": "relatedfield_family_id",
                     "label": "家庭编号",
                     "content_type": 13,
-                    "object_id": 337
+                    "object_id": 379
                 },
                 {
-                    "id": 841,
+                    "id": 944,
                     "name": "relatedfield_gender",
                     "label": "性别",
                     "content_type": 13,
-                    "object_id": 338
+                    "object_id": 380
                 },
                 {
-                    "id": 842,
+                    "id": 945,
                     "name": "relatedfield_nationality",
                     "label": "民族",
                     "content_type": 13,
-                    "object_id": 339
+                    "object_id": 381
                 },
                 {
-                    "id": 843,
+                    "id": 946,
                     "name": "relatedfield_marital_status",
                     "label": "婚姻状况",
                     "content_type": 13,
-                    "object_id": 340
+                    "object_id": 382
                 },
                 {
-                    "id": 844,
+                    "id": 947,
                     "name": "relatedfield_education",
                     "label": "文化程度",
                     "content_type": 13,
-                    "object_id": 341
+                    "object_id": 383
                 },
                 {
-                    "id": 845,
+                    "id": 948,
                     "name": "relatedfield_occupational_status",
                     "label": "职业状况",
                     "content_type": 13,
-                    "object_id": 342
+                    "object_id": 384
                 },
                 {
-                    "id": 846,
+                    "id": 949,
                     "name": "relatedfield_medical_expenses_burden",
                     "label": "医疗费用负担",
                     "content_type": 13,
-                    "object_id": 343
+                    "object_id": 385
                 },
                 {
-                    "id": 847,
+                    "id": 950,
                     "name": "relatedfield_type_of_residence",
                     "label": "居住类型",
                     "content_type": 13,
-                    "object_id": 344
+                    "object_id": 386
                 },
                 {
-                    "id": 848,
+                    "id": 951,
                     "name": "relatedfield_blood_type",
                     "label": "血型",
                     "content_type": 13,
-                    "object_id": 345
+                    "object_id": 387
                 },
                 {
-                    "id": 849,
+                    "id": 952,
                     "name": "relatedfield_signed_family_doctor",
                     "label": "签约家庭医生",
                     "content_type": 13,
-                    "object_id": 346
+                    "object_id": 388
                 },
                 {
-                    "id": 867,
+                    "id": 970,
                     "name": "relatedfield_family_relationship",
                     "label": "家庭成员关系",
                     "content_type": 13,
-                    "object_id": 364
+                    "object_id": 406
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 324,
+            "id": 365,
             "name": "physical_examination_athletic_ability",
+            "name_new": null,
             "label": "查体运动能力",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 850,
+                    "id": 953,
                     "name": "relatedfield_athletic_ability",
                     "label": "运动能力",
                     "content_type": 13,
-                    "object_id": 347
+                    "object_id": 389
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 325,
+            "id": 366,
             "name": "user_registry",
+            "name_new": null,
             "label": "用户注册表",
             "description": null,
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 803,
+                    "id": 906,
                     "name": "characterfield_name",
                     "label": "姓名",
                     "content_type": 8,
-                    "object_id": 201
+                    "object_id": 227
                 },
                 {
-                    "id": 804,
+                    "id": 907,
                     "name": "characterfield_gender",
                     "label": "性别",
                     "content_type": 8,
-                    "object_id": 202
+                    "object_id": 228
                 },
                 {
-                    "id": 805,
+                    "id": 908,
                     "name": "characterfield_age",
                     "label": "年龄",
                     "content_type": 8,
-                    "object_id": 203
+                    "object_id": 229
                 },
                 {
-                    "id": 806,
+                    "id": 909,
                     "name": "characterfield_identification_number",
                     "label": "身份证号码",
                     "content_type": 8,
-                    "object_id": 204
+                    "object_id": 230
                 },
                 {
-                    "id": 807,
+                    "id": 910,
                     "name": "characterfield_contact_information",
                     "label": "联系电话",
                     "content_type": 8,
-                    "object_id": 205
+                    "object_id": 231
                 },
                 {
-                    "id": 808,
+                    "id": 911,
                     "name": "characterfield_contact_address",
                     "label": "联系地址",
                     "content_type": 8,
-                    "object_id": 206
+                    "object_id": 232
                 },
                 {
-                    "id": 810,
+                    "id": 913,
                     "name": "characterfield_password_setting",
                     "label": "密码设置",
                     "content_type": 8,
-                    "object_id": 208
+                    "object_id": 234
                 },
                 {
-                    "id": 811,
+                    "id": 914,
                     "name": "characterfield_confirm_password",
                     "label": "确认密码",
                     "content_type": 8,
-                    "object_id": 209
+                    "object_id": 235
                 },
                 {
-                    "id": 838,
+                    "id": 941,
                     "name": "datetimefield_date_of_birth",
                     "label": "出生日期",
                     "content_type": 11,
-                    "object_id": 29
+                    "object_id": 33
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 326,
+            "id": 367,
             "name": "kong_fu_xue_tang_jian_cha",
+            "name_new": null,
             "label": "空腹血糖检查",
             "description": "",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 834,
+                    "id": 937,
                     "name": "numberfield_kong_fu_xue_tang",
                     "label": "空腹血糖",
                     "content_type": 12,
-                    "object_id": 98
+                    "object_id": 109
                 }
             ],
-            "managed_entity": []
+            "managed_entity": [
+                "icpc10_test_results_and_statistics"
+            ]
         },
         {
-            "id": 327,
+            "id": 368,
             "name": "tang_hua_xue_hong_dan_bai_jian_cha_biao",
+            "name_new": null,
             "label": "糖化血红蛋白检查表",
             "description": "",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 835,
+                    "id": 938,
                     "name": "numberfield_tang_hua_xue_hong_dan_bai",
                     "label": "糖化血红蛋白",
                     "content_type": 12,
-                    "object_id": 99
+                    "object_id": 110
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 328,
+            "id": 369,
             "name": "yong_yao_chu_fang",
+            "name_new": null,
             "label": "用药处方",
             "description": "",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 851,
+                    "id": 954,
                     "name": "relatedfield_drug_name",
                     "label": "药品名称",
                     "content_type": 13,
-                    "object_id": 348
+                    "object_id": 390
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 329,
+            "id": 370,
             "name": "yong_yao_diao_cha_biao",
+            "name_new": null,
             "label": "用药调查表",
             "description": "",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 823,
+                    "id": 926,
                     "name": "characterfield_yong_yao_ji_liang",
                     "label": "用药剂量",
                     "content_type": 8,
-                    "object_id": 221
+                    "object_id": 247
                 },
                 {
-                    "id": 851,
+                    "id": 954,
                     "name": "relatedfield_drug_name",
                     "label": "药品名称",
                     "content_type": 13,
-                    "object_id": 348
+                    "object_id": 390
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 330,
+            "id": 371,
             "name": "yu_yue_biao",
+            "name_new": null,
             "label": "预约单",
             "description": "",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 816,
+                    "id": 919,
                     "name": "characterfield_service_role",
                     "label": "服务角色",
                     "content_type": 8,
-                    "object_id": 214
+                    "object_id": 240
                 },
                 {
-                    "id": 839,
+                    "id": 942,
                     "name": "datetimefield_ri_qi_shi_jian",
                     "label": "日期时间",
                     "content_type": 11,
-                    "object_id": 30
+                    "object_id": 34
                 }
             ],
             "managed_entity": [
@@ -3245,59 +3354,62 @@
             ]
         },
         {
-            "id": 331,
+            "id": 372,
             "name": "que_ren_dan",
+            "name_new": null,
             "label": "确认单",
             "description": "",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 797,
+                    "id": 900,
                     "name": "boolfield_yu_yue_que_ren",
                     "label": "签到确认",
                     "content_type": 7,
-                    "object_id": 149
+                    "object_id": 169
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 332,
+            "id": 373,
             "name": "tang_niao_bing_zhuan_yong_wen_zhen_biao",
+            "name_new": null,
             "label": "糖尿病专用问诊表",
             "description": "",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 799,
+                    "id": 902,
                     "name": "characterfield_supplementary_description_of_the_condition",
                     "label": "病情补充描述",
                     "content_type": 8,
-                    "object_id": 197
+                    "object_id": 223
                 },
                 {
-                    "id": 852,
+                    "id": 955,
                     "name": "relatedfield_symptom_list",
                     "label": "症状",
                     "content_type": 13,
-                    "object_id": 349
+                    "object_id": 391
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 333,
+            "id": 374,
             "name": "yong_yao_ti_xing_dan",
+            "name_new": null,
             "label": "用药提醒单",
             "description": "",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 798,
+                    "id": 901,
                     "name": "boolfield_shi_fou_ji_xu_shi_yong",
                     "label": "是否继续使用",
                     "content_type": 7,
-                    "object_id": 150
+                    "object_id": 170
                 }
             ],
             "managed_entity": [
@@ -3305,148 +3417,193 @@
             ]
         },
         {
-            "id": 334,
+            "id": 375,
             "name": "yuan_qian_fu_zhu_wen_zhen_biao",
+            "name_new": null,
             "label": "院前辅助问诊表",
             "description": "院外调查",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 799,
+                    "id": 902,
                     "name": "characterfield_supplementary_description_of_the_condition",
                     "label": "病情补充描述",
                     "content_type": 8,
-                    "object_id": 197
+                    "object_id": 223
                 },
                 {
-                    "id": 852,
+                    "id": 955,
                     "name": "relatedfield_symptom_list",
                     "label": "症状",
                     "content_type": 13,
-                    "object_id": 349
+                    "object_id": 391
                 }
             ],
-            "managed_entity": []
+            "managed_entity": [
+                "icpc3_symptoms_and_problems"
+            ]
         },
         {
-            "id": 335,
+            "id": 376,
             "name": "men_zhen_yi_sheng_wen_zhen_biao",
+            "name_new": null,
             "label": "门诊医生问诊表",
             "description": "",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 799,
+                    "id": 902,
                     "name": "characterfield_supplementary_description_of_the_condition",
                     "label": "病情补充描述",
                     "content_type": 8,
-                    "object_id": 197
+                    "object_id": 223
                 },
                 {
-                    "id": 852,
+                    "id": 955,
                     "name": "relatedfield_symptom_list",
                     "label": "症状",
                     "content_type": 13,
-                    "object_id": 349
+                    "object_id": 391
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 336,
+            "id": 377,
             "name": "tang_niao_bing_zhen_duan_biao",
+            "name_new": null,
             "label": "糖尿病诊断表",
             "description": "",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 868,
+                    "id": 971,
                     "name": "relatedfield_disease_name",
                     "label": "疾病名称",
                     "content_type": 13,
-                    "object_id": 365
+                    "object_id": 407
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 337,
+            "id": 378,
             "name": "yuan_nei_fu_zhu_wen_zhen_biao",
+            "name_new": null,
             "label": "院内辅助问诊表",
             "description": "院内诊前辅助问诊",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 799,
+                    "id": 902,
                     "name": "characterfield_supplementary_description_of_the_condition",
                     "label": "病情补充描述",
                     "content_type": 8,
-                    "object_id": 197
+                    "object_id": 223
                 },
                 {
-                    "id": 852,
+                    "id": 955,
                     "name": "relatedfield_symptom_list",
                     "label": "症状",
                     "content_type": 13,
-                    "object_id": 349
+                    "object_id": 391
                 }
             ],
-            "managed_entity": []
+            "managed_entity": [
+                "icpc3_symptoms_and_problems"
+            ]
         },
         {
-            "id": 338,
+            "id": 379,
             "name": "yuan_wai_zi_xun_biao",
+            "name_new": null,
             "label": "院外咨询表",
             "description": "",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 799,
+                    "id": 902,
                     "name": "characterfield_supplementary_description_of_the_condition",
                     "label": "病情补充描述",
                     "content_type": 8,
-                    "object_id": 197
+                    "object_id": 223
                 },
                 {
-                    "id": 852,
+                    "id": 955,
                     "name": "relatedfield_symptom_list",
                     "label": "症状",
                     "content_type": 13,
-                    "object_id": 349
+                    "object_id": 391
                 }
             ],
             "managed_entity": []
         },
         {
-            "id": 339,
+            "id": 380,
             "name": "xue_ya_jian_ce_biao",
+            "name_new": null,
             "label": "血压监测表",
             "description": "",
             "is_base_infomation": false,
             "components": [
                 {
-                    "id": 832,
+                    "id": 935,
                     "name": "numberfield_systolic_blood_pressure",
                     "label": "收缩压",
                     "content_type": 12,
-                    "object_id": 96
+                    "object_id": 107
                 },
                 {
-                    "id": 833,
+                    "id": 936,
                     "name": "numberfield_diastolic_blood_pressure",
                     "label": "舒张压",
                     "content_type": 12,
-                    "object_id": 97
+                    "object_id": 108
                 }
             ],
             "managed_entity": [
                 "icpc4_physical_examination_and_tests"
             ]
+        },
+        {
+            "id": 381,
+            "name": "diao_cha_biao",
+            "name_new": null,
+            "label": "常用调查表",
+            "description": "",
+            "is_base_infomation": false,
+            "components": [
+                {
+                    "id": 902,
+                    "name": "characterfield_supplementary_description_of_the_condition",
+                    "label": "病情补充描述",
+                    "content_type": 8,
+                    "object_id": 223
+                },
+                {
+                    "id": 955,
+                    "name": "relatedfield_symptom_list",
+                    "label": "症状",
+                    "content_type": 13,
+                    "object_id": 391
+                },
+                {
+                    "id": 985,
+                    "name": "relatedfield_chang_yong_zheng_zhuang",
+                    "label": "常用症状",
+                    "content_type": 13,
+                    "object_id": 421
+                }
+            ],
+            "managed_entity": [
+                "icpc2_reservation_investigations",
+                "icpc3_symptoms_and_problems"
+            ]
         }
     ],
     "baseforms": [
         {
-            "id": 359,
+            "id": 404,
             "name": "basic_personal_information_baseform_query_1642159528",
             "label": "个人基本情况_查询视图_1642159528",
             "basemodel": "basic_personal_information",
@@ -3454,37 +3611,37 @@
             "style": "detail",
             "components": [
                 {
-                    "id": 803,
+                    "id": 906,
                     "name": "characterfield_name",
                     "label": "姓名",
                     "content_type": 8,
-                    "object_id": 201
+                    "object_id": 227
                 },
                 {
-                    "id": 821,
+                    "id": 924,
                     "name": "characterfield_contact_number",
                     "label": "联系电话",
                     "content_type": 8,
-                    "object_id": 219
+                    "object_id": 245
                 },
                 {
-                    "id": 838,
+                    "id": 941,
                     "name": "datetimefield_date_of_birth",
                     "label": "出生日期",
                     "content_type": 11,
-                    "object_id": 29
+                    "object_id": 33
                 },
                 {
-                    "id": 841,
+                    "id": 944,
                     "name": "relatedfield_gender",
                     "label": "性别",
                     "content_type": 13,
-                    "object_id": 338
+                    "object_id": 380
                 }
             ]
         },
         {
-            "id": 360,
+            "id": 405,
             "name": "yong_yao_chu_fang_baseform_query_1645404404",
             "label": "用药处方_查询视图_1645404404",
             "basemodel": "yong_yao_chu_fang",
@@ -3492,16 +3649,16 @@
             "style": "detail",
             "components": [
                 {
-                    "id": 851,
+                    "id": 954,
                     "name": "relatedfield_drug_name",
                     "label": "药品名称",
                     "content_type": 13,
-                    "object_id": 348
+                    "object_id": 390
                 }
             ]
         },
         {
-            "id": 361,
+            "id": 406,
             "name": "tang_niao_bing_zhen_duan_biao_baseform_query_1645431372",
             "label": "糖尿病诊断表_查询视图_1645431372",
             "basemodel": "tang_niao_bing_zhen_duan_biao",
@@ -3509,29 +3666,32 @@
             "style": "detail",
             "components": [
                 {
-                    "id": 868,
+                    "id": 971,
                     "name": "relatedfield_disease_name",
                     "label": "疾病名称",
                     "content_type": 13,
-                    "object_id": 365
+                    "object_id": 407
                 }
             ]
         }
     ],
     "combineforms": [
         {
-            "id": 451,
+            "id": 509,
             "name": "ge_ren_ji_bing_shi_diao_cha_biao",
+            "name_new": null,
             "label": "个人疾病史调查表",
             "is_base": false,
             "managed_entity": null,
             "forms": [
+                "medical_history_baseform",
                 "basic_personal_information_baseform_query_1642159528"
             ]
         },
         {
-            "id": 452,
+            "id": 510,
             "name": "kong_fu_xue_tang_jian_cha_biao",
+            "name_new": null,
             "label": "空腹血糖检查表",
             "is_base": false,
             "managed_entity": null,
@@ -3541,8 +3701,9 @@
             ]
         },
         {
-            "id": 453,
+            "id": 511,
             "name": "tang_hua_xue_hong_dan_bai_jian_cha_biao_1",
+            "name_new": null,
             "label": "糖化血红蛋白检查表1",
             "is_base": false,
             "managed_entity": null,
@@ -3552,8 +3713,9 @@
             ]
         },
         {
-            "id": 454,
+            "id": 512,
             "name": "guo_min_shi_diao_cha_biao",
+            "name_new": null,
             "label": "过敏史调查表",
             "is_base": false,
             "managed_entity": null,
@@ -3563,8 +3725,9 @@
             ]
         },
         {
-            "id": 455,
+            "id": 513,
             "name": "tang_niao_bing_cha_ti_biao",
+            "name_new": null,
             "label": "糖尿病查体表",
             "is_base": false,
             "managed_entity": null,
@@ -3575,8 +3738,9 @@
             ]
         },
         {
-            "id": 456,
+            "id": 514,
             "name": "chang_gui_cha_ti_biao",
+            "name_new": null,
             "label": "常规查体表",
             "is_base": false,
             "managed_entity": null,
@@ -3591,8 +3755,9 @@
             ]
         },
         {
-            "id": 457,
+            "id": 515,
             "name": "men_zhen_chu_fang_dan",
+            "name_new": null,
             "label": "药物干预表",
             "is_base": false,
             "managed_entity": "icpc6_prescribe_medicines",
@@ -3602,8 +3767,9 @@
             ]
         },
         {
-            "id": 458,
+            "id": 516,
             "name": "tang_niao_bing_sui_fang_biao",
+            "name_new": null,
             "label": "糖尿病随访表",
             "is_base": false,
             "managed_entity": null,
@@ -3617,8 +3783,9 @@
             ]
         },
         {
-            "id": 459,
+            "id": 517,
             "name": "men_zhen_yu_yue",
+            "name_new": null,
             "label": "门诊预约",
             "is_base": false,
             "managed_entity": "icpc2_reservation_investigations",
@@ -3628,18 +3795,21 @@
             ]
         },
         {
-            "id": 460,
+            "id": 518,
             "name": "fen_zhen_que_ren",
+            "name_new": null,
             "label": "分诊确认",
             "is_base": false,
             "managed_entity": "icpc2_reservation_investigations",
             "forms": [
+                "que_ren_dan_baseform",
                 "basic_personal_information_baseform_query_1642159528"
             ]
         },
         {
-            "id": 461,
+            "id": 519,
             "name": "yao_shi_fu_wu_ti_xing_biao",
+            "name_new": null,
             "label": "药事服务提醒表",
             "is_base": false,
             "managed_entity": "icpc6_prescribe_medicines",
@@ -3650,8 +3820,9 @@
             ]
         },
         {
-            "id": 462,
+            "id": 520,
             "name": "tang_niao_bing_zi_wo_jian_ce_biao",
+            "name_new": null,
             "label": "糖尿病自我监测表",
             "is_base": false,
             "managed_entity": "icpc8_other_health_interventions",
@@ -3663,8 +3834,9 @@
     ],
     "operations": [
         {
-            "id": 125,
+            "id": 150,
             "name": "ge_ren_ji_bing_shi_diao_cha_biao",
+            "name_new": null,
             "label": "个人疾病史调查",
             "forms": "ge_ren_ji_bing_shi_diao_cha_biao",
             "priority": 3,
@@ -3684,8 +3856,9 @@
             ]
         },
         {
-            "id": 126,
+            "id": 151,
             "name": "kong_fu_xue_tang_jian_cha_biao",
+            "name_new": null,
             "label": "空腹血糖检查表",
             "forms": "kong_fu_xue_tang_jian_cha_biao",
             "priority": 3,
@@ -3704,8 +3877,9 @@
             ]
         },
         {
-            "id": 127,
+            "id": 152,
             "name": "tang_hua_xue_hong_dan_bai_jian_cha_biao",
+            "name_new": null,
             "label": "糖化血红蛋白检查表",
             "forms": "tang_hua_xue_hong_dan_bai_jian_cha_biao_1",
             "priority": 3,
@@ -3722,8 +3896,9 @@
             "group": []
         },
         {
-            "id": 128,
+            "id": 153,
             "name": "chang_gui_cha_ti_biao",
+            "name_new": null,
             "label": "常规查体表",
             "forms": "chang_gui_cha_ti_biao",
             "priority": 3,
@@ -3740,8 +3915,9 @@
             "group": []
         },
         {
-            "id": 129,
+            "id": 154,
             "name": "tang_niao_bing_cha_ti_biao",
+            "name_new": null,
             "label": "糖尿病查体表",
             "forms": "tang_niao_bing_cha_ti_biao",
             "priority": 3,
@@ -3758,8 +3934,9 @@
             "group": []
         },
         {
-            "id": 130,
+            "id": 155,
             "name": "ge_ren_guo_min_shi_diao_cha_biao",
+            "name_new": null,
             "label": "个人过敏史调查表",
             "forms": "guo_min_shi_diao_cha_biao",
             "priority": 3,
@@ -3776,8 +3953,9 @@
             "group": []
         },
         {
-            "id": 131,
+            "id": 156,
             "name": "men_zhen_chu_fang_biao",
+            "name_new": null,
             "label": "药物干预",
             "forms": "men_zhen_chu_fang_dan",
             "priority": 3,
@@ -3796,8 +3974,9 @@
             ]
         },
         {
-            "id": 132,
+            "id": 157,
             "name": "user_registry",
+            "name_new": null,
             "label": "用户注册",
             "forms": null,
             "priority": 3,
@@ -3816,8 +3995,9 @@
             ]
         },
         {
-            "id": 133,
+            "id": 158,
             "name": "user_login",
+            "name_new": null,
             "label": "用户登录",
             "forms": null,
             "priority": 3,
@@ -3834,8 +4014,9 @@
             "group": []
         },
         {
-            "id": 134,
+            "id": 159,
             "name": "doctor_login",
+            "name_new": null,
             "label": "员工登录",
             "forms": null,
             "priority": 3,
@@ -3852,8 +4033,9 @@
             "group": []
         },
         {
-            "id": 135,
+            "id": 160,
             "name": "ge_ren_ji_ben_xin_xi_diao_cha",
+            "name_new": null,
             "label": "个人基本信息调查",
             "forms": "basic_personal_information_baseform",
             "priority": 3,
@@ -3872,8 +4054,9 @@
             ]
         },
         {
-            "id": 136,
+            "id": 161,
             "name": "ge_ren_jian_kang_xing_wei_diao_cha",
+            "name_new": null,
             "label": "个人健康行为调查",
             "forms": "personal_health_behavior_survey_baseform",
             "priority": 3,
@@ -3892,8 +4075,9 @@
             ]
         },
         {
-            "id": 137,
+            "id": 162,
             "name": "men_zhen_yu_yue",
+            "name_new": null,
             "label": "门诊预约",
             "forms": "men_zhen_yu_yue",
             "priority": 3,
@@ -3913,8 +4097,9 @@
             ]
         },
         {
-            "id": 138,
+            "id": 163,
             "name": "fen_zhen_que_ren",
+            "name_new": null,
             "label": "分诊确认",
             "forms": "fen_zhen_que_ren",
             "priority": 3,
@@ -3933,8 +4118,9 @@
             ]
         },
         {
-            "id": 139,
+            "id": 164,
             "name": "men_zhen_fu_zhu_jian_cha",
+            "name_new": null,
             "label": "门诊辅助检查",
             "forms": "chang_gui_cha_ti_biao",
             "priority": 3,
@@ -3953,8 +4139,9 @@
             ]
         },
         {
-            "id": 140,
+            "id": 165,
             "name": "tang_niao_bing_zhuan_yong_wen_zhen",
+            "name_new": null,
             "label": "糖尿病专用问诊",
             "forms": "tang_niao_bing_zhuan_yong_wen_zhen_biao_baseform",
             "priority": 3,
@@ -3973,8 +4160,9 @@
             ]
         },
         {
-            "id": 141,
+            "id": 166,
             "name": "yao_shi_fu_wu",
+            "name_new": null,
             "label": "药事服务",
             "forms": "yao_shi_fu_wu_ti_xing_biao",
             "priority": 3,
@@ -3993,8 +4181,9 @@
             ]
         },
         {
-            "id": 142,
+            "id": 167,
             "name": "tang_niao_bing_zi_wo_jian_ce",
+            "name_new": null,
             "label": "糖尿病自我监测",
             "forms": "tang_niao_bing_zi_wo_jian_ce_biao",
             "priority": 3,
@@ -4013,10 +4202,11 @@
             ]
         },
         {
-            "id": 144,
+            "id": 168,
             "name": "yuan_wai_fu_zhu_wen_zhen",
+            "name_new": null,
             "label": "院外辅助问诊",
-            "forms": "yuan_qian_fu_zhu_wen_zhen_biao_baseform",
+            "forms": "diao_cha_biao_baseform",
             "priority": 3,
             "suppliers": null,
             "not_suitable": null,
@@ -4033,8 +4223,9 @@
             ]
         },
         {
-            "id": 145,
+            "id": 169,
             "name": "yuan_nei_fu_zhu_wen_zhen",
+            "name_new": null,
             "label": "院内辅助问诊",
             "forms": "yuan_nei_fu_zhu_wen_zhen_biao_baseform",
             "priority": 3,
@@ -4053,8 +4244,9 @@
             ]
         },
         {
-            "id": 146,
+            "id": 170,
             "name": "yuan_wai_zi_xun",
+            "name_new": null,
             "label": "院外咨询",
             "forms": "yuan_wai_zi_xun_biao_baseform",
             "priority": 3,
@@ -4073,8 +4265,9 @@
             ]
         },
         {
-            "id": 147,
+            "id": 171,
             "name": "men_zhen_yi_sheng_wen_zhen",
+            "name_new": null,
             "label": "门诊医生问诊",
             "forms": "men_zhen_yi_sheng_wen_zhen_biao_baseform",
             "priority": 3,
@@ -4093,8 +4286,9 @@
             ]
         },
         {
-            "id": 148,
+            "id": 172,
             "name": "tang_niao_bing_zhen_duan",
+            "name_new": null,
             "label": "糖尿病诊断",
             "forms": "tang_niao_bing_zhen_duan_biao_baseform",
             "priority": 3,
@@ -4113,8 +4307,9 @@
             ]
         },
         {
-            "id": 149,
+            "id": 173,
             "name": "tang_niao_bing_sui_fang",
+            "name_new": null,
             "label": "糖尿病随访",
             "forms": "tang_niao_bing_sui_fang_biao",
             "priority": 3,
@@ -4135,7 +4330,7 @@
     ],
     "services": [
         {
-            "id": 21,
+            "id": 24,
             "name": "pu_tong_men_zhen",
             "label": "普通门诊",
             "first_operation": null,
@@ -4154,7 +4349,7 @@
             "group": []
         },
         {
-            "id": 22,
+            "id": 25,
             "name": "men_zhen_ji_zhen",
             "label": "门诊急诊",
             "first_operation": null,
@@ -4173,7 +4368,7 @@
             "group": []
         },
         {
-            "id": 23,
+            "id": 26,
             "name": "yuan_wai_fu_wu",
             "label": "院外服务",
             "first_operation": null,
@@ -4195,7 +4390,7 @@
     "service_packages": [],
     "instructions": [
         {
-            "id": 9,
+            "id": 10,
             "name": "create_operation_proc",
             "label": "创建作业进程",
             "code": "cop",
@@ -4205,7 +4400,7 @@
     ],
     "events": [
         {
-            "id": 79,
+            "id": 95,
             "name": "user_registry_completed",
             "label": "用户注册_完成",
             "operation": "user_registry",
@@ -4218,18 +4413,20 @@
             ]
         },
         {
-            "id": 80,
+            "id": 96,
             "name": "user_login_completed",
             "label": "用户登录_完成",
             "operation": "user_login",
             "description": null,
             "expression": "completed",
             "parameters": null,
-            "fields": null,
-            "next": []
+            "fields": "",
+            "next": [
+                "yuan_wai_fu_zhu_wen_zhen"
+            ]
         },
         {
-            "id": 81,
+            "id": 97,
             "name": "doctor_login_completed",
             "label": "员工登录_完成",
             "operation": "doctor_login",
@@ -4240,7 +4437,7 @@
             "next": []
         },
         {
-            "id": 82,
+            "id": 98,
             "name": "kong_fu_xue_tang_jian_cha_biao_空腹血糖超过正常值",
             "label": "空腹血糖超过正常值",
             "operation": "kong_fu_xue_tang_jian_cha_biao",
@@ -4253,7 +4450,7 @@
             ]
         },
         {
-            "id": 83,
+            "id": 99,
             "name": "tang_hua_xue_hong_dan_bai_jian_cha_biao_糖化血红蛋白超过正常值",
             "label": "糖化血红蛋白超过正常值",
             "operation": "tang_hua_xue_hong_dan_bai_jian_cha_biao",
@@ -4266,7 +4463,7 @@
             ]
         },
         {
-            "id": 84,
+            "id": 100,
             "name": "men_zhen_fu_zhu_jian_cha_门诊辅助检查完成",
             "label": "门诊辅助检查完成",
             "operation": "men_zhen_fu_zhu_jian_cha",
@@ -4279,34 +4476,34 @@
             ]
         },
         {
-            "id": 85,
+            "id": 101,
             "name": "fen_zhen_que_ren_分诊确认完成",
             "label": "分诊确认完成",
             "operation": "fen_zhen_que_ren",
             "description": null,
             "expression": "completed",
             "parameters": null,
-            "fields": "('que_ren_dan-boolfield_yu_yue_que_ren', '签到确认', 'boolean')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')",
+            "fields": "('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')",
             "next": [
                 "men_zhen_fu_zhu_jian_cha",
                 "yuan_nei_fu_zhu_wen_zhen"
             ]
         },
         {
-            "id": 86,
+            "id": 102,
             "name": "men_zhen_yu_yue_门诊预约完成",
             "label": "门诊预约完成",
             "operation": "men_zhen_yu_yue",
             "description": null,
             "expression": "completed",
             "parameters": null,
-            "fields": "('yu_yue_biao-datetimefield_ri_qi_shi_jian', '日期时间', 'datetime')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')",
+            "fields": "('yu_yue_biao-characterfield_service_role', '服务角色', 'string')\n('yu_yue_biao-datetimefield_ri_qi_shi_jian', '日期时间', 'datetime')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')",
             "next": [
                 "fen_zhen_que_ren"
             ]
         },
         {
-            "id": 87,
+            "id": 103,
             "name": "men_zhen_chu_fang_biao_药物干预有风险",
             "label": "药物干预有风险",
             "operation": "men_zhen_chu_fang_biao",
@@ -4319,7 +4516,7 @@
             ]
         },
         {
-            "id": 88,
+            "id": 104,
             "name": "yuan_wai_zi_xun_院外咨询完成",
             "label": "院外咨询完成",
             "operation": "yuan_wai_zi_xun",
@@ -4332,20 +4529,20 @@
             ]
         },
         {
-            "id": 89,
+            "id": 105,
             "name": "yuan_wai_fu_zhu_wen_zhen_院外辅助问诊发现问题",
             "label": "院外辅助问诊发现问题",
             "operation": "yuan_wai_fu_zhu_wen_zhen",
             "description": null,
             "expression": "symptom_list==“多尿”",
             "parameters": "",
-            "fields": "('yuan_qian_fu_zhu_wen_zhen_biao-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string')\n('yuan_qian_fu_zhu_wen_zhen_biao-relatedfield_symptom_list', '症状', 'dict')",
+            "fields": "('diao_cha_biao-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string')\n('diao_cha_biao-relatedfield_symptom_list', '症状', 'dict')\n('diao_cha_biao-relatedfield_chang_yong_zheng_zhuang', '常用症状', 'dict')",
             "next": [
                 "men_zhen_yu_yue"
             ]
         },
         {
-            "id": 90,
+            "id": 106,
             "name": "yuan_nei_fu_zhu_wen_zhen_院内辅助问诊完成",
             "label": "院内辅助问诊完成",
             "operation": "yuan_nei_fu_zhu_wen_zhen",
@@ -4358,20 +4555,20 @@
             ]
         },
         {
-            "id": 91,
+            "id": 107,
             "name": "ge_ren_ji_bing_shi_diao_cha_biao_个人疾病史调查无病史",
             "label": "个人疾病史调查无病史",
             "operation": "ge_ren_ji_bing_shi_diao_cha_biao",
             "description": null,
             "expression": "medical_history-boolfield_shi_fou_you_man_xing_ji_bing==“无”",
-            "parameters": "medical_history-boolfield_shi_fou_you_man_xing_ji_bing",
-            "fields": "('medical_history-datetimefield_time_of_diagnosis', '确诊时间', 'datetime')\n('medical_history-relatedfield_disease_name', '疾病名称', 'dict')\n('medical_history-boolfield_shi_fou_you_man_xing_ji_bing', '是否有慢性疾病', 'boolean')\n('medical_history-datetimefield_time_of_diagnosis', '确诊时间', 'datetime')\n('medical_history-relatedfield_disease_name', '疾病名称', 'dict')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')",
+            "parameters": "",
+            "fields": "('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')",
             "next": [
                 "men_zhen_yi_sheng_wen_zhen"
             ]
         },
         {
-            "id": 92,
+            "id": 108,
             "name": "men_zhen_yi_sheng_wen_zhen_门诊医生问诊发现糖尿病症状",
             "label": "门诊医生问诊发现糖尿病症状",
             "operation": "men_zhen_yi_sheng_wen_zhen",
@@ -4385,14 +4582,14 @@
             ]
         },
         {
-            "id": 93,
+            "id": 109,
             "name": "tang_niao_bing_zhen_duan_糖尿病诊断完成",
             "label": "糖尿病诊断完成",
             "operation": "tang_niao_bing_zhen_duan",
             "description": null,
             "expression": "completed",
             "parameters": null,
-            "fields": "('tang_niao_bing_zhen_duan_biao-relatedfield_disease_name', '疾病名称', 'dict')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')",
+            "fields": "('tang_niao_bing_zhen_duan_biao-relatedfield_disease_name', '疾病名称', 'dict')",
             "next": [
                 "men_zhen_chu_fang_biao",
                 "tang_niao_bing_zi_wo_jian_ce",
@@ -4400,14 +4597,14 @@
             ]
         },
         {
-            "id": 94,
+            "id": 110,
             "name": "tang_niao_bing_sui_fang_糖尿病随访血压异常",
             "label": "糖尿病随访血压异常",
             "operation": "tang_niao_bing_sui_fang",
             "description": null,
             "expression": "blood_pressure_monitoring-numberfield_systolic_blood_pressure>130 or blood_pressure_monitoring-numberfield_diastolic_blood_pressure>90",
-            "parameters": "blood_pressure_monitoring-numberfield_systolic_blood_pressure, blood_pressure_monitoring-numberfield_diastolic_blood_pressure",
-            "fields": "('personal_health_behavior_survey-boolfield_is_the_diet_regular', '饮食是否规律', 'boolean')\n('personal_health_behavior_survey-boolfield_is_the_diet_proportion_healthy', '饮食比例是否健康', 'boolean')\n('personal_health_behavior_survey-boolfield_whether_the_bowel_movements_are_regular', '大便是否规律', 'boolean')\n('personal_health_behavior_survey-boolfield_whether_to_drink_alcohol', '是否饮酒', 'boolean')\n('personal_health_behavior_survey-boolfield_do_you_smoke', '是否吸烟', 'boolean')\n('personal_health_behavior_survey-boolfield_insomnia', '是否有失眠情况', 'boolean')\n('personal_health_behavior_survey-characterfield_average_sleep_duration', '平均睡眠时长', 'string')\n('personal_health_behavior_survey-characterfield_duration_of_insomnia', '持续失眠时间', 'string')\n('personal_health_behavior_survey-relatedfield_drinking_frequency', '饮酒频次', 'dict')\n('personal_health_behavior_survey-relatedfield_smoking_frequency', '吸烟频次', 'dict')\n('fundus_examination-relatedfield_fundus', '眼底', 'dict')\n('dorsal_artery_pulsation_examination-relatedfield_left_foot', '左脚', 'dict')\n('dorsal_artery_pulsation_examination-relatedfield_right_foot', '右脚', 'dict')\n('blood_pressure_monitoring-numberfield_systolic_blood_pressure', '收缩压', 'number')\n('blood_pressure_monitoring-numberfield_diastolic_blood_pressure', '舒张压', 'number')\n('personal_health_behavior_survey-boolfield_is_the_diet_regular', '饮食是否规律', 'boolean')\n('personal_health_behavior_survey-boolfield_is_the_diet_proportion_healthy', '饮食比例是否健康', 'boolean')\n('personal_health_behavior_survey-boolfield_whether_the_bowel_movements_are_regular', '大便是否规律', 'boolean')\n('personal_health_behavior_survey-boolfield_whether_to_drink_alcohol', '是否饮酒', 'boolean')\n('personal_health_behavior_survey-boolfield_do_you_smoke', '是否吸烟', 'boolean')\n('personal_health_behavior_survey-boolfield_insomnia', '是否有失眠情况', 'boolean')\n('personal_health_behavior_survey-characterfield_average_sleep_duration', '平均睡眠时长', 'string')\n('personal_health_behavior_survey-characterfield_duration_of_insomnia', '持续失眠时间', 'string')\n('personal_health_behavior_survey-relatedfield_drinking_frequency', '饮酒频次', 'dict')\n('personal_health_behavior_survey-relatedfield_smoking_frequency', '吸烟频次', 'dict')\n('fundus_examination-relatedfield_fundus', '眼底', 'dict')\n('dorsal_artery_pulsation_examination-relatedfield_left_foot', '左脚', 'dict')\n('dorsal_artery_pulsation_examination-relatedfield_right_foot', '右脚', 'dict')\n('blood_pressure_monitoring-numberfield_systolic_blood_pressure', '收缩压', 'number')\n('blood_pressure_monitoring-numberfield_diastolic_blood_pressure', '舒张压', 'number')\n('basic_personal_information-boolfield_contract_signatory', '合同签约户', 'boolean')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_identification_number', '身份证号码', 'string')\n('basic_personal_information-characterfield_resident_file_number', '居民档案号', 'string')\n('basic_personal_information-characterfield_family_address', '家庭地址', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-characterfield_medical_ic_card_number', '医疗ic卡号', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_family_id', '家庭编号', 'dict')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('basic_personal_information-relatedfield_nationality', '民族', 'dict')\n('basic_personal_information-relatedfield_marital_status', '婚姻状况', 'dict')\n('basic_personal_information-relatedfield_education', '文化程度', 'dict')\n('basic_personal_information-relatedfield_occupational_status', '职业状况', 'dict')\n('basic_personal_information-relatedfield_medical_expenses_burden', '医疗费用负担', 'dict')\n('basic_personal_information-relatedfield_type_of_residence', '居住类型', 'dict')\n('basic_personal_information-relatedfield_blood_type', '血型', 'dict')\n('basic_personal_information-relatedfield_signed_family_doctor', '签约家庭医生', 'dict')\n('basic_personal_information-relatedfield_family_relationship', '家庭成员关系', 'dict')\n('yong_yao_diao_cha_biao-characterfield_yong_yao_ji_liang', '用药剂量', 'string')\n('yong_yao_diao_cha_biao-relatedfield_drug_name', '药品名称', 'dict')\n('blood_pressure_monitoring-numberfield_systolic_blood_pressure', '收缩压', 'number')\n('blood_pressure_monitoring-numberfield_diastolic_blood_pressure', '舒张压', 'number')\n('kong_fu_xue_tang_jian_cha-numberfield_kong_fu_xue_tang', '空腹血糖', 'number')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('basic_personal_information-boolfield_contract_signatory', '合同签约户', 'boolean')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_identification_number', '身份证号码', 'string')\n('basic_personal_information-characterfield_resident_file_number', '居民档案号', 'string')\n('basic_personal_information-characterfield_family_address', '家庭地址', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-characterfield_medical_ic_card_number', '医疗ic卡号', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_family_id', '家庭编号', 'dict')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('basic_personal_information-relatedfield_nationality', '民族', 'dict')\n('basic_personal_information-relatedfield_marital_status', '婚姻状况', 'dict')\n('basic_personal_information-relatedfield_education', '文化程度', 'dict')\n('basic_personal_information-relatedfield_occupational_status', '职业状况', 'dict')\n('basic_personal_information-relatedfield_medical_expenses_burden', '医疗费用负担', 'dict')\n('basic_personal_information-relatedfield_type_of_residence', '居住类型', 'dict')\n('basic_personal_information-relatedfield_blood_type', '血型', 'dict')\n('basic_personal_information-relatedfield_signed_family_doctor', '签约家庭医生', 'dict')\n('basic_personal_information-relatedfield_family_relationship', '家庭成员关系', 'dict')\n('yong_yao_diao_cha_biao-characterfield_yong_yao_ji_liang', '用药剂量', 'string')\n('yong_yao_diao_cha_biao-relatedfield_drug_name', '药品名称', 'dict')",
+            "parameters": "",
+            "fields": "('personal_health_behavior_survey-boolfield_is_the_diet_regular', '饮食是否规律', 'boolean')\n('personal_health_behavior_survey-boolfield_is_the_diet_proportion_healthy', '饮食比例是否健康', 'boolean')\n('personal_health_behavior_survey-boolfield_whether_the_bowel_movements_are_regular', '大便是否规律', 'boolean')\n('personal_health_behavior_survey-boolfield_whether_to_drink_alcohol', '是否饮酒', 'boolean')\n('personal_health_behavior_survey-boolfield_do_you_smoke', '是否吸烟', 'boolean')\n('personal_health_behavior_survey-boolfield_insomnia', '是否有失眠情况', 'boolean')\n('personal_health_behavior_survey-characterfield_average_sleep_duration', '平均睡眠时长', 'string')\n('personal_health_behavior_survey-characterfield_duration_of_insomnia', '持续失眠时间', 'string')\n('personal_health_behavior_survey-relatedfield_drinking_frequency', '饮酒频次', 'dict')\n('personal_health_behavior_survey-relatedfield_smoking_frequency', '吸烟频次', 'dict')\n('fundus_examination-relatedfield_fundus', '眼底', 'dict')\n('dorsal_artery_pulsation_examination-relatedfield_left_foot', '左脚', 'dict')\n('dorsal_artery_pulsation_examination-relatedfield_right_foot', '右脚', 'dict')\n('basic_personal_information-boolfield_contract_signatory', '合同签约户', 'boolean')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_identification_number', '身份证号码', 'string')\n('basic_personal_information-characterfield_resident_file_number', '居民档案号', 'string')\n('basic_personal_information-characterfield_family_address', '家庭地址', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-characterfield_medical_ic_card_number', '医疗ic卡号', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_family_id', '家庭编号', 'dict')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('basic_personal_information-relatedfield_nationality', '民族', 'dict')\n('basic_personal_information-relatedfield_marital_status', '婚姻状况', 'dict')\n('basic_personal_information-relatedfield_education', '文化程度', 'dict')\n('basic_personal_information-relatedfield_occupational_status', '职业状况', 'dict')\n('basic_personal_information-relatedfield_medical_expenses_burden', '医疗费用负担', 'dict')\n('basic_personal_information-relatedfield_type_of_residence', '居住类型', 'dict')\n('basic_personal_information-relatedfield_blood_type', '血型', 'dict')\n('basic_personal_information-relatedfield_signed_family_doctor', '签约家庭医生', 'dict')\n('basic_personal_information-relatedfield_family_relationship', '家庭成员关系', 'dict')\n('yong_yao_diao_cha_biao-characterfield_yong_yao_ji_liang', '用药剂量', 'string')\n('yong_yao_diao_cha_biao-relatedfield_drug_name', '药品名称', 'dict')\n('xue_ya_jian_ce_biao-numberfield_systolic_blood_pressure', '收缩压', 'number')\n('xue_ya_jian_ce_biao-numberfield_diastolic_blood_pressure', '舒张压', 'number')",
             "next": [
                 "yuan_wai_fu_zhu_wen_zhen"
             ]

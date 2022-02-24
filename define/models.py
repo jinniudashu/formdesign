@@ -261,19 +261,17 @@ def fields_post_save_handler(sender, instance, created, **kwargs):
 @receiver(post_save, sender=ManagedEntity, weak=True, dispatch_uid=None)
 def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
     if sender==DicList:
-        _app='define_dict'
         _model='diclist'
         related_content=instance.name.capitalize()
         display_field='value'
         related_field='id'
     elif sender==ManagedEntity:
-        _app='define'
         _model='managedentity'
         related_content=instance.model_name
         display_field=instance.display_field
         related_field=instance.related_field
 
-    content_type = ContentType.objects.get(app_label=_app, model=_model)
+    content_type = ContentType.objects.get(app_label='define_dict', model=_model)
     print(sender, instance)
 
     if created:
