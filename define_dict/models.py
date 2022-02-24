@@ -1,4 +1,7 @@
 from django.db import models
+from pypinyin import Style, lazy_pinyin
+
+from define_icpc.models import Icpc
 
 # 字典列表
 class DicList(models.Model):
@@ -6,13 +9,32 @@ class DicList(models.Model):
     label = models.CharField(max_length=100, verbose_name="字典名称")
     related_field = models.CharField(max_length=100, verbose_name="关联字段")
     content = models.TextField(max_length=1024, null=True, blank=True, verbose_name="字典内容")
+    pym = models.CharField(max_length=100, null=True, blank=True, verbose_name="拼音码")
 
     def __str__(self):
         return str(self.label)
 
+    def save(self, *args, **kwargs):
+        if self.label:
+            self.pym = ''.join(lazy_pinyin(self.label, style=Style.FIRST_LETTER))
+        super().save(*args, **kwargs)
+
     class Meta:
         verbose_name = "字典列表"
         verbose_name_plural = "字典列表"
+
+# 字典明细
+class DicDetail(models.Model):
+    diclist = models.ForeignKey(DicList, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字典")
+    item = models.CharField(max_length=255, unique=True, verbose_name="值")
+    icpc = models.ForeignKey(Icpc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="ICPC")
+
+    def __str__(self):
+        return self.item
+
+    class Meta:
+        verbose_name = "字典明细"
+        verbose_name_plural = "字典明细"
 
 
 # 管理实体定义

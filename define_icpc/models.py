@@ -320,7 +320,7 @@ class Icpc(models.Model):
     subclass = models.CharField(max_length=255, blank=True, null=True, verbose_name="ICPC子类")
 
     def __str__(self):
-        return self.iname
+        return str(self.iname)
 
     class Meta:
         verbose_name = "ICPC总表"
