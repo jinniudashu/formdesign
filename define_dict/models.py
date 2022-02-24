@@ -26,11 +26,17 @@ class DicList(models.Model):
 # 字典明细
 class DicDetail(models.Model):
     diclist = models.ForeignKey(DicList, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字典")
-    item = models.CharField(max_length=255, unique=True, verbose_name="值")
+    item = models.CharField(max_length=255, verbose_name="值")
     icpc = models.ForeignKey(Icpc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="ICPC")
+    pym = models.CharField(max_length=255, blank=True, null=True, verbose_name="拼音码")
 
     def __str__(self):
         return self.item
+
+    def save(self, *args, **kwargs):
+        if self.item:
+            self.pym = ''.join(lazy_pinyin(self.item, style=Style.FIRST_LETTER))
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "字典明细"

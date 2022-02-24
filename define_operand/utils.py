@@ -59,7 +59,7 @@ from .models import *\n\n'''
     search_fields = ["value"]
 admin.site.register({dic_name}, {dic_name}Admin)\n\n'''
 
-            # 获取字典数据
+            # 获取字典数据content???
             if dic.content:
                 dicts_data.append({dic_name: dic.content})
 
