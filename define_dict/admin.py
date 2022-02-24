@@ -31,7 +31,7 @@ class DicListAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'content']
     search_fields=["label", "pym"]
     inlines = [DicDetailInlineAdmin]
-    actions = [export_diclist_content_to_dicdetail]
+    # actions = [export_diclist_content_to_dicdetail]
 admin.site.register(DicList, DicListAdmin)
 
 admin.site.register(ManagedEntity)
