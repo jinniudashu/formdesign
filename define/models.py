@@ -12,11 +12,11 @@ from define_icpc.models import Icpc
 from define_dict.models import DicList, ManagedEntity
 
 
-# 关联字段模型
+# 关联字段基础表
 # 内容由DicList和ManagedEntity生成内容时自动维护
 class RelateFieldModel(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
-    name_new = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
     label = models.CharField(max_length=100, verbose_name="关联模型名称")
     related_content = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联内容")
     display_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="显示字段")
@@ -49,7 +49,7 @@ class RelateFieldModel(models.Model):
 # 布尔字段
 class BoolField(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
-    name_new = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
     label = models.CharField(max_length=100, verbose_name="表单字段")
     CHOICES_TYPE = [('0', '是, 否'), ('1', '未知, 是, 否')]
     type = models.CharField(max_length=100, choices=CHOICES_TYPE , default='1', verbose_name="可选值")
@@ -72,7 +72,7 @@ class BoolField(models.Model):
 # 字符字段
 class CharacterField(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
-    name_new = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
     label = models.CharField(max_length=100, verbose_name="表单字段")
     CHAR_TYPE = [('CharField', '单行文本'), ('TextField', '多行文本')]
     type = models.CharField(max_length=50, choices=CHAR_TYPE, default='CharField', verbose_name="类型")
@@ -97,7 +97,7 @@ class CharacterField(models.Model):
 # 数值字段
 class NumberField(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
-    name_new = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
     label = models.CharField(max_length=100, verbose_name="表单字段")
     NUMBER_TYPE = [('IntegerField', '整数'), ('DecimalField', '固定精度小数'), ('FloatField', '浮点数')]
     type = models.CharField(max_length=50, choices=NUMBER_TYPE, default='IntegerField', verbose_name="类型")
@@ -126,7 +126,7 @@ class NumberField(models.Model):
 # 日期时间字段
 class DTField(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
-    name_new = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
     label = models.CharField(max_length=100, verbose_name="表单字段")
     DT_TYPE = [('DateTimeField', '日期时间'), ('DateField', '日期')]
     type = models.CharField(max_length=50, choices=DT_TYPE, default='DateTimeField', verbose_name="类型")
@@ -149,7 +149,7 @@ class DTField(models.Model):
 # 选择字段
 class ChoiceField(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
-    name_new = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
     label = models.CharField(max_length=100, verbose_name="表单字段")
     CHOICE_TYPE = [('Select', '下拉单选'), ('RadioSelect', '单选按钮列表'), ('CheckboxSelectMultiple', '复选框列表'), ('SelectMultiple', '下拉多选')]
     type = models.CharField(max_length=50, choices=CHOICE_TYPE, default='ChoiceField', verbose_name="类型")
@@ -173,7 +173,7 @@ class ChoiceField(models.Model):
 # 关联字段
 class RelatedField(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
-    name_new = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
     label = models.CharField(max_length=100, unique=True, verbose_name="表单字段")
     CHOICE_TYPE = [('Select', '下拉单选'), ('RadioSelect', '单选按钮列表'), ('CheckboxSelectMultiple', '复选框列表'), ('SelectMultiple', '下拉多选')]
     type = models.CharField(max_length=50, choices=CHOICE_TYPE, default='ChoiceField', verbose_name="类型")

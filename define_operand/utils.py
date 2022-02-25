@@ -730,14 +730,16 @@ from django.forms.models import model_to_dict
 from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelateFieldModel, RelatedField, Component
 from define_form.models import CombineForm
 from define_operand.models import Service, ServicePackage, Event, Instruction, Role, DesignBackup
-from define_dict.models import ManagedEntity
+from define_dict.models import ManagedEntity, DicDetail
 
 # 不备份再其他表新增内容时自动插入内容的表，RelateFieldModel
 def design_backup(modeladmin, request, queryset):
+    # 每个需要备份的model都需要在这里添加
     design_data = {
         'roles': [],
         'managedentities': [],
         'diclists': [],
+        'dicdetails': [],
         'boolfields': [],
         'characterfields': [],
         'numberfields': [],
@@ -764,6 +766,13 @@ def design_backup(modeladmin, request, queryset):
 
     for item in DicList.objects.all():
         design_data['diclists'].append(model_to_dict(item))
+
+    for item in DicDetail.objects.all():
+        model = model_to_dict(item)
+        model['diclist'] = item.diclist.name
+        if item.icpc:
+            model['icpc'] = item.icpc.icpc_code
+        design_data['dicdetails'].append(model)
 
     for item in BoolField.objects.all():
         design_data['boolfields'].append(model_to_dict(item))

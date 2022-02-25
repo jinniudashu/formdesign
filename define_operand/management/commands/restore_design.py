@@ -2,10 +2,10 @@ from django.core.management import BaseCommand
 import json
 
 from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelatedField, Component, RelateFieldModel
-from define_dict.models import DicList, ManagedEntity
+from define_dict.models import DicDetail, DicList, ManagedEntity
 from define_form.models import BaseModel, BaseForm, CombineForm
 from define_operand.models import ServicePackage, Service, Operation, Event, Instruction, Event_instructions, Role
-from define_icpc.models import icpc_list
+from define_icpc.models import Icpc
 
 class Command(BaseCommand):
     help = 'Import design from json file'
@@ -24,6 +24,7 @@ class Command(BaseCommand):
             # 删除所有数据
             Role.objects.all().delete()
             ManagedEntity.objects.all().delete()
+            DicDetail.objects.all().delete()
             DicList.objects.all().delete()
             RelateFieldModel.objects.all().delete()
             BoolField.objects.all().delete()
@@ -46,21 +47,30 @@ class Command(BaseCommand):
             # 导入角色表
             for item in design_data['roles']:
                 print('Role:', item)
-                Role.objects.create(
-                    label=item['label'],
-                    description=item['description'],
-                )
+                Role.objects.create(**item)
             print('导入角色表完成')
 
-            # 导入字典表，自动插入RelateFieldModel表内容
+            # 导入DicList表，自动插入RelateFieldModel表内容
             for item in design_data['diclists']:
-                DicList.objects.create(
-                    name=item['name'],
-                    label=item['label'],
-                    related_field=item['related_field'],
-                    content=item['content'],
+                print('DicList:', item)
+                DicList.objects.create(**item)
+            
+            # 导入DicDetail表
+            for item in design_data['dicdetails']:
+                print('DicDetail:', item)
+                diclist = DicList.objects.get(name=item['diclist'])
+                if item['icpc']:
+                    icpc = Icpc.objects.get(icpc_code=item['icpc'])
+                else:
+                    icpc = None
+                DicDetail.objects.create(
+                    diclist=diclist,
+                    item=item['item'],
+                    icpc=icpc,
                 )
+
             print('导入字典表完成')
+
 
             # ******************************************************
             # 导入管理实体表和字典表时自动插入RelateFieldModel表内容

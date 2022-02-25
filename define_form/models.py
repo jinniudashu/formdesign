@@ -14,10 +14,10 @@ from define_dict.models import ManagedEntity
 # 基础表单定义
 class BaseModel(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
-    name_new = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="表单名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="表单名称")
     label = models.CharField(max_length=100, unique=True, verbose_name="表单名称")
     description = models.TextField(max_length=255, verbose_name="描述", null=True, blank=True)
-    components = models.ManyToManyField(Component, verbose_name="组件清单")
+    components = models.ManyToManyField(Component, verbose_name="字段")
     managed_entity = models.ManyToManyField(ManagedEntity, verbose_name="关联实体", blank=True)
     is_base_infomation = models.BooleanField(default=False, verbose_name="基础信息表")
 
@@ -43,7 +43,7 @@ class BaseForm(models.Model):
     is_inquiry = models.BooleanField(default=False, verbose_name="仅用于查询")
     FORM_STYLE = [('detail', '详情'),('list', '列表')]
     style = models.CharField(max_length=50, choices=FORM_STYLE, default='detail', verbose_name='风格')
-    components = models.ManyToManyField(Component, verbose_name="组件清单")
+    components = models.ManyToManyField(Component, verbose_name="字段")
     meta_data = models.JSONField(null=True, blank=True, verbose_name="视图元数据")
     # q = Q(BaseModel.objects.get(id=basemodel).components.all())
 
@@ -64,7 +64,7 @@ class BaseForm(models.Model):
 # 组合视图定义
 class CombineForm(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
-    name_new = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="表单名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="表单名称")
     label = models.CharField(max_length=100, unique=True, verbose_name="表单名称")
     forms = models.ManyToManyField('self', blank=True, verbose_name="可组合的视图")
     is_base = models.BooleanField(default=False, verbose_name="基础视图")

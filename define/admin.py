@@ -4,27 +4,27 @@ from define.models import BoolField, CharacterField, NumberField, DTField, Choic
 
 class BoolFieldAdmin(admin.ModelAdmin):
     readonly_fields = ['name']
-    autocomplete_fields = ["name_new", ]
+    autocomplete_fields = ["name_icpc", ]
 
 class CharacterFieldAdmin(admin.ModelAdmin):
     readonly_fields = ['name']
-    autocomplete_fields = ["name_new", ]
+    autocomplete_fields = ["name_icpc", ]
 
 class NumberFieldAdmin(admin.ModelAdmin):
     readonly_fields = ['name']
-    autocomplete_fields = ["name_new", ]
+    autocomplete_fields = ["name_icpc", ]
 
 class DTFieldAdmin(admin.ModelAdmin):
     readonly_fields = ['name']
-    autocomplete_fields = ["name_new", ]
+    autocomplete_fields = ["name_icpc", ]
 
 # class ChoiceFieldAdmin(admin.ModelAdmin):
 #     readonly_fields = ['name']
-    # autocomplete_fields = ["name_new", ]
+    # autocomplete_fields = ["name_icpc", ]
 
 class RelatedFieldAdmin(admin.ModelAdmin):
     readonly_fields = ['name']
-    autocomplete_fields = ["name_new", ]
+    autocomplete_fields = ["name_icpc", ]
 
 class ComponentAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'label', 'content_type', 'object_id']

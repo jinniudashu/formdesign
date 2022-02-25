@@ -34,7 +34,7 @@ class Role(models.Model):
 # 作业信息表
 class Operation(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="作业名称")
-    name_new = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="作业名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="作业名称")
     label = models.CharField(max_length=255, blank=True, null=True, verbose_name="显示名称")
     forms = models.ForeignKey(CombineForm, on_delete=models.CASCADE, null=True, blank=True, verbose_name="组合视图")
     Operation_priority = [
