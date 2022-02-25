@@ -775,24 +775,41 @@ def design_backup(modeladmin, request, queryset):
         design_data['dicdetails'].append(model)
 
     for item in BoolField.objects.all():
-        design_data['boolfields'].append(model_to_dict(item))
+        model = model_to_dict(item)
+        if item.name_icpc:
+            model['name_icpc'] = item.name_icpc.icpc_code
+        design_data['boolfields'].append(model)
 
     for item in CharacterField.objects.all():
-        design_data['characterfields'].append(model_to_dict(item))
+        model = model_to_dict(item)
+        if item.name_icpc:
+            model['name_icpc'] = item.name_icpc.icpc_code
+        design_data['characterfields'].append(model)
 
     for item in NumberField.objects.all():
-        design_data['numberfields'].append(model_to_dict(item))
+        model = model_to_dict(item)
+        if item.name_icpc:
+            model['name_icpc'] = item.name_icpc.icpc_code
+        design_data['numberfields'].append(model)
 
     for item in DTField.objects.all():
-        design_data['dtfields'].append(model_to_dict(item))
+        model = model_to_dict(item)
+        if item.name_icpc:
+            model['name_icpc'] = item.name_icpc.icpc_code
+        design_data['dtfields'].append(model)
 
     for item in RelatedField.objects.all():
         model = model_to_dict(item)
         model['related_content'] = item.related_content.name
+        if item.name_icpc:
+            model['name_icpc'] = item.name_icpc.icpc_code
         design_data['relatedfields'].append(model)
 
     for item in ChoiceField.objects.all():
-        design_data['choicefields'].append(model_to_dict(item))
+        model = model_to_dict(item)
+        if item.name_icpc:
+            model['name_icpc'] = item.name_icpc.icpc_code
+        design_data['choicefields'].append(model)
 
     for item in Component.objects.all():
         design_data['components'].append(model_to_dict(item))

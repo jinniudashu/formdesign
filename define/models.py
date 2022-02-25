@@ -239,17 +239,23 @@ class Component(models.Model):
 @receiver(post_save, sender=ChoiceField, weak=True, dispatch_uid=None)
 @receiver(post_save, sender=RelatedField, weak=True, dispatch_uid=None)
 def fields_post_save_handler(sender, instance, created, **kwargs):
+    if instance.name_icpc:
+        component_name = instance.name_icpc.icpc_code
+    else:
+        component_name = instance.name
     content_type = ContentType.objects.get(app_label='define', model=sender.__name__.lower())
     print(content_type, ':', instance.name)
     if created:
         Component.objects.create(
             content_type = content_type, 
             object_id = instance.id, 
-            name = instance.name, 
+            name = component_name, 
             label = instance.label, 
         )
     else:
-        Component.objects.filter(name=instance.name).update(
+        # 所有字段model增加唯一field_id字段
+        # Component.objects.filter(name=instance.name).update(
+        Component.objects.filter(name=component_name).update(
             content_type = content_type,
             object_id = instance.id,
             label = instance.label, 
