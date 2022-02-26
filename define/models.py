@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models import Q
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
-
+import uuid
 from pypinyin import lazy_pinyin
 
 from django.dispatch import receiver
@@ -56,11 +56,14 @@ class BoolField(models.Model):
     required = models.BooleanField(default=False, verbose_name="必填")
     DEFAULT_VALUE = [('0', '未知'), ('1', '是'), ('2', '否')]
     default = models.CharField(max_length=10, choices=DEFAULT_VALUE, default='0', null=True, blank=True, verbose_name="默认值")
+    field_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="字段ID")
 
     def __str__(self):
         return self.label
 
     def save(self, *args, **kwargs):
+        if self.field_id is None:
+            self.field_id = uuid.uuid1()
         if not self.name:
             self.name = f'boolfield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
@@ -79,12 +82,15 @@ class CharacterField(models.Model):
     length = models.PositiveSmallIntegerField(default=255, verbose_name="字符长度")
     required = models.BooleanField(default=False, verbose_name="必填")
     default = models.CharField(max_length=255, null=True, blank=True, verbose_name="默认值")
+    field_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="字段ID")
     # component = GenericRelation(to='Component')
 
     def __str__(self):
         return str(self.label)
 
     def save(self, *args, **kwargs):
+        if self.field_id is None:
+            self.field_id = uuid.uuid1()
         if not self.name:
             self.name = f'characterfield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
@@ -109,11 +115,14 @@ class NumberField(models.Model):
     unit = models.CharField(max_length=50, null=True, blank=True, verbose_name="单位")
     default = models.FloatField(null=True, blank=True, verbose_name="默认值")
     required = models.BooleanField(default=False, verbose_name="必填")
+    field_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="字段ID")
 
     def __str__(self):
         return str(self.label)
 
     def save(self, *args, **kwargs):
+        if self.field_id is None:
+            self.field_id = uuid.uuid1()
         if not self.name:
             self.name = f'numberfield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
@@ -132,11 +141,14 @@ class DTField(models.Model):
     type = models.CharField(max_length=50, choices=DT_TYPE, default='DateTimeField', verbose_name="类型")
     default_now = models.BooleanField(default=False, verbose_name="默认为当前时间")
     required = models.BooleanField(default=False, verbose_name="必填")
+    field_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="字段ID")
 
     def __str__(self):
         return str(self.label)
 
     def save(self, *args, **kwargs):
+        if self.field_id is None:
+            self.field_id = uuid.uuid1()
         if not self.name:
             self.name = f'datetimefield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
@@ -156,11 +168,14 @@ class ChoiceField(models.Model):
     options = models.TextField(max_length=1024, null=True, blank=True, verbose_name="选项", help_text="每行一个选项, 最多100个")
     default_first = models.BooleanField(default=False, verbose_name="默认选第一个")
     required = models.BooleanField(default=False, verbose_name="必填")
+    field_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="字段ID")
 
     def __str__(self):
         return str(self.label)
 
     def save(self, *args, **kwargs):
+        if self.field_id is None:
+            self.field_id = uuid.uuid1()
         if not self.name:
             self.name = f'choicefield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
@@ -177,15 +192,15 @@ class RelatedField(models.Model):
     label = models.CharField(max_length=100, unique=True, verbose_name="表单字段")
     CHOICE_TYPE = [('Select', '下拉单选'), ('RadioSelect', '单选按钮列表'), ('CheckboxSelectMultiple', '复选框列表'), ('SelectMultiple', '下拉多选')]
     type = models.CharField(max_length=50, choices=CHOICE_TYPE, default='ChoiceField', verbose_name="类型")
-    # related_content是弃用的旧字段，待完成升级后清理
-    # related_content = models.ForeignKey(DicList, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="关联内容-旧版")
     related_content = models.ForeignKey(RelateFieldModel, on_delete=models.CASCADE, null=True, blank=True, verbose_name="关联内容")
-    # related_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联字段")
+    field_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="字段ID")
 
     def __str__(self):
         return str(self.label)
 
     def save(self, *args, **kwargs):
+        if self.field_id is None:
+            self.field_id = uuid.uuid1()
         if not self.name:
             self.name = f'relatedfield_{"_".join(lazy_pinyin(self.label)).lower()}'
         super().save(*args, **kwargs)
@@ -208,7 +223,6 @@ class ComputeField(models.Model):
 class Component(models.Model):
     name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
     label = models.CharField(max_length=100, verbose_name="表单字段", null=True, blank=True)
-
     q  = Q(app_label='define') & (
         Q(model = 'boolfield') | 
         Q(model = 'characterfield') | 
@@ -221,6 +235,7 @@ class Component(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=q , null=True, blank=True)
     object_id = models.PositiveIntegerField(null=True, blank=True)
     content_object = GenericForeignKey('content_type', 'object_id')
+    field_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="字段ID")
 
     def __str__(self):
         return str(self.label)
@@ -250,15 +265,15 @@ def fields_post_save_handler(sender, instance, created, **kwargs):
             content_type = content_type, 
             object_id = instance.id, 
             name = component_name, 
-            label = instance.label, 
+            label = instance.label,
+            field_id = instance.field_id
         )
     else:
-        # 所有字段model增加唯一field_id字段
-        # Component.objects.filter(name=instance.name).update(
-        Component.objects.filter(name=component_name).update(
+        Component.objects.filter(field_id=instance.field_id).update(
+            name = component_name,
+            label = instance.label, 
             content_type = content_type,
             object_id = instance.id,
-            label = instance.label, 
         )
         
 
