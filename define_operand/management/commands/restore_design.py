@@ -111,8 +111,13 @@ class Command(BaseCommand):
             # ******************************************************
             # 导入字段表
             for item in design_data['boolfields']:
+                if item['name_icpc']:
+                    name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
+                else:
+                    name_icpc = None
                 BoolField.objects.create(
                     name=item['name'],
+                    name_icpc=name_icpc,
                     label=item['label'],
                     type=item['type'],
                     required=item['required'],
@@ -121,8 +126,13 @@ class Command(BaseCommand):
             print('导入布尔型字段表完成')
 
             for item in design_data['characterfields']:
+                if item['name_icpc']:
+                    name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
+                else:
+                    name_icpc = None
                 CharacterField.objects.create(
                     name=item['name'],
+                    name_icpc=name_icpc,
                     label=item['label'],
                     type=item['type'],
                     length=item['length'],
@@ -132,8 +142,13 @@ class Command(BaseCommand):
             print('导入字符型字段表完成')
 
             for item in design_data['numberfields']:
+                if item['name_icpc']:
+                    name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
+                else:
+                    name_icpc = None
                 NumberField.objects.create(
                     name=item['name'],
+                    name_icpc=name_icpc,
                     label=item['label'],
                     type=item['type'],
                     max_digits=item['max_digits'],
@@ -148,8 +163,13 @@ class Command(BaseCommand):
             print('导入数值型字段表完成')
 
             for item in design_data['dtfields']:
+                if item['name_icpc']:
+                    name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
+                else:
+                    name_icpc = None
                 DTField.objects.create(
                     name=item['name'],
+                    name_icpc=name_icpc,
                     label=item['label'],
                     type=item['type'],
                     default_now=item['default_now'],
@@ -158,8 +178,13 @@ class Command(BaseCommand):
             print('导入日期型字段表完成')
 
             for item in design_data['choicefields']:
+                if item['name_icpc']:
+                    name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
+                else:
+                    name_icpc = None
                 ChoiceField.objects.create(
                     name=item['name'],
+                    name_icpc=name_icpc,
                     label=item['label'],
                     type=item['type'],
                     options=item['options'],
@@ -169,9 +194,14 @@ class Command(BaseCommand):
             print('导入选择型字段表完成')
 
             for item in design_data['relatedfields']:
+                if item['name_icpc']:
+                    name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
+                else:
+                    name_icpc = None
                 related_content=RelateFieldModel.objects.get(name=item['related_content'])
                 RelatedField.objects.create(
                     name=item['name'],
+                    name_icpc=name_icpc,
                     label=item['label'],
                     type=item['type'],
                     related_content=related_content,
@@ -180,8 +210,13 @@ class Command(BaseCommand):
 
             # 导入模型表
             for item in design_data['basemodels']:
+                if item['name_icpc']:
+                    name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
+                else:
+                    name_icpc = None
                 basemodel = BaseModel.objects.create(
                     name=item['name'],
+                    name_icpc=name_icpc,
                     label=item['label'],
                     description=item['description'],
                     is_base_infomation=item['is_base_infomation'],
@@ -221,6 +256,10 @@ class Command(BaseCommand):
 
             # 导入组合表单表
             for item in design_data['combineforms']:
+                if item['name_icpc']:
+                    name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
+                else:
+                    name_icpc = None
                 if item['managed_entity']:
                     managed_entity=ManagedEntity.objects.get(name=item['managed_entity'])
                 else:
@@ -228,6 +267,7 @@ class Command(BaseCommand):
                 print(item)
                 combineform = CombineForm.objects.create(
                     name=item['name'],
+                    name_icpc=name_icpc,
                     label=item['label'],
                     is_base=item['is_base'],
                     managed_entity=managed_entity,

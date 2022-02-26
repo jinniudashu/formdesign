@@ -815,49 +815,70 @@ def design_backup(modeladmin, request, queryset):
         design_data['components'].append(model_to_dict(item))
 
     for item in BaseModel.objects.all():
+        model = model_to_dict(item)
+
         components = []
         for component in item.components.all():
             components.append(model_to_dict(component))
-        model = model_to_dict(item)
         model['components'] = components
+        
+        if item.name_icpc:
+            model['name_icpc'] = item.name_icpc.icpc_code
+
         if model['managed_entity']:
             managed_entity_name = []
             for managed_entity in model['managed_entity']:
                 managed_entity_name.append(managed_entity.name)
             model['managed_entity'] = managed_entity_name
+
         design_data['basemodels'].append(model)
 
     for item in BaseForm.objects.filter(is_inquiry=True):
+        model = model_to_dict(item)
+
         components = []
         for component in item.components.all():
             components.append(model_to_dict(component))
-        model = model_to_dict(item)
         model['components'] = components
+
         model['basemodel'] = item.basemodel.name
         model.pop('meta_data')
+
         design_data['baseforms'].append(model)
 
     for item in CombineForm.objects.filter(is_base=False):
+        model = model_to_dict(item)
+
         forms = []
         for form in item.forms.all():
             _form = model_to_dict(form)
             forms.append(_form['name'])
-        model = model_to_dict(item)
         model['forms'] = forms
+        
+        if item.name_icpc:
+            model['name_icpc'] = item.name_icpc.icpc_code
+
         if model['managed_entity']:
             model['managed_entity'] = item.managed_entity.name
         model.pop('meta_data')
+
         design_data['combineforms'].append(model)
 
     for item in Operation.objects.all():
         model = model_to_dict(item)
+
         if model['forms']:
             model['forms'] = item.forms.name
+
+        if item.name_icpc:
+            model['name_icpc'] = item.name_icpc.icpc_code
+
         if model['group']:
             group_name = []
             for group in model['group']:
                 group_name.append(group.name)
             model['group'] = group_name
+
         design_data['operations'].append(model)
 
     for item in Service.objects.all():
