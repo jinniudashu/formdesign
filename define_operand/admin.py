@@ -25,7 +25,7 @@ class OperationAdmin(admin.ModelAdmin):
     search_fields = ['name', 'label']
     inlines = [EventInline]
     ordering = ['id']
-    readonly_fields = ['name']
+    readonly_fields = ['name', 'operand_id']
     autocomplete_fields = ["name_icpc", ]
 
 admin.site.register(Operation, OperationAdmin)
@@ -43,20 +43,20 @@ admin.site.register(Event, EventAdmin)
 
 
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['label', 'id']
+    list_display = ['name_icpc', 'label', 'id']
     list_display_links = ['label', ]
     search_fields = ['label']
-    readonly_fields = ['name']
+    readonly_fields = ['name', 'service_id']
     ordering = ['id']
 
 admin.site.register(Service, ServiceAdmin)
 
 
 class ServicePackageAdmin(admin.ModelAdmin):
-    list_display = ['label', 'id']
+    list_display = ['name_icpc', 'label', 'name_icpc', 'id']
     list_display_links = ['label', ]
     search_fields = ['label']
-    readonly_fields = ['name']
+    readonly_fields = ['name', 'service_package_id']
     ordering = ['id']
 
 admin.site.register(ServicePackage, ServicePackageAdmin)

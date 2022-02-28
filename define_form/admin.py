@@ -32,15 +32,15 @@ copy_form.short_description = '生成查询视图副本'
 
 
 class BaseModelAdmin(admin.ModelAdmin):
-    readonly_fields = ['name']
+    readonly_fields = ['name', 'basemodel_id']
     autocomplete_fields = ["name_icpc", ]
 
 class BaseFormAdmin(admin.ModelAdmin):
-    readonly_fields = ['name', 'basemodel', 'meta_data']
+    readonly_fields = ['name', 'basemodel', 'meta_data', 'baseform_id']
     actions = [copy_form]
 
 class CombineFormAdmin(admin.ModelAdmin):
-    readonly_fields = ['name', 'is_base', 'meta_data']
+    readonly_fields = ['name', 'is_base', 'meta_data', 'combineform_id']
     autocomplete_fields = ["name_icpc", ]
 
 

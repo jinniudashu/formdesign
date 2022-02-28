@@ -30,7 +30,7 @@ class ComponentAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'label', 'content_type', 'object_id', 'field_id']
 
 class RelateFieldModelAdmin(admin.ModelAdmin):
-    readonly_fields = ['name']
+    readonly_fields = ['name', 'relate_field_model_id']
 
 admin.site.register(BoolField, BoolFieldAdmin)
 admin.site.register(CharacterField, CharacterFieldAdmin)

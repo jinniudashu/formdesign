@@ -227,10 +227,6 @@ class RelatedField(models.Model):
         verbose_name = "关联字段"
         verbose_name_plural = "关联字段"
 
-# Updated items:
-# 服务角色
-# 病名-评估和诊断
-# 症状-症状和问题
 
 # 计算字段
 class ComputeField(models.Model):
