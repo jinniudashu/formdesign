@@ -740,13 +740,14 @@ def design_backup(modeladmin, request, queryset):
         'managedentities': [],
         'diclists': [],
         'dicdetails': [],
+        # 'relatefieldmodels': [],
         'boolfields': [],
         'characterfields': [],
         'numberfields': [],
         'dtfields': [],
         'relatedfields': [],
         'choicefields': [],
-        'components': [],
+        # 'components': [],
         'basemodels': [],
         'baseforms': [],
         'combineforms': [],
@@ -769,7 +770,7 @@ def design_backup(modeladmin, request, queryset):
 
     for item in DicDetail.objects.all():
         model = model_to_dict(item)
-        model['diclist'] = item.diclist.name
+        model['diclist'] = item.diclist.dic_id
         if item.icpc:
             model['icpc'] = item.icpc.icpc_code
         design_data['dicdetails'].append(model)
@@ -800,7 +801,7 @@ def design_backup(modeladmin, request, queryset):
 
     for item in RelatedField.objects.all():
         model = model_to_dict(item)
-        model['related_content'] = item.related_content.name
+        model['related_content'] = item.related_content.relate_field_model_id
         if item.name_icpc:
             model['name_icpc'] = item.name_icpc.icpc_code
         design_data['relatedfields'].append(model)
@@ -811,8 +812,8 @@ def design_backup(modeladmin, request, queryset):
             model['name_icpc'] = item.name_icpc.icpc_code
         design_data['choicefields'].append(model)
 
-    for item in Component.objects.all():
-        design_data['components'].append(model_to_dict(item))
+    # for item in Component.objects.all():
+    #     design_data['components'].append(model_to_dict(item))
 
     for item in BaseModel.objects.all():
         model = model_to_dict(item)
@@ -828,7 +829,7 @@ def design_backup(modeladmin, request, queryset):
         if model['managed_entity']:
             managed_entity_name = []
             for managed_entity in model['managed_entity']:
-                managed_entity_name.append(managed_entity.name)
+                managed_entity_name.append(managed_entity.entity_id)
             model['managed_entity'] = managed_entity_name
 
         design_data['basemodels'].append(model)
@@ -841,7 +842,7 @@ def design_backup(modeladmin, request, queryset):
             components.append(model_to_dict(component))
         model['components'] = components
 
-        model['basemodel'] = item.basemodel.name
+        model['basemodel'] = item.basemodel.basemodel_id
         model.pop('meta_data')
 
         design_data['baseforms'].append(model)
@@ -852,61 +853,77 @@ def design_backup(modeladmin, request, queryset):
         forms = []
         for form in item.forms.all():
             _form = model_to_dict(form)
-            forms.append(_form['name'])
+            forms.append(_form['combineform_id'])
         model['forms'] = forms
         
         if item.name_icpc:
             model['name_icpc'] = item.name_icpc.icpc_code
 
         if model['managed_entity']:
-            model['managed_entity'] = item.managed_entity.name
+            model['managed_entity'] = item.managed_entity.entity_id
         model.pop('meta_data')
 
         design_data['combineforms'].append(model)
 
+
     for item in Operation.objects.all():
         model = model_to_dict(item)
-
-        if model['forms']:
-            model['forms'] = item.forms.name
 
         if item.name_icpc:
             model['name_icpc'] = item.name_icpc.icpc_code
 
+        if model['forms']:
+            model['forms'] = item.forms.combineform_id
+
         if model['group']:
-            group_name = []
-            for group in model['group']:
-                group_name.append(group.name)
-            model['group'] = group_name
+            group_id = []
+            for group in item.group.all():
+                group_id.append(group.role_id)
+            model['group'] = group_id
 
         design_data['operations'].append(model)
 
+
     for item in Service.objects.all():
         model = model_to_dict(item)
+        if item.name_icpc:
+            model['name_icpc'] = item.name_icpc.icpc_code
+
         if model['first_operation']:
-            model['first_operation'] = item.first_operation.name
+            model['first_operation'] = item.first_operation.operand_id
+
         if model['operations']:
             operations_name = []
             for operation in model['operations']:
-                operations_name.append(operation.name)
+                operations_name.append(operation.operand_id)
             model['operations'] = operations_name
+
         if model['group']:
-            group_name = []
-            for group in model['group']:
-                group_name.append(group.name)
-            model['group'] = group_name
+            group_id = []
+            for group in item.group.all():
+                group_id.append(group.role_id)
+            model['group'] = group_id
+
         design_data['services'].append(model)
+
 
     for item in ServicePackage.objects.all():
         model = model_to_dict(item)
+
+        if item.name_icpc:
+            model['name_icpc'] = item.name_icpc.icpc_code
+
         if model['first_service']:
-            model['first_service'] = item.first_service.name
+            model['first_service'] = item.first_service.service_id
+
         if model['services']:
-            services_name = []
-            for service in model['services']:
-                services_name.append(service.name)
-            model['services'] = services_name
+            services_id = []
+            for service in item.sercices.all():
+                services_id.append(service.service_id)
+            model['services'] = services_id
+
         design_data['service_packages'].append(model)
+
 
     for item in Instruction.objects.all():
         model = model_to_dict(item)
@@ -914,12 +931,11 @@ def design_backup(modeladmin, request, queryset):
 
     for item in Event.objects.all():
         model = model_to_dict(item)
-        model['operation'] = item.operation.name
+        model['operation'] = item.operation.operand_id
         if model['next']:
             next_operations = []
             for operation in item.next.all():
-                _operation = model_to_dict(operation)
-                next_operations.append(_operation['name'])
+                next_operations.append(operation.operand_id)
             model['next'] = next_operations
         design_data['events'].append(model)
 

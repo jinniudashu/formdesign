@@ -16,15 +16,15 @@ from define_dict.models import DicList, ManagedEntity
 # 内容由DicList和ManagedEntity生成内容时自动维护
 class RelateFieldModel(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
-    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字段名称")
     label = models.CharField(max_length=100, verbose_name="关联模型名称")
     related_content = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联内容")
     display_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="显示字段")
     related_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联字段")
-    q = Q(app_label='define_dict' ) & Q(model = 'diclist') | Q(app_label='define_form') & Q(model = 'managedentity')
+    q = Q(app_label='define_dict' ) & (Q(model = 'diclist') | Q(model = 'managedentity')) | Q(app_label='define_icpc')
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=q, null=True, blank=True, verbose_name="关联基本信息")
     object_id = models.PositiveIntegerField(null=True, blank=True)
     content_object = GenericForeignKey('content_type', 'object_id')
+    relate_field_model_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="关联字段基础表ID")
 
     def __str__(self):
         return str(self.label)
@@ -64,7 +64,10 @@ class BoolField(models.Model):
     def save(self, *args, **kwargs):
         if self.field_id is None:
             self.field_id = uuid.uuid1()
-        if not self.name:
+        if self.name_icpc is not None:
+            self.name = self.name_icpc.icpc_code
+            self.label = self.name_icpc.iname
+        if self.name is None:
             self.name = f'boolfield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -91,7 +94,10 @@ class CharacterField(models.Model):
     def save(self, *args, **kwargs):
         if self.field_id is None:
             self.field_id = uuid.uuid1()
-        if not self.name:
+        if self.name_icpc is not None:
+            self.name = self.name_icpc.icpc_code
+            self.label = self.name_icpc.iname
+        if self.name is None:
             self.name = f'characterfield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -123,7 +129,10 @@ class NumberField(models.Model):
     def save(self, *args, **kwargs):
         if self.field_id is None:
             self.field_id = uuid.uuid1()
-        if not self.name:
+        if self.name_icpc is not None:
+            self.name = self.name_icpc.icpc_code
+            self.label = self.name_icpc.iname
+        if self.name is None:
             self.name = f'numberfield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -149,7 +158,10 @@ class DTField(models.Model):
     def save(self, *args, **kwargs):
         if self.field_id is None:
             self.field_id = uuid.uuid1()
-        if not self.name:
+        if self.name_icpc is not None:
+            self.name = self.name_icpc.icpc_code
+            self.label = self.name_icpc.iname
+        if self.name is None:
             self.name = f'datetimefield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -176,7 +188,10 @@ class ChoiceField(models.Model):
     def save(self, *args, **kwargs):
         if self.field_id is None:
             self.field_id = uuid.uuid1()
-        if not self.name:
+        if self.name_icpc is not None:
+            self.name = self.name_icpc.icpc_code
+            self.label = self.name_icpc.iname
+        if self.name is None:
             self.name = f'choicefield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -201,7 +216,10 @@ class RelatedField(models.Model):
     def save(self, *args, **kwargs):
         if self.field_id is None:
             self.field_id = uuid.uuid1()
-        if not self.name:
+        if self.name_icpc is not None:
+            self.name = self.name_icpc.icpc_code
+            self.label = self.name_icpc.iname
+        if self.name is None:
             self.name = f'relatedfield_{"_".join(lazy_pinyin(self.label)).lower()}'
         super().save(*args, **kwargs)
 
@@ -256,8 +274,10 @@ class Component(models.Model):
 def fields_post_save_handler(sender, instance, created, **kwargs):
     if instance.name_icpc:
         component_name = instance.name_icpc.icpc_code
+        component_label = instance.name_icpc.iname
     else:
         component_name = instance.name
+        component_label = instance.label
     content_type = ContentType.objects.get(app_label='define', model=sender.__name__.lower())
     print(content_type, ':', instance.name)
     if created:
@@ -265,7 +285,7 @@ def fields_post_save_handler(sender, instance, created, **kwargs):
             content_type = content_type, 
             object_id = instance.id, 
             name = component_name, 
-            label = instance.label,
+            label = component_label,
             field_id = instance.field_id
         )
     else:
@@ -281,16 +301,18 @@ def fields_post_save_handler(sender, instance, created, **kwargs):
 @receiver(post_save, sender=DicList, weak=True, dispatch_uid=None)
 @receiver(post_save, sender=ManagedEntity, weak=True, dispatch_uid=None)
 def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
-    if sender==DicList:
+    if sender == DicList:
         _model='diclist'
         related_content=instance.name.capitalize()
         display_field='value'
         related_field='id'
-    elif sender==ManagedEntity:
+        relate_field_model_id=instance.dic_id
+    elif sender == ManagedEntity:
         _model='managedentity'
         related_content=instance.model_name
         display_field=instance.display_field
         related_field=instance.related_field
+        relate_field_model_id=instance.entity_id
 
     content_type = ContentType.objects.get(app_label='define_dict', model=_model)
     print(sender, instance)
@@ -304,9 +326,11 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
             related_field=related_field,
             content_type = content_type, 
             object_id = instance.id, 
+            relate_field_model_id = relate_field_model_id
         )
     else:
-        RelateFieldModel.objects.filter(name=instance.name).update(
+        RelateFieldModel.objects.filter(relate_field_model_id=relate_field_model_id).update(
+            name=instance.name,
             label=instance.label,
             related_content=related_content,
             display_field=display_field,

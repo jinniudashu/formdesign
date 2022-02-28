@@ -23,16 +23,18 @@ class DicDetailInlineAdmin(admin.TabularInline):
 
 class DicDetailAdmin(admin.ModelAdmin):
     list_display = ('diclist', 'item', 'icpc')
+    readonly_fields = ['item_id']
     autocomplete_fields = ['icpc', 'diclist']
 admin.site.register(DicDetail, DicDetailAdmin)
 
 class DicListAdmin(admin.ModelAdmin):
     list_display = ('label', 'name')
-    readonly_fields = ['name', 'content']
+    readonly_fields = ['name', 'content', 'dic_id']
     search_fields=["label", "pym"]
     inlines = [DicDetailInlineAdmin]
     # actions = [export_diclist_content_to_dicdetail]
 admin.site.register(DicList, DicListAdmin)
 
+class ManagedEntityAdmin(admin.ModelAdmin):
+    readonly_fields = ['entity_id']
 admin.site.register(ManagedEntity)
-

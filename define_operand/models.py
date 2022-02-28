@@ -2,6 +2,7 @@ from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_delete, m2m_changed
 import json
+import uuid
 from django.contrib.auth.models import Group
 
 from pypinyin import lazy_pinyin
@@ -16,12 +17,15 @@ class Role(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="角色名")
     label = models.CharField(max_length=255, verbose_name="显示名称")
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="角色描述")
+    role_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="角色ID")
 
     def __str__(self):
         return str(self.label)
 
     def save(self, *args, **kwargs):
-        if not self.name:
+        if self.role_id is None:
+            self.role_id = uuid.uuid1()
+        if self.name is None:
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -34,7 +38,7 @@ class Role(models.Model):
 # 作业信息表
 class Operation(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="作业名称")
-    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="作业名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=255, blank=True, null=True, verbose_name="显示名称")
     forms = models.ForeignKey(CombineForm, on_delete=models.CASCADE, null=True, blank=True, verbose_name="组合视图")
     Operation_priority = [
@@ -55,12 +59,18 @@ class Operation(models.Model):
     resource_materials = models.CharField(max_length=255, blank=True, null=True, verbose_name='配套物料')
     resource_devices = models.CharField(max_length=255, blank=True, null=True, verbose_name='配套设备')
     resource_knowledge = models.CharField(max_length=255, blank=True, null=True, verbose_name='服务知识')
+    operand_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="作业ID")
 
     def __str__(self):
         return str(self.label)
 
     def save(self, *args, **kwargs):
-        if not self.name:
+        if self.operand_id is None:
+            self.operand_id = uuid.uuid1()
+        if self.name_icpc is not None:
+            self.name = self.name_icpc.icpc_code
+            self.label = self.name_icpc.iname
+        if self.name is None:
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -70,9 +80,10 @@ class Operation(models.Model):
         ordering = ['id']
 
 
-# 服务类型信息表
+# 单元服务类型信息表
 class Service(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=255, verbose_name="显示名称")
     first_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='first_operation', blank=True, null=True, verbose_name="起始作业")
     operations = models.ManyToManyField(Operation, blank=True, verbose_name="包含作业")
@@ -94,12 +105,18 @@ class Service(models.Model):
     resource_materials = models.CharField(max_length=255, blank=True, null=True, verbose_name='配套物料')
     resource_devices = models.CharField(max_length=255, blank=True, null=True, verbose_name='配套设备')
     resource_knowledge = models.CharField(max_length=255, blank=True, null=True, verbose_name='服务知识')
+    service_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="单元服务ID")
 
     def __str__(self):
         return str(self.label)
 
     def save(self, *args, **kwargs):
-        if not self.name:
+        if self.service_id is None:
+            self.service_id = uuid.uuid1()
+        if self.name_icpc is not None:
+            self.name = self.name_icpc.icpc_code
+            self.label = self.name_icpc.iname
+        if self.name is None:
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -111,15 +128,22 @@ class Service(models.Model):
 
 class ServicePackage(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=255, verbose_name="显示名称")
     first_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='first_service', blank=True, null=True, verbose_name="起始服务")
     services = models.ManyToManyField(Service, blank=True, verbose_name="包含服务")
+    service_package_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="服务包ID")
 
     def __str__(self):
         return self.label
 
     def save(self, *args, **kwargs):
-        if not self.name:
+        if self.service_package_id is None:
+            self.service_package_id = uuid.uuid1()
+        if self.name_icpc is not None:
+            self.name = self.name_icpc.icpc_code
+            self.label = self.name_icpc.iname
+        if self.name is None:
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -146,6 +170,7 @@ class Event(models.Model):
         ''')
     parameters = models.CharField(max_length=1024, blank=True, null=True, verbose_name="检查字段")
     fields = models.TextField(max_length=1024, blank=True, null=True, verbose_name="可用字段")
+    event_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="事件ID")
 
     def __str__(self):
         return str(self.label)
@@ -156,6 +181,9 @@ class Event(models.Model):
         ordering = ['id']
 
     def save(self, *args, **kwargs):
+        if self.event_id is None:
+            self.event_id = uuid.uuid1()
+
         # 自动为事件名加作业名为前缀
         if self.operation.name not in self.name:
             self.name = f'{self.operation.name}_{self.name}'
@@ -170,16 +198,16 @@ class Event(models.Model):
             field_names = []
             print('forms:', forms)
             for form in forms:
-                print('*********************form:########################', form)
                 form_name = form['basemodel']
                 _fields = form['fields']
                 for _field in _fields:
                     field_name = form_name + '-' + _field['name']
                     field_label = _field['label']
                     field_type = _field['type']
-
+                    if _field.has_key('app_label'):  # 如果有app_label，则表示是外键
+                        field_app_label = _field['app_label']
                     field_names.append(field_name)
-                    fields.append(str((field_name, field_label, field_type)))
+                    fields.append(str((field_name, field_label, field_type, field_app_label)))
 
             self.fields = '\n'.join(fields)
 
@@ -199,9 +227,15 @@ class Instruction(models.Model):
     code = models.CharField(max_length=10, verbose_name="指令代码")
     func = models.CharField(max_length=100, verbose_name="操作函数")
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="指令描述")
+    instruction_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="指令ID")
 
     def __str__(self):
         return str(self.name)
+
+    def save(self, *args, **kwargs):
+        if self.instruction_id is None:
+            self.instruction_id = uuid.uuid1()
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "指令"

@@ -3,6 +3,9 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save, m2m_changed
 from django.db.models import Q
 import json
+import uuid
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 
 from pypinyin import lazy_pinyin
 
@@ -20,12 +23,18 @@ class BaseModel(models.Model):
     components = models.ManyToManyField(Component, verbose_name="字段")
     managed_entity = models.ManyToManyField(ManagedEntity, verbose_name="关联实体", blank=True)
     is_base_infomation = models.BooleanField(default=False, verbose_name="基础信息表")
+    basemodel_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="基础表单ID")
 
     def __str__(self):
         return str(self.label)
 
     def save(self, *args, **kwargs):
-        if not self.name:
+        if self.basemodel_id is None:
+            self.basemodel_id = uuid.uuid1()
+        if self.name_icpc is not None:
+            self.name = self.name_icpc.icpc_code
+            self.label = self.name_icpc.iname
+        if self.name is None:
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -45,13 +54,15 @@ class BaseForm(models.Model):
     style = models.CharField(max_length=50, choices=FORM_STYLE, default='detail', verbose_name='风格')
     components = models.ManyToManyField(Component, verbose_name="字段")
     meta_data = models.JSONField(null=True, blank=True, verbose_name="视图元数据")
-    # q = Q(BaseModel.objects.get(id=basemodel).components.all())
+    baseform_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="基础视图ID")
 
     def __str__(self):
         return str(self.label)
 
     def save(self, *args, **kwargs):
-        if not self.name:
+        if self.baseform_id is None:
+            self.baseform_id = uuid.uuid1()
+        if self.name is None:
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -70,12 +81,18 @@ class CombineForm(models.Model):
     is_base = models.BooleanField(default=False, verbose_name="基础视图")
     managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, null=True, blank=True, verbose_name="实体类型")
     meta_data = models.JSONField(null=True, blank=True, verbose_name="视图元数据")
+    combineform_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="组合视图ID")
 
     def __str__(self):
         return str(self.label)
 
     def save(self, *args, **kwargs):
-        if not self.name:
+        if self.combineform_id is None:
+            self.combineform_id = uuid.uuid1()
+        if self.name_icpc is not None:
+            self.name = self.name_icpc.icpc_code
+            self.label = self.name_icpc.iname
+        if self.name is None:
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -95,13 +112,18 @@ def basemodel_m2m_changed_handler(sender, instance, action, **kwargs):
 
 @receiver(m2m_changed, sender=BaseForm.components.through)
 def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
+        # 根据新的components字段，更新meta_data字段
+        meta_data = {}
+        meta_data['name'] = instance.name
+        meta_data['label'] = instance.label
+
         # 根据components的变更生成字段记录
-        # fields = list(instance.components.values_list('name', flat=True))
         fields = []
         for component in instance.components.all():
             field = {}
             field['name'] = component.name
             field['label'] = component.label
+            field['field_id'] = component.field_id
             _type = component.content_object._meta.object_name
             if _type == 'CharacterField':
                 field['type'] = 'string'
@@ -111,25 +133,27 @@ def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
                 field['type'] = 'number'
             elif _type == 'DTField':
                 field['type'] = 'datetime'
-            elif _type == 'ChoiceField' or _type == 'RelatedField':
-                # 获取关联字段的模型???
-                print('component', component)
-                field['type'] = 'dict'
-                field['dict_name'] = component.content_object.related_content.related_content
+            elif _type == 'RelatedField':
+                field['type'] = component.content_object.related_content.related_content  # 关联表的Model名称
+                hssc_app_label = component.content_object.related_content.content_type.model
+                if hssc_app_label == 'diclist':  # 字典表
+                    hssc_app_label = 'dictionaries'  # 指向hssc.dictionaries
+                elif hssc_app_label == 'managedentity':  # 实体表
+                    hssc_app_label = component.content_object.related_content.content_object.app_name  # 指向hssc.app_name
+                field['app_label'] = hssc_app_label
             fields.append(field)
+        meta_data['fields'] = fields
 
-        meta_data = {}
-        meta_data['name'] = instance.name
-        meta_data['label'] = instance.label
         if instance.is_inquiry:
             meta_data['mutate_or_inquiry'] = 'inquiry'
         else:
             meta_data['mutate_or_inquiry'] = 'mutate'
+        
         meta_data['style'] = instance.style
         meta_data['basemodel'] = instance.basemodel.name
-        meta_data['fields'] = fields
+        meta_data['baseform_id'] = instance.baseform_id
         
-        # 更新基础视图的meta_data，类型为dict
+        # 更新meta_data，类型为dict
         instance.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
         instance.save()
 
