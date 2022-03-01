@@ -204,8 +204,7 @@ class Event(models.Model):
                     field_name = form_name + '-' + _field['name']
                     field_label = _field['label']
                     field_type = _field['type']
-                    if _field.has_key('app_label'):  # 如果有app_label，则表示是外键
-                        field_app_label = _field['app_label']
+                    field_app_label = _field.get('app_label')
                     field_names.append(field_name)
                     fields.append(str((field_name, field_label, field_type, field_app_label)))
 

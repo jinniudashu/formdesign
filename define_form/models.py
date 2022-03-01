@@ -151,8 +151,8 @@ def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
         
         meta_data['style'] = instance.style
         meta_data['basemodel'] = instance.basemodel.name
-        meta_data['baseform_id'] = instance.baseform_id
-        
+        meta_data['baseform_id'] = str(instance.baseform_id)
+
         # 更新meta_data，类型为dict
         instance.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
         instance.save()
