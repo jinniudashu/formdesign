@@ -861,7 +861,7 @@ def design_backup(modeladmin, request, queryset):
 
         if model['managed_entity']:
             model['managed_entity'] = item.managed_entity.entity_id
-        model.pop('meta_data')
+        model.pop('meta_data')  # 去掉meta_data字段, 因为导入的时候会自动生成
 
         design_data['combineforms'].append(model)
 

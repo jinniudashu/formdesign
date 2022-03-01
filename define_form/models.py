@@ -78,6 +78,7 @@ class CombineForm(models.Model):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=100, unique=True, verbose_name="表单名称")
     forms = models.ManyToManyField('self', blank=True, verbose_name="可组合的视图")
+    forms_new = models.ManyToManyField(BaseForm, blank=True, verbose_name="基础视图")
     is_base = models.BooleanField(default=False, verbose_name="基础视图")
     managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, null=True, blank=True, verbose_name="实体类型")
     meta_data = models.JSONField(null=True, blank=True, verbose_name="视图元数据")
