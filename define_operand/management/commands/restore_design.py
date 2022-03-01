@@ -268,7 +268,6 @@ class Command(BaseCommand):
                     managed_entity=ManagedEntity.objects.get(entity_id=item['managed_entity'])
                 else:
                     managed_entity=None
-                print(item)
                 combineform = CombineForm.objects.create(
                     name=item['name'],
                     name_icpc=name_icpc,
@@ -279,9 +278,11 @@ class Command(BaseCommand):
                 )
 
             for item in design_data['combineforms']:
+                print('CombineForm:', item)
                 combineform = CombineForm.objects.get(combineform_id=item['combineform_id'])                
                 forms = []
                 for _form in item['forms']:
+                    print('_form:', _form)
                     form = CombineForm.objects.get(combineform_id=_form)
                     forms.append(form)
                 combineform.forms.set(forms)

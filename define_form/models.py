@@ -17,7 +17,7 @@ from define_dict.models import ManagedEntity
 # 基础表单定义
 class BaseModel(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
-    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="表单名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=100, unique=True, verbose_name="表单名称")
     description = models.TextField(max_length=255, verbose_name="描述", null=True, blank=True)
     components = models.ManyToManyField(Component, verbose_name="字段")
@@ -75,7 +75,7 @@ class BaseForm(models.Model):
 # 组合视图定义
 class CombineForm(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
-    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="表单名称")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=100, unique=True, verbose_name="表单名称")
     forms = models.ManyToManyField('self', blank=True, verbose_name="可组合的视图")
     is_base = models.BooleanField(default=False, verbose_name="基础视图")

@@ -12,8 +12,8 @@ class OperationAdmin(admin.ModelAdmin):
     list_display = ['name_icpc', 'label', 'name', 'id']
     list_display_links = ['label', 'name',]
     fieldsets = (
-        (None, {
-            'fields': (('name_icpc', 'label', 'name'), ('forms', 'priority'), 'group',)
+        ('基本信息', {
+            'fields': (('name_icpc', 'label'), ('forms', 'priority'), 'group', 'name', 'operand_id')
         }),
         ('作业管理', {
             'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
@@ -36,7 +36,7 @@ class EventAdmin(admin.ModelAdmin):
     list_display = ['label', 'name', 'operation', 'id']
     list_display_links = ['label', 'name', 'operation',]
     search_fields = ['name', 'label']
-    readonly_fields = ['parameters']
+    readonly_fields = ['parameters', 'event_id']
     ordering = ['id']
 
 admin.site.register(Event, EventAdmin)
@@ -66,7 +66,7 @@ class RoleAdmin(admin.ModelAdmin):
     list_display = ['label', 'id']
     list_display_links = ['label', ]
     search_fields = ['label']
-    readonly_fields = ['name']
+    readonly_fields = ['name', 'role_id']
     ordering = ['id']
 
 admin.site.register(Role, RoleAdmin)
