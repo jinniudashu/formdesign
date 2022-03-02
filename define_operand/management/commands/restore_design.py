@@ -200,7 +200,7 @@ class Command(BaseCommand):
                     name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
                 else:
                     name_icpc = None
-
+                print('item', item)
                 related_content=RelateFieldModel.objects.get(relate_field_model_id=item['related_content'])
                 RelatedField.objects.create(
                     name=item['name'],
@@ -232,17 +232,16 @@ class Command(BaseCommand):
                     basemodel_id=item['basemodel_id'],
                 )
 
-                model_components = []
-                for _component in item['components']:
-                    component = Component.objects.get(field_id=_component['field_id'])
-                    model_components.append(component)
-                basemodel.components.set(model_components)
+                # 导入多对多字段
+                _components=[]
+                for index, component in enumerate(item['components']):
+                    _components.append(component['field_id'])
+                components=Component.objects.filter(field_id__in=_components)
+                basemodel.components.set(components)
 
-                model_managedentities = []
-                for _managedentity in item['managed_entity']:
-                    managedentity = ManagedEntity.objects.get(entity_id=_managedentity)
-                    model_managedentities.append(managedentity)
-                basemodel.managed_entity.set(model_managedentities)
+                # 导入多对多字段
+                managedentities=ManagedEntity.objects.filter(entity_id__in=item['managed_entity'])
+                basemodel.managed_entity.set(managedentities)
             
             print('导入基础模型表完成')
 
@@ -257,12 +256,13 @@ class Command(BaseCommand):
                     baseform_id=item['baseform_id'],
                 )
 
-                form_components = []
-                for _component in item['components']:
-                    component = Component.objects.get(field_id=_component['field_id'])
-                    form_components.append(component)
-                baseform.components.set(form_components)
-            
+                # 导入多对多字段
+                _components=[]
+                for index, component in enumerate(item['components']):
+                    _components.append(component['field_id'])
+                components=Component.objects.filter(field_id__in=_components)
+                baseform.components.set(components)
+
             print('导入基础表单表完成')
 
             # 导入组合表单表
@@ -283,16 +283,17 @@ class Command(BaseCommand):
                     managed_entity=managed_entity,
                     combineform_id=item['combineform_id'],
                 )
+                # 导入多对多字段forms
+                baseforms=BaseForm.objects.filter(name__in=item['forms'])
+                combineform.forms_new.set(baseforms)
 
-            for item in design_data['combineforms']:
-                print('CombineForm:', item)
-                combineform = CombineForm.objects.get(combineform_id=item['combineform_id'])                
-                forms = []
-                for _form in item['forms']:
-                    print('_form:', _form)
-                    form = CombineForm.objects.get(combineform_id=_form)
-                    forms.append(form)
-                combineform.forms.set(forms)
+            # 初始化生成所有组合表单（自动生成+导入）的meta_data
+            for item in CombineForm.objects.all():
+                meta_data = []
+                for form in item.forms_new.all():
+                    meta_data.append(json.loads(form.meta_data))
+                item.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
+                item.save()
 
             print('导入组合表单表完成')
 
@@ -317,6 +318,7 @@ class Command(BaseCommand):
                     forms = CombineForm.objects.get(combineform_id=item['forms'])
                 else:
                     forms = None
+
                 operation = Operation.objects.create(
                     name=item['name'],
                     name_icpc=name_icpc,
@@ -335,14 +337,11 @@ class Command(BaseCommand):
                     resource_knowledge=item['resource_knowledge'],
                     operand_id=item['operand_id'],
                 )
+
                 # 写入Operation.group 多对多字段
                 if item['group']:
-                    groups = []
-                    for _role in item['group']:
-                        group = Role.objects.get(role_id=_role)  # 使用角色中文名称查询角色
-                        groups.append(group)
+                    groups=Role.objects.filter(role_id__in=item['group'])
                     operation.group.set(groups)
-
 
             print('导入作业表完成')
 
@@ -381,18 +380,12 @@ class Command(BaseCommand):
 
                 # 写入Service.operations 多对多字段
                 if item['operations']:
-                    operations = []
-                    for _operation in item['operations']:
-                        operation = Operation.objects.get(operand_id=_operation)
-                        operations.append(operation)
+                    operations = Operation.objects.filter(operand_id__in=item['operations'])
                     service.operations.set(operations)
 
                 # 写入Service.group 多对多字段
                 if item['group']:
-                    groups = []
-                    for _role in item['group']:
-                        group = Role.objects.get(rold_id=_role)  # 使用角色中文名称查询角色
-                        groups.append(group)
+                    groups=Role.objects.filter(role_id__in=item['group'])
                     service.group.set(groups)
             
             print('导入服务表完成')
@@ -420,10 +413,7 @@ class Command(BaseCommand):
 
                 # 写入ServicePackage.services 多对多字段
                 if item['services']:
-                    services = []
-                    for _service in item['services']:
-                        service = Service.objects.get(service_id=_service)
-                        services.append(service)
+                    services = Service.objects.filter(service_id__in=item['services'])
                     service_package.services.set(services)
             
             print('导入服务包表完成')
@@ -450,11 +440,10 @@ class Command(BaseCommand):
                     event_id=item['event_id'],
                 )
 
-                next_operations = []
-                for _operation in item['next']:
-                    operation = Operation.objects.get(operand_id=_operation)
-                    next_operations.append(operation)
-                event.next.set(next_operations)
+                # 写入Event.next 多对多字段
+                if item['next']:
+                    operations = Operation.objects.filter(operand_id__in=item['next'])
+                    event.next.set(operations)
             
             print('导入事件表完成')
 
