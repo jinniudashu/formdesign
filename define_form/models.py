@@ -158,22 +158,14 @@ def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
         instance.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
         instance.save()
 
-        # 更新组合视图的meta_data字段, 类型为list
-        combine_form_meta_data = json.dumps([meta_data], ensure_ascii=False, indent=4)
-        CombineForm.objects.filter(name=instance.name).update(meta_data=combine_form_meta_data)
 
-
-@receiver(m2m_changed, sender=CombineForm.forms.through)
+# 重新生成组合视图的meta_data
+@receiver(m2m_changed, sender=CombineForm)
 def combineform_m2m_changed_handler(sender, instance, action, **kwargs):
-    # 合成每个组合视图的meta_data
     meta_data = []
-    for item in instance.forms.all():
+    for item in instance.forms_new.all():
         _meta_data = json.loads(item.meta_data)
-        if isinstance(_meta_data, list):  # forms中可能包含CombineForm，这时item.meta_data是数组，需要先解包
-            for i, v in enumerate(_meta_data):
-                meta_data.append(v)
-        else:
-            meta_data.append(_meta_data)
+        meta_data.append(_meta_data)
     instance.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
     instance.save()
 
@@ -202,4 +194,4 @@ def baseform_post_save_handler(sender, instance, created, **kwargs):
             label=instance.label,
             is_base=True,
         )
-        c.forms.add(c)
+        c.forms_new.add(instance)

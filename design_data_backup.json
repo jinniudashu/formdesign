@@ -283,6 +283,14 @@
     ],
     "diclists": [
         {
+            "id": 260,
+            "name": "dorsal_artery_pulsation",
+            "label": "足背动脉搏动情况",
+            "related_field": "value",
+            "content": "触及正常\n触及正常\n减弱\n消失",
+            "pym": "zbdmbdqk"
+        },
+        {
             "id": 250,
             "name": "character",
             "label": "性格",
@@ -363,51 +371,11 @@
             "pym": null
         },
         {
-            "id": 261,
-            "name": "hearing",
-            "label": "听力",
-            "related_field": "value",
-            "content": "听见\n听不清或无法听见",
-            "pym": null
-        },
-        {
-            "id": 262,
-            "name": "lips",
-            "label": "口唇",
-            "related_field": "value",
-            "content": "红润\n苍白\n发绀\n皲裂\n疱疹",
-            "pym": null
-        },
-        {
-            "id": 263,
-            "name": "dentition",
-            "label": "齿列",
-            "related_field": "value",
-            "content": "正常\n缺齿\n龋齿\n义齿（假牙）",
-            "pym": null
-        },
-        {
-            "id": 264,
-            "name": "pharynx",
-            "label": "咽部",
-            "related_field": "value",
-            "content": "无充血\n充血\n淋巴滤泡增生",
-            "pym": null
-        },
-        {
             "id": 265,
             "name": "life_event",
             "label": "生活事件",
             "related_field": "value",
             "content": "丧偶\n父母死亡\n子女死亡\n离婚\n失业\n家属病重\n恋爱\n结婚\n生子",
-            "pym": null
-        },
-        {
-            "id": 266,
-            "name": "edema",
-            "label": "水肿情况",
-            "related_field": "value",
-            "content": "无水肿\n单侧水肿\n双侧不对称水肿\n双侧对称水肿",
             "pym": null
         },
         {
@@ -475,12 +443,52 @@
             "pym": null
         },
         {
-            "id": 260,
-            "name": "dorsal_artery_pulsation",
-            "label": "足背动脉搏动情况",
+            "id": 275,
+            "name": "",
+            "label": "常用症状",
+            "related_field": "常用症状",
+            "content": null,
+            "pym": "cyzz"
+        },
+        {
+            "id": 266,
+            "name": "edema",
+            "label": "水肿情况",
             "related_field": "value",
-            "content": "触及正常\n触及正常\n减弱\n消失",
-            "pym": "zbdmbdqk"
+            "content": "无水肿\n单侧水肿\n双侧不对称水肿\n双侧对称水肿",
+            "pym": "szqk"
+        },
+        {
+            "id": 264,
+            "name": "pharynx",
+            "label": "咽部",
+            "related_field": "value",
+            "content": "无充血\n充血\n淋巴滤泡增生",
+            "pym": "yb"
+        },
+        {
+            "id": 263,
+            "name": "dentition",
+            "label": "齿列",
+            "related_field": "value",
+            "content": "正常\n缺齿\n龋齿\n义齿（假牙）",
+            "pym": "cl"
+        },
+        {
+            "id": 262,
+            "name": "lips",
+            "label": "口唇",
+            "related_field": "value",
+            "content": "红润\n苍白\n发绀\n皲裂\n疱疹",
+            "pym": "kc"
+        },
+        {
+            "id": 261,
+            "name": "hearing",
+            "label": "听力",
+            "related_field": "value",
+            "content": "听见\n听不清或无法听见",
+            "pym": "tl"
         }
     ],
     "dicdetails": [
@@ -779,27 +787,6 @@
             "pym": "wsz"
         },
         {
-            "id": 43,
-            "diclist": "edema",
-            "item": "单侧水肿",
-            "icpc": null,
-            "pym": "dcsz"
-        },
-        {
-            "id": 44,
-            "diclist": "edema",
-            "item": "双侧不对称水肿",
-            "icpc": null,
-            "pym": "scbdcsz"
-        },
-        {
-            "id": 45,
-            "diclist": "edema",
-            "item": "双侧对称水肿",
-            "icpc": null,
-            "pym": "scdcsz"
-        },
-        {
             "id": 46,
             "diclist": "life_event",
             "item": "丧偶",
@@ -870,46 +857,11 @@
             "pym": "wcx"
         },
         {
-            "id": 56,
-            "diclist": "pharynx",
-            "item": "充血",
-            "icpc": null,
-            "pym": "cx"
-        },
-        {
-            "id": 57,
-            "diclist": "pharynx",
-            "item": "淋巴滤泡增生",
-            "icpc": null,
-            "pym": "lblpzs"
-        },
-        {
             "id": 58,
             "diclist": "dentition",
             "item": "正常",
             "icpc": null,
             "pym": "zc"
-        },
-        {
-            "id": 59,
-            "diclist": "dentition",
-            "item": "缺齿",
-            "icpc": null,
-            "pym": "qc"
-        },
-        {
-            "id": 60,
-            "diclist": "dentition",
-            "item": "龋齿",
-            "icpc": null,
-            "pym": "qc"
-        },
-        {
-            "id": 61,
-            "diclist": "dentition",
-            "item": "义齿（假牙）",
-            "icpc": null,
-            "pym": "yc（jy）"
         },
         {
             "id": 62,
@@ -919,34 +871,6 @@
             "pym": "hr"
         },
         {
-            "id": 63,
-            "diclist": "lips",
-            "item": "苍白",
-            "icpc": null,
-            "pym": "cb"
-        },
-        {
-            "id": 64,
-            "diclist": "lips",
-            "item": "发绀",
-            "icpc": null,
-            "pym": "fg"
-        },
-        {
-            "id": 65,
-            "diclist": "lips",
-            "item": "皲裂",
-            "icpc": null,
-            "pym": "jl"
-        },
-        {
-            "id": 66,
-            "diclist": "lips",
-            "item": "疱疹",
-            "icpc": null,
-            "pym": "pz"
-        },
-        {
             "id": 67,
             "diclist": "hearing",
             "item": "听见",
@@ -954,32 +878,11 @@
             "pym": "tj"
         },
         {
-            "id": 68,
-            "diclist": "hearing",
-            "item": "听不清或无法听见",
-            "icpc": null,
-            "pym": "tbqhwftj"
-        },
-        {
             "id": 70,
             "diclist": "dorsal_artery_pulsation",
             "item": "触及正常",
             "icpc": null,
             "pym": "cjzc"
-        },
-        {
-            "id": 71,
-            "diclist": "dorsal_artery_pulsation",
-            "item": "减弱",
-            "icpc": null,
-            "pym": "jr"
-        },
-        {
-            "id": 72,
-            "diclist": "dorsal_artery_pulsation",
-            "item": "消失",
-            "icpc": null,
-            "pym": "xs"
         },
         {
             "id": 73,
@@ -1253,6 +1156,167 @@
             "item": "内向",
             "icpc": null,
             "pym": "nx"
+        },
+        {
+            "id": 112,
+            "diclist": "",
+            "item": "头痛",
+            "icpc": "L99",
+            "pym": "tt"
+        },
+        {
+            "id": 113,
+            "diclist": "",
+            "item": "发热",
+            "icpc": "A0301",
+            "pym": "fr"
+        },
+        {
+            "id": 114,
+            "diclist": "",
+            "item": "头晕",
+            "icpc": "N1701",
+            "pym": "ty"
+        },
+        {
+            "id": 115,
+            "diclist": "",
+            "item": "咳嗽",
+            "icpc": "R0501",
+            "pym": "ks"
+        },
+        {
+            "id": 116,
+            "diclist": "",
+            "item": "打喷嚏",
+            "icpc": "R0701",
+            "pym": "dpt"
+        },
+        {
+            "id": 117,
+            "diclist": "",
+            "item": "咽喉痛",
+            "icpc": "R0102",
+            "pym": "yht"
+        },
+        {
+            "id": 118,
+            "diclist": "",
+            "item": "腹痛",
+            "icpc": "D0103",
+            "pym": "ft"
+        },
+        {
+            "id": 119,
+            "diclist": "",
+            "item": "腹泻",
+            "icpc": "D1101",
+            "pym": "fx"
+        },
+        {
+            "id": 43,
+            "diclist": "edema",
+            "item": "单侧水肿",
+            "icpc": "K0702",
+            "pym": "dcsz"
+        },
+        {
+            "id": 44,
+            "diclist": "edema",
+            "item": "双侧不对称水肿",
+            "icpc": "K0702",
+            "pym": "scbdcsz"
+        },
+        {
+            "id": 45,
+            "diclist": "edema",
+            "item": "双侧对称水肿",
+            "icpc": "K0702",
+            "pym": "scdcsz"
+        },
+        {
+            "id": 56,
+            "diclist": "pharynx",
+            "item": "充血",
+            "icpc": "R2902",
+            "pym": "cx"
+        },
+        {
+            "id": 57,
+            "diclist": "pharynx",
+            "item": "淋巴滤泡增生",
+            "icpc": "R8528",
+            "pym": "lblpzs"
+        },
+        {
+            "id": 59,
+            "diclist": "dentition",
+            "item": "缺齿",
+            "icpc": "D8268",
+            "pym": "qc"
+        },
+        {
+            "id": 60,
+            "diclist": "dentition",
+            "item": "龋齿",
+            "icpc": "D8214",
+            "pym": "qc"
+        },
+        {
+            "id": 61,
+            "diclist": "dentition",
+            "item": "义齿（假牙）",
+            "icpc": "D8268",
+            "pym": "yc（jy）"
+        },
+        {
+            "id": 63,
+            "diclist": "lips",
+            "item": "苍白",
+            "icpc": "D2001",
+            "pym": "cb"
+        },
+        {
+            "id": 64,
+            "diclist": "lips",
+            "item": "发绀",
+            "icpc": "D2001",
+            "pym": "fg"
+        },
+        {
+            "id": 65,
+            "diclist": "lips",
+            "item": "皲裂",
+            "icpc": "D2001",
+            "pym": "jl"
+        },
+        {
+            "id": 66,
+            "diclist": "lips",
+            "item": "疱疹",
+            "icpc": "D2001",
+            "pym": "pz"
+        },
+        {
+            "id": 68,
+            "diclist": "hearing",
+            "item": "听不清或无法听见",
+            "icpc": "H0201",
+            "pym": "tbqhwftj"
+        },
+        {
+            "id": 71,
+            "diclist": "dorsal_artery_pulsation",
+            "item": "减弱",
+            "icpc": "L1701",
+            "pym": "jr"
+        },
+        {
+            "id": 72,
+            "diclist": "dorsal_artery_pulsation",
+            "item": "消失",
+            "icpc": "L1701",
+            "pym": "xs"
         }
     ],
     "boolfields": [
@@ -1910,7 +1974,7 @@
             "name_icpc": null,
             "label": "常用症状",
             "type": "CheckboxSelectMultiple",
-            "related_content": "icpc3_symptoms_and_problems"
+            "related_content": ""
         },
         {
             "id": 379,
@@ -2969,9 +3033,9 @@
         {
             "id": 340,
             "name": "allergies_history",
-            "name_icpc": null,
+            "name_icpc": 38,
             "label": "过敏史",
-            "description": null,
+            "description": "",
             "is_base_infomation": false,
             "components": [
                 {
@@ -2987,9 +3051,9 @@
         {
             "id": 341,
             "name": "personal_comprehensive_psychological_quality_survey",
-            "name_icpc": null,
+            "name_icpc": 43,
             "label": "个人心理综合素质调查",
-            "description": null,
+            "description": "",
             "is_base_infomation": false,
             "components": [
                 {
@@ -3058,9 +3122,9 @@
         {
             "id": 343,
             "name": "personal_health_behavior_survey",
-            "name_icpc": null,
+            "name_icpc": 42,
             "label": "个人健康行为调查",
-            "description": null,
+            "description": "",
             "is_base_infomation": false,
             "components": [
                 {
@@ -3252,9 +3316,9 @@
         {
             "id": 346,
             "name": "vital_signs_check",
-            "name_icpc": null,
+            "name_icpc": 6063,
             "label": "生命体征检查",
-            "description": null,
+            "description": "",
             "is_base_infomation": false,
             "components": [
                 {
@@ -3284,9 +3348,9 @@
         {
             "id": 347,
             "name": "family_history_of_illness",
-            "name_icpc": null,
+            "name_icpc": 47,
             "label": "家族病史",
-            "description": null,
+            "description": "",
             "is_base_infomation": false,
             "components": [
                 {
@@ -3309,9 +3373,9 @@
         {
             "id": 348,
             "name": "physical_examination",
-            "name_icpc": null,
+            "name_icpc": 1281,
             "label": "体格检查",
-            "description": null,
+            "description": "",
             "is_base_infomation": false,
             "components": [
                 {
@@ -3391,9 +3455,9 @@
         {
             "id": 351,
             "name": "fundus_examination",
-            "name_icpc": null,
+            "name_icpc": 6061,
             "label": "眼底检查",
-            "description": null,
+            "description": "",
             "is_base_infomation": false,
             "components": [
                 {
@@ -3409,7 +3473,7 @@
         {
             "id": 352,
             "name": "medical_history",
-            "name_icpc": null,
+            "name_icpc": 35,
             "label": "疾病史",
             "description": "",
             "is_base_infomation": false,
@@ -3443,9 +3507,9 @@
         {
             "id": 353,
             "name": "doctor_registry",
-            "name_icpc": null,
+            "name_icpc": 1,
             "label": "医生注册",
-            "description": null,
+            "description": "",
             "is_base_infomation": false,
             "components": [
                 {
@@ -3609,9 +3673,9 @@
         {
             "id": 356,
             "name": "dorsal_artery_pulsation_examination",
-            "name_icpc": null,
+            "name_icpc": 6062,
             "label": "足背动脉搏动检查",
-            "description": null,
+            "description": "",
             "is_base_infomation": false,
             "components": [
                 {
@@ -4216,7 +4280,7 @@
         {
             "id": 375,
             "name": "yuan_qian_fu_zhu_wen_zhen_biao",
-            "name_icpc": null,
+            "name_icpc": 33,
             "label": "院前辅助问诊表",
             "description": "院外调查",
             "is_base_infomation": false,
@@ -4237,7 +4301,7 @@
                 }
             ],
             "managed_entity": [
-                "icpc3_symptoms_and_problems"
+                "icpc2_reservation_investigations"
             ]
         },
         {
@@ -4313,60 +4377,8 @@
         {
             "id": 379,
             "name": "yuan_wai_zi_xun_biao",
-            "name_icpc": null,
+            "name_icpc": 30,
             "label": "院外咨询表",
-            "description": "",
-            "is_base_infomation": false,
-            "components": [
-                {
-                    "id": 902,
-                    "name": "characterfield_supplementary_description_of_the_condition",
-                    "label": "病情补充描述",
-                    "content_type": 8,
-                    "object_id": 223
-                },
-                {
-                    "id": 955,
-                    "name": "relatedfield_symptom_list",
-                    "label": "症状",
-                    "content_type": 13,
-                    "object_id": 391
-                }
-            ],
-            "managed_entity": []
-        },
-        {
-            "id": 380,
-            "name": "xue_ya_jian_ce_biao",
-            "name_icpc": null,
-            "label": "血压监测表",
-            "description": "",
-            "is_base_infomation": false,
-            "components": [
-                {
-                    "id": 935,
-                    "name": "numberfield_systolic_blood_pressure",
-                    "label": "收缩压",
-                    "content_type": 12,
-                    "object_id": 107
-                },
-                {
-                    "id": 936,
-                    "name": "numberfield_diastolic_blood_pressure",
-                    "label": "舒张压",
-                    "content_type": 12,
-                    "object_id": 108
-                }
-            ],
-            "managed_entity": [
-                "icpc4_physical_examination_and_tests"
-            ]
-        },
-        {
-            "id": 381,
-            "name": "diao_cha_biao",
-            "name_icpc": null,
-            "label": "常用调查表",
             "description": "",
             "is_base_infomation": false,
             "components": [
@@ -4393,8 +4405,34 @@
                 }
             ],
             "managed_entity": [
-                "icpc2_reservation_investigations",
-                "icpc3_symptoms_and_problems"
+                "icpc2_reservation_investigations"
+            ]
+        },
+        {
+            "id": 380,
+            "name": "xue_ya_jian_ce_biao",
+            "name_icpc": null,
+            "label": "血压监测表",
+            "description": "",
+            "is_base_infomation": false,
+            "components": [
+                {
+                    "id": 935,
+                    "name": "numberfield_systolic_blood_pressure",
+                    "label": "收缩压",
+                    "content_type": 12,
+                    "object_id": 107
+                },
+                {
+                    "id": 936,
+                    "name": "numberfield_diastolic_blood_pressure",
+                    "label": "舒张压",
+                    "content_type": 12,
+                    "object_id": 108
+                }
+            ],
+            "managed_entity": [
+                "icpc4_physical_examination_and_tests"
             ]
         }
     ],
@@ -4773,7 +4811,7 @@
         {
             "id": 157,
             "name": "user_registry",
-            "name_icpc": null,
+            "name_icpc": 1,
             "label": "用户注册",
             "forms": null,
             "priority": 3,
@@ -4999,27 +5037,6 @@
             ]
         },
         {
-            "id": 168,
-            "name": "yuan_wai_fu_zhu_wen_zhen",
-            "name_icpc": null,
-            "label": "院外辅助问诊",
-            "forms": "diao_cha_biao_baseform",
-            "priority": 3,
-            "suppliers": null,
-            "not_suitable": null,
-            "time_limits": null,
-            "working_hours": null,
-            "frequency": null,
-            "cost": null,
-            "load_feedback": false,
-            "resource_materials": null,
-            "resource_devices": null,
-            "resource_knowledge": null,
-            "group": [
-                "jian_kang_guan_li_shi"
-            ]
-        },
-        {
             "id": 169,
             "name": "yuan_nei_fu_zhu_wen_zhen",
             "name_icpc": null,
@@ -5218,9 +5235,7 @@
             "expression": "completed",
             "parameters": null,
             "fields": "",
-            "next": [
-                "yuan_wai_fu_zhu_wen_zhen"
-            ]
+            "next": []
         },
         {
             "id": 97,
@@ -5321,22 +5336,7 @@
             "expression": "completed",
             "parameters": null,
             "fields": "('yuan_wai_zi_xun_biao-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string')\n('yuan_wai_zi_xun_biao-relatedfield_symptom_list', '症状', 'dict')",
-            "next": [
-                "yuan_wai_fu_zhu_wen_zhen"
-            ]
-        },
-        {
-            "id": 105,
-            "name": "yuan_wai_fu_zhu_wen_zhen_院外辅助问诊发现问题",
-            "label": "院外辅助问诊发现问题",
-            "operation": "yuan_wai_fu_zhu_wen_zhen",
-            "description": null,
-            "expression": "symptom_list==“多尿”",
-            "parameters": "",
-            "fields": "('diao_cha_biao-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string')\n('diao_cha_biao-relatedfield_symptom_list', '症状', 'dict')\n('diao_cha_biao-relatedfield_chang_yong_zheng_zhuang', '常用症状', 'dict')",
-            "next": [
-                "men_zhen_yu_yue"
-            ]
+            "next": []
         },
         {
             "id": 106,
@@ -5402,9 +5402,7 @@
             "expression": "blood_pressure_monitoring-numberfield_systolic_blood_pressure>130 or blood_pressure_monitoring-numberfield_diastolic_blood_pressure>90",
             "parameters": "",
             "fields": "('personal_health_behavior_survey-boolfield_is_the_diet_regular', '饮食是否规律', 'boolean')\n('personal_health_behavior_survey-boolfield_is_the_diet_proportion_healthy', '饮食比例是否健康', 'boolean')\n('personal_health_behavior_survey-boolfield_whether_the_bowel_movements_are_regular', '大便是否规律', 'boolean')\n('personal_health_behavior_survey-boolfield_whether_to_drink_alcohol', '是否饮酒', 'boolean')\n('personal_health_behavior_survey-boolfield_do_you_smoke', '是否吸烟', 'boolean')\n('personal_health_behavior_survey-boolfield_insomnia', '是否有失眠情况', 'boolean')\n('personal_health_behavior_survey-characterfield_average_sleep_duration', '平均睡眠时长', 'string')\n('personal_health_behavior_survey-characterfield_duration_of_insomnia', '持续失眠时间', 'string')\n('personal_health_behavior_survey-relatedfield_drinking_frequency', '饮酒频次', 'dict')\n('personal_health_behavior_survey-relatedfield_smoking_frequency', '吸烟频次', 'dict')\n('fundus_examination-relatedfield_fundus', '眼底', 'dict')\n('dorsal_artery_pulsation_examination-relatedfield_left_foot', '左脚', 'dict')\n('dorsal_artery_pulsation_examination-relatedfield_right_foot', '右脚', 'dict')\n('basic_personal_information-boolfield_contract_signatory', '合同签约户', 'boolean')\n('basic_personal_information-characterfield_name', '姓名', 'string')\n('basic_personal_information-characterfield_identification_number', '身份证号码', 'string')\n('basic_personal_information-characterfield_resident_file_number', '居民档案号', 'string')\n('basic_personal_information-characterfield_family_address', '家庭地址', 'string')\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string')\n('basic_personal_information-characterfield_medical_ic_card_number', '医疗ic卡号', 'string')\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime')\n('basic_personal_information-relatedfield_family_id', '家庭编号', 'dict')\n('basic_personal_information-relatedfield_gender', '性别', 'dict')\n('basic_personal_information-relatedfield_nationality', '民族', 'dict')\n('basic_personal_information-relatedfield_marital_status', '婚姻状况', 'dict')\n('basic_personal_information-relatedfield_education', '文化程度', 'dict')\n('basic_personal_information-relatedfield_occupational_status', '职业状况', 'dict')\n('basic_personal_information-relatedfield_medical_expenses_burden', '医疗费用负担', 'dict')\n('basic_personal_information-relatedfield_type_of_residence', '居住类型', 'dict')\n('basic_personal_information-relatedfield_blood_type', '血型', 'dict')\n('basic_personal_information-relatedfield_signed_family_doctor', '签约家庭医生', 'dict')\n('basic_personal_information-relatedfield_family_relationship', '家庭成员关系', 'dict')\n('yong_yao_diao_cha_biao-characterfield_yong_yao_ji_liang', '用药剂量', 'string')\n('yong_yao_diao_cha_biao-relatedfield_drug_name', '药品名称', 'dict')\n('xue_ya_jian_ce_biao-numberfield_systolic_blood_pressure', '收缩压', 'number')\n('xue_ya_jian_ce_biao-numberfield_diastolic_blood_pressure', '舒张压', 'number')",
-            "next": [
-                "yuan_wai_fu_zhu_wen_zhen"
-            ]
+            "next": []
         }
     ]
 }

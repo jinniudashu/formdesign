@@ -46,23 +46,24 @@ class Command(BaseCommand):
 
             # 导入角色表
             for item in design_data['roles']:
-                print('Role:', item)
+                # print('Role:', item)
                 Role.objects.create(**item)
             print('导入角色表完成')
 
             # 导入DicList表，自动插入RelateFieldModel表内容
             for item in design_data['diclists']:
-                print('DicList:', item)
+                # print('DicList:', item)
                 DicList.objects.create(**item)
             
             # 导入DicDetail表
             for item in design_data['dicdetails']:
-                print('DicDetail:', item)
+                # print('DicDetail:', item)
                 diclist = DicList.objects.get(name=item['diclist'])
                 if item['icpc']:
                     icpc = Icpc.objects.get(icpc_code=item['icpc'])
                 else:
                     icpc = None
+
                 DicDetail.objects.create(
                     diclist=diclist,
                     item=item['item'],
@@ -77,6 +78,7 @@ class Command(BaseCommand):
             # ******************************************************
             # 导入管理实体表，自动插入RelateFieldModel表内容
             for item in design_data['managedentities']:
+                # print('ManagedEntity:', item)
                 ManagedEntity.objects.create(**item)
 
             # 初始化管理实体表，自动插入RelateFieldModel表内容
@@ -187,17 +189,14 @@ class Command(BaseCommand):
                     is_base_infomation=item['is_base_infomation'],
                 )
 
-                model_components = []
-                for _component in item['components']:
-                    component = Component.objects.get(name=_component['name'])
-                    model_components.append(component)
-                basemodel.components.set(model_components)
-
-                model_managedentities = []
-                for _managedentity in item['managed_entity']:
-                    managedentity = ManagedEntity.objects.get(name=_managedentity)
-                    model_managedentities.append(managedentity)
-                basemodel.managed_entity.set(model_managedentities)
+                _components=[]
+                for index, component in enumerate(item['components']):
+                    _components.append(component['name'])
+                components=Component.objects.filter(name__in=_components)
+                basemodel.components.set(components)
+                
+                managedentities=ManagedEntity.objects.filter(name__in=item['managed_entity'])
+                basemodel.managed_entity.set(managedentities)
             
             print('导入基础模型表完成')
 
@@ -211,11 +210,11 @@ class Command(BaseCommand):
                     style=item['style'],
                 )
 
-                form_components = []
-                for _component in item['components']:
-                    component = Component.objects.get(name=_component['name'])
-                    form_components.append(component)
-                baseform.components.set(form_components)
+                _components=[]
+                for index, component in enumerate(item['components']):
+                    _components.append(component['name'])
+                components=Component.objects.filter(name__in=_components)
+                baseform.components.set(components)
             
             print('导入基础表单表完成')
 
@@ -225,7 +224,7 @@ class Command(BaseCommand):
                     managed_entity=ManagedEntity.objects.get(name=item['managed_entity'])
                 else:
                     managed_entity=None
-                print(item)
+
                 combineform = CombineForm.objects.create(
                     name=item['name'],
                     label=item['label'],
@@ -233,23 +232,28 @@ class Command(BaseCommand):
                     managed_entity=managed_entity,
                 )
 
-            for item in design_data['combineforms']:
-                combineform = CombineForm.objects.get(name=item['name'])                
-                forms = []
-                for _form in item['forms']:
-                    form = CombineForm.objects.get(name=_form)
-                    forms.append(form)
-                combineform.forms.set(forms)
+                baseforms=BaseForm.objects.filter(name__in=item['forms'])
+                combineform.forms_new.set(baseforms)
+
+            # 初始化生成所有组合表单（自动生成+导入）的meta_data
+            for item in CombineForm.objects.all():
+                meta_data = []
+                for form in item.forms_new.all():
+                    _meta_data = json.loads(form.meta_data)
+                    meta_data.append(_meta_data)
+                item.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
+                item.save()
 
             print('导入组合表单表完成')
 
             # 导入作业表
             for item in design_data['operations']:
-                print('Operation:', item)
+                # print('Operation:', item)
                 if item['forms']:
                     forms = CombineForm.objects.get(name=item['forms'])
                 else:
                     forms = None
+
                 operation = Operation.objects.create(
                     name=item['name'],
                     label=item['label'],
@@ -257,20 +261,15 @@ class Command(BaseCommand):
                 )
                 # 写入Operation.group 多对多字段
                 if item['group']:
-                    groups = []
-                    for _role in item['group']:
-                        group = Role.objects.get(name=_role)  # 使用角色中文名称查询角色
-                        groups.append(group)
+                    groups=Role.objects.filter(name__in=item['group'])
                     operation.group.set(groups)
-
 
             print('导入作业表完成')
 
 
             # 导入服务表
             for item in design_data['services']:
-                print('Service:', item)
-
+                # print('Service:', item)
                 if item['first_operation']:
                     first_operation = Operation.objects.get(name=item['first_operation'])
                 else:
@@ -284,26 +283,19 @@ class Command(BaseCommand):
 
                 # 写入Service.operations 多对多字段
                 if item['operations']:
-                    operations = []
-                    for _operation in item['operations']:
-                        operation = Operation.objects.get(name=_operation)
-                        operations.append(operation)
+                    operations=Operation.objects.filter(name__in=item['operations'])
                     service.operations.set(operations)
 
                 # 写入Service.group 多对多字段
                 if item['group']:
-                    groups = []
-                    for _role in item['group']:
-                        group = Role.objects.get(name=_role)  # 使用角色中文名称查询角色
-                        groups.append(group)
+                    groups=Role.objects.filter(name__in=item['group'])
                     service.group.set(groups)
             
             print('导入服务表完成')
             
             # 导入服务包表
             for item in design_data['service_packages']:
-                print('ServicePackage:', item)
-
+                # print('ServicePackage:', item)
                 if item['first_service']:
                     first_service = Service.objects.get(name=item['first_service'])
                 else:
@@ -317,10 +309,7 @@ class Command(BaseCommand):
 
                 # 写入ServicePackage.services 多对多字段
                 if item['services']:
-                    services = []
-                    for _service in item['services']:
-                        service = Service.objects.get(name=_service)
-                        services.append(service)
+                    services=Service.objects.filter(name__in=item['services'])
                     service_package.services.set(services)
             
             print('导入服务包表完成')
@@ -328,20 +317,14 @@ class Command(BaseCommand):
 
             # 导入指令表
             for item in design_data['instructions']:
-                print('Instruction:', item)
-                Instruction.objects.create(
-                    name=item['name'],
-                    label=item['label'],
-                    code=item['code'],
-                    func=item['func'],
-                    description=item['description'],
-                )
+                # print('Instruction:', item)
+                Instruction.objects.create(**item)
             
             print('导入指令表完成')
             
             # 导入事件表
             for item in design_data['events']:
-                print('Event:', item)
+                # print('Event:', item)
                 event = Event.objects.create(
                     name=item['name'],
                     label=item['label'],

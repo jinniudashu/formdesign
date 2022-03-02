@@ -851,7 +851,7 @@ def design_backup(modeladmin, request, queryset):
         model = model_to_dict(item)
 
         forms = []
-        for form in item.forms.all():
+        for form in item.forms_new.all():
             _form = model_to_dict(form)
             forms.append(_form['combineform_id'])
         model['forms'] = forms

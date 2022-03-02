@@ -196,7 +196,6 @@ class Event(models.Model):
             forms = json.loads(self.operation.forms.meta_data)
             fields = []
             field_names = []
-            print('forms:', forms)
             for form in forms:
                 form_name = form['basemodel']
                 _fields = form['fields']
@@ -214,7 +213,7 @@ class Event(models.Model):
             if self.expression and self.expression != 'completed':
                 _form_fields = keyword_search(self.expression, field_names)
                 self.parameters = ', '.join(_form_fields)
-                print('Parameters fields:', self.parameters)
+                # print('Parameters fields:', self.parameters)
 
         super().save(*args, **kwargs)
 
@@ -307,10 +306,8 @@ def event_m2m_changed_handler(sender, instance, action, **kwargs):
     next_operations = []
     if action == 'post_add':
         next_operations = instance.next.all()
-        print('!!post_add:', next_operations)
     elif action == 'post_remove':
         next_operations = instance.next.all()
-        print('##post_remove:', next_operations)
     
     # 删除原有事件指令
     Event_instructions.objects.filter(event=instance).delete()
