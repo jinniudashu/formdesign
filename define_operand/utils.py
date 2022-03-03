@@ -834,7 +834,8 @@ def design_backup(modeladmin, request, queryset):
 
         design_data['basemodels'].append(model)
 
-    for item in BaseForm.objects.filter(is_inquiry=True):
+    # for item in BaseForm.objects.filter(is_inquiry=True):
+    for item in BaseForm.objects.all():
         model = model_to_dict(item)
 
         components = []
