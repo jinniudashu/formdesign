@@ -156,6 +156,16 @@ def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
         instance.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
         instance.save()
 
+        # 更新相应CombineForm的meta_data字段
+        print('CombineForm:', instance.combineform_set.all())
+        for combineform in instance.combineform_set.all():
+            meta_data = []
+            for baseform in combineform.forms.all():
+                _meta_data = json.loads(baseform.meta_data)
+                meta_data.append(_meta_data)
+            combineform.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
+            combineform.save()
+
 
 # 重新生成组合视图的meta_data
 @receiver(m2m_changed, sender=CombineForm)
