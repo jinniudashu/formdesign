@@ -109,6 +109,16 @@ def basemodel_m2m_changed_handler(sender, instance, action, **kwargs):
         baseform.components.set(instance.components.all())
 
 
+# 生成CombineForm的meta_data
+def generate_combineform_meta_data(instance):
+    meta_data = []
+    for baseform in instance.forms.all():
+        _meta_data = json.loads(baseform.meta_data)
+        meta_data.append(_meta_data)
+    instance.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
+    instance.save()
+
+
 @receiver(m2m_changed, sender=BaseForm.components.through)
 def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
         # 根据新的components字段，更新meta_data字段
@@ -157,25 +167,14 @@ def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
         instance.save()
 
         # 更新相应CombineForm的meta_data字段
-        print('CombineForm:', instance.combineform_set.all())
         for combineform in instance.combineform_set.all():
-            meta_data = []
-            for baseform in combineform.forms.all():
-                _meta_data = json.loads(baseform.meta_data)
-                meta_data.append(_meta_data)
-            combineform.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
-            combineform.save()
+            generate_combineform_meta_data(combineform)
 
 
 # 重新生成组合视图的meta_data
 @receiver(m2m_changed, sender=CombineForm)
 def combineform_m2m_changed_handler(sender, instance, action, **kwargs):
-    meta_data = []
-    for item in instance.forms.all():
-        _meta_data = json.loads(item.meta_data)
-        meta_data.append(_meta_data)
-    instance.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
-    instance.save()
+    generate_combineform_meta_data(instance)
 
 
 # # old_restore_design时恢复使用。使用restore_design时，注释掉不使用

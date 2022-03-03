@@ -13,7 +13,7 @@ class OperationAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('name_icpc', 'label'), ('forms', 'priority'), 'group', 'name', 'operand_id')
+            'fields': (('label', 'name_icpc', 'priority'), ('forms', 'execute_datetime'), 'group', ('name', 'operand_id'))
         }),
         ('作业管理', {
             'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
@@ -33,21 +33,33 @@ admin.site.register(Operation, OperationAdmin)
 
 class EventAdmin(admin.ModelAdmin):
 #     change_form_template = "core/templates/change_form.html"
-    list_display = ['label', 'name', 'operation', 'id']
+    list_display = ['label', 'operation', 'name', 'id']
     list_display_links = ['label', 'name', 'operation',]
     search_fields = ['name', 'label']
-    readonly_fields = ['parameters', 'event_id']
+    readonly_fields = ['fields', 'parameters', 'event_id']
     ordering = ['id']
 
 admin.site.register(Event, EventAdmin)
 
 
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ['name_icpc', 'label', 'id']
-    list_display_links = ['label', ]
-    search_fields = ['label']
-    readonly_fields = ['name', 'service_id']
+    list_display = ['name_icpc', 'label', 'name', 'id']
+    list_display_links = ['label', 'name',]
+    fieldsets = (
+        ('基本信息', {
+            'fields': (('label', 'name_icpc', 'priority'), ('execute_datetime', 'first_operation'), ('operations', 'group'), ('name', 'service_id'))
+        }),
+        ('作业管理', {
+            'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
+        }),
+        ('资源配置', {
+            'fields': ('resource_materials','resource_devices','resource_knowledge')
+        }),
+    )
+    search_fields = ['name', 'label']
     ordering = ['id']
+    readonly_fields = ['name', 'service_id']
+    autocomplete_fields = ['name_icpc', ]
 
 admin.site.register(Service, ServiceAdmin)
 
