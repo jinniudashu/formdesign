@@ -106,8 +106,7 @@ class CombineForm(models.Model):
 # BaseModel变更components字段，更新相应BaseForm的components字段
 def basemodel_m2m_changed_handler(sender, instance, action, **kwargs):
     for baseform in instance.baseform_set.all():
-        baseform.components.add(*instance.components.all())
-        baseform.save()
+        baseform.components.set(instance.components.all())
 
 
 @receiver(m2m_changed, sender=BaseForm.components.through)
