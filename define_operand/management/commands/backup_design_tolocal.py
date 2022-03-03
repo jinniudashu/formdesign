@@ -6,8 +6,8 @@ class Command(BaseCommand):
     help = '从设计系统导入设计数据，保存为本地JSON文件'
 
     def handle(self, *args, **kwargs):
-        # url = 'https://hssc-formdesign.herokuapp.com/define_operand/design_backup/'
-        url = 'http://127.0.0.1:8000/define_operand/design_backup/'
+        url = 'https://hssc-formdesign.herokuapp.com/define_operand/design_backup/'
+        # url = 'http://127.0.0.1:8000/define_operand/design_backup/'
         make_sure = input(f'''即将从{url}倒入设计备份数据到本地，请确认导入来源！\n是否要开始？(y/n)''')
         if make_sure == 'y':
 

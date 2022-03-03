@@ -170,9 +170,9 @@ def combineform_m2m_changed_handler(sender, instance, action, **kwargs):
     instance.save()
 
 
-# 收到表单保存信号
-@receiver(post_save, sender=BaseModel)
+# old_restore_design时恢复使用。使用restore_design时，注释掉不使用
 # 生成BaseModel时，自动生成BaseForm
+@receiver(post_save, sender=BaseModel)
 def basemodel_post_save_handler(sender, instance, created, **kwargs):
     if created:
         BaseForm.objects.create(
@@ -184,7 +184,7 @@ def basemodel_post_save_handler(sender, instance, created, **kwargs):
             # components字段是m2m, 由basemodel_m2m_changed_handler处理
         )
 
-
+# old_restore_design时恢复使用。使用restore_design时，注释掉不使用
 @receiver(post_save, sender=BaseForm)
 # 生成BaseForm时，自动生成CombineForm
 def baseform_post_save_handler(sender, instance, created, **kwargs):

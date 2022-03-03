@@ -37,4 +37,4 @@ admin.site.register(DicList, DicListAdmin)
 
 class ManagedEntityAdmin(admin.ModelAdmin):
     readonly_fields = ['entity_id']
-admin.site.register(ManagedEntity)
+admin.site.register(ManagedEntity, ManagedEntityAdmin)

@@ -847,7 +847,7 @@ def design_backup(modeladmin, request, queryset):
 
         design_data['baseforms'].append(model)
 
-    for item in CombineForm.objects.filter(is_base=False):
+    for item in CombineForm.objects.all():
         model = model_to_dict(item)
 
         forms = []
@@ -865,8 +865,6 @@ def design_backup(modeladmin, request, queryset):
         model.pop('meta_data')  # 去掉meta_data字段, 因为导入的时候会自动生成
 
         design_data['combineforms'].append(model)
-    print('design_data_combineforms: ', design_data['combineforms'])
-
 
     for item in Operation.objects.all():
         model = model_to_dict(item)
