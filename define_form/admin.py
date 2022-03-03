@@ -40,7 +40,7 @@ class BaseFormAdmin(admin.ModelAdmin):
     actions = [copy_form]
 
 class CombineFormAdmin(admin.ModelAdmin):
-    readonly_fields = ['name', 'is_base', 'meta_data', 'combineform_id', 'forms']
+    readonly_fields = ['name', 'is_base', 'meta_data', 'combineform_id']
     autocomplete_fields = ["name_icpc", ]
 
 

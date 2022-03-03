@@ -265,12 +265,12 @@ class Command(BaseCommand):
                 )
                 # 导入多对多字段forms
                 baseforms=BaseForm.objects.filter(baseform_id__in=item['forms'])
-                combineform.forms_new.set(baseforms)
+                combineform.forms.set(baseforms)
 
             # 初始化生成所有组合表单（自动生成+导入）的meta_data
             for item in CombineForm.objects.all():
                 meta_data = []
-                for form in item.forms_new.all():
+                for form in item.forms.all():
                     meta_data.append(json.loads(form.meta_data))
                 item.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
                 item.save()

@@ -77,8 +77,7 @@ class CombineForm(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=100, unique=True, verbose_name="表单名称")
-    forms = models.ManyToManyField('self', blank=True, verbose_name="可组合的视图")
-    forms_new = models.ManyToManyField(BaseForm, blank=True, verbose_name="基础视图")
+    forms = models.ManyToManyField(BaseForm, blank=True, verbose_name="可用视图")
     is_base = models.BooleanField(default=False, verbose_name="基础视图")
     managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, null=True, blank=True, verbose_name="实体类型")
     meta_data = models.JSONField(null=True, blank=True, verbose_name="视图元数据")
@@ -163,7 +162,7 @@ def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
 @receiver(m2m_changed, sender=CombineForm)
 def combineform_m2m_changed_handler(sender, instance, action, **kwargs):
     meta_data = []
-    for item in instance.forms_new.all():
+    for item in instance.forms.all():
         _meta_data = json.loads(item.meta_data)
         meta_data.append(_meta_data)
     instance.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
@@ -194,4 +193,4 @@ def combineform_m2m_changed_handler(sender, instance, action, **kwargs):
 #             label=instance.label,
 #             is_base=True,
 #         )
-#         c.forms_new.add(instance)
+#         c.forms.add(instance)

@@ -852,11 +852,10 @@ def design_backup(modeladmin, request, queryset):
         model = model_to_dict(item)
 
         forms = []
-        for form in item.forms_new.all():
+        for form in item.forms.all():
             _form = model_to_dict(form)
             forms.append(_form['baseform_id'])
         model['forms'] = forms
-        model['forms_new'] = forms
         
         if item.name_icpc:
             model['name_icpc'] = item.name_icpc.icpc_code
