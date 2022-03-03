@@ -132,7 +132,7 @@
             "id": 1,
             "name": "icpc1_register_logins",
             "label": "注册登录（行政管理）",
-            "app_name": "define_icpc",
+            "app_name": "icpc",
             "model_name": "Icpc1_register_logins",
             "display_field": "iname",
             "related_field": "icpc_code",
@@ -143,7 +143,7 @@
             "id": 2,
             "name": "icpc2_reservation_investigations",
             "label": "预约咨询调查（行政管理）",
-            "app_name": "define_icpc",
+            "app_name": "icpc",
             "model_name": "Icpc2_reservation_investigations",
             "display_field": "iname",
             "related_field": "icpc_code",
@@ -154,7 +154,7 @@
             "id": 3,
             "name": "icpc3_symptoms_and_problems",
             "label": "症状和问题",
-            "app_name": "define_icpc",
+            "app_name": "icpc",
             "model_name": "Icpc3_symptoms_and_problems",
             "display_field": "iname",
             "related_field": "icpc_code",
@@ -165,7 +165,7 @@
             "id": 4,
             "name": "icpc4_physical_examination_and_tests",
             "label": "体格和其他检查",
-            "app_name": "define_icpc",
+            "app_name": "icpc",
             "model_name": "Icpc4_physical_examination_and_tests",
             "display_field": "iname",
             "related_field": "icpc_code",
@@ -176,7 +176,7 @@
             "id": 5,
             "name": "icpc5_evaluation_and_diagnoses",
             "label": "评估和诊断",
-            "app_name": "define_icpc",
+            "app_name": "icpc",
             "model_name": "Icpc5_evaluation_and_diagnoses",
             "display_field": "iname",
             "related_field": "icpc_code",
@@ -187,7 +187,7 @@
             "id": 6,
             "name": "icpc6_prescribe_medicines",
             "label": "开药",
-            "app_name": "define_icpc",
+            "app_name": "icpc",
             "model_name": "Icpc6_prescribe_medicines",
             "display_field": "iname",
             "related_field": "icpc_code",
@@ -198,7 +198,7 @@
             "id": 7,
             "name": "icpc7_treatments",
             "label": "治疗",
-            "app_name": "define_icpc",
+            "app_name": "icpc",
             "model_name": "Icpc7_treatments",
             "display_field": "iname",
             "related_field": "icpc_code",
@@ -209,7 +209,7 @@
             "id": 8,
             "name": "icpc8_other_health_interventions",
             "label": "其他健康干预",
-            "app_name": "define_icpc",
+            "app_name": "icpc",
             "model_name": "Icpc8_other_health_interventions",
             "display_field": "iname",
             "related_field": "icpc_code",
@@ -220,7 +220,7 @@
             "id": 9,
             "name": "icpc9_referral_consultations",
             "label": "转诊会诊",
-            "app_name": "define_icpc",
+            "app_name": "icpc",
             "model_name": "Icpc9_referral_consultations",
             "display_field": "iname",
             "related_field": "icpc_code",
@@ -231,7 +231,7 @@
             "id": 10,
             "name": "icpc10_test_results_and_statistics",
             "label": "检查结果和统计",
-            "app_name": "define_icpc",
+            "app_name": "icpc",
             "model_name": "Icpc10_test_results_and_statistics",
             "display_field": "iname",
             "related_field": "icpc_code",
@@ -294,17 +294,6 @@
             "entity_id": "de8a1c64-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 17,
-            "name": "institution",
-            "label": "机构",
-            "app_name": "core",
-            "model_name": "Institution",
-            "display_field": "name",
-            "related_field": "institution_code",
-            "description": null,
-            "entity_id": "de8ad1a4-9aa1-11ec-bde1-8a6e55faf877"
-        },
-        {
             "id": 16,
             "name": "role",
             "label": "角色",
@@ -314,24 +303,25 @@
             "related_field": "role_code",
             "description": "",
             "entity_id": "de8b82fc-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "id": 17,
+            "name": "institution",
+            "label": "机构",
+            "app_name": "core",
+            "model_name": "Institution",
+            "display_field": "name",
+            "related_field": "institution_code",
+            "description": null,
+            "entity_id": "de8ad1a4-9aa1-11ec-bde1-8a6e55faf877"
         }
     ],
     "diclists": [
-        {
-            "id": 260,
-            "name": "dorsal_artery_pulsation",
-            "label": "足背动脉搏动情况",
-            "related_field": "value",
-            "content": "触及正常\n触及正常\n减弱\n消失",
-            "pym": "zbdmbdqk",
-            "dic_id": "de1df50c-9aa1-11ec-bde1-8a6e55faf877"
-        },
         {
             "id": 250,
             "name": "character",
             "label": "性格",
             "related_field": "value",
-            "content": "外向\n内向",
             "pym": "xg",
             "dic_id": "de1f127a-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -340,7 +330,6 @@
             "name": "satisfaction",
             "label": "满意度",
             "related_field": "value",
-            "content": "很满意\n满意\n既非满意也非不满意\n不满意\n很不满意",
             "pym": "myd",
             "dic_id": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -349,7 +338,6 @@
             "name": "frequency",
             "label": "频次",
             "related_field": "value",
-            "content": "经常\n偶尔\n从无",
             "pym": "pc",
             "dic_id": "de20b71a-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -358,7 +346,6 @@
             "name": "state_degree",
             "label": "状态程度",
             "related_field": "value",
-            "content": "非常好\n还不错\n不太好\n非常糟",
             "pym": "ztcd",
             "dic_id": "de21b21e-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -367,7 +354,6 @@
             "name": "comparative_expression",
             "label": "比较表达",
             "related_field": "value",
-            "content": "改善很大\n有一定改善\n没变化\n变更差了",
             "pym": "bjbd",
             "dic_id": "de227fa0-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -376,7 +362,6 @@
             "name": "sports_preference",
             "label": "运动类型",
             "related_field": "value",
-            "content": "有氧运动\n无氧运动\n有氧无氧交替运动\n不运动",
             "pym": "ydlx",
             "dic_id": "de23c81a-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -385,7 +370,6 @@
             "name": "exercise_time",
             "label": "运动时长",
             "related_field": "value",
-            "content": "半小时以内\n半小时到一个半小时\n一个半小时以上",
             "pym": "ydsc",
             "dic_id": "de24d020-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -394,7 +378,6 @@
             "name": "convenience",
             "label": "便捷程度",
             "related_field": "value",
-            "content": "非常不方便\n不方便\n比较方便\n非常方便",
             "pym": "bjcd",
             "dic_id": "de25c214-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -403,7 +386,6 @@
             "name": "family_relationship",
             "label": "家庭成员关系",
             "related_field": "value",
-            "content": "户主\n配偶\n父母\n子女\n祖父母\n孙子女\n兄弟姐妹\n其他成员",
             "pym": "jtcygx",
             "dic_id": "de26a332-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -412,25 +394,70 @@
             "name": "normality",
             "label": "正常性判断",
             "related_field": "value",
-            "content": "正常\n异常",
             "pym": "zcxpd",
             "dic_id": "de278914-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "id": 260,
+            "name": "dorsal_artery_pulsation",
+            "label": "足背动脉搏动情况",
+            "related_field": "value",
+            "pym": "zbdmbdqk",
+            "dic_id": "de1df50c-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "id": 261,
+            "name": "hearing",
+            "label": "听力",
+            "related_field": "value",
+            "pym": "tl",
+            "dic_id": "de34d862-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "id": 262,
+            "name": "lips",
+            "label": "口唇",
+            "related_field": "value",
+            "pym": "kc",
+            "dic_id": "de340608-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "id": 263,
+            "name": "dentition",
+            "label": "齿列",
+            "related_field": "value",
+            "pym": "cl",
+            "dic_id": "de332d5a-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "id": 264,
+            "name": "pharynx",
+            "label": "咽部",
+            "related_field": "value",
+            "pym": "yb",
+            "dic_id": "de3247a0-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
             "id": 265,
             "name": "life_event",
             "label": "生活事件",
             "related_field": "value",
-            "content": "丧偶\n父母死亡\n子女死亡\n离婚\n失业\n家属病重\n恋爱\n结婚\n生子",
             "pym": "shsj",
             "dic_id": "de287ad6-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "id": 266,
+            "name": "edema",
+            "label": "水肿情况",
+            "related_field": "value",
+            "pym": "szqk",
+            "dic_id": "de316146-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
             "id": 267,
             "name": "gender",
             "label": "性别",
             "related_field": "value",
-            "content": "男\n女",
             "pym": "xb",
             "dic_id": "de2963ba-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -439,7 +466,6 @@
             "name": "nationality",
             "label": "民族",
             "related_field": "value",
-            "content": "汉族\n少数民族",
             "pym": "mz",
             "dic_id": "de2a4ee2-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -448,7 +474,6 @@
             "name": "marital_status",
             "label": "婚姻状况",
             "related_field": "value",
-            "content": "未婚\n已婚\n离异\n丧偶",
             "pym": "hyzk",
             "dic_id": "de2b3578-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -457,7 +482,6 @@
             "name": "education",
             "label": "文化程度",
             "related_field": "value",
-            "content": "博士\n硕士\n本科\n大专\n中专技校\n高中\n初中\n小学\n文盲或半文盲",
             "pym": "whcd",
             "dic_id": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -466,7 +490,6 @@
             "name": "occupational_status",
             "label": "职业状况",
             "related_field": "value",
-            "content": "在职\n失业\n退休",
             "pym": "zyzk",
             "dic_id": "de2d3ef4-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -475,7 +498,6 @@
             "name": "medical_expenses_burden",
             "label": "医疗费用负担",
             "related_field": "value",
-            "content": "职工医疗保险\n城镇居民医疗保险\n商业保险\n自费\n公费\n贫困救助",
             "pym": "ylfyfd",
             "dic_id": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -484,7 +506,6 @@
             "name": "type_of_residence",
             "label": "居住类型",
             "related_field": "value",
-            "content": "常住\n非常住",
             "pym": "jzlx",
             "dic_id": "de2ed7e6-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -493,7 +514,6 @@
             "name": "blood_type",
             "label": "血型",
             "related_field": "value",
-            "content": "A型\nB型\nO型\nAB型\nA+型\nA-型\nB+型\nB-型\nO+型\nO-型\nAB+型\nAB-型\n不详",
             "pym": "xx",
             "dic_id": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877"
         },
@@ -502,59 +522,13 @@
             "name": "",
             "label": "常用症状",
             "related_field": "常用症状",
-            "content": null,
             "pym": "cyzz",
             "dic_id": "de307c04-9aa1-11ec-bde1-8a6e55faf877"
-        },
-        {
-            "id": 266,
-            "name": "edema",
-            "label": "水肿情况",
-            "related_field": "value",
-            "content": "无水肿\n单侧水肿\n双侧不对称水肿\n双侧对称水肿",
-            "pym": "szqk",
-            "dic_id": "de316146-9aa1-11ec-bde1-8a6e55faf877"
-        },
-        {
-            "id": 264,
-            "name": "pharynx",
-            "label": "咽部",
-            "related_field": "value",
-            "content": "无充血\n充血\n淋巴滤泡增生",
-            "pym": "yb",
-            "dic_id": "de3247a0-9aa1-11ec-bde1-8a6e55faf877"
-        },
-        {
-            "id": 263,
-            "name": "dentition",
-            "label": "齿列",
-            "related_field": "value",
-            "content": "正常\n缺齿\n龋齿\n义齿（假牙）",
-            "pym": "cl",
-            "dic_id": "de332d5a-9aa1-11ec-bde1-8a6e55faf877"
-        },
-        {
-            "id": 262,
-            "name": "lips",
-            "label": "口唇",
-            "related_field": "value",
-            "content": "红润\n苍白\n发绀\n皲裂\n疱疹",
-            "pym": "kc",
-            "dic_id": "de340608-9aa1-11ec-bde1-8a6e55faf877"
-        },
-        {
-            "id": 261,
-            "name": "hearing",
-            "label": "听力",
-            "related_field": "value",
-            "content": "听见\n听不清或无法听见",
-            "pym": "tl",
-            "dic_id": "de34d862-9aa1-11ec-bde1-8a6e55faf877"
         }
     ],
     "dicdetails": [
         {
-            "id": 237,
+            "id": 332,
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "A型",
             "icpc": null,
@@ -562,7 +536,7 @@
             "item_id": "de361ee8-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 238,
+            "id": 333,
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "B型",
             "icpc": null,
@@ -570,7 +544,7 @@
             "item_id": "de36cc8a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 239,
+            "id": 334,
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "O型",
             "icpc": null,
@@ -578,7 +552,7 @@
             "item_id": "de3747a0-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 240,
+            "id": 335,
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "AB型",
             "icpc": null,
@@ -586,7 +560,7 @@
             "item_id": "de37c3d8-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 241,
+            "id": 336,
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "A+型",
             "icpc": null,
@@ -594,7 +568,7 @@
             "item_id": "de38406a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 242,
+            "id": 337,
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "A-型",
             "icpc": null,
@@ -602,7 +576,7 @@
             "item_id": "de38b130-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 243,
+            "id": 338,
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "B+型",
             "icpc": null,
@@ -610,7 +584,7 @@
             "item_id": "de3923ea-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 244,
+            "id": 339,
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "B-型",
             "icpc": null,
@@ -618,7 +592,7 @@
             "item_id": "de399afa-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 245,
+            "id": 340,
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "O+型",
             "icpc": null,
@@ -626,7 +600,7 @@
             "item_id": "de3a17a0-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 246,
+            "id": 341,
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "O-型",
             "icpc": null,
@@ -634,7 +608,7 @@
             "item_id": "de3a835c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 247,
+            "id": 342,
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "AB+型",
             "icpc": null,
@@ -642,7 +616,7 @@
             "item_id": "de3afa26-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 248,
+            "id": 343,
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "AB-型",
             "icpc": null,
@@ -650,7 +624,7 @@
             "item_id": "de3b8e0a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 249,
+            "id": 344,
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "不详",
             "icpc": null,
@@ -658,7 +632,7 @@
             "item_id": "de3c0056-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 250,
+            "id": 345,
             "diclist": "de2ed7e6-9aa1-11ec-bde1-8a6e55faf877",
             "item": "常住",
             "icpc": null,
@@ -666,7 +640,7 @@
             "item_id": "de3c728e-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 251,
+            "id": 346,
             "diclist": "de2ed7e6-9aa1-11ec-bde1-8a6e55faf877",
             "item": "非常住",
             "icpc": null,
@@ -674,7 +648,7 @@
             "item_id": "de3ce85e-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 252,
+            "id": 347,
             "diclist": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877",
             "item": "职工医疗保险",
             "icpc": null,
@@ -682,7 +656,7 @@
             "item_id": "de3d5ca8-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 253,
+            "id": 348,
             "diclist": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877",
             "item": "城镇居民医疗保险",
             "icpc": null,
@@ -690,7 +664,7 @@
             "item_id": "de3dd5f2-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 254,
+            "id": 349,
             "diclist": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877",
             "item": "商业保险",
             "icpc": null,
@@ -698,7 +672,7 @@
             "item_id": "de3e51bc-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 255,
+            "id": 350,
             "diclist": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877",
             "item": "自费",
             "icpc": null,
@@ -706,7 +680,7 @@
             "item_id": "de3ed452-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 256,
+            "id": 351,
             "diclist": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877",
             "item": "公费",
             "icpc": null,
@@ -714,7 +688,7 @@
             "item_id": "de3f5378-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 257,
+            "id": 352,
             "diclist": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877",
             "item": "贫困救助",
             "icpc": null,
@@ -722,7 +696,7 @@
             "item_id": "de3fda3c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 258,
+            "id": 353,
             "diclist": "de2d3ef4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "在职",
             "icpc": null,
@@ -730,7 +704,7 @@
             "item_id": "de406c5e-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 259,
+            "id": 354,
             "diclist": "de2d3ef4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "失业",
             "icpc": null,
@@ -738,7 +712,7 @@
             "item_id": "de40ec7e-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 260,
+            "id": 355,
             "diclist": "de2d3ef4-9aa1-11ec-bde1-8a6e55faf877",
             "item": "退休",
             "icpc": null,
@@ -746,7 +720,7 @@
             "item_id": "de4173d8-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 261,
+            "id": 356,
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
             "item": "博士",
             "icpc": null,
@@ -754,7 +728,7 @@
             "item_id": "de41f858-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 262,
+            "id": 357,
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
             "item": "硕士",
             "icpc": null,
@@ -762,7 +736,7 @@
             "item_id": "de4287fa-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 263,
+            "id": 358,
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
             "item": "本科",
             "icpc": null,
@@ -770,7 +744,7 @@
             "item_id": "de430806-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 264,
+            "id": 359,
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
             "item": "大专",
             "icpc": null,
@@ -778,7 +752,7 @@
             "item_id": "de438b5a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 265,
+            "id": 360,
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
             "item": "中专技校",
             "icpc": null,
@@ -786,7 +760,7 @@
             "item_id": "de44152a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 266,
+            "id": 361,
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
             "item": "高中",
             "icpc": null,
@@ -794,7 +768,7 @@
             "item_id": "de44a94a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 267,
+            "id": 362,
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
             "item": "初中",
             "icpc": null,
@@ -802,7 +776,7 @@
             "item_id": "de452e9c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 268,
+            "id": 363,
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
             "item": "小学",
             "icpc": null,
@@ -810,7 +784,7 @@
             "item_id": "de45b538-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 269,
+            "id": 364,
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
             "item": "文盲或半文盲",
             "icpc": null,
@@ -818,7 +792,7 @@
             "item_id": "de463a4e-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 270,
+            "id": 365,
             "diclist": "de2b3578-9aa1-11ec-bde1-8a6e55faf877",
             "item": "未婚",
             "icpc": null,
@@ -826,7 +800,7 @@
             "item_id": "de46c3d8-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 271,
+            "id": 366,
             "diclist": "de2b3578-9aa1-11ec-bde1-8a6e55faf877",
             "item": "已婚",
             "icpc": null,
@@ -834,7 +808,7 @@
             "item_id": "de474592-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 272,
+            "id": 367,
             "diclist": "de2b3578-9aa1-11ec-bde1-8a6e55faf877",
             "item": "离异",
             "icpc": null,
@@ -842,7 +816,7 @@
             "item_id": "de47d584-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 273,
+            "id": 368,
             "diclist": "de2b3578-9aa1-11ec-bde1-8a6e55faf877",
             "item": "丧偶",
             "icpc": null,
@@ -850,7 +824,7 @@
             "item_id": "de4848b6-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 274,
+            "id": 369,
             "diclist": "de2a4ee2-9aa1-11ec-bde1-8a6e55faf877",
             "item": "汉族",
             "icpc": null,
@@ -858,7 +832,7 @@
             "item_id": "de48cdae-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 275,
+            "id": 370,
             "diclist": "de2a4ee2-9aa1-11ec-bde1-8a6e55faf877",
             "item": "少数民族",
             "icpc": null,
@@ -866,7 +840,7 @@
             "item_id": "de49873a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 276,
+            "id": 371,
             "diclist": "de2963ba-9aa1-11ec-bde1-8a6e55faf877",
             "item": "男",
             "icpc": null,
@@ -874,7 +848,7 @@
             "item_id": "de4a3054-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 277,
+            "id": 372,
             "diclist": "de2963ba-9aa1-11ec-bde1-8a6e55faf877",
             "item": "女",
             "icpc": null,
@@ -882,7 +856,7 @@
             "item_id": "de4af1e2-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 278,
+            "id": 373,
             "diclist": "de316146-9aa1-11ec-bde1-8a6e55faf877",
             "item": "无水肿",
             "icpc": null,
@@ -890,7 +864,7 @@
             "item_id": "de4b6fbe-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 279,
+            "id": 374,
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
             "item": "丧偶",
             "icpc": null,
@@ -898,7 +872,7 @@
             "item_id": "de4bf2f4-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 280,
+            "id": 375,
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
             "item": "父母死亡",
             "icpc": null,
@@ -906,7 +880,7 @@
             "item_id": "de4c8016-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 281,
+            "id": 376,
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
             "item": "子女死亡",
             "icpc": null,
@@ -914,7 +888,7 @@
             "item_id": "de4d0324-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 282,
+            "id": 377,
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
             "item": "离婚",
             "icpc": null,
@@ -922,7 +896,7 @@
             "item_id": "de4d890c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 283,
+            "id": 378,
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
             "item": "失业",
             "icpc": null,
@@ -930,7 +904,7 @@
             "item_id": "de4e072e-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 284,
+            "id": 379,
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
             "item": "家属病重",
             "icpc": null,
@@ -938,7 +912,7 @@
             "item_id": "de4ea800-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 285,
+            "id": 380,
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
             "item": "恋爱",
             "icpc": null,
@@ -946,7 +920,7 @@
             "item_id": "de4f34a0-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 286,
+            "id": 381,
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
             "item": "结婚",
             "icpc": null,
@@ -954,7 +928,7 @@
             "item_id": "de4fc0dc-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 287,
+            "id": 382,
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
             "item": "生子",
             "icpc": null,
@@ -962,7 +936,7 @@
             "item_id": "de504d7c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 288,
+            "id": 383,
             "diclist": "de3247a0-9aa1-11ec-bde1-8a6e55faf877",
             "item": "无充血",
             "icpc": null,
@@ -970,7 +944,7 @@
             "item_id": "de50d0e4-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 289,
+            "id": 384,
             "diclist": "de332d5a-9aa1-11ec-bde1-8a6e55faf877",
             "item": "正常",
             "icpc": null,
@@ -978,7 +952,7 @@
             "item_id": "de51666c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 290,
+            "id": 385,
             "diclist": "de340608-9aa1-11ec-bde1-8a6e55faf877",
             "item": "红润",
             "icpc": null,
@@ -986,7 +960,7 @@
             "item_id": "de51ef10-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 291,
+            "id": 386,
             "diclist": "de34d862-9aa1-11ec-bde1-8a6e55faf877",
             "item": "听见",
             "icpc": null,
@@ -994,7 +968,7 @@
             "item_id": "de527660-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 292,
+            "id": 387,
             "diclist": "de1df50c-9aa1-11ec-bde1-8a6e55faf877",
             "item": "触及正常",
             "icpc": null,
@@ -1002,7 +976,7 @@
             "item_id": "de52f2ca-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 293,
+            "id": 388,
             "diclist": "de278914-9aa1-11ec-bde1-8a6e55faf877",
             "item": "正常",
             "icpc": null,
@@ -1010,7 +984,7 @@
             "item_id": "de536944-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 294,
+            "id": 389,
             "diclist": "de278914-9aa1-11ec-bde1-8a6e55faf877",
             "item": "异常",
             "icpc": null,
@@ -1018,7 +992,7 @@
             "item_id": "de53e568-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 295,
+            "id": 390,
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
             "item": "户主",
             "icpc": null,
@@ -1026,7 +1000,7 @@
             "item_id": "de547320-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 296,
+            "id": 391,
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
             "item": "配偶",
             "icpc": null,
@@ -1034,7 +1008,7 @@
             "item_id": "de54ec2e-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 297,
+            "id": 392,
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
             "item": "父母",
             "icpc": null,
@@ -1042,7 +1016,7 @@
             "item_id": "de556366-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 298,
+            "id": 393,
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
             "item": "子女",
             "icpc": null,
@@ -1050,7 +1024,7 @@
             "item_id": "de55e3e0-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 299,
+            "id": 394,
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
             "item": "祖父母",
             "icpc": null,
@@ -1058,7 +1032,7 @@
             "item_id": "de56666c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 300,
+            "id": 395,
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
             "item": "孙子女",
             "icpc": null,
@@ -1066,7 +1040,7 @@
             "item_id": "de573056-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 301,
+            "id": 396,
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
             "item": "兄弟姐妹",
             "icpc": null,
@@ -1074,7 +1048,7 @@
             "item_id": "de57c6a6-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 302,
+            "id": 397,
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
             "item": "其他成员",
             "icpc": null,
@@ -1082,7 +1056,7 @@
             "item_id": "de592e10-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 303,
+            "id": 398,
             "diclist": "de25c214-9aa1-11ec-bde1-8a6e55faf877",
             "item": "非常不方便",
             "icpc": null,
@@ -1090,7 +1064,7 @@
             "item_id": "de59e6ca-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 304,
+            "id": 399,
             "diclist": "de25c214-9aa1-11ec-bde1-8a6e55faf877",
             "item": "不方便",
             "icpc": null,
@@ -1098,7 +1072,7 @@
             "item_id": "de5a95ac-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 305,
+            "id": 400,
             "diclist": "de25c214-9aa1-11ec-bde1-8a6e55faf877",
             "item": "比较方便",
             "icpc": null,
@@ -1106,7 +1080,7 @@
             "item_id": "de5b17a2-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 306,
+            "id": 401,
             "diclist": "de25c214-9aa1-11ec-bde1-8a6e55faf877",
             "item": "非常方便",
             "icpc": null,
@@ -1114,7 +1088,7 @@
             "item_id": "de5c3880-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 307,
+            "id": 402,
             "diclist": "de24d020-9aa1-11ec-bde1-8a6e55faf877",
             "item": "半小时以内",
             "icpc": null,
@@ -1122,7 +1096,7 @@
             "item_id": "de5cb49a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 308,
+            "id": 403,
             "diclist": "de24d020-9aa1-11ec-bde1-8a6e55faf877",
             "item": "半小时到一个半小时",
             "icpc": null,
@@ -1130,7 +1104,7 @@
             "item_id": "de5d388e-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 309,
+            "id": 404,
             "diclist": "de24d020-9aa1-11ec-bde1-8a6e55faf877",
             "item": "一个半小时以上",
             "icpc": null,
@@ -1138,7 +1112,7 @@
             "item_id": "de5dc0ec-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 310,
+            "id": 405,
             "diclist": "de23c81a-9aa1-11ec-bde1-8a6e55faf877",
             "item": "有氧运动",
             "icpc": null,
@@ -1146,7 +1120,7 @@
             "item_id": "de5e52fa-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 311,
+            "id": 406,
             "diclist": "de23c81a-9aa1-11ec-bde1-8a6e55faf877",
             "item": "无氧运动",
             "icpc": null,
@@ -1154,7 +1128,7 @@
             "item_id": "de5edffe-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 312,
+            "id": 407,
             "diclist": "de23c81a-9aa1-11ec-bde1-8a6e55faf877",
             "item": "有氧无氧交替运动",
             "icpc": null,
@@ -1162,7 +1136,7 @@
             "item_id": "de5f6e88-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 313,
+            "id": 408,
             "diclist": "de23c81a-9aa1-11ec-bde1-8a6e55faf877",
             "item": "不运动",
             "icpc": null,
@@ -1170,7 +1144,7 @@
             "item_id": "de600a00-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 314,
+            "id": 409,
             "diclist": "de227fa0-9aa1-11ec-bde1-8a6e55faf877",
             "item": "改善很大",
             "icpc": null,
@@ -1178,7 +1152,7 @@
             "item_id": "de609470-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 315,
+            "id": 410,
             "diclist": "de227fa0-9aa1-11ec-bde1-8a6e55faf877",
             "item": "有一定改善",
             "icpc": null,
@@ -1186,7 +1160,7 @@
             "item_id": "de611d00-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 316,
+            "id": 411,
             "diclist": "de227fa0-9aa1-11ec-bde1-8a6e55faf877",
             "item": "没变化",
             "icpc": null,
@@ -1194,7 +1168,7 @@
             "item_id": "de619f3c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 317,
+            "id": 412,
             "diclist": "de227fa0-9aa1-11ec-bde1-8a6e55faf877",
             "item": "变更差了",
             "icpc": null,
@@ -1202,7 +1176,7 @@
             "item_id": "de621d9a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 318,
+            "id": 413,
             "diclist": "de21b21e-9aa1-11ec-bde1-8a6e55faf877",
             "item": "非常好",
             "icpc": null,
@@ -1210,7 +1184,7 @@
             "item_id": "de629d56-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 319,
+            "id": 414,
             "diclist": "de21b21e-9aa1-11ec-bde1-8a6e55faf877",
             "item": "还不错",
             "icpc": null,
@@ -1218,7 +1192,7 @@
             "item_id": "de631dd0-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 320,
+            "id": 415,
             "diclist": "de21b21e-9aa1-11ec-bde1-8a6e55faf877",
             "item": "不太好",
             "icpc": null,
@@ -1226,7 +1200,7 @@
             "item_id": "de63a58e-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 321,
+            "id": 416,
             "diclist": "de21b21e-9aa1-11ec-bde1-8a6e55faf877",
             "item": "非常糟",
             "icpc": null,
@@ -1234,7 +1208,7 @@
             "item_id": "de642b08-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 322,
+            "id": 417,
             "diclist": "de20b71a-9aa1-11ec-bde1-8a6e55faf877",
             "item": "经常",
             "icpc": null,
@@ -1242,7 +1216,7 @@
             "item_id": "de64a6dc-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 323,
+            "id": 418,
             "diclist": "de20b71a-9aa1-11ec-bde1-8a6e55faf877",
             "item": "偶尔",
             "icpc": null,
@@ -1250,7 +1224,7 @@
             "item_id": "de65254e-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 324,
+            "id": 419,
             "diclist": "de20b71a-9aa1-11ec-bde1-8a6e55faf877",
             "item": "从无",
             "icpc": null,
@@ -1258,7 +1232,7 @@
             "item_id": "de65a884-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 325,
+            "id": 420,
             "diclist": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877",
             "item": "很满意",
             "icpc": null,
@@ -1266,7 +1240,7 @@
             "item_id": "de662a2a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 326,
+            "id": 421,
             "diclist": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877",
             "item": "满意",
             "icpc": null,
@@ -1274,7 +1248,7 @@
             "item_id": "de66a07c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 327,
+            "id": 422,
             "diclist": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877",
             "item": "既非满意也非不满意",
             "icpc": null,
@@ -1282,7 +1256,7 @@
             "item_id": "de671890-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 328,
+            "id": 423,
             "diclist": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877",
             "item": "不满意",
             "icpc": null,
@@ -1290,7 +1264,7 @@
             "item_id": "de678df2-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 329,
+            "id": 424,
             "diclist": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877",
             "item": "很不满意",
             "icpc": null,
@@ -1298,7 +1272,7 @@
             "item_id": "de6807b4-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 330,
+            "id": 425,
             "diclist": "de1f127a-9aa1-11ec-bde1-8a6e55faf877",
             "item": "外向",
             "icpc": null,
@@ -1306,7 +1280,7 @@
             "item_id": "de687c94-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 331,
+            "id": 426,
             "diclist": "de1f127a-9aa1-11ec-bde1-8a6e55faf877",
             "item": "内向",
             "icpc": null,
@@ -1314,7 +1288,7 @@
             "item_id": "de69174e-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 332,
+            "id": 427,
             "diclist": "de307c04-9aa1-11ec-bde1-8a6e55faf877",
             "item": "头痛",
             "icpc": "L99",
@@ -1322,7 +1296,7 @@
             "item_id": "de6a0b22-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 333,
+            "id": 428,
             "diclist": "de307c04-9aa1-11ec-bde1-8a6e55faf877",
             "item": "发热",
             "icpc": "A0301",
@@ -1330,7 +1304,7 @@
             "item_id": "de6b0c0c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 334,
+            "id": 429,
             "diclist": "de307c04-9aa1-11ec-bde1-8a6e55faf877",
             "item": "头晕",
             "icpc": "N1701",
@@ -1338,7 +1312,7 @@
             "item_id": "de6c69a8-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 335,
+            "id": 430,
             "diclist": "de307c04-9aa1-11ec-bde1-8a6e55faf877",
             "item": "咳嗽",
             "icpc": "R0501",
@@ -1346,7 +1320,7 @@
             "item_id": "de6d7802-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 336,
+            "id": 431,
             "diclist": "de307c04-9aa1-11ec-bde1-8a6e55faf877",
             "item": "打喷嚏",
             "icpc": "R0701",
@@ -1354,7 +1328,7 @@
             "item_id": "de6e9ae8-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 337,
+            "id": 432,
             "diclist": "de307c04-9aa1-11ec-bde1-8a6e55faf877",
             "item": "咽喉痛",
             "icpc": "R0102",
@@ -1362,7 +1336,7 @@
             "item_id": "de6faaf0-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 338,
+            "id": 433,
             "diclist": "de307c04-9aa1-11ec-bde1-8a6e55faf877",
             "item": "腹痛",
             "icpc": "D0103",
@@ -1370,7 +1344,7 @@
             "item_id": "de709f14-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 339,
+            "id": 434,
             "diclist": "de307c04-9aa1-11ec-bde1-8a6e55faf877",
             "item": "腹泻",
             "icpc": "D1101",
@@ -1378,7 +1352,7 @@
             "item_id": "de716584-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 340,
+            "id": 435,
             "diclist": "de316146-9aa1-11ec-bde1-8a6e55faf877",
             "item": "单侧水肿",
             "icpc": "K0702",
@@ -1386,7 +1360,7 @@
             "item_id": "de72474c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 341,
+            "id": 436,
             "diclist": "de316146-9aa1-11ec-bde1-8a6e55faf877",
             "item": "双侧不对称水肿",
             "icpc": "K0702",
@@ -1394,7 +1368,7 @@
             "item_id": "de7358a8-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 342,
+            "id": 437,
             "diclist": "de316146-9aa1-11ec-bde1-8a6e55faf877",
             "item": "双侧对称水肿",
             "icpc": "K0702",
@@ -1402,7 +1376,7 @@
             "item_id": "de748818-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 343,
+            "id": 438,
             "diclist": "de3247a0-9aa1-11ec-bde1-8a6e55faf877",
             "item": "充血",
             "icpc": "R2902",
@@ -1410,7 +1384,7 @@
             "item_id": "de75fb94-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 344,
+            "id": 439,
             "diclist": "de3247a0-9aa1-11ec-bde1-8a6e55faf877",
             "item": "淋巴滤泡增生",
             "icpc": "R8528",
@@ -1418,7 +1392,7 @@
             "item_id": "de76e752-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 345,
+            "id": 440,
             "diclist": "de332d5a-9aa1-11ec-bde1-8a6e55faf877",
             "item": "缺齿",
             "icpc": "D8268",
@@ -1426,7 +1400,7 @@
             "item_id": "de7842aa-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 346,
+            "id": 441,
             "diclist": "de332d5a-9aa1-11ec-bde1-8a6e55faf877",
             "item": "龋齿",
             "icpc": "D8214",
@@ -1434,7 +1408,7 @@
             "item_id": "de790992-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 347,
+            "id": 442,
             "diclist": "de332d5a-9aa1-11ec-bde1-8a6e55faf877",
             "item": "义齿（假牙）",
             "icpc": "D8268",
@@ -1442,7 +1416,7 @@
             "item_id": "de79d73c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 348,
+            "id": 443,
             "diclist": "de340608-9aa1-11ec-bde1-8a6e55faf877",
             "item": "苍白",
             "icpc": "D2001",
@@ -1450,7 +1424,7 @@
             "item_id": "de7a8ae2-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 349,
+            "id": 444,
             "diclist": "de340608-9aa1-11ec-bde1-8a6e55faf877",
             "item": "发绀",
             "icpc": "D2001",
@@ -1458,7 +1432,7 @@
             "item_id": "de7b4b76-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 350,
+            "id": 445,
             "diclist": "de340608-9aa1-11ec-bde1-8a6e55faf877",
             "item": "皲裂",
             "icpc": "D2001",
@@ -1466,7 +1440,7 @@
             "item_id": "de7c0476-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 351,
+            "id": 446,
             "diclist": "de340608-9aa1-11ec-bde1-8a6e55faf877",
             "item": "疱疹",
             "icpc": "D2001",
@@ -1474,7 +1448,7 @@
             "item_id": "de7cbfba-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 352,
+            "id": 447,
             "diclist": "de34d862-9aa1-11ec-bde1-8a6e55faf877",
             "item": "听不清或无法听见",
             "icpc": "H0201",
@@ -1482,7 +1456,7 @@
             "item_id": "de7d8882-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 353,
+            "id": 448,
             "diclist": "de1df50c-9aa1-11ec-bde1-8a6e55faf877",
             "item": "减弱",
             "icpc": "L1701",
@@ -1490,7 +1464,7 @@
             "item_id": "de7e72f6-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 354,
+            "id": 449,
             "diclist": "de1df50c-9aa1-11ec-bde1-8a6e55faf877",
             "item": "消失",
             "icpc": "L1701",
@@ -4172,7 +4146,7 @@
     ],
     "baseforms": [
         {
-            "id": 48,
+            "id": 89,
             "name": "allergies_history_baseform",
             "label": "过敏史",
             "basemodel": "dee16a0a-9aa1-11ec-bde1-8a6e55faf877",
@@ -4191,7 +4165,7 @@
             ]
         },
         {
-            "id": 49,
+            "id": 90,
             "name": "personal_comprehensive_psychological_quality_survey_baseform",
             "label": "个人心理综合素质调查",
             "basemodel": "dee8629c-9aa1-11ec-bde1-8a6e55faf877",
@@ -4218,7 +4192,7 @@
             ]
         },
         {
-            "id": 50,
+            "id": 91,
             "name": "personal_adaptability_assessment_baseform",
             "label": "个人适应能力评估",
             "basemodel": "deee38f2-9aa1-11ec-bde1-8a6e55faf877",
@@ -4269,7 +4243,7 @@
             ]
         },
         {
-            "id": 51,
+            "id": 92,
             "name": "personal_health_behavior_survey_baseform",
             "label": "个人健康行为调查",
             "basemodel": "def5d0ee-9aa1-11ec-bde1-8a6e55faf877",
@@ -4360,7 +4334,7 @@
             ]
         },
         {
-            "id": 52,
+            "id": 93,
             "name": "personal_health_assessment_baseform",
             "label": "个人身体健康评估",
             "basemodel": "defd18b8-9aa1-11ec-bde1-8a6e55faf877",
@@ -4419,7 +4393,7 @@
             ]
         },
         {
-            "id": 53,
+            "id": 94,
             "name": "social_environment_assessment_baseform",
             "label": "社会环境评估",
             "basemodel": "df04a4e8-9aa1-11ec-bde1-8a6e55faf877",
@@ -4486,7 +4460,7 @@
             ]
         },
         {
-            "id": 54,
+            "id": 95,
             "name": "vital_signs_check_baseform",
             "label": "生命体征检查",
             "basemodel": "df0c5b34-9aa1-11ec-bde1-8a6e55faf877",
@@ -4521,7 +4495,7 @@
             ]
         },
         {
-            "id": 55,
+            "id": 96,
             "name": "family_history_of_illness_baseform",
             "label": "家族病史",
             "basemodel": "df11ea2c-9aa1-11ec-bde1-8a6e55faf877",
@@ -4548,7 +4522,7 @@
             ]
         },
         {
-            "id": 56,
+            "id": 97,
             "name": "physical_examination_baseform",
             "label": "体格检查",
             "basemodel": "df17ec4c-9aa1-11ec-bde1-8a6e55faf877",
@@ -4583,7 +4557,7 @@
             ]
         },
         {
-            "id": 57,
+            "id": 98,
             "name": "history_of_blood_transfusion_baseform",
             "label": "输血史",
             "basemodel": "df1d88f0-9aa1-11ec-bde1-8a6e55faf877",
@@ -4610,7 +4584,7 @@
             ]
         },
         {
-            "id": 58,
+            "id": 99,
             "name": "history_of_trauma_baseform",
             "label": "外伤史",
             "basemodel": "df22e782-9aa1-11ec-bde1-8a6e55faf877",
@@ -4637,7 +4611,7 @@
             ]
         },
         {
-            "id": 59,
+            "id": 100,
             "name": "fundus_examination_baseform",
             "label": "眼底检查",
             "basemodel": "df2884b2-9aa1-11ec-bde1-8a6e55faf877",
@@ -4656,7 +4630,7 @@
             ]
         },
         {
-            "id": 60,
+            "id": 101,
             "name": "medical_history_baseform",
             "label": "疾病史",
             "basemodel": "df2dd7dc-9aa1-11ec-bde1-8a6e55faf877",
@@ -4691,7 +4665,7 @@
             ]
         },
         {
-            "id": 61,
+            "id": 102,
             "name": "doctor_registry_baseform",
             "label": "医生注册",
             "basemodel": "df346124-9aa1-11ec-bde1-8a6e55faf877",
@@ -4814,7 +4788,7 @@
             ]
         },
         {
-            "id": 62,
+            "id": 103,
             "name": "user_login_baseform",
             "label": "用户登录",
             "basemodel": "df3ce4c0-9aa1-11ec-bde1-8a6e55faf877",
@@ -4841,7 +4815,7 @@
             ]
         },
         {
-            "id": 63,
+            "id": 104,
             "name": "doctor_login_baseform",
             "label": "医生登陆",
             "basemodel": "df4213a0-9aa1-11ec-bde1-8a6e55faf877",
@@ -4876,7 +4850,7 @@
             ]
         },
         {
-            "id": 64,
+            "id": 105,
             "name": "dorsal_artery_pulsation_examination_baseform",
             "label": "足背动脉搏动检查",
             "basemodel": "df47a9dc-9aa1-11ec-bde1-8a6e55faf877",
@@ -4903,7 +4877,7 @@
             ]
         },
         {
-            "id": 65,
+            "id": 106,
             "name": "physical_examination_hearing_baseform",
             "label": "查体听力",
             "basemodel": "df4dfa30-9aa1-11ec-bde1-8a6e55faf877",
@@ -4930,7 +4904,7 @@
             ]
         },
         {
-            "id": 66,
+            "id": 107,
             "name": "history_of_infectious_diseases_baseform",
             "label": "遗传病史",
             "basemodel": "df54ef34-9aa1-11ec-bde1-8a6e55faf877",
@@ -4957,7 +4931,7 @@
             ]
         },
         {
-            "id": 67,
+            "id": 108,
             "name": "history_of_surgery_baseform",
             "label": "手术史",
             "basemodel": "df5c27a4-9aa1-11ec-bde1-8a6e55faf877",
@@ -4984,7 +4958,7 @@
             ]
         },
         {
-            "id": 68,
+            "id": 109,
             "name": "physical_examination_oral_cavity_baseform",
             "label": "查体口腔",
             "basemodel": "df62a23c-9aa1-11ec-bde1-8a6e55faf877",
@@ -5019,7 +4993,7 @@
             ]
         },
         {
-            "id": 69,
+            "id": 110,
             "name": "major_life_events_baseform",
             "label": "重大生活事件调查",
             "basemodel": "df69524e-9aa1-11ec-bde1-8a6e55faf877",
@@ -5046,7 +5020,7 @@
             ]
         },
         {
-            "id": 70,
+            "id": 111,
             "name": "physical_examination_vision_baseform",
             "label": "查体视力",
             "basemodel": "df71cbf4-9aa1-11ec-bde1-8a6e55faf877",
@@ -5073,7 +5047,7 @@
             ]
         },
         {
-            "id": 71,
+            "id": 112,
             "name": "lower_extremity_edema_examination_baseform",
             "label": "下肢水肿检查",
             "basemodel": "df778c4c-9aa1-11ec-bde1-8a6e55faf877",
@@ -5092,7 +5066,7 @@
             ]
         },
         {
-            "id": 72,
+            "id": 113,
             "name": "basic_personal_information_baseform",
             "label": "个人基本情况",
             "basemodel": "df7ce96c-9aa1-11ec-bde1-8a6e55faf877",
@@ -5255,7 +5229,7 @@
             ]
         },
         {
-            "id": 73,
+            "id": 114,
             "name": "physical_examination_athletic_ability_baseform",
             "label": "查体运动能力",
             "basemodel": "df8ad338-9aa1-11ec-bde1-8a6e55faf877",
@@ -5274,7 +5248,7 @@
             ]
         },
         {
-            "id": 74,
+            "id": 115,
             "name": "user_registry_baseform",
             "label": "用户注册表",
             "basemodel": "df9130f2-9aa1-11ec-bde1-8a6e55faf877",
@@ -5357,7 +5331,7 @@
             ]
         },
         {
-            "id": 75,
+            "id": 116,
             "name": "kong_fu_xue_tang_jian_cha_baseform",
             "label": "空腹血糖检查",
             "basemodel": "df996f4c-9aa1-11ec-bde1-8a6e55faf877",
@@ -5376,7 +5350,7 @@
             ]
         },
         {
-            "id": 76,
+            "id": 117,
             "name": "tang_hua_xue_hong_dan_bai_jian_cha_biao_baseform",
             "label": "糖化血红蛋白检查表",
             "basemodel": "dfa11364-9aa1-11ec-bde1-8a6e55faf877",
@@ -5395,7 +5369,7 @@
             ]
         },
         {
-            "id": 77,
+            "id": 118,
             "name": "yong_yao_chu_fang_baseform",
             "label": "用药处方",
             "basemodel": "dfa6b0b2-9aa1-11ec-bde1-8a6e55faf877",
@@ -5414,7 +5388,7 @@
             ]
         },
         {
-            "id": 78,
+            "id": 119,
             "name": "yong_yao_diao_cha_biao_baseform",
             "label": "用药调查表",
             "basemodel": "dfaca706-9aa1-11ec-bde1-8a6e55faf877",
@@ -5441,7 +5415,7 @@
             ]
         },
         {
-            "id": 79,
+            "id": 120,
             "name": "yu_yue_biao_baseform",
             "label": "预约单",
             "basemodel": "dfb39b1a-9aa1-11ec-bde1-8a6e55faf877",
@@ -5468,7 +5442,7 @@
             ]
         },
         {
-            "id": 80,
+            "id": 121,
             "name": "que_ren_dan_baseform",
             "label": "确认单",
             "basemodel": "dfb9b220-9aa1-11ec-bde1-8a6e55faf877",
@@ -5487,7 +5461,7 @@
             ]
         },
         {
-            "id": 81,
+            "id": 122,
             "name": "tang_niao_bing_zhuan_yong_wen_zhen_biao_baseform",
             "label": "糖尿病专用问诊表",
             "basemodel": "dfbecf6c-9aa1-11ec-bde1-8a6e55faf877",
@@ -5514,7 +5488,7 @@
             ]
         },
         {
-            "id": 82,
+            "id": 123,
             "name": "yong_yao_ti_xing_dan_baseform",
             "label": "用药提醒单",
             "basemodel": "dfc47ae8-9aa1-11ec-bde1-8a6e55faf877",
@@ -5533,7 +5507,7 @@
             ]
         },
         {
-            "id": 83,
+            "id": 124,
             "name": "yuan_qian_fu_zhu_wen_zhen_biao_baseform",
             "label": "院前辅助问诊表",
             "basemodel": "dfca1322-9aa1-11ec-bde1-8a6e55faf877",
@@ -5560,7 +5534,7 @@
             ]
         },
         {
-            "id": 84,
+            "id": 125,
             "name": "men_zhen_yi_sheng_wen_zhen_biao_baseform",
             "label": "门诊医生问诊表",
             "basemodel": "dfd0332e-9aa1-11ec-bde1-8a6e55faf877",
@@ -5587,7 +5561,7 @@
             ]
         },
         {
-            "id": 85,
+            "id": 126,
             "name": "tang_niao_bing_zhen_duan_biao_baseform",
             "label": "糖尿病诊断表",
             "basemodel": "dfd5ed8c-9aa1-11ec-bde1-8a6e55faf877",
@@ -5606,7 +5580,7 @@
             ]
         },
         {
-            "id": 86,
+            "id": 127,
             "name": "yuan_nei_fu_zhu_wen_zhen_biao_baseform",
             "label": "院内辅助问诊表",
             "basemodel": "dfdb58e4-9aa1-11ec-bde1-8a6e55faf877",
@@ -5633,7 +5607,7 @@
             ]
         },
         {
-            "id": 87,
+            "id": 128,
             "name": "yuan_wai_zi_xun_biao_baseform",
             "label": "院外咨询表",
             "basemodel": "dfe1db92-9aa1-11ec-bde1-8a6e55faf877",
@@ -5668,7 +5642,7 @@
             ]
         },
         {
-            "id": 88,
+            "id": 129,
             "name": "xue_ya_jian_ce_biao_baseform",
             "label": "血压监测表",
             "basemodel": "dfe88f28-9aa1-11ec-bde1-8a6e55faf877",
@@ -5695,7 +5669,7 @@
             ]
         },
         {
-            "id": 89,
+            "id": 130,
             "name": "basic_personal_information_baseform_query_1642159528",
             "label": "个人基本情况_查询视图_1642159528",
             "basemodel": "df7ce96c-9aa1-11ec-bde1-8a6e55faf877",
@@ -5738,7 +5712,7 @@
             ]
         },
         {
-            "id": 90,
+            "id": 131,
             "name": "yong_yao_chu_fang_baseform_query_1645404404",
             "label": "用药处方_查询视图_1645404404",
             "basemodel": "dfa6b0b2-9aa1-11ec-bde1-8a6e55faf877",
@@ -5757,7 +5731,7 @@
             ]
         },
         {
-            "id": 91,
+            "id": 132,
             "name": "tang_niao_bing_zhen_duan_biao_baseform_query_1645431372",
             "label": "糖尿病诊断表_查询视图_1645431372",
             "basemodel": "dfd5ed8c-9aa1-11ec-bde1-8a6e55faf877",
@@ -7371,7 +7345,7 @@
             "description": null,
             "expression": "completed",
             "parameters": null,
-            "fields": "('yuan_wai_zi_xun_biao-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string', None)\n('yuan_wai_zi_xun_biao-relatedfield_symptom_list', '症状', 'Icpc3_symptoms_and_problems', 'define_icpc')\n('yuan_wai_zi_xun_biao-relatedfield_chang_yong_zheng_zhuang', '常用症状', '', 'dictionaries')",
+            "fields": "('yuan_wai_zi_xun_biao-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string', None)\n('yuan_wai_zi_xun_biao-relatedfield_symptom_list', '症状', 'Icpc3_symptoms_and_problems', 'icpc')\n('yuan_wai_zi_xun_biao-relatedfield_chang_yong_zheng_zhuang', '常用症状', '', 'dictionaries')",
             "event_id": "e059ed4e-9aa1-11ec-bde1-8a6e55faf877",
             "next": []
         },
@@ -7383,7 +7357,7 @@
             "description": null,
             "expression": "completed",
             "parameters": null,
-            "fields": "('yuan_nei_fu_zhu_wen_zhen_biao-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string', None)\n('yuan_nei_fu_zhu_wen_zhen_biao-relatedfield_symptom_list', '症状', 'Icpc3_symptoms_and_problems', 'define_icpc')",
+            "fields": "('yuan_nei_fu_zhu_wen_zhen_biao-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string', None)\n('yuan_nei_fu_zhu_wen_zhen_biao-relatedfield_symptom_list', '症状', 'Icpc3_symptoms_and_problems', 'icpc')",
             "event_id": "e05aeae6-9aa1-11ec-bde1-8a6e55faf877",
             "next": [
                 "e02a9d1e-9aa1-11ec-bde1-8a6e55faf877"
@@ -7397,7 +7371,7 @@
             "description": null,
             "expression": "medical_history-boolfield_shi_fou_you_man_xing_ji_bing==“无”",
             "parameters": "medical_history-boolfield_shi_fou_you_man_xing_ji_bing",
-            "fields": "('medical_history-boolfield_shi_fou_you_man_xing_ji_bing', '是否有慢性疾病', 'boolean', None)\n('medical_history-datetimefield_time_of_diagnosis', '确诊时间', 'datetime', None)\n('medical_history-relatedfield_disease_name', '疾病名称', 'Icpc5_evaluation_and_diagnoses', 'define_icpc')\n('basic_personal_information-characterfield_name', '姓名', 'string', None)\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string', None)\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime', None)\n('basic_personal_information-relatedfield_gender', '性别', 'Gender', 'dictionaries')",
+            "fields": "('medical_history-boolfield_shi_fou_you_man_xing_ji_bing', '是否有慢性疾病', 'boolean', None)\n('medical_history-datetimefield_time_of_diagnosis', '确诊时间', 'datetime', None)\n('medical_history-relatedfield_disease_name', '疾病名称', 'Icpc5_evaluation_and_diagnoses', 'icpc')\n('basic_personal_information-characterfield_name', '姓名', 'string', None)\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string', None)\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime', None)\n('basic_personal_information-relatedfield_gender', '性别', 'Gender', 'dictionaries')",
             "event_id": "e05d9264-9aa1-11ec-bde1-8a6e55faf877",
             "next": [
                 "e03f9d54-9aa1-11ec-bde1-8a6e55faf877"
@@ -7411,7 +7385,7 @@
             "description": null,
             "expression": "men_zhen_yi_sheng_wen_zhen_biao-relatedfield_symptom_list==“体重减轻”口渴\"",
             "parameters": "men_zhen_yi_sheng_wen_zhen_biao-relatedfield_symptom_list",
-            "fields": "('men_zhen_yi_sheng_wen_zhen_biao-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string', None)\n('men_zhen_yi_sheng_wen_zhen_biao-relatedfield_symptom_list', '症状', 'Icpc3_symptoms_and_problems', 'define_icpc')",
+            "fields": "('men_zhen_yi_sheng_wen_zhen_biao-characterfield_supplementary_description_of_the_condition', '病情补充描述', 'string', None)\n('men_zhen_yi_sheng_wen_zhen_biao-relatedfield_symptom_list', '症状', 'Icpc3_symptoms_and_problems', 'icpc')",
             "event_id": "e0604b62-9aa1-11ec-bde1-8a6e55faf877",
             "next": [
                 "e02d0e28-9aa1-11ec-bde1-8a6e55faf877",
@@ -7426,7 +7400,7 @@
             "description": null,
             "expression": "completed",
             "parameters": null,
-            "fields": "('tang_niao_bing_zhen_duan_biao-relatedfield_disease_name', '疾病名称', 'Icpc5_evaluation_and_diagnoses', 'define_icpc')",
+            "fields": "('tang_niao_bing_zhen_duan_biao-relatedfield_disease_name', '疾病名称', 'Icpc5_evaluation_and_diagnoses', 'icpc')",
             "event_id": "e0635974-9aa1-11ec-bde1-8a6e55faf877",
             "next": [
                 "e0305c18-9aa1-11ec-bde1-8a6e55faf877",
@@ -7442,7 +7416,7 @@
             "description": null,
             "expression": "blood_pressure_monitoring-numberfield_systolic_blood_pressure>130 or blood_pressure_monitoring-numberfield_diastolic_blood_pressure>90",
             "parameters": "",
-            "fields": "('personal_health_behavior_survey-boolfield_is_the_diet_regular', '饮食是否规律', 'boolean', None)\n('personal_health_behavior_survey-boolfield_is_the_diet_proportion_healthy', '饮食比例是否健康', 'boolean', None)\n('personal_health_behavior_survey-boolfield_whether_the_bowel_movements_are_regular', '大便是否规律', 'boolean', None)\n('personal_health_behavior_survey-boolfield_whether_to_drink_alcohol', '是否饮酒', 'boolean', None)\n('personal_health_behavior_survey-boolfield_do_you_smoke', '是否吸烟', 'boolean', None)\n('personal_health_behavior_survey-boolfield_insomnia', '是否有失眠情况', 'boolean', None)\n('personal_health_behavior_survey-characterfield_average_sleep_duration', '平均睡眠时长', 'string', None)\n('personal_health_behavior_survey-characterfield_duration_of_insomnia', '持续失眠时间', 'string', None)\n('personal_health_behavior_survey-relatedfield_drinking_frequency', '饮酒频次', 'Frequency', 'dictionaries')\n('personal_health_behavior_survey-relatedfield_smoking_frequency', '吸烟频次', 'Frequency', 'dictionaries')\n('fundus_examination-relatedfield_fundus', '眼底', 'Normality', 'dictionaries')\n('dorsal_artery_pulsation_examination-relatedfield_left_foot', '左脚', 'Dorsal_artery_pulsation', 'dictionaries')\n('dorsal_artery_pulsation_examination-relatedfield_right_foot', '右脚', 'Dorsal_artery_pulsation', 'dictionaries')\n('basic_personal_information-boolfield_contract_signatory', '合同签约户', 'boolean', None)\n('basic_personal_information-characterfield_name', '姓名', 'string', None)\n('basic_personal_information-characterfield_identification_number', '身份证号码', 'string', None)\n('basic_personal_information-characterfield_resident_file_number', '居民档案号', 'string', None)\n('basic_personal_information-characterfield_family_address', '家庭地址', 'string', None)\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string', None)\n('basic_personal_information-characterfield_medical_ic_card_number', '医疗ic卡号', 'string', None)\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime', None)\n('basic_personal_information-relatedfield_family_id', '家庭编号', 'Icpc1_register_logins', 'define_icpc')\n('basic_personal_information-relatedfield_gender', '性别', 'Gender', 'dictionaries')\n('basic_personal_information-relatedfield_nationality', '民族', 'Nationality', 'dictionaries')\n('basic_personal_information-relatedfield_marital_status', '婚姻状况', 'Marital_status', 'dictionaries')\n('basic_personal_information-relatedfield_education', '文化程度', 'Education', 'dictionaries')\n('basic_personal_information-relatedfield_occupational_status', '职业状况', 'Occupational_status', 'dictionaries')\n('basic_personal_information-relatedfield_medical_expenses_burden', '医疗费用负担', 'Medical_expenses_burden', 'dictionaries')\n('basic_personal_information-relatedfield_type_of_residence', '居住类型', 'Type_of_residence', 'dictionaries')\n('basic_personal_information-relatedfield_blood_type', '血型', 'Blood_type', 'dictionaries')\n('basic_personal_information-relatedfield_signed_family_doctor', '签约家庭医生', 'Staff', 'core')\n('basic_personal_information-relatedfield_family_relationship', '家庭成员关系', 'Family_relationship', 'dictionaries')\n('yong_yao_diao_cha_biao-characterfield_yong_yao_ji_liang', '用药剂量', 'string', None)\n('yong_yao_diao_cha_biao-relatedfield_drug_name', '药品名称', 'Medicine', 'core')\n('xue_ya_jian_ce_biao-numberfield_systolic_blood_pressure', '收缩压', 'number', None)\n('xue_ya_jian_ce_biao-numberfield_diastolic_blood_pressure', '舒张压', 'number', None)",
+            "fields": "('personal_health_behavior_survey-boolfield_is_the_diet_regular', '饮食是否规律', 'boolean', None)\n('personal_health_behavior_survey-boolfield_is_the_diet_proportion_healthy', '饮食比例是否健康', 'boolean', None)\n('personal_health_behavior_survey-boolfield_whether_the_bowel_movements_are_regular', '大便是否规律', 'boolean', None)\n('personal_health_behavior_survey-boolfield_whether_to_drink_alcohol', '是否饮酒', 'boolean', None)\n('personal_health_behavior_survey-boolfield_do_you_smoke', '是否吸烟', 'boolean', None)\n('personal_health_behavior_survey-boolfield_insomnia', '是否有失眠情况', 'boolean', None)\n('personal_health_behavior_survey-characterfield_average_sleep_duration', '平均睡眠时长', 'string', None)\n('personal_health_behavior_survey-characterfield_duration_of_insomnia', '持续失眠时间', 'string', None)\n('personal_health_behavior_survey-relatedfield_drinking_frequency', '饮酒频次', 'Frequency', 'dictionaries')\n('personal_health_behavior_survey-relatedfield_smoking_frequency', '吸烟频次', 'Frequency', 'dictionaries')\n('fundus_examination-relatedfield_fundus', '眼底', 'Normality', 'dictionaries')\n('dorsal_artery_pulsation_examination-relatedfield_left_foot', '左脚', 'Dorsal_artery_pulsation', 'dictionaries')\n('dorsal_artery_pulsation_examination-relatedfield_right_foot', '右脚', 'Dorsal_artery_pulsation', 'dictionaries')\n('basic_personal_information-boolfield_contract_signatory', '合同签约户', 'boolean', None)\n('basic_personal_information-characterfield_name', '姓名', 'string', None)\n('basic_personal_information-characterfield_identification_number', '身份证号码', 'string', None)\n('basic_personal_information-characterfield_resident_file_number', '居民档案号', 'string', None)\n('basic_personal_information-characterfield_family_address', '家庭地址', 'string', None)\n('basic_personal_information-characterfield_contact_number', '联系电话', 'string', None)\n('basic_personal_information-characterfield_medical_ic_card_number', '医疗ic卡号', 'string', None)\n('basic_personal_information-datetimefield_date_of_birth', '出生日期', 'datetime', None)\n('basic_personal_information-relatedfield_family_id', '家庭编号', 'Icpc1_register_logins', 'icpc')\n('basic_personal_information-relatedfield_gender', '性别', 'Gender', 'dictionaries')\n('basic_personal_information-relatedfield_nationality', '民族', 'Nationality', 'dictionaries')\n('basic_personal_information-relatedfield_marital_status', '婚姻状况', 'Marital_status', 'dictionaries')\n('basic_personal_information-relatedfield_education', '文化程度', 'Education', 'dictionaries')\n('basic_personal_information-relatedfield_occupational_status', '职业状况', 'Occupational_status', 'dictionaries')\n('basic_personal_information-relatedfield_medical_expenses_burden', '医疗费用负担', 'Medical_expenses_burden', 'dictionaries')\n('basic_personal_information-relatedfield_type_of_residence', '居住类型', 'Type_of_residence', 'dictionaries')\n('basic_personal_information-relatedfield_blood_type', '血型', 'Blood_type', 'dictionaries')\n('basic_personal_information-relatedfield_signed_family_doctor', '签约家庭医生', 'Staff', 'core')\n('basic_personal_information-relatedfield_family_relationship', '家庭成员关系', 'Family_relationship', 'dictionaries')\n('yong_yao_diao_cha_biao-characterfield_yong_yao_ji_liang', '用药剂量', 'string', None)\n('yong_yao_diao_cha_biao-relatedfield_drug_name', '药品名称', 'Medicine', 'core')\n('xue_ya_jian_ce_biao-numberfield_systolic_blood_pressure', '收缩压', 'number', None)\n('xue_ya_jian_ce_biao-numberfield_diastolic_blood_pressure', '舒张压', 'number', None)",
             "event_id": "e06695e4-9aa1-11ec-bde1-8a6e55faf877",
             "next": []
         }

@@ -9,7 +9,6 @@ class DicList(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="字典表名")
     label = models.CharField(max_length=100, verbose_name="字典名称")
     related_field = models.CharField(max_length=100, verbose_name="关联字段")
-    content = models.TextField(max_length=1024, null=True, blank=True, verbose_name="字典内容")
     pym = models.CharField(max_length=100, null=True, blank=True, verbose_name="拼音码")
     dic_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="字典ID")
 

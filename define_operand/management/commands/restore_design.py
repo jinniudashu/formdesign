@@ -65,9 +65,9 @@ class Command(BaseCommand):
                 entity=ManagedEntity.objects.create(**item)
 
                 # 修正管理实体表中ICPC实体的app_name
-                if entity.app_name=='define_icpc':
-                    entity.app_name='icpc'
-                    entity.save()
+                # if entity.app_name=='define_icpc':
+                #     entity.app_name='icpc'
+                #     entity.save()
 
             print('导入管理实体表完成')
 
