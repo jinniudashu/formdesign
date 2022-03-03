@@ -24,7 +24,7 @@ class Command(BaseCommand):
             # 导入角色表
             Role.objects.all().delete()
             for item in design_data['roles']:
-                print('Role:', item)
+                # print('Role:', item)
                 Role.objects.create(**item)
             print('导入角色表完成')
 
@@ -33,12 +33,12 @@ class Command(BaseCommand):
             DicDetail.objects.all().delete()
             DicList.objects.all().delete()
             for item in design_data['diclists']:
-                print('DicList:', item)
+                # print('DicList:', item)
                 DicList.objects.create(**item)
 
             # 导入DicDetail表
             for item in design_data['dicdetails']:
-                print('DicDetail:', item)
+                # print('DicDetail:', item)
                 diclist = DicList.objects.get(dic_id=item['diclist'])
                 if item['icpc']:
                     icpc = Icpc.objects.get(icpc_code=item['icpc'])
@@ -68,31 +68,6 @@ class Command(BaseCommand):
                 if entity.app_name=='define_icpc':
                     entity.app_name='icpc'
                     entity.save()
-
-            # 初始化管理实体表，自动插入RelateFieldModel表内容
-            # 创建ICPC类实体
-            # for icpc in icpc_list:
-            #     ManagedEntity.objects.create(
-            #         name=icpc['name'].lower(),
-            #         label=icpc['label'],
-            #         app_name='icpc',
-            #         model_name=icpc['name'],
-            #         display_field='iname',
-            #         related_field='icpc_code',
-            #     )
-
-            # # 创建管理实体
-            # entities_list = [
-            #     {'name': 'staff', 'label': '职员', 'app_name': 'core', 'model_name': 'Staff', 'display_field': 'name', 'related_field': 'staff_code'},
-            #     {'name': 'customer', 'label': '客户', 'app_name': 'core', 'model_name': 'Customer', 'display_field': 'name', 'related_field': 'customer_code'},
-            #     {'name': 'supplier', 'label': '供应商', 'app_name': 'core', 'model_name': 'Supplier', 'display_field': 'name', 'related_field': 'supplier_code'},
-            #     {'name': 'medicine', 'label': '药品', 'app_name': 'core', 'model_name': 'Medicine', 'display_field': 'name', 'related_field': 'medicine_code'},
-            #     {'name': 'device', 'label': '设备', 'app_name': 'core', 'model_name': 'Device', 'display_field': 'name', 'related_field': 'device_code'},
-            #     {'name': 'role', 'label': '角色', 'app_name': 'core', 'model_name': 'Role', 'display_field': 'name', 'related_field': 'role_code'},
-            #     {'name': 'institution', 'label': '机构', 'app_name': 'core', 'model_name': 'Institution', 'display_field': 'name', 'related_field': 'institution_code'},
-            # ]
-            # for entity in entities_list:
-            #     ManagedEntity.objects.create(**entity)
 
             print('导入管理实体表完成')
 
@@ -289,7 +264,7 @@ class Command(BaseCommand):
                     combineform_id=item['combineform_id'],
                 )
                 # 导入多对多字段forms
-                baseforms=BaseForm.objects.filter(name__in=item['forms'])
+                baseforms=BaseForm.objects.filter(baseform_id__in=item['forms'])
                 combineform.forms_new.set(baseforms)
 
             # 初始化生成所有组合表单（自动生成+导入）的meta_data
@@ -313,7 +288,7 @@ class Command(BaseCommand):
 
             # 导入作业表
             for item in design_data['operations']:
-                print('Operation:', item)
+                # print('Operation:', item)
                 if item['name_icpc']:
                     name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
                 else:
@@ -353,7 +328,7 @@ class Command(BaseCommand):
 
             # 导入单元服务表
             for item in design_data['services']:
-                print('Service:', item)
+                # print('Service:', item)
                 if item['name_icpc']:
                     name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
                 else:
@@ -397,7 +372,7 @@ class Command(BaseCommand):
             
             # 导入服务包表
             for item in design_data['service_packages']:
-                print('ServicePackage:', item)
+                # print('ServicePackage:', item)
                 if item['name_icpc']:
                     name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
                 else:
@@ -426,14 +401,14 @@ class Command(BaseCommand):
 
             # 导入指令表
             for item in design_data['instructions']:
-                print('Instruction:', item)
+                # print('Instruction:', item)
                 Instruction.objects.create(**item)
             
             print('导入指令表完成')
             
             # 导入事件表
             for item in design_data['events']:
-                print('Event:', item)
+                # print('Event:', item)
                 event = Event.objects.create(
                     name=item['name'],
                     label=item['label'],
