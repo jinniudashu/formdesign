@@ -35,7 +35,7 @@ class Role(models.Model):
         ordering = ['id']
 
 
-# 作业信息表
+# 作业基础信息表
 class Operation(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="作业名称")
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
@@ -50,6 +50,7 @@ class Operation(models.Model):
     execute_datetime = models.DateTimeField(blank=True, null=True, verbose_name='执行时间')
     priority = models.PositiveSmallIntegerField(choices=Operation_priority, default=3, verbose_name='优先级')
     group = models.ManyToManyField(Role, blank=True, verbose_name="作业角色")
+    enable_queue_counter = models.BooleanField(default=True, verbose_name='显示队列数量')
     suppliers = models.CharField(max_length=255, blank=True, null=True, verbose_name="供应商")
     not_suitable = models.CharField(max_length=255, blank=True, null=True, verbose_name='不适用对象')
     time_limits = models.DurationField(blank=True, null=True, verbose_name='完成时限')
@@ -97,6 +98,7 @@ class Service(models.Model):
     ]
     priority = models.PositiveSmallIntegerField(choices=Operation_priority, default=3, verbose_name='优先级')
     group = models.ManyToManyField(Role, blank=True, verbose_name="服务角色")
+    enable_queue_counter = models.BooleanField(default=True, verbose_name='显示队列数量')
     suppliers = models.CharField(max_length=255, blank=True, null=True, verbose_name="供应商")
     not_suitable = models.CharField(max_length=255, blank=True, null=True, verbose_name='不适用对象')
     time_limits = models.DurationField(blank=True, null=True, verbose_name='完成时限')
@@ -169,7 +171,8 @@ class Event(models.Model):
         2. 表达式接受的逻辑运算符：or, and, not, in, >=, <=, >, <, ==, +, -, *, /, ^, ()<br>
         3. 字段名只允许由小写字母a~z，数字0~9和下划线_组成；字段值接受数字和字符，字符需要放在双引号中，如"A0101"
         ''')
-    next = models.ManyToManyField(Operation, verbose_name="后续作业")
+    next = models.ManyToManyField(Operation, related_name='event_next', verbose_name="后续作业")
+    next_operations = models.ManyToManyField(Operation, through='EventRoute', verbose_name="后续作业")
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="事件描述")
     parameters = models.CharField(max_length=1024, blank=True, null=True, verbose_name="检查字段")
     fields = models.TextField(max_length=1024, blank=True, null=True, verbose_name="可用字段")
@@ -179,8 +182,8 @@ class Event(models.Model):
         return str(self.label)
 
     class Meta:
-        verbose_name = "规则"
-        verbose_name_plural = "规则"
+        verbose_name = "事件"
+        verbose_name_plural = "事件"
         ordering = ['id']
 
     def save(self, *args, **kwargs):
@@ -216,8 +219,55 @@ class Event(models.Model):
             if self.expression and self.expression != 'completed':
                 _form_fields = keyword_search(self.expression, field_names)
                 self.parameters = ', '.join(_form_fields)
-                # print('Parameters fields:', self.parameters)
 
+        super().save(*args, **kwargs)
+
+
+# 作业间隔规则表
+class OperandIntervalRule(models.Model):
+    label = models.CharField(max_length=255, verbose_name="规则名称")
+    name = models.CharField(max_length=255, unique=True, blank=True, null=True, verbose_name="name")
+    Interval_rule_options = [(0, '等于'), (1, '小于'), (2, '大于')]
+    rule = models.PositiveSmallIntegerField(choices=Interval_rule_options, blank=True, null=True, verbose_name='间隔规则')
+    interval = models.DurationField(blank=True, null=True, verbose_name="间隔时间", help_text='例如：3 days, 22:00:00')
+    description = models.TextField(max_length=255, blank=True, null=True, verbose_name="说明")
+    operand_interval_rule_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="间隔规则ID")
+
+    def __str__(self):
+        return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if self.operand_interval_rule_id is None:
+            self.operand_interval_rule_id = uuid.uuid1()
+        if self.name is None:
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "间隔规则"
+        verbose_name_plural = "间隔规则"
+        ordering = ['id']
+
+
+# 事件路由作业表
+class EventRoute(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, verbose_name="事件")
+    operation = models.ForeignKey(Operation, on_delete=models.CASCADE, verbose_name="作业")
+    is_specified = models.BooleanField(default=False, verbose_name="规定作业")  # 默认为：推荐作业
+    interval_rule = models.ForeignKey(OperandIntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="间隔规则")
+    event_route_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="事件路由ID")
+
+    def __str__(self):
+        return str(self.event) + '--' + str(self.operation)
+
+    class Meta:
+        verbose_name = "事件后续作业"
+        verbose_name_plural = "事件后续作业"
+        ordering = ['id']
+
+    def save(self, *args, **kwargs):
+        if self.event_route_id is None:
+            self.event_route_id = uuid.uuid1()
         super().save(*args, **kwargs)
 
 
@@ -297,7 +347,6 @@ class DesignBackup(models.Model):
 # ********************
 # 作业进程设置
 # ********************
-
 # 监视事件表Event变更，变更事件后续作业时，同步变更事件指令表Event_instructions的内容
 @receiver(m2m_changed, sender=Event.next.through)
 def event_m2m_changed_handler(sender, instance, action, **kwargs):
