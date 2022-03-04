@@ -284,7 +284,7 @@ class Command(BaseCommand):
 
             # 删除所有数据
             EventRoute.objects.all().delete()
-            # OperandIntervalRule.objects.all().delete()
+            OperandIntervalRule.objects.all().delete()
             ServicePackage.objects.all().delete()
             Service.objects.all().delete()
             Operation.objects.all().delete()
@@ -293,18 +293,18 @@ class Command(BaseCommand):
             Event_instructions.objects.all().delete()
 
 
-            # # 导入作业间隔规则表
-            # for item in design_data['operandintervalrules']:
-            #     interval = parse_timedelta(item['interval'])
-            #     OperandIntervalRule.objects.create(
-            #         name=item['name'],
-            #         label=item['label'],
-            #         rule=item['rule'],
-            #         interval=interval,
-            #         description=item['description'],
-            #         operand_interval_rule_id=item['operand_interval_rule_id'],
-            #     )
-            # print('导入作业间隔规则表完成')
+            # 导入作业间隔规则表
+            for item in design_data['operandintervalrules']:
+                interval = parse_timedelta(item['interval'])
+                OperandIntervalRule.objects.create(
+                    name=item['name'],
+                    label=item['label'],
+                    rule=item['rule'],
+                    interval=interval,
+                    description=item['description'],
+                    operand_interval_rule_id=item['operand_interval_rule_id'],
+                )
+            print('导入作业间隔规则表完成')
 
 
             # 导入作业表
@@ -449,11 +449,11 @@ class Command(BaseCommand):
 
                     # 写入EventRoute中间表
                     # event.next_operations.set(operations, through_defaults={'is_specified': True})
-                    for operation in operations:
-                        EventRoute.objects.create(
-                            event=event,
-                            operation=operation,
-                        )
+                    # for operation in operations:
+                    #     EventRoute.objects.create(
+                    #         event=event,
+                    #         operation=operation,
+                    #     )
 
                 # 写入Event.next_operations 多对多字段
                 # if item['next_operations']:
@@ -464,19 +464,19 @@ class Command(BaseCommand):
             print('导入事件表完成')
 
 
-            # # 导入事件路由表
-            # for item in design_data['eventroutes']:
-            #     if item['interval_rule']:
-            #         interval_rule=OperandIntervalRule.objects.get(operand_interval_rule_id=item['interval_rule'])
-            #     else:
-            #         interval_rule=None
-            #     EventRoute.objects.create(
-            #         event=Event.objects.get(event_id=item['event']),
-            #         operation=Operation.objects.get(operand_id=item['operation']),
-            #         is_specified=item['is_specified'],
-            #         interval_rule=interval_rule,
-            #         event_route_id=item['event_route_id'],
-            #     )
+            # 导入事件路由表
+            for item in design_data['eventroutes']:
+                if item['interval_rule']:
+                    interval_rule=OperandIntervalRule.objects.get(operand_interval_rule_id=item['interval_rule'])
+                else:
+                    interval_rule=None
+                EventRoute.objects.create(
+                    event=Event.objects.get(event_id=item['event']),
+                    operation=Operation.objects.get(operand_id=item['operation']),
+                    is_specified=item['is_specified'],
+                    interval_rule=interval_rule,
+                    event_route_id=item['event_route_id'],
+                )
 
 
         else:
