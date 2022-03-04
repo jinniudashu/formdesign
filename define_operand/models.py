@@ -1,6 +1,6 @@
 from django.db import models
 from django.dispatch import receiver
-from django.db.models.signals import post_delete, m2m_changed
+from django.db.models.signals import post_delete, m2m_changed, post_save
 import json
 import uuid
 from django.contrib.auth.models import Group
@@ -171,7 +171,6 @@ class Event(models.Model):
         2. 表达式接受的逻辑运算符：or, and, not, in, >=, <=, >, <, ==, +, -, *, /, ^, ()<br>
         3. 字段名只允许由小写字母a~z，数字0~9和下划线_组成；字段值接受数字和字符，字符需要放在双引号中，如"A0101"
         ''')
-    next = models.ManyToManyField(Operation, related_name='event_next', verbose_name="后续作业")
     next_operations = models.ManyToManyField(Operation, through='EventRoute', verbose_name="后续作业")
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="事件描述")
     parameters = models.CharField(max_length=1024, blank=True, null=True, verbose_name="检查字段")
@@ -252,7 +251,7 @@ class OperandIntervalRule(models.Model):
 # 事件路由作业表
 class EventRoute(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, verbose_name="事件")
-    operation = models.ForeignKey(Operation, on_delete=models.CASCADE, verbose_name="作业")
+    operation = models.ForeignKey(Operation, on_delete=models.CASCADE, verbose_name="后续作业")
     is_specified = models.BooleanField(default=False, verbose_name="规定作业")  # 默认为：推荐作业
     interval_rule = models.ForeignKey(OperandIntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="间隔规则")
     event_route_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="事件路由ID")
@@ -347,34 +346,18 @@ class DesignBackup(models.Model):
 # ********************
 # 作业进程设置
 # ********************
-# 监视事件表Event变更，变更事件后续作业时，同步变更事件指令表Event_instructions的内容
-@receiver(m2m_changed, sender=Event.next.through)
-def event_m2m_changed_handler(sender, instance, action, **kwargs):
-
-    # 设定指令为 create_operation_proc
-    instruction_create_operation_proc = Instruction.objects.get(name='create_operation_proc')
-
-    # 获取后续作业
-    next_operations = []
-    if action == 'post_add':
-        next_operations = instance.next.all()
-    elif action == 'post_remove':
-        next_operations = instance.next.all()
-    
-    # 删除原有事件指令
-    Event_instructions.objects.filter(event=instance).delete()
-
-    # 新增事件指令
-    for operation in next_operations:
+# 监视事件路由表EventRoute变更，变更事件后续作业时，同步变更事件指令表Event_instructions的内容
+@receiver(post_save, sender=EventRoute)
+def event_route_post_save_handler(sender, instance, created, **kwargs):
+    if created:
+        # 设定指令为 create_operation_proc
+        instruction_create_operation_proc = Instruction.objects.get(name='create_operation_proc')
         Event_instructions.objects.create(
-            event=instance,
+            event=instance.event,
             instruction=instruction_create_operation_proc,
-            order=1,
-            params=operation.name,    # 用后续作业name作为指令参数
+            params=instance.operation.name,    # 用后续作业name作为指令参数
         )
 
-
-# 监视事件表变更，管理员删除事件表Event时，同步删除事件指令表Event_instructions的内容
-@receiver(post_delete, sender=Event)
-def event_post_delete_handler(sender, instance, **kwargs):
-    Event_instructions.objects.filter(event=instance).delete()
+@receiver(post_delete, sender=EventRoute)
+def event_route_post_delete_handler(sender, instance, **kwargs):
+    Event_instructions.objects.filter(event=instance.event, params=instance.operation.name).delete()

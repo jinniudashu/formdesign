@@ -934,11 +934,6 @@ def design_backup(modeladmin, request, queryset):
     for item in Event.objects.all():
         model = model_to_dict(item)
         model['operation'] = item.operation.operand_id
-        if model['next']:
-            next_operations = []
-            for operation in item.next.all():
-                next_operations.append(operation.operand_id)
-            model['next'] = next_operations
         if model['next_operations']:
             next_operations = []
             for operation in item.next_operations.all():

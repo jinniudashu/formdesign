@@ -72,7 +72,7 @@ def get_service_packages(request):
 
 class EventSerializer(serializers.ModelSerializer):
     operation = OperationSerializer(read_only=True)
-    next = OperationSerializer(read_only=True, many=True)
+    next_operations = OperationSerializer(read_only=True, many=True)
     class Meta:
         model = Event
         fields = '__all__'

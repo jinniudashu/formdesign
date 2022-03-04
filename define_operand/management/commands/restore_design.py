@@ -431,7 +431,7 @@ class Command(BaseCommand):
             # 导入事件表
             for item in design_data['events']:
                 # print('Event:', item)
-                event = Event.objects.create(
+                Event.objects.create(
                     name=item['name'],
                     label=item['label'],
                     operation=Operation.objects.get(operand_id=item['operation']),
@@ -441,25 +441,6 @@ class Command(BaseCommand):
                     fields=item['fields'],
                     event_id=item['event_id'],
                 )
-
-                # 写入Event.next 多对多字段
-                if item['next']:
-                    operations = Operation.objects.filter(operand_id__in=item['next'])
-                    event.next.set(operations)
-
-                    # 写入EventRoute中间表
-                    # event.next_operations.set(operations, through_defaults={'is_specified': True})
-                    # for operation in operations:
-                    #     EventRoute.objects.create(
-                    #         event=event,
-                    #         operation=operation,
-                    #     )
-
-                # 写入Event.next_operations 多对多字段
-                # if item['next_operations']:
-                #     operations = Operation.objects.filter(operand_id__in=item['next_operations'])
-                #     event.next_operations.set(operations)
-
 
             print('导入事件表完成')
 
@@ -483,7 +464,7 @@ class Command(BaseCommand):
             print('Cancel restore design data...')
 
 
-
+# 转换string to timedelta
 def parse_timedelta(stamp):
     if 'day' in stamp:
         m = re.match(r'(?P<d>[-\d]+) day[s]*, (?P<h>\d+):'
