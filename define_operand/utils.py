@@ -948,13 +948,15 @@ def design_backup(modeladmin, request, queryset):
 
     for item in OperandIntervalRule.objects.all():
         model = model_to_dict(item)
+        model['interval'] = str(item.interval)
         design_data['operandintervalrules'].append(model)
 
     for item in EventRoute.objects.all():
         model = model_to_dict(item)
         model['event'] = item.event.event_id
         model['operation'] = item.operation.operand_id
-        model['interval_rule'] = item.interval_rule.operand_interval_rule_id
+        if item.interval_rule:
+            model['interval_rule'] = item.interval_rule.operand_interval_rule_id
         design_data['eventroutes'].append(model)
 
     # 写入数据库
