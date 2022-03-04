@@ -4,7 +4,7 @@ import json
 from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelatedField, Component, RelateFieldModel
 from define_dict.models import DicDetail, DicList, ManagedEntity
 from define_form.models import BaseModel, BaseForm, CombineForm
-from define_operand.models import ServicePackage, Service, Operation, Event, Instruction, Event_instructions, Role
+from define_operand.models import ServicePackage, Service, Operation, Event, EventRoute, OperandIntervalRule, Instruction, Event_instructions, Role
 from define_icpc.models import Icpc, icpc_list
 
 class Command(BaseCommand):
@@ -279,12 +279,22 @@ class Command(BaseCommand):
 
 
             # 删除所有数据
+            EventRoute.objects.all().delete()
+            # OperandIntervalRule.objects.all().delete()
             ServicePackage.objects.all().delete()
             Service.objects.all().delete()
             Operation.objects.all().delete()
             Instruction.objects.all().delete()
             Event.objects.all().delete()
             Event_instructions.objects.all().delete()
+
+
+            # # 导入作业间隔规则表
+            # for item in design_data['operandintervalrules']:
+            #     OperandIntervalRule.objects.create(**item)
+            
+            # print('导入作业间隔规则表完成')
+
 
             # 导入作业表
             for item in design_data['operations']:
@@ -405,7 +415,8 @@ class Command(BaseCommand):
                 Instruction.objects.create(**item)
             
             print('导入指令表完成')
-            
+
+
             # 导入事件表
             for item in design_data['events']:
                 # print('Event:', item)
@@ -424,8 +435,35 @@ class Command(BaseCommand):
                 if item['next']:
                     operations = Operation.objects.filter(operand_id__in=item['next'])
                     event.next.set(operations)
-            
+
+                    # 写入EventRoute中间表
+                    event.next_operations.set(operations)
+
+                    # for operation in operations:
+                    #     EventRoute.objects.create(
+                    #         event=event,
+                    #         operation=operation,
+                    #     )
+
+                # 写入Event.next_operations 多对多字段
+                # if item['next_operations']:
+                #     operations = Operation.objects.filter(operand_id__in=item['next_operations'])
+                #     event.next_operations.set(operations)
+
+
             print('导入事件表完成')
+
+
+            # 导入事件路由表
+            # for item in design_data['eventroutes']:
+            #     EventRoute.objects.create(
+            #         event=Event.objects.get(event_id=item['event']),
+            #         operation=Operation.objects.get(operand_id=item['operation']),
+            #         is_specified=item['is_specified'],
+            #         interval_rule=OperandIntervalRule.objects.get(operand_interval_rule_id=item['interval_rule'])
+            #         event_route_id=item['event_route_id'],
+            #     )
+
 
         else:
             print('Cancel restore design data...')

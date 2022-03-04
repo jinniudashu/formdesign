@@ -729,7 +729,7 @@ def {self.operand_name}_update(request, *args, **kwargs):
 from django.forms.models import model_to_dict
 from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelateFieldModel, RelatedField, Component
 from define_form.models import CombineForm
-from define_operand.models import Service, ServicePackage, Event, Instruction, Role, DesignBackup
+from define_operand.models import Service, ServicePackage, Event, EventRoute, OperandIntervalRule, Instruction, Role, DesignBackup
 from define_dict.models import ManagedEntity, DicDetail
 
 # 不备份再其他表新增内容时自动插入内容的表，RelateFieldModel
@@ -756,6 +756,8 @@ def design_backup(modeladmin, request, queryset):
         'service_packages': [],
         'instructions': [],
         'events': [],
+        'operandintervalrules': [],
+        'eventroutes': [],
     }
 
     for item in Role.objects.all():
@@ -937,8 +939,23 @@ def design_backup(modeladmin, request, queryset):
             for operation in item.next.all():
                 next_operations.append(operation.operand_id)
             model['next'] = next_operations
+        if model['next_operations']:
+            next_operations = []
+            for operation in item.next_operations.all():
+                next_operations.append(operation.operand_id)
+            model['next_operations'] = next_operations
         design_data['events'].append(model)
 
+    for item in OperandIntervalRule.objects.all():
+        model = model_to_dict(item)
+        design_data['operandintervalrules'].append(model)
+
+    for item in EventRoute.objects.all():
+        model = model_to_dict(item)
+        model['event'] = item.event.event_id
+        model['operation'] = item.operation.operand_id
+        model['interval_rule'] = item.interval_rule.operand_interval_rule_id
+        design_data['eventroutes'].append(model)
 
     # 写入数据库
     s = DesignBackup.objects.create(

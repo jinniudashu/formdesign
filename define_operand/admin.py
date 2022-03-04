@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Service, ServicePackage, Operation, Event, Instruction, Event_instructions, Role, SourceCode, DesignBackup
+from .models import Service, ServicePackage, Operation, Event, EventRoute, OperandIntervalRule, Instruction, Event_instructions, Role, SourceCode, DesignBackup
 from .utils import generate_source_code, design_backup
 
 
@@ -8,6 +8,7 @@ class EventInline(admin.TabularInline):
     model = Event
     extra = 0
 
+@admin.register(Operation)
 class OperationAdmin(admin.ModelAdmin):
     list_display = ['name_icpc', 'label', 'name', 'id']
     list_display_links = ['label', 'name',]
@@ -28,20 +29,31 @@ class OperationAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'operand_id']
     autocomplete_fields = ["name_icpc", ]
 
-admin.site.register(Operation, OperationAdmin)
 
+class EventRouteInline(admin.TabularInline):
+    model = Event.next_operations.through
+    exclude = ['event_route_id']
 
+@admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
 #     change_form_template = "core/templates/change_form.html"
     list_display = ['label', 'operation', 'name', 'id']
     list_display_links = ['label', 'name', 'operation',]
     search_fields = ['name', 'label']
     readonly_fields = ['fields', 'parameters', 'event_id']
+    inlines = [EventRouteInline]
     ordering = ['id']
 
-admin.site.register(Event, EventAdmin)
+
+# @admin.register(EventRoute)
+# class EventRouteAdmin(admin.ModelAdmin):
+#     list_display = ['event', 'operation', 'id']
+#     list_display_links = ['event', 'operation',]
+#     readonly_fields= ['event_route_id']
+#     ordering = ['id']
 
 
+@admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ['name_icpc', 'label', 'name', 'id']
     list_display_links = ['label', 'name',]
@@ -61,9 +73,8 @@ class ServiceAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'service_id']
     autocomplete_fields = ['name_icpc', ]
 
-admin.site.register(Service, ServiceAdmin)
 
-
+@admin.register(ServicePackage)
 class ServicePackageAdmin(admin.ModelAdmin):
     list_display = ['name_icpc', 'label', 'name_icpc', 'id']
     list_display_links = ['label', ]
@@ -71,9 +82,22 @@ class ServicePackageAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'service_package_id']
     ordering = ['id']
 
-admin.site.register(ServicePackage, ServicePackageAdmin)
+
+@admin.register(OperandIntervalRule)
+class OperandIntervalRuldAdmin(admin.ModelAdmin):
+    list_display = ['label', 'name', 'rule', 'interval', 'id']
+    list_display_links = ['label', 'name',]
+    fieldsets = (
+        (None, {
+            'fields': ('label', ('rule', 'interval'), 'description', ('name', 'operand_interval_rule_id'))
+        }),
+    )
+    search_fields = ['name', 'label']
+    readonly_fields = ['name', 'operand_interval_rule_id']
+    ordering = ['id']
 
 
+@admin.register(Role)
 class RoleAdmin(admin.ModelAdmin):
     list_display = ['label', 'id']
     list_display_links = ['label', ]
@@ -81,34 +105,28 @@ class RoleAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'role_id']
     ordering = ['id']
 
-admin.site.register(Role, RoleAdmin)
 
-
+@admin.register(DesignBackup)
 class DesignBackupAdmin(admin.ModelAdmin):
     actions = [design_backup]
 
-admin.site.register(DesignBackup, DesignBackupAdmin)
 
-
+@admin.register(SourceCode)
 class SourceCodeAdmin(admin.ModelAdmin):
     actions = [generate_source_code]
 
-admin.site.register(SourceCode, SourceCodeAdmin)
 
-
+# @admin.register(Event_instructions)
 # class Event_instructionsAdmin(admin.ModelAdmin):
 #     list_display = ['event', 'instruction', 'order', 'params', 'id']
 #     list_display_links = ['event', 'instruction', 'order', 'params']
 #     search_fields = ['event']
 #     ordering = ['id']
 
-# admin.site.register(Event_instructions, Event_instructionsAdmin)
 
-
+# @admin.register(Instruction)
 # class InstructionAdmin(admin.ModelAdmin):
 #     list_display = ['label', 'name', 'code', 'func', 'description', 'id']
 #     list_display_links = ['label', 'name', 'code', 'func']
 #     search_fields = ['name']
 #     ordering = ['id']
-
-# admin.site.register(Instruction, InstructionAdmin)
