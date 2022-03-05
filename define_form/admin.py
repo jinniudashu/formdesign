@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BaseModel, BaseForm, CombineForm
+from .models import BuessinessForm, EntityFormShip, BaseModel, BaseForm, CombineForm
 
 from time import time
 import json
@@ -31,19 +31,27 @@ def copy_form(modeladmin, request, queryset):
 copy_form.short_description = '生成查询视图副本'
 
 
+class EntityFormShipInline(admin.TabularInline):
+    model = BuessinessForm.managed_entity.through
+    exclude = ['entity_form_ship_id']
+
+@admin.register(BuessinessForm)
+class BuessinessFormAdmin(admin.ModelAdmin):
+    readonly_fields = ['name', 'buessiness_form_id']
+    autocomplete_fields = ['name_icpc',]
+    inlines = [EntityFormShipInline]
+
+@admin.register(BaseModel)
 class BaseModelAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'basemodel_id']
-    autocomplete_fields = ["name_icpc", ]
+    autocomplete_fields = ['name_icpc', ]
 
+@admin.register(BaseForm)
 class BaseFormAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'basemodel', 'meta_data', 'baseform_id']
     actions = [copy_form]
 
+@admin.register(CombineForm)
 class CombineFormAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'is_base', 'meta_data', 'combineform_id']
     autocomplete_fields = ["name_icpc", ]
-
-
-admin.site.register(BaseModel, BaseModelAdmin)
-admin.site.register(BaseForm, BaseFormAdmin)
-admin.site.register(CombineForm, CombineFormAdmin)

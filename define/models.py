@@ -260,6 +260,27 @@ class Component(models.Model):
         ordering = ['id']
 
 
+class ComponentsGroup(models.Model):
+    name = models.CharField(max_length=100, unique=True, null=True, blank=True, verbose_name="name")
+    label = models.CharField(max_length=100, null=True, blank=True, verbose_name="组件名称", )
+    components = models.ManyToManyField(Component, verbose_name="字段")
+    components_group_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="组件ID")
+
+    def __str__(self):
+        return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if self.components_group_id is None:
+            self.components_group_id = uuid.uuid1()
+        if self.name is None:
+            self.name = f'relatedfield_{"_".join(lazy_pinyin(self.label)).lower()}'
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "组件"
+        verbose_name_plural = "组件"
+
+
 # 如果保存字段表，则更新Component表
 @receiver(post_save, sender=BoolField, weak=True, dispatch_uid=None)
 @receiver(post_save, sender=CharacterField, weak=True, dispatch_uid=None)

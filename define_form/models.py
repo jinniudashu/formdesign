@@ -10,8 +10,60 @@ from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelatio
 from pypinyin import lazy_pinyin
 
 from define_icpc.models import Icpc
-from define.models import Component
+from define.models import Component, ComponentsGroup
 from define_dict.models import ManagedEntity
+
+
+# 业务表单定义
+class BuessinessForm(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name="name")
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
+    label = models.CharField(max_length=100, unique=True, verbose_name="表单名称")
+    description = models.TextField(max_length=255, null=True, blank=True, verbose_name="描述")
+    components = models.ManyToManyField(Component, blank=True, verbose_name="字段")
+    components_groups = models.ManyToManyField(ComponentsGroup, blank=True, verbose_name="组件")
+    managed_entity = models.ManyToManyField(ManagedEntity, through='EntityFormShip', null=True, blank=True, verbose_name="隶属实体")
+    # is_base_infomation = models.BooleanField(default=False, verbose_name="基本信息表")
+    meta_data = models.JSONField(null=True, blank=True, verbose_name="元数据")
+    buessiness_form_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="业务表单ID")
+
+    def __str__(self):
+        return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if self.buessiness_form_id is None:
+            self.buessiness_form_id = uuid.uuid1()
+        if self.name_icpc is not None:
+            self.name = self.name_icpc.icpc_code
+            self.label = self.name_icpc.iname
+        if self.name is None:
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = '业务表单'
+        verbose_name_plural = verbose_name
+
+
+# 实体和表单关系表
+class EntityFormShip(models.Model):
+    entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, verbose_name="隶属实体")
+    form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="业务表单")
+    is_base_infomation = models.BooleanField(default=False, verbose_name="基本信息表")
+    relation_field = models.ForeignKey(Component, on_delete=models.CASCADE, verbose_name="关联字段")
+    entity_form_ship_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="实体表单关系ID")
+
+    def __str__(self):
+        return str(self.entity) + '--' + str(self.form)
+
+    def save(self, *args, **kwargs):
+        if self.entity_form_ship_id is None:
+            self.entity_form_ship_id = uuid.uuid1()
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = '实体和表单关系'
+        verbose_name_plural = verbose_name
 
 
 # 基础表单定义
@@ -40,7 +92,7 @@ class BaseModel(models.Model):
 
     class Meta:
         verbose_name = "基础表单"
-        verbose_name_plural = "基础表单"
+        verbose_name_plural = verbose_name
         ordering = ['id']
 
 
@@ -68,7 +120,7 @@ class BaseForm(models.Model):
 
     class Meta:
         verbose_name = "基础视图"
-        verbose_name_plural = "基础视图"
+        verbose_name_plural = verbose_name
         ordering = ['id']
 
 
@@ -98,7 +150,7 @@ class CombineForm(models.Model):
 
     class Meta:
         verbose_name = "组合视图"
-        verbose_name_plural = "组合视图"
+        verbose_name_plural = verbose_name
         ordering = ['id']
 
 

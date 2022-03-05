@@ -1,6 +1,6 @@
 from django.db import models
 from django.dispatch import receiver
-from django.db.models.signals import post_delete, m2m_changed, post_save
+from django.db.models.signals import post_delete, post_save
 import json
 import uuid
 from django.contrib.auth.models import Group
@@ -31,7 +31,7 @@ class Role(models.Model):
 
     class Meta:
         verbose_name = "角色"
-        verbose_name_plural = "角色"
+        verbose_name_plural = verbose_name
         ordering = ['id']
 
 
@@ -78,7 +78,7 @@ class Operation(models.Model):
 
     class Meta:
         verbose_name = "作业"
-        verbose_name_plural = "作业"
+        verbose_name_plural = verbose_name
         ordering = ['id']
 
 
@@ -126,7 +126,7 @@ class Service(models.Model):
 
     class Meta:
         verbose_name = "单元服务"
-        verbose_name_plural = "单元服务"
+        verbose_name_plural = verbose_name
         ordering = ['id']
 
 
@@ -154,7 +154,7 @@ class ServicePackage(models.Model):
 
     class Meta:
         verbose_name = "服务包"
-        verbose_name_plural = "服务包"
+        verbose_name_plural = verbose_name
         ordering = ['id']
 
 
@@ -182,7 +182,7 @@ class Event(models.Model):
 
     class Meta:
         verbose_name = "事件"
-        verbose_name_plural = "事件"
+        verbose_name_plural = verbose_name
         ordering = ['id']
 
     def save(self, *args, **kwargs):
@@ -244,7 +244,7 @@ class OperandIntervalRule(models.Model):
 
     class Meta:
         verbose_name = "间隔规则"
-        verbose_name_plural = "间隔规则"
+        verbose_name_plural = verbose_name
         ordering = ['id']
 
 
@@ -261,7 +261,7 @@ class EventRoute(models.Model):
 
     class Meta:
         verbose_name = "事件后续作业"
-        verbose_name_plural = "事件后续作业"
+        verbose_name_plural = verbose_name
         ordering = ['id']
 
     def save(self, *args, **kwargs):
@@ -289,7 +289,7 @@ class Instruction(models.Model):
 
     class Meta:
         verbose_name = "指令"
-        verbose_name_plural = "指令"
+        verbose_name_plural = verbose_name
         ordering = ['id']
 
 
@@ -305,7 +305,7 @@ class Event_instructions(models.Model):
 
     class Meta:
         verbose_name = "事件指令集"
-        verbose_name_plural = "事件指令集"
+        verbose_name_plural = verbose_name
         ordering = ['event', 'order']
 
 
@@ -322,7 +322,7 @@ class SourceCode(models.Model):
 
     class Meta:
         verbose_name = "输出脚本"
-        verbose_name_plural = "输出脚本"
+        verbose_name_plural = verbose_name
         ordering = ['id']
 
 
@@ -339,7 +339,7 @@ class DesignBackup(models.Model):
 
     class Meta:
         verbose_name = "设计备份"
-        verbose_name_plural = "设计备份"
+        verbose_name_plural = verbose_name
         ordering = ['id']
 
 
