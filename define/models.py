@@ -3,7 +3,7 @@ from django.db.models import Q
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 import uuid
-from pypinyin import lazy_pinyin
+from pypinyin import Style, lazy_pinyin
 
 from django.dispatch import receiver
 from django.db.models.signals import post_save
@@ -67,7 +67,7 @@ class BoolField(models.Model):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'boolfield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -97,7 +97,7 @@ class CharacterField(models.Model):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'characterfield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -132,7 +132,7 @@ class NumberField(models.Model):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'numberfield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -161,7 +161,7 @@ class DTField(models.Model):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'datetimefield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -191,7 +191,7 @@ class ChoiceField(models.Model):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'choicefield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -219,7 +219,7 @@ class RelatedField(models.Model):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'relatedfield_{"_".join(lazy_pinyin(self.label)).lower()}'
         super().save(*args, **kwargs)
 
@@ -249,10 +249,16 @@ class Component(models.Model):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=q , null=True, blank=True)
     object_id = models.PositiveIntegerField(null=True, blank=True)
     content_object = GenericForeignKey('content_type', 'object_id')
+    pym = models.CharField(max_length=100, null=True, blank=True, verbose_name="拼音码")
     field_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="字段ID")
 
     def __str__(self):
         return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if self.label:
+            self.pym = ''.join(lazy_pinyin(self.label, style=Style.FIRST_LETTER))
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "表单字段汇总"
@@ -272,7 +278,7 @@ class ComponentsGroup(models.Model):
     def save(self, *args, **kwargs):
         if self.components_group_id is None:
             self.components_group_id = uuid.uuid1()
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'relatedfield_{"_".join(lazy_pinyin(self.label)).lower()}'
         super().save(*args, **kwargs)
 

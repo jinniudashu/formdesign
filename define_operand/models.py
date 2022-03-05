@@ -25,7 +25,7 @@ class Role(models.Model):
     def save(self, *args, **kwargs):
         if self.role_id is None:
             self.role_id = uuid.uuid1()
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -72,7 +72,7 @@ class Operation(models.Model):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -120,7 +120,7 @@ class Service(models.Model):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -148,7 +148,7 @@ class ServicePackage(models.Model):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -238,7 +238,7 @@ class OperandIntervalRule(models.Model):
     def save(self, *args, **kwargs):
         if self.operand_interval_rule_id is None:
             self.operand_interval_rule_id = uuid.uuid1()
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 

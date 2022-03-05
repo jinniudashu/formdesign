@@ -19,11 +19,10 @@ class BuessinessForm(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=100, unique=True, verbose_name="表单名称")
-    description = models.TextField(max_length=255, null=True, blank=True, verbose_name="描述")
     components = models.ManyToManyField(Component, blank=True, verbose_name="字段")
     components_groups = models.ManyToManyField(ComponentsGroup, blank=True, verbose_name="组件")
-    managed_entity = models.ManyToManyField(ManagedEntity, through='EntityFormShip', null=True, blank=True, verbose_name="隶属实体")
-    # is_base_infomation = models.BooleanField(default=False, verbose_name="基本信息表")
+    managed_entity = models.ManyToManyField(ManagedEntity, through='FormEntityShip', blank=True, verbose_name="隶属实体")
+    description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
     meta_data = models.JSONField(null=True, blank=True, verbose_name="元数据")
     buessiness_form_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="业务表单ID")
 
@@ -36,7 +35,7 @@ class BuessinessForm(models.Model):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -44,26 +43,85 @@ class BuessinessForm(models.Model):
         verbose_name = '业务表单'
         verbose_name_plural = verbose_name
 
+# @receiver(post_save, sender=BuessinessForm)
+# def buessinessform_post_save_handler(sender, instance, created, **kwargs):
+#     pass
 
-# 实体和表单关系表
-class EntityFormShip(models.Model):
+# 生成BuessinessForm的字段的meta_data
+def generate_components_meta_data(components):
+    fields = []
+    for component in components:
+        field = {}
+        field['name'] = component.name
+        field['label'] = component.label
+        field['field_id'] = component.field_id
+        _type = component.content_object._meta.object_name
+        if _type == 'CharacterField':
+            field['type'] = 'string'
+        elif _type == 'BoolField':
+            field['type'] = 'boolean'
+        elif _type == 'NumberField':
+            field['type'] = 'number'
+        elif _type == 'DTField':
+            field['type'] = 'datetime'
+        elif _type == 'RelatedField':
+            field['type'] = component.content_object.related_content.related_content  # 关联表的Model名称
+            hssc_app_label = component.content_object.related_content.content_type.model
+            if hssc_app_label == 'diclist':  # 字典表
+                hssc_app_label = 'dictionaries'  # 指向hssc.dictionaries
+            elif hssc_app_label == 'managedentity':  # 实体表
+                hssc_app_label = component.content_object.related_content.content_object.app_name  # 指向hssc.app_name
+            field['app_label'] = hssc_app_label
+        fields.append(field)
+    return fields
+
+# 生成BuessinessForm的meta_data
+def generate_buessiness_form_meta_data(instance):
+    meta_data = {}
+    meta_data['name'] = instance.name
+    meta_data['label'] = instance.label
+    meta_data['buessiness_form_id'] = str(instance.buessiness_form_id)
+
+    # 根据components重新生成字段记录
+    components = instance.components.all()
+    meta_data['fields'] = generate_components_meta_data(components)
+    # 根据components_groups重新生成字段记录
+    for components_group in instance.components_groups.all():
+        meta_data['fields'].extend(generate_components_meta_data(components_group.components.all()))
+
+    # 更新meta_data，类型为dict
+    instance.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
+    instance.save()
+
+@receiver(m2m_changed, sender=BuessinessForm.components.through)
+def buessinessform_components_m2m_changed_handler(sender, instance, action, **kwargs):
+    generate_buessiness_form_meta_data(instance)
+
+@receiver(m2m_changed, sender=BuessinessForm.components_groups.through)
+def buessinessform_components_groups_m2m_changed_handler(sender, instance, action, **kwargs):
+    generate_buessiness_form_meta_data(instance)
+
+
+# 表单和实体关系表
+class FormEntityShip(models.Model):
     entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, verbose_name="隶属实体")
     form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="业务表单")
-    is_base_infomation = models.BooleanField(default=False, verbose_name="基本信息表")
     relation_field = models.ForeignKey(Component, on_delete=models.CASCADE, verbose_name="关联字段")
-    entity_form_ship_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="实体表单关系ID")
+    is_base_infomation = models.BooleanField(default=False, verbose_name="基本信息表")
+    form_entity_ship_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="实体表单关系ID")
 
     def __str__(self):
         return str(self.entity) + '--' + str(self.form)
 
     def save(self, *args, **kwargs):
-        if self.entity_form_ship_id is None:
-            self.entity_form_ship_id = uuid.uuid1()
+        if self.form_entity_ship_id is None:
+            self.form_entity_ship_id = uuid.uuid1()
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name = '实体和表单关系'
+        verbose_name = '表单和实体关系'
         verbose_name_plural = verbose_name
+
 
 
 # 基础表单定义
@@ -86,7 +144,7 @@ class BaseModel(models.Model):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -114,7 +172,7 @@ class BaseForm(models.Model):
     def save(self, *args, **kwargs):
         if self.baseform_id is None:
             self.baseform_id = uuid.uuid1()
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -144,7 +202,7 @@ class CombineForm(models.Model):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
-        if self.name is None:
+        if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
@@ -173,54 +231,54 @@ def generate_combineform_meta_data(instance):
 
 @receiver(m2m_changed, sender=BaseForm.components.through)
 def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
-        # 根据新的components字段，更新meta_data字段
-        meta_data = {}
-        meta_data['name'] = instance.name
-        meta_data['label'] = instance.label
+    # 根据新的components字段，更新meta_data字段
+    meta_data = {}
+    meta_data['name'] = instance.name
+    meta_data['label'] = instance.label
 
-        # 根据components的变更生成字段记录
-        fields = []
-        for component in instance.components.all():
-            field = {}
-            field['name'] = component.name
-            field['label'] = component.label
-            field['field_id'] = component.field_id
-            _type = component.content_object._meta.object_name
-            if _type == 'CharacterField':
-                field['type'] = 'string'
-            elif _type == 'BoolField':
-                field['type'] = 'boolean'
-            elif _type == 'NumberField':
-                field['type'] = 'number'
-            elif _type == 'DTField':
-                field['type'] = 'datetime'
-            elif _type == 'RelatedField':
-                field['type'] = component.content_object.related_content.related_content  # 关联表的Model名称
-                hssc_app_label = component.content_object.related_content.content_type.model
-                if hssc_app_label == 'diclist':  # 字典表
-                    hssc_app_label = 'dictionaries'  # 指向hssc.dictionaries
-                elif hssc_app_label == 'managedentity':  # 实体表
-                    hssc_app_label = component.content_object.related_content.content_object.app_name  # 指向hssc.app_name
-                field['app_label'] = hssc_app_label
-            fields.append(field)
-        meta_data['fields'] = fields
+    # 根据components的变更生成字段记录
+    fields = []
+    for component in instance.components.all():
+        field = {}
+        field['name'] = component.name
+        field['label'] = component.label
+        field['field_id'] = component.field_id
+        _type = component.content_object._meta.object_name
+        if _type == 'CharacterField':
+            field['type'] = 'string'
+        elif _type == 'BoolField':
+            field['type'] = 'boolean'
+        elif _type == 'NumberField':
+            field['type'] = 'number'
+        elif _type == 'DTField':
+            field['type'] = 'datetime'
+        elif _type == 'RelatedField':
+            field['type'] = component.content_object.related_content.related_content  # 关联表的Model名称
+            hssc_app_label = component.content_object.related_content.content_type.model
+            if hssc_app_label == 'diclist':  # 字典表
+                hssc_app_label = 'dictionaries'  # 指向hssc.dictionaries
+            elif hssc_app_label == 'managedentity':  # 实体表
+                hssc_app_label = component.content_object.related_content.content_object.app_name  # 指向hssc.app_name
+            field['app_label'] = hssc_app_label
+        fields.append(field)
+    meta_data['fields'] = fields
 
-        if instance.is_inquiry:
-            meta_data['mutate_or_inquiry'] = 'inquiry'
-        else:
-            meta_data['mutate_or_inquiry'] = 'mutate'
-        
-        meta_data['style'] = instance.style
-        meta_data['basemodel'] = instance.basemodel.name
-        meta_data['baseform_id'] = str(instance.baseform_id)
+    if instance.is_inquiry:
+        meta_data['mutate_or_inquiry'] = 'inquiry'
+    else:
+        meta_data['mutate_or_inquiry'] = 'mutate'
+    
+    meta_data['style'] = instance.style
+    meta_data['basemodel'] = instance.basemodel.name
+    meta_data['baseform_id'] = str(instance.baseform_id)
 
-        # 更新meta_data，类型为dict
-        instance.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
-        instance.save()
+    # 更新meta_data，类型为dict
+    instance.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
+    instance.save()
 
-        # 更新相应CombineForm的meta_data字段
-        for combineform in instance.combineform_set.all():
-            generate_combineform_meta_data(combineform)
+    # 更新相应CombineForm的meta_data字段
+    for combineform in instance.combineform_set.all():
+        generate_combineform_meta_data(combineform)
 
 
 # 重新生成组合视图的meta_data
