@@ -309,40 +309,6 @@ class Event_instructions(models.Model):
         ordering = ['event', 'order']
 
 
-# 输出脚本
-class SourceCode(models.Model):
-    name = models.CharField(max_length=255, unique=True, verbose_name="版本")
-    label = models.CharField(max_length=255, verbose_name="版本名称", null=True, blank=True)
-    description = models.TextField(max_length=255, verbose_name="描述", null=True, blank=True)
-    code = models.TextField(verbose_name="源代码")
-    create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")  
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "输出脚本"
-        verbose_name_plural = verbose_name
-        ordering = ['id']
-
-
-# 设计数据备份
-class DesignBackup(models.Model):
-    name = models.CharField(max_length=255, unique=True, verbose_name="版本")
-    label = models.CharField(max_length=255, verbose_name="版本名称", null=True, blank=True)
-    description = models.TextField(max_length=255, verbose_name="描述", null=True, blank=True)
-    code = models.TextField(verbose_name="源代码")
-    create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")  
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "设计备份"
-        verbose_name_plural = verbose_name
-        ordering = ['id']
-
-
 # ********************
 # 作业进程设置
 # ********************

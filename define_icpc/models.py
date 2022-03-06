@@ -287,22 +287,6 @@ class Icpc10_test_results_and_statistics(models.Model):
         verbose_name_plural = "检查结果和统计"
 
 
-# 设计数据备份
-class IcpcBackup(models.Model):
-    name = models.CharField(max_length=255, unique=True, verbose_name="版本")
-    label = models.CharField(max_length=255, verbose_name="版本名称", null=True, blank=True)
-    description = models.TextField(max_length=255, verbose_name="描述", null=True, blank=True)
-    code = models.TextField(verbose_name="源代码")
-    create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")  
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "ICPC数据备份"
-        verbose_name_plural = "ICPC数据备份"
-        ordering = ['id']
-
 # ICPC总表
 class Icpc(models.Model):
     icpc_code = models.CharField(max_length=5, blank=True, null=True, verbose_name="icpc码")

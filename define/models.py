@@ -1,15 +1,13 @@
 from django.db import models
-from django.db.models import Q
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.db.models import Q
 import uuid
 from pypinyin import Style, lazy_pinyin
 
-from django.dispatch import receiver
-from django.db.models.signals import post_save
-
 from define_icpc.models import Icpc
-from define_dict.models import DicList, ManagedEntity
 
 
 # 关联字段基础表
@@ -20,7 +18,7 @@ class RelateFieldModel(models.Model):
     related_content = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联内容")
     display_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="显示字段")
     related_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联字段")
-    q = Q(app_label='define_dict' ) & (Q(model = 'diclist') | Q(model = 'managedentity')) | Q(app_label='define_icpc')
+    q = Q(app_label='define' ) & (Q(model = 'diclist') | Q(model = 'managedentity')) | Q(app_label='define_icpc')
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=q, null=True, blank=True, verbose_name="关联基本信息")
     object_id = models.PositiveIntegerField(null=True, blank=True)
     content_object = GenericForeignKey('content_type', 'object_id')
@@ -318,7 +316,77 @@ def fields_post_save_handler(sender, instance, created, **kwargs):
             content_type = content_type,
             object_id = instance.id,
         )
-        
+
+
+# 字典列表
+class DicList(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name="字典表名")
+    label = models.CharField(max_length=100, verbose_name="字典名称")
+    related_field = models.CharField(max_length=100, verbose_name="关联字段")
+    pym = models.CharField(max_length=100, null=True, blank=True, verbose_name="拼音码")
+    dic_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="字典ID")
+
+    def __str__(self):
+        return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if self.dic_id is None:
+            self.dic_id = uuid.uuid1()
+        if self.label:
+            self.pym = ''.join(lazy_pinyin(self.label, style=Style.FIRST_LETTER))
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "字典列表"
+        verbose_name_plural = "字典列表"
+
+# 字典明细
+class DicDetail(models.Model):
+    diclist = models.ForeignKey(DicList, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字典")
+    item = models.CharField(max_length=255, verbose_name="值")
+    icpc = models.ForeignKey(Icpc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="ICPC")
+    pym = models.CharField(max_length=255, blank=True, null=True, verbose_name="拼音码")
+    item_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="字典项目ID")
+
+    def __str__(self):
+        return self.item
+
+    def save(self, *args, **kwargs):
+        if self.item_id is None:
+            self.item_id = uuid.uuid1()
+        if self.item:
+            self.pym = ''.join(lazy_pinyin(self.item, style=Style.FIRST_LETTER))
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "字典明细"
+        verbose_name_plural = "字典明细"
+
+
+# 管理实体定义
+class ManagedEntity(models.Model):
+    name = models.CharField(max_length=100, unique=True, verbose_name="Entity name")
+    label = models.CharField(max_length=100, verbose_name="管理实体名称", null=True, blank=True)
+    model_key_field = models.ForeignKey(Component, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="基本信息表主键")
+    description = models.TextField(max_length=255, verbose_name="描述", null=True, blank=True)
+    app_name = models.CharField(max_length=100, verbose_name="实体app名", null=True, blank=True)
+    model_name = models.CharField(max_length=100, verbose_name="基本信息表", null=True, blank=True)
+    display_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="显示字段")
+    related_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联字段")
+    entity_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="实体ID")
+
+    def __str__(self):
+        return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if self.entity_id is None:
+            self.entity_id = uuid.uuid1()
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "管理实体清单"
+        verbose_name_plural = "管理实体清单"
+
 
 # Sync Create and update RelateFieldModel
 @receiver(post_save, sender=DicList, weak=True, dispatch_uid=None)
@@ -337,7 +405,7 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
         related_field=instance.related_field
         relate_field_model_id=instance.entity_id
 
-    content_type = ContentType.objects.get(app_label='define_dict', model=_model)
+    content_type = ContentType.objects.get(app_label='define', model=_model)
     print(sender, instance)
 
     if created:

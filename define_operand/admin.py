@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import Service, ServicePackage, Operation, Event, EventRoute, OperandIntervalRule, Instruction, Event_instructions, Role, SourceCode, DesignBackup
-from .utils import generate_source_code, design_backup
+from .models import Service, ServicePackage, Operation, Event, EventRoute, OperandIntervalRule, Instruction, Event_instructions, Role
 
 
 class EventInline(admin.TabularInline):
@@ -104,16 +103,6 @@ class RoleAdmin(admin.ModelAdmin):
     search_fields = ['label']
     readonly_fields = ['name', 'role_id']
     ordering = ['id']
-
-
-@admin.register(DesignBackup)
-class DesignBackupAdmin(admin.ModelAdmin):
-    actions = [design_backup]
-
-
-@admin.register(SourceCode)
-class SourceCodeAdmin(admin.ModelAdmin):
-    actions = [generate_source_code]
 
 
 # @admin.register(Event_instructions)

@@ -3470,6 +3470,21 @@
             "pym": "lbxzd"
         },
         {
+            "id": 1466,
+            "icpc_code": "D2806",
+            "icode": "D28",
+            "iname": "胃肠道的其他人工造口状态",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "wcddqtrgzkzt"
+        },
+        {
             "id": 1411,
             "icpc_code": "B2501",
             "icode": "B25",
@@ -4293,21 +4308,6 @@
             "icpc2": null,
             "note": "R19.0",
             "pym": "fbzz"
-        },
-        {
-            "id": 1466,
-            "icpc_code": "D2806",
-            "icode": "D28",
-            "iname": "胃肠道的其他人工造口状态",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "wcddqtrgzkzt"
         },
         {
             "id": 1467,
@@ -6140,6 +6140,21 @@
             "pym": "exzldwxys"
         },
         {
+            "id": 1699,
+            "icpc_code": "N1902",
+            "icode": "N19",
+            "iname": "言语障碍，不可归类在他处者",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "yyza，bkglztcz"
+        },
+        {
             "id": 1589,
             "icpc_code": "A2801",
             "icode": "A28",
@@ -6918,6 +6933,36 @@
             "icpc2": null,
             "note": "Z82.3,Z82.4,Z86.7",
             "pym": "xxgjbdwxys"
+        },
+        {
+            "id": 1700,
+            "icpc_code": "N2905",
+            "icode": "N29",
+            "iname": "手足搐搦",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "szcn"
+        },
+        {
+            "id": 1701,
+            "icpc_code": "P0806",
+            "icode": "P08",
+            "iname": "非器质性阴道痉挛",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "fqzxydjl"
         },
         {
             "id": 1641,
@@ -7788,51 +7833,6 @@
             "icpc2": null,
             "note": null,
             "pym": "zc，wtz"
-        },
-        {
-            "id": 1699,
-            "icpc_code": "N1902",
-            "icode": "N19",
-            "iname": "言语障碍，不可归类在他处者",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "yyza，bkglztcz"
-        },
-        {
-            "id": 1700,
-            "icpc_code": "N2905",
-            "icode": "N29",
-            "iname": "手足搐搦",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "szcn"
-        },
-        {
-            "id": 1701,
-            "icpc_code": "P0806",
-            "icode": "P08",
-            "iname": "非器质性阴道痉挛",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "fqzxydjl"
         },
         {
             "id": 1702,
@@ -9980,6 +9980,21 @@
             "pym": "wddyqdzcslfysp，wtz"
         },
         {
+            "id": 1994,
+            "icpc_code": "S1821",
+            "icode": "S18",
+            "iname": "小腿开放性伤口",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "xtkfxsk"
+        },
+        {
             "id": 1849,
             "icpc_code": "U0101",
             "icode": "U01",
@@ -11028,6 +11043,21 @@
             "icpc2": null,
             "note": null,
             "pym": "tnsjxjlza"
+        },
+        {
+            "id": 1995,
+            "icpc_code": "S1907",
+            "icode": "S19",
+            "iname": "胸部浅表损伤",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "xbqbss"
         },
         {
             "id": 1919,
@@ -12153,36 +12183,6 @@
             "icpc2": null,
             "note": null,
             "pym": "tbqtbwkfxsk"
-        },
-        {
-            "id": 1994,
-            "icpc_code": "S1821",
-            "icode": "S18",
-            "iname": "小腿开放性伤口",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "xtkfxsk"
-        },
-        {
-            "id": 1995,
-            "icpc_code": "S1907",
-            "icode": "S19",
-            "iname": "胸部浅表损伤",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "xbqbss"
         },
         {
             "id": 1996,
@@ -14075,6 +14075,21 @@
             "pym": "tdxpxza"
         },
         {
+            "id": 2194,
+            "icpc_code": "S1819",
+            "icode": "S18",
+            "iname": "腕和手开放性伤口",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "whskfxsk"
+        },
+        {
             "id": 2122,
             "icpc_code": "P2701",
             "icode": "P27",
@@ -15153,21 +15168,6 @@
             "icpc2": null,
             "note": null,
             "pym": "tbdckfxsk"
-        },
-        {
-            "id": 2194,
-            "icpc_code": "S1819",
-            "icode": "S18",
-            "iname": "腕和手开放性伤口",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "whskfxsk"
         },
         {
             "id": 2195,
@@ -16880,6 +16880,21 @@
             "pym": "bdxdyyzk"
         },
         {
+            "id": 2363,
+            "icpc_code": "Z0506",
+            "icode": "Z05",
+            "iname": "不合意的工作",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "bhydgz"
+        },
+        {
             "id": 2309,
             "icpc_code": "Z0507",
             "icode": "Z05",
@@ -17688,21 +17703,6 @@
             "icpc2": null,
             "note": null,
             "pym": "whsykn"
-        },
-        {
-            "id": 2363,
-            "icpc_code": "Z0506",
-            "icode": "Z05",
-            "iname": "不合意的工作",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "bhydgz"
         },
         {
             "id": 2364,
@@ -26064,6 +26064,21 @@
             "pym": "nxszqpz"
         },
         {
+            "id": 5028,
+            "icpc_code": "D8212",
+            "icode": "D82",
+            "iname": "埋伏牙",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "mfy"
+        },
+        {
             "id": 4607,
             "icpc_code": "T7301",
             "icode": "T73",
@@ -26707,6 +26722,21 @@
             "icpc2": null,
             "note": null,
             "pym": "mfnz"
+        },
+        {
+            "id": 4873,
+            "icpc_code": "F8135",
+            "icode": "F81",
+            "iname": "视盘先天性畸形",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "spxtxjx"
         },
         {
             "id": 4649,
@@ -28824,6 +28854,21 @@
             "pym": "yzd"
         },
         {
+            "id": 7715,
+            "icpc_code": "W9314",
+            "icode": "W93",
+            "iname": "急产",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "jc"
+        },
+        {
             "id": 4790,
             "icpc_code": "D8229",
             "icode": "D82",
@@ -30084,21 +30129,6 @@
             "pym": "whm"
         },
         {
-            "id": 4873,
-            "icpc_code": "F8135",
-            "icode": "F81",
-            "iname": "视盘先天性畸形",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "spxtxjx"
-        },
-        {
             "id": 4874,
             "icpc_code": "F8301",
             "icode": "F83",
@@ -31269,6 +31299,36 @@
             "pym": "szqthtxbx"
         },
         {
+            "id": 5026,
+            "icpc_code": "D8187",
+            "icode": "D81",
+            "iname": "肝的其他先天性畸形",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "gdqtxtxjx"
+        },
+        {
+            "id": 5027,
+            "icpc_code": "D8202",
+            "icode": "D82",
+            "iname": "无牙症",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "wyz"
+        },
+        {
             "id": 4952,
             "icpc_code": "H8601",
             "icode": "H86",
@@ -32377,51 +32437,6 @@
             "icpc2": null,
             "note": null,
             "pym": "xzqcl"
-        },
-        {
-            "id": 5026,
-            "icpc_code": "D8187",
-            "icode": "D81",
-            "iname": "肝的其他先天性畸形",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "gdqtxtxjx"
-        },
-        {
-            "id": 5027,
-            "icpc_code": "D8202",
-            "icode": "D82",
-            "iname": "无牙症",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "wyz"
-        },
-        {
-            "id": 5028,
-            "icpc_code": "D8212",
-            "icode": "D82",
-            "iname": "埋伏牙",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "mfy"
         },
         {
             "id": 5029,
@@ -36067,6 +36082,21 @@
             "icpc2": null,
             "note": null,
             "pym": "ykctshyw（cjx）cl"
+        },
+        {
+            "id": 8228,
+            "icpc_code": "A7833",
+            "icode": "A78",
+            "iname": "曲霉病",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "qmb"
         },
         {
             "id": 5272,
@@ -40284,6 +40314,21 @@
             "pym": "jxxnmxxjgs"
         },
         {
+            "id": 5610,
+            "icpc_code": "P7306",
+            "icode": "P73",
+            "iname": "持续性心境(情感)障碍",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "cxxxj(qg)za"
+        },
+        {
             "id": 5475,
             "icpc_code": "K7521",
             "icode": "K75",
@@ -41287,6 +41332,51 @@
             "icpc2": null,
             "note": null,
             "pym": "gxyxzhszb，tsby（cxx）xlsj"
+        },
+        {
+            "id": 5611,
+            "icpc_code": "P7405",
+            "icode": "P74",
+            "iname": "严重应激反应及适应障碍",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "yzyjfyjsyza"
+        },
+        {
+            "id": 5669,
+            "icpc_code": "R8126",
+            "icode": "R81",
+            "iname": "其他特指的传染性病原体引起的肺炎",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "qttzdcrxbytyqdfy"
+        },
+        {
+            "id": 5670,
+            "icpc_code": "R8305",
+            "icode": "R83",
+            "iname": "曲霉病",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "qmb"
         },
         {
             "id": 5539,
@@ -42309,36 +42399,6 @@
             "pym": "wtzdfqzxjsb"
         },
         {
-            "id": 5610,
-            "icpc_code": "P7306",
-            "icode": "P73",
-            "iname": "持续性心境(情感)障碍",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "cxxxj(qg)za"
-        },
-        {
-            "id": 5611,
-            "icpc_code": "P7405",
-            "icode": "P74",
-            "iname": "严重应激反应及适应障碍",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "yzyjfyjsyza"
-        },
-        {
             "id": 5612,
             "icpc_code": "P7601",
             "icode": "P76",
@@ -43224,10 +43284,10 @@
             "pym": "yyptqjyqdfy"
         },
         {
-            "id": 5669,
-            "icpc_code": "R8126",
-            "icode": "R81",
-            "iname": "其他特指的传染性病原体引起的肺炎",
+            "id": 5990,
+            "icpc_code": "L7004",
+            "icode": "L70",
+            "iname": "椎间盘感染（脓性）",
             "iename": null,
             "include": null,
             "criteria": null,
@@ -43236,22 +43296,7 @@
             "icd10": null,
             "icpc2": null,
             "note": null,
-            "pym": "qttzdcrxbytyqdfy"
-        },
-        {
-            "id": 5670,
-            "icpc_code": "R8305",
-            "icode": "R83",
-            "iname": "曲霉病",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "qmb"
+            "pym": "cjpgr（nx）"
         },
         {
             "id": 5671,
@@ -46029,6 +46074,66 @@
             "pym": "ghs，wtz"
         },
         {
+            "id": 5991,
+            "icpc_code": "L7008",
+            "icode": "L70",
+            "iname": "腱鞘脓肿",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "jqnz"
+        },
+        {
+            "id": 5992,
+            "icpc_code": "L7006",
+            "icode": "L70",
+            "iname": "其他感染性脊椎病",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "qtgrxjzb"
+        },
+        {
+            "id": 5993,
+            "icpc_code": "L7005",
+            "icode": "L70",
+            "iname": "关节盘炎，未特指",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "gjpy，wtz"
+        },
+        {
+            "id": 5994,
+            "icpc_code": "L7007",
+            "icode": "L70",
+            "iname": "感染性肌炎",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "grxjy"
+        },
+        {
             "id": 5925,
             "icpc_code": "S8801",
             "icode": "S88",
@@ -47002,81 +47107,6 @@
             "icpc2": null,
             "note": null,
             "pym": "cggsy"
-        },
-        {
-            "id": 5990,
-            "icpc_code": "L7004",
-            "icode": "L70",
-            "iname": "椎间盘感染（脓性）",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "cjpgr（nx）"
-        },
-        {
-            "id": 5991,
-            "icpc_code": "L7008",
-            "icode": "L70",
-            "iname": "腱鞘脓肿",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "jqnz"
-        },
-        {
-            "id": 5992,
-            "icpc_code": "L7006",
-            "icode": "L70",
-            "iname": "其他感染性脊椎病",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "qtgrxjzb"
-        },
-        {
-            "id": 5993,
-            "icpc_code": "L7005",
-            "icode": "L70",
-            "iname": "关节盘炎，未特指",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "gjpy，wtz"
-        },
-        {
-            "id": 5994,
-            "icpc_code": "L7007",
-            "icode": "L70",
-            "iname": "感染性肌炎",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "grxjy"
         },
         {
             "id": 5995,
@@ -52764,6 +52794,21 @@
             "pym": "qtjzgjqy"
         },
         {
+            "id": 6588,
+            "icpc_code": "L9993",
+            "icode": "L99",
+            "iname": "关节固定术状态",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "gjgdszt"
+        },
+        {
             "id": 6374,
             "icpc_code": "L8501",
             "icode": "L85",
@@ -54999,6 +55044,51 @@
             "pym": "wgjzwy"
         },
         {
+            "id": 6589,
+            "icpc_code": "N7106",
+            "icode": "N71",
+            "iname": "蜱媒介的病毒性脑炎",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "pmjdbdxny"
+        },
+        {
+            "id": 6590,
+            "icpc_code": "N7116",
+            "icode": "N71",
+            "iname": "病毒性脑炎后遗症",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "bdxnyhyz"
+        },
+        {
+            "id": 6591,
+            "icpc_code": "N7126",
+            "icode": "N71",
+            "iname": "热带痉挛性截瘫",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "rdjlxjt"
+        },
+        {
             "id": 6523,
             "icpc_code": "L9001",
             "icode": "L90",
@@ -55989,66 +56079,6 @@
             "pym": "gzrj"
         },
         {
-            "id": 6588,
-            "icpc_code": "L9993",
-            "icode": "L99",
-            "iname": "关节固定术状态",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "gjgdszt"
-        },
-        {
-            "id": 6589,
-            "icpc_code": "N7106",
-            "icode": "N71",
-            "iname": "蜱媒介的病毒性脑炎",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "pmjdbdxny"
-        },
-        {
-            "id": 6590,
-            "icpc_code": "N7116",
-            "icode": "N71",
-            "iname": "病毒性脑炎后遗症",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "bdxnyhyz"
-        },
-        {
-            "id": 6591,
-            "icpc_code": "N7126",
-            "icode": "N71",
-            "iname": "热带痉挛性截瘫",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "rdjlxjt"
-        },
-        {
             "id": 6592,
             "icpc_code": "N7303",
             "icode": "N73",
@@ -56977,6 +57007,21 @@
             "icpc2": null,
             "note": null,
             "pym": "yymxblyfdlfsxyqdqtpfgb"
+        },
+        {
+            "id": 6891,
+            "icpc_code": "S99B9",
+            "icode": "S99",
+            "iname": "其他局限于皮肤的脉管炎",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "qtjxypfdmgy"
         },
         {
             "id": 6650,
@@ -59227,21 +59272,6 @@
             "icpc2": null,
             "note": null,
             "pym": "jxxypb[ybb]"
-        },
-        {
-            "id": 6891,
-            "icpc_code": "S99B9",
-            "icode": "S99",
-            "iname": "其他局限于皮肤的脉管炎",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "qtjxypfdmgy"
         },
         {
             "id": 6892,
@@ -62709,6 +62739,21 @@
             "pym": "yyywhqtwyxwzyqdjzxgnjtz"
         },
         {
+            "id": 7195,
+            "icpc_code": "T99B8",
+            "icode": "T99",
+            "iname": "其他特指的氨基酸代谢紊乱",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "qttzdajsdxwl"
+        },
+        {
             "id": 7123,
             "icpc_code": "T9001",
             "icode": "T90",
@@ -63787,21 +63832,6 @@
             "icpc2": null,
             "note": null,
             "pym": "qtajsdxwl"
-        },
-        {
-            "id": 7195,
-            "icpc_code": "T99B8",
-            "icode": "T99",
-            "iname": "其他特指的氨基酸代谢紊乱",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "qttzdajsdxwl"
         },
         {
             "id": 7196,
@@ -68319,6 +68349,21 @@
             "pym": "qtdxwl"
         },
         {
+            "id": 7572,
+            "icpc_code": "U9946",
+            "icode": "U99",
+            "iname": "泌尿系统疾患，未特指",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "mnxtjh，wtz"
+        },
+        {
             "id": 7497,
             "icpc_code": "U7008",
             "icode": "U70",
@@ -69442,21 +69487,6 @@
             "icpc2": null,
             "note": null,
             "pym": "qtndxz"
-        },
-        {
-            "id": 7572,
-            "icpc_code": "U9946",
-            "icode": "U99",
-            "iname": "泌尿系统疾患，未特指",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "mnxtjh，wtz"
         },
         {
             "id": 7573,
@@ -71602,21 +71632,6 @@
             "icpc2": null,
             "note": null,
             "pym": "tpdgzfl[tpzqtl]"
-        },
-        {
-            "id": 7715,
-            "icpc_code": "W9314",
-            "icode": "W93",
-            "iname": "急产",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "jc"
         },
         {
             "id": 7716,
@@ -73899,6 +73914,21 @@
             "pym": "wteqytpjydycfyl"
         },
         {
+            "id": 8011,
+            "icpc_code": "W9351",
+            "icode": "W93",
+            "iname": "其他分娩期内出血",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "qtfmqncx"
+        },
+        {
             "id": 7869,
             "icpc_code": "W8476",
             "icode": "W84",
@@ -74964,6 +74994,51 @@
             "pym": "dtfm，jwsc"
         },
         {
+            "id": 8012,
+            "icpc_code": "W9362",
+            "icode": "W93",
+            "iname": "产程和分娩并发脐带绕颈并伴有受压",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "cchfmbfqdrjbbysy"
+        },
+        {
+            "id": 8013,
+            "icpc_code": "W9372",
+            "icode": "W93",
+            "iname": "分娩时Ⅲ度会阴裂伤",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "fmsⅢdhyls"
+        },
+        {
+            "id": 8014,
+            "icpc_code": "W9381",
+            "icode": "W93",
+            "iname": "伤及盆腔器官的其他产科损伤",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "sjpqqgdqtckss"
+        },
+        {
             "id": 7940,
             "icpc_code": "W9301",
             "icode": "W93",
@@ -76027,66 +76102,6 @@
             "icpc2": null,
             "note": null,
             "pym": "yymtgpycyqdgzxfm，wtz"
-        },
-        {
-            "id": 8011,
-            "icpc_code": "W9351",
-            "icode": "W93",
-            "iname": "其他分娩期内出血",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "qtfmqncx"
-        },
-        {
-            "id": 8012,
-            "icpc_code": "W9362",
-            "icode": "W93",
-            "iname": "产程和分娩并发脐带绕颈并伴有受压",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "cchfmbfqdrjbbysy"
-        },
-        {
-            "id": 8013,
-            "icpc_code": "W9372",
-            "icode": "W93",
-            "iname": "分娩时Ⅲ度会阴裂伤",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "fmsⅢdhyls"
-        },
-        {
-            "id": 8014,
-            "icpc_code": "W9381",
-            "icode": "W93",
-            "iname": "伤及盆腔器官的其他产科损伤",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "sjpqqgdqtckss"
         },
         {
             "id": 8015,
@@ -79282,21 +79297,6 @@
             "icpc2": null,
             "note": null,
             "pym": "lqbzjb"
-        },
-        {
-            "id": 8228,
-            "icpc_code": "A7833",
-            "icode": "A78",
-            "iname": "曲霉病",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "qmb"
         },
         {
             "id": 8229,
@@ -87999,6 +87999,21 @@
             "pym": "jcjdkydsh"
         },
         {
+            "id": 8887,
+            "icpc_code": "D9716",
+            "icode": "D97",
+            "iname": "中毒性肝病,伴有慢性迁延性肝炎",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "zdxgb,bymxqyxgy"
+        },
+        {
             "id": 8807,
             "icpc_code": "D7601",
             "icode": "D76",
@@ -89184,10 +89199,10 @@
             "pym": "jjxzfg"
         },
         {
-            "id": 8887,
-            "icpc_code": "D9716",
-            "icode": "D97",
-            "iname": "中毒性肝病,伴有慢性迁延性肝炎",
+            "id": 8963,
+            "icpc_code": "D7050",
+            "icode": "D70",
+            "iname": "阿米巴肺脓肿（J99.8*)",
             "iename": null,
             "include": null,
             "criteria": null,
@@ -89196,7 +89211,7 @@
             "icd10": null,
             "icpc2": null,
             "note": null,
-            "pym": "zdxgb,bymxqyxgy"
+            "pym": "ambfnz（J99.8*)"
         },
         {
             "id": 8888,
@@ -90307,21 +90322,6 @@
             "icpc2": null,
             "note": null,
             "pym": "swmjdfrxxhjswzd"
-        },
-        {
-            "id": 8963,
-            "icpc_code": "D7050",
-            "icode": "D70",
-            "iname": "阿米巴肺脓肿（J99.8*)",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "ambfnz（J99.8*)"
         },
         {
             "id": 8964,

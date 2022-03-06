@@ -4,7 +4,7 @@ from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import IcpcBackup, Icpc1_register_logins, Icpc2_reservation_investigations, Icpc3_symptoms_and_problems, Icpc4_physical_examination_and_tests, Icpc5_evaluation_and_diagnoses, Icpc6_prescribe_medicines, Icpc7_treatments, Icpc8_other_health_interventions, Icpc9_referral_consultations, Icpc10_test_results_and_statistics
+from .models import Icpc1_register_logins, Icpc2_reservation_investigations, Icpc3_symptoms_and_problems, Icpc4_physical_examination_and_tests, Icpc5_evaluation_and_diagnoses, Icpc6_prescribe_medicines, Icpc7_treatments, Icpc8_other_health_interventions, Icpc9_referral_consultations, Icpc10_test_results_and_statistics
 
 class Icpc1_register_loginsSerializer(serializers.ModelSerializer):
     class Meta:
@@ -123,16 +123,4 @@ class Icpc10_test_results_and_statisticsSerializer(serializers.ModelSerializer):
 def get_icpc10_test_results_and_statistics(request):
     icpc10_test_results_and_statistics = Icpc10_test_results_and_statistics.objects.all()
     serializer = Icpc10_test_results_and_statisticsSerializer(icpc10_test_results_and_statistics, many=True)
-    return Response(serializer.data)
-
-
-class IcpcBackupSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = IcpcBackup
-        fields = '__all__'
-
-@api_view(['GET'])
-def get_icpc_backup(request):
-    icpc_backup = [IcpcBackup.objects.last()]
-    serializer = IcpcBackupSerializer(icpc_backup, many=True)
     return Response(serializer.data)

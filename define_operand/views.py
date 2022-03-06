@@ -4,7 +4,7 @@ from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Role, Operation, Service, ServicePackage, Event, Instruction, Event_instructions, SourceCode, DesignBackup
+from .models import Role, Operation, Service, ServicePackage, Event, Instruction, Event_instructions
 
 
 class RoleSerializer(serializers.ModelSerializer):
@@ -107,28 +107,4 @@ class Event_instructionsSerializer(serializers.ModelSerializer):
 def get_event_instructions(request):
     event_instructions = Event_instructions.objects.all()
     serializer = Event_instructionsSerializer(event_instructions, many=True)
-    return Response(serializer.data)
-
-
-class SourceCodeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SourceCode
-        fields = '__all__'
-
-@api_view(['GET'])
-def source_codes_list(request):
-    source_codes = [SourceCode.objects.last()]
-    serializer = SourceCodeSerializer(source_codes, many=True)
-    return Response(serializer.data)
-
-
-class DesignBackupSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DesignBackup
-        fields = '__all__'
-
-@api_view(['GET'])
-def design_backup(request):
-    design_backups = [DesignBackup.objects.last()]
-    serializer = DesignBackupSerializer(design_backups, many=True)
     return Response(serializer.data)

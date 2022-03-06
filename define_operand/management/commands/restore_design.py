@@ -1,8 +1,7 @@
 from django.core.management import BaseCommand
 import json
 
-from define.models import BoolField, CharacterField, NumberField, DTField, ChoiceField, RelatedField, Component, RelateFieldModel
-from define_dict.models import DicDetail, DicList, ManagedEntity
+from define.models import *
 from define_form.models import BaseModel, BaseForm, CombineForm
 from define_operand.models import ServicePackage, Service, Operation, Event, EventRoute, OperandIntervalRule, Instruction, Event_instructions, Role
 from define_icpc.models import Icpc, icpc_list

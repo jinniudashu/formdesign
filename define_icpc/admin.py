@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from .models import IcpcBackup, Icpc, Icpc1_register_logins, Icpc2_reservation_investigations, Icpc3_symptoms_and_problems, Icpc4_physical_examination_and_tests, Icpc5_evaluation_and_diagnoses, Icpc6_prescribe_medicines, Icpc7_treatments, Icpc8_other_health_interventions, Icpc9_referral_consultations, Icpc10_test_results_and_statistics
-from .utils import icpc_backup
+from .models import Icpc, Icpc1_register_logins, Icpc2_reservation_investigations, Icpc3_symptoms_and_problems, Icpc4_physical_examination_and_tests, Icpc5_evaluation_and_diagnoses, Icpc6_prescribe_medicines, Icpc7_treatments, Icpc8_other_health_interventions, Icpc9_referral_consultations, Icpc10_test_results_and_statistics
 
 class Icpc1_register_loginsAdmin(admin.ModelAdmin):
 	list_display = [field.name for field in Icpc1_register_logins._meta.fields]
@@ -68,7 +67,3 @@ class IcpcAdmin(admin.ModelAdmin):
 	search_fields=["iname", "pym", "icpc_code"]
 	ordering = ["icpc_code"]
 admin.site.register(Icpc, IcpcAdmin)
-
-class IcpcBackupAdmin(admin.ModelAdmin):
-	actions = [icpc_backup]
-admin.site.register(IcpcBackup, IcpcBackupAdmin)

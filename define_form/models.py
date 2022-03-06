@@ -1,17 +1,15 @@
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_save, m2m_changed
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.db.models import Q
 import json
 import uuid
-from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
-
 from pypinyin import lazy_pinyin
 
+from define.models import Component, ComponentsGroup, ManagedEntity
 from define_icpc.models import Icpc
-from define.models import Component, ComponentsGroup
-from define_dict.models import ManagedEntity
 
 
 # 业务表单定义
@@ -107,7 +105,6 @@ def buessiness_form_components_groups_changed_handler(sender, instance, action, 
 class FormEntityShip(models.Model):
     entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, verbose_name="隶属实体")
     form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="业务表单")
-    relation_field = models.ForeignKey(Component, on_delete=models.CASCADE, verbose_name="关联字段")
     is_base_infomation = models.BooleanField(default=False, verbose_name="基本信息表")
     form_entity_ship_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="实体表单关系ID")
 

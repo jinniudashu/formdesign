@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import get_roles, get_operations, get_service_packages, get_services, get_events, get_instructions, get_event_instructions, source_codes_list, design_backup
+from .views import get_roles, get_operations, get_service_packages, get_services, get_events, get_instructions, get_event_instructions
 
 urlpatterns = [
     path('get_roles/', get_roles, name='get_roles'),
@@ -9,6 +9,4 @@ urlpatterns = [
     path('get_events/', get_events, name='get_events'),
     path('get_instructions/', get_instructions, name='get_instructions'),
     path('get_event_instructions/', get_event_instructions, name='get_event_instructions'),
-    path('source_codes_list/', source_codes_list, name='source_codes_list'),
-    path('design_backup/', design_backup, name='design_backup'),
 ]

@@ -3,9 +3,10 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('define_dict/', include('define_dict.urls')),
+    path('define/', include('define.urls')),
     path('define_icpc/', include('define_icpc.urls')),
     path('define_operand/', include('define_operand.urls')),
+    path('define_backup/', include('define_backup.urls')),
 ]
 
 admin.site.site_header = '智益医养服务供应链管理系统'
