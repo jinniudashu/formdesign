@@ -37,69 +37,70 @@ class BuessinessForm(models.Model):
             self.label = self.name_icpc.iname
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
+
+        # 生成meta_data
+        if self.meta_data:
+            meta_data = json.loads(self.meta_data)
+        else:
+            meta_data = {}
+        meta_data['name'] = self.name
+        meta_data['label'] = self.label
+        meta_data['buessiness_form_id'] = str(self.buessiness_form_id)
+        # 更新meta_data，类型为dict
+        self.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
+
         super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = '业务表单'
         verbose_name_plural = verbose_name
 
-# @receiver(post_save, sender=BuessinessForm)
-# def buessinessform_post_save_handler(sender, instance, created, **kwargs):
-#     pass
+    # 生成BuessinessForm的meta_data
+    def generate_meta_data(self):
+        meta_data = json.loads(self.meta_data)
+        meta_data['fields'] = self.generate_components_meta_data(self.components.all())  # 根据components重新生成字段记录
+        for components_group in self.components_groups.all():  # 根据components_groups重新生成字段记录
+            meta_data['fields'].extend(self.generate_components_meta_data(components_group.components.all()))
+        self.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
+        self.save()
 
-# 生成BuessinessForm的字段的meta_data
-def generate_components_meta_data(components):
-    fields = []
-    for component in components:
-        field = {}
-        field['name'] = component.name
-        field['label'] = component.label
-        field['field_id'] = component.field_id
-        _type = component.content_object._meta.object_name
-        if _type == 'CharacterField':
-            field['type'] = 'string'
-        elif _type == 'BoolField':
-            field['type'] = 'boolean'
-        elif _type == 'NumberField':
-            field['type'] = 'number'
-        elif _type == 'DTField':
-            field['type'] = 'datetime'
-        elif _type == 'RelatedField':
-            field['type'] = component.content_object.related_content.related_content  # 关联表的Model名称
-            hssc_app_label = component.content_object.related_content.content_type.model
-            if hssc_app_label == 'diclist':  # 字典表
-                hssc_app_label = 'dictionaries'  # 指向hssc.dictionaries
-            elif hssc_app_label == 'managedentity':  # 实体表
-                hssc_app_label = component.content_object.related_content.content_object.app_name  # 指向hssc.app_name
-            field['app_label'] = hssc_app_label
-        fields.append(field)
-    return fields
+    # 生成BuessinessForm的字段的meta_data
+    def generate_components_meta_data(self, components):
+        fields = []
+        for component in components:
+            field = {}
+            field['name'] = component.name
+            field['label'] = component.label
+            field['field_id'] = component.field_id
+            _type = component.content_object._meta.object_name
+            if _type == 'CharacterField':
+                field['type'] = 'string'
+            elif _type == 'BoolField':
+                field['type'] = 'boolean'
+            elif _type == 'NumberField':
+                field['type'] = 'number'
+            elif _type == 'DTField':
+                field['type'] = 'datetime'
+            elif _type == 'RelatedField':
+                field['type'] = component.content_object.related_content.related_content  # 关联表的Model名称
+                hssc_app_label = component.content_object.related_content.content_type.model
+                if hssc_app_label == 'diclist':  # 字典表
+                    hssc_app_label = 'dictionaries'  # 指向hssc.dictionaries
+                elif hssc_app_label == 'managedentity':  # 实体表
+                    hssc_app_label = component.content_object.related_content.content_object.app_name  # 指向hssc.app_name
+                field['app_label'] = hssc_app_label
+            fields.append(field)
+        return fields
 
-# 生成BuessinessForm的meta_data
-def generate_buessiness_form_meta_data(instance):
-    meta_data = {}
-    meta_data['name'] = instance.name
-    meta_data['label'] = instance.label
-    meta_data['buessiness_form_id'] = str(instance.buessiness_form_id)
-
-    # 根据components重新生成字段记录
-    components = instance.components.all()
-    meta_data['fields'] = generate_components_meta_data(components)
-    # 根据components_groups重新生成字段记录
-    for components_group in instance.components_groups.all():
-        meta_data['fields'].extend(generate_components_meta_data(components_group.components.all()))
-
-    # 更新meta_data，类型为dict
-    instance.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
-    instance.save()
-
+# 重新生成字段的meta_data
 @receiver(m2m_changed, sender=BuessinessForm.components.through)
-def buessinessform_components_m2m_changed_handler(sender, instance, action, **kwargs):
-    generate_buessiness_form_meta_data(instance)
+def buessiness_form_components_changed_handler(sender, instance, action, reverse, model, pk_set, **kwargs):
+    instance.generate_meta_data()
 
+# 重新生成字段的meta_data
 @receiver(m2m_changed, sender=BuessinessForm.components_groups.through)
-def buessinessform_components_groups_m2m_changed_handler(sender, instance, action, **kwargs):
-    generate_buessiness_form_meta_data(instance)
+def buessiness_form_components_groups_changed_handler(sender, instance, action, reverse, model, pk_set, **kwargs):
+    instance.generate_meta_data()
 
 
 # 表单和实体关系表
@@ -121,7 +122,6 @@ class FormEntityShip(models.Model):
     class Meta:
         verbose_name = '表单和实体关系'
         verbose_name_plural = verbose_name
-
 
 
 # 基础表单定义
