@@ -294,9 +294,7 @@ class Command(BaseCommand):
                 components = []
                 for index, form in enumerate(meta_data):
                     if form['name'] != 'basic_personal_information_baseform_query_1642159528':
-                        print(item, form['name'])
                         for field in form['fields']:
-                            print(field['field_id'])
                             components.append(Component.objects.get(field_id=field['field_id']))
                 buessiness_form.components.set(components)
                 

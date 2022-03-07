@@ -7,6 +7,7 @@ from django.contrib.auth.models import Group
 
 from pypinyin import lazy_pinyin
 
+from define.models import ManagedEntity
 from define_icpc.models import Icpc
 from define_form.models import CombineForm, BuessinessForm
 from .utils import keyword_search
@@ -242,6 +243,7 @@ class Service(models.Model):
     first_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='first_operation', blank=True, null=True, verbose_name="起始作业")
     last_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='last_operation', blank=True, null=True, verbose_name="结束作业")
     operations = models.ManyToManyField(Operation, blank=True, verbose_name="可选作业")
+    managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, blank=True, null=True, verbose_name="管理实体")
     execute_datetime = models.DateTimeField(blank=True, null=True, verbose_name='执行时间')
     Operation_priority = [
         (0, '0级'),
@@ -251,7 +253,10 @@ class Service(models.Model):
     ]
     priority = models.PositiveSmallIntegerField(choices=Operation_priority, default=3, verbose_name='优先级')
     group = models.ManyToManyField(Role, blank=True, verbose_name="服务角色")
-    enable_queue_counter = models.BooleanField(default=True, verbose_name='显示队列数量')
+    History_services_display=[(0, '所有历史服务'), (1, '当日服务')]
+    history_services_display = models.PositiveBigIntegerField(choices=History_services_display, default=0, verbose_name='历史服务显示')
+    enable_recommanded_list = models.BooleanField(default=True, verbose_name='显示推荐作业')
+    enable_queue_counter = models.BooleanField(default=True, verbose_name='显示队列计数')
     suppliers = models.CharField(max_length=255, blank=True, null=True, verbose_name="供应商")
     not_suitable = models.CharField(max_length=255, blank=True, null=True, verbose_name='不适用对象')
     time_limits = models.DurationField(blank=True, null=True, verbose_name='完成时限')
