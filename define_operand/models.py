@@ -289,7 +289,7 @@ class ServiceEvent(models.Model):
     label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
     name = models.CharField(max_length=255, db_index=True, unique=True, verbose_name="name")
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name="from_service_id",  null=True, verbose_name="所属服务")
-    operation = models.ForeignKey(Operation, on_delete=models.CASCADE,  null=True, verbose_name="所属作业")
+    # operation = models.ForeignKey(Operation, on_delete=models.CASCADE,  null=True, verbose_name="所属作业")
     expression = models.TextField(max_length=1024, blank=True, null=True, default='completed', verbose_name="表达式", 
         help_text='''
         说明：<br>
@@ -383,7 +383,6 @@ class ServicePackageEvent(models.Model):
     label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
     name = models.CharField(max_length=255, db_index=True, unique=True, verbose_name="name")
     servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, related_name="from_sid",  null=True, verbose_name="所属服务包")
-    service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name="from_servicepackage_id",  null=True, verbose_name="所属服务")
     expression = models.TextField(max_length=1024, blank=True, null=True, default='completed', verbose_name="表达式", 
         help_text='''
         说明：<br>
@@ -391,7 +390,7 @@ class ServicePackageEvent(models.Model):
         2. 表达式接受的逻辑运算符：or, and, not, in, >=, <=, >, <, ==, +, -, *, /, ^, ()<br>
         3. 字段名只允许由小写字母a~z，数字0~9和下划线_组成；字段值接受数字和字符，字符需要放在双引号中，如"A0101"
         ''')
-    next_servicepackages = models.ManyToManyField(ServicePackage, through='ServicePackageEventRoute', verbose_name="后续服务包")
+    next_servicepackages = models.ManyToManyField(ServicePackage, through='ServicePackageEventRoute', verbose_name="后续服务")
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="事件描述")
     servicepackage_event_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="服务包事件ID")
 
@@ -419,8 +418,8 @@ class ServicePackageEvent(models.Model):
 # 服务包事件路由作业表
 class ServicePackageEventRoute(models.Model):
     servicepackage_event = models.ForeignKey(ServicePackageEvent, on_delete=models.CASCADE, verbose_name="服务包事件")
-    servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, verbose_name="后续服务包")
-    is_specified = models.BooleanField(default=False, verbose_name="规定服务包")  # 默认为：推荐服务包
+    servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, verbose_name="后续服务")
+    is_specified = models.BooleanField(default=False, verbose_name="规定服务")  # 默认为：推荐服务包
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="间隔规则")
     servicepackage_event_route_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="服务包事件路由ID")
 

@@ -506,7 +506,6 @@ class Command(BaseCommand):
                     name=item['name'],
                     label=item['label'],
                     service=Service.objects.get(name=_operation.name),
-                    operation=_operation,
                     expression=item['expression'],
                     description=item['description'],
                     parameters=item['parameters'],
