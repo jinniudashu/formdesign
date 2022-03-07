@@ -12,6 +12,9 @@ from define_form.models import CombineForm
 from .utils import keyword_search
 
 
+# 复制表单数据
+Passing_data = [(0, '否'), (1, '复制，不可编辑'), (2, '复制，可以编辑')]
+
 # 角色表
 class Role(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name="name")
@@ -64,13 +67,13 @@ class Operation(models.Model):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
     forms = models.ForeignKey(CombineForm, on_delete=models.CASCADE, null=True, blank=True, verbose_name="作业表单")
+    execute_datetime = models.DateTimeField(blank=True, null=True, verbose_name='执行时间')
     Operation_priority = [
         (0, '0级'),
         (1, '紧急'),
         (2, '优先'),
         (3, '一般'),
     ]
-    execute_datetime = models.DateTimeField(blank=True, null=True, verbose_name='执行时间')
     priority = models.PositiveSmallIntegerField(choices=Operation_priority, default=3, verbose_name='优先级')
     group = models.ManyToManyField(Role, blank=True, verbose_name="作业角色")
     enable_queue_counter = models.BooleanField(default=True, verbose_name='显示队列数量')
@@ -199,6 +202,7 @@ class IntervalRule(models.Model):
 class EventRoute(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE, verbose_name="事件")
     operation = models.ForeignKey(Operation, on_delete=models.CASCADE, verbose_name="后续作业")
+    passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0, verbose_name='复制表单数据')
     is_specified = models.BooleanField(default=False, verbose_name="规定作业")  # 默认为：推荐作业
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="间隔规则")
     event_route_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="事件路由ID")
@@ -311,6 +315,7 @@ class ServiceEvent(models.Model):
 class ServiceEventRoute(models.Model):
     service_event = models.ForeignKey(ServiceEvent, on_delete=models.CASCADE, verbose_name="服务事件")
     service = models.ForeignKey(Service, on_delete=models.CASCADE, verbose_name="后续服务")
+    passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0, verbose_name='复制表单数据')
     is_specified = models.BooleanField(default=False, verbose_name="规定服务")  # 默认为：推荐作业
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="间隔规则")
     service_event_route_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="服务事件路由ID")

@@ -62,7 +62,7 @@ class ServiceAdmin(admin.ModelAdmin):
         ('基本信息', {
             'fields': (('label', 'name_icpc', 'priority'), ('first_operation', 'last_operation', ), ('operations', 'group'), ('name', 'service_id'))
         }),
-        ('作业管理', {
+        ('单元服务管理', {
             'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
         }),
         ('资源配置', {

@@ -2,7 +2,7 @@ from django.core.management import BaseCommand
 import json
 
 from define.models import *
-from define_form.models import BaseModel, BaseForm, CombineForm
+from define_form.models import BaseModel, BaseForm, CombineForm, BuessinessForm
 from define_operand.models import ServicePackage, Service, Operation, Event, EventRoute, IntervalRule, Instruction, Event_instructions, Role
 from define_icpc.models import Icpc, icpc_list
 
@@ -278,6 +278,30 @@ class Command(BaseCommand):
                 item.save()
 
             print('导入组合表单表完成')
+
+            # 临时处理BuessinessForm的输入导入
+            BuessinessForm.objects.all().delete()
+            # 根据组合表单表的meta_data生成业务表单BuessinessForm内容
+            for item in CombineForm.objects.all():
+                meta_data = json.loads(item.meta_data)
+                # 创建表单内容
+                buessiness_form = BuessinessForm.objects.create(
+                    name = item.name,
+                    name_icpc = item.name_icpc,
+                    label = item.label,
+                )
+                # 创建表单内容的多对多字段
+                components = []
+                for index, form in enumerate(meta_data):
+                    if form['name'] != 'basic_personal_information_baseform_query_1642159528':
+                        print(item, form['name'])
+                        for field in form['fields']:
+                            print(field['field_id'])
+                            components.append(Component.objects.get(field_id=field['field_id']))
+                buessiness_form.components.set(components)
+                
+                if item.managed_entity:
+                    buessiness_form.managed_entity.set([item.managed_entity])
 
 
             # 删除所有数据
