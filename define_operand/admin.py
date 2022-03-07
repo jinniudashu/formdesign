@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Service, ServicePackage, Operation, Event, EventRoute, OperandIntervalRule, Instruction, Event_instructions, Role
+from .models import Operation, Event, EventRoute, Service, ServiceEvent, ServiceEventRoute, ServicePackage, ServicePackageEvent, ServicePackageEventRoute, Role, IntervalRule, Instruction, Event_instructions
 
 
 class EventInline(admin.TabularInline):
@@ -28,7 +28,6 @@ class OperationAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'operand_id']
     autocomplete_fields = ["name_icpc", ]
 
-
 class EventRouteInline(admin.TabularInline):
     model = Event.next_operations.through
     exclude = ['event_route_id']
@@ -43,7 +42,6 @@ class EventAdmin(admin.ModelAdmin):
     inlines = [EventRouteInline]
     ordering = ['id']
 
-
 # @admin.register(EventRoute)
 # class EventRouteAdmin(admin.ModelAdmin):
 #     list_display = ['event', 'operation', 'id']
@@ -51,6 +49,10 @@ class EventAdmin(admin.ModelAdmin):
 #     readonly_fields= ['event_route_id']
 #     ordering = ['id']
 
+
+class ServiceEventInline(admin.TabularInline):
+    model = ServiceEvent
+    extra = 0
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
@@ -68,9 +70,31 @@ class ServiceAdmin(admin.ModelAdmin):
         }),
     )
     search_fields = ['name', 'label']
+    inlines = [ServiceEventInline]
     ordering = ['id']
     readonly_fields = ['name', 'service_id']
     autocomplete_fields = ['name_icpc', ]
+
+class ServiceEventRouteInline(admin.TabularInline):
+    model = ServiceEvent.next_services.through
+    exclude = ['service_event_route_id']
+
+@admin.register(ServiceEvent)
+class ServiceEventAdmin(admin.ModelAdmin):
+    list_display = ['label', 'service', 'name', 'id']
+    list_display_links = ['label', 'name', 'service',]
+    search_fields = ['name', 'label']
+    readonly_fields = ['service_event_id']
+    inlines = [ServiceEventRouteInline]
+    ordering = ['id']
+
+# @admin.register(ServiceEventRoute)
+# class ServiceEventRouteAdmin(admin.ModelAdmin):
+#     list_display = ['event', 'service', 'id']
+#     list_display_links = ['event', 'service',]
+#     readonly_fields= ['service_event_route_id']
+#     ordering = ['id']
+
 
 
 @admin.register(ServicePackage)
@@ -81,9 +105,31 @@ class ServicePackageAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'service_package_id']
     ordering = ['id']
 
+class ServicePackageEventRouteInline(admin.TabularInline):
+    model = ServicePackageEvent.next_servicepackages.through
+    exclude = ['servicepackage_event_route_id']
 
-@admin.register(OperandIntervalRule)
-class OperandIntervalRuldAdmin(admin.ModelAdmin):
+@admin.register(ServicePackageEvent)
+class ServicePackageEventAdmin(admin.ModelAdmin):
+    list_display = ['label', 'servicepackage', 'name', 'id']
+    list_display_links = ['label', 'name', 'servicepackage',]
+    search_fields = ['name', 'label']
+    readonly_fields = ['servicepackage_event_id']
+    inlines = [ServicePackageEventRouteInline]
+    ordering = ['id']
+
+# @admin.register(ServicePackageEventRoute)
+# class ServicePackageEventRouteAdmin(admin.ModelAdmin):
+#     list_display = ['event', 'servicepackage', 'id']
+#     list_display_links = ['event', 'servicepackage',]
+#     readonly_fields= ['servicepackage_event_route_id']
+#     ordering = ['id']
+
+
+
+
+@admin.register(IntervalRule)
+class IntervalRuldAdmin(admin.ModelAdmin):
     list_display = ['label', 'name', 'rule', 'interval', 'id']
     list_display_links = ['label', 'name',]
     fieldsets = (

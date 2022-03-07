@@ -224,7 +224,7 @@ def design_backup(modeladmin, request, queryset):
 
         if model['services']:
             services_id = []
-            for service in item.sercices.all():
+            for service in item.services.all():
                 services_id.append(service.service_id)
             model['services'] = services_id
 
@@ -245,7 +245,7 @@ def design_backup(modeladmin, request, queryset):
             model['next_operations'] = next_operations
         design_data['events'].append(model)
 
-    for item in OperandIntervalRule.objects.all():
+    for item in IntervalRule.objects.all():
         model = model_to_dict(item)
         model['interval'] = str(item.interval)
         design_data['operandintervalrules'].append(model)

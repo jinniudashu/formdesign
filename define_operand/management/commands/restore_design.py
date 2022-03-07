@@ -3,7 +3,7 @@ import json
 
 from define.models import *
 from define_form.models import BaseModel, BaseForm, CombineForm
-from define_operand.models import ServicePackage, Service, Operation, Event, EventRoute, OperandIntervalRule, Instruction, Event_instructions, Role
+from define_operand.models import ServicePackage, Service, Operation, Event, EventRoute, IntervalRule, Instruction, Event_instructions, Role
 from define_icpc.models import Icpc, icpc_list
 
 from datetime import timedelta
@@ -183,7 +183,6 @@ class Command(BaseCommand):
                     name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
                 else:
                     name_icpc = None
-                print('item', item)
                 related_content=RelateFieldModel.objects.get(relate_field_model_id=item['related_content'])
                 RelatedField.objects.create(
                     name=item['name'],
@@ -283,7 +282,7 @@ class Command(BaseCommand):
 
             # 删除所有数据
             EventRoute.objects.all().delete()
-            OperandIntervalRule.objects.all().delete()
+            IntervalRule.objects.all().delete()
             ServicePackage.objects.all().delete()
             Service.objects.all().delete()
             Operation.objects.all().delete()
@@ -295,7 +294,7 @@ class Command(BaseCommand):
             # 导入作业间隔规则表
             for item in design_data['operandintervalrules']:
                 interval = parse_timedelta(item['interval'])
-                OperandIntervalRule.objects.create(
+                IntervalRule.objects.create(
                     name=item['name'],
                     label=item['label'],
                     rule=item['rule'],
@@ -447,7 +446,7 @@ class Command(BaseCommand):
             # 导入事件路由表
             for item in design_data['eventroutes']:
                 if item['interval_rule']:
-                    interval_rule=OperandIntervalRule.objects.get(operand_interval_rule_id=item['interval_rule'])
+                    interval_rule=IntervalRule.objects.get(operand_interval_rule_id=item['interval_rule'])
                 else:
                     interval_rule=None
                 EventRoute.objects.create(
