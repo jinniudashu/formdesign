@@ -13,7 +13,7 @@ class OperationAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('label', 'name_icpc', 'priority'), ('forms', 'execute_datetime'), 'group', ('name', 'operand_id'))
+            'fields': (('label', 'name_icpc'), ('forms', 'priority' ), 'group', ('name', 'operand_id'))
         }),
         ('作业管理', {
             'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
@@ -23,9 +23,9 @@ class OperationAdmin(admin.ModelAdmin):
         }),
     )
     search_fields = ['name', 'label']
-    inlines = [EventInline]
+    # inlines = [EventInline]
     ordering = ['id']
-    readonly_fields = ['name', 'operand_id']
+    readonly_fields = ['group', 'name', 'operand_id']
     autocomplete_fields = ["name_icpc", ]
 
 class EventRouteInline(admin.TabularInline):
@@ -60,7 +60,7 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('label', 'name_icpc', 'priority'), ('execute_datetime', 'first_operation'), ('operations', 'group'), ('name', 'service_id'))
+            'fields': (('label', 'name_icpc', 'priority'), ('first_operation', 'last_operation', ), ('operations', 'group'), ('name', 'service_id'))
         }),
         ('作业管理', {
             'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
@@ -70,7 +70,7 @@ class ServiceAdmin(admin.ModelAdmin):
         }),
     )
     search_fields = ['name', 'label']
-    inlines = [ServiceEventInline]
+    # inlines = [ServiceEventInline]
     ordering = ['id']
     readonly_fields = ['name', 'service_id']
     autocomplete_fields = ['name_icpc', ]
@@ -101,6 +101,11 @@ class ServiceEventAdmin(admin.ModelAdmin):
 class ServicePackageAdmin(admin.ModelAdmin):
     list_display = ['name_icpc', 'label', 'name_icpc', 'id']
     list_display_links = ['label', ]
+    fieldsets = (
+        (None, {
+            'fields': (('label', 'name_icpc'), ('first_service', 'last_service', ), 'services', ('name', 'service_package_id'))
+        }),
+    )
     search_fields = ['label']
     readonly_fields = ['name', 'service_package_id']
     ordering = ['id']
@@ -124,8 +129,6 @@ class ServicePackageEventAdmin(admin.ModelAdmin):
 #     list_display_links = ['event', 'servicepackage',]
 #     readonly_fields= ['servicepackage_event_route_id']
 #     ordering = ['id']
-
-
 
 
 @admin.register(IntervalRule)

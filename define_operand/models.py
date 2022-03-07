@@ -14,8 +14,8 @@ from .utils import keyword_search
 
 # 角色表
 class Role(models.Model):
-    name = models.CharField(max_length=100, unique=True, verbose_name="角色名")
-    label = models.CharField(max_length=255, verbose_name="显示名称")
+    name = models.CharField(max_length=100, unique=True, verbose_name="name")
+    label = models.CharField(max_length=255, verbose_name="名称")
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="角色描述")
     role_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="角色ID")
 
@@ -37,8 +37,8 @@ class Role(models.Model):
 
 # 指令表
 class Instruction(models.Model):
-    name = models.CharField(max_length=100, db_index=True, unique=True, verbose_name="指令名称")
-    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="显示名称")
+    name = models.CharField(max_length=100, db_index=True, unique=True, verbose_name="name")
+    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="指令名称")
     code = models.CharField(max_length=10, verbose_name="指令代码")
     func = models.CharField(max_length=100, verbose_name="操作函数")
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="指令描述")
@@ -60,9 +60,9 @@ class Instruction(models.Model):
 
 # 作业基础信息表
 class Operation(models.Model):
-    name = models.CharField(max_length=255, unique=True, verbose_name="作业名称")
+    name = models.CharField(max_length=255, unique=True, verbose_name="name")
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
-    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="显示名称")
+    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
     forms = models.ForeignKey(CombineForm, on_delete=models.CASCADE, null=True, blank=True, verbose_name="作业表单")
     Operation_priority = [
         (0, '0级'),
@@ -108,8 +108,8 @@ class Operation(models.Model):
 # 作业事件表
 # # 默认事件：xx作业完成--系统作业名+"_operation_completed"
 class Event(models.Model):
-    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="显示名称")
-    name = models.CharField(max_length=255, db_index=True, unique=True, verbose_name="作业事件名")
+    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
+    name = models.CharField(max_length=255, db_index=True, unique=True, verbose_name="name")
     operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='from_oid', verbose_name="所属作业")
     expression = models.TextField(max_length=1024, blank=True, null=True, default='completed', verbose_name="表达式", 
         help_text='''
@@ -219,12 +219,12 @@ class EventRoute(models.Model):
 
 # 单元服务类型信息表
 class Service(models.Model):
-    name = models.CharField(max_length=255, unique=True, verbose_name="名称")
+    name = models.CharField(max_length=255, unique=True, verbose_name="name")
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
-    label = models.CharField(max_length=255, verbose_name="显示名称")
+    label = models.CharField(max_length=255, verbose_name="名称")
     first_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='first_operation', blank=True, null=True, verbose_name="起始作业")
-    last_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='last_operation', blank=True, null=True, verbose_name="完成作业")
-    operations = models.ManyToManyField(Operation, blank=True, verbose_name="包含作业")
+    last_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='last_operation', blank=True, null=True, verbose_name="结束作业")
+    operations = models.ManyToManyField(Operation, blank=True, verbose_name="可选作业")
     execute_datetime = models.DateTimeField(blank=True, null=True, verbose_name='执行时间')
     Operation_priority = [
         (0, '0级'),
@@ -261,7 +261,7 @@ class Service(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name = "服务"
+        verbose_name = "单元服务"
         verbose_name_plural = verbose_name
         ordering = ['id']
 
@@ -269,8 +269,8 @@ class Service(models.Model):
 # 服务事件表
 # # 默认事件：xx服务完成--单元服务名+"_service_completed"
 class ServiceEvent(models.Model):
-    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="显示名称")
-    name = models.CharField(max_length=255, db_index=True, unique=True, verbose_name="服务事件名")
+    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
+    name = models.CharField(max_length=255, db_index=True, unique=True, verbose_name="name")
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name="from_service_id",  null=True, verbose_name="所属服务")
     operation = models.ForeignKey(Operation, on_delete=models.CASCADE,  null=True, verbose_name="所属作业")
     expression = models.TextField(max_length=1024, blank=True, null=True, default='completed', verbose_name="表达式", 
@@ -290,7 +290,7 @@ class ServiceEvent(models.Model):
         return str(self.label)
 
     class Meta:
-        verbose_name = "服务事件"
+        verbose_name = "单元服务事件"
         verbose_name_plural = verbose_name
         ordering = ['id']
 
@@ -331,12 +331,12 @@ class ServiceEventRoute(models.Model):
 
 # 服务包类型信息表
 class ServicePackage(models.Model):
-    name = models.CharField(max_length=255, unique=True, verbose_name="名称")
+    name = models.CharField(max_length=255, unique=True, verbose_name="name")
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
-    label = models.CharField(max_length=255, verbose_name="显示名称")
+    label = models.CharField(max_length=255, verbose_name="名称")
     first_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='first_service', blank=True, null=True, verbose_name="起始服务")
     last_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='last_service', blank=True, null=True, verbose_name="结束服务")
-    services = models.ManyToManyField(Service, blank=True, verbose_name="包含服务")
+    services = models.ManyToManyField(Service, blank=True, verbose_name="可选服务")
     execute_datetime = models.DateTimeField(blank=True, null=True, verbose_name='执行时间')
     service_package_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="服务包ID")
 
@@ -362,8 +362,8 @@ class ServicePackage(models.Model):
 # 服务包事件表
 # # 默认事件：xx服务完成--单元服务名+"_service_completed"
 class ServicePackageEvent(models.Model):
-    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="显示名称")
-    name = models.CharField(max_length=255, db_index=True, unique=True, verbose_name="服务包事件名")
+    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
+    name = models.CharField(max_length=255, db_index=True, unique=True, verbose_name="name")
     servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, related_name="from_sid",  null=True, verbose_name="所属服务包")
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name="from_servicepackage_id",  null=True, verbose_name="所属服务")
     expression = models.TextField(max_length=1024, blank=True, null=True, default='completed', verbose_name="表达式", 
