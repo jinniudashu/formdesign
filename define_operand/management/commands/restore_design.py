@@ -3,7 +3,7 @@ import json
 
 from define.models import *
 from define_form.models import BaseModel, BaseForm, CombineForm, BuessinessForm
-from define_operand.models import ServicePackage, Service, Operation, Event, EventRoute, IntervalRule, Instruction, Event_instructions, Role
+from define_operand.models import ServiceEvent, ServiceEventRoute, ServicePackage, Service, Operation, Event, EventRoute, IntervalRule, Instruction, Event_instructions, Role
 from define_icpc.models import Icpc, icpc_list
 
 from datetime import timedelta
@@ -305,6 +305,7 @@ class Command(BaseCommand):
 
 
             # 删除所有数据
+            ServiceEventRoute.objects.all().delete()
             EventRoute.objects.all().delete()
             IntervalRule.objects.all().delete()
             ServicePackage.objects.all().delete()
@@ -312,6 +313,7 @@ class Command(BaseCommand):
             Operation.objects.all().delete()
             Instruction.objects.all().delete()
             Event.objects.all().delete()
+            ServiceEvent.objects.all().delete()
             Event_instructions.objects.all().delete()
 
 
@@ -337,8 +339,10 @@ class Command(BaseCommand):
                 else:
                     name_icpc = None
 
+                # 临时处理
                 if item['forms']:
-                    forms = CombineForm.objects.get(combineform_id=item['forms'])
+                    _forms = CombineForm.objects.get(combineform_id=item['forms'])
+                    forms = BuessinessForm.objects.get(name=_forms.name)
                 else:
                     forms = None
 
@@ -347,6 +351,7 @@ class Command(BaseCommand):
                     name_icpc=name_icpc,
                     label=item['label'],
                     forms=forms,
+                    enable_queue_counter=item['enable_queue_counter'],
                     priority=item['priority'],
                     suppliers=item['suppliers'],
                     not_suitable=item['not_suitable'],
@@ -366,27 +371,16 @@ class Command(BaseCommand):
                     groups=Role.objects.filter(role_id__in=item['group'])
                     operation.group.set(groups)
 
-            print('导入作业表完成')
 
-
-            # 导入单元服务表
-            for item in design_data['services']:
-                # print('Service:', item)
-                if item['name_icpc']:
-                    name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
-                else:
-                    name_icpc = None
-
-                if item['first_operation']:
-                    first_operation = Operation.objects.get(operand_id=item['first_operation'])
-                else:
-                    first_operation = None
-                
-                service = Service.objects.create(
+                # 临时处理
+                # 导入单元服务表
+                unit_service = Service.objects.create(
                     name=item['name'],
                     name_icpc=name_icpc,
                     label=item['label'],
-                    first_operation=first_operation,
+                    first_operation=operation,
+                    last_operation=None,   
+                    enable_queue_counter=item['enable_queue_counter'],
                     priority=item['priority'],
                     suppliers=item['suppliers'],
                     not_suitable=item['not_suitable'],
@@ -398,20 +392,61 @@ class Command(BaseCommand):
                     resource_materials=item['resource_materials'],
                     resource_devices=item['resource_devices'],
                     resource_knowledge=item['resource_knowledge'],
-                    service_id=item['service_id'],
                 )
-
                 # 写入Service.operations 多对多字段
-                if item['operations']:
-                    operations = Operation.objects.filter(operand_id__in=item['operations'])
-                    service.operations.set(operations)
-
+                unit_service.operations.set([operation])
                 # 写入Service.group 多对多字段
                 if item['group']:
                     groups=Role.objects.filter(role_id__in=item['group'])
-                    service.group.set(groups)
+                    unit_service.group.set(groups)
+
+
+            print('导入作业表完成')
+
+
+            # # 导入单元服务表
+            # for item in design_data['services']:
+            #     # print('Service:', item)
+            #     if item['name_icpc']:
+            #         name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
+            #     else:
+            #         name_icpc = None
+
+            #     if item['first_operation']:
+            #         first_operation = Operation.objects.get(operand_id=item['first_operation'])
+            #     else:
+            #         first_operation = None
+                
+            #     service = Service.objects.create(
+            #         name=item['name'],
+            #         name_icpc=name_icpc,
+            #         label=item['label'],
+            #         first_operation=first_operation,
+            #         priority=item['priority'],
+            #         suppliers=item['suppliers'],
+            #         not_suitable=item['not_suitable'],
+            #         time_limits=item['time_limits'],
+            #         working_hours=item['working_hours'],
+            #         frequency=item['frequency'],
+            #         cost=item['cost'],
+            #         load_feedback=item['load_feedback'],
+            #         resource_materials=item['resource_materials'],
+            #         resource_devices=item['resource_devices'],
+            #         resource_knowledge=item['resource_knowledge'],
+            #         service_id=item['service_id'],
+            #     )
+
+            #     # 写入Service.operations 多对多字段
+            #     if item['operations']:
+            #         operations = Operation.objects.filter(operand_id__in=item['operations'])
+            #         service.operations.set(operations)
+
+            #     # 写入Service.group 多对多字段
+            #     if item['group']:
+            #         groups=Role.objects.filter(role_id__in=item['group'])
+            #         service.group.set(groups)
             
-            print('导入服务表完成')
+            # print('导入单元服务表完成')
             
             # 导入服务包表
             for item in design_data['service_packages']:
@@ -464,6 +499,20 @@ class Command(BaseCommand):
                     event_id=item['event_id'],
                 )
 
+                # 临时处理
+                # 导入服务事件表
+                _operation = Operation.objects.get(operand_id=item['operation'])
+                ServiceEvent.objects.create(
+                    name=item['name'],
+                    label=item['label'],
+                    service=Service.objects.get(name=_operation.name),
+                    operation=_operation,
+                    expression=item['expression'],
+                    description=item['description'],
+                    parameters=item['parameters'],
+                    fields=item['fields'],
+                )
+
             print('导入事件表完成')
 
 
@@ -479,6 +528,17 @@ class Command(BaseCommand):
                     is_specified=item['is_specified'],
                     interval_rule=interval_rule,
                     event_route_id=item['event_route_id'],
+                )
+
+                # 临时处理
+                # 导入服务事件路由表
+                _event = Event.objects.get(event_id=item['event'])
+                _operation = Operation.objects.get(operand_id=item['operation'])
+                ServiceEventRoute.objects.create(
+                    service_event=ServiceEvent.objects.get(name=_event.name),
+                    service=Service.objects.get(name=_operation.name),
+                    is_specified=item['is_specified'],
+                    interval_rule=interval_rule,
                 )
 
 

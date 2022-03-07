@@ -8,7 +8,7 @@ from django.contrib.auth.models import Group
 from pypinyin import lazy_pinyin
 
 from define_icpc.models import Icpc
-from define_form.models import CombineForm
+from define_form.models import CombineForm, BuessinessForm
 from .utils import keyword_search
 
 
@@ -66,7 +66,7 @@ class Operation(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="name")
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
-    forms = models.ForeignKey(CombineForm, on_delete=models.CASCADE, null=True, blank=True, verbose_name="作业表单")
+    forms = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, null=True, blank=True, verbose_name="作业表单")
     execute_datetime = models.DateTimeField(blank=True, null=True, verbose_name='执行时间')
     Operation_priority = [
         (0, '0级'),
@@ -147,20 +147,33 @@ class Event(models.Model):
                 self.expression = 'completed'
 
         if self.operation.forms:
-            # 生成fields
-            forms = json.loads(self.operation.forms.meta_data)
+            # # 旧版生成fields
+            # forms = json.loads(self.operation.forms.meta_data)
+            # fields = []
+            # field_names = []
+            # for form in forms:
+            #     form_name = form['basemodel']
+            #     _fields = form['fields']
+            #     for _field in _fields:
+            #         field_name = form_name + '-' + _field['name']
+            #         field_label = _field['label']
+            #         field_type = _field['type']
+            #         field_app_label = _field.get('app_label')
+            #         field_names.append(field_name)
+            #         fields.append(str((field_name, field_label, field_type, field_app_label)))
+
+            # 新版生成fields
+            form = json.loads(self.operation.forms.meta_data)
             fields = []
             field_names = []
-            for form in forms:
-                form_name = form['basemodel']
-                _fields = form['fields']
-                for _field in _fields:
-                    field_name = form_name + '-' + _field['name']
-                    field_label = _field['label']
-                    field_type = _field['type']
-                    field_app_label = _field.get('app_label')
-                    field_names.append(field_name)
-                    fields.append(str((field_name, field_label, field_type, field_app_label)))
+            form_name = form['name']
+            for _field in form['fields']:
+                field_name = form_name + '-' + _field['name']
+                field_label = _field['label']
+                field_type = _field['type']
+                field_id = _field['field_id']
+                field_names.append(field_name)
+                fields.append(str((field_name, field_label, field_type, field_id)))
 
             self.fields = '\n'.join(fields)
 
@@ -329,8 +342,8 @@ class ServiceEventRoute(models.Model):
         ordering = ['id']
 
     def save(self, *args, **kwargs):
-        if self.event_route_id is None:
-            self.event_route_id = uuid.uuid1()
+        if self.service_event_route_id is None:
+            self.service_event_route_id = uuid.uuid1()
         super().save(*args, **kwargs)
 
 

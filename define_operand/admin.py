@@ -60,7 +60,7 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('label', 'name_icpc', 'priority'), ('first_operation', 'last_operation', ), ('operations', 'group'), ('name', 'service_id'))
+            'fields': (('label', 'name_icpc', 'priority'), ('first_operation', 'last_operation', ), ('operations', 'group'), 'enable_queue_counter', ('name', 'service_id'))
         }),
         ('单元服务管理', {
             'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
