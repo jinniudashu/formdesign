@@ -1,0 +1,35 @@
+[
+    {
+        "model": "define_operand.SystemAction",
+        "pk": "1",
+        "fields": {
+            "label": "生成后续作业", 
+            "name": "create_next_operation", 
+            "func": "create_next_operation", 
+            "parameters": "operand_id", 
+            "description": ""
+        }
+    },
+    {
+        "model": "define_operand.SystemAction",
+        "pk": "2",
+        "fields": {
+            "label": "推荐后续作业", 
+            "name": "recommend_next_operation", 
+            "func": "recommend_next_operation", 
+            "parameters": "operand_id", 
+            "description": ""
+        }
+    },
+    {
+        "model": "define_operand.SystemAction",
+        "pk": "3",
+        "fields": {
+            "label": "提示内容违反业务规则", 
+            "name": "prompt_violate_business_rule", 
+            "func": "prompt_violate_business_rule", 
+            "parameters": "violation_info", 
+            "description": ""
+        }
+    }
+]

@@ -1,7 +1,19 @@
 from django.contrib import admin
 
-from .models import Operation, Event, EventRoute, Service, ServiceOperations, ServiceEvent, ServiceEventRoute, ServicePackage, ServicePackageEvent, ServicePackageEventRoute, Role, IntervalRule, Instruction, Event_instructions
+from .models import BuessinessRule, SystemAction, Operation, Event, EventRoute, Service, ServiceOperations, ServiceEvent, ServiceEventRoute, ServicePackage, ServicePackageEvent, ServicePackageEventRoute, Role, IntervalRule, Instruction, Event_instructions
 
+
+@admin.register(BuessinessRule)
+class BuessinessRuleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'expression')
+    search_fields = ('id', 'name')
+    ordering = ('id',)
+
+@admin.register(SystemAction)
+class SystemActionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'func', 'parameters')
+    search_fields = ('id', 'name')
+    ordering = ('id',)
 
 class EventInline(admin.TabularInline):
     model = Event

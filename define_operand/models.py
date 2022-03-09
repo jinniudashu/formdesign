@@ -257,7 +257,7 @@ class Service(models.Model):
     priority = models.PositiveSmallIntegerField(choices=Operation_priority, default=3, verbose_name='优先级')
     group = models.ManyToManyField(Role, blank=True, verbose_name="服务角色")
     History_services_display=[(0, '所有历史服务'), (1, '当日服务')]
-    history_services_display = models.PositiveBigIntegerField(choices=History_services_display, default=0, verbose_name='历史服务显示')
+    history_services_display = models.PositiveBigIntegerField(choices=History_services_display, default=0, blank=True, null=True, verbose_name='历史服务默认显示')
     enable_recommanded_list = models.BooleanField(default=True, verbose_name='显示推荐作业')
     enable_queue_counter = models.BooleanField(default=True, verbose_name='显示队列计数')
     suppliers = models.CharField(max_length=255, blank=True, null=True, verbose_name="供应商")
@@ -297,16 +297,35 @@ class BuessinessRule(models.Model):
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="事件描述")
     buessiness_rule_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="业务规则ID")
 
+    class Meta:
+        verbose_name = '业务规则'
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
+class SystemAction(models.Model):
+    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
+    name = models.CharField(max_length=255, unique=True, verbose_name="name")
+    func = models.CharField(max_length=255, blank=True, null=True, verbose_name="内部实现函数")
+    parameters = models.CharField(max_length=255, blank=True, null=True, verbose_name="参数")
+    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="描述")
+    system_action_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="系统动作ID")
+
+    class Meta:
+        verbose_name = '系统动作'
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
 
 class ServiceOperations(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, verbose_name='单元服务')
     operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='operation', null=True, verbose_name='作业')
-    buessiness_rule = models.ForeignKey(BuessinessRule, on_delete=models.CASCADE, null=True, verbose_name='内容检查')
+    buessiness_rule = models.ForeignKey(BuessinessRule, on_delete=models.CASCADE, null=True, verbose_name='事件规则')
+    system_action = models.ForeignKey(SystemAction, on_delete=models.CASCADE, null=True, verbose_name='系统动作')
     next_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, null=True, related_name='next_operation', verbose_name='后续作业')
-    passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0, verbose_name='复制表单数据')
-    interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔")
-    is_specified = models.BooleanField(default=False, verbose_name="规定作业")  # 默认为：推荐作业
+    passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0, verbose_name='传递表单数据')
+    interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔限制")
     operation_route_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="作业路由ID")
+
     class Meta:
         verbose_name = '作业关系设置'
         verbose_name_plural = verbose_name
