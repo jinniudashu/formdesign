@@ -1,27 +1,7 @@
 from django.contrib import admin
 
-from .models import BuessinessRule, SystemAction, Operation, Event, EventRoute, Service, ServiceOperations, ServiceEvent, ServiceEventRoute, ServicePackage, ServicePackageEvent, ServicePackageEventRoute, Role, IntervalRule, Instruction, Event_instructions
+from .models import BuessinessRule, SystemOperand, Operation, Event, EventRoute, Service, ServiceOperationsShip, ServiceEvent, ServiceEventRoute, ServicePackage, ServicePackageServicesShip, Role, IntervalRule, Instruction, Event_instructions
 
-
-@admin.register(BuessinessRule)
-class BuessinessRuleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'expression')
-    search_fields = ('id', 'name')
-    ordering = ('id',)
-
-@admin.register(SystemAction)
-class SystemActionAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'func', 'parameters')
-    search_fields = ('id', 'name')
-    ordering = ('id',)
-
-class EventInline(admin.TabularInline):
-    model = Event
-    extra = 0
-
-class ServiceOperationsInline(admin.TabularInline):
-    model = ServiceOperations
-    exclude = ['operation_route_id']
 
 @admin.register(Operation)
 class OperationAdmin(admin.ModelAdmin):
@@ -39,7 +19,6 @@ class OperationAdmin(admin.ModelAdmin):
         }),
     )
     search_fields = ['name', 'label']
-    # inlines = [EventInline]
     ordering = ['id']
     readonly_fields = ['group', 'name', 'operand_id']
     autocomplete_fields = ["name_icpc", ]
@@ -58,17 +37,10 @@ class EventAdmin(admin.ModelAdmin):
     inlines = [EventRouteInline]
     ordering = ['id']
 
-# @admin.register(EventRoute)
-# class EventRouteAdmin(admin.ModelAdmin):
-#     list_display = ['event', 'operation', 'id']
-#     list_display_links = ['event', 'operation',]
-#     readonly_fields= ['event_route_id']
-#     ordering = ['id']
 
-
-# class ServiceEventInline(admin.TabularInline):
-#     model = ServiceEvent
-#     extra = 0
+class ServiceOperationsShipInline(admin.TabularInline):
+    model = ServiceOperationsShip
+    exclude = ['operation_route_id']
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
@@ -89,7 +61,7 @@ class ServiceAdmin(admin.ModelAdmin):
         }),
     )
     search_fields = ['name', 'label']
-    inlines = [ServiceOperationsInline]
+    inlines = [ServiceOperationsShipInline]
     ordering = ['id']
     readonly_fields = ['name', 'service_id']
     autocomplete_fields = ['name_icpc', ]
@@ -107,14 +79,10 @@ class ServiceEventAdmin(admin.ModelAdmin):
     inlines = [ServiceEventRouteInline]
     ordering = ['id']
 
-# @admin.register(ServiceEventRoute)
-# class ServiceEventRouteAdmin(admin.ModelAdmin):
-#     list_display = ['event', 'service', 'id']
-#     list_display_links = ['event', 'service',]
-#     readonly_fields= ['service_event_route_id']
-#     ordering = ['id']
 
-
+class ServicePackageServicesShipInline(admin.TabularInline):
+    model = ServicePackageServicesShip
+    exclude = ['servicepackage_services_ship_id']
 
 @admin.register(ServicePackage)
 class ServicePackageAdmin(admin.ModelAdmin):
@@ -127,27 +95,22 @@ class ServicePackageAdmin(admin.ModelAdmin):
     )
     search_fields = ['label']
     readonly_fields = ['name', 'service_package_id']
+    inlines = [ServicePackageServicesShipInline]
     ordering = ['id']
 
-class ServicePackageEventRouteInline(admin.TabularInline):
-    model = ServicePackageEvent.next_servicepackages.through
-    exclude = ['servicepackage_event_route_id']
 
-@admin.register(ServicePackageEvent)
-class ServicePackageEventAdmin(admin.ModelAdmin):
-    list_display = ['label', 'servicepackage', 'name', 'id']
-    list_display_links = ['label', 'name', 'servicepackage',]
-    search_fields = ['name', 'label']
-    readonly_fields = ['servicepackage_event_id']
-    inlines = [ServicePackageEventRouteInline]
-    ordering = ['id']
+@admin.register(SystemOperand)
+class SystemOperandAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'func', 'parameters')
+    search_fields = ('id', 'name')
+    ordering = ('id',)
 
-# @admin.register(ServicePackageEventRoute)
-# class ServicePackageEventRouteAdmin(admin.ModelAdmin):
-#     list_display = ['event', 'servicepackage', 'id']
-#     list_display_links = ['event', 'servicepackage',]
-#     readonly_fields= ['servicepackage_event_route_id']
-#     ordering = ['id']
+
+@admin.register(BuessinessRule)
+class BuessinessRuleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'expression')
+    search_fields = ('id', 'name')
+    ordering = ('id',)
 
 
 @admin.register(IntervalRule)

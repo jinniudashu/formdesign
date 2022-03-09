@@ -1,35 +1,72 @@
 [
     {
-        "model": "define_operand.SystemAction",
+        "model": "define_operand.SystemOperand",
         "pk": "1",
-        "fields": {
-            "label": "生成后续作业", 
-            "name": "create_next_operation", 
-            "func": "create_next_operation", 
-            "parameters": "operand_id", 
-            "description": ""
-        }
-    },
-    {
-        "model": "define_operand.SystemAction",
-        "pk": "2",
         "fields": {
             "label": "推荐后续作业", 
             "name": "recommend_next_operation", 
             "func": "recommend_next_operation", 
             "parameters": "operand_id", 
-            "description": ""
+            "description": "",
+            "applicable": 0
         }
     },
     {
-        "model": "define_operand.SystemAction",
+        "model": "define_operand.SystemOperand",
+        "pk": "2",
+        "fields": {
+            "label": "生成后续作业", 
+            "name": "create_next_operation", 
+            "func": "create_next_operation", 
+            "parameters": "operand_id", 
+            "description": "",
+            "applicable": 0
+        }
+    },
+    {
+        "model": "define_operand.SystemOperand",
         "pk": "3",
+        "fields": {
+            "label": "推荐后续服务", 
+            "name": "recommend_next_service", 
+            "func": "recommend_next_service", 
+            "parameters": "service_id", 
+            "description": "",
+            "applicable": 1
+        }
+    },
+    {
+        "model": "define_operand.SystemOperand",
+        "pk": "4",
+        "fields": {
+            "label": "生成后续服务", 
+            "name": "create_next_service", 
+            "func": "create_next_service", 
+            "parameters": "service_id", 
+            "description": "",
+            "applicable": 1
+        }
+    },
+    {
+        "model": "define_operand.SystemOperand",
+        "pk": "5",
         "fields": {
             "label": "提示内容违反业务规则", 
             "name": "prompt_violate_business_rule", 
             "func": "prompt_violate_business_rule", 
             "parameters": "violation_info", 
-            "description": ""
+            "description": "",
+            "applicable": 3
+        }
+    },
+    {
+        "model": "define_operand.BuessinessRule",
+        "pk": "1",
+        "fields": {
+            "label": "完成", 
+            "name": "completed", 
+            "expression": "completed", 
+            "description": "完成"
         }
     }
 ]

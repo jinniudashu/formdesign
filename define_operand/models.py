@@ -88,6 +88,55 @@ class IntervalRule(models.Model):
         verbose_name_plural = verbose_name
         ordering = ['id']
 
+# 间隔规则表
+class BuessinessRule(models.Model):
+    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
+    name = models.CharField(max_length=255, null=True, blank=True, verbose_name="name")
+    expression = models.CharField(max_length=1024, blank=True, null=True, default='completed', verbose_name="规则")
+    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="事件描述")
+    buessiness_rule_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="业务规则ID")
+
+    def __str__(self):
+        return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if self.buessiness_rule_id is None:
+            self.buessiness_rule_id = uuid.uuid1()
+        if self.name is None or self.name == '':
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = '业务规则'
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
+
+class SystemOperand(models.Model):
+    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
+    name = models.CharField(max_length=255, unique=True, verbose_name="name")
+    func = models.CharField(max_length=255, blank=True, null=True, verbose_name="内部实现函数")
+    parameters = models.CharField(max_length=255, blank=True, null=True, verbose_name="参数")
+    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="描述")
+    Applicable = [(0, '作业'), (1, '单元服务'), (2, '服务包'), (3, '全部')]
+    applicable = models.PositiveSmallIntegerField(choices=Applicable, default=1, verbose_name='适用范围')
+    system_action_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="系统动作ID")
+
+    def __str__(self):
+        return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if self.system_action_id is None:
+            self.system_action_id = uuid.uuid1()
+        if self.name is None or self.name == '':
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = '系统作业'
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
 
 # 作业基础信息表
 class Operation(models.Model):
@@ -245,7 +294,7 @@ class Service(models.Model):
     label = models.CharField(max_length=255, verbose_name="名称")
     first_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='first_operation', blank=True, null=True, verbose_name="起始作业")
     last_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='last_operation', blank=True, null=True, verbose_name="结束作业")
-    operations = models.ManyToManyField(Operation, blank=True, verbose_name="可选作业")
+    # operations = models.ManyToManyField(Operation, blank=True, verbose_name="可选作业")
     managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, blank=True, null=True, verbose_name="管理实体")
     execute_datetime = models.DateTimeField(blank=True, null=True, verbose_name='执行时间')
     Operation_priority = [
@@ -290,41 +339,21 @@ class Service(models.Model):
         verbose_name_plural = verbose_name
         ordering = ['id']
 
-class BuessinessRule(models.Model):
-    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
-    name = models.CharField(max_length=255, db_index=True, unique=True, verbose_name="name")
-    expression = models.CharField(max_length=1024, blank=True, null=True, default='completed', verbose_name="规则")
-    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="事件描述")
-    buessiness_rule_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="业务规则ID")
 
-    class Meta:
-        verbose_name = '业务规则'
-        verbose_name_plural = verbose_name
-        ordering = ['id']
-
-class SystemAction(models.Model):
-    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
-    name = models.CharField(max_length=255, unique=True, verbose_name="name")
-    func = models.CharField(max_length=255, blank=True, null=True, verbose_name="内部实现函数")
-    parameters = models.CharField(max_length=255, blank=True, null=True, verbose_name="参数")
-    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="描述")
-    system_action_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="系统动作ID")
-
-    class Meta:
-        verbose_name = '系统动作'
-        verbose_name_plural = verbose_name
-        ordering = ['id']
-
-
-class ServiceOperations(models.Model):
+class ServiceOperationsShip(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, verbose_name='单元服务')
     operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='operation', null=True, verbose_name='作业')
     buessiness_rule = models.ForeignKey(BuessinessRule, on_delete=models.CASCADE, null=True, verbose_name='事件规则')
-    system_action = models.ForeignKey(SystemAction, on_delete=models.CASCADE, null=True, verbose_name='系统动作')
-    next_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, null=True, related_name='next_operation', verbose_name='后续作业')
+    system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, blank=True, null=True, verbose_name='系统作业')
+    next_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, blank=True, null=True, related_name='next_operation', verbose_name='后续作业')
     passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0, verbose_name='传递表单数据')
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔限制")
-    operation_route_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="作业路由ID")
+    service_operations_ship_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="作业关系ID")
+
+    def save(self, *args, **kwargs):
+        if self.service_operations_ship_id is None:
+            self.service_operations_ship_id = uuid.uuid1()
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = '作业关系设置'
@@ -428,66 +457,25 @@ class ServicePackage(models.Model):
         ordering = ['id']
 
 
-# 服务包事件表
-# # 默认事件：xx服务完成--单元服务名+"_service_completed"
-class ServicePackageEvent(models.Model):
-    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
-    name = models.CharField(max_length=255, db_index=True, unique=True, verbose_name="name")
-    servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, related_name="from_sid",  null=True, verbose_name="所属服务包")
-    expression = models.TextField(max_length=1024, blank=True, null=True, default='completed', verbose_name="表达式", 
-        help_text='''
-        说明：<br>
-        1. 作业完成事件: completed<br>
-        2. 表达式接受的逻辑运算符：or, and, not, in, >=, <=, >, <, ==, +, -, *, /, ^, ()<br>
-        3. 字段名只允许由小写字母a~z，数字0~9和下划线_组成；字段值接受数字和字符，字符需要放在双引号中，如"A0101"
-        ''')
-    next_servicepackages = models.ManyToManyField(ServicePackage, through='ServicePackageEventRoute', verbose_name="后续服务")
-    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="事件描述")
-    servicepackage_event_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="服务包事件ID")
-
-    def __str__(self):
-        return str(self.label)
-
-    class Meta:
-        verbose_name = "服务包事件"
-        verbose_name_plural = verbose_name
-        ordering = ['id']
+class ServicePackageServicesShip(models.Model):
+    servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, verbose_name='服务包')
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='单元服务')
+    buessiness_rule = models.ForeignKey(BuessinessRule, on_delete=models.CASCADE, null=True, verbose_name='事件规则')
+    system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, blank=True, null=True, verbose_name='系统作业')
+    next_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='next_service', verbose_name='后续服务')
+    passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0, verbose_name='传递表单数据')
+    interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔限制")
+    servicepackage_services_ship_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="服务关系ID")
 
     def save(self, *args, **kwargs):
-        if self.servicepackage_event_id is None:
-            self.servicepackage_event_id = uuid.uuid1()
-
-        # 自动为事件名加作业名为前缀
-        if self.service.name not in self.name:
-            self.name = f'{self.service.name}_{self.name}'
-            # 保留字：服务完成事件，自动填充expression为'completed'
-            if self.name == f'{self.service.name}_completed':
-                self.expression = 'completed'
+        if self.servicepackage_services_ship_id is None:
+            self.servicepackage_services_ship_id = uuid.uuid1()
         super().save(*args, **kwargs)
-
-
-# 服务包事件路由作业表
-class ServicePackageEventRoute(models.Model):
-    servicepackage_event = models.ForeignKey(ServicePackageEvent, on_delete=models.CASCADE, verbose_name="服务包事件")
-    servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, verbose_name="后续服务")
-    is_specified = models.BooleanField(default=False, verbose_name="规定服务")  # 默认为：推荐服务包
-    interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="间隔规则")
-    servicepackage_event_route_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="服务包事件路由ID")
-
-    def __str__(self):
-        return str(self.servicepackage_event) + '--' + str(self.servicepackage)
 
     class Meta:
-        verbose_name = "服务包事件路由"
+        verbose_name = '服务关系设置'
         verbose_name_plural = verbose_name
         ordering = ['id']
-
-    def save(self, *args, **kwargs):
-        if self.servicepackage_event_route_id is None:
-            self.servicepackage_event_route_id = uuid.uuid1()
-        super().save(*args, **kwargs)
-
-
 
 
 # 作业事件指令程序表
