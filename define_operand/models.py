@@ -1,3 +1,4 @@
+from tkinter import CASCADE
 from django.db import models
 from django.dispatch import receiver
 from django.db.models.signals import post_delete, post_save
@@ -62,6 +63,32 @@ class Instruction(models.Model):
         ordering = ['id']
 
 
+# 间隔规则表
+class IntervalRule(models.Model):
+    label = models.CharField(max_length=255, verbose_name="规则名称")
+    name = models.CharField(max_length=255, unique=True, blank=True, null=True, verbose_name="name")
+    Interval_rule_options = [(0, '等于'), (1, '小于'), (2, '大于')]
+    rule = models.PositiveSmallIntegerField(choices=Interval_rule_options, blank=True, null=True, verbose_name='间隔规则')
+    interval = models.DurationField(blank=True, null=True, verbose_name="间隔时间", help_text='例如：3 days, 22:00:00')
+    description = models.TextField(max_length=255, blank=True, null=True, verbose_name="说明")
+    operand_interval_rule_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="间隔规则ID")
+
+    def __str__(self):
+        return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if self.operand_interval_rule_id is None:
+            self.operand_interval_rule_id = uuid.uuid1()
+        if self.name is None or self.name == '':
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "间隔规则"
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
+
 # 作业基础信息表
 class Operation(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="name")
@@ -115,7 +142,7 @@ class Event(models.Model):
     label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
     name = models.CharField(max_length=255, db_index=True, unique=True, verbose_name="name")
     operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='from_oid', verbose_name="所属作业")
-    expression = models.TextField(max_length=1024, blank=True, null=True, default='completed', verbose_name="表达式", 
+    expression = models.TextField(max_length=1024, blank=True, null=True, default='completed', verbose_name="规则", 
         help_text='''
         说明：<br>
         1. 作业完成事件: completed<br>
@@ -132,7 +159,7 @@ class Event(models.Model):
         return str(self.label)
 
     class Meta:
-        verbose_name = "作业事件"
+        verbose_name = "事件"
         verbose_name_plural = verbose_name
         ordering = ['id']
 
@@ -186,34 +213,10 @@ class Event(models.Model):
         super().save(*args, **kwargs)
 
 
-# 间隔规则表
-class IntervalRule(models.Model):
-    label = models.CharField(max_length=255, verbose_name="规则名称")
-    name = models.CharField(max_length=255, unique=True, blank=True, null=True, verbose_name="name")
-    Interval_rule_options = [(0, '等于'), (1, '小于'), (2, '大于')]
-    rule = models.PositiveSmallIntegerField(choices=Interval_rule_options, blank=True, null=True, verbose_name='间隔规则')
-    interval = models.DurationField(blank=True, null=True, verbose_name="间隔时间", help_text='例如：3 days, 22:00:00')
-    description = models.TextField(max_length=255, blank=True, null=True, verbose_name="说明")
-    operand_interval_rule_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="间隔规则ID")
-
-    def __str__(self):
-        return str(self.label)
-
-    def save(self, *args, **kwargs):
-        if self.operand_interval_rule_id is None:
-            self.operand_interval_rule_id = uuid.uuid1()
-        if self.name is None or self.name == '':
-            self.name = f'{"_".join(lazy_pinyin(self.label))}'
-        super().save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = "间隔规则"
-        verbose_name_plural = verbose_name
-        ordering = ['id']
-
 
 # 作业事件路由作业表
 class EventRoute(models.Model):
+    service = models.ForeignKey('Service', on_delete=models.CASCADE, null=True, verbose_name='单元服务')
     event = models.ForeignKey(Event, on_delete=models.CASCADE, verbose_name="事件")
     operation = models.ForeignKey(Operation, on_delete=models.CASCADE, verbose_name="后续作业")
     passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0, verbose_name='复制表单数据')
@@ -286,6 +289,30 @@ class Service(models.Model):
         verbose_name = "单元服务"
         verbose_name_plural = verbose_name
         ordering = ['id']
+
+class BuessinessRule(models.Model):
+    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
+    name = models.CharField(max_length=255, db_index=True, unique=True, verbose_name="name")
+    expression = models.CharField(max_length=1024, blank=True, null=True, default='completed', verbose_name="规则")
+    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="事件描述")
+    buessiness_rule_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="业务规则ID")
+
+
+class ServiceOperations(models.Model):
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, verbose_name='单元服务')
+    operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='operation', null=True, verbose_name='作业')
+    buessiness_rule = models.ForeignKey(BuessinessRule, on_delete=models.CASCADE, null=True, verbose_name='内容检查')
+    next_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, null=True, related_name='next_operation', verbose_name='后续作业')
+    passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0, verbose_name='复制表单数据')
+    interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔")
+    is_specified = models.BooleanField(default=False, verbose_name="规定作业")  # 默认为：推荐作业
+    operation_route_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="作业路由ID")
+    class Meta:
+        verbose_name = '作业关系设置'
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
+
 
 
 # 服务事件表

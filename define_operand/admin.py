@@ -1,11 +1,15 @@
 from django.contrib import admin
 
-from .models import Operation, Event, EventRoute, Service, ServiceEvent, ServiceEventRoute, ServicePackage, ServicePackageEvent, ServicePackageEventRoute, Role, IntervalRule, Instruction, Event_instructions
+from .models import Operation, Event, EventRoute, Service, ServiceOperations, ServiceEvent, ServiceEventRoute, ServicePackage, ServicePackageEvent, ServicePackageEventRoute, Role, IntervalRule, Instruction, Event_instructions
 
 
 class EventInline(admin.TabularInline):
     model = Event
     extra = 0
+
+class ServiceOperationsInline(admin.TabularInline):
+    model = ServiceOperations
+    exclude = ['operation_route_id']
 
 @admin.register(Operation)
 class OperationAdmin(admin.ModelAdmin):
@@ -50,9 +54,9 @@ class EventAdmin(admin.ModelAdmin):
 #     ordering = ['id']
 
 
-class ServiceEventInline(admin.TabularInline):
-    model = ServiceEvent
-    extra = 0
+# class ServiceEventInline(admin.TabularInline):
+#     model = ServiceEvent
+#     extra = 0
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
@@ -60,7 +64,7 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('label', 'name_icpc'), ('managed_entity', 'priority'), ('first_operation', 'last_operation', ), ('operations', 'group'), ('name', 'service_id'))
+            'fields': (('label', 'name_icpc'), ('managed_entity', 'priority'), ('first_operation', 'last_operation', ), 'group', ('name', 'service_id'))
         }),
         ('界面设置', {
             'fields':('history_services_display', ('enable_recommanded_list', 'enable_queue_counter'), )
@@ -73,7 +77,7 @@ class ServiceAdmin(admin.ModelAdmin):
         }),
     )
     search_fields = ['name', 'label']
-    # inlines = [ServiceEventInline]
+    inlines = [ServiceOperationsInline]
     ordering = ['id']
     readonly_fields = ['name', 'service_id']
     autocomplete_fields = ['name_icpc', ]
