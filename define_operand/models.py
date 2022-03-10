@@ -1,5 +1,6 @@
 from tkinter import CASCADE
 from django.db import models
+from django.db.models import Q
 from django.dispatch import receiver
 from django.db.models.signals import post_delete, post_save
 import json
@@ -88,7 +89,33 @@ class IntervalRule(models.Model):
         verbose_name_plural = verbose_name
         ordering = ['id']
 
-# 间隔规则表
+
+# 频度规则表
+class FrequencyRule(models.Model):
+    label = models.CharField(max_length=255, verbose_name="规则名称")
+    name = models.CharField(max_length=255, unique=True, blank=True, null=True, verbose_name="name")
+    Cycle_options = [(0, '总共'), (1, '每天'), (2, '每周'), (3, '每月'), (4, '每季'), (5, '每年')]
+    cycle_option = models.PositiveSmallIntegerField(choices=Cycle_options, default=0, blank=True, null=True, verbose_name='周期')
+    times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="次数")
+    frequency_rule_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="频度规则ID")
+
+    def __str__(self):
+        return str(self.label)
+
+    def save(self, *args, **kwargs):
+        if self.frequency_rule_id is None:
+            self.frequency_rule_id = uuid.uuid1()
+        if self.name is None or self.name == '':
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "频度规则"
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
+
+# 业务规则表
 class BuessinessRule(models.Model):
     label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
     name = models.CharField(max_length=255, null=True, blank=True, verbose_name="name")
@@ -344,11 +371,14 @@ class ServiceOperationsShip(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, verbose_name='单元服务')
     operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='operation', null=True, verbose_name='作业')
     buessiness_rule = models.ForeignKey(BuessinessRule, on_delete=models.CASCADE, null=True, verbose_name='事件规则')
-    system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, blank=True, null=True, verbose_name='系统作业')
+    system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, limit_choices_to=Q(applicable__in = [0, 3]), blank=True, null=True, verbose_name='系统作业')
     next_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, blank=True, null=True, related_name='next_operation', verbose_name='后续作业')
     passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0, verbose_name='传递表单数据')
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔限制")
     service_operations_ship_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="作业关系ID")
+
+    def __str__(self):
+        return str(self.service) + '--' + str(self.operation)
 
     def save(self, *args, **kwargs):
         if self.service_operations_ship_id is None:
@@ -432,10 +462,9 @@ class ServicePackage(models.Model):
     name = models.CharField(max_length=255, unique=True, verbose_name="name")
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=255, verbose_name="名称")
-    first_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='first_service', blank=True, null=True, verbose_name="起始服务")
+    first_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='first_service', null=True, verbose_name="起始服务")
     last_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='last_service', blank=True, null=True, verbose_name="结束服务")
-    services = models.ManyToManyField(Service, blank=True, verbose_name="可选服务")
-    execute_datetime = models.DateTimeField(blank=True, null=True, verbose_name='执行时间')
+    duration = models.DurationField(blank=True, null=True, verbose_name="持续周期", help_text='例如：3 days, 22:00:00')
     service_package_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="服务包ID")
 
     def __str__(self):
@@ -460,12 +489,17 @@ class ServicePackage(models.Model):
 class ServicePackageServicesShip(models.Model):
     servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, verbose_name='服务包')
     service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='单元服务')
-    buessiness_rule = models.ForeignKey(BuessinessRule, on_delete=models.CASCADE, null=True, verbose_name='事件规则')
-    system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, blank=True, null=True, verbose_name='系统作业')
+    frequency_rule = models.ForeignKey(FrequencyRule, on_delete=models.CASCADE, null=True, verbose_name='频度')
+    duration = models.DurationField(blank=True, null=True, verbose_name="持续周期", help_text='例如：3 days, 22:00:00')
+    buessiness_rule = models.ForeignKey(BuessinessRule, on_delete=models.CASCADE,  blank=True, null=True, verbose_name='事件规则')
+    system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, limit_choices_to=Q(applicable__in = [1, 3]), blank=True, null=True, verbose_name='系统作业')
     next_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='next_service', verbose_name='后续服务')
-    passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0, verbose_name='传递表单数据')
+    passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0,  blank=True, null=True, verbose_name='传递表单数据')
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔限制")
     servicepackage_services_ship_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="服务关系ID")
+
+    def __str__(self):
+        return str(self.servicepackage) + '--' + str(self.service)
 
     def save(self, *args, **kwargs):
         if self.servicepackage_services_ship_id is None:

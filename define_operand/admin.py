@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BuessinessRule, SystemOperand, Operation, Event, EventRoute, Service, ServiceOperationsShip, ServiceEvent, ServiceEventRoute, ServicePackage, ServicePackageServicesShip, Role, IntervalRule, Instruction, Event_instructions
+from .models import Operation, Event, EventRoute, Service, ServiceOperationsShip, ServiceEvent, ServiceEventRoute, ServicePackage, ServicePackageServicesShip, Role, IntervalRule, BuessinessRule, SystemOperand, FrequencyRule, Instruction, Event_instructions
 
 
 @admin.register(Operation)
@@ -40,7 +40,7 @@ class EventAdmin(admin.ModelAdmin):
 
 class ServiceOperationsShipInline(admin.TabularInline):
     model = ServiceOperationsShip
-    exclude = ['operation_route_id']
+    exclude = ['service_operations_ship_id']
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
@@ -86,11 +86,11 @@ class ServicePackageServicesShipInline(admin.TabularInline):
 
 @admin.register(ServicePackage)
 class ServicePackageAdmin(admin.ModelAdmin):
-    list_display = ['name_icpc', 'label', 'name_icpc', 'id']
+    list_display = ['name_icpc', 'label', 'id']
     list_display_links = ['label', ]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), ('first_service', 'last_service', ), 'services', ('name', 'service_package_id'))
+            'fields': (('label', 'name_icpc'), ('first_service', 'last_service'), 'duration', ('name', 'service_package_id'))
         }),
     )
     search_fields = ['label']
@@ -110,6 +110,15 @@ class SystemOperandAdmin(admin.ModelAdmin):
 class BuessinessRuleAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'expression')
     search_fields = ('id', 'name')
+    readonly_fields = ['name', 'buessiness_rule_id']
+    ordering = ('id',)
+
+
+@admin.register(FrequencyRule)
+class FrequencyRuleAdmin(admin.ModelAdmin):
+    list_display = ('id', 'label', 'cycle_option', 'times')
+    search_fields = ('id', 'name')
+    readonly_fields = ['name', 'frequency_rule_id']
     ordering = ('id',)
 
 

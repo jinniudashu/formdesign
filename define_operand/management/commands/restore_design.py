@@ -3,7 +3,7 @@ import json
 
 from define.models import *
 from define_form.models import BaseModel, BaseForm, CombineForm, BuessinessForm
-from define_operand.models import ServiceEvent, ServiceEventRoute, ServicePackage, Service, Operation, Event, EventRoute, IntervalRule, Instruction, Event_instructions, Role
+from define_operand.models import ServicePackage, ServicePackageServicesShip, ServiceEvent, ServiceEventRoute, Service, ServiceOperationsShip, Operation, Event, EventRoute, BuessinessRule, SystemOperand, IntervalRule, Instruction, Event_instructions, Role
 from define_icpc.models import Icpc, icpc_list
 
 from datetime import timedelta
@@ -303,6 +303,8 @@ class Command(BaseCommand):
 
 
             # 删除所有数据
+            ServicePackageServicesShip.objects.all().delete()
+            ServiceOperationsShip.objects.all().delete()
             ServiceEventRoute.objects.all().delete()
             EventRoute.objects.all().delete()
             IntervalRule.objects.all().delete()
@@ -392,7 +394,7 @@ class Command(BaseCommand):
                     resource_knowledge=item['resource_knowledge'],
                 )
                 # 写入Service.operations 多对多字段
-                unit_service.operations.set([operation])
+                # unit_service.operations.set([operation])
                 # 写入Service.group 多对多字段
                 if item['group']:
                     groups=Role.objects.filter(role_id__in=item['group'])
