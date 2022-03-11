@@ -3,7 +3,7 @@ import json
 
 from define.models import *
 from define_form.models import BaseModel, BaseForm, CombineForm, BuessinessForm
-from define_operand.models import ServicePackage, ServicePackageServicesShip, ServiceEvent, ServiceEventRoute, Service, ServiceOperationsShip, Operation, Event, EventRoute, BuessinessRule, SystemOperand, IntervalRule, Instruction, Event_instructions, Role
+from define_operand.models import ServicePackage, ServicePackageServicesShip, Service, ServiceOperationsShip, Operation, Event, EventRoute, FrequencyRule, EventRule, SystemOperand, IntervalRule, Instruction, Event_instructions, Role
 from define_icpc.models import Icpc, icpc_list
 
 from datetime import timedelta
@@ -303,19 +303,35 @@ class Command(BaseCommand):
 
 
             # 删除所有数据
+            FrequencyRule.objects.all().delete()
+            EventRule.objects.all().delete()
+            SystemOperand.objects.all().delete()
+            IntervalRule.objects.all().delete()
+            Instruction.objects.all().delete()
+
             ServicePackageServicesShip.objects.all().delete()
             ServiceOperationsShip.objects.all().delete()
-            ServiceEventRoute.objects.all().delete()
             EventRoute.objects.all().delete()
-            IntervalRule.objects.all().delete()
             ServicePackage.objects.all().delete()
             Service.objects.all().delete()
             Operation.objects.all().delete()
-            Instruction.objects.all().delete()
             Event.objects.all().delete()
-            ServiceEvent.objects.all().delete()
             Event_instructions.objects.all().delete()
 
+            # 导入频率规则表
+            for item in design_data['frequencyrules']:
+                FrequencyRule.objects.create(**item)
+            print('导入频率规则表完成')
+
+            # 导入业务规则表
+            for item in design_data['buessinessrules']:
+                EventRule.objects.create(**item)
+            print('导入业务规则表完成')
+
+            # 导入系统作业表
+            for item in design_data['systemoperands']:
+                SystemOperand.objects.create(**item)
+            print('导入系统作业表完成')
 
             # 导入作业间隔规则表
             for item in design_data['operandintervalrules']:
@@ -339,10 +355,8 @@ class Command(BaseCommand):
                 else:
                     name_icpc = None
 
-                # 临时处理
                 if item['forms']:
-                    _forms = CombineForm.objects.get(combineform_id=item['forms'])
-                    forms = BuessinessForm.objects.get(name=_forms.name)
+                    forms = BuessinessForm.objects.get(buessiness_form_id=item['forms'])
                 else:
                     forms = None
 
@@ -500,18 +514,23 @@ class Command(BaseCommand):
                 )
 
                 # 临时处理
-                # 导入服务事件表
+                # 导入服务作业关系表
                 _operation = Operation.objects.get(operand_id=item['operation'])
-                ServiceEvent.objects.create(
-                    name=item['name'],
-                    label=item['label'],
-                    service=Service.objects.get(name=_operation.name),
-                    expression=item['expression'],
-                    description=item['description'],
-                    parameters=item['parameters'],
-                    fields=item['fields'],
-                )
-
+                _service = Service.objects.get(name=_operation.name)
+                next_operations = item['next_operations']
+                if item['expression'] == 'completed':
+                    _buessiness_rule = EventRule.objects.get(name='completed')
+                else:
+                    _buessiness_rule = None
+                for next_operation in next_operations:
+                    _next_operation = Operation.objects.get(operand_id=next_operation)
+                    ServiceOperationsShip.objects.create(
+                        service=_service,
+                        operation=_operation,
+                        next_operation=_next_operation,
+                        buessiness_rule=_buessiness_rule,
+                    )
+                
             print('导入事件表完成')
 
 
@@ -528,18 +547,6 @@ class Command(BaseCommand):
                     interval_rule=interval_rule,
                     event_route_id=item['event_route_id'],
                 )
-
-                # 临时处理
-                # 导入服务事件路由表
-                _event = Event.objects.get(event_id=item['event'])
-                _operation = Operation.objects.get(operand_id=item['operation'])
-                ServiceEventRoute.objects.create(
-                    service_event=ServiceEvent.objects.get(name=_event.name),
-                    service=Service.objects.get(name=_operation.name),
-                    is_specified=item['is_specified'],
-                    interval_rule=interval_rule,
-                )
-
 
         else:
             print('Cancel restore design data...')

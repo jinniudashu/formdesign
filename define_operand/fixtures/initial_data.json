@@ -60,7 +60,7 @@
         }
     },
     {
-        "model": "define_operand.BuessinessRule",
+        "model": "define_operand.EventRule",
         "pk": "1",
         "fields": {
             "label": "完成", 

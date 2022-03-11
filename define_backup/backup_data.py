@@ -52,15 +52,22 @@ def design_backup(modeladmin, request, queryset):
         'relatedfields': [],
         'choicefields': [],
         # 'components': [],
+        'componentsgroups': [],
         'basemodels': [],
         'baseforms': [],
         'combineforms': [],
+        'buessinessforms': [],
         'operations': [],
         'services': [],
+        'serviceoperationsships': [],
         'service_packages': [],
+        'servicepackageservicesships': [],
         'instructions': [],
         'events': [],
-        'operandintervalrules': [],
+        'intervalrules': [],
+        'frequencyrules': [],
+        'buessinessrules': [],
+        'systemoperands': [],
         'eventroutes': [],
     }
 
@@ -118,59 +125,74 @@ def design_backup(modeladmin, request, queryset):
             model['name_icpc'] = item.name_icpc.icpc_code
         design_data['choicefields'].append(model)
 
-    # for item in Component.objects.all():
-    #     design_data['components'].append(model_to_dict(item))
+    for item in ComponentsGroup.objects.all():
+        model = model_to_dict(item)
+        components=[]
+        for component in item.components.all():
+            components.append(component.field_id)
+        model['components'] = components
+        design_data['componentsgroups'].append(model)
 
     for item in BaseModel.objects.all():
         model = model_to_dict(item)
-
         components = []
         for component in item.components.all():
             components.append(model_to_dict(component))
         model['components'] = components
-        
         if item.name_icpc:
             model['name_icpc'] = item.name_icpc.icpc_code
-
         if model['managed_entity']:
-            managed_entity_name = []
-            for managed_entity in model['managed_entity']:
-                managed_entity_name.append(managed_entity.entity_id)
-            model['managed_entity'] = managed_entity_name
-
+            managed_entitys = []
+            for managed_entity in item.managed_entity.all():
+                managed_entitys.append(managed_entity.entity_id)
+            model['managed_entity'] = managed_entitys
         design_data['basemodels'].append(model)
 
-    # for item in BaseForm.objects.filter(is_inquiry=True):
     for item in BaseForm.objects.all():
         model = model_to_dict(item)
-
         components = []
         for component in item.components.all():
             components.append(model_to_dict(component))
         model['components'] = components
-
         model['basemodel'] = item.basemodel.basemodel_id
         model.pop('meta_data')
-
         design_data['baseforms'].append(model)
 
     for item in CombineForm.objects.all():
         model = model_to_dict(item)
-
         forms = []
         for form in item.forms.all():
             _form = model_to_dict(form)
             forms.append(_form['baseform_id'])
         model['forms'] = forms
-        
         if item.name_icpc:
             model['name_icpc'] = item.name_icpc.icpc_code
-
         if model['managed_entity']:
             model['managed_entity'] = item.managed_entity.entity_id
         model.pop('meta_data')  # 去掉meta_data字段, 因为导入的时候会自动生成
-
         design_data['combineforms'].append(model)
+
+
+    for item in BuessinessForm.objects.all():
+        model = model_to_dict(item)
+        if item.name_icpc:
+            model['name_icpc'] = item.name_icpc.icpc_code
+        components = []
+        for component in item.components.all():
+            components.append(component.field_id)
+        model['components'] = components
+        if model['components_groups']:
+            components_groups = []
+            for components_group in item.components_groups.all():
+                components_groups.append(components_group.components_group_id)
+            model['components_groups'] = components_groups
+        if model['managed_entity']:
+            managed_entitys = []
+            for managed_entity in item.managed_entity.all():
+                managed_entitys.append(managed_entity.entity_id)
+            model['managed_entity'] = managed_entitys
+        design_data['buessinessforms'].append(model)
+
 
     for item in Operation.objects.all():
         model = model_to_dict(item)
@@ -179,7 +201,7 @@ def design_backup(modeladmin, request, queryset):
             model['name_icpc'] = item.name_icpc.icpc_code
 
         if model['forms']:
-            model['forms'] = item.forms.combineform_id
+            model['forms'] = item.forms.buessiness_form_id
 
         if model['group']:
             group_id = []
@@ -197,12 +219,6 @@ def design_backup(modeladmin, request, queryset):
 
         if model['first_operation']:
             model['first_operation'] = item.first_operation.operand_id
-
-        if model['operations']:
-            operations_name = []
-            for operation in model['operations']:
-                operations_name.append(operation.operand_id)
-            model['operations'] = operations_name
 
         if model['group']:
             group_id = []
@@ -248,7 +264,19 @@ def design_backup(modeladmin, request, queryset):
     for item in IntervalRule.objects.all():
         model = model_to_dict(item)
         model['interval'] = str(item.interval)
-        design_data['operandintervalrules'].append(model)
+        design_data['intervalrules'].append(model)
+
+    for item in FrequencyRule.objects.all():
+        model = model_to_dict(item)
+        design_data['frequencyrules'].append(model)
+
+    for item in EventRule.objects.all():
+        model = model_to_dict(item)
+        design_data['buessinessrules'].append(model)
+
+    for item in SystemOperand.objects.all():
+        model = model_to_dict(item)
+        design_data['systemoperands'].append(model)
 
     for item in EventRoute.objects.all():
         model = model_to_dict(item)

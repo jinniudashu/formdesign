@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Operation, Event, EventRoute, Service, ServiceOperationsShip, ServiceEvent, ServiceEventRoute, ServicePackage, ServicePackageServicesShip, Role, IntervalRule, BuessinessRule, SystemOperand, FrequencyRule, Instruction, Event_instructions
+from .models import Operation, Event, EventRoute, Service, ServiceOperationsShip, ServicePackage, ServicePackageServicesShip, Role, IntervalRule, EventRule, EventExpression, SystemOperand, FrequencyRule, Instruction, Event_instructions
 
 
 @admin.register(Operation)
@@ -9,7 +9,7 @@ class OperationAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('label', 'name_icpc'), ('forms', 'priority' ), 'group', ('name', 'operand_id'))
+            'fields': (('label', 'name_icpc'), ('forms', 'priority' ), 'group', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'operand_id'))
         }),
         ('作业管理', {
             'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
@@ -48,7 +48,7 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('label', 'name_icpc'), ('managed_entity', 'priority'), ('first_operation', 'last_operation', ), 'group', ('name', 'service_id'))
+            'fields': (('label', 'name_icpc'), ('managed_entity', 'priority'), ('first_operation', 'last_operation', ), 'group', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'service_id'))
         }),
         ('界面设置', {
             'fields':('history_services_display', ('enable_recommanded_list', 'enable_queue_counter'), )
@@ -66,19 +66,6 @@ class ServiceAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'service_id']
     autocomplete_fields = ['name_icpc', ]
 
-class ServiceEventRouteInline(admin.TabularInline):
-    model = ServiceEvent.next_services.through
-    exclude = ['service_event_route_id']
-
-@admin.register(ServiceEvent)
-class ServiceEventAdmin(admin.ModelAdmin):
-    list_display = ['label', 'service', 'name', 'id']
-    list_display_links = ['label', 'name', 'service',]
-    search_fields = ['name', 'label']
-    readonly_fields = ['service_event_id']
-    inlines = [ServiceEventRouteInline]
-    ordering = ['id']
-
 
 class ServicePackageServicesShipInline(admin.TabularInline):
     model = ServicePackageServicesShip
@@ -90,7 +77,7 @@ class ServicePackageAdmin(admin.ModelAdmin):
     list_display_links = ['label', ]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), ('first_service', 'last_service'), 'duration', ('name', 'service_package_id'))
+            'fields': (('label', 'name_icpc'), ('first_service', 'last_service'), 'duration', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'service_package_id'))
         }),
     )
     search_fields = ['label']
@@ -106,11 +93,16 @@ class SystemOperandAdmin(admin.ModelAdmin):
     ordering = ('id',)
 
 
-@admin.register(BuessinessRule)
-class BuessinessRuleAdmin(admin.ModelAdmin):
+class EventExpressionInline(admin.TabularInline):
+    model = EventExpression
+    exclude = ['label', 'name', 'event_expression_id']
+
+@admin.register(EventRule)
+class EventRuleAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'expression')
     search_fields = ('id', 'name')
-    readonly_fields = ['name', 'buessiness_rule_id']
+    readonly_fields = ['name', 'event_rule_id']
+    inlines = [EventExpressionInline]
     ordering = ('id',)
 
 
