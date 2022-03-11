@@ -122,6 +122,7 @@ class EventRule(models.Model):
     expression = models.CharField(max_length=1024, blank=True, null=True, default='completed', verbose_name="表达式")
     Detection_scope = [(0, '所有历史表单'), (1, '本次服务表单'), (2, '单元服务表单')]
     detection_scope = models.PositiveSmallIntegerField(choices=Detection_scope, default=1, blank=True, null=True, verbose_name='检测范围')
+    weight = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="权重")
     description = models.TextField(max_length=255, blank=True, null=True, verbose_name="事件描述")
     event_rule_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="业务规则ID")
 
@@ -463,6 +464,7 @@ class ServicePackageServicesShip(models.Model):
     system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, limit_choices_to=Q(applicable__in = [1, 3]), blank=True, null=True, verbose_name='系统作业')
     next_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='next_service', verbose_name='后续服务')
     passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0,  blank=True, null=True, verbose_name='传递表单数据')
+    next_service_confirmation_required = models.BooleanField(default=False, verbose_name='需要后续服务确认')
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔限制")
     servicepackage_services_ship_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="服务关系ID")
 
