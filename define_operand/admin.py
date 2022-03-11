@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Operation, Event, EventRoute, Service, ServiceOperationsShip, ServicePackage, ServicePackageServicesShip, Role, IntervalRule, EventRule, EventExpression, SystemOperand, FrequencyRule, Instruction, Event_instructions
+from .models import Operation, Event, EventRoute, Service, OperationsSetting, ServicePackage, ServicesSetting, Role, IntervalRule, EventRule, EventExpression, SystemOperand, FrequencyRule, Instruction, Event_instructions
 
 
 @admin.register(Operation)
@@ -38,9 +38,9 @@ class EventAdmin(admin.ModelAdmin):
     ordering = ['id']
 
 
-class ServiceOperationsShipInline(admin.TabularInline):
-    model = ServiceOperationsShip
-    exclude = ['service_operations_ship_id']
+class OperationsSettingInline(admin.TabularInline):
+    model = OperationsSetting
+    exclude = ['operations_setting_id']
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
@@ -61,15 +61,15 @@ class ServiceAdmin(admin.ModelAdmin):
         }),
     )
     search_fields = ['name', 'label']
-    inlines = [ServiceOperationsShipInline]
+    inlines = [OperationsSettingInline]
     ordering = ['id']
     readonly_fields = ['name', 'service_id']
     autocomplete_fields = ['name_icpc', ]
 
 
-class ServicePackageServicesShipInline(admin.TabularInline):
-    model = ServicePackageServicesShip
-    exclude = ['servicepackage_services_ship_id']
+class ServicesSettingInline(admin.TabularInline):
+    model = ServicesSetting
+    exclude = ['services_setting_id']
 
 @admin.register(ServicePackage)
 class ServicePackageAdmin(admin.ModelAdmin):
@@ -82,7 +82,7 @@ class ServicePackageAdmin(admin.ModelAdmin):
     )
     search_fields = ['label']
     readonly_fields = ['name', 'service_package_id']
-    inlines = [ServicePackageServicesShipInline]
+    inlines = [ServicesSettingInline]
     ordering = ['id']
 
 

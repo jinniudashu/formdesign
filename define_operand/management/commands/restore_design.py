@@ -3,7 +3,7 @@ import json
 
 from define.models import *
 from define_form.models import BaseModel, BaseForm, CombineForm, BuessinessForm
-from define_operand.models import ServicePackage, ServicePackageServicesShip, Service, ServiceOperationsShip, Operation, Event, EventRoute, FrequencyRule, EventRule, SystemOperand, IntervalRule, Instruction, Event_instructions, Role
+from define_operand.models import ServicePackage, ServicesSetting, Service, OperationsSetting, Operation, Event, EventRoute, FrequencyRule, EventRule, SystemOperand, IntervalRule, Instruction, Event_instructions, Role
 from define_icpc.models import Icpc, icpc_list
 
 from datetime import timedelta
@@ -309,8 +309,8 @@ class Command(BaseCommand):
             IntervalRule.objects.all().delete()
             Instruction.objects.all().delete()
 
-            ServicePackageServicesShip.objects.all().delete()
-            ServiceOperationsShip.objects.all().delete()
+            ServicesSetting.objects.all().delete()
+            OperationsSetting.objects.all().delete()
             EventRoute.objects.all().delete()
             ServicePackage.objects.all().delete()
             Service.objects.all().delete()
@@ -524,7 +524,7 @@ class Command(BaseCommand):
                     _buessiness_rule = None
                 for next_operation in next_operations:
                     _next_operation = Operation.objects.get(operand_id=next_operation)
-                    ServiceOperationsShip.objects.create(
+                    OperationsSetting.objects.create(
                         service=_service,
                         operation=_operation,
                         next_operation=_next_operation,

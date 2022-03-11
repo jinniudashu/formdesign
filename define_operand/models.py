@@ -394,9 +394,7 @@ class Service(models.Model):
         ordering = ['id']
 
 
-class ServiceOperationsShip(models.Model):
-    # label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
-    # name = models.CharField(max_length=255, blank=True, null=True, verbose_name="name")
+class OperationsSetting(models.Model):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, verbose_name='单元服务')
     operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='operation', null=True, verbose_name='作业')
     event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE, null=True, verbose_name='事件规则')
@@ -404,16 +402,14 @@ class ServiceOperationsShip(models.Model):
     next_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, blank=True, null=True, related_name='next_operation', verbose_name='后续作业')
     passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0, verbose_name='传递表单数据')
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔限制")
-    service_operations_ship_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="作业关系ID")
+    operations_setting_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="作业关系ID")
 
     def __str__(self):
         return str(self.service) + '--' + str(self.operation)
 
     def save(self, *args, **kwargs):
-        if self.service_operations_ship_id is None:
-            self.service_operations_ship_id = uuid.uuid1()
-        # if self.name is None or self.name == '':
-        #     self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        if self.operations_setting_id is None:
+            self.operations_setting_id = uuid.uuid1()
         super().save(*args, **kwargs)
 
     class Meta:
@@ -453,9 +449,7 @@ class ServicePackage(models.Model):
         ordering = ['id']
 
 
-class ServicePackageServicesShip(models.Model):
-    # label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
-    # name = models.CharField(max_length=255, blank=True, null=True, verbose_name="name")
+class ServicesSetting(models.Model):
     servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, verbose_name='服务包')
     service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='单元服务')
     frequency_rule = models.ForeignKey(FrequencyRule, on_delete=models.CASCADE, null=True, verbose_name='频度')
@@ -466,14 +460,14 @@ class ServicePackageServicesShip(models.Model):
     passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0,  blank=True, null=True, verbose_name='传递表单数据')
     next_service_confirmation_required = models.BooleanField(default=False, verbose_name='需要后续服务确认')
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔限制")
-    servicepackage_services_ship_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="服务关系ID")
+    services_setting_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="服务关系ID")
 
     def __str__(self):
         return str(self.servicepackage) + '--' + str(self.service)
 
     def save(self, *args, **kwargs):
-        if self.servicepackage_services_ship_id is None:
-            self.servicepackage_services_ship_id = uuid.uuid1()
+        if self.services_setting_id is None:
+            self.services_setting_id = uuid.uuid1()
         # if self.name is None or self.name == '':
         #     self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)

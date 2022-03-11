@@ -60,6 +60,18 @@
         }
     },
     {
+        "model": "define_operand.SystemOperand",
+        "pk": "6",
+        "fields": {
+            "label": "发送提醒消息", 
+            "name": "send_message", 
+            "func": "send_message", 
+            "parameters": "user_id, message_type, message_content", 
+            "description": "",
+            "applicable": 3
+        }
+    },
+    {
         "model": "define_operand.EventRule",
         "pk": "1",
         "fields": {
