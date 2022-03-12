@@ -554,16 +554,17 @@ class Command(BaseCommand):
                 _service = Service.objects.get(name=_operation.name)
                 next_operations = item['next_operations']
                 if item['expression'] == 'completed':
-                    _buessiness_rule = EventRule.objects.get(name='completed')
+                    _event_rule = EventRule.objects.get(name='completed')
                 else:
-                    _buessiness_rule = None
+                    _event_rule = None
                 for next_operation in next_operations:
                     _next_operation = Operation.objects.get(operand_id=next_operation)
+                    print('EventService:', _service, _operation, _next_operation, _event_rule)
                     OperationsSetting.objects.create(
                         service=_service,
                         operation=_operation,
                         next_operation=_next_operation,
-                        buessiness_rule=_buessiness_rule,
+                        event_rule=_event_rule,
                     )
                 
             print('导入事件表完成')
