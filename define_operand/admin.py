@@ -13,11 +13,11 @@ class BuessinessFormAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), ('components', 'components_groups'), 'description', 'meta_data', ('name', 'buessiness_form_id'))
+            'fields': (('label', 'name_icpc'), ('components', 'components_groups'), 'description', 'meta_data', ('name', 'hssc_id'))
         }),
     )
     search_fields = ['name', 'label']
-    readonly_fields = ['name', 'buessiness_form_id', 'meta_data']
+    readonly_fields = ['hssc_id', 'meta_data']
     inlines = [FormEntityShipInline]
     autocomplete_fields = ['name_icpc',]
 
@@ -103,7 +103,7 @@ class RoleAdmin(admin.ModelAdmin):
     list_display = ['label', 'id']
     list_display_links = ['label', ]
     search_fields = ['label']
-    readonly_fields = ['name', 'role_id']
+    readonly_fields = ['name', 'hssc_id']
     ordering = ['id']
 
 @admin.register(Event)

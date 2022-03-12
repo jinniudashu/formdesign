@@ -130,7 +130,7 @@ def baseform_m2m_changed_handler(sender, instance, action, **kwargs):
         field = {}
         field['name'] = component.name
         field['label'] = component.label
-        field['field_id'] = component.field_id
+        field['hssc_id'] = component.hssc_id
         _type = component.content_object._meta.object_name
         if _type == 'CharacterField':
             field['type'] = 'string'

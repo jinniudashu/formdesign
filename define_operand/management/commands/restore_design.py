@@ -34,7 +34,7 @@ class Command(BaseCommand):
             # 导入DicDetail表
             for item in design_data['dicdetails']:
                 # print('DicDetail:', item)
-                diclist = DicList.objects.get(dic_id=item['diclist'])
+                diclist = DicList.objects.get(hssc_id=item['diclist'])
                 if item['icpc']:
                     icpc = Icpc.objects.get(icpc_code=item['icpc'])
                 else:
@@ -44,7 +44,7 @@ class Command(BaseCommand):
                     diclist=diclist,
                     item=item['item'],
                     icpc=icpc,
-                    item_id=item['item_id'],
+                    hssc_id=item['hssc_id'],
                 )
 
             print('导入字典表完成')
@@ -75,7 +75,6 @@ class Command(BaseCommand):
             CharacterField.objects.all().delete()
             NumberField.objects.all().delete()
             DTField.objects.all().delete()
-            ChoiceField.objects.all().delete()
             RelatedField.objects.all().delete()
             # 导入字段表
             for item in design_data['boolfields']:
@@ -91,7 +90,7 @@ class Command(BaseCommand):
                     type=item['type'],
                     required=item['required'],
                     default=item['default'],
-                    field_id=item['field_id'],
+                    hssc_id=item['hssc_id'],
                 )
             print('导入布尔型字段表完成')
 
@@ -109,7 +108,7 @@ class Command(BaseCommand):
                     length=item['length'],
                     required=item['required'],
                     default=item['default'],
-                    field_id=item['field_id'],
+                    hssc_id=item['hssc_id'],
                 )
             print('导入字符型字段表完成')
 
@@ -132,7 +131,7 @@ class Command(BaseCommand):
                     unit=item['unit'],
                     default=item['default'],
                     required=item['required'],
-                    field_id=item['field_id'],
+                    hssc_id=item['hssc_id'],
                 )
             print('导入数值型字段表完成')
 
@@ -149,41 +148,24 @@ class Command(BaseCommand):
                     type=item['type'],
                     default_now=item['default_now'],
                     required=item['required'],
-                    field_id=item['field_id'],
+                    hssc_id=item['hssc_id'],
                 )
             print('导入日期型字段表完成')
 
-            for item in design_data['choicefields']:
-                if item['name_icpc']:
-                    name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
-                else:
-                    name_icpc = None
-
-                ChoiceField.objects.create(
-                    name=item['name'],
-                    name_icpc=name_icpc,
-                    label=item['label'],
-                    type=item['type'],
-                    options=item['options'],
-                    default_first=item['default_first'],
-                    required=item['required'],
-                    field_id=item['field_id'],
-                )
-            print('导入选择型字段表完成')
 
             for item in design_data['relatedfields']:
                 if item['name_icpc']:
                     name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
                 else:
                     name_icpc = None
-                related_content=RelateFieldModel.objects.get(relate_field_model_id=item['related_content'])
+                related_content=RelateFieldModel.objects.get(hssc_id=item['related_content'])
                 RelatedField.objects.create(
                     name=item['name'],
                     name_icpc=name_icpc,
                     label=item['label'],
                     type=item['type'],
                     related_content=related_content,
-                    field_id=item['field_id'],
+                    hssc_id=item['hssc_id'],
                 )
             print('导入关联型字段表完成')
 
@@ -192,14 +174,14 @@ class Command(BaseCommand):
                 if item['components']:
                     components = []
                     for component in item['components']:
-                        components.append(Component.objects.get(field_id=component))
+                        components.append(Component.objects.get(hssc_id=component))
                 else:
                     components=None
 
                 components_group = ComponentsGroup.objects.create(
                     name=item['name'],
                     label=item['label'],
-                    components_group_id=item['components_group_id'],
+                    hssc_id=item['hssc_id'],
                 )
                 components_group.components.set(components)
 
@@ -228,12 +210,12 @@ class Command(BaseCommand):
                 # 导入多对多字段
                 _components=[]
                 for index, component in enumerate(item['components']):
-                    _components.append(component['field_id'])
-                components=Component.objects.filter(field_id__in=_components)
+                    _components.append(component['hssc_id'])
+                components=Component.objects.filter(hssc_id__in=_components)
                 basemodel.components.set(components)
 
                 # 导入多对多字段
-                managedentities=ManagedEntity.objects.filter(entity_id__in=item['managed_entity'])
+                managedentities=ManagedEntity.objects.filter(hssc_id__in=item['managed_entity'])
                 basemodel.managed_entity.set(managedentities)
             
             print('导入基础模型表完成')
@@ -252,8 +234,8 @@ class Command(BaseCommand):
                 # 导入多对多字段
                 _components=[]
                 for index, component in enumerate(item['components']):
-                    _components.append(component['field_id'])
-                components=Component.objects.filter(field_id__in=_components)
+                    _components.append(component['hssc_id'])
+                components=Component.objects.filter(hssc_id__in=_components)
                 baseform.components.set(components)
 
             print('导入基础表单表完成')
@@ -265,7 +247,7 @@ class Command(BaseCommand):
                 else:
                     name_icpc = None
                 if item['managed_entity']:
-                    managed_entity=ManagedEntity.objects.get(entity_id=item['managed_entity'])
+                    managed_entity=ManagedEntity.objects.get(hssc_id=item['managed_entity'])
                 else:
                     managed_entity=None
                 combineform = CombineForm.objects.create(
@@ -304,14 +286,14 @@ class Command(BaseCommand):
                     label = item['label'],
                     description = item['description'],
                     meta_data = item['meta_data'],
-                    buessiness_form_id = item['buessiness_form_id'],
+                    hssc_id = item['hssc_id'],
                 )
 
                 # 创建表单内容的多对多字段
                 if item['components']:
                     components = []
                     for component in item['components']:
-                        components.append(Component.objects.get(field_id=component))
+                        components.append(Component.objects.get(hssc_id=component))
                     buessiness_form.components.set(components)
                 else:
                     components=None
@@ -319,7 +301,7 @@ class Command(BaseCommand):
                 if item['components_groups']:
                     components_groups = []
                     for components_group in item['components_groups']:
-                        components_groups.append(ComponentsGroup.objects.get(components_group_id=components_group))
+                        components_groups.append(ComponentsGroup.objects.get(hssc_id=components_group))
                     buessiness_form.components_groups.set(components_groups)
                 else:
                     components_groups=None
@@ -327,7 +309,7 @@ class Command(BaseCommand):
                 if item['managed_entity']:
                     managed_entities = []
                     for managed_entity in item['managed_entity']:
-                        managed_entities.append(ManagedEntity.objects.get(entity_id=managed_entity))
+                        managed_entities.append(ManagedEntity.objects.get(hssc_id=managed_entity))
                     buessiness_form.managed_entities.set(managed_entities)
                 else:
                     managed_entities=None
@@ -355,7 +337,7 @@ class Command(BaseCommand):
                     rule=item['rule'],
                     interval=interval,
                     description=item['description'],
-                    operand_interval_rule_id=item['operand_interval_rule_id'],
+                    hssc_id=item['hssc_id'],
                 )
             print('导入作业间隔规则表完成')
 
@@ -426,7 +408,7 @@ class Command(BaseCommand):
 
                 # 写入Operation.group 多对多字段
                 if item['group']:
-                    groups=Role.objects.filter(role_id__in=item['group'])
+                    groups=Role.objects.filter(hssc_id__in=item['group'])
                     operation.group.set(groups)
 
 
@@ -455,7 +437,7 @@ class Command(BaseCommand):
                 # unit_service.operations.set([operation])
                 # 写入Service.group 多对多字段
                 if item['group']:
-                    groups=Role.objects.filter(role_id__in=item['group'])
+                    groups=Role.objects.filter(hssc_id__in=item['group'])
                     unit_service.group.set(groups)
 
             print('导入作业表完成')

@@ -91069,21 +91069,6 @@
     ],
     "icpc10_test_results_and_statistics": [
         {
-            "id": 1,
-            "icpc_code": "A6001",
-            "icode": "A60",
-            "iname": "Result test/procedure",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "Resulttest/procedure"
-        },
-        {
             "id": 2,
             "icpc_code": "A6101",
             "icode": "A61",

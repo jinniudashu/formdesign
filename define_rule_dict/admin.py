@@ -11,27 +11,27 @@ class EventExpressionInline(admin.TabularInline):
 class EventRuleAdmin(admin.ModelAdmin):
     list_display = ('label', 'name', 'description', 'detection_scope', 'weight', 'id')
     list_display_links = ['label', 'name', 'description']
-    readonly_fields = ['expression', 'name', 'event_rule_id']
+    readonly_fields = ['expression', 'hssc_id']
     inlines = [EventExpressionInline]
     ordering = ('id',)
 
 
 @admin.register(FrequencyRule)
 class FrequencyRuleAdmin(admin.ModelAdmin):
-    list_display = ('label', 'cycle_option', 'times', 'id')
-    list_display_links = ['label', 'cycle_option', 'times']
-    readonly_fields = ['name', 'frequency_rule_id']
+    list_display = ('cycle_option', 'times', 'id')
+    list_display_links = ['cycle_option', 'times']
+    # readonly_fields = ['hssc_id']
     ordering = ('id',)
 
 
 @admin.register(IntervalRule)
 class IntervalRuldAdmin(admin.ModelAdmin):
-    list_display = ['label', 'name', 'rule', 'interval', 'id']
-    list_display_links = ['label', 'name', 'rule', 'interval']
+    list_display = ['rule', 'interval', 'id']
+    list_display_links = ['rule', 'interval']
     fieldsets = (
         (None, {
             'fields': ('label', ('rule', 'interval'), 'description', ('name', 'operand_interval_rule_id'))
         }),
     )
-    readonly_fields = ['name', 'operand_interval_rule_id']
+    # readonly_fields = ['hssc_id']
     ordering = ['id']

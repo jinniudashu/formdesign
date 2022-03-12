@@ -7,6 +7,7 @@ import uuid
 
 from pypinyin import lazy_pinyin
 
+from hsscbase_class import HsscBase
 from define.models import ManagedEntity, Component, ComponentsGroup
 from define_icpc.models import Icpc
 from define_rule_dict.models import EventRule, FrequencyRule, IntervalRule
@@ -14,23 +15,18 @@ from .utils import keyword_search
 
 
 # 业务表单定义
-class BuessinessForm(models.Model):
-    name = models.CharField(max_length=100, unique=True, verbose_name="name")
+class BuessinessForm(HsscBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
-    label = models.CharField(max_length=100, unique=True, verbose_name="表单名称")
     components = models.ManyToManyField(Component, blank=True, verbose_name="字段")
     components_groups = models.ManyToManyField(ComponentsGroup, blank=True, verbose_name="组件")
     managed_entities = models.ManyToManyField(ManagedEntity, through='FormEntityShip', blank=True, verbose_name="隶属实体")
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
     meta_data = models.JSONField(null=True, blank=True, verbose_name="元数据")
-    buessiness_form_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="业务表单ID")
 
     def __str__(self):
         return str(self.label)
 
     def save(self, *args, **kwargs):
-        if self.buessiness_form_id is None:
-            self.buessiness_form_id = uuid.uuid1()
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
@@ -44,7 +40,7 @@ class BuessinessForm(models.Model):
             meta_data = {}
         meta_data['name'] = self.name
         meta_data['label'] = self.label
-        meta_data['buessiness_form_id'] = str(self.buessiness_form_id)
+        meta_data['hssc_id'] = str(self.hssc_id)
         # 更新meta_data，类型为dict
         self.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
 
@@ -70,7 +66,7 @@ class BuessinessForm(models.Model):
             field = {}
             field['name'] = component.name
             field['label'] = component.label
-            field['field_id'] = component.field_id
+            field['hssc_id'] = component.hssc_id
             _type = component.content_object._meta.object_name
             if _type == 'CharacterField':
                 field['type'] = 'string'
@@ -103,19 +99,13 @@ def buessiness_form_components_groups_changed_handler(sender, instance, action, 
 
 
 # 表单和实体关系表
-class FormEntityShip(models.Model):
+class FormEntityShip(HsscBase):
     entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, verbose_name="隶属实体")
     form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="业务表单")
     is_base_infomation = models.BooleanField(default=False, verbose_name="基本信息表")
-    form_entity_ship_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="实体表单关系ID")
 
     def __str__(self):
         return str(self.entity) + '--' + str(self.form)
-
-    def save(self, *args, **kwargs):
-        if self.form_entity_ship_id is None:
-            self.form_entity_ship_id = uuid.uuid1()
-        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = '表单和实体关系'
@@ -123,18 +113,13 @@ class FormEntityShip(models.Model):
 
 
 # 角色表
-class Role(models.Model):
-    name = models.CharField(max_length=100, unique=True, verbose_name="name")
-    label = models.CharField(max_length=255, verbose_name="名称")
+class Role(HsscBase):
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="角色描述")
-    role_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="角色ID")
 
     def __str__(self):
         return str(self.label)
 
     def save(self, *args, **kwargs):
-        if self.role_id is None:
-            self.role_id = uuid.uuid1()
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
@@ -146,21 +131,13 @@ class Role(models.Model):
 
 
 # 指令表
-class Instruction(models.Model):
-    name = models.CharField(max_length=100, db_index=True, unique=True, verbose_name="name")
-    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="指令名称")
+class Instruction(HsscBase):
     code = models.CharField(max_length=10, verbose_name="指令代码")
     func = models.CharField(max_length=100, verbose_name="操作函数")
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="指令描述")
-    instruction_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="指令ID")
 
     def __str__(self):
         return str(self.name)
-
-    def save(self, *args, **kwargs):
-        if self.instruction_id is None:
-            self.instruction_id = uuid.uuid1()
-        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "指令"
@@ -168,22 +145,17 @@ class Instruction(models.Model):
         ordering = ['id']
 
 
-class SystemOperand(models.Model):
-    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
-    name = models.CharField(max_length=255, unique=True, verbose_name="name")
+class SystemOperand(HsscBase):
     func = models.CharField(max_length=255, blank=True, null=True, verbose_name="内部实现函数")
     parameters = models.CharField(max_length=255, blank=True, null=True, verbose_name="参数")
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="描述")
     Applicable = [(0, '作业'), (1, '单元服务'), (2, '服务包'), (3, '全部')]
     applicable = models.PositiveSmallIntegerField(choices=Applicable, default=1, verbose_name='适用范围')
-    system_action_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="系统动作ID")
 
     def __str__(self):
         return str(self.label)
 
     def save(self, *args, **kwargs):
-        if self.system_action_id is None:
-            self.system_action_id = uuid.uuid1()
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
@@ -305,7 +277,7 @@ class Event(models.Model):
                 field_name = form_name + '-' + _field['name']
                 field_label = _field['label']
                 field_type = _field['type']
-                field_id = _field['field_id']
+                field_id = _field['hssc_id']
                 field_names.append(field_name)
                 fields.append(str((field_name, field_label, field_type, field_id)))
 
