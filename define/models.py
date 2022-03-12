@@ -7,6 +7,7 @@ from django.db.models import Q
 import uuid
 from pypinyin import Style, lazy_pinyin
 
+from .hssc_class import Hssc
 from define_icpc.models import Icpc
 
 
