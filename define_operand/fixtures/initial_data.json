@@ -70,15 +70,5 @@
             "description": "",
             "applicable": 3
         }
-    },
-    {
-        "model": "define_operand.EventRule",
-        "pk": "1",
-        "fields": {
-            "label": "完成", 
-            "name": "completed", 
-            "expression": "completed", 
-            "description": "完成"
-        }
     }
 ]

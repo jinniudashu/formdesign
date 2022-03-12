@@ -2,10 +2,9 @@ from django.core.management import BaseCommand
 import json
 
 from define.models import *
-from define_form.models import BaseModel, BaseForm, CombineForm, BuessinessForm
-from define_operand.models import ServicePackage, ServicesSetting, Service, OperationsSetting, Operation, Event, EventRoute, FrequencyRule, EventRule, SystemOperand, IntervalRule, Instruction, Event_instructions, Role
+from define_operand.models import BuessinessForm, ServicePackage, ServicesSetting, Service, OperationsSetting, Operation, SystemOperand, Instruction, Event, Event_instructions, Role
 from define_icpc.models import Icpc, icpc_list
-
+from define_rule_dict.models import EventRule, EventExpression, FrequencyRule, IntervalRule
 from datetime import timedelta
 import re
 
@@ -23,13 +22,6 @@ class Command(BaseCommand):
             # 读取备份数据文件
             with open('design_data_backup.json', encoding="utf8") as f:
                 design_data = json.loads(f.read())
-
-            # 导入角色表
-            Role.objects.all().delete()
-            for item in design_data['roles']:
-                # print('Role:', item)
-                Role.objects.create(**item)
-            print('导入角色表完成')
 
             RelateFieldModel.objects.all().delete()
             # 导入DicList表，自动插入RelateFieldModel表内容
@@ -77,6 +69,7 @@ class Command(BaseCommand):
             # ******************************************************
             # 导入字段表、表单表、组合表、操作表、服务表、指令表、事件表
             # ******************************************************
+            ComponentsGroup.objects.all().delete()
             Component.objects.all().delete()
             BoolField.objects.all().delete()
             CharacterField.objects.all().delete()
@@ -195,6 +188,24 @@ class Command(BaseCommand):
             print('导入关联型字段表完成')
 
 
+            for item in design_data['componentsgroups']:
+                if item['components']:
+                    components = []
+                    for component in item['components']:
+                        components.append(Component.objects.get(field_id=component))
+                else:
+                    components=None
+
+                components_group = ComponentsGroup.objects.create(
+                    name=item['name'],
+                    label=item['label'],
+                    components_group_id=item['components_group_id'],
+                )
+                components_group.components.set(components)
+
+
+            # 倒入旧表单
+            from define_form.models import BaseModel, BaseForm, CombineForm
             BaseModel.objects.all().delete()
             BaseForm.objects.all().delete()
             CombineForm.objects.all().delete()
@@ -247,7 +258,7 @@ class Command(BaseCommand):
 
             print('导入基础表单表完成')
 
-            # 导入组合表单表
+            #  导入组合表单表
             for item in design_data['combineforms']:
                 if item['name_icpc']:
                     name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
@@ -279,61 +290,63 @@ class Command(BaseCommand):
 
             print('导入组合表单表完成')
 
-            # 临时处理BuessinessForm的输入导入
+            # 导入BuessinessForm
             BuessinessForm.objects.all().delete()
-            # 根据组合表单表的meta_data生成业务表单BuessinessForm内容
-            for item in CombineForm.objects.all():
-                meta_data = json.loads(item.meta_data)
-                # 创建表单内容
+            for item in design_data['buessinessforms']:
+                if item['name_icpc']:
+                    name_icpc = Icpc.objects.get(icpc_code=item['name_icpc'])
+                else:
+                    name_icpc = None
+
                 buessiness_form = BuessinessForm.objects.create(
-                    name = item.name,
-                    name_icpc = item.name_icpc,
-                    label = item.label,
+                    name = item['name'],
+                    name_icpc = name_icpc,
+                    label = item['label'],
+                    description = item['description'],
+                    meta_data = item['meta_data'],
+                    buessiness_form_id = item['buessiness_form_id'],
                 )
+
                 # 创建表单内容的多对多字段
-                components = []
-                for index, form in enumerate(meta_data):
-                    if form['name'] != 'basic_personal_information_baseform_query_1642159528':
-                        for field in form['fields']:
-                            components.append(Component.objects.get(field_id=field['field_id']))
-                buessiness_form.components.set(components)
-                
-                if item.managed_entity:
-                    buessiness_form.managed_entity.set([item.managed_entity])
+                if item['components']:
+                    components = []
+                    for component in item['components']:
+                        components.append(Component.objects.get(field_id=component))
+                    buessiness_form.components.set(components)
+                else:
+                    components=None
+
+                if item['components_groups']:
+                    components_groups = []
+                    for components_group in item['components_groups']:
+                        components_groups.append(ComponentsGroup.objects.get(components_group_id=components_group))
+                    buessiness_form.components_groups.set(components_groups)
+                else:
+                    components_groups=None
+
+                if item['managed_entity']:
+                    managed_entities = []
+                    for managed_entity in item['managed_entity']:
+                        managed_entities.append(ManagedEntity.objects.get(entity_id=managed_entity))
+                    buessiness_form.managed_entities.set(managed_entities)
+                else:
+                    managed_entities=None
 
 
-            # 删除所有数据
-            FrequencyRule.objects.all().delete()
-            EventRule.objects.all().delete()
-            SystemOperand.objects.all().delete()
-            IntervalRule.objects.all().delete()
-            Instruction.objects.all().delete()
+            # # 导入业务规则表
+            # EventRule.objects.all().delete()
+            # for item in design_data['eventrules']:
+            #     EventRule.objects.create(**item)
+            # print('导入业务规则表完成')
 
-            ServicesSetting.objects.all().delete()
-            OperationsSetting.objects.all().delete()
-            EventRoute.objects.all().delete()
-            ServicePackage.objects.all().delete()
-            Service.objects.all().delete()
-            Operation.objects.all().delete()
-            Event.objects.all().delete()
-            Event_instructions.objects.all().delete()
-
-            # 导入频率规则表
-            for item in design_data['frequencyrules']:
-                FrequencyRule.objects.create(**item)
-            print('导入频率规则表完成')
-
-            # 导入业务规则表
-            for item in design_data['buessinessrules']:
-                EventRule.objects.create(**item)
-            print('导入业务规则表完成')
-
-            # 导入系统作业表
-            for item in design_data['systemoperands']:
-                SystemOperand.objects.create(**item)
-            print('导入系统作业表完成')
+            # # 导入频率规则表
+            # FrequencyRule.objects.all().delete()
+            # for item in design_data['frequencyrules']:
+            #     FrequencyRule.objects.create(**item)
+            # print('导入频率规则表完成')
 
             # 导入作业间隔规则表
+            IntervalRule.objects.all().delete()
             for item in design_data['operandintervalrules']:
                 interval = parse_timedelta(item['interval'])
                 IntervalRule.objects.create(
@@ -347,6 +360,36 @@ class Command(BaseCommand):
             print('导入作业间隔规则表完成')
 
 
+            Instruction.objects.all().delete()
+            # 导入指令表
+            for item in design_data['instructions']:
+                # print('Instruction:', item)
+                Instruction.objects.create(**item)
+            
+            print('导入指令表完成')
+
+            # 导入系统作业表
+            # SystemOperand.objects.all().delete()
+            # for item in design_data['systemoperands']:
+            #     SystemOperand.objects.create(**item)
+            # print('导入系统作业表完成')
+
+
+            # 导入角色表
+            Role.objects.all().delete()
+            for item in design_data['roles']:
+                # print('Role:', item)
+                Role.objects.create(**item)
+            print('导入角色表完成')
+
+
+            ServicesSetting.objects.all().delete()
+            ServicePackage.objects.all().delete()
+            OperationsSetting.objects.all().delete()
+            Service.objects.all().delete()
+            Operation.objects.all().delete()
+            Event_instructions.objects.all().delete()
+            Event.objects.all().delete()
             # 导入作业表
             for item in design_data['operations']:
                 # print('Operation:', item)
@@ -356,7 +399,8 @@ class Command(BaseCommand):
                     name_icpc = None
 
                 if item['forms']:
-                    forms = BuessinessForm.objects.get(buessiness_form_id=item['forms'])
+                    combineform = CombineForm.objects.get(combineform_id=item['forms'])
+                    forms = BuessinessForm.objects.get(name=combineform.name)
                 else:
                     forms = None
 
@@ -413,7 +457,6 @@ class Command(BaseCommand):
                 if item['group']:
                     groups=Role.objects.filter(role_id__in=item['group'])
                     unit_service.group.set(groups)
-
 
             print('导入作业表完成')
 
@@ -491,17 +534,9 @@ class Command(BaseCommand):
             print('导入服务包表完成')
 
 
-            # 导入指令表
-            for item in design_data['instructions']:
-                # print('Instruction:', item)
-                Instruction.objects.create(**item)
-            
-            print('导入指令表完成')
-
-
             # 导入事件表
             for item in design_data['events']:
-                # print('Event:', item)
+                print('Event:', item)
                 Event.objects.create(
                     name=item['name'],
                     label=item['label'],
@@ -533,20 +568,6 @@ class Command(BaseCommand):
                 
             print('导入事件表完成')
 
-
-            # 导入事件路由表
-            for item in design_data['eventroutes']:
-                if item['interval_rule']:
-                    interval_rule=IntervalRule.objects.get(operand_interval_rule_id=item['interval_rule'])
-                else:
-                    interval_rule=None
-                EventRoute.objects.create(
-                    event=Event.objects.get(event_id=item['event']),
-                    operation=Operation.objects.get(operand_id=item['operation']),
-                    is_specified=item['is_specified'],
-                    interval_rule=interval_rule,
-                    event_route_id=item['event_route_id'],
-                )
 
         else:
             print('Cancel restore design data...')

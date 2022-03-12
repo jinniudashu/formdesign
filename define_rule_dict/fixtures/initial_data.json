@@ -1,0 +1,12 @@
+[
+    {
+        "model": "define_rule_dict.EventRule",
+        "pk": "1",
+        "fields": {
+            "label": "完成", 
+            "name": "completed", 
+            "expression": "completed", 
+            "description": "完成"
+        }
+    }    
+]

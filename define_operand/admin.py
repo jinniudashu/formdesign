@@ -1,6 +1,25 @@
 from django.contrib import admin
 
-from .models import Operation, Event, EventRoute, Service, OperationsSetting, ServicePackage, ServicesSetting, Role, IntervalRule, EventRule, EventExpression, SystemOperand, FrequencyRule, Instruction, Event_instructions
+from .models import Event, Event_instructions, BuessinessForm, Operation, Service, OperationsSetting, ServicePackage, ServicesSetting, Role, SystemOperand, Instruction
+
+
+class FormEntityShipInline(admin.TabularInline):
+    model = BuessinessForm.managed_entities.through
+    exclude = ['form_entity_ship_id']
+
+@admin.register(BuessinessForm)
+class BuessinessFormAdmin(admin.ModelAdmin):
+    list_display = ['name_icpc', 'label', 'name', 'id']
+    list_display_links = ['label', 'name',]
+    fieldsets = (
+        (None, {
+            'fields': (('label', 'name_icpc'), ('components', 'components_groups'), 'description', 'meta_data', ('name', 'buessiness_form_id'))
+        }),
+    )
+    search_fields = ['name', 'label']
+    readonly_fields = ['name', 'buessiness_form_id', 'meta_data']
+    inlines = [FormEntityShipInline]
+    autocomplete_fields = ['name_icpc',]
 
 
 @admin.register(Operation)
@@ -22,20 +41,6 @@ class OperationAdmin(admin.ModelAdmin):
     ordering = ['id']
     readonly_fields = ['group', 'name', 'operand_id']
     autocomplete_fields = ["name_icpc", ]
-
-class EventRouteInline(admin.TabularInline):
-    model = Event.next_operations.through
-    exclude = ['event_route_id']
-
-@admin.register(Event)
-class EventAdmin(admin.ModelAdmin):
-#     change_form_template = "core/templates/change_form.html"
-    list_display = ['label', 'operation', 'name', 'id']
-    list_display_links = ['label', 'name', 'operation',]
-    search_fields = ['name', 'label']
-    readonly_fields = ['fields', 'parameters', 'event_id']
-    inlines = [EventRouteInline]
-    ordering = ['id']
 
 
 class OperationsSettingInline(admin.TabularInline):
@@ -88,44 +93,9 @@ class ServicePackageAdmin(admin.ModelAdmin):
 
 @admin.register(SystemOperand)
 class SystemOperandAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'func', 'parameters')
+    list_display = ('id', 'label', 'name', 'func', 'parameters')
     search_fields = ('id', 'name')
     ordering = ('id',)
-
-
-class EventExpressionInline(admin.TabularInline):
-    model = EventExpression
-    exclude = ['label', 'name', 'event_expression_id']
-
-@admin.register(EventRule)
-class EventRuleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'expression')
-    search_fields = ('id', 'name')
-    readonly_fields = ['name', 'event_rule_id']
-    inlines = [EventExpressionInline]
-    ordering = ('id',)
-
-
-@admin.register(FrequencyRule)
-class FrequencyRuleAdmin(admin.ModelAdmin):
-    list_display = ('id', 'label', 'cycle_option', 'times')
-    search_fields = ('id', 'name')
-    readonly_fields = ['name', 'frequency_rule_id']
-    ordering = ('id',)
-
-
-@admin.register(IntervalRule)
-class IntervalRuldAdmin(admin.ModelAdmin):
-    list_display = ['label', 'name', 'rule', 'interval', 'id']
-    list_display_links = ['label', 'name',]
-    fieldsets = (
-        (None, {
-            'fields': ('label', ('rule', 'interval'), 'description', ('name', 'operand_interval_rule_id'))
-        }),
-    )
-    search_fields = ['name', 'label']
-    readonly_fields = ['name', 'operand_interval_rule_id']
-    ordering = ['id']
 
 
 @admin.register(Role)
@@ -134,6 +104,15 @@ class RoleAdmin(admin.ModelAdmin):
     list_display_links = ['label', ]
     search_fields = ['label']
     readonly_fields = ['name', 'role_id']
+    ordering = ['id']
+
+@admin.register(Event)
+class EventAdmin(admin.ModelAdmin):
+#     change_form_template = "core/templates/change_form.html"
+    list_display = ['label', 'operation', 'name', 'id']
+    list_display_links = ['label', 'name', 'operation',]
+    search_fields = ['name', 'label']
+    readonly_fields = ['fields', 'parameters', 'event_id']
     ordering = ['id']
 
 

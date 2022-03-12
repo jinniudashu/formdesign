@@ -259,8 +259,8 @@ class Component(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name = "表单字段汇总"
-        verbose_name_plural = "表单字段汇总"
+        verbose_name = "业务字段汇总"
+        verbose_name_plural = verbose_name
         ordering = ['id']
 
 
@@ -337,8 +337,8 @@ class DicList(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name = "字典列表"
-        verbose_name_plural = "字典列表"
+        verbose_name = "业务字典列表"
+        verbose_name_plural = verbose_name
 
 # 字典明细
 class DicDetail(models.Model):
@@ -359,8 +359,8 @@ class DicDetail(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name = "字典明细"
-        verbose_name_plural = "字典明细"
+        verbose_name = "业务字典明细"
+        verbose_name_plural = verbose_name
 
 
 # 管理实体定义
@@ -384,8 +384,8 @@ class ManagedEntity(models.Model):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name = "管理实体清单"
-        verbose_name_plural = "管理实体清单"
+        verbose_name = "业务管理实体"
+        verbose_name_plural = verbose_name
 
 
 # Sync Create and update RelateFieldModel

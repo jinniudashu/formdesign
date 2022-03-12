@@ -68,7 +68,6 @@ def design_backup(modeladmin, request, queryset):
         'frequencyrules': [],
         'buessinessrules': [],
         'systemoperands': [],
-        'eventroutes': [],
     }
 
     for item in Role.objects.all():
@@ -278,13 +277,6 @@ def design_backup(modeladmin, request, queryset):
         model = model_to_dict(item)
         design_data['systemoperands'].append(model)
 
-    for item in EventRoute.objects.all():
-        model = model_to_dict(item)
-        model['event'] = item.event.event_id
-        model['operation'] = item.operation.operand_id
-        if item.interval_rule:
-            model['interval_rule'] = item.interval_rule.operand_interval_rule_id
-        design_data['eventroutes'].append(model)
 
     # 写入数据库
     s = DesignBackup.objects.create(

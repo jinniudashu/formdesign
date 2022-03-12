@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'define',
     'define_form',
     'define_operand',
+    'define_rule_dict',
     'define_icpc',
     'define_backup',
     'rest_framework',
