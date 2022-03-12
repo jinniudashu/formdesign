@@ -9,9 +9,9 @@ class EventExpressionInline(admin.TabularInline):
 
 @admin.register(EventRule)
 class EventRuleAdmin(admin.ModelAdmin):
-    list_display = ('label', 'name', 'expression', 'detection_scope', 'weight', 'id')
-    list_display_links = ['label', 'name', 'expression']
-    readonly_fields = ['name', 'event_rule_id']
+    list_display = ('label', 'name', 'description', 'detection_scope', 'weight', 'id')
+    list_display_links = ['label', 'name', 'description']
+    readonly_fields = ['expression', 'name', 'event_rule_id']
     inlines = [EventExpressionInline]
     ordering = ('id',)
 
