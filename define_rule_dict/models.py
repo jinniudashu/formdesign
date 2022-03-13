@@ -61,15 +61,6 @@ class EventExpression(HsscBase):
     def __str__(self):
         return str(self.event_rule.label)
 
-    def save(self, *args, **kwargs):
-        # 获得表达式和表达式描述
-        expression, description = self.generate_expression()
-        event_rule = self.event_rule
-        event_rule.expression = expression
-        event_rule.description = description
-        event_rule.save()
-        super().save(*args, **kwargs)
-
     def generate_expression(self):
         expressions = []
         descriptions = []
@@ -82,24 +73,31 @@ class EventExpression(HsscBase):
                 value = _expression.value  # 值为数字
             else:
                 value = f"'{_expression.value}'"  # 值为字符串
-            connection_operator = EventExpression.Connection_operator[_expression.connection_operator][1]  # 连接符
-            print('items',[field.field_id, operator, value, connection_operator])
-            for item in [field.field_id, operator, value, connection_operator]:
+            if _expression.connection_operator:
+                connection_operator = EventExpression.Connection_operator[_expression.connection_operator][1]  # 连接符
+            else:
+                connection_operator = ''
+            for item in [field.hssc_id, operator, value, connection_operator]:
                 expressions.append(item)
-                print('expressions.append:', expressions)
             for item in [field.label, operator, value, connection_operator]:
                 descriptions.append(item)
-        print('expressions:', expressions)
         expressions.pop()   # 去掉最后一个连接符
-        print(descriptions)
         descriptions.pop()  # 去掉最后一个连接符
-        print(expressions, descriptions)
         return ' '.join(expressions), ' '.join(descriptions)
 
     class Meta:
         verbose_name = '事件表达式'
         verbose_name_plural = verbose_name
         ordering = ['id']
+
+@receiver(post_save, sender=EventExpression)
+def post_save_event_expression(sender, instance, **kwargs):
+    # 获得表达式和表达式描述
+    expression, description = instance.generate_expression()
+    event_rule = instance.event_rule
+    event_rule.expression = expression
+    event_rule.description = description
+    event_rule.save()
 
 
 # 频度规则表

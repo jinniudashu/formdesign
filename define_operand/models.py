@@ -310,7 +310,7 @@ class ServicesSetting(HsscBase):
     system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, limit_choices_to=Q(applicable__in = [1, 3]), blank=True, null=True, verbose_name='系统作业')
     next_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='next_service', verbose_name='后续服务')
     passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0,  blank=True, null=True, verbose_name='传递表单数据')
-    next_service_confirmation_required = models.BooleanField(default=False, verbose_name='需要后续服务确认')
+    next_service_confirmation_required = models.BooleanField(default=False, verbose_name='反馈确认')
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔限制")
 
     def __str__(self):
@@ -322,96 +322,96 @@ class ServicesSetting(HsscBase):
         ordering = ['id']
 
 
-# 指令表
-# class Instruction(HsscBase):
-#     code = models.CharField(max_length=10, verbose_name="指令代码")
-#     func = models.CharField(max_length=100, verbose_name="操作函数")
-#     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="指令描述")
-
-#     def __str__(self):
-#         return str(self.name)
-
-#     class Meta:
-#         verbose_name = "指令"
-#         verbose_name_plural = verbose_name
-#         ordering = ['id']
-
-
-# # 作业事件指令程序表
-# class Event_instructions(models.Model):
-#     event = models.ForeignKey(Event, on_delete=models.CASCADE, db_index=True, verbose_name="事件")
-#     instruction = models.ForeignKey(Instruction, on_delete=models.CASCADE, verbose_name="指令")
-#     order = models.PositiveSmallIntegerField(default=1, verbose_name="指令序号")
-#     params = models.CharField(max_length=255, blank=True, null=True, verbose_name="创建作业")
-
-#     def __str__(self):
-#         return self.instruction.name
-
-#     class Meta:
-#         verbose_name = "作业事件指令集"
-#         verbose_name_plural = verbose_name
-#         ordering = ['event', 'order']
-
-
 # 作业事件表
-# # # 默认事件：xx作业完成--系统作业名+"_operation_completed"
-# class Event(models.Model):
-#     label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
-#     name = models.CharField(max_length=255, db_index=True, unique=True, verbose_name="name")
-#     operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='from_oid', verbose_name="所属作业")
-#     expression = models.TextField(max_length=1024, blank=True, null=True, default='completed', verbose_name="规则", 
-#         help_text='''
-#         说明：<br>
-#         1. 作业完成事件: completed<br>
-#         2. 表达式接受的逻辑运算符：or, and, not, in, >=, <=, >, <, ==, +, -, *, /, ^, ()<br>
-#         3. 字段名只允许由小写字母a~z，数字0~9和下划线_组成；字段值接受数字和字符，字符需要放在双引号中，如"A0101"
-#         ''')
-#     next_operations = models.ManyToManyField(Operation, verbose_name="后续作业")
-#     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="事件描述")
-#     parameters = models.CharField(max_length=1024, blank=True, null=True, verbose_name="检查字段")
-#     fields = models.TextField(max_length=1024, blank=True, null=True, verbose_name="可用字段")
-#     event_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="作业事件ID")
+# # 默认事件：xx作业完成--系统作业名+"_operation_completed"
+class Event(models.Model):
+    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
+    name = models.CharField(max_length=255, db_index=True, unique=True, verbose_name="name")
+    operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='from_oid', verbose_name="所属作业")
+    expression = models.TextField(max_length=1024, blank=True, null=True, default='completed', verbose_name="规则", 
+        help_text='''
+        说明：<br>
+        1. 作业完成事件: completed<br>
+        2. 表达式接受的逻辑运算符：or, and, not, in, >=, <=, >, <, ==, +, -, *, /, ^, ()<br>
+        3. 字段名只允许由小写字母a~z，数字0~9和下划线_组成；字段值接受数字和字符，字符需要放在双引号中，如"A0101"
+        ''')
+    next_operations = models.ManyToManyField(Operation, verbose_name="后续作业")
+    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="事件描述")
+    parameters = models.CharField(max_length=1024, blank=True, null=True, verbose_name="检查字段")
+    fields = models.TextField(max_length=1024, blank=True, null=True, verbose_name="可用字段")
+    event_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="作业事件ID")
 
-#     def __str__(self):
-#         return str(self.label)
+    def __str__(self):
+        return str(self.label)
 
-#     class Meta:
-#         verbose_name = "事件"
-#         verbose_name_plural = verbose_name
-#         ordering = ['id']
+    class Meta:
+        verbose_name = "事件"
+        verbose_name_plural = verbose_name
+        ordering = ['id']
 
-#     def save(self, *args, **kwargs):
-#         if self.event_id is None:
-#             self.event_id = uuid.uuid1()
+    def save(self, *args, **kwargs):
+        if self.event_id is None:
+            self.event_id = uuid.uuid1()
 
-#         # 自动为事件名加作业名为前缀
-#         if self.operation.name not in self.name:
-#             self.name = f'{self.operation.name}_{self.name}'
-#             # 保留字：作业完成事件，自动填充expression为'completed'
-#             if self.name == f'{self.operation.name}_completed':
-#                 self.expression = 'completed'
+        # 自动为事件名加作业名为前缀
+        if self.operation.name not in self.name:
+            self.name = f'{self.operation.name}_{self.name}'
+            # 保留字：作业完成事件，自动填充expression为'completed'
+            if self.name == f'{self.operation.name}_completed':
+                self.expression = 'completed'
 
-#         if self.operation.forms:
-#             form = json.loads(self.operation.forms.meta_data)
-#             fields = []
-#             field_names = []
-#             form_name = form['name']
-#             for _field in form['fields']:
-#                 field_name = form_name + '-' + _field['name']
-#                 field_label = _field['label']
-#                 field_type = _field['type']
-#                 field_id = _field['hssc_id']
-#                 field_names.append(field_name)
-#                 fields.append(str((field_name, field_label, field_type, field_id)))
+        if self.operation.forms:
+            form = json.loads(self.operation.forms.meta_data)
+            fields = []
+            field_names = []
+            form_name = form['name']
+            for _field in form['fields']:
+                field_name = form_name + '-' + _field['name']
+                field_label = _field['label']
+                field_type = _field['type']
+                field_id = _field['hssc_id']
+                field_names.append(field_name)
+                fields.append(str((field_name, field_label, field_type, field_id)))
 
-#             self.fields = '\n'.join(fields)
+            self.fields = '\n'.join(fields)
 
-#             # 生成表达式参数列表
-#             if self.expression and self.expression != 'completed':
-#                 _form_fields = keyword_search(self.expression, field_names)
-#                 self.parameters = ', '.join(_form_fields)
+            # 生成表达式参数列表
+            if self.expression and self.expression != 'completed':
+                _form_fields = keyword_search(self.expression, field_names)
+                self.parameters = ', '.join(_form_fields)
 
-#         super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
+
+
+# 指令表
+class Instruction(HsscBase):
+    code = models.CharField(max_length=10, verbose_name="指令代码")
+    func = models.CharField(max_length=100, verbose_name="操作函数")
+    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="指令描述")
+
+    def __str__(self):
+        return str(self.name)
+
+    class Meta:
+        verbose_name = "指令"
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
+
+# 作业事件指令程序表
+class Event_instructions(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE, db_index=True, verbose_name="事件")
+    instruction = models.ForeignKey(Instruction, on_delete=models.CASCADE, verbose_name="指令")
+    order = models.PositiveSmallIntegerField(default=1, verbose_name="指令序号")
+    params = models.CharField(max_length=255, blank=True, null=True, verbose_name="创建作业")
+
+    def __str__(self):
+        return self.instruction.name
+
+    class Meta:
+        verbose_name = "作业事件指令集"
+        verbose_name_plural = verbose_name
+        ordering = ['event', 'order']
 
 
 # ********************

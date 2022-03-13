@@ -5,7 +5,7 @@ from .models import BuessinessForm, Operation, Service, OperationsSetting, Servi
 
 class FormEntityShipInline(admin.TabularInline):
     model = BuessinessForm.managed_entities.through
-    exclude = ['form_entity_ship_id']
+    exclude = ['name', 'label', 'hssc_id']
 
 @admin.register(BuessinessForm)
 class BuessinessFormAdmin(admin.ModelAdmin):
@@ -17,7 +17,7 @@ class BuessinessFormAdmin(admin.ModelAdmin):
         }),
     )
     search_fields = ['name', 'label']
-    readonly_fields = ['hssc_id', 'meta_data']
+    readonly_fields = ['name', 'hssc_id', 'meta_data']
     inlines = [FormEntityShipInline]
     autocomplete_fields = ['name_icpc',]
 
@@ -28,7 +28,7 @@ class OperationAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('label', 'name_icpc'), ('forms', 'priority' ), 'group', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'operand_id'))
+            'fields': (('label', 'name_icpc'), ('forms', 'priority' ), 'group', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
         }),
         ('作业管理', {
             'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
@@ -45,7 +45,7 @@ class OperationAdmin(admin.ModelAdmin):
 
 class OperationsSettingInline(admin.TabularInline):
     model = OperationsSetting
-    exclude = ['operations_setting_id']
+    exclude = ['name', 'label', 'hssc_id']
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
@@ -53,7 +53,7 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('label', 'name_icpc'), ('managed_entity', 'priority'), ('first_operation', 'last_operation', ), 'group', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'service_id'))
+            'fields': (('label', 'name_icpc'), ('managed_entity', 'priority'), ('first_operation', 'last_operation', ), 'group', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
         }),
         ('界面设置', {
             'fields':('history_services_display', ('enable_recommanded_list', 'enable_queue_counter'), )
@@ -74,7 +74,7 @@ class ServiceAdmin(admin.ModelAdmin):
 
 class ServicesSettingInline(admin.TabularInline):
     model = ServicesSetting
-    exclude = ['services_setting_id']
+    exclude = ['name', 'label', 'hssc_id']
 
 @admin.register(ServicePackage)
 class ServicePackageAdmin(admin.ModelAdmin):
@@ -82,7 +82,7 @@ class ServicePackageAdmin(admin.ModelAdmin):
     list_display_links = ['label', ]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), ('first_service', 'last_service'), 'duration', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'service_package_id'))
+            'fields': (('label', 'name_icpc'), ('first_service', 'last_service'), 'duration', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
         }),
     )
     search_fields = ['label']

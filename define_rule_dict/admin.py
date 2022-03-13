@@ -5,7 +5,7 @@ from .models import EventRule, EventExpression, FrequencyRule, IntervalRule
 
 class EventExpressionInline(admin.TabularInline):
     model = EventExpression
-    exclude = ['label', 'name', 'event_expression_id']
+    exclude = ['label', 'name', 'hssc_id']
 
 @admin.register(EventRule)
 class EventRuleAdmin(admin.ModelAdmin):
@@ -20,7 +20,7 @@ class EventRuleAdmin(admin.ModelAdmin):
 class FrequencyRuleAdmin(admin.ModelAdmin):
     list_display = ('cycle_option', 'times', 'id')
     list_display_links = ['cycle_option', 'times']
-    # readonly_fields = ['hssc_id']
+    readonly_fields = ['name', 'hssc_id']
     ordering = ('id',)
 
 
@@ -30,8 +30,8 @@ class IntervalRuldAdmin(admin.ModelAdmin):
     list_display_links = ['rule', 'interval']
     fieldsets = (
         (None, {
-            'fields': ('label', ('rule', 'interval'), 'description', ('name', 'operand_interval_rule_id'))
+            'fields': ('label', ('rule', 'interval'), 'description', ('name', 'hssc_id'))
         }),
     )
-    # readonly_fields = ['hssc_id']
+    readonly_fields = ['name', 'hssc_id']
     ordering = ['id']

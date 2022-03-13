@@ -7701,7 +7701,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e02a9d1e-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e02a9d1e-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de194c50-9aa1-11ec-bde1-8a6e55faf877",
                 "de19d6a2-9aa1-11ec-bde1-8a6e55faf877"
@@ -7726,7 +7726,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e02d0e28-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e02d0e28-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de1ce450-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -7750,7 +7750,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e02e6976-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e02e6976-9aa1-11ec-bde1-8a6e55faf877",
             "group": []
         },
         {
@@ -7772,7 +7772,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e02ee856-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e02ee856-9aa1-11ec-bde1-8a6e55faf877",
             "group": []
         },
         {
@@ -7794,7 +7794,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e02f65c4-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e02f65c4-9aa1-11ec-bde1-8a6e55faf877",
             "group": []
         },
         {
@@ -7816,7 +7816,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e02fe238-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e02fe238-9aa1-11ec-bde1-8a6e55faf877",
             "group": []
         },
         {
@@ -7838,7 +7838,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e0305c18-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e0305c18-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de19d6a2-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -7862,7 +7862,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e0317224-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e0317224-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -7886,7 +7886,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e03291f4-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e03291f4-9aa1-11ec-bde1-8a6e55faf877",
             "group": []
         },
         {
@@ -7908,7 +7908,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e032db46-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e032db46-9aa1-11ec-bde1-8a6e55faf877",
             "group": []
         },
         {
@@ -7930,7 +7930,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e03350da-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e03350da-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -7954,7 +7954,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e0348946-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e0348946-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -7978,7 +7978,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e035d648-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e035d648-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de18f0fc-9aa1-11ec-bde1-8a6e55faf877",
                 "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877"
@@ -8003,7 +8003,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e0371aa8-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e0371aa8-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de194c50-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -8027,7 +8027,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e0385d3c-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e0385d3c-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de194c50-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -8051,7 +8051,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e0398a04-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e0398a04-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de19d6a2-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -8075,7 +8075,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e03abda2-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e03abda2-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de19d6a2-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -8099,7 +8099,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e03bfa96-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e03bfa96-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -8123,7 +8123,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e03d308c-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e03d308c-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de194c50-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -8147,7 +8147,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e03e65ba-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e03e65ba-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -8171,7 +8171,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de19d6a2-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -8195,7 +8195,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e040d160-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e040d160-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de19d6a2-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -8219,7 +8219,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "e0420c06-9aa1-11ec-bde1-8a6e55faf877",
+            "hssc_id": "e0420c06-9aa1-11ec-bde1-8a6e55faf877",
             "group": [
                 "de1b05cc-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -8243,7 +8243,7 @@
             "resource_materials": null,
             "resource_devices": null,
             "resource_knowledge": null,
-            "operand_id": "1a3b2382-9b67-11ec-94eb-022c611b2490",
+            "hssc_id": "1a3b2382-9b67-11ec-94eb-022c611b2490",
             "group": [
                 "de18f0fc-9aa1-11ec-bde1-8a6e55faf877"
             ]

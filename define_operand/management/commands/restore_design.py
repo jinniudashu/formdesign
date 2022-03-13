@@ -2,8 +2,8 @@ from django.core.management import BaseCommand
 import json
 
 from define.models import *
-from define_operand.models import BuessinessForm, ServicePackage, ServicesSetting, Service, OperationsSetting, Operation, SystemOperand, Instruction, Event, Event_instructions, Role
-from define_icpc.models import Icpc, icpc_list
+from define_operand.models import Instruction, Event, Event_instructions, BuessinessForm, ServicePackage, ServicesSetting, Service, OperationsSetting, Operation, SystemOperand, Role
+from define_icpc.models import Icpc
 from define_rule_dict.models import EventRule, EventExpression, FrequencyRule, IntervalRule
 from datetime import timedelta
 import re
@@ -372,6 +372,7 @@ class Command(BaseCommand):
             Operation.objects.all().delete()
             Event_instructions.objects.all().delete()
             Event.objects.all().delete()
+
             # 导入作业表
             for item in design_data['operations']:
                 # print('Operation:', item)
@@ -403,7 +404,7 @@ class Command(BaseCommand):
                     resource_materials=item['resource_materials'],
                     resource_devices=item['resource_devices'],
                     resource_knowledge=item['resource_knowledge'],
-                    operand_id=item['operand_id'],
+                    hssc_id=item['hssc_id'],
                 )
 
                 # 写入Operation.group 多对多字段
@@ -521,7 +522,7 @@ class Command(BaseCommand):
                 Event.objects.create(
                     name=item['name'],
                     label=item['label'],
-                    operation=Operation.objects.get(operand_id=item['operation']),
+                    operation=Operation.objects.get(hssc_id=item['operation']),
                     description=item['description'],
                     expression=item['expression'],
                     parameters=item['parameters'],
@@ -531,7 +532,7 @@ class Command(BaseCommand):
 
                 # 临时处理
                 # 导入服务作业关系表
-                _operation = Operation.objects.get(operand_id=item['operation'])
+                _operation = Operation.objects.get(hssc_id=item['operation'])
                 _service = Service.objects.get(name=_operation.name)
                 next_operations = item['next_operations']
                 if item['expression'] == 'completed':
@@ -539,10 +540,11 @@ class Command(BaseCommand):
                 else:
                     _event_rule = None
                 for next_operation in next_operations:
-                    _next_operation = Operation.objects.get(operand_id=next_operation)
+                    _next_operation = Operation.objects.get(hssc_id=next_operation)
                     OperationsSetting.objects.create(
                         service=_service,
                         operation=_operation,
+                        system_operand = SystemOperand.objects.get(id=1),  # 推荐后续作业
                         next_operation=_next_operation,
                         event_rule=_event_rule,
                     )

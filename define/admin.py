@@ -39,17 +39,18 @@ class ComponentsGroupAdmin(admin.ModelAdmin):
 @admin.register(DicDetail)
 class DicDetailAdmin(admin.ModelAdmin):
     list_display = ('diclist', 'item', 'icpc')
-    # readonly_fields = ['hssc_id']
+    readonly_fields = ['hssc_id']
     autocomplete_fields = ['icpc', 'diclist']
 
 class DicDetailInlineAdmin(admin.TabularInline):
     model = DicDetail
+    exclude = ['name', 'label', 'hssc_id']
     autocomplete_fields = ['icpc', 'diclist']
 
 @admin.register(DicList)
 class DicListAdmin(admin.ModelAdmin):
-    # list_display = ('label', 'name')
-    # readonly_fields = ['name', 'related_field', 'hssc_id']
+    list_display = ('label', 'name')
+    readonly_fields = ['name', 'related_field', 'hssc_id']
     search_fields=["pym"]
     inlines = [DicDetailInlineAdmin]
 
