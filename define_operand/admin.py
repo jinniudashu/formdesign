@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Event, Event_instructions, BuessinessForm, Operation, Service, OperationsSetting, ServicePackage, ServicesSetting, Role, SystemOperand, Instruction
+from .models import BuessinessForm, Operation, Service, OperationsSetting, ServicePackage, ServicesSetting, Role, SystemOperand
 
 
 class FormEntityShipInline(admin.TabularInline):
@@ -39,7 +39,7 @@ class OperationAdmin(admin.ModelAdmin):
     )
     search_fields = ['name', 'label']
     ordering = ['id']
-    readonly_fields = ['group', 'name', 'operand_id']
+    readonly_fields = ['group', 'name', 'hssc_id']
     autocomplete_fields = ["name_icpc", ]
 
 
@@ -68,7 +68,7 @@ class ServiceAdmin(admin.ModelAdmin):
     search_fields = ['name', 'label']
     inlines = [OperationsSettingInline]
     ordering = ['id']
-    readonly_fields = ['name', 'service_id']
+    readonly_fields = ['name', 'hssc_id']
     autocomplete_fields = ['name_icpc', ]
 
 
@@ -86,7 +86,7 @@ class ServicePackageAdmin(admin.ModelAdmin):
         }),
     )
     search_fields = ['label']
-    readonly_fields = ['name', 'service_package_id']
+    readonly_fields = ['name', 'hssc_id']
     inlines = [ServicesSettingInline]
     ordering = ['id']
 
@@ -106,14 +106,15 @@ class RoleAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'hssc_id']
     ordering = ['id']
 
-@admin.register(Event)
-class EventAdmin(admin.ModelAdmin):
-#     change_form_template = "core/templates/change_form.html"
-    list_display = ['label', 'operation', 'name', 'id']
-    list_display_links = ['label', 'name', 'operation',]
-    search_fields = ['name', 'label']
-    readonly_fields = ['fields', 'parameters', 'event_id']
-    ordering = ['id']
+
+# @admin.register(Event)
+# class EventAdmin(admin.ModelAdmin):
+# #     change_form_template = "core/templates/change_form.html"
+#     list_display = ['label', 'operation', 'name', 'id']
+#     list_display_links = ['label', 'name', 'operation',]
+#     search_fields = ['name', 'label']
+#     readonly_fields = ['fields', 'parameters', 'event_id']
+#     ordering = ['id']
 
 
 # @admin.register(Event_instructions)

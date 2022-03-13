@@ -40,31 +40,7 @@ class EventRule(HsscBase):
     def save(self, *args, **kwargs):
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
-        # 获得表达式和表达式描述
-        self.expression, self.description = self.generate_expression()
         super().save(*args, **kwargs)
-
-    def generate_expression(self):
-        expressions = []
-        descriptions = []
-        for _expression in self.eventexpression_set.all():
-            field = _expression.field  # 字段
-            operator = EventExpression.Operator[_expression.operator][1]  # 操作符
-            if ',' in _expression.value:
-                value = f"[{_expression.value}]"  # 值为数组
-            elif is_number(_expression.value):
-                value = _expression.value  # 值为数字
-            else:
-                value = f"'{_expression.value}'"  # 值为字符串
-            connection_operator = EventExpression.Connection_operator[_expression.connection_operator][1]  # 连接符
-            for item in [field.field_id, operator, value, connection_operator]:
-                expressions.append(item)
-            for item in [field.label, operator, value, connection_operator]:
-                descriptions.append(item)
-        expressions.pop()   # 去掉最后一个连接符
-        descriptions.pop()  # 去掉最后一个连接符
-        print(expressions, descriptions)
-        return ' '.join(expressions), ' '.join(descriptions)
 
     class Meta:
         verbose_name = '事件规则'
@@ -84,6 +60,41 @@ class EventExpression(HsscBase):
 
     def __str__(self):
         return str(self.event_rule.label)
+
+    def save(self, *args, **kwargs):
+        # 获得表达式和表达式描述
+        expression, description = self.generate_expression()
+        event_rule = self.event_rule
+        event_rule.expression = expression
+        event_rule.description = description
+        event_rule.save()
+        super().save(*args, **kwargs)
+
+    def generate_expression(self):
+        expressions = []
+        descriptions = []
+        for _expression in EventExpression.objects.filter(event_rule=self.event_rule):
+            field = _expression.field  # 字段
+            operator = EventExpression.Operator[_expression.operator][1]  # 操作符
+            if ',' in _expression.value:
+                value = f"[{_expression.value}]"  # 值为数组
+            elif is_number(_expression.value):
+                value = _expression.value  # 值为数字
+            else:
+                value = f"'{_expression.value}'"  # 值为字符串
+            connection_operator = EventExpression.Connection_operator[_expression.connection_operator][1]  # 连接符
+            print('items',[field.field_id, operator, value, connection_operator])
+            for item in [field.field_id, operator, value, connection_operator]:
+                expressions.append(item)
+                print('expressions.append:', expressions)
+            for item in [field.label, operator, value, connection_operator]:
+                descriptions.append(item)
+        print('expressions:', expressions)
+        expressions.pop()   # 去掉最后一个连接符
+        print(descriptions)
+        descriptions.pop()  # 去掉最后一个连接符
+        print(expressions, descriptions)
+        return ' '.join(expressions), ' '.join(descriptions)
 
     class Meta:
         verbose_name = '事件表达式'

@@ -518,7 +518,6 @@ class Command(BaseCommand):
 
             # 导入事件表
             for item in design_data['events']:
-                print('Event:', item)
                 Event.objects.create(
                     name=item['name'],
                     label=item['label'],
@@ -541,7 +540,6 @@ class Command(BaseCommand):
                     _event_rule = None
                 for next_operation in next_operations:
                     _next_operation = Operation.objects.get(operand_id=next_operation)
-                    print('EventService:', _service, _operation, _next_operation, _event_rule)
                     OperationsSetting.objects.create(
                         service=_service,
                         operation=_operation,

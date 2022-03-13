@@ -4,7 +4,7 @@ from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Role, Operation, Service, ServicePackage, Event, Instruction, Event_instructions
+from .models import Role, Operation, Service, ServicePackage
 
 
 class RoleSerializer(serializers.ModelSerializer):
@@ -67,44 +67,4 @@ class ServicePackageSerializer(serializers.ModelSerializer):
 def get_service_packages(request):
     service_packages = ServicePackage.objects.all()
     serializer = ServicePackageSerializer(service_packages, many=True)
-    return Response(serializer.data)
-
-
-class EventSerializer(serializers.ModelSerializer):
-    operation = OperationSerializer(read_only=True)
-    next_operations = OperationSerializer(read_only=True, many=True)
-    class Meta:
-        model = Event
-        fields = '__all__'
-
-@api_view(['GET'])
-def get_events(request):
-    events = Event.objects.all()
-    serializer = EventSerializer(events, many=True)
-    return Response(serializer.data)
-
-
-class InstructionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Instruction
-        fields = '__all__'
-
-@api_view(['GET'])
-def get_instructions(request):
-    instructions = Instruction.objects.all()
-    serializer = InstructionSerializer(instructions, many=True)
-    return Response(serializer.data)
-
-
-class Event_instructionsSerializer(serializers.ModelSerializer):
-    event = EventSerializer(read_only=True)
-    instruction = InstructionSerializer(read_only=True)
-    class Meta:
-        model = Event_instructions
-        fields = '__all__'
-
-@api_view(['GET'])
-def get_event_instructions(request):
-    event_instructions = Event_instructions.objects.all()
-    serializer = Event_instructionsSerializer(event_instructions, many=True)
     return Response(serializer.data)
