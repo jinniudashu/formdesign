@@ -55,9 +55,9 @@ class DicListAdmin(admin.ModelAdmin):
     search_fields=["pym"]
     inlines = [DicDetailInlineAdmin]
 
-# @admin.register(ManagedEntity)
-# class ManagedEntityAdmin(admin.ModelAdmin):
-#     readonly_fields = ['hssc_id', 'app_name', 'model_name', 'display_field', 'related_field']
+@admin.register(ManagedEntity)
+class ManagedEntityAdmin(admin.ModelAdmin):
+    readonly_fields = ['hssc_id', 'app_name', 'model_name', 'display_field', 'related_field']
 
 # @admin.register(RelateFieldModel)
 # class RelateFieldModelAdmin(admin.ModelAdmin):
