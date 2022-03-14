@@ -44,24 +44,10 @@ class EventRule(HsscBase):
         verbose_name_plural = verbose_name
         ordering = ['id']
 
-
-# 事件表达式表
-class EventExpression(HsscBase):
-    event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE, null=True, blank=True, verbose_name="事件规则")
-    field = models.ForeignKey(Component, on_delete=models.CASCADE, null=True, blank=True, verbose_name="字段")
-    Operator = [(0, '=='), (1, '!='), (2, '>'), (3, '<'), (4, '>='), (5, '<='), (6, 'in'), (7, 'not in')]
-    operator = models.PositiveSmallIntegerField(choices=Operator, blank=True, null=True, verbose_name='操作符')
-    value = models.CharField(max_length=255, blank=True, null=True, verbose_name="值", help_text="多个值用英文逗号分隔，空格会被忽略")
-    Connection_operator = [(0, 'and'), (1, 'or')]
-    connection_operator = models.PositiveSmallIntegerField(choices=Connection_operator, blank=True, null=True, verbose_name='连接操作符')
-
-    def __str__(self):
-        return str(self.event_rule.label)
-
-    def generate_expression(self):
+    def generate_expression(self):  # 在EventRuleAdmin.save_formset中调用
         expressions = []
         descriptions = []
-        for _expression in EventExpression.objects.filter(event_rule=self.event_rule):
+        for _expression in self.eventexpression_set.all():
             field = _expression.field  # 字段
             operator = EventExpression.Operator[_expression.operator][1]  # 操作符
             if ',' in _expression.value:
@@ -70,31 +56,37 @@ class EventExpression(HsscBase):
                 value = _expression.value  # 值为数字
             else:
                 value = f"'{_expression.value}'"  # 值为字符串
-            if _expression.connection_operator:
+            if _expression.connection_operator is not None and _expression.connection_operator >= 0:
                 connection_operator = EventExpression.Connection_operator[_expression.connection_operator][1]  # 连接符
             else:
                 connection_operator = ''
-            for item in [field.hssc_id, operator, value, connection_operator]:
-                expressions.append(item)
-            for item in [field.label, operator, value, connection_operator]:
-                descriptions.append(item)
+            expressions.extend([field.hssc_id, operator, value, connection_operator])
+            descriptions.extend([field.label, operator, value, connection_operator])
         expressions.pop()   # 去掉最后一个连接符
         descriptions.pop()  # 去掉最后一个连接符
-        return ' '.join(expressions), ' '.join(descriptions)
+        self.expression = ' '.join(expressions)
+        self.description = ' '.join(descriptions)
+        self.save()
+        return self.expression
+
+
+# 事件表达式表
+class EventExpression(HsscBase):
+    event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE, null=True, blank=True, verbose_name="事件规则")
+    field = models.ForeignKey(Component, on_delete=models.CASCADE, null=True, verbose_name="字段")
+    Operator = [(0, '=='), (1, '!='), (2, '>'), (3, '<'), (4, '>='), (5, '<='), (6, 'in'), (7, 'not in')]
+    operator = models.PositiveSmallIntegerField(choices=Operator, null=True, verbose_name='操作符')
+    value = models.CharField(max_length=255, null=True, verbose_name="值", help_text="多个值用英文逗号分隔，空格会被忽略")
+    Connection_operator = [(0, 'and'), (1, 'or')]
+    connection_operator = models.PositiveSmallIntegerField(choices=Connection_operator, blank=True, null=True, verbose_name='连接操作符')
+
+    def __str__(self):
+        return str(self.event_rule.label)
 
     class Meta:
         verbose_name = '事件表达式'
         verbose_name_plural = verbose_name
         ordering = ['id']
-
-@receiver(post_save, sender=EventExpression)
-def post_save_event_expression(sender, instance, **kwargs):
-    # 获得表达式和表达式描述
-    expression, description = instance.generate_expression()
-    event_rule = instance.event_rule
-    event_rule.expression = expression
-    event_rule.description = description
-    event_rule.save()
 
 
 # 频度规则表

@@ -16,6 +16,12 @@ class EventRuleAdmin(admin.ModelAdmin):
     inlines = [EventExpressionInline]
     ordering = ('id',)
 
+    # 生成表达式
+    def save_formset(self, request, form, formset, change):
+        instances = formset.save()
+        if instances:
+            instances[0].event_rule.generate_expression()
+
 
 # @admin.register(EventExpression)
 # class EventExpressionAdmin(admin.ModelAdmin):

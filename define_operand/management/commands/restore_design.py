@@ -1,12 +1,13 @@
 from django.core.management import BaseCommand
 import json
 
+from datetime import timedelta
+import re
+
 from define.models import *
 from define_operand.models import Instruction, Event, Event_instructions, BuessinessForm, ServicePackage, ServicesSetting, Service, OperationsSetting, Operation, SystemOperand, Role
 from define_icpc.models import Icpc
 from define_rule_dict.models import EventRule, EventExpression, FrequencyRule, IntervalRule
-from datetime import timedelta
-import re
 
 
 class Command(BaseCommand):
@@ -28,7 +29,7 @@ class Command(BaseCommand):
             DicDetail.objects.all().delete()
             DicList.objects.all().delete()
             for item in design_data['diclists']:
-                # print('DicList:', item)
+                print('DicList:', item)
                 DicList.objects.create(**item)
 
             # 导入DicDetail表
