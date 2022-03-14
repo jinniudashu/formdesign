@@ -5,17 +5,17 @@ from define.models import *
 @admin.register(BoolField)
 class BoolFieldAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'hssc_id']
-    autocomplete_fields = ["name_icpc", ]
+    autocomplete_fields = ['name_icpc']
 
 @admin.register(CharacterField)
 class CharacterFieldAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'hssc_id']
-    autocomplete_fields = ["name_icpc", ]
+    autocomplete_fields = ['name_icpc']
 
 @admin.register(NumberField)
 class NumberFieldAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'hssc_id']
-    autocomplete_fields = ["name_icpc", ]
+    autocomplete_fields = ['name_icpc']
 
 @admin.register(DTField)
 class DTFieldAdmin(admin.ModelAdmin):
@@ -25,11 +25,12 @@ class DTFieldAdmin(admin.ModelAdmin):
 @admin.register(RelatedField)
 class RelatedFieldAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'hssc_id']
-    autocomplete_fields = ["name_icpc", ]
+    autocomplete_fields = ['name_icpc']
 
 @admin.register(Component)
 class ComponentAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'label', 'content_type', 'object_id', 'hssc_id']
+    search_fields=['label', 'pym']
 
 @admin.register(ComponentsGroup)
 class ComponentsGroupAdmin(admin.ModelAdmin):

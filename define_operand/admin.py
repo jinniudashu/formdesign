@@ -37,7 +37,7 @@ class OperationAdmin(admin.ModelAdmin):
             'fields': ('resource_materials','resource_devices','resource_knowledge')
         }),
     )
-    search_fields = ['name', 'label']
+    search_fields=['label', 'pym']
     ordering = ['id']
     readonly_fields = ['group', 'name', 'hssc_id']
     autocomplete_fields = ["name_icpc", ]
@@ -46,6 +46,7 @@ class OperationAdmin(admin.ModelAdmin):
 class OperationsSettingInline(admin.TabularInline):
     model = OperationsSetting
     exclude = ['name', 'label', 'hssc_id']
+    autocomplete_fields = ['operation', 'next_operation']
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
@@ -65,7 +66,7 @@ class ServiceAdmin(admin.ModelAdmin):
             'fields': ('resource_materials','resource_devices','resource_knowledge')
         }),
     )
-    search_fields = ['name', 'label']
+    search_fields=['label', 'pym']
     inlines = [OperationsSettingInline]
     ordering = ['id']
     readonly_fields = ['name', 'hssc_id']
@@ -75,6 +76,7 @@ class ServiceAdmin(admin.ModelAdmin):
 class ServicesSettingInline(admin.TabularInline):
     model = ServicesSetting
     exclude = ['name', 'label', 'hssc_id']
+    autocomplete_fields = ['service', 'next_service']
 
 @admin.register(ServicePackage)
 class ServicePackageAdmin(admin.ModelAdmin):
@@ -85,7 +87,7 @@ class ServicePackageAdmin(admin.ModelAdmin):
             'fields': (('label', 'name_icpc'), ('first_service', 'last_service'), 'duration', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
         }),
     )
-    search_fields = ['label']
+    search_fields=['label', 'pym']
     readonly_fields = ['name', 'hssc_id']
     inlines = [ServicesSettingInline]
     ordering = ['id']

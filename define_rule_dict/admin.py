@@ -6,6 +6,7 @@ from .models import EventRule, EventExpression, FrequencyRule, IntervalRule
 class EventExpressionInline(admin.TabularInline):
     model = EventExpression
     exclude = ['label', 'name', 'hssc_id']
+    autocomplete_fields = ['field']
 
 @admin.register(EventRule)
 class EventRuleAdmin(admin.ModelAdmin):
@@ -14,6 +15,11 @@ class EventRuleAdmin(admin.ModelAdmin):
     readonly_fields = ['expression', 'hssc_id']
     inlines = [EventExpressionInline]
     ordering = ('id',)
+
+
+# @admin.register(EventExpression)
+# class EventExpressionAdmin(admin.ModelAdmin):
+#     autocomplete_fields = ['field']
 
 
 @admin.register(FrequencyRule)

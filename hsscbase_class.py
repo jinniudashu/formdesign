@@ -83,7 +83,7 @@ class BackupManager(models.Manager):
 
 # Hssc基类
 class HsscBase(models.Model):
-    label = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
+    label = models.CharField(max_length=255, null=True, verbose_name="名称")
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name="name")
     hssc_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="hsscID")
     objects = BackupManager()
@@ -91,7 +91,22 @@ class HsscBase(models.Model):
     class Meta:
         abstract = True
 
+    def __str__(self):
+        return str(self.label)
+
     def save(self, *args, **kwargs):
         if self.hssc_id is None:
             self.hssc_id = uuid.uuid1()
+        super().save(*args, **kwargs)
+
+
+class HsscPymBase(HsscBase):
+    pym = models.CharField(max_length=255, blank=True, null=True, verbose_name="拼音码")
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        if self.label:
+            self.pym = ''.join(lazy_pinyin(self.label, style=Style.FIRST_LETTER))
         super().save(*args, **kwargs)

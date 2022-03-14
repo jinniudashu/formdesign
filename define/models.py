@@ -7,8 +7,23 @@ from django.db.models import Q
 import uuid
 from pypinyin import Style, lazy_pinyin
 
-from hsscbase_class import HsscBase
+from hsscbase_class import HsscBase, HsscPymBase
 from define_icpc.models import Icpc
+
+
+class HsscFieldBase(HsscBase):
+    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
+
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        if self.name_icpc is not None:
+            self.name = self.name_icpc.icpc_code
+            self.label = self.name_icpc.iname
+        if self.name is None or self.name == '':
+            self.name = f'boolfield_{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
 
 
 # 关联字段基础表
@@ -21,9 +36,6 @@ class RelateFieldModel(HsscBase):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=q, null=True, blank=True, verbose_name="关联基本信息")
     object_id = models.PositiveIntegerField(null=True, blank=True)
     content_object = GenericForeignKey('content_type', 'object_id')
-
-    def __str__(self):
-        return str(self.label)
 
     class Meta:
         verbose_name = "关联字段基础表"
@@ -43,32 +55,19 @@ class RelateFieldModel(HsscBase):
 ###############################################################################
 
 # 布尔字段
-class BoolField(HsscBase):
-    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
+class BoolField(HsscFieldBase):
     CHOICES_TYPE = [('0', '是, 否'), ('1', '未知, 是, 否')]
     type = models.CharField(max_length=100, choices=CHOICES_TYPE , default='1', verbose_name="可选值")
     required = models.BooleanField(default=False, verbose_name="必填")
     DEFAULT_VALUE = [('0', '未知'), ('1', '是'), ('2', '否')]
     default = models.CharField(max_length=10, choices=DEFAULT_VALUE, default='0', null=True, blank=True, verbose_name="默认值")
 
-    def __str__(self):
-        return self.label
-
-    def save(self, *args, **kwargs):
-        if self.name_icpc is not None:
-            self.name = self.name_icpc.icpc_code
-            self.label = self.name_icpc.iname
-        if self.name is None or self.name == '':
-            self.name = f'boolfield_{"_".join(lazy_pinyin(self.label))}'
-        super().save(*args, **kwargs)
-
     class Meta:
         verbose_name = "是否字段"
         verbose_name_plural = "是否字段"
 
 # 字符字段
-class CharacterField(HsscBase):
-    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
+class CharacterField(HsscFieldBase):
     CHAR_TYPE = [('CharField', '单行文本'), ('TextField', '多行文本')]
     type = models.CharField(max_length=50, choices=CHAR_TYPE, default='CharField', verbose_name="类型")
     length = models.PositiveSmallIntegerField(default=255, verbose_name="字符长度")
@@ -76,25 +75,13 @@ class CharacterField(HsscBase):
     default = models.CharField(max_length=255, null=True, blank=True, verbose_name="默认值")
     # component = GenericRelation(to='Component')
 
-    def __str__(self):
-        return str(self.label)
-
-    def save(self, *args, **kwargs):
-        if self.name_icpc is not None:
-            self.name = self.name_icpc.icpc_code
-            self.label = self.name_icpc.iname
-        if self.name is None or self.name == '':
-            self.name = f'characterfield_{"_".join(lazy_pinyin(self.label))}'
-        super().save(*args, **kwargs)
-
     class Meta:
         verbose_name = "字符字段"
         verbose_name_plural = "字符字段"
 
 
 # 数值字段
-class NumberField(HsscBase):
-    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
+class NumberField(HsscFieldBase):
     NUMBER_TYPE = [('IntegerField', '整数'), ('DecimalField', '固定精度小数'), ('FloatField', '浮点数')]
     type = models.CharField(max_length=50, choices=NUMBER_TYPE, default='IntegerField', verbose_name="类型")
     max_digits = models.PositiveSmallIntegerField(default=10, verbose_name="最大位数", null=True, blank=True)
@@ -106,40 +93,17 @@ class NumberField(HsscBase):
     default = models.FloatField(null=True, blank=True, verbose_name="默认值")
     required = models.BooleanField(default=False, verbose_name="必填")
 
-    def __str__(self):
-        return str(self.label)
-
-    def save(self, *args, **kwargs):
-        if self.name_icpc is not None:
-            self.name = self.name_icpc.icpc_code
-            self.label = self.name_icpc.iname
-        if self.name is None or self.name == '':
-            self.name = f'numberfield_{"_".join(lazy_pinyin(self.label))}'
-        super().save(*args, **kwargs)
-
     class Meta:
         verbose_name = "数值字段"
         verbose_name_plural = "数值字段"
 
 
 # 日期时间字段
-class DTField(HsscBase):
-    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
+class DTField(HsscFieldBase):
     DT_TYPE = [('DateTimeField', '日期时间'), ('DateField', '日期')]
     type = models.CharField(max_length=50, choices=DT_TYPE, default='DateTimeField', verbose_name="类型")
     default_now = models.BooleanField(default=False, verbose_name="默认为当前时间")
     required = models.BooleanField(default=False, verbose_name="必填")
-
-    def __str__(self):
-        return str(self.label)
-
-    def save(self, *args, **kwargs):
-        if self.name_icpc is not None:
-            self.name = self.name_icpc.icpc_code
-            self.label = self.name_icpc.iname
-        if self.name is None or self.name == '':
-            self.name = f'datetimefield_{"_".join(lazy_pinyin(self.label))}'
-        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "日期字段"
@@ -147,22 +111,10 @@ class DTField(HsscBase):
 
 
 # 关联字段
-class RelatedField(HsscBase):
-    name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
+class RelatedField(HsscFieldBase):
     CHOICE_TYPE = [('Select', '下拉单选'), ('RadioSelect', '单选按钮列表'), ('CheckboxSelectMultiple', '复选框列表'), ('SelectMultiple', '下拉多选')]
     type = models.CharField(max_length=50, choices=CHOICE_TYPE, default='ChoiceField', verbose_name="类型")
     related_content = models.ForeignKey(RelateFieldModel, on_delete=models.CASCADE, null=True, blank=True, verbose_name="关联内容")
-
-    def __str__(self):
-        return str(self.label)
-
-    def save(self, *args, **kwargs):
-        if self.name_icpc is not None:
-            self.name = self.name_icpc.icpc_code
-            self.label = self.name_icpc.iname
-        if self.name is None or self.name == '':
-            self.name = f'relatedfield_{"_".join(lazy_pinyin(self.label)).lower()}'
-        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "关联字段"
@@ -170,7 +122,7 @@ class RelatedField(HsscBase):
 
 
 # 字段列表
-class Component(HsscBase):
+class Component(HsscPymBase):
     q  = Q(app_label='define') & (
         Q(model = 'boolfield') | 
         Q(model = 'characterfield') | 
@@ -183,15 +135,6 @@ class Component(HsscBase):
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=q , null=True, blank=True)
     object_id = models.PositiveIntegerField(null=True, blank=True)
     content_object = GenericForeignKey('content_type', 'object_id')
-    pym = models.CharField(max_length=100, null=True, blank=True, verbose_name="拼音码")
-
-    def __str__(self):
-        return str(self.label)
-
-    def save(self, *args, **kwargs):
-        if self.label:
-            self.pym = ''.join(lazy_pinyin(self.label, style=Style.FIRST_LETTER))
-        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "业务字段汇总"
@@ -199,15 +142,10 @@ class Component(HsscBase):
         ordering = ['id']
 
 
-class ComponentsGroup(HsscBase):
+class ComponentsGroup(HsscPymBase):
     components = models.ManyToManyField(Component, verbose_name="字段")
 
-    def __str__(self):
-        return str(self.label)
-
     def save(self, *args, **kwargs):
-        if self.components_group_id is None:
-            self.components_group_id = uuid.uuid1()
         if self.name is None or self.name == '':
             self.name = f'relatedfield_{"_".join(lazy_pinyin(self.label)).lower()}'
         super().save(*args, **kwargs)
@@ -250,36 +188,21 @@ def fields_post_save_handler(sender, instance, created, **kwargs):
 
 
 # 字典列表
-class DicList(HsscBase):
+class DicList(HsscPymBase):
     related_field = models.CharField(max_length=100, verbose_name="关联字段")
-    pym = models.CharField(max_length=100, null=True, blank=True, verbose_name="拼音码")
-
-    def __str__(self):
-        return str(self.label)
-
-    def save(self, *args, **kwargs):
-        if self.label:
-            self.pym = ''.join(lazy_pinyin(self.label, style=Style.FIRST_LETTER))
-        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "业务字典列表"
         verbose_name_plural = verbose_name
 
 # 字典明细
-class DicDetail(HsscBase):
+class DicDetail(HsscPymBase):
     diclist = models.ForeignKey(DicList, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字典")
     item = models.CharField(max_length=255, verbose_name="值")
     icpc = models.ForeignKey(Icpc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="ICPC")
-    pym = models.CharField(max_length=255, blank=True, null=True, verbose_name="拼音码")
 
     def __str__(self):
         return self.item
-
-    def save(self, *args, **kwargs):
-        if self.item:
-            self.pym = ''.join(lazy_pinyin(self.item, style=Style.FIRST_LETTER))
-        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = "业务字典明细"
@@ -287,16 +210,13 @@ class DicDetail(HsscBase):
 
 
 # 管理实体定义
-class ManagedEntity(HsscBase):
+class ManagedEntity(HsscPymBase):
     model_key_field = models.ForeignKey(Component, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="基本信息表主键")
     description = models.TextField(max_length=255, verbose_name="描述", null=True, blank=True)
     app_name = models.CharField(max_length=100, verbose_name="实体app名", null=True, blank=True)
     model_name = models.CharField(max_length=100, verbose_name="基本信息表", null=True, blank=True)
     display_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="显示字段")
     related_field = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联字段")
-
-    def __str__(self):
-        return str(self.label)
 
     class Meta:
         verbose_name = "业务管理实体"

@@ -34,16 +34,13 @@ class EventRule(HsscBase):
     weight = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="权重")
     expression = models.TextField(max_length=1024, blank=True, null=True, verbose_name="内部表达式")
 
-    def __str__(self):
-        return str(self.label)
-
     def save(self, *args, **kwargs):
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name = '事件规则'
+        verbose_name = '条件事件'
         verbose_name_plural = verbose_name
         ordering = ['id']
 
@@ -106,9 +103,6 @@ class FrequencyRule(HsscBase):
     cycle_option = models.PositiveSmallIntegerField(choices=Cycle_options, default=0, blank=True, null=True, verbose_name='周期')
     times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="次数")
 
-    def __str__(self):
-        return str(self.label)
-
     def save(self, *args, **kwargs):
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
@@ -126,9 +120,6 @@ class IntervalRule(HsscBase):
     rule = models.PositiveSmallIntegerField(choices=Interval_rule_options, blank=True, null=True, verbose_name='间隔规则')
     interval = models.DurationField(blank=True, null=True, verbose_name="间隔时间", help_text='例如：3 days, 22:00:00')
     description = models.TextField(max_length=255, blank=True, null=True, verbose_name="说明")
-
-    def __str__(self):
-        return str(self.label)
 
     def save(self, *args, **kwargs):
         if self.name is None or self.name == '':

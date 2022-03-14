@@ -7,7 +7,7 @@ import uuid
 
 from pypinyin import lazy_pinyin
 
-from hsscbase_class import HsscBase
+from hsscbase_class import HsscBase, HsscPymBase
 from define.models import ManagedEntity, Component, ComponentsGroup
 from define_icpc.models import Icpc
 from define_rule_dict.models import EventRule, FrequencyRule, IntervalRule
@@ -15,16 +15,13 @@ from .utils import keyword_search
 
 
 # 业务表单定义
-class BuessinessForm(HsscBase):
+class BuessinessForm(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     components = models.ManyToManyField(Component, blank=True, verbose_name="字段")
     components_groups = models.ManyToManyField(ComponentsGroup, blank=True, verbose_name="组件")
     managed_entities = models.ManyToManyField(ManagedEntity, through='FormEntityShip', blank=True, verbose_name="隶属实体")
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
     meta_data = models.JSONField(null=True, blank=True, verbose_name="元数据")
-
-    def __str__(self):
-        return str(self.label)
 
     def save(self, *args, **kwargs):
         if self.name_icpc is not None:
@@ -116,9 +113,6 @@ class FormEntityShip(HsscBase):
 class Role(HsscBase):
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="角色描述")
 
-    def __str__(self):
-        return str(self.label)
-
     def save(self, *args, **kwargs):
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
@@ -138,9 +132,6 @@ class SystemOperand(HsscBase):
     Applicable = [(0, '作业'), (1, '单元服务'), (2, '服务包'), (3, '全部')]
     applicable = models.PositiveSmallIntegerField(choices=Applicable, default=1, verbose_name='适用范围')
 
-    def __str__(self):
-        return str(self.label)
-
     def save(self, *args, **kwargs):
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
@@ -153,7 +144,7 @@ class SystemOperand(HsscBase):
 
 
 # 作业基础信息表
-class Operation(HsscBase):
+class Operation(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     forms = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, null=True, blank=True, verbose_name="作业表单")
     execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='执行时限')
@@ -178,9 +169,6 @@ class Operation(HsscBase):
     resource_devices = models.CharField(max_length=255, blank=True, null=True, verbose_name='配套设备')
     resource_knowledge = models.CharField(max_length=255, blank=True, null=True, verbose_name='服务知识')
 
-    def __str__(self):
-        return str(self.label)
-
     def save(self, *args, **kwargs):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
@@ -196,7 +184,7 @@ class Operation(HsscBase):
 
 
 # # 单元服务类型信息表
-class Service(HsscBase):
+class Service(HsscPymBase):
     name = models.CharField(max_length=255, unique=True, verbose_name="name")
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=255, verbose_name="名称")
@@ -227,14 +215,8 @@ class Service(HsscBase):
     resource_materials = models.CharField(max_length=255, blank=True, null=True, verbose_name='配套物料')
     resource_devices = models.CharField(max_length=255, blank=True, null=True, verbose_name='配套设备')
     resource_knowledge = models.CharField(max_length=255, blank=True, null=True, verbose_name='服务知识')
-    service_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="单元服务ID")
-
-    def __str__(self):
-        return str(self.label)
 
     def save(self, *args, **kwargs):
-        if self.service_id is None:
-            self.service_id = uuid.uuid1()
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
@@ -254,20 +236,14 @@ Passing_data = [(0, '否'), (1, '复制，不可编辑'), (2, '复制，可以�
 class OperationsSetting(HsscBase):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, verbose_name='单元服务')
     operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='operation', null=True, verbose_name='作业')
-    event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE, null=True, verbose_name='事件规则')
+    event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE, null=True, verbose_name='条件事件')
     system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, limit_choices_to=Q(applicable__in = [0, 3]), blank=True, null=True, verbose_name='系统作业')
     next_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, blank=True, null=True, related_name='next_operation', verbose_name='后续作业')
     passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0, verbose_name='传递表单数据')
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔限制")
-    operations_setting_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="作业关系ID")
 
     def __str__(self):
         return str(self.service) + '--' + str(self.operation)
-
-    def save(self, *args, **kwargs):
-        if self.operations_setting_id is None:
-            self.operations_setting_id = uuid.uuid1()
-        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name = '作业关系设置'
@@ -276,16 +252,13 @@ class OperationsSetting(HsscBase):
 
 
 # 服务包类型信息表
-class ServicePackage(HsscBase):
+class ServicePackage(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     first_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='first_service', null=True, verbose_name="起始服务")
     last_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='last_service', blank=True, null=True, verbose_name="结束服务")
     duration = models.DurationField(blank=True, null=True, verbose_name="持续周期", help_text='例如：3 days, 22:00:00')
     execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='执行时限')
     awaiting_time_frame = models.DurationField(blank=True, null=True, verbose_name='等待执行时限')
-
-    def __str__(self):
-        return self.label
 
     def save(self, *args, **kwargs):
         if self.name_icpc is not None:
@@ -306,11 +279,12 @@ class ServicesSetting(HsscBase):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='单元服务')
     frequency_rule = models.ForeignKey(FrequencyRule, on_delete=models.CASCADE, null=True, verbose_name='频度')
     duration = models.DurationField(blank=True, null=True, verbose_name="持续周期", help_text='例如：3 days, 22:00:00')
-    event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE,  blank=True, null=True, verbose_name='事件规则')
+    event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE,  blank=True, null=True, verbose_name='条件事件')
     system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, limit_choices_to=Q(applicable__in = [1, 3]), blank=True, null=True, verbose_name='系统作业')
     next_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='next_service', verbose_name='后续服务')
     passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0,  blank=True, null=True, verbose_name='传递表单数据')
-    next_service_confirmation_required = models.BooleanField(default=False, verbose_name='反馈确认')
+    accepting_confirm = models.BooleanField(default=False, verbose_name='接受确认')
+    complete_feedback = models.BooleanField(default=False, verbose_name='完成反馈')
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔限制")
 
     def __str__(self):
@@ -388,9 +362,6 @@ class Instruction(HsscBase):
     code = models.CharField(max_length=10, verbose_name="指令代码")
     func = models.CharField(max_length=100, verbose_name="操作函数")
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="指令描述")
-
-    def __str__(self):
-        return str(self.name)
 
     class Meta:
         verbose_name = "指令"
