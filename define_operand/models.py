@@ -230,8 +230,8 @@ class Service(HsscPymBase):
         ordering = ['id']
 
 
-# 复制表单数据
-Passing_data = [(0, '否'), (1, '复制，不可编辑'), (2, '复制，可以编辑')]
+# 接收表单数据
+Receive_form = [(0, '否'), (1, '接收，不可编辑'), (2, '接收，可以编辑')]
 
 class OperationsSetting(HsscBase):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, verbose_name='单元服务')
@@ -239,7 +239,7 @@ class OperationsSetting(HsscBase):
     event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE, null=True, verbose_name='条件事件')
     system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, limit_choices_to=Q(applicable__in = [0, 3]), blank=True, null=True, verbose_name='系统作业')
     next_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, blank=True, null=True, related_name='next_operation', verbose_name='后续作业')
-    passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0, verbose_name='传递表单数据')
+    passing_data = models.PositiveSmallIntegerField(choices=Receive_form, default=0, verbose_name='接收表单')
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔限制")
 
     def __str__(self):
@@ -282,9 +282,12 @@ class ServicesSetting(HsscBase):
     event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE,  blank=True, null=True, verbose_name='条件事件')
     system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, limit_choices_to=Q(applicable__in = [1, 3]), blank=True, null=True, verbose_name='系统作业')
     next_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='next_service', verbose_name='后续服务')
-    passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0,  blank=True, null=True, verbose_name='传递表单数据')
-    accepting_confirm = models.BooleanField(default=False, verbose_name='接受确认')
-    complete_feedback = models.BooleanField(default=False, verbose_name='完成反馈')
+    passing_data = models.PositiveSmallIntegerField(choices=Receive_form, default=0,  blank=True, null=True, verbose_name='接收表单')
+    Complete_feedback = [(0, '否'), (1, '返回完成状态'), (2, '返回表单')]
+    complete_feedback = models.PositiveSmallIntegerField(choices=Complete_feedback, default=0,  blank=True, null=True, verbose_name='完成反馈')
+    Reminders = [(0, '客户'), (1, '服务人员'), (2, '服务小组')]
+    reminders = models.PositiveSmallIntegerField(choices=Reminders, default=0,  blank=True, null=True, verbose_name='提醒对象')
+    message_content = models.CharField(max_length=255, blank=True, null=True, verbose_name='消息内容')
     check_awaiting_timeout = models.BooleanField(default=False, verbose_name='检查等待超时')
     check_execution_timeout = models.BooleanField(default=False, verbose_name='检查执行超时')
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="服务时间间隔")
