@@ -285,7 +285,9 @@ class ServicesSetting(HsscBase):
     passing_data = models.PositiveSmallIntegerField(choices=Passing_data, default=0,  blank=True, null=True, verbose_name='传递表单数据')
     accepting_confirm = models.BooleanField(default=False, verbose_name='接受确认')
     complete_feedback = models.BooleanField(default=False, verbose_name='完成反馈')
-    interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔限制")
+    check_awaiting_timeout = models.BooleanField(default=False, verbose_name='检查等待超时')
+    check_execution_timeout = models.BooleanField(default=False, verbose_name='检查执行超时')
+    interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="服务时间间隔")
 
     def __str__(self):
         return str(self.servicepackage) + '--' + str(self.service)
