@@ -14,10 +14,7 @@ class Command(BaseCommand):
         for icpc in icpc_list:
             Icpc_model = eval(icpc['name'])  # 反射出model
             _key = icpc['name'].lower()  # 获取小写键名
-            _l = len(icpc_data[_key])  # 当前ICPC数据的长度
-
-            Icpc_model.objects.all().delete()  # 删除ICPC数据
+            _l = len(icpc_data[_key])  # 当前ICPC数据的长度            
             print(f'正在导入{icpc["name"]}，共{_l}条记录...')
-            for item in icpc_data[_key]:  # 导入ICPC数据
-                Icpc_model.objects.create(**item)
-            print(f'{icpc["name"]} 数据导入成功')
+            result = Icpc_model.objects.restore_data(icpc_data[_key])
+            print(result)

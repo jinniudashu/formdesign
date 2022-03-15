@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms.models import model_to_dict
 from django.dispatch import receiver
 from django.db.models.signals import post_save, post_delete
 from pypinyin import Style, lazy_pinyin
@@ -18,6 +19,24 @@ icpc_list=[
 ]
 
 
+# 自定义管理器增加ICPC备份和恢复功能
+class IcpcBackupManager(models.Manager):
+    def backup_data(self):
+        icpc_data = []
+        for item in self.all():
+            icpc_data.append(model_to_dict(item))
+        return icpc_data
+
+    def restore_data(self, data):
+        if data is None or len(data) == 0:
+            return 'No data to restore'
+        print('开始恢复：', self.model.__name__)
+        self.all().delete()
+        for item in data:
+            self.create(**item)
+        return f'{self.model.__name__} 数据导入成功'
+
+
 # ICPC抽象类
 class IcpcBase(models.Model):
     icpc_code = models.CharField(max_length=5, unique=True, blank=True, null=True, verbose_name="icpc码")
@@ -33,6 +52,8 @@ class IcpcBase(models.Model):
     note = models.CharField(max_length=1024, blank=True, null=True, verbose_name="备注")
     pym = models.CharField(max_length=255, blank=True, null=True, verbose_name="拼音码")
 
+    objects = IcpcBackupManager()
+
     def __str__(self):
         return str(self.iname)
 
@@ -42,6 +63,7 @@ class IcpcBase(models.Model):
 
 # ICPC子类抽象类
 class IcpcSubBase(IcpcBase):
+
     def save(self, *args, **kwargs):
         if self.iname:
             self.pym = ''.join(lazy_pinyin(self.iname, style=Style.FIRST_LETTER))

@@ -41,7 +41,9 @@ class HsscBackupManager(models.Manager):
                         else:
                             ids.append(_object.hssc_id)
                     item_dict[field.name] = ids
-            backup_data.append(item_dict)   
+
+            item_dict['id'] = None
+            backup_data.append(item_dict)
         return backup_data
 
     def restore_data(self, data):
@@ -49,7 +51,7 @@ class HsscBackupManager(models.Manager):
             return 'No data to restore'
 
         print('开始恢复：', self.model.__name__)
-        self.model.objects.all().delete()
+        self.all().delete()
         for item_dict in data:
             item = {}
             # 遍历模型非多对多字段，如果是外键，则用外键的hssc_id找回关联对象
@@ -86,7 +88,6 @@ class HsscBackupManager(models.Manager):
                     eval(f'_instance.{field.name}').set(objects)
             
         return f'{self.model} 已恢复'
-
 
 
 # Hssc基类
