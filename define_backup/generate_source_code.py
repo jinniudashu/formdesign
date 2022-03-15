@@ -2,7 +2,6 @@ from time import time
 import json
 
 from define.models import DicList
-from define_form.models import BaseModel, BaseForm
 from define_operand.models import Operation
 from define_backup.models import SourceCode
 # 导入待生成脚本的文件头部设置

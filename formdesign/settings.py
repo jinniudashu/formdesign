@@ -40,10 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'define',
-    'define_form',
-    'define_operand',
     'define_rule_dict',
     'define_icpc',
+    'define_operand',
     'define_backup',
     'rest_framework',
 ]
