@@ -96,7 +96,7 @@ class ServicePackageAdmin(admin.ModelAdmin):
 @admin.register(SystemOperand)
 class SystemOperandAdmin(admin.ModelAdmin):
     list_display = ('id', 'label', 'name', 'func', 'parameters')
-    search_fields = ('id', 'name')
+    readonly_fields = ('label','name','hssc_id','func','parameters','description','Applicable','applicable')
     ordering = ('id',)
 
 
