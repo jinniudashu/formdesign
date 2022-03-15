@@ -3,10 +3,10 @@ from time import time
 import json
 
 from define.models import *
-from define_backup.models import DesignBackup, IcpcBackup
 from define_icpc.models import *
 from define_operand.models import *
 from define_rule_dict.models import *
+from define_backup.models import DesignBackup, IcpcBackup
 
 
 # 每个需要备份的model都需要在这里添加
@@ -28,8 +28,6 @@ backup_models = [
     EventExpression,
     IntervalRule,
     FrequencyRule,
-    SystemOperand,
-    Instruction,
     Service,
     OperationsSetting,
     ServicePackage,
@@ -82,64 +80,3 @@ def icpc_backup(modeladmin, request, queryset):
     print(f'设计数据备份成功, id: {s.id}')
 
 icpc_backup.short_description = '备份ICPC数据'
-
-
-# # 一次性导出脚本
-
-# # 字符字段表 26→29
-# data=[]
-# for item in CharacterField.objects.all():
-#     model = model_to_dict(item)
-#     if item.name_icpc:
-#         model['name_icpc'] = item.name_icpc.icpc_code
-#     data.append(model)
-
-# # 关联字段表 42→45
-# data=[]
-# for item in RelatedField.objects.all():
-#     model = model_to_dict(item)
-#     model['related_content'] = item.related_content.relate_field_model_id
-#     if item.name_icpc:
-#         model['name_icpc'] = item.name_icpc.icpc_code
-#     data.append(model)
-
-# # 业务表单表 56→58
-# data=[]
-# for item in BuessinessForm.objects.all():
-#     model = model_to_dict(item)
-#     if item.name_icpc:
-#         model['name_icpc'] = item.name_icpc.icpc_code
-#     components = []
-#     for component in item.components.all():
-#         components.append(component.field_id)
-#     model['components'] = components
-#     if model['components_groups']:
-#         components_groups = []
-#         for components_group in item.components_groups.all():
-#             components_groups.append(components_group.components_group_id)
-#         model['components_groups'] = components_groups
-#     if model['managed_entity']:
-#         managed_entitys = []
-#         for managed_entity in item.managed_entity.all():
-#             managed_entitys.append(managed_entity.entity_id)
-#         model['managed_entity'] = managed_entitys
-#     model['meta_data'] = None
-#     data.append(model)
-
-# # 作业表 24→26
-# data=[]
-# for item in Operation.objects.all():
-#     model = model_to_dict(item)
-#     if item.name_icpc:
-#         model['name_icpc'] = item.name_icpc.icpc_code
-#     if model['forms']:
-#         model['forms'] = item.forms.buessiness_form_id
-#     if model['group']:
-#         group_id = []
-#         for group in item.group.all():
-#             group_id.append(group.role_id)
-#         model['group'] = group_id
-#     data.append(model)
-
-
-# code = json.dumps(data, ensure_ascii=False)

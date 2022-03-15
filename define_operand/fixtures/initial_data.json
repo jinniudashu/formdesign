@@ -5,6 +5,7 @@
         "fields": {
             "label": "推荐后续作业", 
             "name": "recommend_next_operation", 
+            "hssc_id": "e0dc2719-a42f-11ec-905b-4889e7cf38c9",
             "func": "recommend_next_operation", 
             "parameters": "operand_id", 
             "description": "",
@@ -17,6 +18,7 @@
         "fields": {
             "label": "生成后续作业", 
             "name": "create_next_operation", 
+            "hssc_id": "e0dd3887-a42f-11ec-85a9-4889e7cf38c9",
             "func": "create_next_operation", 
             "parameters": "operand_id", 
             "description": "",
@@ -29,6 +31,7 @@
         "fields": {
             "label": "推荐后续服务", 
             "name": "recommend_next_service", 
+            "hssc_id": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
             "func": "recommend_next_service", 
             "parameters": "service_id", 
             "description": "",
@@ -41,6 +44,7 @@
         "fields": {
             "label": "生成后续服务", 
             "name": "create_next_service", 
+            "hssc_id": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
             "func": "create_next_service", 
             "parameters": "service_id", 
             "description": "",
@@ -53,6 +57,7 @@
         "fields": {
             "label": "提示内容违反业务规则", 
             "name": "prompt_violate_business_rule", 
+            "hssc_id": "e0dfa946-a42f-11ec-848a-4889e7cf38c9",
             "func": "prompt_violate_business_rule", 
             "parameters": "violation_info", 
             "description": "",
@@ -65,10 +70,23 @@
         "fields": {
             "label": "发送提醒消息", 
             "name": "send_message", 
+            "hssc_id": "e0e045ac-a42f-11ec-93c3-4889e7cf38c9",
             "func": "send_message", 
             "parameters": "user_id, message_type, message_content", 
             "description": "",
             "applicable": 3
+        }
+    },
+    {
+        "model": "define_operand.Instruction",
+        "pk": "1",
+        "fields": {
+            "label": "创建作业进程",
+            "name": "create_operation_proc",
+            "hssc_id": "e04402b8-9aa1-11ec-bde1-8a6e55faf877",
+            "code": "cop",
+            "func": "create_operation_proc",
+            "description": "新建一个人工作业进程"
         }
     }
 ]

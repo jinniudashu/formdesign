@@ -30,16 +30,16 @@ class EventRuleAdmin(admin.ModelAdmin):
 
 @admin.register(FrequencyRule)
 class FrequencyRuleAdmin(admin.ModelAdmin):
-    list_display = ('cycle_option', 'times', 'id')
-    list_display_links = ['cycle_option', 'times']
+    list_display = ('label', 'cycle_option', 'times', 'id')
+    list_display_links = ['label', 'cycle_option', 'times']
     readonly_fields = ['name', 'hssc_id']
     ordering = ('id',)
 
 
 @admin.register(IntervalRule)
 class IntervalRuldAdmin(admin.ModelAdmin):
-    list_display = ['rule', 'interval', 'id']
-    list_display_links = ['rule', 'interval']
+    list_display = ['label', 'rule', 'interval', 'id']
+    list_display_links = ['label', 'rule', 'interval']
     fieldsets = (
         (None, {
             'fields': ('label', ('rule', 'interval'), 'description', ('name', 'hssc_id'))
