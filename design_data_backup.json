@@ -4503,26 +4503,6 @@
             "detection_scope": 1,
             "weight": 1,
             "expression": "completed"
-        },
-        {
-            "id": 11,
-            "label": "asdf",
-            "name": "asdf",
-            "hssc_id": "e50f9c88-a390-11ec-abdf-ee2fa480f37c",
-            "description": "是否有慢性疾病 == 100",
-            "detection_scope": 1,
-            "weight": 1,
-            "expression": "de8c3864-9aa1-11ec-bde1-8a6e55faf877 == 100"
-        },
-        {
-            "id": 12,
-            "label": "qwe",
-            "name": "qwe",
-            "hssc_id": "fe580810-a390-11ec-abdf-ee2fa480f37c",
-            "description": "是否经常加班 != 100 and 是否经常加班 != 32",
-            "detection_scope": 1,
-            "weight": 1,
-            "expression": "de8d23fa-9aa1-11ec-bde1-8a6e55faf877 != 100 and de8d23fa-9aa1-11ec-bde1-8a6e55faf877 != 32"
         }
     ],
     "eventexpression": [],
