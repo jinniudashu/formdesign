@@ -5,7 +5,7 @@ from define.models import DicList
 from define_operand.models import Operation
 from define_backup.models import SourceCode
 # 导入待生成脚本的文件头部设置
-from define_operand.files_head_setting import models_file_head, admins_file_head, forms_file_head, modelform_footer, views_file_head, urls_file_head, index_html_file_head
+from define_backup.files_head_setting import models_file_head, admins_file_head, forms_file_head, modelform_footer, views_file_head, urls_file_head, index_html_file_head
 
 
 # 生成作业脚本, 被define_operand.admin调用
