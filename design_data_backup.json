@@ -1,265 +1,227 @@
 {
     "role": [
         {
-            "id": 141,
+            "id": null,
             "label": "健康管理师",
             "name": "jian_kang_guan_li_shi",
             "hssc_id": "de18f0fc-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 142,
+            "id": null,
             "label": "护士",
             "name": "hu_shi",
             "hssc_id": "de194c50-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 143,
+            "id": null,
             "label": "医生助理",
             "name": "yi_sheng_zhu_li",
             "hssc_id": "de1992d2-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 144,
+            "id": null,
             "label": "医生",
             "name": "yi_sheng",
             "hssc_id": "de19d6a2-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 145,
+            "id": null,
             "label": "质量管理",
             "name": "zhi_liang_guan_li",
             "hssc_id": "de1a253a-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 146,
+            "id": null,
             "label": "药士",
             "name": "yao_shi",
             "hssc_id": "de1a6f7c-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 147,
+            "id": null,
             "label": "药剂师",
             "name": "yao_ji_shi",
             "hssc_id": "de1ab716-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 148,
+            "id": null,
             "label": "公卫",
             "name": "gong_wei",
             "hssc_id": "de1b05cc-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 149,
+            "id": null,
             "label": "管理者",
             "name": "guan_li_zhe",
             "hssc_id": "de1b4cc6-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 150,
+            "id": null,
             "label": "影像医师",
             "name": "ying_xiang_yi_shi",
             "hssc_id": "de1b9046-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 151,
+            "id": null,
             "label": "康复理疗师",
             "name": "kang_fu_li_liao_shi",
             "hssc_id": "de1bcda4-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 152,
+            "id": null,
             "label": "中医师",
             "name": "zhong_yi_shi",
             "hssc_id": "de1c1052-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 153,
+            "id": null,
             "label": "患者",
             "name": "huan_zhe",
             "hssc_id": "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 154,
+            "id": null,
             "label": "患者家属",
             "name": "huan_zhe_jia_shu",
             "hssc_id": "de1ca0c6-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 155,
+            "id": null,
             "label": "检验师",
             "name": "jian_yan_shi",
             "hssc_id": "de1ce450-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 156,
+            "id": null,
             "label": "系统管理员",
             "name": "xi_tong_guan_li_yuan",
             "hssc_id": "de1d24ec-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 157,
+            "id": null,
             "label": "供应商",
             "name": "gong_ying_shang",
             "hssc_id": "de1d6952-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         },
         {
-            "id": 158,
+            "id": null,
             "label": "保险人员",
             "name": "bao_xian_ren_yuan",
             "hssc_id": "de1daa3e-9aa1-11ec-bde1-8a6e55faf877",
             "description": null
         }
     ],
-    "managedentity": [
+    "icpclist": [
         {
             "id": 1,
             "label": "注册登录（行政管理）",
             "name": "icpc1_register_logins",
             "hssc_id": "de7f87ae-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "zcdl（xzgl）",
-            "model_key_field": null,
-            "description": null,
-            "app_name": "icpc",
-            "model_name": "Icpc1_register_logins",
-            "display_field": "iname",
-            "related_field": "icpc_code"
+            "pym": null,
+            "app_name": null,
+            "model_name": null
         },
         {
             "id": 2,
             "label": "预约咨询调查（行政管理）",
             "name": "icpc2_reservation_investigations",
             "hssc_id": "de805a76-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "yyzxdc（xzgl）",
-            "model_key_field": null,
-            "description": null,
-            "app_name": "icpc",
-            "model_name": "Icpc2_reservation_investigations",
-            "display_field": "iname",
-            "related_field": "icpc_code"
+            "pym": null,
+            "app_name": null,
+            "model_name": null
         },
         {
             "id": 3,
             "label": "症状和问题",
             "name": "icpc3_symptoms_and_problems",
             "hssc_id": "de812ca8-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "zzhwt",
-            "model_key_field": null,
-            "description": null,
-            "app_name": "icpc",
-            "model_name": "Icpc3_symptoms_and_problems",
-            "display_field": "iname",
-            "related_field": "icpc_code"
+            "pym": null,
+            "app_name": null,
+            "model_name": null
         },
         {
             "id": 4,
             "label": "体格和其他检查",
             "name": "icpc4_physical_examination_and_tests",
             "hssc_id": "de82074a-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "tghqtjc",
-            "model_key_field": null,
-            "description": null,
-            "app_name": "icpc",
-            "model_name": "Icpc4_physical_examination_and_tests",
-            "display_field": "iname",
-            "related_field": "icpc_code"
+            "pym": null,
+            "app_name": null,
+            "model_name": null
         },
         {
             "id": 5,
             "label": "评估和诊断",
             "name": "icpc5_evaluation_and_diagnoses",
             "hssc_id": "de82c522-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "pghzd",
-            "model_key_field": null,
-            "description": null,
-            "app_name": "icpc",
-            "model_name": "Icpc5_evaluation_and_diagnoses",
-            "display_field": "iname",
-            "related_field": "icpc_code"
+            "pym": null,
+            "app_name": null,
+            "model_name": null
         },
         {
             "id": 6,
             "label": "开药",
             "name": "icpc6_prescribe_medicines",
             "hssc_id": "de83825a-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "ky",
-            "model_key_field": null,
-            "description": null,
-            "app_name": "icpc",
-            "model_name": "Icpc6_prescribe_medicines",
-            "display_field": "iname",
-            "related_field": "icpc_code"
+            "pym": null,
+            "app_name": null,
+            "model_name": null
         },
         {
             "id": 7,
             "label": "治疗",
             "name": "icpc7_treatments",
             "hssc_id": "de844762-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "zl",
-            "model_key_field": null,
-            "description": null,
-            "app_name": "icpc",
-            "model_name": "Icpc7_treatments",
-            "display_field": "iname",
-            "related_field": "icpc_code"
+            "pym": null,
+            "app_name": null,
+            "model_name": null
         },
         {
             "id": 8,
             "label": "其他健康干预",
             "name": "icpc8_other_health_interventions",
             "hssc_id": "de84ff22-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "qtjkgy",
-            "model_key_field": null,
-            "description": null,
-            "app_name": "icpc",
-            "model_name": "Icpc8_other_health_interventions",
-            "display_field": "iname",
-            "related_field": "icpc_code"
+            "pym": null,
+            "app_name": null,
+            "model_name": null
         },
         {
             "id": 9,
             "label": "转诊会诊",
             "name": "icpc9_referral_consultations",
             "hssc_id": "de85c326-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "zzhz",
-            "model_key_field": null,
-            "description": null,
-            "app_name": "icpc",
-            "model_name": "Icpc9_referral_consultations",
-            "display_field": "iname",
-            "related_field": "icpc_code"
+            "pym": null,
+            "app_name": null,
+            "model_name": null
         },
         {
             "id": 10,
             "label": "检查结果和统计",
             "name": "icpc10_test_results_and_statistics",
             "hssc_id": "de867e56-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "jcjghtj",
-            "model_key_field": null,
-            "description": null,
-            "app_name": "icpc",
-            "model_name": "Icpc10_test_results_and_statistics",
-            "display_field": "iname",
-            "related_field": "icpc_code"
-        },
+            "pym": null,
+            "app_name": null,
+            "model_name": null
+        }
+    ],
+    "managedentity": [
         {
-            "id": 11,
+            "id": null,
             "label": "职员",
             "name": "staff",
             "hssc_id": "de87315c-9aa1-11ec-bde1-8a6e55faf877",
@@ -272,7 +234,7 @@
             "related_field": "staff_code"
         },
         {
-            "id": 12,
+            "id": null,
             "label": "客户",
             "name": "customer",
             "hssc_id": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
@@ -285,7 +247,7 @@
             "related_field": "customer_code"
         },
         {
-            "id": 13,
+            "id": null,
             "label": "供应商",
             "name": "supplier",
             "hssc_id": "de889948-9aa1-11ec-bde1-8a6e55faf877",
@@ -298,7 +260,7 @@
             "related_field": "supplier_code"
         },
         {
-            "id": 14,
+            "id": null,
             "label": "药品",
             "name": "medicine",
             "hssc_id": "de896698-9aa1-11ec-bde1-8a6e55faf877",
@@ -311,7 +273,7 @@
             "related_field": "medicine_code"
         },
         {
-            "id": 15,
+            "id": null,
             "label": "设备",
             "name": "device",
             "hssc_id": "de8a1c64-9aa1-11ec-bde1-8a6e55faf877",
@@ -324,7 +286,7 @@
             "related_field": "device_code"
         },
         {
-            "id": 16,
+            "id": null,
             "label": "角色",
             "name": "role",
             "hssc_id": "de8b82fc-9aa1-11ec-bde1-8a6e55faf877",
@@ -337,7 +299,7 @@
             "related_field": "role_code"
         },
         {
-            "id": 17,
+            "id": null,
             "label": "机构",
             "name": "institution",
             "hssc_id": "de8ad1a4-9aa1-11ec-bde1-8a6e55faf877",
@@ -352,7 +314,7 @@
     ],
     "diclist": [
         {
-            "id": 250,
+            "id": null,
             "label": "性格",
             "name": "character",
             "hssc_id": "de1f127a-9aa1-11ec-bde1-8a6e55faf877",
@@ -360,7 +322,7 @@
             "related_field": "value"
         },
         {
-            "id": 251,
+            "id": null,
             "label": "满意度",
             "name": "satisfaction",
             "hssc_id": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877",
@@ -368,7 +330,7 @@
             "related_field": "value"
         },
         {
-            "id": 252,
+            "id": null,
             "label": "频次",
             "name": "frequency",
             "hssc_id": "de20b71a-9aa1-11ec-bde1-8a6e55faf877",
@@ -376,7 +338,7 @@
             "related_field": "value"
         },
         {
-            "id": 253,
+            "id": null,
             "label": "状态程度",
             "name": "state_degree",
             "hssc_id": "de21b21e-9aa1-11ec-bde1-8a6e55faf877",
@@ -384,7 +346,7 @@
             "related_field": "value"
         },
         {
-            "id": 254,
+            "id": null,
             "label": "比较表达",
             "name": "comparative_expression",
             "hssc_id": "de227fa0-9aa1-11ec-bde1-8a6e55faf877",
@@ -392,7 +354,7 @@
             "related_field": "value"
         },
         {
-            "id": 255,
+            "id": null,
             "label": "运动类型",
             "name": "sports_preference",
             "hssc_id": "de23c81a-9aa1-11ec-bde1-8a6e55faf877",
@@ -400,7 +362,7 @@
             "related_field": "value"
         },
         {
-            "id": 256,
+            "id": null,
             "label": "运动时长",
             "name": "exercise_time",
             "hssc_id": "de24d020-9aa1-11ec-bde1-8a6e55faf877",
@@ -408,7 +370,7 @@
             "related_field": "value"
         },
         {
-            "id": 257,
+            "id": null,
             "label": "便捷程度",
             "name": "convenience",
             "hssc_id": "de25c214-9aa1-11ec-bde1-8a6e55faf877",
@@ -416,7 +378,7 @@
             "related_field": "value"
         },
         {
-            "id": 258,
+            "id": null,
             "label": "家庭成员关系",
             "name": "family_relationship",
             "hssc_id": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
@@ -424,7 +386,7 @@
             "related_field": "value"
         },
         {
-            "id": 259,
+            "id": null,
             "label": "正常性判断",
             "name": "normality",
             "hssc_id": "de278914-9aa1-11ec-bde1-8a6e55faf877",
@@ -432,7 +394,7 @@
             "related_field": "value"
         },
         {
-            "id": 260,
+            "id": null,
             "label": "足背动脉搏动情况",
             "name": "dorsal_artery_pulsation",
             "hssc_id": "de1df50c-9aa1-11ec-bde1-8a6e55faf877",
@@ -440,7 +402,7 @@
             "related_field": "value"
         },
         {
-            "id": 261,
+            "id": null,
             "label": "听力",
             "name": "hearing",
             "hssc_id": "de34d862-9aa1-11ec-bde1-8a6e55faf877",
@@ -448,7 +410,7 @@
             "related_field": "value"
         },
         {
-            "id": 262,
+            "id": null,
             "label": "口唇",
             "name": "lips",
             "hssc_id": "de340608-9aa1-11ec-bde1-8a6e55faf877",
@@ -456,7 +418,7 @@
             "related_field": "value"
         },
         {
-            "id": 263,
+            "id": null,
             "label": "齿列",
             "name": "dentition",
             "hssc_id": "de332d5a-9aa1-11ec-bde1-8a6e55faf877",
@@ -464,7 +426,7 @@
             "related_field": "value"
         },
         {
-            "id": 264,
+            "id": null,
             "label": "咽部",
             "name": "pharynx",
             "hssc_id": "de3247a0-9aa1-11ec-bde1-8a6e55faf877",
@@ -472,7 +434,7 @@
             "related_field": "value"
         },
         {
-            "id": 265,
+            "id": null,
             "label": "生活事件",
             "name": "life_event",
             "hssc_id": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
@@ -480,7 +442,7 @@
             "related_field": "value"
         },
         {
-            "id": 266,
+            "id": null,
             "label": "水肿情况",
             "name": "edema",
             "hssc_id": "de316146-9aa1-11ec-bde1-8a6e55faf877",
@@ -488,7 +450,7 @@
             "related_field": "value"
         },
         {
-            "id": 267,
+            "id": null,
             "label": "性别",
             "name": "gender",
             "hssc_id": "de2963ba-9aa1-11ec-bde1-8a6e55faf877",
@@ -496,7 +458,7 @@
             "related_field": "value"
         },
         {
-            "id": 268,
+            "id": null,
             "label": "民族",
             "name": "nationality",
             "hssc_id": "de2a4ee2-9aa1-11ec-bde1-8a6e55faf877",
@@ -504,7 +466,7 @@
             "related_field": "value"
         },
         {
-            "id": 269,
+            "id": null,
             "label": "婚姻状况",
             "name": "marital_status",
             "hssc_id": "de2b3578-9aa1-11ec-bde1-8a6e55faf877",
@@ -512,7 +474,7 @@
             "related_field": "value"
         },
         {
-            "id": 270,
+            "id": null,
             "label": "文化程度",
             "name": "education",
             "hssc_id": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
@@ -520,7 +482,7 @@
             "related_field": "value"
         },
         {
-            "id": 271,
+            "id": null,
             "label": "职业状况",
             "name": "occupational_status",
             "hssc_id": "de2d3ef4-9aa1-11ec-bde1-8a6e55faf877",
@@ -528,7 +490,7 @@
             "related_field": "value"
         },
         {
-            "id": 272,
+            "id": null,
             "label": "医疗费用负担",
             "name": "medical_expenses_burden",
             "hssc_id": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877",
@@ -536,7 +498,7 @@
             "related_field": "value"
         },
         {
-            "id": 273,
+            "id": null,
             "label": "居住类型",
             "name": "type_of_residence",
             "hssc_id": "de2ed7e6-9aa1-11ec-bde1-8a6e55faf877",
@@ -544,7 +506,7 @@
             "related_field": "value"
         },
         {
-            "id": 274,
+            "id": null,
             "label": "血型",
             "name": "blood_type",
             "hssc_id": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
@@ -554,7 +516,7 @@
     ],
     "dicdetail": [
         {
-            "id": 1064,
+            "id": null,
             "label": "B型",
             "name": null,
             "hssc_id": "de36cc8a-9aa1-11ec-bde1-8a6e55faf877",
@@ -564,7 +526,7 @@
             "icpc": null
         },
         {
-            "id": 1066,
+            "id": null,
             "label": "AB型",
             "name": null,
             "hssc_id": "de37c3d8-9aa1-11ec-bde1-8a6e55faf877",
@@ -574,7 +536,7 @@
             "icpc": null
         },
         {
-            "id": 1067,
+            "id": null,
             "label": "A+型",
             "name": null,
             "hssc_id": "de38406a-9aa1-11ec-bde1-8a6e55faf877",
@@ -584,7 +546,7 @@
             "icpc": null
         },
         {
-            "id": 1068,
+            "id": null,
             "label": "A-型",
             "name": null,
             "hssc_id": "de38b130-9aa1-11ec-bde1-8a6e55faf877",
@@ -594,7 +556,7 @@
             "icpc": null
         },
         {
-            "id": 1069,
+            "id": null,
             "label": "B+型",
             "name": null,
             "hssc_id": "de3923ea-9aa1-11ec-bde1-8a6e55faf877",
@@ -604,7 +566,7 @@
             "icpc": null
         },
         {
-            "id": 1070,
+            "id": null,
             "label": "B-型",
             "name": null,
             "hssc_id": "de399afa-9aa1-11ec-bde1-8a6e55faf877",
@@ -614,7 +576,7 @@
             "icpc": null
         },
         {
-            "id": 1071,
+            "id": null,
             "label": "O+型",
             "name": null,
             "hssc_id": "de3a17a0-9aa1-11ec-bde1-8a6e55faf877",
@@ -624,7 +586,7 @@
             "icpc": null
         },
         {
-            "id": 1072,
+            "id": null,
             "label": "O-型",
             "name": null,
             "hssc_id": "de3a835c-9aa1-11ec-bde1-8a6e55faf877",
@@ -634,7 +596,7 @@
             "icpc": null
         },
         {
-            "id": 1074,
+            "id": null,
             "label": "AB-型",
             "name": null,
             "hssc_id": "de3b8e0a-9aa1-11ec-bde1-8a6e55faf877",
@@ -644,7 +606,7 @@
             "icpc": null
         },
         {
-            "id": 1075,
+            "id": null,
             "label": "不详",
             "name": null,
             "hssc_id": "de3c0056-9aa1-11ec-bde1-8a6e55faf877",
@@ -654,7 +616,7 @@
             "icpc": null
         },
         {
-            "id": 1076,
+            "id": null,
             "label": "常住",
             "name": null,
             "hssc_id": "de3c728e-9aa1-11ec-bde1-8a6e55faf877",
@@ -664,7 +626,7 @@
             "icpc": null
         },
         {
-            "id": 1077,
+            "id": null,
             "label": "非常住",
             "name": null,
             "hssc_id": "de3ce85e-9aa1-11ec-bde1-8a6e55faf877",
@@ -674,7 +636,7 @@
             "icpc": null
         },
         {
-            "id": 1079,
+            "id": null,
             "label": "城镇居民医疗保险",
             "name": null,
             "hssc_id": "de3dd5f2-9aa1-11ec-bde1-8a6e55faf877",
@@ -684,7 +646,7 @@
             "icpc": null
         },
         {
-            "id": 1080,
+            "id": null,
             "label": "商业保险",
             "name": null,
             "hssc_id": "de3e51bc-9aa1-11ec-bde1-8a6e55faf877",
@@ -694,7 +656,7 @@
             "icpc": null
         },
         {
-            "id": 1081,
+            "id": null,
             "label": "自费",
             "name": null,
             "hssc_id": "de3ed452-9aa1-11ec-bde1-8a6e55faf877",
@@ -704,7 +666,7 @@
             "icpc": null
         },
         {
-            "id": 1082,
+            "id": null,
             "label": "公费",
             "name": null,
             "hssc_id": "de3f5378-9aa1-11ec-bde1-8a6e55faf877",
@@ -714,7 +676,7 @@
             "icpc": null
         },
         {
-            "id": 1083,
+            "id": null,
             "label": "贫困救助",
             "name": null,
             "hssc_id": "de3fda3c-9aa1-11ec-bde1-8a6e55faf877",
@@ -724,7 +686,7 @@
             "icpc": null
         },
         {
-            "id": 1084,
+            "id": null,
             "label": "在职",
             "name": null,
             "hssc_id": "de406c5e-9aa1-11ec-bde1-8a6e55faf877",
@@ -734,7 +696,7 @@
             "icpc": null
         },
         {
-            "id": 1085,
+            "id": null,
             "label": "失业",
             "name": null,
             "hssc_id": "de40ec7e-9aa1-11ec-bde1-8a6e55faf877",
@@ -744,7 +706,7 @@
             "icpc": null
         },
         {
-            "id": 1086,
+            "id": null,
             "label": "退休",
             "name": null,
             "hssc_id": "de4173d8-9aa1-11ec-bde1-8a6e55faf877",
@@ -754,7 +716,7 @@
             "icpc": null
         },
         {
-            "id": 1088,
+            "id": null,
             "label": "硕士",
             "name": null,
             "hssc_id": "de4287fa-9aa1-11ec-bde1-8a6e55faf877",
@@ -764,7 +726,7 @@
             "icpc": null
         },
         {
-            "id": 1089,
+            "id": null,
             "label": "本科",
             "name": null,
             "hssc_id": "de430806-9aa1-11ec-bde1-8a6e55faf877",
@@ -774,7 +736,7 @@
             "icpc": null
         },
         {
-            "id": 1090,
+            "id": null,
             "label": "大专",
             "name": null,
             "hssc_id": "de438b5a-9aa1-11ec-bde1-8a6e55faf877",
@@ -784,7 +746,7 @@
             "icpc": null
         },
         {
-            "id": 1091,
+            "id": null,
             "label": "中专技校",
             "name": null,
             "hssc_id": "de44152a-9aa1-11ec-bde1-8a6e55faf877",
@@ -794,7 +756,7 @@
             "icpc": null
         },
         {
-            "id": 1092,
+            "id": null,
             "label": "高中",
             "name": null,
             "hssc_id": "de44a94a-9aa1-11ec-bde1-8a6e55faf877",
@@ -804,7 +766,7 @@
             "icpc": null
         },
         {
-            "id": 1093,
+            "id": null,
             "label": "初中",
             "name": null,
             "hssc_id": "de452e9c-9aa1-11ec-bde1-8a6e55faf877",
@@ -814,7 +776,7 @@
             "icpc": null
         },
         {
-            "id": 1095,
+            "id": null,
             "label": "文盲或半文盲",
             "name": null,
             "hssc_id": "de463a4e-9aa1-11ec-bde1-8a6e55faf877",
@@ -824,7 +786,7 @@
             "icpc": null
         },
         {
-            "id": 1096,
+            "id": null,
             "label": "未婚",
             "name": null,
             "hssc_id": "de46c3d8-9aa1-11ec-bde1-8a6e55faf877",
@@ -834,7 +796,7 @@
             "icpc": null
         },
         {
-            "id": 1097,
+            "id": null,
             "label": "已婚",
             "name": null,
             "hssc_id": "de474592-9aa1-11ec-bde1-8a6e55faf877",
@@ -844,7 +806,7 @@
             "icpc": null
         },
         {
-            "id": 1098,
+            "id": null,
             "label": "离异",
             "name": null,
             "hssc_id": "de47d584-9aa1-11ec-bde1-8a6e55faf877",
@@ -854,7 +816,7 @@
             "icpc": null
         },
         {
-            "id": 1099,
+            "id": null,
             "label": "丧偶",
             "name": null,
             "hssc_id": "de4848b6-9aa1-11ec-bde1-8a6e55faf877",
@@ -864,7 +826,7 @@
             "icpc": null
         },
         {
-            "id": 1100,
+            "id": null,
             "label": "汉族",
             "name": null,
             "hssc_id": "de48cdae-9aa1-11ec-bde1-8a6e55faf877",
@@ -874,7 +836,7 @@
             "icpc": null
         },
         {
-            "id": 1102,
+            "id": null,
             "label": "男",
             "name": null,
             "hssc_id": "de4a3054-9aa1-11ec-bde1-8a6e55faf877",
@@ -884,7 +846,7 @@
             "icpc": null
         },
         {
-            "id": 1103,
+            "id": null,
             "label": "女",
             "name": null,
             "hssc_id": "de4af1e2-9aa1-11ec-bde1-8a6e55faf877",
@@ -894,7 +856,7 @@
             "icpc": null
         },
         {
-            "id": 1104,
+            "id": null,
             "label": "无水肿",
             "name": null,
             "hssc_id": "de4b6fbe-9aa1-11ec-bde1-8a6e55faf877",
@@ -904,7 +866,7 @@
             "icpc": null
         },
         {
-            "id": 1105,
+            "id": null,
             "label": "丧偶",
             "name": null,
             "hssc_id": "de4bf2f4-9aa1-11ec-bde1-8a6e55faf877",
@@ -914,7 +876,7 @@
             "icpc": null
         },
         {
-            "id": 1106,
+            "id": null,
             "label": "父母死亡",
             "name": null,
             "hssc_id": "de4c8016-9aa1-11ec-bde1-8a6e55faf877",
@@ -924,7 +886,7 @@
             "icpc": null
         },
         {
-            "id": 1107,
+            "id": null,
             "label": "子女死亡",
             "name": null,
             "hssc_id": "de4d0324-9aa1-11ec-bde1-8a6e55faf877",
@@ -934,7 +896,7 @@
             "icpc": null
         },
         {
-            "id": 1108,
+            "id": null,
             "label": "离婚",
             "name": null,
             "hssc_id": "de4d890c-9aa1-11ec-bde1-8a6e55faf877",
@@ -944,7 +906,7 @@
             "icpc": null
         },
         {
-            "id": 1110,
+            "id": null,
             "label": "家属病重",
             "name": null,
             "hssc_id": "de4ea800-9aa1-11ec-bde1-8a6e55faf877",
@@ -954,7 +916,7 @@
             "icpc": null
         },
         {
-            "id": 1111,
+            "id": null,
             "label": "恋爱",
             "name": null,
             "hssc_id": "de4f34a0-9aa1-11ec-bde1-8a6e55faf877",
@@ -964,7 +926,7 @@
             "icpc": null
         },
         {
-            "id": 1112,
+            "id": null,
             "label": "结婚",
             "name": null,
             "hssc_id": "de4fc0dc-9aa1-11ec-bde1-8a6e55faf877",
@@ -974,7 +936,7 @@
             "icpc": null
         },
         {
-            "id": 1113,
+            "id": null,
             "label": "生子",
             "name": null,
             "hssc_id": "de504d7c-9aa1-11ec-bde1-8a6e55faf877",
@@ -984,7 +946,7 @@
             "icpc": null
         },
         {
-            "id": 1114,
+            "id": null,
             "label": "无充血",
             "name": null,
             "hssc_id": "de50d0e4-9aa1-11ec-bde1-8a6e55faf877",
@@ -994,7 +956,7 @@
             "icpc": null
         },
         {
-            "id": 1115,
+            "id": null,
             "label": "正常",
             "name": null,
             "hssc_id": "de51666c-9aa1-11ec-bde1-8a6e55faf877",
@@ -1004,7 +966,7 @@
             "icpc": null
         },
         {
-            "id": 1117,
+            "id": null,
             "label": "听见",
             "name": null,
             "hssc_id": "de527660-9aa1-11ec-bde1-8a6e55faf877",
@@ -1014,7 +976,7 @@
             "icpc": null
         },
         {
-            "id": 1118,
+            "id": null,
             "label": "触及正常",
             "name": null,
             "hssc_id": "de52f2ca-9aa1-11ec-bde1-8a6e55faf877",
@@ -1024,7 +986,7 @@
             "icpc": null
         },
         {
-            "id": 1119,
+            "id": null,
             "label": "正常",
             "name": null,
             "hssc_id": "de536944-9aa1-11ec-bde1-8a6e55faf877",
@@ -1034,7 +996,7 @@
             "icpc": null
         },
         {
-            "id": 1120,
+            "id": null,
             "label": "异常",
             "name": null,
             "hssc_id": "de53e568-9aa1-11ec-bde1-8a6e55faf877",
@@ -1044,7 +1006,7 @@
             "icpc": null
         },
         {
-            "id": 1121,
+            "id": null,
             "label": "户主",
             "name": null,
             "hssc_id": "de547320-9aa1-11ec-bde1-8a6e55faf877",
@@ -1054,7 +1016,7 @@
             "icpc": null
         },
         {
-            "id": 1122,
+            "id": null,
             "label": "配偶",
             "name": null,
             "hssc_id": "de54ec2e-9aa1-11ec-bde1-8a6e55faf877",
@@ -1064,7 +1026,7 @@
             "icpc": null
         },
         {
-            "id": 1123,
+            "id": null,
             "label": "父母",
             "name": null,
             "hssc_id": "de556366-9aa1-11ec-bde1-8a6e55faf877",
@@ -1074,7 +1036,7 @@
             "icpc": null
         },
         {
-            "id": 1125,
+            "id": null,
             "label": "祖父母",
             "name": null,
             "hssc_id": "de56666c-9aa1-11ec-bde1-8a6e55faf877",
@@ -1084,7 +1046,7 @@
             "icpc": null
         },
         {
-            "id": 1126,
+            "id": null,
             "label": "孙子女",
             "name": null,
             "hssc_id": "de573056-9aa1-11ec-bde1-8a6e55faf877",
@@ -1094,7 +1056,7 @@
             "icpc": null
         },
         {
-            "id": 1127,
+            "id": null,
             "label": "兄弟姐妹",
             "name": null,
             "hssc_id": "de57c6a6-9aa1-11ec-bde1-8a6e55faf877",
@@ -1104,7 +1066,7 @@
             "icpc": null
         },
         {
-            "id": 1128,
+            "id": null,
             "label": "其他成员",
             "name": null,
             "hssc_id": "de592e10-9aa1-11ec-bde1-8a6e55faf877",
@@ -1114,7 +1076,7 @@
             "icpc": null
         },
         {
-            "id": 1130,
+            "id": null,
             "label": "不方便",
             "name": null,
             "hssc_id": "de5a95ac-9aa1-11ec-bde1-8a6e55faf877",
@@ -1124,7 +1086,7 @@
             "icpc": null
         },
         {
-            "id": 1131,
+            "id": null,
             "label": "比较方便",
             "name": null,
             "hssc_id": "de5b17a2-9aa1-11ec-bde1-8a6e55faf877",
@@ -1134,7 +1096,7 @@
             "icpc": null
         },
         {
-            "id": 1132,
+            "id": null,
             "label": "非常方便",
             "name": null,
             "hssc_id": "de5c3880-9aa1-11ec-bde1-8a6e55faf877",
@@ -1144,7 +1106,7 @@
             "icpc": null
         },
         {
-            "id": 1133,
+            "id": null,
             "label": "半小时以内",
             "name": null,
             "hssc_id": "de5cb49a-9aa1-11ec-bde1-8a6e55faf877",
@@ -1154,7 +1116,7 @@
             "icpc": null
         },
         {
-            "id": 1135,
+            "id": null,
             "label": "一个半小时以上",
             "name": null,
             "hssc_id": "de5dc0ec-9aa1-11ec-bde1-8a6e55faf877",
@@ -1164,7 +1126,7 @@
             "icpc": null
         },
         {
-            "id": 1136,
+            "id": null,
             "label": "有氧运动",
             "name": null,
             "hssc_id": "de5e52fa-9aa1-11ec-bde1-8a6e55faf877",
@@ -1174,7 +1136,7 @@
             "icpc": null
         },
         {
-            "id": 1137,
+            "id": null,
             "label": "无氧运动",
             "name": null,
             "hssc_id": "de5edffe-9aa1-11ec-bde1-8a6e55faf877",
@@ -1184,7 +1146,7 @@
             "icpc": null
         },
         {
-            "id": 1138,
+            "id": null,
             "label": "有氧无氧交替运动",
             "name": null,
             "hssc_id": "de5f6e88-9aa1-11ec-bde1-8a6e55faf877",
@@ -1194,7 +1156,7 @@
             "icpc": null
         },
         {
-            "id": 1140,
+            "id": null,
             "label": "改善很大",
             "name": null,
             "hssc_id": "de609470-9aa1-11ec-bde1-8a6e55faf877",
@@ -1204,7 +1166,7 @@
             "icpc": null
         },
         {
-            "id": 1141,
+            "id": null,
             "label": "有一定改善",
             "name": null,
             "hssc_id": "de611d00-9aa1-11ec-bde1-8a6e55faf877",
@@ -1214,7 +1176,7 @@
             "icpc": null
         },
         {
-            "id": 1142,
+            "id": null,
             "label": "没变化",
             "name": null,
             "hssc_id": "de619f3c-9aa1-11ec-bde1-8a6e55faf877",
@@ -1224,7 +1186,7 @@
             "icpc": null
         },
         {
-            "id": 1143,
+            "id": null,
             "label": "变更差了",
             "name": null,
             "hssc_id": "de621d9a-9aa1-11ec-bde1-8a6e55faf877",
@@ -1234,7 +1196,7 @@
             "icpc": null
         },
         {
-            "id": 1145,
+            "id": null,
             "label": "还不错",
             "name": null,
             "hssc_id": "de631dd0-9aa1-11ec-bde1-8a6e55faf877",
@@ -1244,7 +1206,7 @@
             "icpc": null
         },
         {
-            "id": 1146,
+            "id": null,
             "label": "不太好",
             "name": null,
             "hssc_id": "de63a58e-9aa1-11ec-bde1-8a6e55faf877",
@@ -1254,7 +1216,7 @@
             "icpc": null
         },
         {
-            "id": 1147,
+            "id": null,
             "label": "非常糟",
             "name": null,
             "hssc_id": "de642b08-9aa1-11ec-bde1-8a6e55faf877",
@@ -1264,7 +1226,7 @@
             "icpc": null
         },
         {
-            "id": 1148,
+            "id": null,
             "label": "经常",
             "name": null,
             "hssc_id": "de64a6dc-9aa1-11ec-bde1-8a6e55faf877",
@@ -1274,7 +1236,7 @@
             "icpc": null
         },
         {
-            "id": 1063,
+            "id": null,
             "label": "A型",
             "name": null,
             "hssc_id": "de361ee8-9aa1-11ec-bde1-8a6e55faf877",
@@ -1284,7 +1246,7 @@
             "icpc": null
         },
         {
-            "id": 1065,
+            "id": null,
             "label": "O型",
             "name": null,
             "hssc_id": "de3747a0-9aa1-11ec-bde1-8a6e55faf877",
@@ -1294,7 +1256,7 @@
             "icpc": null
         },
         {
-            "id": 1073,
+            "id": null,
             "label": "AB+型",
             "name": null,
             "hssc_id": "de3afa26-9aa1-11ec-bde1-8a6e55faf877",
@@ -1304,7 +1266,7 @@
             "icpc": null
         },
         {
-            "id": 1078,
+            "id": null,
             "label": "职工医疗保险",
             "name": null,
             "hssc_id": "de3d5ca8-9aa1-11ec-bde1-8a6e55faf877",
@@ -1314,7 +1276,7 @@
             "icpc": null
         },
         {
-            "id": 1087,
+            "id": null,
             "label": "博士",
             "name": null,
             "hssc_id": "de41f858-9aa1-11ec-bde1-8a6e55faf877",
@@ -1324,7 +1286,7 @@
             "icpc": null
         },
         {
-            "id": 1094,
+            "id": null,
             "label": "小学",
             "name": null,
             "hssc_id": "de45b538-9aa1-11ec-bde1-8a6e55faf877",
@@ -1334,7 +1296,7 @@
             "icpc": null
         },
         {
-            "id": 1101,
+            "id": null,
             "label": "少数民族",
             "name": null,
             "hssc_id": "de49873a-9aa1-11ec-bde1-8a6e55faf877",
@@ -1344,7 +1306,7 @@
             "icpc": null
         },
         {
-            "id": 1109,
+            "id": null,
             "label": "失业",
             "name": null,
             "hssc_id": "de4e072e-9aa1-11ec-bde1-8a6e55faf877",
@@ -1354,7 +1316,7 @@
             "icpc": null
         },
         {
-            "id": 1116,
+            "id": null,
             "label": "红润",
             "name": null,
             "hssc_id": "de51ef10-9aa1-11ec-bde1-8a6e55faf877",
@@ -1364,7 +1326,7 @@
             "icpc": null
         },
         {
-            "id": 1124,
+            "id": null,
             "label": "子女",
             "name": null,
             "hssc_id": "de55e3e0-9aa1-11ec-bde1-8a6e55faf877",
@@ -1374,7 +1336,7 @@
             "icpc": null
         },
         {
-            "id": 1129,
+            "id": null,
             "label": "非常不方便",
             "name": null,
             "hssc_id": "de59e6ca-9aa1-11ec-bde1-8a6e55faf877",
@@ -1384,7 +1346,7 @@
             "icpc": null
         },
         {
-            "id": 1134,
+            "id": null,
             "label": "半小时到一个半小时",
             "name": null,
             "hssc_id": "de5d388e-9aa1-11ec-bde1-8a6e55faf877",
@@ -1394,7 +1356,7 @@
             "icpc": null
         },
         {
-            "id": 1139,
+            "id": null,
             "label": "不运动",
             "name": null,
             "hssc_id": "de600a00-9aa1-11ec-bde1-8a6e55faf877",
@@ -1404,7 +1366,7 @@
             "icpc": null
         },
         {
-            "id": 1144,
+            "id": null,
             "label": "非常好",
             "name": null,
             "hssc_id": "de629d56-9aa1-11ec-bde1-8a6e55faf877",
@@ -1414,7 +1376,7 @@
             "icpc": null
         },
         {
-            "id": 1149,
+            "id": null,
             "label": "偶尔",
             "name": null,
             "hssc_id": "de65254e-9aa1-11ec-bde1-8a6e55faf877",
@@ -1424,7 +1386,7 @@
             "icpc": null
         },
         {
-            "id": 1150,
+            "id": null,
             "label": "从无",
             "name": null,
             "hssc_id": "de65a884-9aa1-11ec-bde1-8a6e55faf877",
@@ -1434,7 +1396,7 @@
             "icpc": null
         },
         {
-            "id": 1151,
+            "id": null,
             "label": "很满意",
             "name": null,
             "hssc_id": "de662a2a-9aa1-11ec-bde1-8a6e55faf877",
@@ -1444,7 +1406,7 @@
             "icpc": null
         },
         {
-            "id": 1152,
+            "id": null,
             "label": "满意",
             "name": null,
             "hssc_id": "de66a07c-9aa1-11ec-bde1-8a6e55faf877",
@@ -1454,7 +1416,7 @@
             "icpc": null
         },
         {
-            "id": 1153,
+            "id": null,
             "label": "既非满意也非不满意",
             "name": null,
             "hssc_id": "de671890-9aa1-11ec-bde1-8a6e55faf877",
@@ -1464,7 +1426,7 @@
             "icpc": null
         },
         {
-            "id": 1154,
+            "id": null,
             "label": "不满意",
             "name": null,
             "hssc_id": "de678df2-9aa1-11ec-bde1-8a6e55faf877",
@@ -1474,7 +1436,7 @@
             "icpc": null
         },
         {
-            "id": 1155,
+            "id": null,
             "label": "很不满意",
             "name": null,
             "hssc_id": "de6807b4-9aa1-11ec-bde1-8a6e55faf877",
@@ -1484,7 +1446,7 @@
             "icpc": null
         },
         {
-            "id": 1156,
+            "id": null,
             "label": "外向",
             "name": null,
             "hssc_id": "de687c94-9aa1-11ec-bde1-8a6e55faf877",
@@ -1494,7 +1456,7 @@
             "icpc": null
         },
         {
-            "id": 1157,
+            "id": null,
             "label": "内向",
             "name": null,
             "hssc_id": "de69174e-9aa1-11ec-bde1-8a6e55faf877",
@@ -1504,7 +1466,7 @@
             "icpc": null
         },
         {
-            "id": 1166,
+            "id": null,
             "label": "单侧水肿",
             "name": null,
             "hssc_id": "de72474c-9aa1-11ec-bde1-8a6e55faf877",
@@ -1514,7 +1476,7 @@
             "icpc": "K0702"
         },
         {
-            "id": 1167,
+            "id": null,
             "label": "双侧不对称水肿",
             "name": null,
             "hssc_id": "de7358a8-9aa1-11ec-bde1-8a6e55faf877",
@@ -1524,7 +1486,7 @@
             "icpc": "K0702"
         },
         {
-            "id": 1168,
+            "id": null,
             "label": "双侧对称水肿",
             "name": null,
             "hssc_id": "de748818-9aa1-11ec-bde1-8a6e55faf877",
@@ -1534,7 +1496,7 @@
             "icpc": "K0702"
         },
         {
-            "id": 1169,
+            "id": null,
             "label": "充血",
             "name": null,
             "hssc_id": "de75fb94-9aa1-11ec-bde1-8a6e55faf877",
@@ -1544,7 +1506,7 @@
             "icpc": "R2902"
         },
         {
-            "id": 1170,
+            "id": null,
             "label": "淋巴滤泡增生",
             "name": null,
             "hssc_id": "de76e752-9aa1-11ec-bde1-8a6e55faf877",
@@ -1554,7 +1516,7 @@
             "icpc": "R8528"
         },
         {
-            "id": 1171,
+            "id": null,
             "label": "缺齿",
             "name": null,
             "hssc_id": "de7842aa-9aa1-11ec-bde1-8a6e55faf877",
@@ -1564,7 +1526,7 @@
             "icpc": "D8268"
         },
         {
-            "id": 1172,
+            "id": null,
             "label": "龋齿",
             "name": null,
             "hssc_id": "de790992-9aa1-11ec-bde1-8a6e55faf877",
@@ -1574,7 +1536,7 @@
             "icpc": "D8214"
         },
         {
-            "id": 1173,
+            "id": null,
             "label": "义齿（假牙）",
             "name": null,
             "hssc_id": "de79d73c-9aa1-11ec-bde1-8a6e55faf877",
@@ -1584,7 +1546,7 @@
             "icpc": "D8268"
         },
         {
-            "id": 1174,
+            "id": null,
             "label": "苍白",
             "name": null,
             "hssc_id": "de7a8ae2-9aa1-11ec-bde1-8a6e55faf877",
@@ -1594,7 +1556,7 @@
             "icpc": "D2001"
         },
         {
-            "id": 1175,
+            "id": null,
             "label": "发绀",
             "name": null,
             "hssc_id": "de7b4b76-9aa1-11ec-bde1-8a6e55faf877",
@@ -1604,7 +1566,7 @@
             "icpc": "D2001"
         },
         {
-            "id": 1176,
+            "id": null,
             "label": "皲裂",
             "name": null,
             "hssc_id": "de7c0476-9aa1-11ec-bde1-8a6e55faf877",
@@ -1614,7 +1576,7 @@
             "icpc": "D2001"
         },
         {
-            "id": 1177,
+            "id": null,
             "label": "疱疹",
             "name": null,
             "hssc_id": "de7cbfba-9aa1-11ec-bde1-8a6e55faf877",
@@ -1624,7 +1586,7 @@
             "icpc": "D2001"
         },
         {
-            "id": 1178,
+            "id": null,
             "label": "听不清或无法听见",
             "name": null,
             "hssc_id": "de7d8882-9aa1-11ec-bde1-8a6e55faf877",
@@ -1634,7 +1596,7 @@
             "icpc": "H0201"
         },
         {
-            "id": 1179,
+            "id": null,
             "label": "减弱",
             "name": null,
             "hssc_id": "de7e72f6-9aa1-11ec-bde1-8a6e55faf877",
@@ -1644,7 +1606,7 @@
             "icpc": "L1701"
         },
         {
-            "id": 1180,
+            "id": null,
             "label": "消失",
             "name": null,
             "hssc_id": "de7f3330-9aa1-11ec-bde1-8a6e55faf877",
@@ -1656,7 +1618,7 @@
     ],
     "boolfield": [
         {
-            "id": 172,
+            "id": null,
             "label": "是否有慢性疾病",
             "name": "boolfield_shi_fou_you_man_xing_ji_bing",
             "hssc_id": "de8c3864-9aa1-11ec-bde1-8a6e55faf877",
@@ -1666,7 +1628,7 @@
             "default": "0"
         },
         {
-            "id": 173,
+            "id": null,
             "label": "是否经常加班",
             "name": "boolfield_do_you_often_work_overtime",
             "hssc_id": "de8d23fa-9aa1-11ec-bde1-8a6e55faf877",
@@ -1676,7 +1638,7 @@
             "default": "0"
         },
         {
-            "id": 174,
+            "id": null,
             "label": "饮食是否规律",
             "name": "boolfield_is_the_diet_regular",
             "hssc_id": "de8dddd6-9aa1-11ec-bde1-8a6e55faf877",
@@ -1686,7 +1648,7 @@
             "default": "0"
         },
         {
-            "id": 175,
+            "id": null,
             "label": "您觉得生活是否有乐趣吗",
             "name": "boolfield_is_life_fun",
             "hssc_id": "de8e94b0-9aa1-11ec-bde1-8a6e55faf877",
@@ -1696,7 +1658,7 @@
             "default": "0"
         },
         {
-            "id": 176,
+            "id": null,
             "label": "是否感觉到工作压力大",
             "name": "boolfield_do_you_feel_pressured_at_work",
             "hssc_id": "de8f5508-9aa1-11ec-bde1-8a6e55faf877",
@@ -1706,7 +1668,7 @@
             "default": "0"
         },
         {
-            "id": 177,
+            "id": null,
             "label": "饮食比例是否健康",
             "name": "boolfield_is_the_diet_proportion_healthy",
             "hssc_id": "de900642-9aa1-11ec-bde1-8a6e55faf877",
@@ -1716,7 +1678,7 @@
             "default": "0"
         },
         {
-            "id": 178,
+            "id": null,
             "label": "大便是否规律",
             "name": "boolfield_whether_the_bowel_movements_are_regular",
             "hssc_id": "de90cd2a-9aa1-11ec-bde1-8a6e55faf877",
@@ -1726,7 +1688,7 @@
             "default": "0"
         },
         {
-            "id": 179,
+            "id": null,
             "label": "是否饮酒",
             "name": "boolfield_whether_to_drink_alcohol",
             "hssc_id": "de9188a0-9aa1-11ec-bde1-8a6e55faf877",
@@ -1736,7 +1698,7 @@
             "default": "0"
         },
         {
-            "id": 180,
+            "id": null,
             "label": "是否吸烟",
             "name": "boolfield_do_you_smoke",
             "hssc_id": "de923b10-9aa1-11ec-bde1-8a6e55faf877",
@@ -1746,7 +1708,7 @@
             "default": "0"
         },
         {
-            "id": 181,
+            "id": null,
             "label": "是否有失眠情况",
             "name": "boolfield_insomnia",
             "hssc_id": "de92f320-9aa1-11ec-bde1-8a6e55faf877",
@@ -1756,7 +1718,7 @@
             "default": "0"
         },
         {
-            "id": 182,
+            "id": null,
             "label": "是否比别人容易生病",
             "name": "boolfield_is_it_easy_to_get_sick",
             "hssc_id": "de93a91e-9aa1-11ec-bde1-8a6e55faf877",
@@ -1766,57 +1728,7 @@
             "default": "0"
         },
         {
-            "id": 183,
-            "label": "居住环境是否干净卫生",
-            "name": "boolfield_whether_the_living_environment_is_clean_and_hygienic",
-            "hssc_id": "de946d5e-9aa1-11ec-bde1-8a6e55faf877",
-            "name_icpc": null,
-            "type": "0",
-            "required": false,
-            "default": "0"
-        },
-        {
-            "id": 184,
-            "label": "饮水是否健康",
-            "name": "boolfield_is_drinking_water_healthy",
-            "hssc_id": "de9527d0-9aa1-11ec-bde1-8a6e55faf877",
-            "name_icpc": null,
-            "type": "0",
-            "required": false,
-            "default": "0"
-        },
-        {
-            "id": 185,
-            "label": "是否有噪声污染",
-            "name": "boolfield_whether_there_is_noise_pollution",
-            "hssc_id": "de95db9e-9aa1-11ec-bde1-8a6e55faf877",
-            "name_icpc": null,
-            "type": "0",
-            "required": false,
-            "default": "0"
-        },
-        {
-            "id": 186,
-            "label": "是否有空气污染",
-            "name": "boolfield_whether_there_is_air_pollution",
-            "hssc_id": "de969476-9aa1-11ec-bde1-8a6e55faf877",
-            "name_icpc": null,
-            "type": "0",
-            "required": false,
-            "default": "0"
-        },
-        {
-            "id": 187,
-            "label": "是否有其他污染",
-            "name": "boolfield_whether_there_is_other_pollution",
-            "hssc_id": "de974f9c-9aa1-11ec-bde1-8a6e55faf877",
-            "name_icpc": null,
-            "type": "0",
-            "required": false,
-            "default": "0"
-        },
-        {
-            "id": 188,
+            "id": null,
             "label": "合同签约户",
             "name": "boolfield_contract_signatory",
             "hssc_id": "de98237c-9aa1-11ec-bde1-8a6e55faf877",
@@ -1826,7 +1738,7 @@
             "default": "0"
         },
         {
-            "id": 189,
+            "id": null,
             "label": "签到确认",
             "name": "boolfield_yu_yue_que_ren",
             "hssc_id": "de98e56e-9aa1-11ec-bde1-8a6e55faf877",
@@ -1836,7 +1748,7 @@
             "default": "1"
         },
         {
-            "id": 190,
+            "id": null,
             "label": "是否继续使用",
             "name": "boolfield_shi_fou_ji_xu_shi_yong",
             "hssc_id": "de99c1f0-9aa1-11ec-bde1-8a6e55faf877",
@@ -1844,11 +1756,61 @@
             "type": "1",
             "required": true,
             "default": "0"
+        },
+        {
+            "id": null,
+            "label": "暴露于噪音",
+            "name": "Z2902",
+            "hssc_id": "de95db9e-9aa1-11ec-bde1-8a6e55faf877",
+            "name_icpc": "Z2902",
+            "type": "0",
+            "required": false,
+            "default": "0"
+        },
+        {
+            "id": null,
+            "label": "暴露于空气污染",
+            "name": "Z2903",
+            "hssc_id": "de969476-9aa1-11ec-bde1-8a6e55faf877",
+            "name_icpc": "Z2903",
+            "type": "0",
+            "required": false,
+            "default": "0"
+        },
+        {
+            "id": null,
+            "label": "暴露于其他污染",
+            "name": "Z2907",
+            "hssc_id": "de974f9c-9aa1-11ec-bde1-8a6e55faf877",
+            "name_icpc": "Z2907",
+            "type": "0",
+            "required": false,
+            "default": "0"
+        },
+        {
+            "id": null,
+            "label": "食物和饮水问题",
+            "name": "Z0201",
+            "hssc_id": "de9527d0-9aa1-11ec-bde1-8a6e55faf877",
+            "name_icpc": "Z0201",
+            "type": "0",
+            "required": false,
+            "default": "0"
+        },
+        {
+            "id": null,
+            "label": "与外界环境有关的问题，未特指",
+            "name": "Z2909",
+            "hssc_id": "de946d5e-9aa1-11ec-bde1-8a6e55faf877",
+            "name_icpc": "Z2909",
+            "type": "0",
+            "required": false,
+            "default": "0"
         }
     ],
     "characterfield": [
         {
-            "id": 250,
+            "id": null,
             "label": "病情补充描述",
             "name": "characterfield_supplementary_description_of_the_condition",
             "hssc_id": "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
@@ -1859,7 +1821,7 @@
             "default": null
         },
         {
-            "id": 251,
+            "id": null,
             "label": "每天工作及工作往返总时长",
             "name": "characterfield_working_hours_per_day",
             "hssc_id": "de9bbcf8-9aa1-11ec-bde1-8a6e55faf877",
@@ -1870,7 +1832,7 @@
             "default": null
         },
         {
-            "id": 252,
+            "id": null,
             "label": "平均睡眠时长",
             "name": "characterfield_average_sleep_duration",
             "hssc_id": "de9c7012-9aa1-11ec-bde1-8a6e55faf877",
@@ -1881,7 +1843,7 @@
             "default": null
         },
         {
-            "id": 253,
+            "id": null,
             "label": "持续失眠时间",
             "name": "characterfield_duration_of_insomnia",
             "hssc_id": "de9d30a6-9aa1-11ec-bde1-8a6e55faf877",
@@ -1892,7 +1854,7 @@
             "default": null
         },
         {
-            "id": 254,
+            "id": null,
             "label": "姓名",
             "name": "characterfield_name",
             "hssc_id": "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
@@ -1903,7 +1865,7 @@
             "default": null
         },
         {
-            "id": 255,
+            "id": null,
             "label": "性别",
             "name": "characterfield_gender",
             "hssc_id": "de9e99dc-9aa1-11ec-bde1-8a6e55faf877",
@@ -1914,7 +1876,7 @@
             "default": null
         },
         {
-            "id": 256,
+            "id": null,
             "label": "年龄",
             "name": "characterfield_age",
             "hssc_id": "de9f4ea4-9aa1-11ec-bde1-8a6e55faf877",
@@ -1925,7 +1887,7 @@
             "default": null
         },
         {
-            "id": 257,
+            "id": null,
             "label": "身份证号码",
             "name": "characterhssc_identification_number",
             "hssc_id": "dea0045c-9aa1-11ec-bde1-8a6e55faf877",
@@ -1936,7 +1898,7 @@
             "default": null
         },
         {
-            "id": 258,
+            "id": null,
             "label": "联系电话",
             "name": "characterfield_contact_information",
             "hssc_id": "dea0bc44-9aa1-11ec-bde1-8a6e55faf877",
@@ -1947,7 +1909,7 @@
             "default": null
         },
         {
-            "id": 259,
+            "id": null,
             "label": "联系地址",
             "name": "characterfield_contact_address",
             "hssc_id": "dea1797c-9aa1-11ec-bde1-8a6e55faf877",
@@ -1958,7 +1920,7 @@
             "default": null
         },
         {
-            "id": 260,
+            "id": null,
             "label": "执业资质",
             "name": "characterfield_practice_qualification",
             "hssc_id": "dea24708-9aa1-11ec-bde1-8a6e55faf877",
@@ -1969,7 +1931,7 @@
             "default": null
         },
         {
-            "id": 261,
+            "id": null,
             "label": "密码设置",
             "name": "characterfield_password_setting",
             "hssc_id": "dea37b46-9aa1-11ec-bde1-8a6e55faf877",
@@ -1980,7 +1942,7 @@
             "default": null
         },
         {
-            "id": 262,
+            "id": null,
             "label": "确认密码",
             "name": "characterfield_confirm_password",
             "hssc_id": "dea437ac-9aa1-11ec-bde1-8a6e55faf877",
@@ -1991,7 +1953,7 @@
             "default": null
         },
         {
-            "id": 263,
+            "id": null,
             "label": "专长",
             "name": "characterfield_expertise",
             "hssc_id": "dea4f05c-9aa1-11ec-bde1-8a6e55faf877",
@@ -2002,7 +1964,7 @@
             "default": null
         },
         {
-            "id": 264,
+            "id": null,
             "label": "执业时间",
             "name": "characterfield_practice_time",
             "hssc_id": "dea5a43e-9aa1-11ec-bde1-8a6e55faf877",
@@ -2013,7 +1975,7 @@
             "default": null
         },
         {
-            "id": 265,
+            "id": null,
             "label": "用户名",
             "name": "characterfield_username",
             "hssc_id": "dea654a6-9aa1-11ec-bde1-8a6e55faf877",
@@ -2024,7 +1986,7 @@
             "default": null
         },
         {
-            "id": 266,
+            "id": null,
             "label": "密码",
             "name": "characterfield_password",
             "hssc_id": "dea7211a-9aa1-11ec-bde1-8a6e55faf877",
@@ -2035,7 +1997,7 @@
             "default": null
         },
         {
-            "id": 267,
+            "id": null,
             "label": "服务角色",
             "name": "characterfield_service_role",
             "hssc_id": "dea7d614-9aa1-11ec-bde1-8a6e55faf877",
@@ -2046,7 +2008,7 @@
             "default": null
         },
         {
-            "id": 268,
+            "id": null,
             "label": "左眼视力",
             "name": "characterfield_left_eye_vision",
             "hssc_id": "dea8864a-9aa1-11ec-bde1-8a6e55faf877",
@@ -2057,7 +2019,7 @@
             "default": null
         },
         {
-            "id": 269,
+            "id": null,
             "label": "右眼视力",
             "name": "characterfield_right_eye_vision",
             "hssc_id": "dea93de2-9aa1-11ec-bde1-8a6e55faf877",
@@ -2068,7 +2030,7 @@
             "default": null
         },
         {
-            "id": 270,
+            "id": null,
             "label": "居民档案号",
             "name": "characterfield_resident_file_number",
             "hssc_id": "dea9f25a-9aa1-11ec-bde1-8a6e55faf877",
@@ -2079,7 +2041,7 @@
             "default": null
         },
         {
-            "id": 271,
+            "id": null,
             "label": "家庭地址",
             "name": "characterfield_family_address",
             "hssc_id": "deaaac2c-9aa1-11ec-bde1-8a6e55faf877",
@@ -2090,7 +2052,7 @@
             "default": null
         },
         {
-            "id": 272,
+            "id": null,
             "label": "联系电话",
             "name": "characterfield_contact_number",
             "hssc_id": "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
@@ -2101,7 +2063,7 @@
             "default": null
         },
         {
-            "id": 273,
+            "id": null,
             "label": "医疗ic卡号",
             "name": "characterfield_medical_ic_card_number",
             "hssc_id": "deac1aa8-9aa1-11ec-bde1-8a6e55faf877",
@@ -2112,7 +2074,7 @@
             "default": null
         },
         {
-            "id": 274,
+            "id": null,
             "label": "用药剂量",
             "name": "characterfield_yong_yao_ji_liang",
             "hssc_id": "deaccd90-9aa1-11ec-bde1-8a6e55faf877",
@@ -2123,18 +2085,7 @@
             "default": null
         },
         {
-            "id": 275,
-            "label": "健康教育",
-            "name": "characterfield_jian_kang_jiao_yu",
-            "hssc_id": "dead8848-9aa1-11ec-bde1-8a6e55faf877",
-            "name_icpc": null,
-            "type": "TextField",
-            "length": 255,
-            "required": false,
-            "default": null
-        },
-        {
-            "id": 276,
+            "id": null,
             "label": "健康档案编号",
             "name": "characterfield_jian_kang_dang_an_bian_hao",
             "hssc_id": "2f82e170-9ebf-11ec-a013-aa434405c3fc",
@@ -2143,33 +2094,11 @@
             "length": 255,
             "required": false,
             "default": null
-        },
-        {
-            "id": 277,
-            "label": "饮食建议",
-            "name": "characterfield_yin_shi_jian_yi",
-            "hssc_id": "97d7406a-a331-11ec-bab8-96095a1fe853",
-            "name_icpc": null,
-            "type": "TextField",
-            "length": 255,
-            "required": false,
-            "default": null
-        },
-        {
-            "id": 278,
-            "label": "运动处方",
-            "name": "characterfield_yun_dong_chu_fang",
-            "hssc_id": "b35610dc-a331-11ec-b08f-96095a1fe853",
-            "name_icpc": null,
-            "type": "TextField",
-            "length": 255,
-            "required": false,
-            "default": null
         }
     ],
     "numberfield": [
         {
-            "id": 100,
+            "id": null,
             "label": "体温",
             "name": "numberfield_body_temperature",
             "hssc_id": "deae47e2-9aa1-11ec-bde1-8a6e55faf877",
@@ -2185,7 +2114,7 @@
             "required": false
         },
         {
-            "id": 101,
+            "id": null,
             "label": "脉搏",
             "name": "numberfield_pulse",
             "hssc_id": "deaf1ae6-9aa1-11ec-bde1-8a6e55faf877",
@@ -2201,7 +2130,7 @@
             "required": false
         },
         {
-            "id": 102,
+            "id": null,
             "label": "呼吸频率",
             "name": "numberfield_respiratory_rate",
             "hssc_id": "deafc9f0-9aa1-11ec-bde1-8a6e55faf877",
@@ -2217,7 +2146,7 @@
             "required": false
         },
         {
-            "id": 103,
+            "id": null,
             "label": "身高",
             "name": "numberfield_hight",
             "hssc_id": "deb08872-9aa1-11ec-bde1-8a6e55faf877",
@@ -2233,7 +2162,7 @@
             "required": false
         },
         {
-            "id": 104,
+            "id": null,
             "label": "体重",
             "name": "numberfield_weight",
             "hssc_id": "deb135ec-9aa1-11ec-bde1-8a6e55faf877",
@@ -2249,7 +2178,7 @@
             "required": false
         },
         {
-            "id": 105,
+            "id": null,
             "label": "体质指数",
             "name": "numberfield_body_mass_index",
             "hssc_id": "deb1ef6e-9aa1-11ec-bde1-8a6e55faf877",
@@ -2265,7 +2194,7 @@
             "required": false
         },
         {
-            "id": 106,
+            "id": null,
             "label": "输血量",
             "name": "numberfield_blood_transfusion",
             "hssc_id": "deb2a274-9aa1-11ec-bde1-8a6e55faf877",
@@ -2281,7 +2210,7 @@
             "required": false
         },
         {
-            "id": 107,
+            "id": null,
             "label": "收缩压",
             "name": "numberfield_systolic_blood_pressure",
             "hssc_id": "deb35b74-9aa1-11ec-bde1-8a6e55faf877",
@@ -2297,23 +2226,7 @@
             "required": false
         },
         {
-            "id": 108,
-            "label": "舒张压",
-            "name": "numberfield_diastolic_blood_pressure",
-            "hssc_id": "deb416fe-9aa1-11ec-bde1-8a6e55faf877",
-            "name_icpc": null,
-            "type": "IntegerField",
-            "max_digits": 10,
-            "decimal_places": 2,
-            "standard_value": null,
-            "up_limit": 89.0,
-            "down_limit": 60.0,
-            "unit": "mmol/L",
-            "default": null,
-            "required": false
-        },
-        {
-            "id": 109,
+            "id": null,
             "label": "糖化血红蛋白",
             "name": "numberfield_tang_hua_xue_hong_dan_bai",
             "hssc_id": "deb4e084-9aa1-11ec-bde1-8a6e55faf877",
@@ -2329,7 +2242,7 @@
             "required": false
         },
         {
-            "id": 110,
+            "id": null,
             "label": "空腹血糖",
             "name": "numberfield_kong_fu_xue_tang",
             "hssc_id": "deb59434-9aa1-11ec-bde1-8a6e55faf877",
@@ -2343,11 +2256,27 @@
             "unit": "mmol/L",
             "default": null,
             "required": false
+        },
+        {
+            "id": null,
+            "label": "舒张压",
+            "name": "numberfield_diastolic_blood_pressure",
+            "hssc_id": "deb416fe-9aa1-11ec-bde1-8a6e55faf877",
+            "name_icpc": null,
+            "type": "IntegerField",
+            "max_digits": 10,
+            "decimal_places": 2,
+            "standard_value": null,
+            "up_limit": 89.0,
+            "down_limit": 60.0,
+            "unit": "mmHg",
+            "default": null,
+            "required": false
         }
     ],
     "dtfield": [
         {
-            "id": 37,
+            "id": null,
             "label": "日期",
             "name": "datetimefield_date",
             "hssc_id": "deb645d2-9aa1-11ec-bde1-8a6e55faf877",
@@ -2357,7 +2286,7 @@
             "required": false
         },
         {
-            "id": 38,
+            "id": null,
             "label": "确诊时间",
             "name": "datetimefield_time_of_diagnosis",
             "hssc_id": "deb70576-9aa1-11ec-bde1-8a6e55faf877",
@@ -2367,7 +2296,7 @@
             "required": false
         },
         {
-            "id": 39,
+            "id": null,
             "label": "出生日期",
             "name": "datetimefield_date_of_birth",
             "hssc_id": "deb7b0ac-9aa1-11ec-bde1-8a6e55faf877",
@@ -2377,7 +2306,7 @@
             "required": false
         },
         {
-            "id": 40,
+            "id": null,
             "label": "日期时间",
             "name": "datetimefield_ri_qi_shi_jian",
             "hssc_id": "deb85c6e-9aa1-11ec-bde1-8a6e55faf877",
@@ -2389,7 +2318,7 @@
     ],
     "relatedfield": [
         {
-            "id": 398,
+            "id": null,
             "label": "症状",
             "name": "relatedfield_symptom_list",
             "hssc_id": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
@@ -2398,7 +2327,7 @@
             "related_content": "de812ca8-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 399,
+            "id": null,
             "label": "家庭编号",
             "name": "relatedfield_family_id",
             "hssc_id": "debb3bd2-9aa1-11ec-bde1-8a6e55faf877",
@@ -2407,7 +2336,7 @@
             "related_content": "de7f87ae-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 400,
+            "id": null,
             "label": "性别",
             "name": "relatedfield_gender",
             "hssc_id": "debcb08e-9aa1-11ec-bde1-8a6e55faf877",
@@ -2416,7 +2345,7 @@
             "related_content": "de2963ba-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 401,
+            "id": null,
             "label": "民族",
             "name": "relatedfield_nationality",
             "hssc_id": "debdab56-9aa1-11ec-bde1-8a6e55faf877",
@@ -2425,7 +2354,7 @@
             "related_content": "de2a4ee2-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 402,
+            "id": null,
             "label": "婚姻状况",
             "name": "relatedfield_marital_status",
             "hssc_id": "debf042e-9aa1-11ec-bde1-8a6e55faf877",
@@ -2434,7 +2363,7 @@
             "related_content": "de2b3578-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 403,
+            "id": null,
             "label": "文化程度",
             "name": "relatedfield_education",
             "hssc_id": "debff348-9aa1-11ec-bde1-8a6e55faf877",
@@ -2443,7 +2372,7 @@
             "related_content": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 404,
+            "id": null,
             "label": "职业状况",
             "name": "relatedfield_occupational_status",
             "hssc_id": "dec0d42a-9aa1-11ec-bde1-8a6e55faf877",
@@ -2452,7 +2381,7 @@
             "related_content": "de2d3ef4-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 405,
+            "id": null,
             "label": "医疗费用负担",
             "name": "relatedfield_medical_expenses_burden",
             "hssc_id": "dec1c100-9aa1-11ec-bde1-8a6e55faf877",
@@ -2461,7 +2390,7 @@
             "related_content": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 406,
+            "id": null,
             "label": "居住类型",
             "name": "relatedfield_type_of_residence",
             "hssc_id": "dec2ab9c-9aa1-11ec-bde1-8a6e55faf877",
@@ -2470,7 +2399,7 @@
             "related_content": "de2ed7e6-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 407,
+            "id": null,
             "label": "血型",
             "name": "relatedfield_blood_type",
             "hssc_id": "dec38ce2-9aa1-11ec-bde1-8a6e55faf877",
@@ -2479,7 +2408,7 @@
             "related_content": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 408,
+            "id": null,
             "label": "签约家庭医生",
             "name": "relatedfield_signed_family_doctor",
             "hssc_id": "dec46bf8-9aa1-11ec-bde1-8a6e55faf877",
@@ -2488,7 +2417,7 @@
             "related_content": "de87315c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 409,
+            "id": null,
             "label": "运动能力",
             "name": "relatedfield_athletic_ability",
             "hssc_id": "dec54e10-9aa1-11ec-bde1-8a6e55faf877",
@@ -2497,7 +2426,7 @@
             "related_content": "de24d020-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 410,
+            "id": null,
             "label": "药品名称",
             "name": "relatedfield_drug_name",
             "hssc_id": "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
@@ -2506,7 +2435,7 @@
             "related_content": "de896698-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 411,
+            "id": null,
             "label": "性格倾向",
             "name": "relatedfield_personality_tendency",
             "hssc_id": "dec70886-9aa1-11ec-bde1-8a6e55faf877",
@@ -2515,7 +2444,7 @@
             "related_content": "de1f127a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 412,
+            "id": null,
             "label": "对目前生活和工作满意吗",
             "name": "relatedfield_are_you_satisfied_with_the_job_and_life",
             "hssc_id": "dec7ec2e-9aa1-11ec-bde1-8a6e55faf877",
@@ -2524,7 +2453,7 @@
             "related_content": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 413,
+            "id": null,
             "label": "对自己的适应能力满意吗",
             "name": "relatedfield_are_you_satisfied_with_your_adaptability",
             "hssc_id": "dec8f9a2-9aa1-11ec-bde1-8a6e55faf877",
@@ -2533,7 +2462,7 @@
             "related_content": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 414,
+            "id": null,
             "label": "是否能得到家人朋友的鼓励和支持",
             "name": "relatedfield_can_you_get_encouragement_and_support_from_family",
             "hssc_id": "dec9e4c0-9aa1-11ec-bde1-8a6e55faf877",
@@ -2542,7 +2471,7 @@
             "related_content": "de20b71a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 415,
+            "id": null,
             "label": "饮酒频次",
             "name": "relatedfield_drinking_frequency",
             "hssc_id": "decabc92-9aa1-11ec-bde1-8a6e55faf877",
@@ -2551,7 +2480,7 @@
             "related_content": "de20b71a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 416,
+            "id": null,
             "label": "吸烟频次",
             "name": "relatedfield_smoking_frequency",
             "hssc_id": "decba0ee-9aa1-11ec-bde1-8a6e55faf877",
@@ -2560,7 +2489,7 @@
             "related_content": "de20b71a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 417,
+            "id": null,
             "label": "觉得自身健康状况如何",
             "name": "relatedfield_own_health",
             "hssc_id": "decc7fdc-9aa1-11ec-bde1-8a6e55faf877",
@@ -2569,7 +2498,7 @@
             "related_content": "de21b21e-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 418,
+            "id": null,
             "label": "较之过去一年状态如何",
             "name": "relatedfield_compared_to_last_year",
             "hssc_id": "decd7c7a-9aa1-11ec-bde1-8a6e55faf877",
@@ -2578,7 +2507,7 @@
             "related_content": "de227fa0-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 419,
+            "id": null,
             "label": "运动偏好",
             "name": "relatedfield_sports_preference",
             "hssc_id": "dece6cde-9aa1-11ec-bde1-8a6e55faf877",
@@ -2587,7 +2516,7 @@
             "related_content": "de23c81a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 420,
+            "id": null,
             "label": "运动时长",
             "name": "relatedfield_exercise_time",
             "hssc_id": "decf4d66-9aa1-11ec-bde1-8a6e55faf877",
@@ -2596,7 +2525,7 @@
             "related_content": "de24d020-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 421,
+            "id": null,
             "label": "近来有无身体不适症状",
             "name": "relatedfield_have_any_recent_symptoms_of_physical_discomfort",
             "hssc_id": "ded02d26-9aa1-11ec-bde1-8a6e55faf877",
@@ -2605,7 +2534,7 @@
             "related_content": "de812ca8-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 422,
+            "id": null,
             "label": "您对居住环境满意吗",
             "name": "relatedfield_is_the_living_environment_satisfactory",
             "hssc_id": "ded110f6-9aa1-11ec-bde1-8a6e55faf877",
@@ -2614,7 +2543,7 @@
             "related_content": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 423,
+            "id": null,
             "label": "您所在的社区交通方便吗",
             "name": "relatedfield_is_the_transportation_convenient",
             "hssc_id": "ded206d2-9aa1-11ec-bde1-8a6e55faf877",
@@ -2623,16 +2552,7 @@
             "related_content": "de25c214-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 424,
-            "label": "病名",
-            "name": "relatedfield_diseases",
-            "hssc_id": "ded2ec1e-9aa1-11ec-bde1-8a6e55faf877",
-            "name_icpc": null,
-            "type": "Select",
-            "related_content": "de82c522-9aa1-11ec-bde1-8a6e55faf877"
-        },
-        {
-            "id": 425,
+            "id": null,
             "label": "家庭成员关系",
             "name": "relatedfield_family_relationship",
             "hssc_id": "ded3d502-9aa1-11ec-bde1-8a6e55faf877",
@@ -2641,7 +2561,7 @@
             "related_content": "de26a332-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 426,
+            "id": null,
             "label": "疾病名称",
             "name": "relatedfield_disease_name",
             "hssc_id": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
@@ -2650,7 +2570,7 @@
             "related_content": "de82c522-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 427,
+            "id": null,
             "label": "眼底",
             "name": "relatedfield_fundus",
             "hssc_id": "ded5a800-9aa1-11ec-bde1-8a6e55faf877",
@@ -2659,16 +2579,7 @@
             "related_content": "de278914-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 428,
-            "label": "服务角色",
-            "name": "relatedfield_service_role",
-            "hssc_id": "ded69094-9aa1-11ec-bde1-8a6e55faf877",
-            "name_icpc": null,
-            "type": "CheckboxSelectMultiple",
-            "related_content": "de8b82fc-9aa1-11ec-bde1-8a6e55faf877"
-        },
-        {
-            "id": 429,
+            "id": null,
             "label": "所属机构",
             "name": "relatedfield_affiliation",
             "hssc_id": "ded78062-9aa1-11ec-bde1-8a6e55faf877",
@@ -2677,7 +2588,7 @@
             "related_content": "de8ad1a4-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 430,
+            "id": null,
             "label": "左脚",
             "name": "relatedfield_left_foot",
             "hssc_id": "ded859ba-9aa1-11ec-bde1-8a6e55faf877",
@@ -2686,7 +2597,7 @@
             "related_content": "de1df50c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 431,
+            "id": null,
             "label": "右脚",
             "name": "relatedfield_right_foot",
             "hssc_id": "ded93d62-9aa1-11ec-bde1-8a6e55faf877",
@@ -2695,7 +2606,7 @@
             "related_content": "de1df50c-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 432,
+            "id": null,
             "label": "左耳听力",
             "name": "relatedfield_left_ear_hearing",
             "hssc_id": "deda1db8-9aa1-11ec-bde1-8a6e55faf877",
@@ -2704,7 +2615,7 @@
             "related_content": "de34d862-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 433,
+            "id": null,
             "label": "右耳听力",
             "name": "relatedfield_right_ear_hearing",
             "hssc_id": "dedb0962-9aa1-11ec-bde1-8a6e55faf877",
@@ -2713,7 +2624,7 @@
             "related_content": "de34d862-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 434,
+            "id": null,
             "label": "手术名称",
             "name": "relatedfield_name_of_operation",
             "hssc_id": "dedbea3a-9aa1-11ec-bde1-8a6e55faf877",
@@ -2722,7 +2633,7 @@
             "related_content": "de844762-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 435,
+            "id": null,
             "label": "口唇",
             "name": "relatedfield_lips",
             "hssc_id": "dedcdfee-9aa1-11ec-bde1-8a6e55faf877",
@@ -2731,7 +2642,7 @@
             "related_content": "de340608-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 436,
+            "id": null,
             "label": "齿列",
             "name": "relatedfield_dentition",
             "hssc_id": "deddcb16-9aa1-11ec-bde1-8a6e55faf877",
@@ -2740,7 +2651,7 @@
             "related_content": "de332d5a-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 437,
+            "id": null,
             "label": "咽部",
             "name": "relatedfield_pharynx",
             "hssc_id": "dedebd28-9aa1-11ec-bde1-8a6e55faf877",
@@ -2749,7 +2660,7 @@
             "related_content": "de3247a0-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 438,
+            "id": null,
             "label": "生活事件",
             "name": "relatedfield_major_life",
             "hssc_id": "dedfa5b2-9aa1-11ec-bde1-8a6e55faf877",
@@ -2758,7 +2669,7 @@
             "related_content": "de287ad6-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 439,
+            "id": null,
             "label": "下肢水肿",
             "name": "relatedfield_lower_extremity_edema",
             "hssc_id": "dee098fa-9aa1-11ec-bde1-8a6e55faf877",
@@ -2767,37 +2678,82 @@
             "related_content": "de316146-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 440,
-            "label": "第一诊断",
-            "name": "relatedfield_di_yi_zhen_duan",
-            "hssc_id": "da184332-9e92-11ec-a013-aa434405c3fc",
+            "id": null,
+            "label": "可能诊断",
+            "name": "relatedfield_yi_lou_zhen_duan",
+            "hssc_id": "6a4b6984-9e93-11ec-a013-aa434405c3fc",
             "name_icpc": null,
-            "type": "Select",
+            "type": "SelectMultiple",
             "related_content": "de82c522-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 441,
+            "id": null,
             "label": "排除诊断",
             "name": "relatedfield_pai_chu_zhen_duan",
             "hssc_id": "5b880f4c-9e93-11ec-b91b-aa434405c3fc",
             "name_icpc": null,
-            "type": "Select",
+            "type": "SelectMultiple",
             "related_content": "de82c522-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "id": 442,
-            "label": "易漏诊断",
-            "name": "relatedfield_yi_lou_zhen_duan",
-            "hssc_id": "6a4b6984-9e93-11ec-a013-aa434405c3fc",
+            "id": null,
+            "label": "第一诊断",
+            "name": "relatedfield_di_yi_zhen_duan",
+            "hssc_id": "da184332-9e92-11ec-a013-aa434405c3fc",
             "name_icpc": null,
-            "type": "Select",
+            "type": "SelectMultiple",
             "related_content": "de82c522-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "id": null,
+            "label": "营养干预",
+            "name": "T4501",
+            "hssc_id": "abc77c0a-a4c3-11ec-8f29-cecec7a0e139",
+            "name_icpc": "T4501",
+            "type": "SelectMultiple",
+            "related_content": "de84ff22-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "id": null,
+            "label": "运动干预",
+            "name": "T4502",
+            "hssc_id": "bcb64276-a4c3-11ec-a7bb-cecec7a0e139",
+            "name_icpc": "T4502",
+            "type": "SelectMultiple",
+            "related_content": "de84ff22-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "id": null,
+            "label": "健康教育",
+            "name": "T4504",
+            "hssc_id": "cdfeff00-a4c3-11ec-8f29-cecec7a0e139",
+            "name_icpc": "T4504",
+            "type": "SelectMultiple",
+            "related_content": "de84ff22-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "id": null,
+            "label": "服务角色",
+            "name": "relatedfield_service_role",
+            "hssc_id": "ded69094-9aa1-11ec-bde1-8a6e55faf877",
+            "name_icpc": null,
+            "type": "CheckboxSelectMultiple",
+            "related_content": "de8b82fc-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "id": null,
+            "label": "分诊确认",
+            "name": "boolfield_fen_zhen_que_ren",
+            "hssc_id": "a0fc960a-a506-11ec-a7bb-cecec7a0e139",
+            "name_icpc": null,
+            "type": "RadioSelect",
+            "related_content": null
         }
     ],
     "componentsgroup": [],
     "buessinessform": [
         {
-            "id": 498,
+            "id": null,
             "label": "足背动脉搏动检查",
             "name": "dorsal_artery_pulsation_examination_baseform",
             "hssc_id": "0bd6215c-9e23-11ec-aa2c-fe35a7065cdd",
@@ -2813,7 +2769,7 @@
             "managed_entities": []
         },
         {
-            "id": 481,
+            "id": null,
             "label": "疾病史",
             "name": "medical_history_baseform",
             "hssc_id": "0bb52a2e-9e23-11ec-aa2c-fe35a7065cdd",
@@ -2830,7 +2786,23 @@
             "managed_entities": []
         },
         {
-            "id": 496,
+            "id": null,
+            "label": "个人心理综合素质调查",
+            "name": "personal_comprehensive_psychological_quality_survey_baseform",
+            "hssc_id": "0b5c89be-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "grxlzhszdc",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"personal_comprehensive_psychological_quality_survey_baseform\",\n    \"label\": \"个人心理综合素质调查\",\n    \"hssc_id\": \"0b5c89be-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_is_life_fun\",\n            \"label\": \"您觉得生活是否有乐趣吗\",\n            \"hssc_id\": \"de8e94b0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"boolean\"\n        },\n        {\n            \"name\": \"relatedfield_personality_tendency\",\n            \"label\": \"性格倾向\",\n            \"hssc_id\": \"dec70886-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Character\",\n            \"app_label\": \"dictionaries\"\n        }\n    ]\n}",
+            "components": [
+                "de8e94b0-9aa1-11ec-bde1-8a6e55faf877",
+                "dec70886-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": []
+        },
+        {
+            "id": null,
             "label": "体格检查",
             "name": "physical_examination_baseform",
             "hssc_id": "0b9d151a-9e23-11ec-aa2c-fe35a7065cdd",
@@ -2847,7 +2819,7 @@
             "managed_entities": []
         },
         {
-            "id": 482,
+            "id": null,
             "label": "过敏史",
             "name": "allergies_history_baseform",
             "hssc_id": "0b54db10-9e23-11ec-aa2c-fe35a7065cdd",
@@ -2862,54 +2834,7 @@
             "managed_entities": []
         },
         {
-            "id": 483,
-            "label": "个人心理综合素质调查",
-            "name": "personal_comprehensive_psychological_quality_survey_baseform",
-            "hssc_id": "0b5c89be-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "grxlzhszdc",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"personal_comprehensive_psychological_quality_survey_baseform\",\n    \"label\": \"个人心理综合素质调查\",\n    \"hssc_id\": \"0b5c89be-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_is_life_fun\",\n            \"label\": \"您觉得生活是否有乐趣吗\",\n            \"hssc_id\": \"de8e94b0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"boolean\"\n        },\n        {\n            \"name\": \"relatedfield_personality_tendency\",\n            \"label\": \"性格倾向\",\n            \"hssc_id\": \"dec70886-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Character\",\n            \"app_label\": \"dictionaries\"\n        }\n    ]\n}",
-            "components": [
-                "de8e94b0-9aa1-11ec-bde1-8a6e55faf877",
-                "dec70886-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": []
-        },
-        {
-            "id": 484,
-            "label": "用户登录",
-            "name": "user_login_baseform",
-            "hssc_id": "0bcb1fc8-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "yhdl",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"user_login_baseform\",\n    \"label\": \"用户登录\",\n    \"hssc_id\": \"0bcb1fc8-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_username\",\n            \"label\": \"用户名\",\n            \"hssc_id\": \"dea654a6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_password\",\n            \"label\": \"密码\",\n            \"hssc_id\": \"dea7211a-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        }\n    ]\n}",
-            "components": [
-                "dea654a6-9aa1-11ec-bde1-8a6e55faf877",
-                "dea7211a-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": []
-        },
-        {
-            "id": 497,
-            "label": "眼底检查",
-            "name": "fundus_examination_baseform",
-            "hssc_id": "0bb0c86c-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "ydjc",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"fundus_examination_baseform\",\n    \"label\": \"眼底检查\",\n    \"hssc_id\": \"0bb0c86c-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_fundus\",\n            \"label\": \"眼底\",\n            \"hssc_id\": \"ded5a800-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Normality\",\n            \"app_label\": \"dictionaries\"\n        }\n    ]\n}",
-            "components": [
-                "ded5a800-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": []
-        },
-        {
-            "id": 499,
+            "id": null,
             "label": "重大生活事件调查",
             "name": "major_life_events_baseform",
             "hssc_id": "0bfb5648-9e23-11ec-aa2c-fe35a7065cdd",
@@ -2925,7 +2850,38 @@
             "managed_entities": []
         },
         {
-            "id": 500,
+            "id": null,
+            "label": "用户登录",
+            "name": "user_login_baseform",
+            "hssc_id": "0bcb1fc8-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "yhdl",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"user_login_baseform\",\n    \"label\": \"用户登录\",\n    \"hssc_id\": \"0bcb1fc8-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_username\",\n            \"label\": \"用户名\",\n            \"hssc_id\": \"dea654a6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_password\",\n            \"label\": \"密码\",\n            \"hssc_id\": \"dea7211a-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        }\n    ]\n}",
+            "components": [
+                "dea654a6-9aa1-11ec-bde1-8a6e55faf877",
+                "dea7211a-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": []
+        },
+        {
+            "id": null,
+            "label": "眼底检查",
+            "name": "fundus_examination_baseform",
+            "hssc_id": "0bb0c86c-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "ydjc",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"fundus_examination_baseform\",\n    \"label\": \"眼底检查\",\n    \"hssc_id\": \"0bb0c86c-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_fundus\",\n            \"label\": \"眼底\",\n            \"hssc_id\": \"ded5a800-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Normality\",\n            \"app_label\": \"dictionaries\"\n        }\n    ]\n}",
+            "components": [
+                "ded5a800-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": []
+        },
+        {
+            "id": null,
             "label": "查体听力",
             "name": "physical_examination_hearing_baseform",
             "hssc_id": "0bdf33a0-9e23-11ec-aa2c-fe35a7065cdd",
@@ -2941,7 +2897,7 @@
             "managed_entities": []
         },
         {
-            "id": 485,
+            "id": null,
             "label": "个人适应能力评估",
             "name": "personal_adaptability_assessment_baseform",
             "hssc_id": "0b648650-9e23-11ec-aa2c-fe35a7065cdd",
@@ -2960,7 +2916,7 @@
             "managed_entities": []
         },
         {
-            "id": 486,
+            "id": null,
             "label": "医生注册",
             "name": "doctor_registry_baseform",
             "hssc_id": "0bbc9e76-9e23-11ec-aa2c-fe35a7065cdd",
@@ -2988,7 +2944,24 @@
             "managed_entities": []
         },
         {
-            "id": 501,
+            "id": null,
+            "label": "医生登陆",
+            "name": "doctor_login_baseform",
+            "hssc_id": "0bcfcb9a-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "ysdl",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"doctor_login_baseform\",\n    \"label\": \"医生登陆\",\n    \"hssc_id\": \"0bcfcb9a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_username\",\n            \"label\": \"用户名\",\n            \"hssc_id\": \"dea654a6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_password\",\n            \"label\": \"密码\",\n            \"hssc_id\": \"dea7211a-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_service_role\",\n            \"label\": \"服务角色\",\n            \"hssc_id\": \"dea7d614-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        }\n    ]\n}",
+            "components": [
+                "dea654a6-9aa1-11ec-bde1-8a6e55faf877",
+                "dea7211a-9aa1-11ec-bde1-8a6e55faf877",
+                "dea7d614-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": []
+        },
+        {
+            "id": null,
             "label": "遗传病史",
             "name": "history_of_infectious_diseases_baseform",
             "hssc_id": "0be59eac-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3004,7 +2977,7 @@
             "managed_entities": []
         },
         {
-            "id": 487,
+            "id": null,
             "label": "个人健康行为调查",
             "name": "personal_health_behavior_survey_baseform",
             "hssc_id": "0b6e02b6-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3028,24 +3001,7 @@
             "managed_entities": []
         },
         {
-            "id": 488,
-            "label": "医生登陆",
-            "name": "doctor_login_baseform",
-            "hssc_id": "0bcfcb9a-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "ysdl",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"doctor_login_baseform\",\n    \"label\": \"医生登陆\",\n    \"hssc_id\": \"0bcfcb9a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_username\",\n            \"label\": \"用户名\",\n            \"hssc_id\": \"dea654a6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_password\",\n            \"label\": \"密码\",\n            \"hssc_id\": \"dea7211a-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_service_role\",\n            \"label\": \"服务角色\",\n            \"hssc_id\": \"dea7d614-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        }\n    ]\n}",
-            "components": [
-                "dea654a6-9aa1-11ec-bde1-8a6e55faf877",
-                "dea7211a-9aa1-11ec-bde1-8a6e55faf877",
-                "dea7d614-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": []
-        },
-        {
-            "id": 502,
+            "id": null,
             "label": "手术史",
             "name": "history_of_surgery_baseform",
             "hssc_id": "0beb43fc-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3061,7 +3017,7 @@
             "managed_entities": []
         },
         {
-            "id": 503,
+            "id": null,
             "label": "查体口腔",
             "name": "physical_examination_oral_cavity_baseform",
             "hssc_id": "0bf1f86e-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3078,7 +3034,7 @@
             "managed_entities": []
         },
         {
-            "id": 489,
+            "id": null,
             "label": "个人身体健康评估",
             "name": "personal_health_assessment_baseform",
             "hssc_id": "0b787836-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3098,7 +3054,7 @@
             "managed_entities": []
         },
         {
-            "id": 490,
+            "id": null,
             "label": "社会环境评估",
             "name": "social_environment_assessment_baseform",
             "hssc_id": "0b86f50a-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3119,7 +3075,7 @@
             "managed_entities": []
         },
         {
-            "id": 491,
+            "id": null,
             "label": "过敏史调查表",
             "name": "guo_min_shi_diao_cha_biao",
             "hssc_id": "0cc35c6a-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3134,7 +3090,7 @@
             "managed_entities": []
         },
         {
-            "id": 492,
+            "id": null,
             "label": "生命体征检查",
             "name": "vital_signs_check_baseform",
             "hssc_id": "0b8fdf12-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3151,7 +3107,7 @@
             "managed_entities": []
         },
         {
-            "id": 493,
+            "id": null,
             "label": "输血史",
             "name": "history_of_blood_transfusion_baseform",
             "hssc_id": "0ba2ba9c-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3167,7 +3123,7 @@
             "managed_entities": []
         },
         {
-            "id": 494,
+            "id": null,
             "label": "家族病史",
             "name": "family_history_of_illness_baseform",
             "hssc_id": "0b96f9f0-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3183,7 +3139,7 @@
             "managed_entities": []
         },
         {
-            "id": 495,
+            "id": null,
             "label": "外伤史",
             "name": "history_of_trauma_baseform",
             "hssc_id": "0ba83c56-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3199,7 +3155,7 @@
             "managed_entities": []
         },
         {
-            "id": 504,
+            "id": null,
             "label": "查体视力",
             "name": "physical_examination_vision_baseform",
             "hssc_id": "0c00501c-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3215,7 +3171,7 @@
             "managed_entities": []
         },
         {
-            "id": 505,
+            "id": null,
             "label": "下肢水肿检查",
             "name": "lower_extremity_edema_examination_baseform",
             "hssc_id": "0c06f6ce-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3230,7 +3186,22 @@
             "managed_entities": []
         },
         {
-            "id": 506,
+            "id": null,
+            "label": "用药处方",
+            "name": "yong_yao_chu_fang_baseform",
+            "hssc_id": "0c49b1f8-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "yycf",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"yong_yao_chu_fang_baseform\",\n    \"label\": \"用药处方\",\n    \"hssc_id\": \"0c49b1f8-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"core\"\n        }\n    ]\n}",
+            "components": [
+                "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": []
+        },
+        {
+            "id": null,
             "label": "个人基本情况",
             "name": "basic_personal_information_baseform",
             "hssc_id": "0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3263,7 +3234,7 @@
             "managed_entities": []
         },
         {
-            "id": 509,
+            "id": null,
             "label": "空腹血糖检查",
             "name": "kong_fu_xue_tang_jian_cha_baseform",
             "hssc_id": "0c3bd51a-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3278,7 +3249,7 @@
             "managed_entities": []
         },
         {
-            "id": 507,
+            "id": null,
             "label": "查体运动能力",
             "name": "physical_examination_athletic_ability_baseform",
             "hssc_id": "0c2bb0a4-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3293,22 +3264,7 @@
             "managed_entities": []
         },
         {
-            "id": 511,
-            "label": "用药处方",
-            "name": "yong_yao_chu_fang_baseform",
-            "hssc_id": "0c49b1f8-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "yycf",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"yong_yao_chu_fang_baseform\",\n    \"label\": \"用药处方\",\n    \"hssc_id\": \"0c49b1f8-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"core\"\n        }\n    ]\n}",
-            "components": [
-                "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": []
-        },
-        {
-            "id": 508,
+            "id": null,
             "label": "用户注册表",
             "name": "user_registry_baseform",
             "hssc_id": "0c314e38-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3331,38 +3287,7 @@
             "managed_entities": []
         },
         {
-            "id": 510,
-            "label": "糖化血红蛋白检查表",
-            "name": "tang_hua_xue_hong_dan_bai_jian_cha_biao_baseform",
-            "hssc_id": "0c440b9a-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "thxhdbjcb",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"tang_hua_xue_hong_dan_bai_jian_cha_biao_baseform\",\n    \"label\": \"糖化血红蛋白检查表\",\n    \"hssc_id\": \"0c440b9a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_tang_hua_xue_hong_dan_bai\",\n            \"label\": \"糖化血红蛋白\",\n            \"hssc_id\": \"deb4e084-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
-            "components": [
-                "deb4e084-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": []
-        },
-        {
-            "id": 513,
-            "label": "预约单",
-            "name": "yu_yue_biao_baseform",
-            "hssc_id": "0c57f0e2-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "yyd",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"yu_yue_biao_baseform\",\n    \"label\": \"预约单\",\n    \"hssc_id\": \"0c57f0e2-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_service_role\",\n            \"label\": \"服务角色\",\n            \"hssc_id\": \"dea7d614-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"datetimefield_ri_qi_shi_jian\",\n            \"label\": \"日期时间\",\n            \"hssc_id\": \"deb85c6e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"datetime\"\n        }\n    ]\n}",
-            "components": [
-                "dea7d614-9aa1-11ec-bde1-8a6e55faf877",
-                "deb85c6e-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": []
-        },
-        {
-            "id": 512,
+            "id": null,
             "label": "用药调查表",
             "name": "yong_yao_diao_cha_biao_baseform",
             "hssc_id": "0c4fb9cc-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3378,7 +3303,38 @@
             "managed_entities": []
         },
         {
-            "id": 514,
+            "id": null,
+            "label": "糖化血红蛋白检查表",
+            "name": "tang_hua_xue_hong_dan_bai_jian_cha_biao_baseform",
+            "hssc_id": "0c440b9a-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "thxhdbjcb",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"tang_hua_xue_hong_dan_bai_jian_cha_biao_baseform\",\n    \"label\": \"糖化血红蛋白检查表\",\n    \"hssc_id\": \"0c440b9a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_tang_hua_xue_hong_dan_bai\",\n            \"label\": \"糖化血红蛋白\",\n            \"hssc_id\": \"deb4e084-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
+            "components": [
+                "deb4e084-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": []
+        },
+        {
+            "id": null,
+            "label": "预约单",
+            "name": "yu_yue_biao_baseform",
+            "hssc_id": "0c57f0e2-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "yyd",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"yu_yue_biao_baseform\",\n    \"label\": \"预约单\",\n    \"hssc_id\": \"0c57f0e2-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_service_role\",\n            \"label\": \"服务角色\",\n            \"hssc_id\": \"dea7d614-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"datetimefield_ri_qi_shi_jian\",\n            \"label\": \"日期时间\",\n            \"hssc_id\": \"deb85c6e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"datetime\"\n        }\n    ]\n}",
+            "components": [
+                "dea7d614-9aa1-11ec-bde1-8a6e55faf877",
+                "deb85c6e-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": []
+        },
+        {
+            "id": null,
             "label": "确认单",
             "name": "que_ren_dan_baseform",
             "hssc_id": "0c5db8ec-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3393,7 +3349,7 @@
             "managed_entities": []
         },
         {
-            "id": 527,
+            "id": null,
             "label": "空腹血糖检查表",
             "name": "kong_fu_xue_tang_jian_cha_biao",
             "hssc_id": "0cb38a06-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3408,7 +3364,7 @@
             "managed_entities": []
         },
         {
-            "id": 531,
+            "id": null,
             "label": "药物干预表",
             "name": "men_zhen_chu_fang_dan",
             "hssc_id": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3425,7 +3381,23 @@
             ]
         },
         {
-            "id": 515,
+            "id": null,
+            "label": "门诊医生问诊表",
+            "name": "men_zhen_yi_sheng_wen_zhen_biao_baseform",
+            "hssc_id": "0c75d8a0-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "mzyswzb",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"men_zhen_yi_sheng_wen_zhen_biao_baseform\",\n    \"label\": \"门诊医生问诊表\",\n    \"hssc_id\": \"0c75d8a0-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_supplementary_description_of_the_condition\",\n            \"label\": \"病情补充描述\",\n            \"hssc_id\": \"de9ad1a8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_symptom_list\",\n            \"label\": \"症状\",\n            \"hssc_id\": \"deb93f26-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc3_symptoms_and_problems\",\n            \"app_label\": \"icpc\"\n        }\n    ]\n}",
+            "components": [
+                "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
+                "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": []
+        },
+        {
+            "id": null,
             "label": "糖尿病专用问诊表",
             "name": "tang_niao_bing_zhuan_yong_wen_zhen_biao_baseform",
             "hssc_id": "0c620622-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3441,53 +3413,7 @@
             "managed_entities": []
         },
         {
-            "id": 528,
-            "label": "糖化血红蛋白检查表1",
-            "name": "tang_hua_xue_hong_dan_bai_jian_cha_biao_1",
-            "hssc_id": "0cb97808-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "thxhdbjcb1",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"tang_hua_xue_hong_dan_bai_jian_cha_biao_1\",\n    \"label\": \"糖化血红蛋白检查表1\",\n    \"hssc_id\": \"0cb97808-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_tang_hua_xue_hong_dan_bai\",\n            \"label\": \"糖化血红蛋白\",\n            \"hssc_id\": \"deb4e084-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
-            "components": [
-                "deb4e084-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": []
-        },
-        {
-            "id": 516,
-            "label": "用药提醒单",
-            "name": "yong_yao_ti_xing_dan_baseform",
-            "hssc_id": "0c69d474-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "yytxd",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"yong_yao_ti_xing_dan_baseform\",\n    \"label\": \"用药提醒单\",\n    \"hssc_id\": \"0c69d474-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_shi_fou_ji_xu_shi_yong\",\n            \"label\": \"是否继续使用\",\n            \"hssc_id\": \"de99c1f0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"boolean\"\n        }\n    ]\n}",
-            "components": [
-                "de99c1f0-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": []
-        },
-        {
-            "id": 517,
-            "label": "院前辅助问诊表",
-            "name": "yuan_qian_fu_zhu_wen_zhen_biao_baseform",
-            "hssc_id": "0c704264-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "yqfzwzb",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"yuan_qian_fu_zhu_wen_zhen_biao_baseform\",\n    \"label\": \"院前辅助问诊表\",\n    \"hssc_id\": \"0c704264-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_supplementary_description_of_the_condition\",\n            \"label\": \"病情补充描述\",\n            \"hssc_id\": \"de9ad1a8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_symptom_list\",\n            \"label\": \"症状\",\n            \"hssc_id\": \"deb93f26-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc3_symptoms_and_problems\",\n            \"app_label\": \"icpc\"\n        }\n    ]\n}",
-            "components": [
-                "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
-                "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": []
-        },
-        {
-            "id": 530,
+            "id": null,
             "label": "常规查体表",
             "name": "chang_gui_cha_ti_biao",
             "hssc_id": "0cd1dcea-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3515,14 +3441,44 @@
             "managed_entities": []
         },
         {
-            "id": 518,
-            "label": "门诊医生问诊表",
-            "name": "men_zhen_yi_sheng_wen_zhen_biao_baseform",
-            "hssc_id": "0c75d8a0-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "mzyswzb",
+            "id": null,
+            "label": "糖化血红蛋白检查表1",
+            "name": "tang_hua_xue_hong_dan_bai_jian_cha_biao_1",
+            "hssc_id": "0cb97808-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "thxhdbjcb1",
             "name_icpc": null,
             "description": null,
-            "meta_data": "{\n    \"name\": \"men_zhen_yi_sheng_wen_zhen_biao_baseform\",\n    \"label\": \"门诊医生问诊表\",\n    \"hssc_id\": \"0c75d8a0-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_supplementary_description_of_the_condition\",\n            \"label\": \"病情补充描述\",\n            \"hssc_id\": \"de9ad1a8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_symptom_list\",\n            \"label\": \"症状\",\n            \"hssc_id\": \"deb93f26-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc3_symptoms_and_problems\",\n            \"app_label\": \"icpc\"\n        }\n    ]\n}",
+            "meta_data": "{\n    \"name\": \"tang_hua_xue_hong_dan_bai_jian_cha_biao_1\",\n    \"label\": \"糖化血红蛋白检查表1\",\n    \"hssc_id\": \"0cb97808-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_tang_hua_xue_hong_dan_bai\",\n            \"label\": \"糖化血红蛋白\",\n            \"hssc_id\": \"deb4e084-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
+            "components": [
+                "deb4e084-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": []
+        },
+        {
+            "id": null,
+            "label": "用药提醒单",
+            "name": "yong_yao_ti_xing_dan_baseform",
+            "hssc_id": "0c69d474-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "yytxd",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"yong_yao_ti_xing_dan_baseform\",\n    \"label\": \"用药提醒单\",\n    \"hssc_id\": \"0c69d474-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_shi_fou_ji_xu_shi_yong\",\n            \"label\": \"是否继续使用\",\n            \"hssc_id\": \"de99c1f0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"boolean\"\n        }\n    ]\n}",
+            "components": [
+                "de99c1f0-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": []
+        },
+        {
+            "id": null,
+            "label": "院前辅助问诊表",
+            "name": "yuan_qian_fu_zhu_wen_zhen_biao_baseform",
+            "hssc_id": "0c704264-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "yqfzwzb",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"yuan_qian_fu_zhu_wen_zhen_biao_baseform\",\n    \"label\": \"院前辅助问诊表\",\n    \"hssc_id\": \"0c704264-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_supplementary_description_of_the_condition\",\n            \"label\": \"病情补充描述\",\n            \"hssc_id\": \"de9ad1a8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_symptom_list\",\n            \"label\": \"症状\",\n            \"hssc_id\": \"deb93f26-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc3_symptoms_and_problems\",\n            \"app_label\": \"icpc\"\n        }\n    ]\n}",
             "components": [
                 "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
                 "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
@@ -3531,7 +3487,7 @@
             "managed_entities": []
         },
         {
-            "id": 529,
+            "id": null,
             "label": "糖尿病查体表",
             "name": "tang_niao_bing_cha_ti_biao",
             "hssc_id": "0cc8fe04-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3548,7 +3504,7 @@
             "managed_entities": []
         },
         {
-            "id": 525,
+            "id": null,
             "label": "糖尿病诊断表_查询视图_1645431372",
             "name": "tang_niao_bing_zhen_duan_biao_baseform_query_1645431372",
             "hssc_id": "0ca2d17a-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3563,7 +3519,7 @@
             "managed_entities": []
         },
         {
-            "id": 519,
+            "id": null,
             "label": "糖尿病诊断表",
             "name": "tang_niao_bing_zhen_duan_biao_baseform",
             "hssc_id": "0c7bdb06-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3581,52 +3537,7 @@
             "managed_entities": []
         },
         {
-            "id": 522,
-            "label": "血压监测表",
-            "name": "xue_ya_jian_ce_biao_baseform",
-            "hssc_id": "0c940c94-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "xyjcb",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"xue_ya_jian_ce_biao_baseform\",\n    \"label\": \"血压监测表\",\n    \"hssc_id\": \"0c940c94-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_systolic_blood_pressure\",\n            \"label\": \"收缩压\",\n            \"hssc_id\": \"deb35b74-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_diastolic_blood_pressure\",\n            \"label\": \"舒张压\",\n            \"hssc_id\": \"deb416fe-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
-            "components": [
-                "deb35b74-9aa1-11ec-bde1-8a6e55faf877",
-                "deb416fe-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": []
-        },
-        {
-            "id": 520,
-            "label": "院内辅助问诊表",
-            "name": "yuan_nei_fu_zhu_wen_zhen_biao_baseform",
-            "hssc_id": "0c82d69a-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "ynfzwzb",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"yuan_nei_fu_zhu_wen_zhen_biao_baseform\",\n    \"label\": \"院内辅助问诊表\",\n    \"hssc_id\": \"0c82d69a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_supplementary_description_of_the_condition\",\n            \"label\": \"病情补充描述\",\n            \"hssc_id\": \"de9ad1a8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_symptom_list\",\n            \"label\": \"症状\",\n            \"hssc_id\": \"deb93f26-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc3_symptoms_and_problems\",\n            \"app_label\": \"icpc\"\n        }\n    ]\n}",
-            "components": [
-                "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
-                "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": []
-        },
-        {
-            "id": 523,
-            "label": "个人基本情况_查询视图_1642159528",
-            "name": "basic_personal_information_baseform_query_1642159528",
-            "hssc_id": "0c9add44-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "grjbqk_cxst_1642159528",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"basic_personal_information_baseform_query_1642159528\",\n    \"label\": \"个人基本情况_查询视图_1642159528\",\n    \"hssc_id\": \"0c9add44-9e23-11ec-aa2c-fe35a7065cdd\"\n}",
-            "components": [],
-            "components_groups": [],
-            "managed_entities": []
-        },
-        {
-            "id": 521,
+            "id": null,
             "label": "院外咨询",
             "name": "A6201",
             "hssc_id": "0c89031c-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3642,22 +3553,52 @@
             "managed_entities": []
         },
         {
-            "id": 524,
-            "label": "用药处方_查询视图_1645404404",
-            "name": "yong_yao_chu_fang_baseform_query_1645404404",
-            "hssc_id": "0c9d1ac8-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "yycf_cxst_1645404404",
+            "id": null,
+            "label": "血压监测表",
+            "name": "xue_ya_jian_ce_biao_baseform",
+            "hssc_id": "0c940c94-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "xyjcb",
             "name_icpc": null,
             "description": null,
-            "meta_data": "{\n    \"name\": \"yong_yao_chu_fang_baseform_query_1645404404\",\n    \"label\": \"用药处方_查询视图_1645404404\",\n    \"hssc_id\": \"0c9d1ac8-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"core\"\n        }\n    ]\n}",
+            "meta_data": "{\n    \"name\": \"xue_ya_jian_ce_biao_baseform\",\n    \"label\": \"血压监测表\",\n    \"hssc_id\": \"0c940c94-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_systolic_blood_pressure\",\n            \"label\": \"收缩压\",\n            \"hssc_id\": \"deb35b74-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_diastolic_blood_pressure\",\n            \"label\": \"舒张压\",\n            \"hssc_id\": \"deb416fe-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
             "components": [
-                "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
+                "deb35b74-9aa1-11ec-bde1-8a6e55faf877",
+                "deb416fe-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": [],
             "managed_entities": []
         },
         {
-            "id": 526,
+            "id": null,
+            "label": "院内辅助问诊表",
+            "name": "yuan_nei_fu_zhu_wen_zhen_biao_baseform",
+            "hssc_id": "0c82d69a-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "ynfzwzb",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"yuan_nei_fu_zhu_wen_zhen_biao_baseform\",\n    \"label\": \"院内辅助问诊表\",\n    \"hssc_id\": \"0c82d69a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_supplementary_description_of_the_condition\",\n            \"label\": \"病情补充描述\",\n            \"hssc_id\": \"de9ad1a8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_symptom_list\",\n            \"label\": \"症状\",\n            \"hssc_id\": \"deb93f26-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc3_symptoms_and_problems\",\n            \"app_label\": \"icpc\"\n        }\n    ]\n}",
+            "components": [
+                "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
+                "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": []
+        },
+        {
+            "id": null,
+            "label": "个人基本情况_查询视图_1642159528",
+            "name": "basic_personal_information_baseform_query_1642159528",
+            "hssc_id": "0c9add44-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "grjbqk_cxst_1642159528",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"basic_personal_information_baseform_query_1642159528\",\n    \"label\": \"个人基本情况_查询视图_1642159528\",\n    \"hssc_id\": \"0c9add44-9e23-11ec-aa2c-fe35a7065cdd\"\n}",
+            "components": [],
+            "components_groups": [],
+            "managed_entities": []
+        },
+        {
+            "id": null,
             "label": "个人疾病史调查表",
             "name": "ge_ren_ji_bing_shi_diao_cha_biao",
             "hssc_id": "0ca96526-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3674,24 +3615,40 @@
             "managed_entities": []
         },
         {
-            "id": 537,
-            "label": "运动处方",
-            "name": "yun_dong_chu_fang",
-            "hssc_id": "e301ced4-a331-11ec-bab8-96095a1fe853",
-            "pym": "ydcf",
+            "id": null,
+            "label": "用药处方_查询视图_1645404404",
+            "name": "yong_yao_chu_fang_baseform_query_1645404404",
+            "hssc_id": "0c9d1ac8-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "yycf_cxst_1645404404",
             "name_icpc": null,
             "description": null,
-            "meta_data": "{\n    \"name\": \"yun_dong_chu_fang\",\n    \"label\": \"运动处方\",\n    \"hssc_id\": \"e301ced4-a331-11ec-bab8-96095a1fe853\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_yun_dong_chu_fang\",\n            \"label\": \"运动处方\",\n            \"hssc_id\": \"b35610dc-a331-11ec-b08f-96095a1fe853\",\n            \"type\": \"string\"\n        }\n    ]\n}",
+            "meta_data": "{\n    \"name\": \"yong_yao_chu_fang_baseform_query_1645404404\",\n    \"label\": \"用药处方_查询视图_1645404404\",\n    \"hssc_id\": \"0c9d1ac8-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"core\"\n        }\n    ]\n}",
             "components": [
-                "b35610dc-a331-11ec-b08f-96095a1fe853"
+                "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": []
+        },
+        {
+            "id": null,
+            "label": "代人预约挂号",
+            "name": "A6501",
+            "hssc_id": "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "dryygh",
+            "name_icpc": "A6501",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"A6501\",\n    \"label\": \"代人预约挂号\",\n    \"hssc_id\": \"0d137dbc-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_service_role\",\n            \"label\": \"服务角色\",\n            \"hssc_id\": \"dea7d614-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"datetimefield_ri_qi_shi_jian\",\n            \"label\": \"日期时间\",\n            \"hssc_id\": \"deb85c6e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"datetime\"\n        }\n    ]\n}",
+            "components": [
+                "dea7d614-9aa1-11ec-bde1-8a6e55faf877",
+                "deb85c6e-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": [],
             "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
+                "de805a76-9aa1-11ec-bde1-8a6e55faf877"
             ]
         },
         {
-            "id": 532,
+            "id": null,
             "label": "糖尿病随访表",
             "name": "tang_niao_bing_sui_fang_biao",
             "hssc_id": "0ce866ae-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3741,7 +3698,7 @@
             "managed_entities": []
         },
         {
-            "id": 535,
+            "id": null,
             "label": "药事服务提醒表",
             "name": "yao_shi_fu_wu_ti_xing_biao",
             "hssc_id": "0d22201a-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3760,25 +3717,41 @@
             ]
         },
         {
-            "id": 533,
-            "label": "代人预约挂号",
-            "name": "A6501",
-            "hssc_id": "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "dryygh",
-            "name_icpc": "A6501",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A6501\",\n    \"label\": \"代人预约挂号\",\n    \"hssc_id\": \"0d137dbc-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_service_role\",\n            \"label\": \"服务角色\",\n            \"hssc_id\": \"dea7d614-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"datetimefield_ri_qi_shi_jian\",\n            \"label\": \"日期时间\",\n            \"hssc_id\": \"deb85c6e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"datetime\"\n        }\n    ]\n}",
+            "id": null,
+            "label": "运动干预",
+            "name": "T4502",
+            "hssc_id": "7f149618-a4c6-11ec-a7bb-cecec7a0e139",
+            "pym": "ydgy",
+            "name_icpc": "T4502",
+            "description": "",
+            "meta_data": "{\n    \"name\": \"T4502\",\n    \"label\": \"运动干预\",\n    \"hssc_id\": \"7f149618-a4c6-11ec-a7bb-cecec7a0e139\",\n    \"fields\": [\n        {\n            \"name\": \"T4502\",\n            \"label\": \"运动干预\",\n            \"hssc_id\": \"bcb64276-a4c3-11ec-a7bb-cecec7a0e139\",\n            \"type\": \"Icpc8_other_health_interventions\",\n            \"app_label\": \"icpc\"\n        }\n    ]\n}",
             "components": [
-                "dea7d614-9aa1-11ec-bde1-8a6e55faf877",
-                "deb85c6e-9aa1-11ec-bde1-8a6e55faf877"
+                "bcb64276-a4c3-11ec-a7bb-cecec7a0e139"
             ],
             "components_groups": [],
             "managed_entities": [
-                "de805a76-9aa1-11ec-bde1-8a6e55faf877"
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
             ]
         },
         {
-            "id": 534,
+            "id": null,
+            "label": "糖尿病自我监测表",
+            "name": "tang_niao_bing_zi_wo_jian_ce_biao",
+            "hssc_id": "0d3821bc-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "tnbzwjcb",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"tang_niao_bing_zi_wo_jian_ce_biao\",\n    \"label\": \"糖尿病自我监测表\",\n    \"hssc_id\": \"0d3821bc-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_kong_fu_xue_tang\",\n            \"label\": \"空腹血糖\",\n            \"hssc_id\": \"deb59434-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
+            "components": [
+                "deb59434-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": [
+                "de84ff22-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "id": null,
             "label": "分诊确认",
             "name": "fen_zhen_que_ren",
             "hssc_id": "0d1b5014-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3795,16 +3768,16 @@
             ]
         },
         {
-            "id": 538,
-            "label": "营养处方",
-            "name": "ying_yang_chu_fang",
-            "hssc_id": "f2a6e8e2-a331-11ec-b08f-96095a1fe853",
-            "pym": "yycf",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"ying_yang_chu_fang\",\n    \"label\": \"营养处方\",\n    \"hssc_id\": \"f2a6e8e2-a331-11ec-b08f-96095a1fe853\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_yin_shi_jian_yi\",\n            \"label\": \"饮食建议\",\n            \"hssc_id\": \"97d7406a-a331-11ec-bab8-96095a1fe853\",\n            \"type\": \"string\"\n        }\n    ]\n}",
+            "id": null,
+            "label": "健康教育",
+            "name": "T4504",
+            "hssc_id": "44fd7242-a4c6-11ec-a7bb-cecec7a0e139",
+            "pym": "jkjy",
+            "name_icpc": "T4504",
+            "description": "",
+            "meta_data": "{\n    \"name\": \"T4504\",\n    \"label\": \"健康教育\",\n    \"hssc_id\": \"44fd7242-a4c6-11ec-a7bb-cecec7a0e139\",\n    \"fields\": [\n        {\n            \"name\": \"T4504\",\n            \"label\": \"健康教育\",\n            \"hssc_id\": \"cdfeff00-a4c3-11ec-8f29-cecec7a0e139\",\n            \"type\": \"Icpc8_other_health_interventions\",\n            \"app_label\": \"icpc\"\n        }\n    ]\n}",
             "components": [
-                "97d7406a-a331-11ec-bab8-96095a1fe853"
+                "cdfeff00-a4c3-11ec-8f29-cecec7a0e139"
             ],
             "components_groups": [],
             "managed_entities": [
@@ -3812,26 +3785,26 @@
             ]
         },
         {
-            "id": 536,
-            "label": "糖尿病自我监测表",
-            "name": "tang_niao_bing_zi_wo_jian_ce_biao",
-            "hssc_id": "0d3821bc-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "tnbzwjcb",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"tang_niao_bing_zi_wo_jian_ce_biao\",\n    \"label\": \"糖尿病自我监测表\",\n    \"hssc_id\": \"0d3821bc-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_kong_fu_xue_tang\",\n            \"label\": \"空腹血糖\",\n            \"hssc_id\": \"deb59434-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
+            "id": null,
+            "label": "营养干预",
+            "name": "T4501",
+            "hssc_id": "69c663ea-a4c6-11ec-a7bb-cecec7a0e139",
+            "pym": "yygy",
+            "name_icpc": "T4501",
+            "description": "",
+            "meta_data": "{\n    \"name\": \"T4501\",\n    \"label\": \"营养干预\",\n    \"hssc_id\": \"69c663ea-a4c6-11ec-a7bb-cecec7a0e139\",\n    \"fields\": [\n        {\n            \"name\": \"T4501\",\n            \"label\": \"营养干预\",\n            \"hssc_id\": \"abc77c0a-a4c3-11ec-8f29-cecec7a0e139\",\n            \"type\": \"Icpc8_other_health_interventions\",\n            \"app_label\": \"icpc\"\n        }\n    ]\n}",
             "components": [
-                "deb59434-9aa1-11ec-bde1-8a6e55faf877"
+                "abc77c0a-a4c3-11ec-8f29-cecec7a0e139"
             ],
             "components_groups": [],
             "managed_entities": [
-                "de84ff22-9aa1-11ec-bde1-8a6e55faf877"
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
             ]
         }
     ],
     "operation": [
         {
-            "id": 123,
+            "id": null,
             "label": "疾病史",
             "name": "A6204",
             "hssc_id": "e02a9d1e-9aa1-11ec-bde1-8a6e55faf877",
@@ -3858,7 +3831,7 @@
             ]
         },
         {
-            "id": 124,
+            "id": null,
             "label": "空腹血糖检查",
             "name": "T3404",
             "hssc_id": "e02d0e28-9aa1-11ec-bde1-8a6e55faf877",
@@ -3884,7 +3857,7 @@
             ]
         },
         {
-            "id": 125,
+            "id": null,
             "label": "糖化血红蛋白检查",
             "name": "T3405",
             "hssc_id": "e02e6976-9aa1-11ec-bde1-8a6e55faf877",
@@ -3908,7 +3881,7 @@
             "group": []
         },
         {
-            "id": 126,
+            "id": null,
             "label": "常规查体表",
             "name": "chang_gui_cha_ti_biao",
             "hssc_id": "e02ee856-9aa1-11ec-bde1-8a6e55faf877",
@@ -3932,7 +3905,7 @@
             "group": []
         },
         {
-            "id": 127,
+            "id": null,
             "label": "糖尿病查体表",
             "name": "tang_niao_bing_cha_ti_biao",
             "hssc_id": "e02f65c4-9aa1-11ec-bde1-8a6e55faf877",
@@ -3956,7 +3929,7 @@
             "group": []
         },
         {
-            "id": 128,
+            "id": null,
             "label": "个人过敏史调查表",
             "name": "ge_ren_guo_min_shi_diao_cha_biao",
             "hssc_id": "e02fe238-9aa1-11ec-bde1-8a6e55faf877",
@@ -3980,7 +3953,7 @@
             "group": []
         },
         {
-            "id": 129,
+            "id": null,
             "label": "药物干预",
             "name": "men_zhen_chu_fang_biao",
             "hssc_id": "e0305c18-9aa1-11ec-bde1-8a6e55faf877",
@@ -4006,7 +3979,7 @@
             ]
         },
         {
-            "id": 130,
+            "id": null,
             "label": "用户注册",
             "name": "user_registry",
             "hssc_id": "e0317224-9aa1-11ec-bde1-8a6e55faf877",
@@ -4032,7 +4005,7 @@
             ]
         },
         {
-            "id": 131,
+            "id": null,
             "label": "用户登录",
             "name": "user_login",
             "hssc_id": "e03291f4-9aa1-11ec-bde1-8a6e55faf877",
@@ -4056,7 +4029,7 @@
             "group": []
         },
         {
-            "id": 132,
+            "id": null,
             "label": "员工登录",
             "name": "doctor_login",
             "hssc_id": "e032db46-9aa1-11ec-bde1-8a6e55faf877",
@@ -4080,7 +4053,7 @@
             "group": []
         },
         {
-            "id": 133,
+            "id": null,
             "label": "个人基本信息调查",
             "name": "ge_ren_ji_ben_xin_xi_diao_cha",
             "hssc_id": "e03350da-9aa1-11ec-bde1-8a6e55faf877",
@@ -4106,7 +4079,7 @@
             ]
         },
         {
-            "id": 134,
+            "id": null,
             "label": "个人健康行为调查",
             "name": "ge_ren_jian_kang_xing_wei_diao_cha",
             "hssc_id": "e0348946-9aa1-11ec-bde1-8a6e55faf877",
@@ -4132,7 +4105,7 @@
             ]
         },
         {
-            "id": 135,
+            "id": null,
             "label": "代人预约挂号",
             "name": "A6501",
             "hssc_id": "e035d648-9aa1-11ec-bde1-8a6e55faf877",
@@ -4159,7 +4132,7 @@
             ]
         },
         {
-            "id": 136,
+            "id": null,
             "label": "门诊分诊",
             "name": "A6502",
             "hssc_id": "e0371aa8-9aa1-11ec-bde1-8a6e55faf877",
@@ -4185,7 +4158,7 @@
             ]
         },
         {
-            "id": 137,
+            "id": null,
             "label": "门诊辅助检查",
             "name": "men_zhen_fu_zhu_jian_cha",
             "hssc_id": "e0385d3c-9aa1-11ec-bde1-8a6e55faf877",
@@ -4211,7 +4184,7 @@
             ]
         },
         {
-            "id": 138,
+            "id": null,
             "label": "糖尿病专用问诊",
             "name": "tang_niao_bing_zhuan_yong_wen_zhen",
             "hssc_id": "e0398a04-9aa1-11ec-bde1-8a6e55faf877",
@@ -4237,11 +4210,11 @@
             ]
         },
         {
-            "id": 139,
-            "label": "药事服务",
+            "id": null,
+            "label": "用药提醒服务",
             "name": "yao_shi_fu_wu",
             "hssc_id": "e03abda2-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "ysfw",
+            "pym": "yytxfw",
             "name_icpc": null,
             "forms": "0d22201a-9e23-11ec-aa2c-fe35a7065cdd",
             "execution_time_frame": null,
@@ -4263,7 +4236,7 @@
             ]
         },
         {
-            "id": 140,
+            "id": null,
             "label": "糖尿病自我监测",
             "name": "tang_niao_bing_zi_wo_jian_ce",
             "hssc_id": "e03bfa96-9aa1-11ec-bde1-8a6e55faf877",
@@ -4289,7 +4262,7 @@
             ]
         },
         {
-            "id": 141,
+            "id": null,
             "label": "院内辅助问诊",
             "name": "yuan_nei_fu_zhu_wen_zhen",
             "hssc_id": "e03d308c-9aa1-11ec-bde1-8a6e55faf877",
@@ -4315,7 +4288,7 @@
             ]
         },
         {
-            "id": 142,
+            "id": null,
             "label": "院外咨询",
             "name": "A6201",
             "hssc_id": "e03e65ba-9aa1-11ec-bde1-8a6e55faf877",
@@ -4341,7 +4314,7 @@
             ]
         },
         {
-            "id": 143,
+            "id": null,
             "label": "门诊医生问诊",
             "name": "men_zhen_yi_sheng_wen_zhen",
             "hssc_id": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
@@ -4367,7 +4340,7 @@
             ]
         },
         {
-            "id": 144,
+            "id": null,
             "label": "胰岛素依赖性糖尿病",
             "name": "T8901",
             "hssc_id": "e040d160-9aa1-11ec-bde1-8a6e55faf877",
@@ -4393,7 +4366,7 @@
             ]
         },
         {
-            "id": 145,
+            "id": null,
             "label": "糖尿病一般随访",
             "name": "T6301",
             "hssc_id": "e0420c06-9aa1-11ec-bde1-8a6e55faf877",
@@ -4419,7 +4392,7 @@
             ]
         },
         {
-            "id": 146,
+            "id": null,
             "label": "院外辅助问诊",
             "name": "A6202",
             "hssc_id": "1a3b2382-9b67-11ec-94eb-022c611b2490",
@@ -4443,62 +4416,14 @@
             "group": [
                 "de18f0fc-9aa1-11ec-bde1-8a6e55faf877"
             ]
-        },
-        {
-            "id": 147,
-            "label": "营养干预",
-            "name": "ying_yang_gan_yu",
-            "hssc_id": "4fc0f0da-a333-11ec-bab8-96095a1fe853",
-            "pym": "yygy",
-            "name_icpc": null,
-            "forms": "f2a6e8e2-a331-11ec-b08f-96095a1fe853",
-            "execution_time_frame": null,
-            "awaiting_time_frame": null,
-            "priority": 3,
-            "enable_queue_counter": true,
-            "suppliers": null,
-            "not_suitable": null,
-            "time_limits": null,
-            "working_hours": null,
-            "frequency": null,
-            "cost": null,
-            "load_feedback": false,
-            "resource_materials": null,
-            "resource_devices": null,
-            "resource_knowledge": null,
-            "group": []
-        },
-        {
-            "id": 148,
-            "label": "运动干预",
-            "name": "yun_dong_gan_yu",
-            "hssc_id": "5cdc74c4-a333-11ec-b08f-96095a1fe853",
-            "pym": "ydgy",
-            "name_icpc": null,
-            "forms": "e301ced4-a331-11ec-bab8-96095a1fe853",
-            "execution_time_frame": null,
-            "awaiting_time_frame": null,
-            "priority": 3,
-            "enable_queue_counter": true,
-            "suppliers": null,
-            "not_suitable": null,
-            "time_limits": null,
-            "working_hours": null,
-            "frequency": null,
-            "cost": null,
-            "load_feedback": false,
-            "resource_materials": null,
-            "resource_devices": null,
-            "resource_knowledge": null,
-            "group": []
         }
     ],
     "eventrule": [
         {
-            "id": 1,
+            "id": null,
             "label": "完成",
             "name": "completed",
-            "hssc_id": null,
+            "hssc_id": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
             "description": "完成",
             "detection_scope": 1,
             "weight": 1,
@@ -4508,7 +4433,7 @@
     "eventexpression": [],
     "intervalrule": [
         {
-            "id": 8,
+            "id": null,
             "label": "大于3天",
             "name": "da_yu_3_tian",
             "hssc_id": "e3df3d1a-9bc9-11ec-a754-620d205b9455",
@@ -4519,7 +4444,7 @@
     ],
     "frequencyrule": [
         {
-            "id": 1,
+            "id": null,
             "label": "总共1次",
             "name": "zong_gong_1_ci",
             "hssc_id": "e83a5240-a3a9-11ec-a311-ee2fa480f37c",
@@ -4529,7 +4454,7 @@
     ],
     "service": [
         {
-            "id": 123,
+            "id": null,
             "hssc_id": "9cd8cb5c-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "jbs",
             "name": "A6204",
@@ -4560,7 +4485,7 @@
             ]
         },
         {
-            "id": 124,
+            "id": null,
             "hssc_id": "9cd95bf8-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "kfxtjc",
             "name": "T3404",
@@ -4590,7 +4515,7 @@
             ]
         },
         {
-            "id": 125,
+            "id": null,
             "hssc_id": "9cd9ca2a-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "thxhdbjc",
             "name": "T3405",
@@ -4618,7 +4543,7 @@
             "group": []
         },
         {
-            "id": 126,
+            "id": null,
             "hssc_id": "9cda0454-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "cgctb",
             "name": "chang_gui_cha_ti_biao",
@@ -4646,7 +4571,7 @@
             "group": []
         },
         {
-            "id": 127,
+            "id": null,
             "hssc_id": "9cda3a32-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "tnbctb",
             "name": "tang_niao_bing_cha_ti_biao",
@@ -4674,7 +4599,7 @@
             "group": []
         },
         {
-            "id": 128,
+            "id": null,
             "hssc_id": "9cda6bf6-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "grgmsdcb",
             "name": "ge_ren_guo_min_shi_diao_cha_biao",
@@ -4702,7 +4627,7 @@
             "group": []
         },
         {
-            "id": 129,
+            "id": null,
             "hssc_id": "9cdabe58-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "ywgy",
             "name": "men_zhen_chu_fang_biao",
@@ -4732,7 +4657,7 @@
             ]
         },
         {
-            "id": 130,
+            "id": null,
             "hssc_id": "9cdb27d0-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "yhzc",
             "name": "user_registry",
@@ -4762,7 +4687,7 @@
             ]
         },
         {
-            "id": 131,
+            "id": null,
             "hssc_id": "9cdb723a-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "yhdl",
             "name": "user_login",
@@ -4790,7 +4715,7 @@
             "group": []
         },
         {
-            "id": 132,
+            "id": null,
             "hssc_id": "9cdba336-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "ygdl",
             "name": "doctor_login",
@@ -4818,7 +4743,7 @@
             "group": []
         },
         {
-            "id": 133,
+            "id": null,
             "hssc_id": "9cdbf78c-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "grjbxxdc",
             "name": "ge_ren_ji_ben_xin_xi_diao_cha",
@@ -4848,7 +4773,7 @@
             ]
         },
         {
-            "id": 134,
+            "id": null,
             "hssc_id": "9cdc69b0-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "grjkxwdc",
             "name": "ge_ren_jian_kang_xing_wei_diao_cha",
@@ -4878,7 +4803,7 @@
             ]
         },
         {
-            "id": 135,
+            "id": null,
             "hssc_id": "9cdce0de-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "dryygh",
             "name": "A6501",
@@ -4909,7 +4834,7 @@
             ]
         },
         {
-            "id": 136,
+            "id": null,
             "hssc_id": "9cdd6ca2-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "mzfz",
             "name": "A6502",
@@ -4939,7 +4864,7 @@
             ]
         },
         {
-            "id": 137,
+            "id": null,
             "hssc_id": "9cddf348-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "mzfzjc",
             "name": "men_zhen_fu_zhu_jian_cha",
@@ -4969,7 +4894,7 @@
             ]
         },
         {
-            "id": 138,
+            "id": null,
             "hssc_id": "9cde714c-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "tnbzywz",
             "name": "tang_niao_bing_zhuan_yong_wen_zhen",
@@ -4999,7 +4924,7 @@
             ]
         },
         {
-            "id": 139,
+            "id": null,
             "hssc_id": "9cdeedf2-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "ysfw",
             "name": "yao_shi_fu_wu",
@@ -5029,7 +4954,7 @@
             ]
         },
         {
-            "id": 140,
+            "id": null,
             "hssc_id": "9cdf64c6-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "tnbzwjc",
             "name": "tang_niao_bing_zi_wo_jian_ce",
@@ -5059,7 +4984,7 @@
             ]
         },
         {
-            "id": 141,
+            "id": null,
             "hssc_id": "9cdfda82-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "ynfzwz",
             "name": "yuan_nei_fu_zhu_wen_zhen",
@@ -5089,7 +5014,7 @@
             ]
         },
         {
-            "id": 142,
+            "id": null,
             "hssc_id": "9ce05aca-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "ywzx",
             "name": "A6201",
@@ -5119,7 +5044,7 @@
             ]
         },
         {
-            "id": 143,
+            "id": null,
             "hssc_id": "9ce0eb8e-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "mzyswz",
             "name": "men_zhen_yi_sheng_wen_zhen",
@@ -5149,7 +5074,7 @@
             ]
         },
         {
-            "id": 144,
+            "id": null,
             "hssc_id": "9ce167ee-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "ydsylxtnb",
             "name": "T8901",
@@ -5179,7 +5104,7 @@
             ]
         },
         {
-            "id": 145,
+            "id": null,
             "hssc_id": "9ce1e05c-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "tnbybsf",
             "name": "T6301",
@@ -5209,7 +5134,7 @@
             ]
         },
         {
-            "id": 146,
+            "id": null,
             "hssc_id": "9ce25dde-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "ywfzwz",
             "name": "A6202",
@@ -5237,62 +5162,6 @@
             "group": [
                 "de18f0fc-9aa1-11ec-bde1-8a6e55faf877"
             ]
-        },
-        {
-            "id": 147,
-            "hssc_id": "9ce2ae1a-a416-11ec-bfc4-ee2fa480f37c",
-            "pym": "yygy",
-            "name": "ying_yang_gan_yu",
-            "name_icpc": null,
-            "label": "营养干预",
-            "first_operation": "4fc0f0da-a333-11ec-bab8-96095a1fe853",
-            "last_operation": null,
-            "managed_entity": null,
-            "execution_time_frame": null,
-            "awaiting_time_frame": null,
-            "priority": 3,
-            "history_services_display": 0,
-            "enable_recommanded_list": true,
-            "enable_queue_counter": true,
-            "suppliers": null,
-            "not_suitable": null,
-            "time_limits": null,
-            "working_hours": null,
-            "frequency": null,
-            "cost": null,
-            "load_feedback": false,
-            "resource_materials": null,
-            "resource_devices": null,
-            "resource_knowledge": null,
-            "group": []
-        },
-        {
-            "id": 148,
-            "hssc_id": "9ce2deee-a416-11ec-bfc4-ee2fa480f37c",
-            "pym": "ydgy",
-            "name": "yun_dong_gan_yu",
-            "name_icpc": null,
-            "label": "运动干预",
-            "first_operation": "5cdc74c4-a333-11ec-b08f-96095a1fe853",
-            "last_operation": null,
-            "managed_entity": null,
-            "execution_time_frame": null,
-            "awaiting_time_frame": null,
-            "priority": 3,
-            "history_services_display": 0,
-            "enable_recommanded_list": true,
-            "enable_queue_counter": true,
-            "suppliers": null,
-            "not_suitable": null,
-            "time_limits": null,
-            "working_hours": null,
-            "frequency": null,
-            "cost": null,
-            "load_feedback": false,
-            "resource_materials": null,
-            "resource_devices": null,
-            "resource_knowledge": null,
-            "group": []
         }
     ],
     "operationssetting": [],

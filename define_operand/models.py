@@ -19,7 +19,7 @@ class BuessinessForm(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     components = models.ManyToManyField(Component, blank=True, verbose_name="字段")
     components_groups = models.ManyToManyField(ComponentsGroup, blank=True, verbose_name="组件")
-    managed_entities = models.ManyToManyField(ManagedEntity, through='FormEntityShip', blank=True, verbose_name="隶属实体")
+    managed_entities = models.ManyToManyField(ManagedEntity, through='FormEntityShip', blank=True, verbose_name="关联实体")
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
     meta_data = models.JSONField(null=True, blank=True, verbose_name="元数据")
 
@@ -75,11 +75,13 @@ class BuessinessForm(HsscPymBase):
                 field['type'] = 'datetime'
             elif _type == 'RelatedField':
                 field['type'] = component.content_object.related_content.related_content  # 关联表的Model名称
-                hssc_app_label = component.content_object.related_content.content_type.model
-                if hssc_app_label == 'diclist':  # 字典表
-                    hssc_app_label = 'dictionaries'  # 指向hssc.dictionaries
-                elif hssc_app_label == 'managedentity':  # 实体表
-                    hssc_app_label = component.content_object.related_content.content_object.app_name  # 指向hssc.app_name
+                # 关联Model所属app名称，待补充!!!
+                # related_content_type = component.content_object.related_content.related_content_type
+                hssc_app_label = ''
+                # if hssc_app_label == 'diclist':  # 字典表
+                #     hssc_app_label = 'dictionaries'  # 指向hssc.dictionaries
+                # elif hssc_app_label == 'managedentity':  # 实体表
+                #     hssc_app_label = component.content_object.related_content.content_object.app_name  # 指向hssc.app_name
                 field['app_label'] = hssc_app_label
             fields.append(field)
         return fields
@@ -97,7 +99,7 @@ def buessiness_form_components_groups_changed_handler(sender, instance, action, 
 
 # 表单和实体关系表
 class FormEntityShip(HsscBase):
-    entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, verbose_name="隶属实体")
+    entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, verbose_name="关联实体")
     form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="业务表单")
     is_base_infomation = models.BooleanField(default=False, verbose_name="基本信息表")
 

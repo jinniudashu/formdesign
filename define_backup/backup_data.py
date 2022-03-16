@@ -18,6 +18,7 @@ from define_backup.models import DesignBackup, IcpcBackup
 backup_models = [
     Role, 
     ManagedEntity, 
+    IcpcList,
     DicList, 
     DicDetail,
     BoolField,

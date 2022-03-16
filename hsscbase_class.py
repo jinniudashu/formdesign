@@ -118,6 +118,8 @@ class HsscPymBase(HsscBase):
     def save(self, *args, **kwargs):
         if self.label:
             self.pym = ''.join(lazy_pinyin(self.label, style=Style.FIRST_LETTER))
+            if self.name is None or self.name=='':
+                self.name = "_".join(lazy_pinyin(self.label))
         super().save(*args, **kwargs)
 
 

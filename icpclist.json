@@ -1,0 +1,63 @@
+{    "icpclist": [
+    {
+        "id": 1,
+        "label": "注册登录（行政管理）",
+        "name": "icpc1_register_logins",
+        "hssc_id": "de7f87ae-9aa1-11ec-bde1-8a6e55faf877"
+    },
+    {
+        "id": 2,
+        "label": "预约咨询调查（行政管理）",
+        "name": "icpc2_reservation_investigations",
+        "hssc_id": "de805a76-9aa1-11ec-bde1-8a6e55faf877"
+    },
+    {
+        "id": 3,
+        "label": "症状和问题",
+        "name": "icpc3_symptoms_and_problems",
+        "hssc_id": "de812ca8-9aa1-11ec-bde1-8a6e55faf877"
+    },
+    {
+        "id": 4,
+        "label": "体格和其他检查",
+        "name": "icpc4_physical_examination_and_tests",
+        "hssc_id": "de82074a-9aa1-11ec-bde1-8a6e55faf877"
+    },
+    {
+        "id": 5,
+        "label": "评估和诊断",
+        "name": "icpc5_evaluation_and_diagnoses",
+        "hssc_id": "de82c522-9aa1-11ec-bde1-8a6e55faf877"
+    },
+    {
+        "id": 6,
+        "label": "开药",
+        "name": "icpc6_prescribe_medicines",
+        "hssc_id": "de83825a-9aa1-11ec-bde1-8a6e55faf877"
+    },
+    {
+        "id": 7,
+        "label": "治疗",
+        "name": "icpc7_treatments",
+        "hssc_id": "de844762-9aa1-11ec-bde1-8a6e55faf877"
+    },
+    {
+        "id": 8,
+        "label": "其他健康干预",
+        "name": "icpc8_other_health_interventions",
+        "hssc_id": "de84ff22-9aa1-11ec-bde1-8a6e55faf877"
+    },
+    {
+        "id": 9,
+        "label": "转诊会诊",
+        "name": "icpc9_referral_consultations",
+        "hssc_id": "de85c326-9aa1-11ec-bde1-8a6e55faf877"
+    },
+    {
+        "id": 10,
+        "label": "检查结果和统计",
+        "name": "icpc10_test_results_and_statistics",
+        "hssc_id": "de867e56-9aa1-11ec-bde1-8a6e55faf877"
+    }
+]
+}
