@@ -5,8 +5,9 @@ import uuid
 import re
 from pypinyin import Style, lazy_pinyin
 
+from define_backup.files_head_setting import dict_models_head, dict_admin_head, dict_admin_content
 
-# 自定义管理器增加备份功能
+# 自定义管理器：设计数据备份、恢复
 class HsscBackupManager(models.Manager):
     def backup_data(self):
         backup_data = []
@@ -90,12 +91,54 @@ class HsscBackupManager(models.Manager):
         return f'{self.model} 已恢复'
 
 
+# 自定义管理器：导出字典脚本、数据
+class ExportDictManager(models.Manager):
+    # 导出字典models.py, admin.py脚本
+    def models_admin_script(self, fields=None):
+        if self.model.__name__ != 'DicList':
+            return 'Only DicList can use this function'
+        else:
+            models_script = dict_models_head
+            admin_script = dict_admin_head
+            
+            dicts = self.all()
+            for dict in dicts:
+                name = dict.name.capitalize()
+
+                _model_script = f'''
+class {name}(DictBase):
+    class Meta:
+        verbate_name = '{dict.label}'
+        verbate_name_plural = verbate_name'''
+                models_script = f'{models_script}\n\n{_model_script}'
+
+                _admin_script = f'''
+@admin.register({name})
+class {name}Admin(admin.ModelAdmin):{dict_admin_content}'''
+                admin_script = f'{admin_script}\n\n{_admin_script}'
+
+            return models_script, admin_script
+
+    
+    # 导出字典Json数据
+    def dict_data(self, fields=None):
+        script = ''
+        if self.model.__name__ != 'DicDetail':
+            return 'Only DicDetail can use this function'
+        else:
+            dict_data = self.all()
+            for item in dict_data:
+                print(item)
+            return script
+
+
 # Hssc基类
 class HsscBase(models.Model):
     label = models.CharField(max_length=255, null=True, verbose_name="名称")
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name="name")
     hssc_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="hsscID")
     objects = HsscBackupManager()
+    export_dict = ExportDictManager()
 
     class Meta:
         abstract = True

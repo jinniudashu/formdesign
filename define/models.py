@@ -193,15 +193,6 @@ class DicList(HsscPymBase):
         verbose_name = "基础字典"
         verbose_name_plural = verbose_name
 
-# Icpc字典列表
-class IcpcList(HsscPymBase):
-    app_name = models.CharField(max_length=100, verbose_name="所属app名", null=True, blank=True)
-    model_name = models.CharField(max_length=100, verbose_name="模型名", null=True, blank=True)
-
-    class Meta:
-        verbose_name = "ICPC字典列表"
-        verbose_name_plural = verbose_name
-
 # 字典明细
 class DicDetail(HsscPymBase):
     diclist = models.ForeignKey(DicList, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字典")
@@ -215,6 +206,15 @@ class DicDetail(HsscPymBase):
         verbose_name = "业务字典明细"
         verbose_name_plural = verbose_name
 
+
+# Icpc字典列表
+class IcpcList(HsscPymBase):
+    app_name = models.CharField(max_length=100, verbose_name="所属app名", null=True, blank=True)
+    model_name = models.CharField(max_length=100, verbose_name="模型名", null=True, blank=True)
+
+    class Meta:
+        verbose_name = "ICPC字典列表"
+        verbose_name_plural = verbose_name
 
 # 管理实体定义
 class ManagedEntity(HsscPymBase):

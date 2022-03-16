@@ -1,7 +1,7 @@
 from time import time
 import json
 
-from define.models import DicList
+from define.models import DicDetail, DicList
 from define_operand.models import Operation
 from define_backup.models import SourceCode
 # 导入待生成脚本的文件头部设置
@@ -11,7 +11,9 @@ from define_backup.files_head_setting import models_file_head, admins_file_head,
 # 生成作业脚本, 被define_operand.admin调用
 def generate_source_code(modeladmin, request, queryset):
     source_code = {}
-    source_code['dicts_models'], source_code['dicts_admin'], source_code['dicts_data'] = generate_dicts_code()
+    source_code['dicts_models'], source_code['dicts_admin'] = DicList.export_dict.models_admin_script()
+    source_code['dicts_data'] = DicDetail.export_dict.dict_data()
+    
     source_code['models'] , source_code['admin'] = generate_models_admin_code()
     source_code['forms'] =  generate_forms_code()
     source_code['views'] , source_code['urls'], source_code['templates'], source_code['operand_views'] = generate_views_urls_templates_code()

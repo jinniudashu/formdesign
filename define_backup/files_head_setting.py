@@ -125,3 +125,32 @@ index_html_file_head = f'''{{% extends "base.html" %}}
 
 <section class="list-group">
 '''
+
+
+# 字典models.py文件头部设置
+dict_models_head = '''from django.db import models
+
+class DictBase(models.Model):
+    label = models.CharField(max_length=255, null=True, verbose_name="名称")
+    name = models.CharField(max_length=255, blank=True, null=True, verbose_name="name")
+    hssc_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="hsscID")
+    value = models.CharField(max_length=255, null=True, blank=True, verbose_name="值")
+    pym = models.CharField(max_length=255, blank=True, null=True, verbose_name="拼音码")
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return self.value
+
+'''
+
+dict_admin_head = '''from django.contrib import admin
+from .models import *
+
+'''
+
+dict_admin_content = '''
+    search_fields = ['value', 'pym']
+    list_display = ["value"]
+'''
