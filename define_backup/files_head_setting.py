@@ -11,10 +11,28 @@ from icpc.models import *
 from dictionaries.models import *
 from core.models import Staff, Customer, Operation_proc
 
+class HsscBuessinessFormBase(models.Model):
+    hssc_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="hsscID")
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="客户")
+    operator = models.ForeignKey(Staff, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="作业人员")
+    pid = models.ForeignKey(Operation_proc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="作业进程id")
+    slug = models.SlugField(max_length=250, blank=True, null=True, verbose_name="slug")
+
+    class Meta:
+        abstract = True
+
+    def __str__(self):
+        return str(self.customer)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.slug = slugify(self._meta.model_name, allow_unicode=True) + f'-{{int(time())}}'
+        super().save(*args, **kwargs)
+
 '''
 
 # admin.py文件头部设置
-admins_file_head = '''from django.contrib import admin
+admin_file_head = '''from django.contrib import admin
 from .models import *
     '''
 
@@ -28,7 +46,7 @@ from crispy_forms.layout import Layout, Field, HTML, Submit
 from .models import *
 '''
 
-modelform_footer = '''
+form_footer = '''
     @property
     def helper(self):
         helper = FormHelper()

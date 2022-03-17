@@ -2,10 +2,10 @@ from time import time
 import json
 
 from define.models import DicDetail, DicList
-from define_operand.models import Operation
+from define_operand.models import BuessinessForm, Operation
 from define_backup.models import SourceCode
 # 导入待生成脚本的文件头部设置
-from define_backup.files_head_setting import models_file_head, admins_file_head, forms_file_head, modelform_footer, views_file_head, urls_file_head, index_html_file_head
+from define_backup.files_head_setting import models_file_head, admin_file_head, forms_file_head, modelform_footer, views_file_head, urls_file_head, index_html_file_head
 
 
 # 生成作业脚本, 被define_operand.admin调用
@@ -14,9 +14,9 @@ def generate_source_code(modeladmin, request, queryset):
     source_code['dicts_models'], source_code['dicts_admin'] = DicList.export_dict.models_admin_script()
     source_code['dicts_data'] = DicDetail.export_dict.dict_data()
     
-    source_code['models'] , source_code['admin'] = generate_models_admin_code()
-    source_code['forms'] =  generate_forms_code()
-    source_code['views'] , source_code['urls'], source_code['templates'], source_code['operand_views'] = generate_views_urls_templates_code()
+    source_code['models'] , source_code['admin'] = BuessinessForm.export_buessiness_form.models_admin_script()
+    source_code['forms'] =  BuessinessForm.export_buessiness_form.forms_script()
+    # source_code['views'] , source_code['urls'], source_code['templates'], source_code['operand_views'] = generate_views_urls_templates_code()
 
     # 写入数据库
     s = SourceCode.objects.create(
@@ -28,274 +28,9 @@ def generate_source_code(modeladmin, request, queryset):
 generate_source_code.short_description = '生成作业脚本'
 
 
-####################################################################################################################
-# Create models.py, admin.py
-####################################################################################################################
-def generate_models_admin_code():
-    print('生成models.py, admin.py ...')
-    models_script = ''
-    admins_script =  ''
-    models = BaseModel.objects.all()
-    for obj in models:
-        s = CreateModelsScript(obj)
-        ms, ads = s.create_scripts()
-        # construct models script
-        models_script = models_script + ms
-        # construct admin script
-        admins_script = admins_script + ads
-    return models_file_head + models_script, admins_file_head + admins_script
-
-
-class CreateModelsScript:
-    def __init__(self, model):
-        self.name = model.name
-        self.label = model.label
-        self.components = model.components.all()
-
-    def create_scripts(self):
-        # construct model script
-        model_head = f'class {self.name.capitalize()}(models.Model):'
-
-        model_fields = autocomplete_fields = ''
-        for component in self.components:
-            # construct fields script
-            script = self.__create_model_field_script(component)
-            model_fields = model_fields + script
-            
-            # construct admin autocomplete_fields script
-            if component.content_type.__dict__['model'] == 'relatedfield':
-                autocomplete_fields = autocomplete_fields + f'"{component.content_object.__dict__["name"]}", '
-
-        model_footer = self.__create_model_footer_script()
-
-        # construct model script
-        model_script = f'{model_head}{model_fields}{model_footer}\n\n'
-        # construct admin script
-        admin_script = self.__create_admin_script(autocomplete_fields)
-
-        return model_script, admin_script
-
-    # generate model field script
-    def __create_model_field_script(self, component):
-        script = ''
-        field = component.content_object.__dict__
-        component_type = component.content_type.__dict__['model']
-        if component_type == 'characterfield':
-            script = self.__create_char_field_script(field)
-        elif component_type == 'boolfield':
-            script = self.__create_bool_field_script(field)
-        elif component_type == 'numberfield':
-            script = self.__create_number_field_script(field)
-        elif component_type == 'dtfield':
-            script = self.__create_datetime_field_script(field)
-        elif component_type == 'choicefield':
-            script = self.__create_choice_field_script(field)
-        elif component_type == 'relatedfield':
-            field['foreign_key'] = component.content_object.related_content.related_content
-            script = self.__create_related_field_script(field)
-        return script
-
-    # 生成字符型字段定义脚本
-    def __create_char_field_script(self, field):
-        if field['type'] == 'CharField':
-            f_type = 'CharField'
-        else:
-            f_type = 'TextField'
-
-        if field['required']:
-            f_required = ''
-        else:
-            f_required = 'null=True, blank=True, '
-        f_required = 'null=True, blank=True, '
-
-        if field['default']:
-            f_default = f'default="{field["default"]}", '
-        else:
-            f_default = ''
-
-        return f'''
-    {field['name']} = models.{f_type}(max_length={field['length']}, {f_default}{f_required}verbose_name='{field['label']}')'''
-
-    # 生成布尔型字段定义脚本
-    def __create_bool_field_script(self, field):
-
-        f_required = f_default = ''
-
-        if field['type'] == '1':
-            f_required = 'null=True, blank=True, '
-        else:
-            f_required = 'null=True, '
-
-        if field['default'] == '1':
-            f_default = 'default=True, '
-        elif field['default'] == '2':
-            f_default = 'default=False, '
-        else:
-            f_required = 'null=True, blank=True, '            
-            
-        return f'''
-    {field['name']} = models.BooleanField({f_default}{f_required}verbose_name='{field['label']}')'''
-
-    # 生成数字型字段定义脚本
-    def __create_number_field_script(self, field):
-        if field['type'] == 'IntegerField':
-            f_type = 'IntegerField'
-            f_dicimal = ''
-        elif field['type'] == 'DecimalField':
-            f_type = 'DecimalField'
-            f_dicimal = f'max_digits={field["max_digits"]}, decimal_places={field["decimal_places"]}, '
-        else:
-            f_type = 'FloatField'
-            f_dicimal = ''
-        
-        if field['standard_value']:
-            f_standard_value = f'default={field["standard_value"]}, '
-        else:
-            f_standard_value = ''
-        if field['up_limit']:
-            f_up_limit = f'default={field["up_limit"]}, '
-        else:
-            f_up_limit = ''
-        if field['down_limit']:
-            f_down_limit = f'default={field["down_limit"]}, '
-        else:
-            f_down_limit = ''
-
-        if field['default']:
-            f_default = f'default={field["default"]}, '
-        else:
-            f_default = ''
-
-        if field['required']:
-            f_required = 'null=True, '
-        else:
-            f_required = 'null=True, blank=True, '
-        f_required = 'null=True, blank=True, '
-
-        return f'''
-    {field['name']} = models.{f_type}({f_dicimal}{f_default}{f_required}verbose_name='{field['label']}')
-    {field['name']}_standard_value = models.{f_type}({f_dicimal}{f_standard_value}{f_required}verbose_name='{field['label']}标准值')
-    {field['name']}_up_limit = models.{f_type}({f_dicimal}{f_up_limit}{f_required}verbose_name='{field['label']}上限')
-    {field['name']}_down_limit = models.{f_type}({f_dicimal}{f_down_limit}{f_required}verbose_name='{field['label']}下限')'''
-    
-    # 生成日期型字段定义脚本
-    def __create_datetime_field_script(self, field):
-        f_default = ''
-        if field['type'] == 'DateTimeField':
-            f_type = 'DateTimeField'
-            if field['default_now']: f_default = 'default=timezone.now(), '
-        else:
-            f_type = 'DateField'
-            if field['default_now']: f_default = 'default=date.today(), '
-        
-        if field['required']:
-            f_required = 'null=True, '
-        else:
-            f_required = 'null=True, blank=True, '
-
-        return f'''
-    {field['name']} = models.{f_type}({f_default}{f_required}verbose_name='{field['label']}')'''
-
-    # 生成选择型字段定义脚本
-    def __create_choice_field_script(self, field):
-        if field['type'] == 'Select':
-            f_type = 'Select'
-        elif field['type'] == 'RadioSelect':
-            f_type = 'RadioSelect'
-        elif field['type'] == 'CheckboxSelectMultiple':
-            f_type = 'CheckboxSelectMultiple'
-        else:
-            f_type = 'SelectMultiple'
-
-        f_enum = f'{field["name"].capitalize()}Enum'
-        f_choices = ''
-        for index, name in enumerate(field['options'].split('\r\n')):
-            f_choices=f_choices + (f'({index}, "{name}"),')
-
-        if field['default_first']:
-            f_default = 'default=0, '
-        else:
-            f_default = ''
-
-        if field['required']:
-            f_required = 'null=True, '
-        else:
-            f_required = 'null=True, blank=True, '
-
-        return f'''
-    {f_enum} = [{f_choices}]
-    {field['name']} = models.PositiveSmallIntegerField({f_default}{f_required}choices={f_enum}, verbose_name='{field['label']}')'''
-
-    # 生成外键字段定义脚本
-    def __create_related_field_script(self, field):
-        if field['type'] in ['Select', 'RadioSelect']:
-            if field['type'] == 'Select':
-                f_type = 'Select'
-            else:
-                f_type = 'RadioSelect'
-            f_required = 'null=True, blank=True, '
-
-            return f'''
-    {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, {f_required}verbose_name='{field['label']}')'''
-
-        elif field['type'] in ['SelectMultiple', 'CheckboxSelectMultiple']:
-            if field['type'] == 'SelectMultiple':
-                f_type = 'SelectMultiple'
-            else:
-                f_type = 'CheckboxSelectMultiple'
-
-            return f'''
-    {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', verbose_name='{field['label']}')'''
-
-    # generate model footer script
-    def __create_model_footer_script(self):
-        return f'''
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="客户")
-    operator = models.ForeignKey(Staff, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="作业人员")
-    pid = models.ForeignKey(Operation_proc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="作业进程id")
-    slug = models.SlugField(max_length=250, blank=True, null=True, verbose_name="slug")
-
-    def __str__(self):
-        return str(self.customer)
-
-    class Meta:
-        verbose_name = '{self.label}'
-        verbose_name_plural = '{self.label}'
-
-    def get_absolute_url(self):
-        return reverse('{self.name}_detail_url', kwargs={{'slug': self.slug}})
-
-    def get_update_url(self):
-        return reverse('{self.name}_update_url', kwargs={{'slug': self.slug}})
-
-    def get_delete_url(self):
-        return reverse('{self.name}_delete_url', kwargs={{'slug': self.slug}})
-
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.slug = slugify(self._meta.model_name, allow_unicode=True) + f'-{{int(time())}}'
-        super().save(*args, **kwargs)        
-        '''
-
-    # generate admin script
-    def __create_admin_script(self, autocomplete_fields):
-        c_model_name = self.name.capitalize()
-        if autocomplete_fields != '':
-            admin_script = f'''
-class {c_model_name}Admin(admin.ModelAdmin):
-    autocomplete_fields = [{autocomplete_fields}]
-admin.site.register({c_model_name}, {c_model_name}Admin)
-'''
-        else:
-            admin_script = f'''
-admin.site.register({c_model_name})
-'''
-        return admin_script
-
-
-####################################################################################################################
+###################################################################################################################
 # generate forms.py script
-####################################################################################################################
+###################################################################################################################
 def generate_forms_code():
     print('生成forms.py ...')
     forms_script = ''
