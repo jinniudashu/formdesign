@@ -193,6 +193,7 @@ class DicList(HsscPymBase):
         verbose_name = "基础字典"
         verbose_name_plural = verbose_name
 
+
 # 字典明细
 class DicDetail(HsscPymBase):
     diclist = models.ForeignKey(DicList, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字典")

@@ -29,50 +29,6 @@ generate_source_code.short_description = '生成作业脚本'
 
 
 ####################################################################################################################
-# Create dictionaries models.py, admin.py
-####################################################################################################################
-def generate_dicts_code():
-    print('生成字典 ...')
-    dicts_models_script = '''from django.db import models\n\n'''
-    dicts_admin_script = '''from django.contrib import admin
-from .models import *\n\n'''
-    dicts_data = []
-
-    dicts = DicList.objects.all()
-    for dic in dicts:
-        if 'icpc' not in dic.name:
-            dic_name = dic.name.capitalize()
-            # construct model script
-            model_head = f'class {dic_name}(models.Model):'
-            # construct field script
-            model_field = '''
-        value = models.CharField(max_length=60, null=True, blank=True, verbose_name="值")'''
-            # construct model footer script
-            model_footer = f'''
-        def __str__(self):
-            return self.value
-
-        class Meta:
-            verbose_name = "{dic.label}"
-            verbose_name_plural = "{dic.label}"
-            '''
-            ds =  f'{model_head}{model_field}{model_footer}\n'
-
-            ads = f'''class {dic_name}Admin(admin.ModelAdmin):
-    search_fields = ["value"]
-admin.site.register({dic_name}, {dic_name}Admin)\n\n'''
-
-            # 获取字典数据content???
-            if dic.content:
-                dicts_data.append({dic_name: dic.content})
-
-            dicts_models_script = dicts_models_script + ds
-            dicts_admin_script = dicts_admin_script + ads
-
-    return dicts_models_script, dicts_admin_script, dicts_data
-
-
-####################################################################################################################
 # Create models.py, admin.py
 ####################################################################################################################
 def generate_models_admin_code():
