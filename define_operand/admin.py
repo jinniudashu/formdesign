@@ -28,7 +28,7 @@ class OperationAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('label', 'name_icpc'), ('forms', 'priority' ), 'group', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
+            'fields': (('label', 'name_icpc'), ('form', 'priority' ), 'group', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
         }),
         ('作业管理', {
             'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')

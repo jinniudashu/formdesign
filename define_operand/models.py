@@ -148,7 +148,7 @@ class SystemOperand(HsscBase):
 # 作业基础信息表
 class Operation(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
-    forms = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, null=True, blank=True, verbose_name="作业表单")
+    form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, null=True, blank=True, verbose_name="作业表单")
     execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='执行时限')
     awaiting_time_frame = models.DurationField(blank=True, null=True, verbose_name='等待执行时限')
     Operation_priority = [
@@ -345,8 +345,8 @@ class Event(models.Model):
             if self.name == f'{self.operation.name}_completed':
                 self.expression = 'completed'
 
-        if self.operation.forms:
-            form = json.loads(self.operation.forms.meta_data)
+        if self.operation.form:
+            form = json.loads(self.operation.form.meta_data)
             fields = []
             field_names = []
             form_name = form['name']

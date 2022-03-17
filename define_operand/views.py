@@ -28,10 +28,10 @@ class OperationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Operation
-        fields = ('name', 'label', 'forms', 'priority', 'group', 'suppliers', 'not_suitable', 'time_limits', 'working_hours', 'frequency', 'cost', 'load_feedback', 'resource_materials', 'resource_devices', 'resource_knowledge', 'meta_data')
+        fields = ('name', 'label', 'form', 'priority', 'group', 'suppliers', 'not_suitable', 'time_limits', 'working_hours', 'frequency', 'cost', 'load_feedback', 'resource_materials', 'resource_devices', 'resource_knowledge', 'meta_data')
     
     def get_meta_data(self, obj):
-        if obj.forms: meta_data = obj.forms.meta_data
+        if obj.form: meta_data = obj.form.meta_data
         else: meta_data = None
         return meta_data
 
