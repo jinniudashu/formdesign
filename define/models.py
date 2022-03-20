@@ -190,7 +190,7 @@ def fields_post_delete_handler(sender, instance, **kwargs):
 # 字典列表
 class DicList(HsscPymBase):
     class Meta:
-        verbose_name = "基础字典"
+        verbose_name = "自定义关联字典"
         verbose_name_plural = verbose_name
 
 

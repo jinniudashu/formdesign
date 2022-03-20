@@ -451,7 +451,7 @@ class Service(HsscPymBase):
     script = models.TextField(blank=True, null=True, verbose_name='运行时脚本', help_text="script['views'] , script['urls'], script['templates']")
 
     class Meta:
-        verbose_name = "单元服务"
+        verbose_name = "服务"
         verbose_name_plural = verbose_name
         ordering = ['id']
 

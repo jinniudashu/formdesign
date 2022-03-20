@@ -61,21 +61,6 @@
             "pym": "yszl"
         },
         {
-            "id": 33,
-            "icpc_code": "Z6205",
-            "icode": "Z62",
-            "iname": "医生",
-            "iename": null,
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "ys"
-        },
-        {
             "id": 34,
             "icpc_code": "Z6206",
             "icode": "Z62",
@@ -419,6 +404,21 @@
             "icpc2": null,
             "note": null,
             "pym": "zys"
+        },
+        {
+            "id": 33,
+            "icpc_code": "Z6205",
+            "icode": "Z62",
+            "iname": "医生注册",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "yszc"
         }
     ],
     "icpc2_reservation_investigations": [
@@ -751,6 +751,21 @@
             "icpc2": null,
             "note": null,
             "pym": "mzfz"
+        },
+        {
+            "id": 4,
+            "icpc_code": "A6219",
+            "icode": null,
+            "iname": "糖尿病专用问诊",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "tnbzywz"
         }
     ],
     "icpc3_symptoms_and_problems": [
@@ -1457,7 +1472,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "F52.1 至 F52.9",
-            "pym": "xnljtSEXUALFULFILMENTREDUCEDwc"
+            "pym": "xnljtSEXUAL FULFILMENT REDUCED wc"
         },
         {
             "id": 1281,
@@ -2462,7 +2477,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "M62.5,M62.6,M79.9",
-            "pym": "jrdzz/zsNOS"
+            "pym": "jrdzz/zs NOS"
         },
         {
             "id": 1344,
@@ -3257,7 +3272,7 @@
             "icd10": null,
             "icpc2": null,
             "note": null,
-            "pym": "jb，kc，ccTICSF95,F98.4,F98.5,F98.6"
+            "pym": "jb，kc，ccTICS   F95,F98.4,F98.5,F98.6"
         },
         {
             "id": 1397,
@@ -3512,7 +3527,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "R10.0,R10.4",
-            "pym": "ft/jt,qfxd"
+            "pym": "ft/jt, qfxd"
         },
         {
             "id": 1413,
@@ -4037,7 +4052,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "H93.1",
-            "pym": "em,RINGING/BUZZINGEARwws"
+            "pym": "em, RINGING/BUZZING EARwws"
         },
         {
             "id": 1448,
@@ -4232,7 +4247,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "R09.8",
-            "pym": "xxgxtttNOS"
+            "pym": "xxgxttt NOS"
         },
         {
             "id": 1461,
@@ -4487,7 +4502,7 @@
             "icd10": null,
             "icpc2": null,
             "note": " M25.4,M25.5,M25.6,M25.8,M25.9",
-            "pym": "gjdzz/zsNOS"
+            "pym": "gjdzz/zs NOS"
         },
         {
             "id": 1479,
@@ -4682,7 +4697,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "R18,R19.1 至 R19.3,R19.8",
-            "pym": "xhxtdqtzz/zs"
+            "pym": "xhxtdqtzz/ zs"
         },
         {
             "id": 1492,
@@ -6287,7 +6302,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "R19.0",
-            "pym": "yczkNOS"
+            "pym": "yczk NOS"
         },
         {
             "id": 1598,
@@ -6317,7 +6332,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "H53.8",
-            "pym": "fwzVISUALFLOATERS/SPOTS"
+            "pym": "fwzVISUAL FLOATERS/SPOTS"
         },
         {
             "id": 1600,
@@ -12662,7 +12677,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "R07.1",
-            "pym": "tt,hxxt"
+            "pym": "tt, hxxt"
         },
         {
             "id": 2028,
@@ -13412,7 +13427,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "R06.0",
-            "pym": "qd,hxkn"
+            "pym": "qd, hxkn"
         },
         {
             "id": 2078,
@@ -15857,7 +15872,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "Z73.6",
-            "pym": "gnsx/cjsjxt"
+            "pym": "gnsx/cj sjxt"
         },
         {
             "id": 2241,
@@ -26181,7 +26196,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "S01.3,S09.2,T70.0",
-            "pym": "ess,qt"
+            "pym": "ess, qt"
         },
         {
             "id": 4614,
@@ -26886,7 +26901,7 @@
             "icd10": null,
             "icpc2": null,
             "note": " B58.1,B94.2,K70至K76",
-            "pym": "gbNOS"
+            "pym": "gb NOS"
         },
         {
             "id": 4659,
@@ -28506,7 +28521,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "*H61.0,H61.1,H61.3 至 H61.9,H73.8,H73.9, H74,H83.1,* H83.2,H83.8,H83.9,H93.0,H93",
-            "pym": "e/rtjb,qt"
+            "pym": "e/rtjb, qt"
         },
         {
             "id": 4767,
@@ -36876,7 +36891,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "I49",
-            "pym": "xlbqNOS"
+            "pym": "xlbq NOS"
         },
         {
             "id": 5324,
@@ -40551,7 +40566,7 @@
             "icd10": null,
             "icpc2": null,
             "note": null,
-            "pym": "rnqdmdbshxz，wzcngs"
+            "pym": "rnqdmdbs hxz，wzcngs"
         },
         {
             "id": 5490,
@@ -41226,7 +41241,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "R01",
-            "pym": "xz/dmzyNOS"
+            "pym": "xz/dmzy NOS"
         },
         {
             "id": 5532,
@@ -43536,7 +43551,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "I08,I34 至 I37",
-            "pym": "xzbmbNOS"
+            "pym": "xzbmb NOS"
         },
         {
             "id": 5687,
@@ -48696,7 +48711,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "S03.4,S03.5,S23.3 至 S23.5,S33.6,  S43.4 至 S43.7,S53.2 至 S53.4,S63.3 至S63.7,S",
-            "pym": "gjnsjlsNOS"
+            "pym": "gjnsjls NOS"
         },
         {
             "id": 6101,
@@ -52506,7 +52521,7 @@
             "icd10": null,
             "icpc2": null,
             "note": null,
-            "pym": "xtspdqtjrhjjss"
+            "pym": "xt spdqtjrhjjss"
         },
         {
             "id": 6355,
@@ -57156,7 +57171,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "M65.2 至 M65.4,M65.8,M65.9,M67.3,M67.4,M70,   *M71.2 至 M71.9,M72,M76,M77.0,M77.",
-            "pym": "hny/jy/hmyNOS"
+            "pym": "hny/jy/hmy NOS"
         },
         {
             "id": 6673,
@@ -59316,7 +59331,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "E66",
-            "pym": "cz(BMI25-30)"
+            "pym": "cz(BMI 25-30)"
         },
         {
             "id": 6895,
@@ -79206,7 +79221,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "A20至A28,A30,A31,A32.7 至 A32.9,A38,A39.1 至A39.9, A40 至 A44,A48.0,A48.2 至 A48",
-            "pym": "grxjb,qt"
+            "pym": "grxjb, qt"
         },
         {
             "id": 8222,
@@ -80901,7 +80916,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "S11,S15,S21,S25,S26,S27,S35,S37.9,S38.1S38.3,S39,S45,S55,S65,S75,S85,S95,T09,T14",
-            "pym": "cs/ssNOS"
+            "pym": "cs/ss NOS"
         },
         {
             "id": 8335,
@@ -82701,7 +82716,7 @@
             "icd10": null,
             "icpc2": null,
             "note": null,
-            "pym": "c，wtz"
+            "pym": "c  ，wtz"
         },
         {
             "id": 8456,
@@ -84786,7 +84801,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "C00 至 C08,C14.8,C15,C17,C22 至C24,C26,C45.1,C46.2,C48",
-            "pym": "xhxtexzl,qt/NOS"
+            "pym": "xhxtexzl, qt/NOS"
         },
         {
             "id": 8592,
@@ -84861,7 +84876,7 @@
             "icd10": null,
             "icpc2": null,
             "note": null,
-            "pym": "ghgndgexzl"
+            "pym": "ghgndge xzl"
         },
         {
             "id": 8597,
@@ -85251,7 +85266,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "E83,R73,R74,R76 至 R79,R83 至 R94",
-            "pym": "ycdjcjgNOS"
+            "pym": "ycdjcjg NOS"
         },
         {
             "id": 8623,
@@ -86136,7 +86151,7 @@
             "icd10": null,
             "icpc2": null,
             "note": " T78.0,T78.4",
-            "pym": "gm/gmxfyNOS"
+            "pym": "gm/gmxfy NOS"
         },
         {
             "id": 8683,
@@ -87726,7 +87741,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "Q85 至 Q87,Q89.3,Q89.4,Q89.7,Q89.9,Q90 至 Q93,Q95 至 Q99",
-            "pym": "xtxycNOS/dfx"
+            "pym": "xtxyc NOS/dfx"
         },
         {
             "id": 8787,
@@ -88551,7 +88566,7 @@
             "icd10": null,
             "icpc2": null,
             "note": "K91.4,T82 至 T85,Z95 至 Z97",
-            "pym": "xfqjjzdxy"
+            "pym": "xfqj jzdxy"
         },
         {
             "id": 8843,
@@ -90746,6 +90761,21 @@
             "icpc2": null,
             "note": null,
             "pym": "ydszs"
+        },
+        {
+            "id": 1,
+            "icpc_code": "A5002",
+            "icode": null,
+            "iname": "药事服务",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "ysfw"
         }
     ],
     "icpc8_other_health_interventions": [
@@ -90825,21 +90855,6 @@
             "pym": "ftzdsf"
         },
         {
-            "id": 6,
-            "icpc_code": "T4501",
-            "icode": "T45",
-            "iname": "处方饮食",
-            "iename": "Observation/health education/advice/diet",
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "cfys"
-        },
-        {
             "id": 7,
             "icpc_code": "T4504",
             "icode": "T45",
@@ -90900,21 +90915,6 @@
             "pym": "tnbtzqjc"
         },
         {
-            "id": 11,
-            "icpc_code": "T4502",
-            "icode": "T45",
-            "iname": "处方运动",
-            "iename": "Observation/health education/advice/diet",
-            "include": null,
-            "criteria": null,
-            "exclude": null,
-            "consider": null,
-            "icd10": null,
-            "icpc2": null,
-            "note": null,
-            "pym": "cfyd"
-        },
-        {
             "id": 12,
             "icpc_code": "T4507",
             "icode": "T45",
@@ -90943,6 +90943,36 @@
             "icpc2": null,
             "note": null,
             "pym": "tnbybsf"
+        },
+        {
+            "id": 11,
+            "icpc_code": "T4502",
+            "icode": "T45",
+            "iname": "运动干预",
+            "iename": "Observation/health education/advice/diet",
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "ydgy"
+        },
+        {
+            "id": 6,
+            "icpc_code": "T4501",
+            "icode": "T45",
+            "iname": "营养干预",
+            "iename": "Observation/health education/advice/diet",
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "yygy"
         }
     ],
     "icpc9_referral_consultations": [
