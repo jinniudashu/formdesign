@@ -3363,6 +3363,24 @@
         },
         {
             "id": null,
+            "label": "遗传病史",
+            "name": "history_of_infectious_diseases_baseform",
+            "hssc_id": "0be59eac-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "ycbs",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"history_of_infectious_diseases_baseform\",\n    \"label\": \"遗传病史\",\n    \"hssc_id\": \"0be59eac-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_family_relationship\",\n            \"label\": \"家庭成员关系\",\n            \"hssc_id\": \"ded3d502-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Family_relationship\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class History_of_infectious_diseases_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '遗传病史'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('history_of_infectious_diseases_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('history_of_infectious_diseases_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(History_of_infectious_diseases_baseform)\\n    \", \"forms\": \"\\n    class History_of_infectious_diseases_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = History_of_infectious_diseases_baseform\\n            fields = []\\n            \\n            \"}",
+            "components": [
+                "ded3d502-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": [
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "id": null,
             "label": "过敏史",
             "name": "allergies_history_baseform",
             "hssc_id": "0b54db10-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3437,6 +3455,26 @@
         },
         {
             "id": null,
+            "label": "个人适应能力评估",
+            "name": "personal_adaptability_assessment_baseform",
+            "hssc_id": "0b648650-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "grsynlpg",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"personal_adaptability_assessment_baseform\",\n    \"label\": \"个人适应能力评估\",\n    \"hssc_id\": \"0b648650-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_working_hours_per_day\",\n            \"label\": \"每天工作及工作往返总时长\",\n            \"hssc_id\": \"de9bbcf8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_are_you_satisfied_with_the_job_and_life\",\n            \"label\": \"对目前生活和工作满意吗\",\n            \"hssc_id\": \"dec7ec2e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Satisfaction\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_are_you_satisfied_with_your_adaptability\",\n            \"label\": \"对自己的适应能力满意吗\",\n            \"hssc_id\": \"dec8f9a2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Satisfaction\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Personal_adaptability_assessment_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '个人适应能力评估'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('personal_adaptability_assessment_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('personal_adaptability_assessment_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Personal_adaptability_assessment_baseform)\\n    \", \"forms\": \"\\n    class Personal_adaptability_assessment_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Personal_adaptability_assessment_baseform\\n            fields = []\\n            \\n            \"}",
+            "components": [
+                "de9bbcf8-9aa1-11ec-bde1-8a6e55faf877",
+                "dec7ec2e-9aa1-11ec-bde1-8a6e55faf877",
+                "dec8f9a2-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": [
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "id": null,
             "label": "查体听力",
             "name": "physical_examination_hearing_baseform",
             "hssc_id": "0bdf33a0-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3456,18 +3494,16 @@
         },
         {
             "id": null,
-            "label": "个人适应能力评估",
-            "name": "personal_adaptability_assessment_baseform",
-            "hssc_id": "0b648650-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "grsynlpg",
+            "label": "家族病史",
+            "name": "family_history_of_illness_baseform",
+            "hssc_id": "0b96f9f0-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "jzbs",
             "name_icpc": null,
             "description": null,
-            "meta_data": "{\n    \"name\": \"personal_adaptability_assessment_baseform\",\n    \"label\": \"个人适应能力评估\",\n    \"hssc_id\": \"0b648650-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_working_hours_per_day\",\n            \"label\": \"每天工作及工作往返总时长\",\n            \"hssc_id\": \"de9bbcf8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_are_you_satisfied_with_the_job_and_life\",\n            \"label\": \"对目前生活和工作满意吗\",\n            \"hssc_id\": \"dec7ec2e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Satisfaction\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_are_you_satisfied_with_your_adaptability\",\n            \"label\": \"对自己的适应能力满意吗\",\n            \"hssc_id\": \"dec8f9a2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Satisfaction\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Personal_adaptability_assessment_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '个人适应能力评估'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('personal_adaptability_assessment_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('personal_adaptability_assessment_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Personal_adaptability_assessment_baseform)\\n    \", \"forms\": \"\\n    class Personal_adaptability_assessment_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Personal_adaptability_assessment_baseform\\n            fields = []\\n            \\n            \"}",
+            "meta_data": "{\n    \"name\": \"family_history_of_illness_baseform\",\n    \"label\": \"家族病史\",\n    \"hssc_id\": \"0b96f9f0-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_family_relationship\",\n            \"label\": \"家庭成员关系\",\n            \"hssc_id\": \"ded3d502-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Family_relationship\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Family_history_of_illness_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '家族病史'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('family_history_of_illness_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('family_history_of_illness_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Family_history_of_illness_baseform)\\n    \", \"forms\": \"\\n    class Family_history_of_illness_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Family_history_of_illness_baseform\\n            fields = []\\n            \\n            \"}",
             "components": [
-                "de9bbcf8-9aa1-11ec-bde1-8a6e55faf877",
-                "dec7ec2e-9aa1-11ec-bde1-8a6e55faf877",
-                "dec8f9a2-9aa1-11ec-bde1-8a6e55faf877"
+                "ded3d502-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": [],
             "managed_entities": [
@@ -3489,6 +3525,60 @@
                 "de9d30a6-9aa1-11ec-bde1-8a6e55faf877",
                 "decabc92-9aa1-11ec-bde1-8a6e55faf877",
                 "decba0ee-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": [
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "id": null,
+            "label": "用药处方",
+            "name": "yong_yao_chu_fang_baseform",
+            "hssc_id": "0c49b1f8-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "yycf",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"yong_yao_chu_fang_baseform\",\n    \"label\": \"用药处方\",\n    \"hssc_id\": \"0c49b1f8-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Yong_yao_chu_fang_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '用药处方'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('yong_yao_chu_fang_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('yong_yao_chu_fang_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Yong_yao_chu_fang_baseform)\\n    \", \"forms\": \"\\n    class Yong_yao_chu_fang_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Yong_yao_chu_fang_baseform\\n            fields = []\\n            \\n            \"}",
+            "components": [
+                "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": [
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "id": null,
+            "label": "下肢水肿检查",
+            "name": "lower_extremity_edema_examination_baseform",
+            "hssc_id": "0c06f6ce-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "xzszjc",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"lower_extremity_edema_examination_baseform\",\n    \"label\": \"下肢水肿检查\",\n    \"hssc_id\": \"0c06f6ce-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_lower_extremity_edema\",\n            \"label\": \"下肢水肿\",\n            \"hssc_id\": \"dee098fa-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Edema\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Lower_extremity_edema_examination_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '下肢水肿检查'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('lower_extremity_edema_examination_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('lower_extremity_edema_examination_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Lower_extremity_edema_examination_baseform)\\n    \", \"forms\": \"\\n    class Lower_extremity_edema_examination_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Lower_extremity_edema_examination_baseform\\n            fields = []\\n            \\n            \"}",
+            "components": [
+                "dee098fa-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": [
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "id": null,
+            "label": "空腹血糖检查",
+            "name": "kong_fu_xue_tang_jian_cha_baseform",
+            "hssc_id": "0c3bd51a-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "kfxtjc",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"kong_fu_xue_tang_jian_cha_baseform\",\n    \"label\": \"空腹血糖检查\",\n    \"hssc_id\": \"0c3bd51a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_kong_fu_xue_tang\",\n            \"label\": \"空腹血糖\",\n            \"hssc_id\": \"deb59434-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Kong_fu_xue_tang_jian_cha_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '空腹血糖检查'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('kong_fu_xue_tang_jian_cha_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('kong_fu_xue_tang_jian_cha_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Kong_fu_xue_tang_jian_cha_baseform)\\n    \", \"forms\": \"\\n    class Kong_fu_xue_tang_jian_cha_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Kong_fu_xue_tang_jian_cha_baseform\\n            fields = []\\n            \\n            \"}",
+            "components": [
+                "deb59434-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": [],
             "managed_entities": [
@@ -3548,24 +3638,6 @@
         },
         {
             "id": null,
-            "label": "遗传病史",
-            "name": "history_of_infectious_diseases_baseform",
-            "hssc_id": "0be59eac-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "ycbs",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"history_of_infectious_diseases_baseform\",\n    \"label\": \"遗传病史\",\n    \"hssc_id\": \"0be59eac-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_family_relationship\",\n            \"label\": \"家庭成员关系\",\n            \"hssc_id\": \"ded3d502-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Family_relationship\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class History_of_infectious_diseases_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '遗传病史'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('history_of_infectious_diseases_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('history_of_infectious_diseases_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(History_of_infectious_diseases_baseform)\\n    \", \"forms\": \"\\n    class History_of_infectious_diseases_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = History_of_infectious_diseases_baseform\\n            fields = []\\n            \\n            \"}",
-            "components": [
-                "ded3d502-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
-            "id": null,
             "label": "手术史",
             "name": "history_of_surgery_baseform",
             "hssc_id": "0beb43fc-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3577,6 +3649,43 @@
             "components": [
                 "deb645d2-9aa1-11ec-bde1-8a6e55faf877",
                 "dedbea3a-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": [
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "id": null,
+            "label": "门诊医生问诊表",
+            "name": "men_zhen_yi_sheng_wen_zhen_biao_baseform",
+            "hssc_id": "0c75d8a0-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "mzyswzb",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"men_zhen_yi_sheng_wen_zhen_biao_baseform\",\n    \"label\": \"门诊医生问诊表\",\n    \"hssc_id\": \"0c75d8a0-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_supplementary_description_of_the_condition\",\n            \"label\": \"病情补充描述\",\n            \"hssc_id\": \"de9ad1a8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_symptom_list\",\n            \"label\": \"症状\",\n            \"hssc_id\": \"deb93f26-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc3_symptoms_and_problems\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Men_zhen_yi_sheng_wen_zhen_biao_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '门诊医生问诊表'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('men_zhen_yi_sheng_wen_zhen_biao_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('men_zhen_yi_sheng_wen_zhen_biao_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Men_zhen_yi_sheng_wen_zhen_biao_baseform)\\n    \", \"forms\": \"\\n    class Men_zhen_yi_sheng_wen_zhen_biao_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Men_zhen_yi_sheng_wen_zhen_biao_baseform\\n            fields = []\\n            \\n            \"}",
+            "components": [
+                "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
+                "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": [
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "id": null,
+            "label": "药物干预表",
+            "name": "men_zhen_chu_fang_dan",
+            "hssc_id": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "ywgyb",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"men_zhen_chu_fang_dan\",\n    \"label\": \"药物干预表\",\n    \"hssc_id\": \"0ce117aa-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Men_zhen_chu_fang_dan(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '药物干预表'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('men_zhen_chu_fang_dan_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('men_zhen_chu_fang_dan_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Men_zhen_chu_fang_dan)\\n    \", \"forms\": \"\\n    class Men_zhen_chu_fang_dan_ModelForm(ModelForm):\\n        class Meta:\\n            model = Men_zhen_chu_fang_dan\\n            fields = []\\n            \\n            \"}",
+            "components": [
+                "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": [],
             "managed_entities": [
@@ -3597,6 +3706,25 @@
                 "dedcdfee-9aa1-11ec-bde1-8a6e55faf877",
                 "deddcb16-9aa1-11ec-bde1-8a6e55faf877",
                 "dedebd28-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": [
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "id": null,
+            "label": "药事服务提醒表",
+            "name": "yao_shi_fu_wu_ti_xing_biao",
+            "hssc_id": "0d22201a-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "ysfwtxb",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"yao_shi_fu_wu_ti_xing_biao\",\n    \"label\": \"药事服务提醒表\",\n    \"hssc_id\": \"0d22201a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_disease_name\",\n            \"label\": \"疾病名称\",\n            \"hssc_id\": \"ded4c1a6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc5_evaluation_and_diagnoses\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Yao_shi_fu_wu_ti_xing_biao(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '药事服务提醒表'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('yao_shi_fu_wu_ti_xing_biao_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('yao_shi_fu_wu_ti_xing_biao_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Yao_shi_fu_wu_ti_xing_biao)\\n    \", \"forms\": \"\\n    class Yao_shi_fu_wu_ti_xing_biao_ModelForm(ModelForm):\\n        class Meta:\\n            model = Yao_shi_fu_wu_ti_xing_biao\\n            fields = []\\n            \\n            \"}",
+            "components": [
+                "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
+                "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": [],
             "managed_entities": [
@@ -3703,24 +3831,6 @@
         },
         {
             "id": null,
-            "label": "家族病史",
-            "name": "family_history_of_illness_baseform",
-            "hssc_id": "0b96f9f0-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "jzbs",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"family_history_of_illness_baseform\",\n    \"label\": \"家族病史\",\n    \"hssc_id\": \"0b96f9f0-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_family_relationship\",\n            \"label\": \"家庭成员关系\",\n            \"hssc_id\": \"ded3d502-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Family_relationship\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Family_history_of_illness_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '家族病史'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('family_history_of_illness_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('family_history_of_illness_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Family_history_of_illness_baseform)\\n    \", \"forms\": \"\\n    class Family_history_of_illness_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Family_history_of_illness_baseform\\n            fields = []\\n            \\n            \"}",
-            "components": [
-                "ded3d502-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
-            "id": null,
             "label": "查体运动能力",
             "name": "physical_examination_athletic_ability_baseform",
             "hssc_id": "0c2bb0a4-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3731,25 +3841,6 @@
             "script": "{\"models\": \"class Physical_examination_athletic_ability_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '查体运动能力'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('physical_examination_athletic_ability_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('physical_examination_athletic_ability_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Physical_examination_athletic_ability_baseform)\\n    \", \"forms\": \"\\n    class Physical_examination_athletic_ability_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Physical_examination_athletic_ability_baseform\\n            fields = []\\n            \\n            \"}",
             "components": [
                 "dec54e10-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
-            "id": null,
-            "label": "外伤史",
-            "name": "history_of_trauma_baseform",
-            "hssc_id": "0ba83c56-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "wss",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"history_of_trauma_baseform\",\n    \"label\": \"外伤史\",\n    \"hssc_id\": \"0ba83c56-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"datetimefield_date\",\n            \"label\": \"日期\",\n            \"hssc_id\": \"deb645d2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"datetime\"\n        },\n        {\n            \"name\": \"relatedfield_disease_name\",\n            \"label\": \"疾病名称\",\n            \"hssc_id\": \"ded4c1a6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc5_evaluation_and_diagnoses\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class History_of_trauma_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '外伤史'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('history_of_trauma_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('history_of_trauma_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(History_of_trauma_baseform)\\n    \", \"forms\": \"\\n    class History_of_trauma_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = History_of_trauma_baseform\\n            fields = []\\n            \\n            \"}",
-            "components": [
-                "deb645d2-9aa1-11ec-bde1-8a6e55faf877",
-                "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": [],
             "managed_entities": [
@@ -3777,52 +3868,17 @@
         },
         {
             "id": null,
-            "label": "下肢水肿检查",
-            "name": "lower_extremity_edema_examination_baseform",
-            "hssc_id": "0c06f6ce-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "xzszjc",
+            "label": "外伤史",
+            "name": "history_of_trauma_baseform",
+            "hssc_id": "0ba83c56-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "wss",
             "name_icpc": null,
             "description": null,
-            "meta_data": "{\n    \"name\": \"lower_extremity_edema_examination_baseform\",\n    \"label\": \"下肢水肿检查\",\n    \"hssc_id\": \"0c06f6ce-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_lower_extremity_edema\",\n            \"label\": \"下肢水肿\",\n            \"hssc_id\": \"dee098fa-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Edema\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Lower_extremity_edema_examination_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '下肢水肿检查'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('lower_extremity_edema_examination_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('lower_extremity_edema_examination_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Lower_extremity_edema_examination_baseform)\\n    \", \"forms\": \"\\n    class Lower_extremity_edema_examination_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Lower_extremity_edema_examination_baseform\\n            fields = []\\n            \\n            \"}",
+            "meta_data": "{\n    \"name\": \"history_of_trauma_baseform\",\n    \"label\": \"外伤史\",\n    \"hssc_id\": \"0ba83c56-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"datetimefield_date\",\n            \"label\": \"日期\",\n            \"hssc_id\": \"deb645d2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"datetime\"\n        },\n        {\n            \"name\": \"relatedfield_disease_name\",\n            \"label\": \"疾病名称\",\n            \"hssc_id\": \"ded4c1a6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc5_evaluation_and_diagnoses\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class History_of_trauma_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '外伤史'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('history_of_trauma_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('history_of_trauma_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(History_of_trauma_baseform)\\n    \", \"forms\": \"\\n    class History_of_trauma_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = History_of_trauma_baseform\\n            fields = []\\n            \\n            \"}",
             "components": [
-                "dee098fa-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
-            "id": null,
-            "label": "用药处方",
-            "name": "yong_yao_chu_fang_baseform",
-            "hssc_id": "0c49b1f8-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "yycf",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"yong_yao_chu_fang_baseform\",\n    \"label\": \"用药处方\",\n    \"hssc_id\": \"0c49b1f8-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Yong_yao_chu_fang_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '用药处方'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('yong_yao_chu_fang_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('yong_yao_chu_fang_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Yong_yao_chu_fang_baseform)\\n    \", \"forms\": \"\\n    class Yong_yao_chu_fang_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Yong_yao_chu_fang_baseform\\n            fields = []\\n            \\n            \"}",
-            "components": [
-                "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
-            "id": null,
-            "label": "空腹血糖检查",
-            "name": "kong_fu_xue_tang_jian_cha_baseform",
-            "hssc_id": "0c3bd51a-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "kfxtjc",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"kong_fu_xue_tang_jian_cha_baseform\",\n    \"label\": \"空腹血糖检查\",\n    \"hssc_id\": \"0c3bd51a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_kong_fu_xue_tang\",\n            \"label\": \"空腹血糖\",\n            \"hssc_id\": \"deb59434-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Kong_fu_xue_tang_jian_cha_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '空腹血糖检查'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('kong_fu_xue_tang_jian_cha_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('kong_fu_xue_tang_jian_cha_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Kong_fu_xue_tang_jian_cha_baseform)\\n    \", \"forms\": \"\\n    class Kong_fu_xue_tang_jian_cha_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Kong_fu_xue_tang_jian_cha_baseform\\n            fields = []\\n            \\n            \"}",
-            "components": [
-                "deb59434-9aa1-11ec-bde1-8a6e55faf877"
+                "deb645d2-9aa1-11ec-bde1-8a6e55faf877",
+                "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": [],
             "managed_entities": [
@@ -3929,24 +3985,6 @@
         },
         {
             "id": null,
-            "label": "空腹血糖检查表",
-            "name": "kong_fu_xue_tang_jian_cha_biao",
-            "hssc_id": "0cb38a06-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "kfxtjcb",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"kong_fu_xue_tang_jian_cha_biao\",\n    \"label\": \"空腹血糖检查表\",\n    \"hssc_id\": \"0cb38a06-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_kong_fu_xue_tang\",\n            \"label\": \"空腹血糖\",\n            \"hssc_id\": \"deb59434-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Kong_fu_xue_tang_jian_cha_biao(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '空腹血糖检查表'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('kong_fu_xue_tang_jian_cha_biao_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('kong_fu_xue_tang_jian_cha_biao_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Kong_fu_xue_tang_jian_cha_biao)\\n    \", \"forms\": \"\\n    class Kong_fu_xue_tang_jian_cha_biao_ModelForm(ModelForm):\\n        class Meta:\\n            model = Kong_fu_xue_tang_jian_cha_biao\\n            fields = []\\n            \\n            \"}",
-            "components": [
-                "deb59434-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
-            "id": null,
             "label": "常规查体表",
             "name": "chang_gui_cha_ti_biao",
             "hssc_id": "0cd1dcea-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3978,16 +4016,16 @@
         },
         {
             "id": null,
-            "label": "药物干预表",
-            "name": "men_zhen_chu_fang_dan",
-            "hssc_id": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "ywgyb",
+            "label": "空腹血糖检查表",
+            "name": "kong_fu_xue_tang_jian_cha_biao",
+            "hssc_id": "0cb38a06-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "kfxtjcb",
             "name_icpc": null,
             "description": null,
-            "meta_data": "{\n    \"name\": \"men_zhen_chu_fang_dan\",\n    \"label\": \"药物干预表\",\n    \"hssc_id\": \"0ce117aa-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Men_zhen_chu_fang_dan(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '药物干预表'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('men_zhen_chu_fang_dan_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('men_zhen_chu_fang_dan_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Men_zhen_chu_fang_dan)\\n    \", \"forms\": \"\\n    class Men_zhen_chu_fang_dan_ModelForm(ModelForm):\\n        class Meta:\\n            model = Men_zhen_chu_fang_dan\\n            fields = []\\n            \\n            \"}",
+            "meta_data": "{\n    \"name\": \"kong_fu_xue_tang_jian_cha_biao\",\n    \"label\": \"空腹血糖检查表\",\n    \"hssc_id\": \"0cb38a06-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_kong_fu_xue_tang\",\n            \"label\": \"空腹血糖\",\n            \"hssc_id\": \"deb59434-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Kong_fu_xue_tang_jian_cha_biao(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '空腹血糖检查表'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('kong_fu_xue_tang_jian_cha_biao_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('kong_fu_xue_tang_jian_cha_biao_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Kong_fu_xue_tang_jian_cha_biao)\\n    \", \"forms\": \"\\n    class Kong_fu_xue_tang_jian_cha_biao_ModelForm(ModelForm):\\n        class Meta:\\n            model = Kong_fu_xue_tang_jian_cha_biao\\n            fields = []\\n            \\n            \"}",
             "components": [
-                "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
+                "deb59434-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": [],
             "managed_entities": [
@@ -3996,14 +4034,32 @@
         },
         {
             "id": null,
-            "label": "门诊医生问诊表",
-            "name": "men_zhen_yi_sheng_wen_zhen_biao_baseform",
-            "hssc_id": "0c75d8a0-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "mzyswzb",
+            "label": "处方运动",
+            "name": "T4502",
+            "hssc_id": "7f149618-a4c6-11ec-a7bb-cecec7a0e139",
+            "pym": "cfyd",
+            "name_icpc": "T4502",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"T4502\",\n    \"label\": \"处方运动\",\n    \"hssc_id\": \"7f149618-a4c6-11ec-a7bb-cecec7a0e139\",\n    \"fields\": [\n        {\n            \"name\": \"T4502\",\n            \"label\": \"处方运动\",\n            \"hssc_id\": \"bcb64276-a4c3-11ec-a7bb-cecec7a0e139\",\n            \"type\": \"Icpc8_other_health_interventions\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class T4502(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '处方运动'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('T4502_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('T4502_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(T4502)\\n    \", \"forms\": \"\\n    class T4502_ModelForm(ModelForm):\\n        class Meta:\\n            model = T4502\\n            fields = []\\n            \\n            \"}",
+            "components": [
+                "bcb64276-a4c3-11ec-a7bb-cecec7a0e139"
+            ],
+            "components_groups": [],
+            "managed_entities": [
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "id": null,
+            "label": "院前辅助问诊表",
+            "name": "yuan_qian_fu_zhu_wen_zhen_biao_baseform",
+            "hssc_id": "0c704264-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "yqfzwzb",
             "name_icpc": null,
             "description": null,
-            "meta_data": "{\n    \"name\": \"men_zhen_yi_sheng_wen_zhen_biao_baseform\",\n    \"label\": \"门诊医生问诊表\",\n    \"hssc_id\": \"0c75d8a0-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_supplementary_description_of_the_condition\",\n            \"label\": \"病情补充描述\",\n            \"hssc_id\": \"de9ad1a8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_symptom_list\",\n            \"label\": \"症状\",\n            \"hssc_id\": \"deb93f26-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc3_symptoms_and_problems\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Men_zhen_yi_sheng_wen_zhen_biao_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '门诊医生问诊表'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('men_zhen_yi_sheng_wen_zhen_biao_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('men_zhen_yi_sheng_wen_zhen_biao_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Men_zhen_yi_sheng_wen_zhen_biao_baseform)\\n    \", \"forms\": \"\\n    class Men_zhen_yi_sheng_wen_zhen_biao_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Men_zhen_yi_sheng_wen_zhen_biao_baseform\\n            fields = []\\n            \\n            \"}",
+            "meta_data": "{\n    \"name\": \"yuan_qian_fu_zhu_wen_zhen_biao_baseform\",\n    \"label\": \"院前辅助问诊表\",\n    \"hssc_id\": \"0c704264-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_supplementary_description_of_the_condition\",\n            \"label\": \"病情补充描述\",\n            \"hssc_id\": \"de9ad1a8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_symptom_list\",\n            \"label\": \"症状\",\n            \"hssc_id\": \"deb93f26-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc3_symptoms_and_problems\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Yuan_qian_fu_zhu_wen_zhen_biao_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '院前辅助问诊表'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('yuan_qian_fu_zhu_wen_zhen_biao_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('yuan_qian_fu_zhu_wen_zhen_biao_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Yuan_qian_fu_zhu_wen_zhen_biao_baseform)\\n    \", \"forms\": \"\\n    class Yuan_qian_fu_zhu_wen_zhen_biao_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Yuan_qian_fu_zhu_wen_zhen_biao_baseform\\n            fields = []\\n            \\n            \"}",
             "components": [
                 "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
                 "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
@@ -4034,18 +4090,15 @@
         },
         {
             "id": null,
-            "label": "院前辅助问诊表",
-            "name": "yuan_qian_fu_zhu_wen_zhen_biao_baseform",
-            "hssc_id": "0c704264-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "yqfzwzb",
+            "label": "用药提醒单",
+            "name": "yong_yao_ti_xing_dan_baseform",
+            "hssc_id": "0c69d474-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "yytxd",
             "name_icpc": null,
             "description": null,
-            "meta_data": "{\n    \"name\": \"yuan_qian_fu_zhu_wen_zhen_biao_baseform\",\n    \"label\": \"院前辅助问诊表\",\n    \"hssc_id\": \"0c704264-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_supplementary_description_of_the_condition\",\n            \"label\": \"病情补充描述\",\n            \"hssc_id\": \"de9ad1a8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_symptom_list\",\n            \"label\": \"症状\",\n            \"hssc_id\": \"deb93f26-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc3_symptoms_and_problems\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Yuan_qian_fu_zhu_wen_zhen_biao_baseform(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '院前辅助问诊表'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('yuan_qian_fu_zhu_wen_zhen_biao_baseform_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('yuan_qian_fu_zhu_wen_zhen_biao_baseform_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Yuan_qian_fu_zhu_wen_zhen_biao_baseform)\\n    \", \"forms\": \"\\n    class Yuan_qian_fu_zhu_wen_zhen_biao_baseform_ModelForm(ModelForm):\\n        class Meta:\\n            model = Yuan_qian_fu_zhu_wen_zhen_biao_baseform\\n            fields = []\\n            \\n            \"}",
-            "components": [
-                "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
-                "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
-            ],
+            "meta_data": "{\n    \"name\": \"yong_yao_ti_xing_dan_baseform\",\n    \"label\": \"用药提醒单\",\n    \"hssc_id\": \"0c69d474-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_shi_fou_ji_xu_shi_yong\",\n            \"label\": \"是否继续使用\",\n            \"hssc_id\": \"de99c1f0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"boolean\"\n        }\n    ]\n}",
+            "script": null,
+            "components": [],
             "components_groups": [],
             "managed_entities": [
                 "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
@@ -4064,22 +4117,6 @@
             "components": [
                 "deb4e084-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
-            "id": null,
-            "label": "用药提醒单",
-            "name": "yong_yao_ti_xing_dan_baseform",
-            "hssc_id": "0c69d474-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "yytxd",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"yong_yao_ti_xing_dan_baseform\",\n    \"label\": \"用药提醒单\",\n    \"hssc_id\": \"0c69d474-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_shi_fou_ji_xu_shi_yong\",\n            \"label\": \"是否继续使用\",\n            \"hssc_id\": \"de99c1f0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"boolean\"\n        }\n    ]\n}",
-            "script": null,
-            "components": [],
             "components_groups": [],
             "managed_entities": [
                 "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
@@ -4218,6 +4255,24 @@
         },
         {
             "id": null,
+            "label": "糖尿病自我监测表",
+            "name": "tang_niao_bing_zi_wo_jian_ce_biao",
+            "hssc_id": "0d3821bc-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "tnbzwjcb",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"tang_niao_bing_zi_wo_jian_ce_biao\",\n    \"label\": \"糖尿病自我监测表\",\n    \"hssc_id\": \"0d3821bc-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_kong_fu_xue_tang\",\n            \"label\": \"空腹血糖\",\n            \"hssc_id\": \"deb59434-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Tang_niao_bing_zi_wo_jian_ce_biao(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '糖尿病自我监测表'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('tang_niao_bing_zi_wo_jian_ce_biao_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('tang_niao_bing_zi_wo_jian_ce_biao_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Tang_niao_bing_zi_wo_jian_ce_biao)\\n    \", \"forms\": \"\\n    class Tang_niao_bing_zi_wo_jian_ce_biao_ModelForm(ModelForm):\\n        class Meta:\\n            model = Tang_niao_bing_zi_wo_jian_ce_biao\\n            fields = []\\n            \\n            \"}",
+            "components": [
+                "deb59434-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": [
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "id": null,
             "label": "血压监测表",
             "name": "xue_ya_jian_ce_biao_baseform",
             "hssc_id": "0c940c94-9e23-11ec-aa2c-fe35a7065cdd",
@@ -4237,6 +4292,40 @@
         },
         {
             "id": null,
+            "label": "处方饮食",
+            "name": "T4501",
+            "hssc_id": "69c663ea-a4c6-11ec-a7bb-cecec7a0e139",
+            "pym": "cfys",
+            "name_icpc": "T4501",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"T4501\",\n    \"label\": \"处方饮食\",\n    \"hssc_id\": \"69c663ea-a4c6-11ec-a7bb-cecec7a0e139\",\n    \"fields\": [\n        {\n            \"name\": \"T4501\",\n            \"label\": \"处方饮食\",\n            \"hssc_id\": \"abc77c0a-a4c3-11ec-8f29-cecec7a0e139\",\n            \"type\": \"Icpc8_other_health_interventions\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class T4501(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '处方饮食'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('T4501_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('T4501_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(T4501)\\n    \", \"forms\": \"\\n    class T4501_ModelForm(ModelForm):\\n        class Meta:\\n            model = T4501\\n            fields = []\\n            \\n            \"}",
+            "components": [
+                "abc77c0a-a4c3-11ec-8f29-cecec7a0e139"
+            ],
+            "components_groups": [],
+            "managed_entities": [
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "id": null,
+            "label": "分诊确认",
+            "name": "fen_zhen_que_ren",
+            "hssc_id": "0d1b5014-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "fzqr",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"fen_zhen_que_ren\",\n    \"label\": \"分诊确认\",\n    \"hssc_id\": \"0d1b5014-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_yu_yue_que_ren\",\n            \"label\": \"签到确认\",\n            \"hssc_id\": \"de98e56e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"boolean\"\n        }\n    ]\n}",
+            "script": null,
+            "components": [],
+            "components_groups": [],
+            "managed_entities": [
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "id": null,
             "label": "个人疾病史调查表",
             "name": "ge_ren_ji_bing_shi_diao_cha_biao",
             "hssc_id": "0ca96526-9e23-11ec-aa2c-fe35a7065cdd",
@@ -4248,25 +4337,6 @@
             "components": [
                 "deb70576-9aa1-11ec-bde1-8a6e55faf877",
                 "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
-            "id": null,
-            "label": "代人预约挂号",
-            "name": "A6501",
-            "hssc_id": "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "dryygh",
-            "name_icpc": "A6501",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A6501\",\n    \"label\": \"代人预约挂号\",\n    \"hssc_id\": \"0d137dbc-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_service_role\",\n            \"label\": \"服务角色\",\n            \"hssc_id\": \"dea7d614-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"datetimefield_ri_qi_shi_jian\",\n            \"label\": \"预约时间\",\n            \"hssc_id\": \"deb85c6e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"datetime\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A6501(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '代人预约挂号'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('A6501_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('A6501_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(A6501)\\n    \", \"forms\": \"\\n    class A6501_ModelForm(ModelForm):\\n        class Meta:\\n            model = A6501\\n            fields = []\\n            \\n            \"}",
-            "components": [
-                "dea7d614-9aa1-11ec-bde1-8a6e55faf877",
-                "deb85c6e-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": [],
             "managed_entities": [
@@ -4321,6 +4391,25 @@
         },
         {
             "id": null,
+            "label": "代人预约挂号",
+            "name": "A6501",
+            "hssc_id": "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "dryygh",
+            "name_icpc": "A6501",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"A6501\",\n    \"label\": \"代人预约挂号\",\n    \"hssc_id\": \"0d137dbc-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_service_role\",\n            \"label\": \"服务角色\",\n            \"hssc_id\": \"dea7d614-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"datetimefield_ri_qi_shi_jian\",\n            \"label\": \"预约时间\",\n            \"hssc_id\": \"deb85c6e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"datetime\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class A6501(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '代人预约挂号'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('A6501_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('A6501_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(A6501)\\n    \", \"forms\": \"\\n    class A6501_ModelForm(ModelForm):\\n        class Meta:\\n            model = A6501\\n            fields = []\\n            \\n            \"}",
+            "components": [
+                "dea7d614-9aa1-11ec-bde1-8a6e55faf877",
+                "deb85c6e-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": [],
+            "managed_entities": [
+                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "id": null,
             "label": "健康教育",
             "name": "T4504",
             "hssc_id": "44fd7242-a4c6-11ec-a7bb-cecec7a0e139",
@@ -4331,95 +4420,6 @@
             "script": "{\"models\": \"class T4504(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '健康教育'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('T4504_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('T4504_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(T4504)\\n    \", \"forms\": \"\\n    class T4504_ModelForm(ModelForm):\\n        class Meta:\\n            model = T4504\\n            fields = []\\n            \\n            \"}",
             "components": [
                 "cdfeff00-a4c3-11ec-8f29-cecec7a0e139"
-            ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
-            "id": null,
-            "label": "药事服务提醒表",
-            "name": "yao_shi_fu_wu_ti_xing_biao",
-            "hssc_id": "0d22201a-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "ysfwtxb",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"yao_shi_fu_wu_ti_xing_biao\",\n    \"label\": \"药事服务提醒表\",\n    \"hssc_id\": \"0d22201a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_disease_name\",\n            \"label\": \"疾病名称\",\n            \"hssc_id\": \"ded4c1a6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc5_evaluation_and_diagnoses\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Yao_shi_fu_wu_ti_xing_biao(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '药事服务提醒表'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('yao_shi_fu_wu_ti_xing_biao_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('yao_shi_fu_wu_ti_xing_biao_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Yao_shi_fu_wu_ti_xing_biao)\\n    \", \"forms\": \"\\n    class Yao_shi_fu_wu_ti_xing_biao_ModelForm(ModelForm):\\n        class Meta:\\n            model = Yao_shi_fu_wu_ti_xing_biao\\n            fields = []\\n            \\n            \"}",
-            "components": [
-                "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
-                "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
-            "id": null,
-            "label": "处方运动",
-            "name": "T4502",
-            "hssc_id": "7f149618-a4c6-11ec-a7bb-cecec7a0e139",
-            "pym": "cfyd",
-            "name_icpc": "T4502",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"T4502\",\n    \"label\": \"处方运动\",\n    \"hssc_id\": \"7f149618-a4c6-11ec-a7bb-cecec7a0e139\",\n    \"fields\": [\n        {\n            \"name\": \"T4502\",\n            \"label\": \"处方运动\",\n            \"hssc_id\": \"bcb64276-a4c3-11ec-a7bb-cecec7a0e139\",\n            \"type\": \"Icpc8_other_health_interventions\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class T4502(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '处方运动'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('T4502_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('T4502_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(T4502)\\n    \", \"forms\": \"\\n    class T4502_ModelForm(ModelForm):\\n        class Meta:\\n            model = T4502\\n            fields = []\\n            \\n            \"}",
-            "components": [
-                "bcb64276-a4c3-11ec-a7bb-cecec7a0e139"
-            ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
-            "id": null,
-            "label": "糖尿病自我监测表",
-            "name": "tang_niao_bing_zi_wo_jian_ce_biao",
-            "hssc_id": "0d3821bc-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "tnbzwjcb",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"tang_niao_bing_zi_wo_jian_ce_biao\",\n    \"label\": \"糖尿病自我监测表\",\n    \"hssc_id\": \"0d3821bc-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_kong_fu_xue_tang\",\n            \"label\": \"空腹血糖\",\n            \"hssc_id\": \"deb59434-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Tang_niao_bing_zi_wo_jian_ce_biao(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '糖尿病自我监测表'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('tang_niao_bing_zi_wo_jian_ce_biao_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('tang_niao_bing_zi_wo_jian_ce_biao_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(Tang_niao_bing_zi_wo_jian_ce_biao)\\n    \", \"forms\": \"\\n    class Tang_niao_bing_zi_wo_jian_ce_biao_ModelForm(ModelForm):\\n        class Meta:\\n            model = Tang_niao_bing_zi_wo_jian_ce_biao\\n            fields = []\\n            \\n            \"}",
-            "components": [
-                "deb59434-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
-            "id": null,
-            "label": "分诊确认",
-            "name": "fen_zhen_que_ren",
-            "hssc_id": "0d1b5014-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "fzqr",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"fen_zhen_que_ren\",\n    \"label\": \"分诊确认\",\n    \"hssc_id\": \"0d1b5014-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_yu_yue_que_ren\",\n            \"label\": \"签到确认\",\n            \"hssc_id\": \"de98e56e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"boolean\"\n        }\n    ]\n}",
-            "script": null,
-            "components": [],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
-            "id": null,
-            "label": "处方饮食",
-            "name": "T4501",
-            "hssc_id": "69c663ea-a4c6-11ec-a7bb-cecec7a0e139",
-            "pym": "cfys",
-            "name_icpc": "T4501",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"T4501\",\n    \"label\": \"处方饮食\",\n    \"hssc_id\": \"69c663ea-a4c6-11ec-a7bb-cecec7a0e139\",\n    \"fields\": [\n        {\n            \"name\": \"T4501\",\n            \"label\": \"处方饮食\",\n            \"hssc_id\": \"abc77c0a-a4c3-11ec-8f29-cecec7a0e139\",\n            \"type\": \"Icpc8_other_health_interventions\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class T4501(HsscBuessinessFormBase):\\n        class Meta:\\n            verbose_name = '处方饮食'\\n            verbose_name_plural = verbose_name\\n\\n        def get_absolute_url(self):\\n            return reverse('T4501_detail_url', kwargs={'slug': self.slug})\\n\\n        def get_update_url(self):\\n            return reverse('T4501_update_url', kwargs={'slug': self.slug})\\n            \\n\\n\", \"admin\": \"\\nadmin.site.register(T4501)\\n    \", \"forms\": \"\\n    class T4501_ModelForm(ModelForm):\\n        class Meta:\\n            model = T4501\\n            fields = []\\n            \\n            \"}",
-            "components": [
-                "abc77c0a-a4c3-11ec-8f29-cecec7a0e139"
             ],
             "components_groups": [],
             "managed_entities": [
@@ -5602,7 +5602,7 @@
             "label": "疾病史",
             "first_operation": "e02a9d1e-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -5634,7 +5634,7 @@
             "label": "空腹血糖检查",
             "first_operation": "e02d0e28-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -5665,7 +5665,7 @@
             "label": "糖化血红蛋白检查",
             "first_operation": "e02e6976-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -5694,7 +5694,7 @@
             "label": "门诊分诊",
             "first_operation": "e0371aa8-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": "e02ee856-9aa1-11ec-bde1-8a6e55faf877",
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -5725,7 +5725,7 @@
             "label": "糖尿病查体表",
             "first_operation": "e02f65c4-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -5754,7 +5754,7 @@
             "label": "个人过敏史调查表",
             "first_operation": "e02fe238-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -5783,7 +5783,7 @@
             "label": "药物干预",
             "first_operation": "e0305c18-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -5814,7 +5814,7 @@
             "label": "用户注册",
             "first_operation": "e0317224-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -5845,7 +5845,7 @@
             "label": "用户登录",
             "first_operation": "e03291f4-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -5874,7 +5874,7 @@
             "label": "员工登录",
             "first_operation": "e032db46-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -5903,7 +5903,7 @@
             "label": "个人基本信息调查",
             "first_operation": "e03350da-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -5934,7 +5934,7 @@
             "label": "个人健康行为调查",
             "first_operation": "e0348946-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -5965,7 +5965,7 @@
             "label": "代人预约挂号",
             "first_operation": "e035d648-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -5997,7 +5997,7 @@
             "label": "门诊分诊",
             "first_operation": "e0371aa8-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": "e02ee856-9aa1-11ec-bde1-8a6e55faf877",
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -6028,7 +6028,7 @@
             "label": "门诊辅助检查",
             "first_operation": "e0385d3c-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -6059,7 +6059,7 @@
             "label": "糖尿病专用问诊",
             "first_operation": "e0398a04-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -6090,7 +6090,7 @@
             "label": "药事服务",
             "first_operation": "e03abda2-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -6121,7 +6121,7 @@
             "label": "糖尿病自我监测",
             "first_operation": "e03bfa96-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -6152,7 +6152,7 @@
             "label": "院内辅助问诊",
             "first_operation": "e03d308c-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -6183,7 +6183,7 @@
             "label": "院外咨询",
             "first_operation": "e03e65ba-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -6214,7 +6214,7 @@
             "label": "门诊医生问诊",
             "first_operation": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -6245,7 +6245,7 @@
             "label": "胰岛素依赖性糖尿病",
             "first_operation": "e040d160-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -6276,7 +6276,7 @@
             "label": "糖尿病一般随访",
             "first_operation": "e0420c06-9aa1-11ec-bde1-8a6e55faf877",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -6307,7 +6307,7 @@
             "label": "院外辅助问诊",
             "first_operation": "1a3b2382-9b67-11ec-94eb-022c611b2490",
             "last_operation": null,
-            "managed_entity": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
