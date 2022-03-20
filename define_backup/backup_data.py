@@ -7,6 +7,7 @@ from define_operand.models import *
 from define_rule_dict.models import *
 from define_backup.models import DesignBackup, IcpcBackup, SourceCode
 
+from .script_file_header import *
 
 ########################################################################################################################
 # 设计数据备份
@@ -26,6 +27,7 @@ backup_models = [
     RelatedField,
     ComponentsGroup,
     BuessinessForm,
+    FormEntityShip,
     Operation,
     EventRule,
     EventExpression,
@@ -83,10 +85,50 @@ def generate_source_code(modeladmin, request, queryset):
     source_code['dicts_models'], source_code['dicts_admin'] = DicList.export_dict.models_admin_script()
     source_code['dicts_data'] = DicDetail.export_dict.dict_data()
     
-    source_code['models'] , source_code['admin'] = BuessinessForm.export_buessiness_form.models_admin_script()
-    source_code['forms'] =  BuessinessForm.export_buessiness_form.forms_script()
-    source_code['views'] , source_code['urls'], source_code['templates'] = BuessinessForm.export_buessiness_form.views_urls_templates_script()
+    # 导出业务表单models.py, admin.py, forms.py脚本
+    models_script = models_file_head
+    admin_script =  admin_file_head
+    forms_script = forms_file_head
+    views_script = views_file_head
+    urls_script = urls_file_head
+    templates_code = []
+    index_html_script = index_html_file_head
 
+    for form in BuessinessForm.objects.all():
+        script = json.loads(form.script)
+        models_script = f"{models_script}{script['models']}"
+        admin_script = f"{admin_script}{script['admin']}"
+        forms_script = f"{forms_script}{script['forms']}"
+    source_code['models'] = models_script
+    source_code['admin'] = admin_script
+    source_code['forms'] = forms_script
+
+    # 导出业务表单views.py，template.html, urls.py, index.html脚本
+    for service in Service.objects.all():                
+        script = json.loads(service.script)
+        views_script = f"{views_script}{script['views']}"
+        urls_script = f"{urls_script}{script['urls']}"
+        templates_code.extend(script['templates'])
+
+        # construct index.html script
+        ihs = f'''<a class='list-group-item' href='{{% url "{service.first_operation.name}_create_url" %}}'>
+{service.first_operation.label}
+</a>
+'''
+        index_html_script = index_html_script + ihs
+    templates_code.append({'index.html': f"{index_html_script}'\n</section>\n{{% endblock %}}'"})
+
+    source_code['views'] = views_script
+    source_code['urls'] = f'{urls_script}\n]'
+    source_code['templates'] = templates_code
+
+    print(source_code['models'])
+    print(source_code['admin'])
+    print(source_code['forms'])
+    print(source_code['views'])
+    print(source_code['urls'])
+    print(source_code['templates'])
+    
     # 写入数据库
     s = SourceCode.objects.create(
         name = str(int(time())),

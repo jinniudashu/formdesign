@@ -5,7 +5,7 @@ import uuid
 import re
 from pypinyin import Style, lazy_pinyin
 
-from define_backup.export_script_manager import ExportDictManager, ExportBuessinessFormManager
+from define_backup.export_script_manager import ExportDictManager
 
 # 自定义管理器：设计数据备份、恢复
 class HsscBackupManager(models.Manager):
@@ -57,7 +57,7 @@ class HsscBackupManager(models.Manager):
             item = {}
             # 遍历模型非多对多字段，如果是外键，则用外键的hssc_id找回关联对象
             for field in self.model._meta.fields:
-                if item_dict[field.name]:  # 如果字段不为空，进行检查替换                    
+                if item_dict.get(field.name):  # 如果字段存在且不为空，进行检查替换                    
                     if field.name in ['name_icpc', 'icpc']:  # 如果是ICPC外键，用icpc_code获取对象
                         _object = field.related_model.objects.get(icpc_code=item_dict[field.name])
                         item[field.name] = _object
@@ -98,7 +98,6 @@ class HsscBase(models.Model):
     hssc_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="hsscID")
     objects = HsscBackupManager()
     export_dict = ExportDictManager()
-    export_buessiness_form = ExportBuessinessFormManager()
 
     class Meta:
         abstract = True

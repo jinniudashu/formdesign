@@ -29,6 +29,7 @@ class Command(BaseCommand):
             Component.objects.all().delete()
             RelateFieldModel.objects.all().delete()
             for model in backup_models:
+                print(model._meta.model_name)
                 result = model.objects.restore_data(design_data[model._meta.model_name])
                 print(result)
                 

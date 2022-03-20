@@ -22,6 +22,8 @@ class BuessinessForm(HsscPymBase):
     managed_entities = models.ManyToManyField(ManagedEntity, through='FormEntityShip', blank=True, verbose_name="关联实体")
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
     meta_data = models.JSONField(null=True, blank=True, verbose_name="元数据")
+    script = models.TextField(blank=True, null=True, verbose_name='运行时脚本', help_text="script['models'] , script['admin'], script['forms']")
+    
 
     def save(self, *args, **kwargs):
         if self.name_icpc is not None:
@@ -40,7 +42,6 @@ class BuessinessForm(HsscPymBase):
         meta_data['hssc_id'] = str(self.hssc_id)
         # 更新meta_data，类型为dict
         self.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
-
         super().save(*args, **kwargs)
 
     class Meta:
@@ -55,6 +56,9 @@ class BuessinessForm(HsscPymBase):
             meta_data['fields'].extend(self.generate_components_meta_data(components_group.components.all()))
         self.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
         self.save()
+
+        # 生成models, admin, forms脚本
+        self.script = json.dumps(self.generate_script(), ensure_ascii=False)
 
     # 生成BuessinessForm的字段的meta_data
     def generate_components_meta_data(self, components):
@@ -86,6 +90,233 @@ class BuessinessForm(HsscPymBase):
             fields.append(field)
         return fields
 
+    # 生成models, admin, forms脚本
+    def generate_script(self):
+        script = {}
+        _s = self.__CreateModelScript(self)
+        script['models'], script['admin'] = _s.create_script()
+        _s = self.__CreateFormScript(self)
+        script['forms'] = _s.create_script()
+        return script
+
+    class __CreateModelScript:
+        def __init__(self, form):
+            self.name = form.name
+            self.label = form.label
+            # !!!待修改：compontents = form.components.all() + form.component_groups.all()
+            self.components = form.components.all()
+
+        # generate model and admin script
+        def create_script(self):
+            # construct model script
+            head_script = f'class {self.name.capitalize()}(HsscBuessinessFormBase):'
+
+            fields_script = autocomplete_fields = ''
+            for component in self.components:
+                # construct fields script
+                script = self.__create_model_field_script(component)
+                fields_script = fields_script + script
+                # construct admin autocomplete_fields script
+                if component.content_object.__class__.__name__ == 'RelatedField':
+                    autocomplete_fields = autocomplete_fields + f'"{component.content_object.__dict__["name"]}", '
+
+            footer_script = self.__create_model_footer_script()
+
+            # construct model and admin script
+            model_script = f'{head_script}{fields_script}{footer_script}\n\n'
+            admin_script = self.__create_admin_script(autocomplete_fields)
+
+            return model_script, admin_script
+
+        # generate admin script
+        def __create_admin_script(self, autocomplete_fields):
+            name = self.name.capitalize()
+            if autocomplete_fields != '':
+                admin_script = f'''
+@admin.register({name})
+class {name}Admin(admin.ModelAdmin):
+    autocomplete_fields = [{autocomplete_fields}]
+    '''
+            else:
+                admin_script = f'''
+admin.site.register({name})
+    '''
+            return admin_script
+
+        # generate model field script
+        def __create_model_field_script(self, component):
+            script = ''
+            field = component.content_object.__dict__
+            component_type = component.content_type.__dict__['model']
+            if component_type == 'characterfield':
+                script = self.__create_char_field_script(field)
+            elif component_type == 'numberfield':
+                script = self.__create_number_field_script(field)
+            elif component_type == 'dtfield':
+                script = self.__create_datetime_field_script(field)
+            elif component_type == 'relatedfield':
+                field['foreign_key'] = component.content_object.related_content.related_content
+                script = self.__create_related_field_script(field)
+            return script
+
+        # generate model footer script
+        def __create_model_footer_script(self):
+            return f'''
+        class Meta:
+            verbose_name = '{self.label}'
+            verbose_name_plural = verbose_name
+
+        def get_absolute_url(self):
+            return reverse('{self.name}_detail_url', kwargs={{'slug': self.slug}})
+
+        def get_update_url(self):
+            return reverse('{self.name}_update_url', kwargs={{'slug': self.slug}})
+            '''
+
+        # 生成字符型字段定义脚本
+        def __create_char_field_script(self, field):
+            if field['type'] == 'CharField':
+                f_type = 'CharField'
+            else:
+                f_type = 'TextField'
+
+            if field['required']:
+                f_required = ''
+            else:
+                f_required = 'null=True, blank=True, '
+            f_required = 'null=True, blank=True, '
+
+            if field['default']:
+                f_default = f'default="{field["default"]}", '
+            else:
+                f_default = ''
+
+            return f'''
+        {field['name']} = models.{f_type}(max_length={field['length']}, {f_default}{f_required}verbose_name='{field['label']}')'''
+
+        # 生成数字型字段定义脚本
+        def __create_number_field_script(self, field):
+            if field['type'] == 'IntegerField':
+                f_type = 'IntegerField'
+                f_dicimal = ''
+            elif field['type'] == 'DecimalField':
+                f_type = 'DecimalField'
+                f_dicimal = f'max_digits={field["max_digits"]}, decimal_places={field["decimal_places"]}, '
+            else:
+                f_type = 'FloatField'
+                f_dicimal = ''
+            
+            if field['standard_value']:
+                f_standard_value = f'default={field["standard_value"]}, '
+            else:
+                f_standard_value = ''
+            if field['up_limit']:
+                f_up_limit = f'default={field["up_limit"]}, '
+            else:
+                f_up_limit = ''
+            if field['down_limit']:
+                f_down_limit = f'default={field["down_limit"]}, '
+            else:
+                f_down_limit = ''
+
+            if field['default']:
+                f_default = f'default={field["default"]}, '
+            else:
+                f_default = ''
+
+            if field['required']:
+                f_required = 'null=True, '
+            else:
+                f_required = 'null=True, blank=True, '
+            f_required = 'null=True, blank=True, '
+
+            return f'''
+        {field['name']} = models.{f_type}({f_dicimal}{f_default}{f_required}verbose_name='{field['label']}')
+        {field['name']}_standard_value = models.{f_type}({f_dicimal}{f_standard_value}{f_required}verbose_name='{field['label']}标准值')
+        {field['name']}_up_limit = models.{f_type}({f_dicimal}{f_up_limit}{f_required}verbose_name='{field['label']}上限')
+        {field['name']}_down_limit = models.{f_type}({f_dicimal}{f_down_limit}{f_required}verbose_name='{field['label']}下限')'''
+        
+        # 生成日期型字段定义脚本
+        def __create_datetime_field_script(self, field):
+            f_default = ''
+            if field['type'] == 'DateTimeField':
+                f_type = 'DateTimeField'
+                if field['default_now']: f_default = 'default=timezone.now(), '
+            else:
+                f_type = 'DateField'
+                if field['default_now']: f_default = 'default=date.today(), '
+            
+            if field['required']:
+                f_required = 'null=True, '
+            else:
+                f_required = 'null=True, blank=True, '
+
+            return f'''
+        {field['name']} = models.{f_type}({f_default}{f_required}verbose_name='{field['label']}')'''
+
+        # 生成关联型字段定义脚本
+        def __create_related_field_script(self, field):
+            if field['type'] in ['Select', 'RadioSelect']:
+                if field['type'] == 'Select':
+                    f_type = 'Select'
+                else:
+                    f_type = 'RadioSelect'
+                f_required = 'null=True, blank=True, '
+
+                return f'''
+        {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, {f_required}verbose_name='{field['label']}')'''
+
+            elif field['type'] in ['SelectMultiple', 'CheckboxSelectMultiple']:
+                if field['type'] == 'SelectMultiple':
+                    f_type = 'SelectMultiple'
+                else:
+                    f_type = 'CheckboxSelectMultiple'
+
+                return f'''
+        {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', verbose_name='{field['label']}')'''
+
+    class __CreateFormScript:
+        def __init__(self, form):
+            self.name = form.name.capitalize()
+            self.label = form.label
+            self.components = form.components.all()
+            self.fields = ''
+            self.widgets = ''
+
+        def create_script(self):
+            for component in self.components:
+                field_name = component.content_object.__dict__['name']
+                # get fields
+                self.fields = self.fields + f'\'{field_name}\', '
+
+                # get widgets
+                if component.content_type.__dict__['model']=='relatedfield':
+                    field_type = component.content_object.__dict__['type']
+                    if field_type == 'Select':
+                        self.type = 'Select'
+                    elif field_type == 'RadioSelect':
+                        self.type = 'RadioSelect'
+                    elif field_type == 'CheckboxSelectMultiple':
+                        self.type = 'CheckboxSelectMultiple'
+                    else:
+                        self.type = 'SelectMultiple'
+                    self.widgets = self.widgets + f'\'{field_name}\': {self.type}, '
+
+            if self.widgets != '':
+                self.widgets = f'widgets = {{{self.widgets}}}'
+
+            # construct form script
+            head_script = f'''
+    class {self.name}_ModelForm(ModelForm):'''
+
+            body_script = f'''
+        class Meta:
+            model = {self.name}
+            fields = [{self.fields}]
+            {self.widgets}
+            '''
+            return f'{head_script}{body_script}'
+
 # 重新生成字段的meta_data
 @receiver(m2m_changed, sender=BuessinessForm.components.through)
 def buessiness_form_components_changed_handler(sender, instance, action, reverse, model, pk_set, **kwargs):
@@ -101,7 +332,7 @@ def buessiness_form_components_groups_changed_handler(sender, instance, action, 
 class FormEntityShip(HsscBase):
     entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, verbose_name="关联实体")
     form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="业务表单")
-    is_base_infomation = models.BooleanField(default=False, verbose_name="基本信息表")
+    is_base = models.BooleanField(default=False, verbose_name="基本信息表")
 
     def __str__(self):
         return str(self.entity) + '--' + str(self.form)
@@ -148,7 +379,7 @@ class SystemOperand(HsscBase):
 # 作业基础信息表
 class Operation(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
-    form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, null=True, blank=True, verbose_name="作业表单")
+    buessiness_form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, null=True, blank=True, verbose_name="作业表单")
     execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='执行时限')
     awaiting_time_frame = models.DurationField(blank=True, null=True, verbose_name='等待执行时限')
     Operation_priority = [
@@ -217,6 +448,12 @@ class Service(HsscPymBase):
     resource_materials = models.CharField(max_length=255, blank=True, null=True, verbose_name='配套物料')
     resource_devices = models.CharField(max_length=255, blank=True, null=True, verbose_name='配套设备')
     resource_knowledge = models.CharField(max_length=255, blank=True, null=True, verbose_name='服务知识')
+    script = models.TextField(blank=True, null=True, verbose_name='运行时脚本', help_text="script['views'] , script['urls'], script['templates']")
+
+    class Meta:
+        verbose_name = "单元服务"
+        verbose_name_plural = verbose_name
+        ordering = ['id']
 
     def save(self, *args, **kwargs):
         if self.name_icpc is not None:
@@ -224,12 +461,156 @@ class Service(HsscPymBase):
             self.label = self.name_icpc.iname
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
-        super().save(*args, **kwargs)
 
-    class Meta:
-        verbose_name = "单元服务"
-        verbose_name_plural = verbose_name
-        ordering = ['id']
+        # 生成views, template, urls 脚本
+        # self.script = json.dumps(self.generate_script(), ensure_ascii=False)
+
+        super().save(*args, **kwargs)
+    
+    # 生成运行时脚本的views, urls, templates
+    def generate_script(self):
+        script = {}
+        operation = self.first_operation
+        base_info_from = FormEntityShip.objects.get(entity=self.managed_entity, is_base_infomation=True).form
+        base_from_name = f"{base_info_from.name.capitalize()}'ModelForm'"
+        # create views.py, template.html, urls.py, index.html script
+        _s = self.__CreateViewScript(operation, base_from_name)
+        script['views'], script['urls'], script['templates'] = _s.create_script()
+        return script
+
+    # create views.py, template.html, urls.py, index.html script
+    class __CreateViewScript:
+        def __init__(self, operation, base_form_name):
+            self.operand_name = operation.name
+            self.operand_label = operation.label
+            form_meta_data = json.loads(operation.form.meta_data)
+
+            self.model_class_name = operation.form.name.capitalize()
+            self.create_view_name = f"{self.model_class_name}'CreateView'"
+            self.update_view_name = f"{self.model_class_name}'UpdateView'"
+            self.edit_template_name = f"{self.operand_name}'_edit.html'"
+            self.success_url = '/'
+            self.base_form_name = base_form_name
+            self.attribute_form_name = f"{self.model_class_name}'ModelForm'"
+            self.url = f"{self.operand_name}'_update_url'"
+
+        def create_script(self):
+            return self.__construct_view_script(), self.__construct_url_script(), self.__construct_html_script()
+
+        # 构造views脚本
+        def __construct_view_script(self):
+            # create view
+            create_script_head = f'''
+class {self.create_view_name}(CreateView):
+    model = {self.model_class_name}
+    basic_personal_information = Basic_personal_information.objects.get(customer=customer)
+    context = {{}}
+'''
+
+            create_script_body = f'''
+    def get_context_data(self, **kwargs):
+        context = super({self.create_view_name}, self).get_context_data(**kwargs)
+        base_form = {self.base_form_name}(instance=self.customer, prefix="base_form")
+        if self.request.method == 'POST':
+            attribute_form = {self.attribute_form_name}(self.request.POST, prefix="attribute_form")
+        else:
+            attribute_form = {self.attribute_form_name}(prefix="attribute_form")
+        # context
+        context['base_form'] = base_form
+        context['attribute_form'] = attribute_form
+        context['user'] = self.request.user
+        return context
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+        customer = Customer.objects.get(user=context['user'])
+        operator = Staff.objects.get(user=context['user'])
+        # form_valid
+        f = context['attribute_form'].save(commit=False)
+        f.customer = customer
+        f.operator = operator
+        f.save()
+        return super({self.attribute_form_name}, self).form_valid(form)
+'''
+            return f'{create_script_head}{create_script_body}'
+
+#             # update view
+#             update_script_head = f'''
+# class {self.update_view_name}(CreateView):
+#     model = {self.model_class_name}
+#     operation_proc = get_object_or_404(Operation_proc, id=kwargs['id'])
+
+#     if operation_proc.group is None:  # 如果进程角色已经被置为空，说明已有其他人处理，退出本修改作业进程
+#         return redirect(reverse('index'))
+#     operation_proc.group.set([])  # 设置作业进程所属角色组为空
+#     # 构造作业开始消息参数
+#     operand_started.send(sender={self.operand_name}_update, operation_proc=operation_proc, ocode='rtr', operator=request.user)
+
+#     customer = operation_proc.customer
+#     basic_personal_information = Basic_personal_information.objects.get(customer=customer)
+#     context = {{}}
+#         '''
+
+#             update_script_body = vs[7] + f'''
+#         # inquire_forms''' + vs[0] + f'''
+#         # mutate_formsets''' + vs[1] + f'''
+#         # mutate_forms
+#         if request.method == 'POST':'''+ vs[2] + f'''
+#             ''' + vs[6] + vs[5] + f'''
+#                 # 构造作业完成消息参数
+#                 operand_finished.send(sender={self.operand_name}_update, pid=kwargs['id'], ocode='rtc', field_values=request.POST)
+#                 return redirect(reverse('index'))
+#         else:''' + vs[3] + f'''
+#         # context''' + vs[4]
+
+#             update_script_foot = f'''
+#         context['proc_id'] = kwargs['id']
+#         return render(request, '{self.operand_name}_update.html', context)
+
+#         '''
+
+            # s = f'{create_script_head}{create_script_body}{create_script_foot}\n\n{update_script_head}{update_script_body}{update_script_foot}'
+
+
+        # 构造html脚本
+        def __construct_html_script(self):
+            _hs = f'''
+                        <h5>{self.operand_name}</h5>
+                        {{{{ {self.operand_name}.as_p }}}}
+                        <hr>'''            
+            script_head = f'''{{% extends "base.html" %}}
+
+    {{% load crispy_forms_tags %}}
+
+    {{% block content %}}
+    '''
+
+            create_script_body = f'''
+        <form action={{% url '{self.operand_name}_create_url' %}} method='POST' enctype='multipart/form-data'> 
+            {{% csrf_token %}}
+                ''' + _hs
+
+            update_script_body = f'''
+        <form action={{% url '{self.operand_name}_update_url' proc_id %}} method='POST' enctype='multipart/form-data'> 
+            {{% csrf_token %}}
+                ''' + _hs
+
+            script_foot = f'''
+            <input type="submit" value="提交" /> 
+        </form>
+
+    {{% endblock %}}
+    '''
+
+            s_create = f'{script_head}{create_script_body}{script_foot}'
+            s_update = f'{script_head}{update_script_body}{script_foot}'
+            return [{f'{self.operand_name}_create.html': s_create}, {f'{self.operand_name}_create.html': s_update}]
+
+        # 构造urls脚本
+        def __construct_url_script(self):
+            return f'''
+        path('{self.operand_name}/create', {self.operand_name}_create, name='{self.operand_name}_create_url'),
+        path('{self.operand_name}/<int:id>/update', {self.operand_name}_update, name='{self.operand_name}_update_url'),'''
 
 
 # 接收表单数据
