@@ -19,7 +19,7 @@ class BuessinessForm(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     components = models.ManyToManyField(Component, blank=True, verbose_name="字段")
     components_groups = models.ManyToManyField(ComponentsGroup, blank=True, verbose_name="组件")
-    managed_entities = models.ManyToManyField(ManagedEntity, through='FormEntityShip', blank=True, verbose_name="关联实体")
+    managed_entities = models.ManyToManyField(ManagedEntity, through='FormEntityShip', verbose_name="关联实体")
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
     meta_data = models.JSONField(null=True, blank=True, verbose_name="元数据")
     script = models.TextField(blank=True, null=True, verbose_name='运行时脚本', help_text="script['models'] , script['admin'], script['forms']")
@@ -423,7 +423,7 @@ class Service(HsscPymBase):
     label = models.CharField(max_length=255, verbose_name="名称")
     first_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='first_operation', blank=True, null=True, verbose_name="起始作业")
     last_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='last_operation', blank=True, null=True, verbose_name="结束作业")
-    managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, blank=True, null=True, verbose_name="管理实体")
+    managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, null=True, verbose_name="管理实体")
     execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='执行时限')
     awaiting_time_frame = models.DurationField(blank=True, null=True, verbose_name='等待执行时限')
     Operation_priority = [
@@ -463,7 +463,8 @@ class Service(HsscPymBase):
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
 
         # 生成views, template, urls 脚本
-        # self.script = json.dumps(self.generate_script(), ensure_ascii=False)
+        print(self)
+        self.script = json.dumps(self.generate_script(), ensure_ascii=False)
 
         super().save(*args, **kwargs)
     
@@ -471,10 +472,10 @@ class Service(HsscPymBase):
     def generate_script(self):
         script = {}
         operation = self.first_operation
-        base_info_from = FormEntityShip.objects.get(entity=self.managed_entity, is_base_infomation=True).form
-        base_from_name = f"{base_info_from.name.capitalize()}'ModelForm'"
+        base_info_form = FormEntityShip.objects.get(entity=self.managed_entity, is_base=True).form
+        base_form_name = f"{base_info_form.name.capitalize()}'ModelForm'"
         # create views.py, template.html, urls.py, index.html script
-        _s = self.__CreateViewScript(operation, base_from_name)
+        _s = self.__CreateViewScript(operation, base_form_name)
         script['views'], script['urls'], script['templates'] = _s.create_script()
         return script
 
@@ -483,9 +484,9 @@ class Service(HsscPymBase):
         def __init__(self, operation, base_form_name):
             self.operand_name = operation.name
             self.operand_label = operation.label
-            form_meta_data = json.loads(operation.form.meta_data)
+            form_meta_data = json.loads(operation.buessiness_form.meta_data)
 
-            self.model_class_name = operation.form.name.capitalize()
+            self.model_class_name = operation.buessiness_form.name.capitalize()
             self.create_view_name = f"{self.model_class_name}'CreateView'"
             self.update_view_name = f"{self.model_class_name}'UpdateView'"
             self.edit_template_name = f"{self.operand_name}'_edit.html'"
