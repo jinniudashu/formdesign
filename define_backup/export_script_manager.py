@@ -22,15 +22,15 @@ class ExportDictManager(models.Manager):
                 _model_script = f'''
 class {name}(DictBase):
     class Meta:
-        verbate_name = '{dict.label}'
-        verbate_name_plural = verbate_name'''
+        verbose_name = '{dict.label}'
+        verbose_name_plural = verbose_name'''
                 models_script = f'{models_script}\n\n{_model_script}'
 
                 # 生成admin脚本
                 _admin_script = f'''
 @admin.register({name})
 class {name}Admin(admin.ModelAdmin):{dict_admin_content}'''
-                admin_script = f'{admin_script}\n\n{_admin_script}'
+                admin_script = f'{admin_script}\n{_admin_script}'
 
             return models_script, admin_script
     

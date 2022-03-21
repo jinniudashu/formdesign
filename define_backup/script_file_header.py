@@ -157,6 +157,7 @@ index_html_file_head = f'''{{% extends "base.html" %}}
 # 字典models.py文件头
 dict_models_head = '''from django.db import models
 
+
 class DictBase(models.Model):
     label = models.CharField(max_length=255, null=True, verbose_name="名称")
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name="name")
@@ -168,14 +169,11 @@ class DictBase(models.Model):
         abstract = True
 
     def __str__(self):
-        return self.value
-
-'''
+        return self.value'''
 
 # 字典admin.py文件头
 dict_admin_head = '''from django.contrib import admin
 from .models import *
-
 '''
 
 # 字典admin固定内容

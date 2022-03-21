@@ -46,7 +46,7 @@ class OperationAdmin(admin.ModelAdmin):
 class OperationsSettingInline(admin.TabularInline):
     model = OperationsSetting
     exclude = ['name', 'label', 'hssc_id']
-    autocomplete_fields = ['operation', 'next_operation']
+    autocomplete_fields = ['operation', 'next_operation', 'event_rule']
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
@@ -76,7 +76,7 @@ class ServiceAdmin(admin.ModelAdmin):
 class ServicesSettingInline(admin.TabularInline):
     model = ServicesSetting
     exclude = ['name', 'label', 'hssc_id']
-    autocomplete_fields = ['service', 'next_service']
+    autocomplete_fields = ['service', 'next_service', 'event_rule']
 
 @admin.register(ServicePackage)
 class ServicePackageAdmin(admin.ModelAdmin):

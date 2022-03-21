@@ -101,6 +101,7 @@ class BuessinessForm(HsscPymBase):
 
     class __CreateModelScript:
         def __init__(self, form):
+            print('form.name:', form.name)
             self.name = form.name
             self.label = form.label
             # !!!待修改：compontents = form.components.all() + form.component_groups.all()
@@ -108,6 +109,7 @@ class BuessinessForm(HsscPymBase):
 
         # generate model and admin script
         def create_script(self):
+            print('self.name:', self.name)
             # construct model script
             head_script = f'class {self.name.capitalize()}(HsscBuessinessFormBase):'
 
@@ -406,7 +408,7 @@ class Service(HsscPymBase):
     name = models.CharField(max_length=255, unique=True, verbose_name="name")
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=255, verbose_name="名称")
-    first_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='first_operation', blank=True, null=True, verbose_name="起始作业")
+    first_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='first_operation', null=True, verbose_name="起始作业")
     last_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='last_operation', blank=True, null=True, verbose_name="结束作业")
     managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, null=True, verbose_name="管理实体")
     Begin_time_setting = [(0, '默认当前时间'), (1, '人工指定时间'), (2, '引用出生日期')]
@@ -415,7 +417,7 @@ class Service(HsscPymBase):
     awaiting_time_frame = models.DurationField(blank=True, null=True, verbose_name='等待执行时限')
     Operation_priority = [(0, '0级'), (1, '紧急'), (2, '优先'), (3, '一般')]
     priority = models.PositiveSmallIntegerField(choices=Operation_priority, default=3, verbose_name='优先级')
-    group = models.ManyToManyField(Role, blank=True, verbose_name="服务角色")
+    group = models.ManyToManyField(Role, verbose_name="服务角色")
     History_services_display=[(0, '所有历史服务'), (1, '当日服务')]
     history_services_display = models.PositiveBigIntegerField(choices=History_services_display, default=0, blank=True, null=True, verbose_name='历史服务默认显示')
     enable_recommanded_list = models.BooleanField(default=True, verbose_name='显示推荐作业')
@@ -588,7 +590,7 @@ class {self.create_view_name}(CreateView):
 
             s_create = f'{script_head}{create_script_body}{script_foot}'
             s_update = f'{script_head}{update_script_body}{script_foot}'
-            return [{f'{self.operand_name}_create.html': s_create}, {f'{self.operand_name}_create.html': s_update}]
+            return [{f'{self.operand_name}_create.html': s_create}, {f'{self.operand_name}_update.html': s_update}]
 
         # 构造urls脚本
         def __construct_url_script(self):
