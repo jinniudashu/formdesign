@@ -464,7 +464,8 @@ class Service(HsscPymBase):
 
         # 生成views, template, urls 脚本
         print(self)
-        self.script = json.dumps(self.generate_script(), ensure_ascii=False)
+        if self.first_operation.buessiness_form:
+            self.script = json.dumps(self.generate_script(), ensure_ascii=False)
 
         super().save(*args, **kwargs)
     

@@ -5,7 +5,7 @@ from define.models import *
 from define_operand.models import *
 from define_rule_dict.models import *
 from define_icpc.models import Icpc
-from define_backup.backup_data import backup_models
+from define_backup.backup_data import Backup_models
 
 
 class Command(BaseCommand):
@@ -28,7 +28,7 @@ class Command(BaseCommand):
 
             Component.objects.all().delete()
             RelateFieldModel.objects.all().delete()
-            for model in backup_models:
+            for model in Backup_models:
                 print(model._meta.model_name)
                 result = model.objects.restore_data(design_data[model._meta.model_name])
                 print(result)
