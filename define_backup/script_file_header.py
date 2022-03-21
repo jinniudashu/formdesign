@@ -15,6 +15,7 @@ from icpc.models import *
 from dictionaries.models import *
 from core.models import Staff, Customer, Operation_proc
 
+
 class HsscBuessinessFormBase(models.Model):
     hssc_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="hsscID")
     creater = models.ForeignKey(Staff, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="创建人")
@@ -35,6 +36,7 @@ class HsscBuessinessFormBase(models.Model):
         if not self.id:
             self.slug = slugify(self._meta.model_name, allow_unicode=True) + f'-{{int(time())}}'
         super().save(*args, **kwargs)
+
 
 '''
 

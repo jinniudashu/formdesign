@@ -78,8 +78,8 @@ def generate_source_code(modeladmin, request, queryset):
     source_code = {}
     
     # 导出字典表models.py, admin.py脚本
-    source_code['dicts_models'], source_code['dicts_admin'] = DicList.export_dict.models_admin_script()
-    source_code['dicts_data'] = DicDetail.export_dict.dict_data()
+    # source_code['dicts_models'], source_code['dicts_admin'] = DicList.export_dict.models_admin_script()
+    # source_code['dicts_data'] = DicDetail.export_dict.dict_data()
     
     # 导出ICPC表models.py, admin.py脚本
 

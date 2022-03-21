@@ -307,13 +307,13 @@ admin.site.register({name})
 
             # construct form script
             head_script = f'''
-    class {self.name}_ModelForm(ModelForm):'''
+class {self.name}_ModelForm(ModelForm):'''
 
             body_script = f'''
-        class Meta:
-            model = {self.name}
-            fields = [{self.fields}]
-            {self.widgets}
+    class Meta:
+        model = {self.name}
+        fields = [{self.fields}]
+        {self.widgets}
             '''
             return f'{head_script}{body_script}'
 
@@ -474,7 +474,7 @@ class Service(HsscPymBase):
         script = {}
         operation = self.first_operation
         base_info_form = FormEntityShip.objects.get(entity=self.managed_entity, is_base=True).form
-        base_form_name = f"{base_info_form.name.capitalize()}'ModelForm'"
+        base_form_name = f'{base_info_form.name.capitalize()}_ModelForm'
         # create views.py, template.html, urls.py, index.html script
         _s = self.__CreateViewScript(operation, base_form_name)
         script['views'], script['urls'], script['templates'] = _s.create_script()
@@ -488,13 +488,13 @@ class Service(HsscPymBase):
             form_meta_data = json.loads(operation.buessiness_form.meta_data)
 
             self.model_class_name = operation.buessiness_form.name.capitalize()
-            self.create_view_name = f"{self.model_class_name}'CreateView'"
-            self.update_view_name = f"{self.model_class_name}'UpdateView'"
-            self.edit_template_name = f"{self.operand_name}'_edit.html'"
+            self.create_view_name = f'{self.model_class_name}_CreateView'
+            self.update_view_name = f'{self.model_class_name}_UpdateView'
+            self.edit_template_name = f'{self.operand_name}_edit.html'
             self.success_url = '/'
             self.base_form_name = base_form_name
-            self.attribute_form_name = f"{self.model_class_name}'ModelForm'"
-            self.url = f"{self.operand_name}'_update_url'"
+            self.attribute_form_name = f'{self.model_class_name}_ModelForm'
+            self.url = f'{self.operand_name}_update_url'
 
         def create_script(self):
             return self.__construct_view_script(), self.__construct_url_script(), self.__construct_html_script()
@@ -611,8 +611,8 @@ class {self.create_view_name}(CreateView):
         # 构造urls脚本
         def __construct_url_script(self):
             return f'''
-        path('{self.operand_name}/create', {self.operand_name}_create, name='{self.operand_name}_create_url'),
-        path('{self.operand_name}/<int:id>/update', {self.operand_name}_update, name='{self.operand_name}_update_url'),'''
+    path('{self.operand_name}/create', {self.model_class_name}_CreateView.as_view(), name='{self.operand_name}_create_url'),'''
+    # path('{self.operand_name}/<int:id>/update', {self.operand_name}_UpdateView, name='{self.operand_name}_update_url'),'''
 
 
 # 接收表单数据
