@@ -247,3 +247,18 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
             related_content=instance.name.capitalize(),
             related_content_type=sender._meta.model_name,
         )
+
+
+# 角色表
+class Role(HsscBase):
+    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="角色描述")
+
+    def save(self, *args, **kwargs):
+        if self.name is None or self.name == '':
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "角色"
+        verbose_name_plural = verbose_name
+        ordering = ['id']

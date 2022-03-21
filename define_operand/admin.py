@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BuessinessForm, Operation, Service, OperationsSetting, ServicePackage, ServicesSetting, Role, SystemOperand
+from .models import BuessinessForm, Operation, Service, OperationsSetting, ServicePackage, ServicesSetting, SystemOperand
 
 
 class FormEntityShipInline(admin.TabularInline):
@@ -54,10 +54,10 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('label', 'name_icpc'), ('managed_entity', 'priority'), ('first_operation', 'last_operation', ), 'group', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
+            'fields': (('label', 'name_icpc'), ('managed_entity', 'priority'), ('first_operation', 'last_operation', ), 'group', ('begin_time_setting', 'awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
         }),
         ('界面设置', {
-            'fields':('history_services_display', ('enable_recommanded_list', 'enable_queue_counter'), )
+            'fields':(('history_services_display', 'enable_recommanded_list', 'enable_queue_counter', ), )
         }),
         ('单元服务管理', {
             'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
@@ -98,15 +98,6 @@ class SystemOperandAdmin(admin.ModelAdmin):
     list_display = ('id', 'label', 'name', 'func', 'parameters')
     readonly_fields = ('label','name','hssc_id','func','parameters','description','Applicable','applicable')
     ordering = ('id',)
-
-
-@admin.register(Role)
-class RoleAdmin(admin.ModelAdmin):
-    list_display = ['label', 'id']
-    list_display_links = ['label', ]
-    search_fields = ['label']
-    readonly_fields = ['name', 'hssc_id']
-    ordering = ['id']
 
 
 # @admin.register(Event)

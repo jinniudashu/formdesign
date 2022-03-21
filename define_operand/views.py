@@ -4,7 +4,8 @@ from rest_framework import serializers
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from .models import Role, Operation, Service, ServicePackage
+from .models import Operation, Service, ServicePackage
+from define.models import Role
 
 
 class RoleSerializer(serializers.ModelSerializer):

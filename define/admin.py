@@ -62,6 +62,15 @@ class DicListAdmin(admin.ModelAdmin):
 class ManagedEntityAdmin(admin.ModelAdmin):
     readonly_fields = ['hssc_id', 'pym']
 
+@admin.register(Role)
+class RoleAdmin(admin.ModelAdmin):
+    list_display = ['label', 'id']
+    list_display_links = ['label', ]
+    search_fields = ['label']
+    readonly_fields = ['name', 'hssc_id']
+    ordering = ['id']
+
+
 # @admin.register(IcpcList)
 # class IcpcListAdmin(admin.ModelAdmin):
 #     readonly_fields = ['hssc_id', 'pym']

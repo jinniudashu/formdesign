@@ -8,7 +8,7 @@ import uuid
 from pypinyin import lazy_pinyin
 
 from hsscbase_class import HsscBase, HsscPymBase
-from define.models import ManagedEntity, Component, ComponentsGroup
+from define.models import ManagedEntity, Component, ComponentsGroup, Role
 from define_icpc.models import Icpc
 from define_rule_dict.models import EventRule, FrequencyRule, IntervalRule
 from .utils import keyword_search
@@ -280,18 +280,18 @@ admin.site.register({name})
             self.name = form.name.capitalize()
             self.label = form.label
             self.components = form.components.all()
-            self.fields = ''
-            self.widgets = ''
 
         def create_script(self):
+            fields = ''
+            widgets = ''
             for component in self.components:
-                field_name = component.content_object.__dict__['name']
+                field_name = component.content_object.name
                 # get fields
-                self.fields = self.fields + f'\'{field_name}\', '
+                fields = f'{fields}\'{field_name}\', '
 
                 # get widgets
                 if component.content_type.__dict__['model']=='relatedfield':
-                    field_type = component.content_object.__dict__['type']
+                    field_type = component.content_object.type
                     if field_type == 'Select':
                         self.type = 'Select'
                     elif field_type == 'RadioSelect':
@@ -300,10 +300,10 @@ admin.site.register({name})
                         self.type = 'CheckboxSelectMultiple'
                     else:
                         self.type = 'SelectMultiple'
-                    self.widgets = self.widgets + f'\'{field_name}\': {self.type}, '
+                    widgets = f'{widgets}\'{field_name}\': {self.type}, '
 
-            if self.widgets != '':
-                self.widgets = f'widgets = {{{self.widgets}}}'
+            if widgets != '':
+                widgets = f'widgets = {{{widgets}}}'
 
             # construct form script
             head_script = f'''
@@ -312,8 +312,8 @@ class {self.name}_ModelForm(ModelForm):'''
             body_script = f'''
     class Meta:
         model = {self.name}
-        fields = [{self.fields}]
-        {self.widgets}
+        fields = [{fields}]
+        {widgets}
             '''
             return f'{head_script}{body_script}'
 
@@ -340,21 +340,6 @@ class FormEntityShip(HsscBase):
     class Meta:
         verbose_name = '表单和实体关系'
         verbose_name_plural = verbose_name
-
-
-# 角色表
-class Role(HsscBase):
-    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="角色描述")
-
-    def save(self, *args, **kwargs):
-        if self.name is None or self.name == '':
-            self.name = f'{"_".join(lazy_pinyin(self.label))}'
-        super().save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = "角色"
-        verbose_name_plural = verbose_name
-        ordering = ['id']
 
 
 # # 系统作业指令表
@@ -424,14 +409,11 @@ class Service(HsscPymBase):
     first_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='first_operation', blank=True, null=True, verbose_name="起始作业")
     last_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='last_operation', blank=True, null=True, verbose_name="结束作业")
     managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, null=True, verbose_name="管理实体")
+    Begin_time_setting = [(0, '默认当前时间'), (1, '人工指定时间'), (2, '引用出生日期')]
+    begin_time_setting = models.PositiveSmallIntegerField(choices=Begin_time_setting, default=0, verbose_name='开始时间设置')
     execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='执行时限')
     awaiting_time_frame = models.DurationField(blank=True, null=True, verbose_name='等待执行时限')
-    Operation_priority = [
-        (0, '0级'),
-        (1, '紧急'),
-        (2, '优先'),
-        (3, '一般'),
-    ]
+    Operation_priority = [(0, '0级'), (1, '紧急'), (2, '优先'), (3, '一般')]
     priority = models.PositiveSmallIntegerField(choices=Operation_priority, default=3, verbose_name='优先级')
     group = models.ManyToManyField(Role, blank=True, verbose_name="服务角色")
     History_services_display=[(0, '所有历史服务'), (1, '当日服务')]
@@ -505,7 +487,7 @@ class Service(HsscPymBase):
             create_script_head = f'''
 class {self.create_view_name}(CreateView):
     model = {self.model_class_name}
-    basic_personal_information = Basic_personal_information.objects.get(customer=customer)
+    # basic_personal_information = Basic_personal_information.objects.get(customer=customer)
     context = {{}}
 '''
 
@@ -612,7 +594,7 @@ class {self.create_view_name}(CreateView):
         def __construct_url_script(self):
             return f'''
     path('{self.operand_name}/create', {self.model_class_name}_CreateView.as_view(), name='{self.operand_name}_create_url'),'''
-    # path('{self.operand_name}/<int:id>/update', {self.operand_name}_UpdateView, name='{self.operand_name}_update_url'),'''
+    # path('{self.operand_name}/<int:id>/update', {self.model_class_name}_UpdateView, name='{self.operand_name}_update_url'),'''
 
 
 # 接收表单数据
