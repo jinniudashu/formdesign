@@ -46,7 +46,6 @@ def design_backup(modeladmin, request, queryset):
         _model = model.__name__.lower()
         design_data[_model]=model.objects.backup_data()
         json.dumps(design_data[_model], indent=4, ensure_ascii=False)
-
     # 写入数据库
     result = write_to_db(DesignBackup, design_data)
     print(f'设计数据备份成功, id: {result}')
@@ -63,7 +62,6 @@ def icpc_backup(modeladmin, request, queryset):
         Icpc_model = eval(icpc['name'])
         _key = icpc['name'].lower()
         icpc_data[_key] = Icpc_model.objects.backup_data()
-
     # 写入数据库
     result = write_to_db(IcpcBackup, icpc_data)
     print(f'ICPC数据备份成功, id: {result}')
@@ -81,7 +79,9 @@ def generate_source_code(modeladmin, request, queryset):
     source_code['dict_models'], source_code['dict_admin'] = DicList.export_dict.models_admin_script()
     source_code['dict_data'] = DicDetail.export_dict.dict_data()
     
-    # 导出ICPC表models.py, admin.py脚本
+    # 导出ICPC表models.py, admin.py脚本???
+    # source_code['icpc_models'], source_code['icpc_admin'] = IcpcList.export_icpc.models_admin_script()
+    # source_code['icpc_data'] = IcpcList.export_icpc.icpc_data()
 
     # 导出业务表单models.py, admin.py, forms.py脚本
     models_script = models_file_head
@@ -95,9 +95,9 @@ def generate_source_code(modeladmin, request, queryset):
     for form in BuessinessForm.objects.all():
         if form.script:
             script = json.loads(form.script)
-            models_script = f"{models_script}{script['models']}"
-            admin_script = f"{admin_script}{script['admin']}"
-            forms_script = f"{forms_script}{script['forms']}"
+            models_script = f'{models_script}{script["models"]}'
+            admin_script = f'{admin_script}{script["admin"]}'
+            forms_script = f'{forms_script}{script["forms"]}'
     source_code['models'] = models_script
     source_code['admin'] = admin_script
     source_code['forms'] = forms_script
@@ -106,8 +106,8 @@ def generate_source_code(modeladmin, request, queryset):
     for service in Service.objects.all():
         if service.script:          
             script = json.loads(service.script)
-            views_script = f"{views_script}{script['views']}"
-            urls_script = f"{urls_script}{script['urls']}"
+            views_script = f'{views_script}{script["views"]}'
+            urls_script = f'{urls_script}{script["urls"]}'
             templates_code.extend(script['templates'])
 
         # construct index.html script

@@ -22,7 +22,7 @@ class BuessinessForm(HsscPymBase):
     managed_entities = models.ManyToManyField(ManagedEntity, through='FormEntityShip', verbose_name="关联实体")
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
     meta_data = models.JSONField(null=True, blank=True, verbose_name="元数据")
-    script = models.TextField(blank=True, null=True, verbose_name='运行时脚本', help_text="script['models'] , script['admin'], script['forms']")
+    script = models.TextField(blank=True, null=True, verbose_name='运行时脚本')
     
 
     def save(self, *args, **kwargs):
@@ -55,10 +55,11 @@ class BuessinessForm(HsscPymBase):
         for components_group in self.components_groups.all():  # 根据components_groups重新生成字段记录
             meta_data['fields'].extend(self.generate_components_meta_data(components_group.components.all()))
         self.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
-        self.save()
 
         # 生成models, admin, forms脚本
         self.script = json.dumps(self.generate_script(), ensure_ascii=False)
+
+        self.save()
 
     # 生成BuessinessForm的字段的meta_data
     def generate_components_meta_data(self, components):
@@ -93,231 +94,211 @@ class BuessinessForm(HsscPymBase):
     # 生成models, admin, forms脚本
     def generate_script(self):
         script = {}
-        _s = self.__CreateModelScript(self)
-        script['models'], script['admin'] = _s.create_script()
-        _s = self.__CreateFormScript(self)
-        script['forms'] = _s.create_script()
+        script['models'], script['admin'] = self.__create_model_script()
+        script['forms'] = self.__create_form_script()
         return script
 
-    class __CreateModelScript:
-        def __init__(self, form):
-            print('form.name:', form.name)
-            self.name = form.name
-            self.label = form.label
-            # !!!待修改：compontents = form.components.all() + form.component_groups.all()
-            self.components = form.components.all()
-
         # generate model and admin script
-        def create_script(self):
-            print('self.name:', self.name)
-            # construct model script
-            head_script = f'class {self.name.capitalize()}(HsscBuessinessFormBase):'
+    def __create_model_script(self):
+        # construct model script
+        head_script = f'class {self.name.capitalize()}(HsscBuessinessFormBase):'
+        fields_script = autocomplete_fields = ''
 
-            fields_script = autocomplete_fields = ''
-            for component in self.components:
-                # construct fields script
-                script = self.__create_model_field_script(component)
-                fields_script = fields_script + script
-                # construct admin autocomplete_fields script
-                if component.content_object.__class__.__name__ == 'RelatedField':
-                    autocomplete_fields = autocomplete_fields + f'"{component.content_object.__dict__["name"]}", '
+        # !!!待修改：compontents = form.components.all() + form.component_groups.all()
+        for component in self.components.all():
+            # construct fields script
+            _script = self.__create_model_field_script(component)
+            fields_script = fields_script + _script
+            # construct admin autocomplete_fields script
+            if component.content_object.__class__.__name__ == 'RelatedField':
+                autocomplete_fields = autocomplete_fields + f'"{component.content_object.name}", '
 
-            footer_script = self.__create_model_footer_script()
+        footer_script = self.__create_model_footer_script()
 
-            # construct model and admin script
-            model_script = f'{head_script}{fields_script}{footer_script}\n\n'
-            admin_script = self.__create_admin_script(autocomplete_fields)
+        # construct model and admin script
+        model_script = f'{head_script}{fields_script}{footer_script}\n\n'
+        admin_script = self.__create_admin_script(autocomplete_fields)
+        return model_script, admin_script
 
-            return model_script, admin_script
-
-        # generate admin script
-        def __create_admin_script(self, autocomplete_fields):
-            name = self.name.capitalize()
-            if autocomplete_fields != '':
-                admin_script = f'''
+    # generate admin script
+    def __create_admin_script(self, autocomplete_fields):
+        name = self.name.capitalize()
+        if autocomplete_fields == '':
+            admin_script = f'''
+admin.site.register({name})
+'''
+        else:
+            admin_script = f'''
 @admin.register({name})
 class {name}Admin(admin.ModelAdmin):
     autocomplete_fields = [{autocomplete_fields}]
-    '''
-            else:
-                admin_script = f'''
-admin.site.register({name})
-    '''
-            return admin_script
+'''
+        return admin_script
 
-        # generate model field script
-        def __create_model_field_script(self, component):
-            script = ''
-            field = component.content_object.__dict__
-            component_type = component.content_type.__dict__['model']
-            if component_type == 'characterfield':
-                script = self.__create_char_field_script(field)
-            elif component_type == 'numberfield':
-                script = self.__create_number_field_script(field)
-            elif component_type == 'dtfield':
-                script = self.__create_datetime_field_script(field)
-            elif component_type == 'relatedfield':
-                field['foreign_key'] = component.content_object.related_content.related_content
-                script = self.__create_related_field_script(field)
-            return script
+    # generate model field script
+    def __create_model_field_script(self, component):
+        script = ''
+        field = component.content_object.__dict__
+        component_type = component.content_type.__dict__['model']
+        if component_type == 'characterfield':
+            script = self.__create_char_field_script(field)
+        elif component_type == 'numberfield':
+            script = self.__create_number_field_script(field)
+        elif component_type == 'dtfield':
+            script = self.__create_datetime_field_script(field)
+        elif component_type == 'relatedfield':
+            field['foreign_key'] = component.content_object.related_content.related_content
+            script = self.__create_related_field_script(field)
+        return script
 
-        # generate model footer script
-        def __create_model_footer_script(self):
-            return f'''
-        class Meta:
-            verbose_name = '{self.label}'
-            verbose_name_plural = verbose_name
+    # 生成字符型字段定义脚本
+    def __create_char_field_script(self, field):
+        if field['type'] == 'CharField':
+            f_type = 'CharField'
+        else:
+            f_type = 'TextField'
 
-        def get_absolute_url(self):
-            return reverse('{self.name}_detail_url', kwargs={{'slug': self.slug}})
-
-        def get_update_url(self):
-            return reverse('{self.name}_update_url', kwargs={{'slug': self.slug}})
-            '''
-
-        # 生成字符型字段定义脚本
-        def __create_char_field_script(self, field):
-            if field['type'] == 'CharField':
-                f_type = 'CharField'
-            else:
-                f_type = 'TextField'
-
-            if field['required']:
-                f_required = ''
-            else:
-                f_required = 'null=True, blank=True, '
+        if field['required']:
+            f_required = ''
+        else:
             f_required = 'null=True, blank=True, '
+        f_required = 'null=True, blank=True, '
 
-            if field['default']:
-                f_default = f'default="{field["default"]}", '
-            else:
-                f_default = ''
-
-            return f'''
-        {field['name']} = models.{f_type}(max_length={field['length']}, {f_default}{f_required}verbose_name='{field['label']}')'''
-
-        # 生成数字型字段定义脚本
-        def __create_number_field_script(self, field):
-            if field['type'] == 'IntegerField':
-                f_type = 'IntegerField'
-                f_dicimal = ''
-            elif field['type'] == 'DecimalField':
-                f_type = 'DecimalField'
-                f_dicimal = f'max_digits={field["max_digits"]}, decimal_places={field["decimal_places"]}, '
-            else:
-                f_type = 'FloatField'
-                f_dicimal = ''
-            
-            if field['standard_value']:
-                f_standard_value = f'default={field["standard_value"]}, '
-            else:
-                f_standard_value = ''
-            if field['up_limit']:
-                f_up_limit = f'default={field["up_limit"]}, '
-            else:
-                f_up_limit = ''
-            if field['down_limit']:
-                f_down_limit = f'default={field["down_limit"]}, '
-            else:
-                f_down_limit = ''
-
-            if field['default']:
-                f_default = f'default={field["default"]}, '
-            else:
-                f_default = ''
-
-            if field['required']:
-                f_required = 'null=True, '
-            else:
-                f_required = 'null=True, blank=True, '
-            f_required = 'null=True, blank=True, '
-
-            return f'''
-        {field['name']} = models.{f_type}({f_dicimal}{f_default}{f_required}verbose_name='{field['label']}')
-        {field['name']}_standard_value = models.{f_type}({f_dicimal}{f_standard_value}{f_required}verbose_name='{field['label']}标准值')
-        {field['name']}_up_limit = models.{f_type}({f_dicimal}{f_up_limit}{f_required}verbose_name='{field['label']}上限')
-        {field['name']}_down_limit = models.{f_type}({f_dicimal}{f_down_limit}{f_required}verbose_name='{field['label']}下限')'''
-        
-        # 生成日期型字段定义脚本
-        def __create_datetime_field_script(self, field):
+        if field['default']:
+            f_default = f'default="{field["default"]}", '
+        else:
             f_default = ''
-            if field['type'] == 'DateTimeField':
-                f_type = 'DateTimeField'
-                if field['default_now']: f_default = 'default=timezone.now(), '
+
+        return f'''
+    {field['name']} = models.{f_type}(max_length={field['length']}, {f_default}{f_required}verbose_name='{field['label']}')'''
+
+    # 生成数字型字段定义脚本
+    def __create_number_field_script(self, field):
+        if field['type'] == 'IntegerField':
+            f_type = 'IntegerField'
+            f_dicimal = ''
+        elif field['type'] == 'DecimalField':
+            f_type = 'DecimalField'
+            f_dicimal = f'max_digits={field["max_digits"]}, decimal_places={field["decimal_places"]}, '
+        else:
+            f_type = 'FloatField'
+            f_dicimal = ''
+        
+        if field['standard_value']:
+            f_standard_value = f'default={field["standard_value"]}, '
+        else:
+            f_standard_value = ''
+        if field['up_limit']:
+            f_up_limit = f'default={field["up_limit"]}, '
+        else:
+            f_up_limit = ''
+        if field['down_limit']:
+            f_down_limit = f'default={field["down_limit"]}, '
+        else:
+            f_down_limit = ''
+
+        if field['default']:
+            f_default = f'default={field["default"]}, '
+        else:
+            f_default = ''
+
+        if field['required']:
+            f_required = 'null=True, '
+        else:
+            f_required = 'null=True, blank=True, '
+        f_required = 'null=True, blank=True, '
+
+        return f'''
+    {field['name']} = models.{f_type}({f_dicimal}{f_default}{f_required}verbose_name='{field['label']}')
+    {field['name']}_standard_value = models.{f_type}({f_dicimal}{f_standard_value}{f_required}verbose_name='{field['label']}标准值')
+    {field['name']}_up_limit = models.{f_type}({f_dicimal}{f_up_limit}{f_required}verbose_name='{field['label']}上限')
+    {field['name']}_down_limit = models.{f_type}({f_dicimal}{f_down_limit}{f_required}verbose_name='{field['label']}下限')'''
+
+    # 生成日期型字段定义脚本
+    def __create_datetime_field_script(self, field):
+        f_default = ''
+        if field['type'] == 'DateTimeField':
+            f_type = 'DateTimeField'
+            if field['default_now']: f_default = 'default=timezone.now(), '
+        else:
+            f_type = 'DateField'
+            if field['default_now']: f_default = 'default=date.today(), '
+        
+        if field['required']:
+            f_required = 'null=True, '
+        else:
+            f_required = 'null=True, blank=True, '
+
+        return f'''
+    {field['name']} = models.{f_type}({f_default}{f_required}verbose_name='{field['label']}')'''
+
+    # 生成关联型字段定义脚本
+    def __create_related_field_script(self, field):
+        if field['type'] in ['Select', 'RadioSelect']:
+            if field['type'] == 'Select':
+                f_type = 'Select'
             else:
-                f_type = 'DateField'
-                if field['default_now']: f_default = 'default=date.today(), '
-            
-            if field['required']:
-                f_required = 'null=True, '
-            else:
-                f_required = 'null=True, blank=True, '
+                f_type = 'RadioSelect'
+            f_required = 'null=True, blank=True, '
 
             return f'''
-        {field['name']} = models.{f_type}({f_default}{f_required}verbose_name='{field['label']}')'''
+    {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, {f_required}verbose_name='{field['label']}')'''
 
-        # 生成关联型字段定义脚本
-        def __create_related_field_script(self, field):
-            if field['type'] in ['Select', 'RadioSelect']:
-                if field['type'] == 'Select':
-                    f_type = 'Select'
-                else:
-                    f_type = 'RadioSelect'
-                f_required = 'null=True, blank=True, '
+        elif field['type'] in ['SelectMultiple', 'CheckboxSelectMultiple']:
+            if field['type'] == 'SelectMultiple':
+                f_type = 'SelectMultiple'
+            else:
+                f_type = 'CheckboxSelectMultiple'
 
-                return f'''
-        {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, {f_required}verbose_name='{field['label']}')'''
+            return f'''
+    {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', verbose_name='{field['label']}')'''
 
-            elif field['type'] in ['SelectMultiple', 'CheckboxSelectMultiple']:
-                if field['type'] == 'SelectMultiple':
-                    f_type = 'SelectMultiple'
-                else:
-                    f_type = 'CheckboxSelectMultiple'
-
-                return f'''
-        {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', verbose_name='{field['label']}')'''
-
-    class __CreateFormScript:
-        def __init__(self, form):
-            self.name = form.name.capitalize()
-            self.label = form.label
-            self.components = form.components.all()
-
-        def create_script(self):
-            fields = ''
-            widgets = ''
-            for component in self.components:
-                field_name = component.content_object.name
-                # get fields
-                fields = f'{fields}\'{field_name}\', '
-
-                # get widgets
-                if component.content_type.__dict__['model']=='relatedfield':
-                    field_type = component.content_object.type
-                    if field_type == 'Select':
-                        self.type = 'Select'
-                    elif field_type == 'RadioSelect':
-                        self.type = 'RadioSelect'
-                    elif field_type == 'CheckboxSelectMultiple':
-                        self.type = 'CheckboxSelectMultiple'
-                    else:
-                        self.type = 'SelectMultiple'
-                    widgets = f'{widgets}\'{field_name}\': {self.type}, '
-
-            if widgets != '':
-                widgets = f'widgets = {{{widgets}}}'
-
-            # construct form script
-            head_script = f'''
-class {self.name}_ModelForm(ModelForm):'''
-
-            body_script = f'''
+    # generate model footer script
+    def __create_model_footer_script(self):
+        return f'''
     class Meta:
-        model = {self.name}
+        verbose_name = '{self.label}'
+        verbose_name_plural = verbose_name
+
+    def get_absolute_url(self):
+        return reverse('{self.name}_detail_url', kwargs={{'slug': self.slug}})
+
+    def get_update_url(self):
+        return reverse('{self.name}_update_url', kwargs={{'slug': self.slug}})
+        '''
+
+    def __create_form_script(self):
+        fields = ''
+        widgets = ''
+
+        for component in self.components.all():
+            field_name = component.content_object.name
+            # get fields
+            if field_name:
+                fields = f'{fields}\'{field_name}\', '
+            # get widgets
+            if component.content_type.__dict__['model']=='relatedfield':
+                field_type = component.content_object.type
+                if field_type == 'Select':
+                    type = 'Select'
+                elif field_type == 'RadioSelect':
+                    type = 'RadioSelect'
+                elif field_type == 'CheckboxSelectMultiple':
+                    type = 'CheckboxSelectMultiple'
+                else:
+                    type = 'SelectMultiple'
+                widgets = f'{widgets}\'{field_name}\': {type}, '
+        if widgets != '':
+            widgets = f'widgets = {{{widgets}}}'
+
+        # construct form script
+        return f'''
+class {self.name.capitalize()}_ModelForm(ModelForm):
+    class Meta:
+        model = {self.name.capitalize()}
         fields = [{fields}]
         {widgets}
-            '''
-            return f'{head_script}{body_script}'
+    '''
 
 # 重新生成字段的meta_data
 @receiver(m2m_changed, sender=BuessinessForm.components.through)
@@ -447,7 +428,6 @@ class Service(HsscPymBase):
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
 
         # 生成views, template, urls 脚本
-        print(self)
         if self.first_operation.buessiness_form:
             self.script = json.dumps(self.generate_script(), ensure_ascii=False)
 
