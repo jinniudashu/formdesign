@@ -31,6 +31,7 @@ Backup_models = [
     BuessinessForm,
     FormEntityShip,
     Operation,
+    BuessinessFormsSetting,
     EventRule,
     EventExpression,
     IntervalRule,
