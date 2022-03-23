@@ -419,6 +419,21 @@
             "icpc2": null,
             "note": null,
             "pym": "yszc"
+        },
+        {
+            "id": 1,
+            "icpc_code": "Z6261",
+            "icode": "Z62",
+            "iname": "家庭医生签约",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "jtysqy"
         }
     ],
     "icpc2_reservation_investigations": [
@@ -755,7 +770,7 @@
         {
             "id": 4,
             "icpc_code": "A6219",
-            "icode": null,
+            "icode": "A62",
             "iname": "糖尿病专用问诊",
             "iename": null,
             "include": null,
@@ -766,6 +781,21 @@
             "icpc2": null,
             "note": null,
             "pym": "tnbzywz"
+        },
+        {
+            "id": 5,
+            "icpc_code": "A6220",
+            "icode": "A62",
+            "iname": "院外随访评估",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "ywsfpg"
         }
     ],
     "icpc3_symptoms_and_problems": [

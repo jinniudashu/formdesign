@@ -11,7 +11,7 @@ from hsscbase_class import HsscBase, HsscPymBase
 from define_icpc.models import Icpc
 
 
-class HsscFieldBase(HsscBase):
+class HsscFieldBase(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
 
     class Meta:
@@ -250,7 +250,7 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
 
 
 # 角色表
-class Role(HsscBase):
+class Role(HsscPymBase):
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="角色描述")
 
     def save(self, *args, **kwargs):

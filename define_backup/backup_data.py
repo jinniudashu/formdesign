@@ -34,7 +34,6 @@ Backup_models = [
     EventRule,
     EventExpression,
     IntervalRule,
-    FrequencyRule,
     Service,
     OperationsSetting,
     ServicePackage,

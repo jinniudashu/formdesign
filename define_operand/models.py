@@ -10,7 +10,7 @@ from pypinyin import lazy_pinyin
 from hsscbase_class import HsscBase, HsscPymBase
 from define.models import ManagedEntity, Component, ComponentsGroup, Role
 from define_icpc.models import Icpc
-from define_rule_dict.models import EventRule, FrequencyRule, IntervalRule
+from define_rule_dict.models import EventRule, IntervalRule
 from .utils import keyword_search
 
 
@@ -347,7 +347,7 @@ class SystemOperand(HsscBase):
 # 作业基础信息表
 class Operation(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
-    buessiness_form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, null=True, blank=True, verbose_name="作业表单")
+    buessiness_forms = models.ManyToManyField(BuessinessForm, through='BuessinessFormsSetting', verbose_name="作业表单")
     execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='执行时限')
     awaiting_time_frame = models.DurationField(blank=True, null=True, verbose_name='等待执行时限')
     Operation_priority = [
@@ -384,6 +384,20 @@ class Operation(HsscPymBase):
         ordering = ['id']
 
 
+class BuessinessFormsSetting(HsscBase):
+    operation = models.ForeignKey(Operation, on_delete=models.CASCADE, verbose_name="作业")
+    buessiness_form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="表单")
+    is_list = models.BooleanField(default=False, verbose_name="列表样式")
+
+    def __str__(self):
+        return str(self.buessiness_form)
+
+    class Meta:
+        verbose_name = '作业表单设置'
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
+
 # # 单元服务类型信息表
 class Service(HsscPymBase):
     name = models.CharField(max_length=255, unique=True, verbose_name="name")
@@ -391,8 +405,9 @@ class Service(HsscPymBase):
     label = models.CharField(max_length=255, verbose_name="名称")
     first_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='first_operation', null=True, verbose_name="起始作业")
     last_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='last_operation', blank=True, null=True, verbose_name="结束作业")
+    # operations = models.ManyToManyField(Operation, through='OperationsSetting', verbose_name="包含作业")
     managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, null=True, verbose_name="管理实体")
-    Begin_time_setting = [(0, '默认当前时间'), (1, '人工指定时间'), (2, '引用出生日期')]
+    Begin_time_setting = [(0, '人工指定时间'), (1, '引用出生日期')]
     begin_time_setting = models.PositiveSmallIntegerField(choices=Begin_time_setting, default=0, verbose_name='开始时间设置')
     execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='执行时限')
     awaiting_time_frame = models.DurationField(blank=True, null=True, verbose_name='等待执行时限')
@@ -428,8 +443,8 @@ class Service(HsscPymBase):
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
 
         # 生成views, template, urls 脚本
-        if self.first_operation.buessiness_form:
-            self.script = json.dumps(self.generate_script(), ensure_ascii=False)
+        # if self.first_operation.buessiness_form:
+        #     self.script = json.dumps(self.generate_script(), ensure_ascii=False)
 
         super().save(*args, **kwargs)
     
@@ -449,9 +464,9 @@ class Service(HsscPymBase):
         def __init__(self, operation, base_form_name):
             self.operand_name = operation.name
             self.operand_label = operation.label
-            form_meta_data = json.loads(operation.buessiness_form.meta_data)
+            # form_meta_data = json.loads(operation.buessiness_form.meta_data)
 
-            self.model_class_name = operation.buessiness_form.name.capitalize()
+            self.model_class_name = operation.buessiness_forms.all().first().name.capitalize()
             self.create_view_name = f'{self.model_class_name}_CreateView'
             self.update_view_name = f'{self.model_class_name}_UpdateView'
             self.edit_template_name = f'{self.operand_name}_edit.html'
@@ -605,6 +620,8 @@ class ServicePackage(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     first_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='first_service', null=True, verbose_name="起始服务")
     last_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='last_service', blank=True, null=True, verbose_name="结束服务")
+    Begin_time_setting = [(0, '人工指定时间'), (1, '引用出生日期')]
+    begin_time_setting = models.PositiveSmallIntegerField(choices=Begin_time_setting, default=0, verbose_name='开始时间设置')
     duration = models.DurationField(blank=True, null=True, verbose_name="持续周期", help_text='例如：3 days, 22:00:00')
     execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='执行时限')
     awaiting_time_frame = models.DurationField(blank=True, null=True, verbose_name='等待执行时限')
@@ -626,7 +643,9 @@ class ServicePackage(HsscPymBase):
 class ServicesSetting(HsscBase):
     servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, verbose_name='服务包')
     service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='单元服务')
-    frequency_rule = models.ForeignKey(FrequencyRule, on_delete=models.CASCADE, null=True, verbose_name='频度')
+    Cycle_options = [(0, '总共'), (1, '每天'), (2, '每周'), (3, '每月'), (4, '每季'), (5, '每年')]
+    cycle_option = models.PositiveSmallIntegerField(choices=Cycle_options, default=0, blank=True, null=True, verbose_name='周期')
+    cycle_times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="次数")
     duration = models.DurationField(blank=True, null=True, verbose_name="持续周期", help_text='例如：3 days, 22:00:00')
     event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE,  blank=True, null=True, verbose_name='条件事件')
     system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, limit_choices_to=Q(applicable__in = [1, 3]), blank=True, null=True, verbose_name='系统作业')
@@ -637,9 +656,8 @@ class ServicesSetting(HsscBase):
     Reminders = [(0, '客户'), (1, '服务人员'), (2, '服务小组')]
     reminders = models.PositiveSmallIntegerField(choices=Reminders, default=0,  blank=True, null=True, verbose_name='提醒对象')
     message_content = models.CharField(max_length=255, blank=True, null=True, verbose_name='消息内容')
-    check_awaiting_timeout = models.BooleanField(default=False, verbose_name='检查等待超时')
-    check_execution_timeout = models.BooleanField(default=False, verbose_name='检查执行超时')
     interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="服务时间间隔")
+    check_awaiting_timeout = models.BooleanField(default=False, verbose_name='检查等待超时')
 
     def __str__(self):
         return str(self.servicepackage) + '--' + str(self.service)

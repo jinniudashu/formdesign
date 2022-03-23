@@ -73,7 +73,7 @@ class HsscBackupManager(models.Manager):
 
             # 遍历模型多对多字段，用hssc_id或icpc_code获取对象
             for field in self.model._meta.many_to_many:
-                if item_dict[field.name]:  # 如果字段不为空，进行检查替换
+                if item_dict.get(field.name):  # 如果字段不为空，进行检查替换
                     objects = []
                     # 如果是ICPC外键，用icpc_code获取对象，否则用hssc_id获取对象
                     if field.name in ['name_icpc', 'icpc']:

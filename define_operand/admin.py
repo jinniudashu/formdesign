@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BuessinessForm, Operation, Service, OperationsSetting, ServicePackage, ServicesSetting, SystemOperand
+from .models import BuessinessForm, Operation, BuessinessFormsSetting, Service, OperationsSetting, ServicePackage, ServicesSetting, SystemOperand
 
 
 class FormEntityShipInline(admin.TabularInline):
@@ -22,13 +22,18 @@ class BuessinessFormAdmin(admin.ModelAdmin):
     autocomplete_fields = ['name_icpc',]
 
 
+class BuessinessFormsSettingInline(admin.TabularInline):
+    model = BuessinessFormsSetting
+    exclude = ['name', 'label', 'hssc_id']
+
+
 @admin.register(Operation)
 class OperationAdmin(admin.ModelAdmin):
     list_display = ['name_icpc', 'label', 'name', 'id']
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('label', 'name_icpc'), ('buessiness_form', 'priority' ), 'group', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
+            'fields': (('label', 'name_icpc'), ('group', 'priority'), ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
         }),
         ('作业管理', {
             'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
@@ -40,6 +45,7 @@ class OperationAdmin(admin.ModelAdmin):
     search_fields=['label', 'pym']
     ordering = ['id']
     readonly_fields = ['group', 'name', 'hssc_id']
+    inlines = [BuessinessFormsSettingInline]
     autocomplete_fields = ["name_icpc", ]
 
 
@@ -84,7 +90,7 @@ class ServicePackageAdmin(admin.ModelAdmin):
     list_display_links = ['label', ]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), ('first_service', 'last_service'), 'duration', ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
+            'fields': (('label', 'name_icpc'), ('first_service', 'last_service'), ('begin_time_setting', 'duration', 'awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
         }),
     )
     search_fields=['label', 'pym']

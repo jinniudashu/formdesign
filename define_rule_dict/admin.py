@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import EventRule, EventExpression, FrequencyRule, IntervalRule
+from .models import EventRule, EventExpression, IntervalRule
 
 
 class EventExpressionInline(admin.TabularInline):
@@ -27,14 +27,6 @@ class EventRuleAdmin(admin.ModelAdmin):
 # @admin.register(EventExpression)
 # class EventExpressionAdmin(admin.ModelAdmin):
 #     autocomplete_fields = ['field']
-
-
-@admin.register(FrequencyRule)
-class FrequencyRuleAdmin(admin.ModelAdmin):
-    list_display = ('label', 'cycle_option', 'times', 'id')
-    list_display_links = ['label', 'cycle_option', 'times']
-    readonly_fields = ['name', 'hssc_id']
-    ordering = ('id',)
 
 
 @admin.register(IntervalRule)

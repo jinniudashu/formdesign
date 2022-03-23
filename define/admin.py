@@ -39,6 +39,7 @@ class ComponentAdmin(admin.ModelAdmin):
 @admin.register(ComponentsGroup)
 class ComponentsGroupAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'hssc_id']
+    search_fields=['label', 'pym']
 
 # @admin.register(DicDetail)
 # class DicDetailAdmin(admin.ModelAdmin):
@@ -66,7 +67,7 @@ class ManagedEntityAdmin(admin.ModelAdmin):
 class RoleAdmin(admin.ModelAdmin):
     list_display = ['label', 'id']
     list_display_links = ['label', ]
-    search_fields = ['label']
+    search_fields = ['label', 'pym']
     readonly_fields = ['name', 'hssc_id']
     ordering = ['id']
 

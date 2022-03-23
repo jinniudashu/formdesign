@@ -89,23 +89,6 @@ class EventExpression(HsscBase):
         ordering = ['id']
 
 
-# 频度规则表
-class FrequencyRule(HsscBase):
-    Cycle_options = [(0, '总共'), (1, '每天'), (2, '每周'), (3, '每月'), (4, '每季'), (5, '每年')]
-    cycle_option = models.PositiveSmallIntegerField(choices=Cycle_options, default=0, blank=True, null=True, verbose_name='周期')
-    times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="次数")
-
-    def save(self, *args, **kwargs):
-        if self.name is None or self.name == '':
-            self.name = f'{"_".join(lazy_pinyin(self.label))}'
-        super().save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = "频度规则"
-        verbose_name_plural = verbose_name
-        ordering = ['id']
-
-
 # 间隔规则表
 class IntervalRule(HsscBase):
     Interval_rule_options = [(0, '等于'), (1, '小于'), (2, '大于')]
