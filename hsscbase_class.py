@@ -5,8 +5,6 @@ import uuid
 import re
 from pypinyin import Style, lazy_pinyin
 
-from define_backup.export_script_manager import ExportDictManager
-
 # 自定义管理器：设计数据备份、恢复
 class HsscBackupManager(models.Manager):
     def backup_data(self):
@@ -97,7 +95,6 @@ class HsscBase(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name="name")
     hssc_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="hsscID")
     objects = HsscBackupManager()
-    export_dict = ExportDictManager()
 
     class Meta:
         abstract = True

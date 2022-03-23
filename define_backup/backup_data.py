@@ -1,3 +1,4 @@
+from django.forms.models import model_to_dict
 from time import time
 import json
 
@@ -76,8 +77,8 @@ def generate_source_code(modeladmin, request, queryset):
     source_code = {}
     
     # 导出字典表models.py, admin.py脚本
-    source_code['dict_models'], source_code['dict_admin'] = DicList.export_dict.models_admin_script()
-    source_code['dict_data'] = DicDetail.export_dict.dict_data()
+    source_code['dict_models'], source_code['dict_admin'] = export_dict_models_admin()
+    source_code['dict_data'] = export_dict_data()
     
     # 导出ICPC表models.py, admin.py脚本???
     # source_code['icpc_models'], source_code['icpc_admin'] = IcpcList.export_icpc.models_admin_script()
@@ -129,6 +130,46 @@ def generate_source_code(modeladmin, request, queryset):
 generate_source_code.short_description = '生成作业脚本'
 
 
+# 导出字典models.py, admin.py脚本
+def export_dict_models_admin():
+    models_script = dict_models_head
+    admin_script = dict_admin_head
+
+    for dict in DicList.objects.all():
+        name = dict.name.capitalize()
+
+        # 生成model脚本
+        _model_script = f'''
+class {name}(DictBase):
+class Meta:
+verbose_name = '{dict.label}'
+verbose_name_plural = verbose_name'''
+        models_script = f'{models_script}\n\n{_model_script}'
+
+        # 生成admin脚本
+        _admin_script = f'''
+@admin.register({name})
+class {name}Admin(admin.ModelAdmin):{dict_admin_content}'''
+        admin_script = f'{admin_script}\n{_admin_script}'
+
+    return models_script, admin_script
+
+
+# 导出字典Json数据
+def export_dict_data():
+    dict_data = []  # 字典明细数据
+    for item in DicDetail.objects.all():
+        item_dict = model_to_dict(item)
+        # 构造字典明细数据
+        item_dict['id'] = None
+        if item_dict['icpc']:
+            item_dict['icpc'] = item.icpc.icpc_code
+        item_dict['diclist'] = item.diclist.hssc_id
+        dict_data.append(item_dict)
+
+    return dict_data
+
+
 # 把备份数据写入备份数据库
 def write_to_db(model, data):
     s = model.objects.create(
@@ -136,4 +177,3 @@ def write_to_db(model, data):
         code = json.dumps(data, indent=4, ensure_ascii=False),
     )
     return s.id
-
