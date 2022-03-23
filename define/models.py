@@ -30,18 +30,6 @@ class HsscFieldBase(HsscPymBase):
 # 业务字段类型定义
 ###############################################################################
 
-# 布尔字段
-class BoolField(HsscFieldBase):
-    CHOICES_TYPE = [('0', '是, 否'), ('1', '未知, 是, 否')]
-    type = models.CharField(max_length=100, choices=CHOICES_TYPE , default='1', verbose_name="可选值")
-    required = models.BooleanField(default=False, verbose_name="必填")
-    DEFAULT_VALUE = [('0', '未知'), ('1', '是'), ('2', '否')]
-    default = models.CharField(max_length=10, choices=DEFAULT_VALUE, default='0', null=True, blank=True, verbose_name="默认值")
-
-    class Meta:
-        verbose_name = "是否字段"
-        verbose_name_plural = "是否字段"
-
 # 字符字段
 class CharacterField(HsscFieldBase):
     CHAR_TYPE = [('CharField', '单行文本'), ('TextField', '多行文本')]
@@ -116,13 +104,10 @@ class RelatedField(HsscFieldBase):
 # 字段列表
 class Component(HsscPymBase):
     q  = Q(app_label='define') & (
-        Q(model = 'boolfield') | 
         Q(model = 'characterfield') | 
         Q(model = 'numberfield') | 
         Q(model = 'dtfield') | 
-        Q(model = 'choicefield') | 
-        Q(model = 'relatedfield') | 
-        Q(model = 'computefield')
+        Q(model = 'relatedfield')
     )
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, limit_choices_to=q , null=True, blank=True)
     object_id = models.PositiveIntegerField(null=True, blank=True)
@@ -148,7 +133,6 @@ class ComponentsGroup(HsscPymBase):
 
 
 # 如果保存字段表，则更新Component表
-@receiver(post_save, sender=BoolField, weak=True, dispatch_uid=None)
 @receiver(post_save, sender=CharacterField, weak=True, dispatch_uid=None)
 @receiver(post_save, sender=NumberField, weak=True, dispatch_uid=None)
 @receiver(post_save, sender=DTField, weak=True, dispatch_uid=None)
@@ -178,7 +162,6 @@ def fields_post_save_handler(sender, instance, created, **kwargs):
             object_id = instance.id,
         )
 
-@receiver(post_delete, sender=BoolField, weak=True, dispatch_uid=None)
 @receiver(post_delete, sender=CharacterField, weak=True, dispatch_uid=None)
 @receiver(post_delete, sender=NumberField, weak=True, dispatch_uid=None)
 @receiver(post_delete, sender=DTField, weak=True, dispatch_uid=None)

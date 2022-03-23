@@ -2,11 +2,6 @@ from django.contrib import admin
 
 from define.models import *
 
-@admin.register(BoolField)
-class BoolFieldAdmin(admin.ModelAdmin):
-    readonly_fields = ['name', 'hssc_id']
-    autocomplete_fields = ['name_icpc']
-
 @admin.register(CharacterField)
 class CharacterFieldAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'hssc_id']

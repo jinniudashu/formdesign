@@ -72,8 +72,6 @@ class BuessinessForm(HsscPymBase):
             _type = component.content_object._meta.object_name
             if _type == 'CharacterField':
                 field['type'] = 'string'
-            elif _type == 'BoolField':
-                field['type'] = 'boolean'
             elif _type == 'NumberField':
                 field['type'] = 'number'
             elif _type == 'DTField':

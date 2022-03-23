@@ -22,7 +22,6 @@ Backup_models = [
     IcpcList,
     DicList, 
     DicDetail,
-    BoolField,
     CharacterField,
     NumberField,
     DTField,
