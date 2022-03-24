@@ -24,7 +24,9 @@ class IcpcBackupManager(models.Manager):
     def backup_data(self):
         icpc_data = []
         for item in self.all():
-            icpc_data.append(model_to_dict(item))
+            item_dict = model_to_dict(item)
+            item_dict.pop('id')  # 删除id字段
+            icpc_data.append(item_dict)
         return icpc_data
 
     def restore_data(self, data):

@@ -41,7 +41,7 @@ class HsscBackupManager(models.Manager):
                             ids.append(_object.hssc_id)
                     item_dict[field.name] = ids
 
-            item_dict['id'] = None
+            item_dict.pop('id')  # 删除id字段
             backup_data.append(item_dict)
         return backup_data
 
