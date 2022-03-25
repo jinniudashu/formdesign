@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BuessinessForm, Operation, BuessinessFormsSetting, Service, OperationsSetting, ServicePackage, ServicesSetting, SystemOperand
+from .models import BuessinessForm, Operation, BuessinessFormsSetting, Service, OperationsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceProgramSetting, SystemOperand
 
 
 class FormEntityShipInline(admin.TabularInline):
@@ -13,7 +13,7 @@ class BuessinessFormAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), ('components', 'components_groups'), 'description', 'meta_data', ('name', 'hssc_id'))
+            'fields': (('label', 'name_icpc'), ('components', 'components_groups'), 'description', ('name', 'hssc_id'), )
         }),
     )
     search_fields = ['name', 'label']
@@ -79,10 +79,10 @@ class ServiceAdmin(admin.ModelAdmin):
     autocomplete_fields = ['name_icpc', ]
 
 
-class ServicesSettingInline(admin.TabularInline):
-    model = ServicesSetting
-    exclude = ['name', 'label', 'hssc_id']
-    autocomplete_fields = ['service', 'next_service', 'event_rule']
+class ServicePackageDetailInline(admin.TabularInline):
+    model = ServicePackageDetail
+    exclude = ['name', 'label', 'hssc_id', 'pym']
+    autocomplete_fields = ['service']
 
 @admin.register(ServicePackage)
 class ServicePackageAdmin(admin.ModelAdmin):
@@ -90,12 +90,26 @@ class ServicePackageAdmin(admin.ModelAdmin):
     list_display_links = ['label', ]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), ('first_service', 'last_service'), ('begin_time_setting', 'duration', 'awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
+            'fields': (('label', 'name_icpc'), ('begin_time_setting', 'duration', 'awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
         }),
     )
     search_fields=['label', 'pym']
     readonly_fields = ['name', 'hssc_id']
-    inlines = [ServicesSettingInline]
+    inlines = [ServicePackageDetailInline]
+    ordering = ['id']
+
+
+class ServiceProgramSettingInline(admin.TabularInline):
+    model = ServiceProgramSetting
+    exclude = ['name', 'label', 'hssc_id', 'pym']
+    autocomplete_fields = ['service', 'next_service']
+
+@admin.register(ServiceSpec)
+class ServiceSpecAdmin(admin.ModelAdmin):
+    list_display = ['label', 'name', 'hssc_id']
+    list_display_links = ['label', 'name']
+    readonly_fields = ['name', 'hssc_id']
+    inlines = [ServiceProgramSettingInline]
     ordering = ['id']
 
 
@@ -130,3 +144,4 @@ class SystemOperandAdmin(admin.ModelAdmin):
 #     list_display_links = ['label', 'name', 'code', 'func']
 #     search_fields = ['name']
 #     ordering = ['id']
+

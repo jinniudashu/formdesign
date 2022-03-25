@@ -37,7 +37,7 @@ Backup_models = [
     Service,
     OperationsSetting,
     ServicePackage,
-    ServicesSetting,
+    ServiceProgramSetting,
 ]
 
 def design_backup(modeladmin, request, queryset):

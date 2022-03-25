@@ -4,7 +4,7 @@ from django.db.models.signals import post_save
 import uuid
 from pypinyin import lazy_pinyin
 
-from hsscbase_class import HsscBase
+from formdesign.hsscbase_class import HsscBase
 from define.models import Component
 
 

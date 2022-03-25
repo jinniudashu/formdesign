@@ -7,7 +7,7 @@ from django.db.models import Q
 import uuid
 from pypinyin import Style, lazy_pinyin
 
-from hsscbase_class import HsscBase, HsscPymBase
+from formdesign.hsscbase_class import HsscBase, HsscPymBase
 from define_icpc.models import Icpc
 
 
