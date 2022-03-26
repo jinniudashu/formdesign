@@ -4089,13 +4089,13 @@
             ]
         },
         {
-            "label": "院外随访评估",
+            "label": "监测评估",
             "name": "A6220",
             "hssc_id": "bbf2ba74-aa48-11ec-8f0c-ee7ade4bced6",
-            "pym": "ywsfpg",
+            "pym": "jcpg",
             "name_icpc": "A6220",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A6220\",\n    \"label\": \"院外随访评估\",\n    \"hssc_id\": \"bbf2ba74-aa48-11ec-8f0c-ee7ade4bced6\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_yuan_wai_jian_kang_ping_gu\",\n            \"label\": \"院外随访评估\",\n            \"hssc_id\": \"4bf17ad0-aa48-11ec-9f15-ee7ade4bced6\",\n            \"type\": \"Sui_fang_ping_gu\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "description": "",
+            "meta_data": "{\n    \"name\": \"A6220\",\n    \"label\": \"监测评估\",\n    \"hssc_id\": \"bbf2ba74-aa48-11ec-8f0c-ee7ade4bced6\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_yuan_wai_jian_kang_ping_gu\",\n            \"label\": \"院外随访评估\",\n            \"hssc_id\": \"4bf17ad0-aa48-11ec-9f15-ee7ade4bced6\",\n            \"type\": \"Sui_fang_ping_gu\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
             "script": "{\"models\": \"class A6220(HsscBuessinessFormBase):\\n    boolfield_yuan_wai_jian_kang_ping_gu = models.ForeignKey(Sui_fang_ping_gu, related_name='sui_fang_ping_gu_for_boolfield_yuan_wai_jian_kang_ping_gu_A6220', on_delete=models.CASCADE, null=True, blank=True, verbose_name='院外随访评估')\\n    class Meta:\\n        verbose_name = '院外随访评估'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6220_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6220_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\n@admin.register(A6220)\\nclass A6220Admin(admin.ModelAdmin):\\n    autocomplete_fields = [\\\"boolfield_yuan_wai_jian_kang_ping_gu\\\", ]\\n\", \"forms\": \"\\nclass A6220_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6220\\n        fields = ['boolfield_yuan_wai_jian_kang_ping_gu', ]\\n        widgets = {'boolfield_yuan_wai_jian_kang_ping_gu': Select, }\\n    \"}",
             "components": [
                 "4bf17ad0-aa48-11ec-9f15-ee7ade4bced6"
@@ -4977,11 +4977,11 @@
             ]
         },
         {
-            "label": "院外随访评估",
-            "name": "yuan_wai_sui_fang_ping_gu",
+            "label": "监测评估",
+            "name": "A6220",
             "hssc_id": "66859d9c-aa55-11ec-9f15-ee7ade4bced6",
-            "pym": "ywsfpg",
-            "name_icpc": null,
+            "pym": "jcpg",
+            "name_icpc": "A6220",
             "execution_time_frame": null,
             "awaiting_time_frame": null,
             "priority": 3,
@@ -5298,17 +5298,202 @@
             "detection_scope": 1,
             "weight": 1,
             "expression": "completed"
+        },
+        {
+            "label": "一型糖尿病诊断规则",
+            "name": "wen_zhen_fa_xian_tang_niao_bing_zheng_zhuang",
+            "hssc_id": "a922d698-abda-11ec-a639-1ac10aeebbc4",
+            "description": "糖尿病症状 == '烦渴，多尿，体重减轻'",
+            "detection_scope": 1,
+            "weight": 1,
+            "expression": "1cad2116-a52a-11ec-a478-2ec403f6c47b == '烦渴，多尿，体重减轻'"
+        },
+        {
+            "label": "二型糖尿病诊断规则",
+            "name": "fa_xian_er_lian_tang_niao_bing_zheng_zhuang_qie_xue_tang_chao_biao",
+            "hssc_id": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
+            "description": "糖尿病症状 == '烦渴，多尿' and 空腹血糖 >= 7.0 or 糖尿病症状 == '烦渴，皮肤感染' and 空腹血糖 >= 7.0 or 糖尿病症状 == '多尿，皮肤感染' and 空腹血糖 >= 7.0",
+            "detection_scope": 1,
+            "weight": 1,
+            "expression": "1cad2116-a52a-11ec-a478-2ec403f6c47b == '烦渴，多尿' and deb59434-9aa1-11ec-bde1-8a6e55faf877 >= 7.0 or 1cad2116-a52a-11ec-a478-2ec403f6c47b == '烦渴，皮肤感染' and deb59434-9aa1-11ec-bde1-8a6e55faf877 >= 7.0 or 1cad2116-a52a-11ec-a478-2ec403f6c47b == '多尿，皮肤感染' and deb59434-9aa1-11ec-bde1-8a6e55faf877 >= 7.0"
+        },
+        {
+            "label": "糖尿病酮中毒诊断规则",
+            "name": "tang_niao_bing_tong_zhong_du_zhen_duan_gui_ze",
+            "hssc_id": "711dadc4-abdd-11ec-a639-1ac10aeebbc4",
+            "description": "症状 == '昏睡，呕吐，腹痛，酮尿' and 疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病'",
+            "detection_scope": 0,
+            "weight": 1,
+            "expression": "deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '昏睡，呕吐，腹痛，酮尿' and ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病'"
+        },
+        {
+            "label": "高血糖诊断规则",
+            "name": "gao_xue_tang_zhen_duan_gui_ze",
+            "hssc_id": "35f1165a-abe2-11ec-bf5e-1ac10aeebbc4",
+            "description": "症状 == '疲乏' and 疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病'",
+            "detection_scope": 0,
+            "weight": 1,
+            "expression": "deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '疲乏' and ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病'"
+        },
+        {
+            "label": "糖尿病肾病诊断规则",
+            "name": "tang_niao_bing_shen_bing_zhen_duan_gui_ze",
+            "hssc_id": "6909de64-abe2-11ec-a639-1ac10aeebbc4",
+            "description": "疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病'",
+            "detection_scope": 0,
+            "weight": 1,
+            "expression": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病'"
+        },
+        {
+            "label": "糖尿病血管病变周围神经炎诊断规则",
+            "name": "tang_niao_bing_xue_guan_bing_bian_zhou_wei_shen_jing_yan_zhen_duan_gui_ze",
+            "hssc_id": "e3563d98-abe2-11ec-bf5e-1ac10aeebbc4",
+            "description": "疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and 症状 == '足痛'",
+            "detection_scope": 0,
+            "weight": 1,
+            "expression": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '足痛'"
         }
     ],
-    "eventexpression": [],
-    "intervalrule": [
+    "eventexpression": [
         {
-            "label": "大于3天",
-            "name": "da_yu_3_tian",
-            "hssc_id": "e3df3d1a-9bc9-11ec-a754-620d205b9455",
-            "rule": 2,
-            "interval": "3 days, 0:00:00",
-            "description": null
+            "label": null,
+            "name": null,
+            "hssc_id": "a9235528-abda-11ec-a639-1ac10aeebbc4",
+            "event_rule": "a922d698-abda-11ec-a639-1ac10aeebbc4",
+            "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
+            "operator": 0,
+            "value": "烦渴，多尿，体重减轻",
+            "connection_operator": 0
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "9dd91d40-abdc-11ec-bf5e-1ac10aeebbc4",
+            "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
+            "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
+            "operator": 0,
+            "value": "烦渴，多尿",
+            "connection_operator": 0
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "9dd95b2a-abdc-11ec-bf5e-1ac10aeebbc4",
+            "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
+            "field": "deb59434-9aa1-11ec-bde1-8a6e55faf877",
+            "operator": 4,
+            "value": "7.0",
+            "connection_operator": 1
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "9dd9862c-abdc-11ec-bf5e-1ac10aeebbc4",
+            "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
+            "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
+            "operator": 0,
+            "value": "烦渴，皮肤感染",
+            "connection_operator": 0
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "9dd9b1ec-abdc-11ec-bf5e-1ac10aeebbc4",
+            "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
+            "field": "deb59434-9aa1-11ec-bde1-8a6e55faf877",
+            "operator": 4,
+            "value": "7.0",
+            "connection_operator": 1
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "9dd9dc8a-abdc-11ec-bf5e-1ac10aeebbc4",
+            "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
+            "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
+            "operator": 0,
+            "value": "多尿，皮肤感染",
+            "connection_operator": 0
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "711df180-abdd-11ec-a639-1ac10aeebbc4",
+            "event_rule": "711dadc4-abdd-11ec-a639-1ac10aeebbc4",
+            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
+            "operator": 0,
+            "value": "昏睡，呕吐，腹痛，酮尿",
+            "connection_operator": 0
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "711e2a92-abdd-11ec-a639-1ac10aeebbc4",
+            "event_rule": "711dadc4-abdd-11ec-a639-1ac10aeebbc4",
+            "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
+            "operator": 6,
+            "value": "非胰岛素依赖糖尿病，胰岛素依赖糖尿病",
+            "connection_operator": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "35f14f9e-abe2-11ec-bf5e-1ac10aeebbc4",
+            "event_rule": "35f1165a-abe2-11ec-bf5e-1ac10aeebbc4",
+            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
+            "operator": 0,
+            "value": "疲乏",
+            "connection_operator": 0
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "35f18d9c-abe2-11ec-bf5e-1ac10aeebbc4",
+            "event_rule": "35f1165a-abe2-11ec-bf5e-1ac10aeebbc4",
+            "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
+            "operator": 6,
+            "value": "非胰岛素依赖糖尿病，胰岛素依赖糖尿病",
+            "connection_operator": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "690a2158-abe2-11ec-a639-1ac10aeebbc4",
+            "event_rule": "6909de64-abe2-11ec-a639-1ac10aeebbc4",
+            "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
+            "operator": 6,
+            "value": "非胰岛素依赖糖尿病，胰岛素依赖糖尿病",
+            "connection_operator": 0
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "e35677c2-abe2-11ec-bf5e-1ac10aeebbc4",
+            "event_rule": "e3563d98-abe2-11ec-bf5e-1ac10aeebbc4",
+            "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
+            "operator": 6,
+            "value": "非胰岛素依赖糖尿病，胰岛素依赖糖尿病",
+            "connection_operator": 0
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "e356ace2-abe2-11ec-bf5e-1ac10aeebbc4",
+            "event_rule": "e3563d98-abe2-11ec-bf5e-1ac10aeebbc4",
+            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
+            "operator": 0,
+            "value": "足痛",
+            "connection_operator": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "74f8d792-abe8-11ec-bf5e-1ac10aeebbc4",
+            "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
+            "field": "deb59434-9aa1-11ec-bde1-8a6e55faf877",
+            "operator": 4,
+            "value": "7.0",
+            "connection_operator": null
         }
     ],
     "service": [
@@ -5864,6 +6049,40 @@
             "group": [
                 "de18f0fc-9aa1-11ec-bde1-8a6e55faf877"
             ]
+        },
+        {
+            "hssc_id": "ca50d78a-abd9-11ec-a639-1ac10aeebbc4",
+            "pym": "jcpg",
+            "name": "A6220",
+            "name_icpc": "A6220",
+            "label": "监测评估",
+            "first_operation": "66859d9c-aa55-11ec-9f15-ee7ade4bced6",
+            "last_operation": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
+            "begin_time_setting": 0,
+            "execution_time_frame": null,
+            "awaiting_time_frame": null,
+            "priority": 3,
+            "history_services_display": 0,
+            "enable_recommanded_list": true,
+            "enable_queue_counter": true,
+            "suppliers": null,
+            "not_suitable": null,
+            "time_limits": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "script": null,
+            "group": [
+                "de18f0fc-9aa1-11ec-bde1-8a6e55faf877",
+                "de194c50-9aa1-11ec-bde1-8a6e55faf877",
+                "de19d6a2-9aa1-11ec-bde1-8a6e55faf877",
+                "de1b05cc-9aa1-11ec-bde1-8a6e55faf877"
+            ]
         }
     ],
     "operationssetting": [
@@ -5914,6 +6133,18 @@
             "next_operation": "e02ee856-9aa1-11ec-bde1-8a6e55faf877",
             "passing_data": 2,
             "interval_rule": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "ca52ea84-abd9-11ec-a639-1ac10aeebbc4",
+            "service": "ca50d78a-abd9-11ec-a639-1ac10aeebbc4",
+            "operation": "66859d9c-aa55-11ec-9f15-ee7ade4bced6",
+            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
+            "system_operand": null,
+            "next_operation": null,
+            "passing_data": 0,
+            "interval_rule": null
         }
     ],
     "servicepackage": [
@@ -5937,7 +6168,7 @@
             "pym": "tnbzqjcfw",
             "name_icpc": null,
             "first_service": "9cdf64c6-a416-11ec-bfc4-ee2fa480f37c",
-            "last_service": "9ce1e05c-a416-11ec-bfc4-ee2fa480f37c",
+            "last_service": "ca50d78a-abd9-11ec-a639-1ac10aeebbc4",
             "begin_time_setting": 0,
             "duration": "90 days, 0:00:00",
             "execution_time_frame": null,
@@ -5989,8 +6220,8 @@
             "hssc_id": "000085d4-aa58-11ec-9f15-ee7ade4bced6",
             "servicepackage": "bb88332a-aa57-11ec-8f0c-ee7ade4bced6",
             "service": "9cdf64c6-a416-11ec-bfc4-ee2fa480f37c",
-            "cycle_option": 0,
-            "cycle_times": 1,
+            "cycle_option": 1,
+            "cycle_times": 2,
             "duration": "30 days, 0:00:00",
             "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
             "system_operand": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
@@ -6008,13 +6239,13 @@
             "hssc_id": "6a1b1c4c-aa5b-11ec-9f15-ee7ade4bced6",
             "servicepackage": "bb88332a-aa57-11ec-8f0c-ee7ade4bced6",
             "service": "9cdf64c6-a416-11ec-bfc4-ee2fa480f37c",
-            "cycle_option": 0,
+            "cycle_option": 1,
             "cycle_times": 1,
             "duration": "60 days, 0:00:00",
-            "event_rule": null,
-            "system_operand": null,
-            "next_service": null,
-            "passing_data": 0,
+            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
+            "system_operand": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
+            "next_service": "ca50d78a-abd9-11ec-a639-1ac10aeebbc4",
+            "passing_data": 2,
             "complete_feedback": 0,
             "reminders": 0,
             "message_content": null,
@@ -6026,13 +6257,32 @@
             "name": null,
             "hssc_id": "6a1b5cde-aa5b-11ec-9f15-ee7ade4bced6",
             "servicepackage": "bb88332a-aa57-11ec-8f0c-ee7ade4bced6",
-            "service": "9ce1e05c-a416-11ec-bfc4-ee2fa480f37c",
+            "service": "ca50d78a-abd9-11ec-a639-1ac10aeebbc4",
             "cycle_option": 0,
             "cycle_times": 1,
             "duration": "90 days, 0:00:00",
             "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
-            "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
-            "next_service": "9ce05aca-a416-11ec-bfc4-ee2fa480f37c",
+            "system_operand": null,
+            "next_service": null,
+            "passing_data": 0,
+            "complete_feedback": 0,
+            "reminders": 0,
+            "message_content": null,
+            "interval_rule": null,
+            "check_awaiting_timeout": true
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "081b0c18-abe2-11ec-bf5e-1ac10aeebbc4",
+            "servicepackage": "bb88332a-aa57-11ec-8f0c-ee7ade4bced6",
+            "service": "9ce1e05c-a416-11ec-bfc4-ee2fa480f37c",
+            "cycle_option": 0,
+            "cycle_times": 1,
+            "duration": "0:01:30",
+            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
+            "system_operand": null,
+            "next_service": null,
             "passing_data": 0,
             "complete_feedback": 0,
             "reminders": 0,
@@ -6040,5 +6290,8 @@
             "interval_rule": null,
             "check_awaiting_timeout": false
         }
-    ]
+    ],
+    "servicepackagedetail": [],
+    "servicespec": [],
+    "serviceprogramsetting": []
 }

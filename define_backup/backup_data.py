@@ -33,10 +33,11 @@ Backup_models = [
     BuessinessFormsSetting,
     EventRule,
     EventExpression,
-    IntervalRule,
     Service,
     OperationsSetting,
     ServicePackage,
+    ServicePackageDetail,
+    ServiceSpec,
     ServiceProgramSetting,
 ]
 

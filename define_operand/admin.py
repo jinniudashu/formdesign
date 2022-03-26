@@ -1,6 +1,32 @@
 from django.contrib import admin
 
-from .models import BuessinessForm, Operation, BuessinessFormsSetting, Service, OperationsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceProgramSetting, SystemOperand
+from .models import BuessinessForm, Operation, BuessinessFormsSetting, Service, OperationsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceProgramSetting, SystemOperand, EventRule, EventExpression
+
+
+class EventExpressionInline(admin.TabularInline):
+    model = EventExpression
+    exclude = ['label', 'name', 'hssc_id']
+    autocomplete_fields = ['field']
+
+@admin.register(EventRule)
+class EventRuleAdmin(admin.ModelAdmin):
+    list_display = ('label', 'name', 'description', 'detection_scope', 'weight', 'id')
+    list_display_links = ['label', 'name', 'description']
+    search_fields=['label', 'name', 'pym']
+    readonly_fields = ['expression', 'hssc_id']
+    inlines = [EventExpressionInline]
+    ordering = ('id',)
+
+    # 生成表达式
+    def save_formset(self, request, form, formset, change):
+        instances = formset.save()
+        if instances:
+            instances[0].event_rule.generate_expression()
+
+
+# @admin.register(EventExpression)
+# class EventExpressionAdmin(admin.ModelAdmin):
+#     autocomplete_fields = ['field']
 
 
 class FormEntityShipInline(admin.TabularInline):
@@ -108,16 +134,21 @@ class ServiceProgramSettingInline(admin.TabularInline):
 class ServiceSpecAdmin(admin.ModelAdmin):
     list_display = ['label', 'name', 'hssc_id']
     list_display_links = ['label', 'name']
+    fieldsets = (
+        (None, {
+            'fields': ('label', )
+        }),
+    )
     readonly_fields = ['name', 'hssc_id']
     inlines = [ServiceProgramSettingInline]
     ordering = ['id']
 
 
-@admin.register(SystemOperand)
-class SystemOperandAdmin(admin.ModelAdmin):
-    list_display = ('id', 'label', 'name', 'func', 'parameters')
-    readonly_fields = ('label','name','hssc_id','func','parameters','description','Applicable','applicable')
-    ordering = ('id',)
+# @admin.register(SystemOperand)
+# class SystemOperandAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'label', 'name', 'func', 'parameters')
+#     readonly_fields = ('label','name','hssc_id','func','parameters','description','Applicable','applicable')
+#     ordering = ('id',)
 
 
 # @admin.register(Event)
@@ -144,4 +175,3 @@ class SystemOperandAdmin(admin.ModelAdmin):
 #     list_display_links = ['label', 'name', 'code', 'func']
 #     search_fields = ['name']
 #     ordering = ['id']
-

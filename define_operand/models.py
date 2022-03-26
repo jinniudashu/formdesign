@@ -10,9 +10,9 @@ from pypinyin import lazy_pinyin
 from formdesign.hsscbase_class import HsscBase, HsscPymBase
 from define.models import ManagedEntity, Component, ComponentsGroup, Role
 from define_icpc.models import Icpc
-from define_rule_dict.models import EventRule, IntervalRule
 from .utils import keyword_search
 from define_backup.utils import GenerateModelsScriptMixin, GenerateViewsScriptMixin
+
 
 # 业务表单定义
 class BuessinessForm(GenerateModelsScriptMixin, HsscPymBase):
@@ -127,6 +127,69 @@ class SystemOperand(HsscBase):
 
     class Meta:
         verbose_name = '系统自动作业'
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
+
+# 事件规则表
+class EventRule(HsscBase):
+    description = models.TextField(max_length=255, blank=True, null=True, verbose_name="表达式")
+    Detection_scope = [(0, '所有历史表单'), (1, '本次服务表单'), (2, '单元服务表单')]
+    detection_scope = models.PositiveSmallIntegerField(choices=Detection_scope, default=1, blank=True, null=True, verbose_name='检测范围')
+    weight = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="权重")
+    expression = models.TextField(max_length=1024, blank=True, null=True, verbose_name="内部表达式")
+
+    def save(self, *args, **kwargs):
+        if self.name is None or self.name == '':
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = '条件事件'
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
+    def generate_expression(self):  # 在EventRuleAdmin.save_formset中调用
+        expressions = []
+        descriptions = []
+        for _expression in self.eventexpression_set.all():
+            field = _expression.field  # 字段
+            operator = EventExpression.Operator[_expression.operator][1]  # 操作符
+            if ',' in _expression.value:
+                value = f"[{_expression.value}]"  # 值为数组
+            elif is_number(_expression.value):
+                value = _expression.value  # 值为数字
+            else:
+                value = f"'{_expression.value}'"  # 值为字符串
+            if _expression.connection_operator is not None and _expression.connection_operator >= 0:
+                connection_operator = EventExpression.Connection_operator[_expression.connection_operator][1]  # 连接符
+            else:
+                connection_operator = ''
+            expressions.extend([field.hssc_id, operator, value, connection_operator])
+            descriptions.extend([field.label, operator, value, connection_operator])
+        expressions.pop()   # 去掉最后一个连接符
+        descriptions.pop()  # 去掉最后一个连接符
+        self.expression = ' '.join(expressions)
+        self.description = ' '.join(descriptions)
+        self.save()
+        return self.expression
+
+
+# 事件表达式表
+class EventExpression(HsscBase):
+    event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE, null=True, blank=True, verbose_name="事件规则")
+    field = models.ForeignKey(Component, on_delete=models.CASCADE, null=True, verbose_name="字段")
+    Operator = [(0, '=='), (1, '!='), (2, '>'), (3, '<'), (4, '>='), (5, '<='), (6, 'in'), (7, 'not in')]
+    operator = models.PositiveSmallIntegerField(choices=Operator, null=True, verbose_name='操作符')
+    value = models.CharField(max_length=255, null=True, verbose_name="值", help_text="多个值用英文逗号分隔，空格会被忽略")
+    Connection_operator = [(0, 'and'), (1, 'or')]
+    connection_operator = models.PositiveSmallIntegerField(choices=Connection_operator, blank=True, null=True, verbose_name='连接操作符')
+
+    def __str__(self):
+        return str(self.event_rule.label)
+
+    class Meta:
+        verbose_name = '事件表达式'
         verbose_name_plural = verbose_name
         ordering = ['id']
 
@@ -246,7 +309,6 @@ class OperationsSetting(HsscBase):
     system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, limit_choices_to=Q(applicable__in = [0, 3]), blank=True, null=True, verbose_name='系统作业')
     next_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, blank=True, null=True, related_name='next_operation', verbose_name='后续作业')
     passing_data = models.PositiveSmallIntegerField(choices=Receive_form, default=0, verbose_name='接收表单')
-    interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="时间间隔限制")
 
     def __str__(self):
         return str(self.service) + '--' + str(self.operation)
@@ -260,8 +322,7 @@ class OperationsSetting(HsscBase):
 # 服务包类型信息表
 class ServicePackage(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
-    # first_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='first_service', null=True, verbose_name="起始服务")
-    # last_service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='last_service', blank=True, null=True, verbose_name="结束服务")
+    services = models.ManyToManyField(Service, through='ServicePackageDetail', verbose_name="服务项目")
     Begin_time_setting = [(0, '人工指定'), (1, '出生日期')]
     begin_time_setting = models.PositiveSmallIntegerField(choices=Begin_time_setting, default=0, verbose_name='开始时间参考')
     duration = models.DurationField(blank=True, null=True, verbose_name="持续周期", help_text='例如：3 days, 22:00:00')
@@ -302,7 +363,7 @@ class ServicePackageDetail(HsscPymBase):
 
 
 
-# 服务规格表
+# 服务规格设置
 class ServiceSpec(HsscBase):
     def save(self, *args, **kwargs):
         if self.name is None or self.name == '':
@@ -310,7 +371,7 @@ class ServiceSpec(HsscBase):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name = "服务规格"
+        verbose_name = "服务规则"
         verbose_name_plural = verbose_name
         ordering = ['id']
 
@@ -327,16 +388,35 @@ class ServiceProgramSetting(HsscBase):
     Reminders = [(0, '客户'), (1, '服务人员'), (2, '服务小组')]
     reminders = models.PositiveSmallIntegerField(choices=Reminders, default=0,  blank=True, null=True, verbose_name='提醒对象')
     message_content = models.CharField(max_length=255, blank=True, null=True, verbose_name='消息内容')
-    interval_rule = models.ForeignKey(IntervalRule, on_delete=models.CASCADE, blank=True, null=True, verbose_name="服务时间间隔")
+    Interval_rule_options = [(0, '等于'), (1, '小于'), (2, '大于')]
+    interval_rule = models.PositiveSmallIntegerField(choices=Interval_rule_options, blank=True, null=True, verbose_name='间隔条件')
+    interval_time = models.DurationField(blank=True, null=True, verbose_name="间隔时间", help_text='例如：3 days, 22:00:00')
 
     def __str__(self):
         return str(self.service)
 
     class Meta:
-        verbose_name = '服务关系设置'
+        verbose_name = '服务程序设置'
         verbose_name_plural = verbose_name
         ordering = ['id']
 
+
+# 判断传入的字符串是否是数字
+def is_number(s):
+    try:
+        float(s)
+        return True
+    except ValueError:
+        pass
+ 
+    try:
+        import unicodedata
+        unicodedata.numeric(s)
+        return True
+    except (TypeError, ValueError):
+        pass
+ 
+    return False
 
 #**********************************************************************************************************************
 # 待清理代码，暂时保留供参考
