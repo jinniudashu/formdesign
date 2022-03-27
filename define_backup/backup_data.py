@@ -5,7 +5,6 @@ import json
 from define.models import *
 from define_icpc.models import *
 from define_operand.models import *
-from define_rule_dict.models import *
 from define_backup.models import DesignBackup, IcpcBackup, SourceCode
 
 from .script_file_header import *
@@ -28,7 +27,6 @@ Backup_models = [
     RelatedField,
     ComponentsGroup,
     BuessinessForm,
-    FormEntityShip,
     Operation,
     BuessinessFormsSetting,
     EventRule,

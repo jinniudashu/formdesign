@@ -13,7 +13,7 @@ class Command(BaseCommand):
         res_json = res.json()[0]
         code =res_json['code']
 
-        with open('icpc_backup.json', 'w', encoding='utf-8') as f:
+        with open('define_icpc/icpc_backup.json', 'w', encoding='utf-8') as f:
             f.write(code)
 
         print('备份设计数据到icpc_backup.json完成！')

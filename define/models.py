@@ -75,7 +75,7 @@ class DTField(HsscFieldBase):
 
 
 # 关联字段基础表
-# 内容由DicList和ManagedEntity生成内容时自动维护
+# 内容由DicList和define_operand.ManagedEntity生成内容时自动维护
 class RelateFieldModel(HsscBase):
     related_content = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联内容")
     Related_content_type = [('diclist', '基础字典'), ('icpclist', 'ICPC'), ('managedentity', '管理实体')]
@@ -200,19 +200,8 @@ class IcpcList(HsscPymBase):
         verbose_name = "ICPC字典列表"
         verbose_name_plural = verbose_name
 
-# 管理实体定义
-class ManagedEntity(HsscPymBase):
-    app_name = models.CharField(max_length=100, verbose_name="所属app名", null=True, blank=True)
-    model_name = models.CharField(max_length=100, verbose_name="模型名", null=True, blank=True)
-
-    class Meta:
-        verbose_name = "业务管理实体"
-        verbose_name_plural = verbose_name
-
-
 # Sync Create and update RelateFieldModel
 @receiver(post_save, sender=DicList, weak=True, dispatch_uid=None)
-@receiver(post_save, sender=ManagedEntity, weak=True, dispatch_uid=None)
 @receiver(post_save, sender=IcpcList, weak=True, dispatch_uid=None)
 def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
     if created:

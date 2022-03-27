@@ -28,8 +28,15 @@ class RelatedFieldAdmin(admin.ModelAdmin):
 
 @admin.register(Component)
 class ComponentAdmin(admin.ModelAdmin):
-    readonly_fields = ['name', 'label', 'content_type', 'object_id', 'hssc_id']
     search_fields=['label', 'pym']
+    readonly_fields = [field.name for field in Component._meta.fields]
+    actions = None
+
+    def has_add_permission(self, request):
+        return False
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 @admin.register(ComponentsGroup)
 class ComponentsGroupAdmin(admin.ModelAdmin):
@@ -53,10 +60,6 @@ class DicListAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'hssc_id']
     search_fields=['label', 'pym']
     inlines = [DicDetailInlineAdmin]
-
-@admin.register(ManagedEntity)
-class ManagedEntityAdmin(admin.ModelAdmin):
-    readonly_fields = ['hssc_id', 'pym']
 
 @admin.register(Role)
 class RoleAdmin(admin.ModelAdmin):

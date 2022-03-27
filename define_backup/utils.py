@@ -214,8 +214,9 @@ class GenerateViewsScriptMixin:
     def generate_script(self):
         script = {}
         operation = self.first_operation
-        base_info_form = FormEntityShip.objects.get(entity=self.managed_entity, is_base=True).form
-        base_form_name = f'{base_info_form.name.capitalize()}_ModelForm'
+        # base_info_form = FormEntityShip.objects.get(entity=self.managed_entity, is_base=True).form
+        # base_form_name = f'{base_info_form.name.capitalize()}_ModelForm'
+        base_form_name = ''
         # create views.py, template.html, urls.py, index.html script
         _s = self.__CreateViewScript(operation, base_form_name)
         script['views'], script['urls'], script['templates'] = _s.create_script()

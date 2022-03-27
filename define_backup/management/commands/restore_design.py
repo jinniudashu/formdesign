@@ -3,7 +3,6 @@ import json
 
 from define.models import *
 from define_operand.models import *
-from define_rule_dict.models import *
 from define_icpc.models import Icpc
 from define_backup.backup_data import Backup_models
 
@@ -22,7 +21,7 @@ class Command(BaseCommand):
             print('start restore design data...')
 
             # 读取备份数据文件
-            backuped_json_file = 'design_data_backup.json'
+            backuped_json_file = 'define_backup/design_data_backup.json'
             with open(backuped_json_file, encoding="utf8") as f:
                 design_data = json.loads(f.read())
 

@@ -8,7 +8,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         # 读取ICPC备份数据文件
-        with open('icpc_backup.json', encoding="utf8") as f:
+        with open('define_icpc/icpc_backup.json', encoding="utf8") as f:
             icpc_data = json.loads(f.read())
 
         for icpc in icpc_list:

@@ -1,17 +1,47 @@
 from django.db import models
 from django.db.models import Q
 from django.dispatch import receiver
-from django.db.models.signals import post_delete, post_save, m2m_changed
+from django.db.models.signals import post_save, m2m_changed
 import json
 import uuid
 
 from pypinyin import lazy_pinyin
 
 from formdesign.hsscbase_class import HsscBase, HsscPymBase
-from define.models import ManagedEntity, Component, ComponentsGroup, Role
+from define.models import Component, ComponentsGroup, Role, RelateFieldModel
 from define_icpc.models import Icpc
 from .utils import keyword_search
 from define_backup.utils import GenerateModelsScriptMixin, GenerateViewsScriptMixin
+
+
+# 管理实体定义
+class ManagedEntity(HsscPymBase):
+    app_name = models.CharField(max_length=100, null=True, blank=True, verbose_name="所属app名")
+    model_name = models.CharField(max_length=100, null=True, blank=True, verbose_name="模型名")
+    base_form = models.OneToOneField('BuessinessForm', on_delete=models.SET_NULL, null=True, verbose_name="基础表单")
+
+    class Meta:
+        verbose_name = "业务管理实体"
+        verbose_name_plural = verbose_name
+
+# Sync Create and update RelateFieldModel
+@receiver(post_save, sender=ManagedEntity, weak=True, dispatch_uid=None)
+def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
+    if created:
+        RelateFieldModel.objects.create(
+            name=instance.name,
+            label=instance.label,
+            related_content=instance.name.capitalize(),
+            related_content_type=sender._meta.model_name,
+            hssc_id = instance.hssc_id
+        )
+    else:
+        RelateFieldModel.objects.filter(hssc_id=instance.hssc_id).update(
+            name=instance.name,
+            label=instance.label,
+            related_content=instance.name.capitalize(),
+            related_content_type=sender._meta.model_name,
+        )
 
 
 # 业务表单定义
@@ -19,7 +49,6 @@ class BuessinessForm(GenerateModelsScriptMixin, HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     components = models.ManyToManyField(Component, blank=True, verbose_name="字段")
     components_groups = models.ManyToManyField(ComponentsGroup, blank=True, verbose_name="组件")
-    managed_entities = models.ManyToManyField(ManagedEntity, through='FormEntityShip', verbose_name="关联实体")
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
     meta_data = models.JSONField(null=True, blank=True, verbose_name="元数据")
     script = models.TextField(blank=True, null=True, verbose_name='运行时脚本')
@@ -96,20 +125,6 @@ def buessiness_form_components_changed_handler(sender, instance, action, reverse
 @receiver(m2m_changed, sender=BuessinessForm.components_groups.through)
 def buessiness_form_components_groups_changed_handler(sender, instance, action, reverse, model, pk_set, **kwargs):
     instance.generate_meta_data()
-
-
-# 表单和实体关系表
-class FormEntityShip(HsscBase):
-    entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, verbose_name="关联实体")
-    form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="业务表单")
-    is_base = models.BooleanField(default=False, verbose_name="基本信息表")
-
-    def __str__(self):
-        return str(self.entity) + '--' + str(self.form)
-
-    class Meta:
-        verbose_name = '表单和实体关系'
-        verbose_name_plural = verbose_name
 
 
 # # 系统作业指令表
@@ -253,9 +268,6 @@ class Service(GenerateViewsScriptMixin, HsscPymBase):
     name = models.CharField(max_length=255, unique=True, verbose_name="name")
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=255, verbose_name="名称")
-    first_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='first_operation', null=True, verbose_name="起始作业")
-    last_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='last_operation', blank=True, null=True, verbose_name="结束作业")
-    # operations = models.ManyToManyField(Operation, through='OperationsSetting', verbose_name="包含作业")
     managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, null=True, verbose_name="管理实体")
     Begin_time_setting = [(0, '人工指定时间'), (1, '引用出生日期')]
     begin_time_setting = models.PositiveSmallIntegerField(choices=Begin_time_setting, default=0, verbose_name='开始时间设置')
@@ -304,7 +316,7 @@ Receive_form = [(0, '否'), (1, '接收，不可编辑'), (2, '接收，可以�
 
 class OperationsSetting(HsscBase):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, verbose_name='单元服务')
-    operation = models.ForeignKey(Operation, on_delete=models.CASCADE, related_name='operation', null=True, verbose_name='作业')
+    operation = models.ForeignKey(Operation, on_delete=models.CASCADE, null=True, verbose_name='作业')
     event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE, null=True, verbose_name='条件事件')
     system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, limit_choices_to=Q(applicable__in = [0, 3]), blank=True, null=True, verbose_name='系统作业')
     next_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, blank=True, null=True, related_name='next_operation', verbose_name='后续作业')
@@ -360,7 +372,6 @@ class ServicePackageDetail(HsscPymBase):
         verbose_name = "服务内容模板"
         verbose_name_plural = verbose_name
         ordering = ['id']
-
 
 
 # 服务规格设置

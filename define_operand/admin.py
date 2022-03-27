@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BuessinessForm, Operation, BuessinessFormsSetting, Service, OperationsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceProgramSetting, SystemOperand, EventRule, EventExpression
+from .models import BuessinessForm, Operation, BuessinessFormsSetting, Service, OperationsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceProgramSetting, SystemOperand, EventRule, EventExpression, ManagedEntity
 
 
 class EventExpressionInline(admin.TabularInline):
@@ -29,10 +29,6 @@ class EventRuleAdmin(admin.ModelAdmin):
 #     autocomplete_fields = ['field']
 
 
-class FormEntityShipInline(admin.TabularInline):
-    model = BuessinessForm.managed_entities.through
-    exclude = ['name', 'label', 'hssc_id']
-
 @admin.register(BuessinessForm)
 class BuessinessFormAdmin(admin.ModelAdmin):
     list_display = ['name_icpc', 'label', 'name', 'id']
@@ -44,7 +40,6 @@ class BuessinessFormAdmin(admin.ModelAdmin):
     )
     search_fields = ['name', 'label']
     readonly_fields = ['name', 'hssc_id', 'meta_data']
-    inlines = [FormEntityShipInline]
     autocomplete_fields = ['name_icpc',]
 
 
@@ -86,7 +81,7 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('label', 'name_icpc'), ('managed_entity', 'priority'), ('first_operation', 'last_operation', ), 'group', ('begin_time_setting', 'awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
+            'fields': (('label', 'name_icpc'), ('managed_entity', 'priority'), 'group', ('begin_time_setting', 'awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
         }),
         ('界面设置', {
             'fields':(('history_services_display', 'enable_recommanded_list', 'enable_queue_counter', ), )
@@ -142,6 +137,11 @@ class ServiceSpecAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'hssc_id']
     inlines = [ServiceProgramSettingInline]
     ordering = ['id']
+
+
+@admin.register(ManagedEntity)
+class ManagedEntityAdmin(admin.ModelAdmin):
+    readonly_fields = ['hssc_id', 'pym', 'name', 'app_name', 'model_name']
 
 
 # @admin.register(SystemOperand)
