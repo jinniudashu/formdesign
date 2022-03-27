@@ -2477,6 +2477,22 @@
             "unit": "mmHg",
             "default": null,
             "required": false
+        },
+        {
+            "label": "尿微量白蛋白",
+            "name": "A3501",
+            "hssc_id": "7b5ee5d2-ad5e-11ec-90c1-cad859921f34",
+            "pym": "nwlbdb",
+            "name_icpc": null,
+            "type": "IntegerField",
+            "max_digits": 10,
+            "decimal_places": 2,
+            "standard_value": null,
+            "up_limit": 20.0,
+            "down_limit": null,
+            "unit": "ug/min",
+            "default": null,
+            "required": false
         }
     ],
     "dtfield": [
@@ -5339,10 +5355,10 @@
             "label": "糖尿病肾病诊断规则",
             "name": "tang_niao_bing_shen_bing_zhen_duan_gui_ze",
             "hssc_id": "6909de64-abe2-11ec-a639-1ac10aeebbc4",
-            "description": "疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病'",
+            "description": "疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and 尿微量白蛋白 > 20",
             "detection_scope": 0,
             "weight": 1,
-            "expression": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病'"
+            "expression": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and 7b5ee5d2-ad5e-11ec-90c1-cad859921f34 > 20"
         },
         {
             "label": "糖尿病血管病变周围神经炎诊断规则",
@@ -5493,6 +5509,16 @@
             "field": "deb59434-9aa1-11ec-bde1-8a6e55faf877",
             "operator": 4,
             "value": "7.0",
+            "connection_operator": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "09ecb946-ad5f-11ec-90c1-cad859921f34",
+            "event_rule": "6909de64-abe2-11ec-a639-1ac10aeebbc4",
+            "field": "7b5ee5d2-ad5e-11ec-90c1-cad859921f34",
+            "operator": 2,
+            "value": "20",
             "connection_operator": null
         }
     ],
