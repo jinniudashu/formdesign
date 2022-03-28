@@ -180,11 +180,11 @@ class DicList(HsscPymBase):
 # 字典明细
 class DicDetail(HsscPymBase):
     diclist = models.ForeignKey(DicList, on_delete=models.CASCADE, blank=True, null=True, verbose_name="字典")
-    item = models.CharField(max_length=255, verbose_name="值")
+    value = models.CharField(max_length=255, verbose_name="值")
     icpc = models.ForeignKey(Icpc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="ICPC")
 
     def __str__(self):
-        return self.item
+        return self.value
 
     class Meta:
         verbose_name = "业务字典明细"

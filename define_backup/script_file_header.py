@@ -163,6 +163,7 @@ class DictBase(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name="name")
     hssc_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="hsscID")
     value = models.CharField(max_length=255, null=True, blank=True, verbose_name="值")
+    icpc = models.CharField(max_length=5, null=True, blank=True, verbose_name="ICPC编码")
     pym = models.CharField(max_length=255, blank=True, null=True, verbose_name="拼音码")
 
     class Meta:

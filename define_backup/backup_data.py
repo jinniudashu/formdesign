@@ -1,3 +1,4 @@
+from cProfile import label
 from django.forms.models import model_to_dict
 from time import time
 import json
@@ -155,17 +156,22 @@ class {name}Admin(admin.ModelAdmin):{dict_admin_content}'''
 
 # 导出字典Json数据
 def export_dict_data():
-    dict_data = []  # 字典明细数据
-    for item in DicDetail.objects.all():
-        item_dict = model_to_dict(item)
+    dicts_data = []  # 字典明细数据
+    for index, item in enumerate(DicDetail.objects.all(), 1):
         # 构造字典明细数据
-        item_dict['id'] = None
+        dict_data = {}
+        dict_data['model'] = item.diclist.__class__.__name__  # 字典Model名称
+        dict_data['pk'] = index  # pk
+        # 构造fields
+        item_dict = model_to_dict(item)
         if item_dict['icpc']:
             item_dict['icpc'] = item.icpc.icpc_code
-        item_dict['diclist'] = item.diclist.hssc_id
-        dict_data.append(item_dict)
+        item_dict.pop('id')
+        item_dict.pop('diclist')
+        dict_data['fields'] = item_dict
 
-    return dict_data
+        dicts_data.append(dict_data)
+    return dicts_data
 
 
 # 把备份数据写入备份数据库

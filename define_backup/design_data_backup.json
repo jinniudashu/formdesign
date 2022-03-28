@@ -540,7 +540,7 @@
             "hssc_id": "de36cc8a-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "Bx",
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "B型",
+            "value": "B型",
             "icpc": null
         },
         {
@@ -549,7 +549,7 @@
             "hssc_id": "de37c3d8-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "ABx",
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "AB型",
+            "value": "AB型",
             "icpc": null
         },
         {
@@ -558,7 +558,7 @@
             "hssc_id": "de38406a-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "A+x",
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "A+型",
+            "value": "A+型",
             "icpc": null
         },
         {
@@ -567,7 +567,7 @@
             "hssc_id": "de38b130-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "A-x",
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "A-型",
+            "value": "A-型",
             "icpc": null
         },
         {
@@ -576,7 +576,7 @@
             "hssc_id": "de3923ea-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "B+x",
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "B+型",
+            "value": "B+型",
             "icpc": null
         },
         {
@@ -585,7 +585,7 @@
             "hssc_id": "de399afa-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "B-x",
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "B-型",
+            "value": "B-型",
             "icpc": null
         },
         {
@@ -594,7 +594,7 @@
             "hssc_id": "de3a17a0-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "O+x",
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "O+型",
+            "value": "O+型",
             "icpc": null
         },
         {
@@ -603,7 +603,7 @@
             "hssc_id": "de3a835c-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "O-x",
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "O-型",
+            "value": "O-型",
             "icpc": null
         },
         {
@@ -612,7 +612,7 @@
             "hssc_id": "de3b8e0a-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "AB-x",
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "AB-型",
+            "value": "AB-型",
             "icpc": null
         },
         {
@@ -621,7 +621,7 @@
             "hssc_id": "de3c0056-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "bx",
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "不详",
+            "value": "不详",
             "icpc": null
         },
         {
@@ -630,7 +630,7 @@
             "hssc_id": "de3c728e-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "cz",
             "diclist": "de2ed7e6-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "常住",
+            "value": "常住",
             "icpc": null
         },
         {
@@ -639,7 +639,7 @@
             "hssc_id": "de3ce85e-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "fcz",
             "diclist": "de2ed7e6-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "非常住",
+            "value": "非常住",
             "icpc": null
         },
         {
@@ -648,7 +648,7 @@
             "hssc_id": "de3dd5f2-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "czjmylbx",
             "diclist": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "城镇居民医疗保险",
+            "value": "城镇居民医疗保险",
             "icpc": null
         },
         {
@@ -657,7 +657,7 @@
             "hssc_id": "de3e51bc-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "sybx",
             "diclist": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "商业保险",
+            "value": "商业保险",
             "icpc": null
         },
         {
@@ -666,7 +666,7 @@
             "hssc_id": "de3ed452-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "zf",
             "diclist": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "自费",
+            "value": "自费",
             "icpc": null
         },
         {
@@ -675,7 +675,7 @@
             "hssc_id": "de3f5378-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "gf",
             "diclist": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "公费",
+            "value": "公费",
             "icpc": null
         },
         {
@@ -684,7 +684,7 @@
             "hssc_id": "de3fda3c-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "pkjz",
             "diclist": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "贫困救助",
+            "value": "贫困救助",
             "icpc": null
         },
         {
@@ -693,7 +693,7 @@
             "hssc_id": "de406c5e-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "zz",
             "diclist": "de2d3ef4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "在职",
+            "value": "在职",
             "icpc": null
         },
         {
@@ -702,7 +702,7 @@
             "hssc_id": "de40ec7e-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "sy",
             "diclist": "de2d3ef4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "失业",
+            "value": "失业",
             "icpc": null
         },
         {
@@ -711,7 +711,7 @@
             "hssc_id": "de4173d8-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "tx",
             "diclist": "de2d3ef4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "退休",
+            "value": "退休",
             "icpc": null
         },
         {
@@ -720,7 +720,7 @@
             "hssc_id": "de4287fa-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "ss",
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "硕士",
+            "value": "硕士",
             "icpc": null
         },
         {
@@ -729,7 +729,7 @@
             "hssc_id": "de430806-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "bk",
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "本科",
+            "value": "本科",
             "icpc": null
         },
         {
@@ -738,7 +738,7 @@
             "hssc_id": "de438b5a-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "dz",
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "大专",
+            "value": "大专",
             "icpc": null
         },
         {
@@ -747,7 +747,7 @@
             "hssc_id": "de44152a-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "zzjx",
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "中专技校",
+            "value": "中专技校",
             "icpc": null
         },
         {
@@ -756,7 +756,7 @@
             "hssc_id": "de44a94a-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "gz",
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "高中",
+            "value": "高中",
             "icpc": null
         },
         {
@@ -765,7 +765,7 @@
             "hssc_id": "de452e9c-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "cz",
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "初中",
+            "value": "初中",
             "icpc": null
         },
         {
@@ -774,7 +774,7 @@
             "hssc_id": "de463a4e-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "wmhbwm",
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "文盲或半文盲",
+            "value": "文盲或半文盲",
             "icpc": null
         },
         {
@@ -783,7 +783,7 @@
             "hssc_id": "de46c3d8-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "wh",
             "diclist": "de2b3578-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "未婚",
+            "value": "未婚",
             "icpc": null
         },
         {
@@ -792,7 +792,7 @@
             "hssc_id": "de474592-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "yh",
             "diclist": "de2b3578-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "已婚",
+            "value": "已婚",
             "icpc": null
         },
         {
@@ -801,7 +801,7 @@
             "hssc_id": "de47d584-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "ly",
             "diclist": "de2b3578-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "离异",
+            "value": "离异",
             "icpc": null
         },
         {
@@ -810,7 +810,7 @@
             "hssc_id": "de4848b6-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "so",
             "diclist": "de2b3578-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "丧偶",
+            "value": "丧偶",
             "icpc": null
         },
         {
@@ -819,7 +819,7 @@
             "hssc_id": "de48cdae-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "hz",
             "diclist": "de2a4ee2-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "汉族",
+            "value": "汉族",
             "icpc": null
         },
         {
@@ -828,7 +828,7 @@
             "hssc_id": "de4a3054-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "n",
             "diclist": "de2963ba-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "男",
+            "value": "男",
             "icpc": null
         },
         {
@@ -837,7 +837,7 @@
             "hssc_id": "de4af1e2-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "n",
             "diclist": "de2963ba-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "女",
+            "value": "女",
             "icpc": null
         },
         {
@@ -846,7 +846,7 @@
             "hssc_id": "de4b6fbe-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "wsz",
             "diclist": "de316146-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "无水肿",
+            "value": "无水肿",
             "icpc": null
         },
         {
@@ -855,7 +855,7 @@
             "hssc_id": "de4bf2f4-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "so",
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "丧偶",
+            "value": "丧偶",
             "icpc": null
         },
         {
@@ -864,7 +864,7 @@
             "hssc_id": "de4c8016-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "fmsw",
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "父母死亡",
+            "value": "父母死亡",
             "icpc": null
         },
         {
@@ -873,7 +873,7 @@
             "hssc_id": "de4d0324-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "znsw",
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "子女死亡",
+            "value": "子女死亡",
             "icpc": null
         },
         {
@@ -882,7 +882,7 @@
             "hssc_id": "de4d890c-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "lh",
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "离婚",
+            "value": "离婚",
             "icpc": null
         },
         {
@@ -891,7 +891,7 @@
             "hssc_id": "de4ea800-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "jsbz",
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "家属病重",
+            "value": "家属病重",
             "icpc": null
         },
         {
@@ -900,7 +900,7 @@
             "hssc_id": "de4f34a0-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "la",
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "恋爱",
+            "value": "恋爱",
             "icpc": null
         },
         {
@@ -909,7 +909,7 @@
             "hssc_id": "de4fc0dc-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "jh",
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "结婚",
+            "value": "结婚",
             "icpc": null
         },
         {
@@ -918,7 +918,7 @@
             "hssc_id": "de504d7c-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "sz",
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "生子",
+            "value": "生子",
             "icpc": null
         },
         {
@@ -927,7 +927,7 @@
             "hssc_id": "de50d0e4-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "wcx",
             "diclist": "de3247a0-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "无充血",
+            "value": "无充血",
             "icpc": null
         },
         {
@@ -936,7 +936,7 @@
             "hssc_id": "de51666c-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "zc",
             "diclist": "de332d5a-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "正常",
+            "value": "正常",
             "icpc": null
         },
         {
@@ -945,7 +945,7 @@
             "hssc_id": "de527660-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "tj",
             "diclist": "de34d862-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "听见",
+            "value": "听见",
             "icpc": null
         },
         {
@@ -954,7 +954,7 @@
             "hssc_id": "de52f2ca-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "cjzc",
             "diclist": "de1df50c-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "触及正常",
+            "value": "触及正常",
             "icpc": null
         },
         {
@@ -963,7 +963,7 @@
             "hssc_id": "de536944-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "zc",
             "diclist": "de278914-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "正常",
+            "value": "正常",
             "icpc": null
         },
         {
@@ -972,7 +972,7 @@
             "hssc_id": "de53e568-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "yc",
             "diclist": "de278914-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "异常",
+            "value": "异常",
             "icpc": null
         },
         {
@@ -981,7 +981,7 @@
             "hssc_id": "de547320-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "hz",
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "户主",
+            "value": "户主",
             "icpc": null
         },
         {
@@ -990,7 +990,7 @@
             "hssc_id": "de54ec2e-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "po",
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "配偶",
+            "value": "配偶",
             "icpc": null
         },
         {
@@ -999,7 +999,7 @@
             "hssc_id": "de556366-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "fm",
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "父母",
+            "value": "父母",
             "icpc": null
         },
         {
@@ -1008,7 +1008,7 @@
             "hssc_id": "de56666c-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "zfm",
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "祖父母",
+            "value": "祖父母",
             "icpc": null
         },
         {
@@ -1017,7 +1017,7 @@
             "hssc_id": "de573056-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "szn",
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "孙子女",
+            "value": "孙子女",
             "icpc": null
         },
         {
@@ -1026,7 +1026,7 @@
             "hssc_id": "de57c6a6-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "xdjm",
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "兄弟姐妹",
+            "value": "兄弟姐妹",
             "icpc": null
         },
         {
@@ -1035,7 +1035,7 @@
             "hssc_id": "de592e10-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "qtcy",
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "其他成员",
+            "value": "其他成员",
             "icpc": null
         },
         {
@@ -1044,7 +1044,7 @@
             "hssc_id": "de5a95ac-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "bfb",
             "diclist": "de25c214-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "不方便",
+            "value": "不方便",
             "icpc": null
         },
         {
@@ -1053,7 +1053,7 @@
             "hssc_id": "de5b17a2-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "bjfb",
             "diclist": "de25c214-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "比较方便",
+            "value": "比较方便",
             "icpc": null
         },
         {
@@ -1062,7 +1062,7 @@
             "hssc_id": "de5c3880-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "fcfb",
             "diclist": "de25c214-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "非常方便",
+            "value": "非常方便",
             "icpc": null
         },
         {
@@ -1071,7 +1071,7 @@
             "hssc_id": "de5cb49a-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "bxsyn",
             "diclist": "de24d020-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "半小时以内",
+            "value": "半小时以内",
             "icpc": null
         },
         {
@@ -1080,7 +1080,7 @@
             "hssc_id": "de5dc0ec-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "ygbxsys",
             "diclist": "de24d020-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "一个半小时以上",
+            "value": "一个半小时以上",
             "icpc": null
         },
         {
@@ -1089,7 +1089,7 @@
             "hssc_id": "de5e52fa-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "yyyd",
             "diclist": "de23c81a-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "有氧运动",
+            "value": "有氧运动",
             "icpc": null
         },
         {
@@ -1098,7 +1098,7 @@
             "hssc_id": "de5edffe-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "wyyd",
             "diclist": "de23c81a-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "无氧运动",
+            "value": "无氧运动",
             "icpc": null
         },
         {
@@ -1107,7 +1107,7 @@
             "hssc_id": "de5f6e88-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "yywyjtyd",
             "diclist": "de23c81a-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "有氧无氧交替运动",
+            "value": "有氧无氧交替运动",
             "icpc": null
         },
         {
@@ -1116,7 +1116,7 @@
             "hssc_id": "de609470-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "gshd",
             "diclist": "de227fa0-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "改善很大",
+            "value": "改善很大",
             "icpc": null
         },
         {
@@ -1125,7 +1125,7 @@
             "hssc_id": "de611d00-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "yydgs",
             "diclist": "de227fa0-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "有一定改善",
+            "value": "有一定改善",
             "icpc": null
         },
         {
@@ -1134,7 +1134,7 @@
             "hssc_id": "de619f3c-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "mbh",
             "diclist": "de227fa0-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "没变化",
+            "value": "没变化",
             "icpc": null
         },
         {
@@ -1143,7 +1143,7 @@
             "hssc_id": "de621d9a-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "bgcl",
             "diclist": "de227fa0-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "变更差了",
+            "value": "变更差了",
             "icpc": null
         },
         {
@@ -1152,7 +1152,7 @@
             "hssc_id": "de631dd0-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "hbc",
             "diclist": "de21b21e-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "还不错",
+            "value": "还不错",
             "icpc": null
         },
         {
@@ -1161,7 +1161,7 @@
             "hssc_id": "de63a58e-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "bth",
             "diclist": "de21b21e-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "不太好",
+            "value": "不太好",
             "icpc": null
         },
         {
@@ -1170,7 +1170,7 @@
             "hssc_id": "de642b08-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "fcz",
             "diclist": "de21b21e-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "非常糟",
+            "value": "非常糟",
             "icpc": null
         },
         {
@@ -1179,7 +1179,7 @@
             "hssc_id": "de64a6dc-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "jc",
             "diclist": "de20b71a-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "经常",
+            "value": "经常",
             "icpc": null
         },
         {
@@ -1188,7 +1188,7 @@
             "hssc_id": "de361ee8-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "Ax",
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "A型",
+            "value": "A型",
             "icpc": null
         },
         {
@@ -1197,7 +1197,7 @@
             "hssc_id": "de3747a0-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "Ox",
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "O型",
+            "value": "O型",
             "icpc": null
         },
         {
@@ -1206,7 +1206,7 @@
             "hssc_id": "de3afa26-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "AB+x",
             "diclist": "de2f9ce4-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "AB+型",
+            "value": "AB+型",
             "icpc": null
         },
         {
@@ -1215,7 +1215,7 @@
             "hssc_id": "de3d5ca8-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "zgylbx",
             "diclist": "de2e1b76-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "职工医疗保险",
+            "value": "职工医疗保险",
             "icpc": null
         },
         {
@@ -1224,7 +1224,7 @@
             "hssc_id": "de41f858-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "bs",
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "博士",
+            "value": "博士",
             "icpc": null
         },
         {
@@ -1233,7 +1233,7 @@
             "hssc_id": "de45b538-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "xx",
             "diclist": "de2c4d00-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "小学",
+            "value": "小学",
             "icpc": null
         },
         {
@@ -1242,7 +1242,7 @@
             "hssc_id": "de49873a-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "ssmz",
             "diclist": "de2a4ee2-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "少数民族",
+            "value": "少数民族",
             "icpc": null
         },
         {
@@ -1251,7 +1251,7 @@
             "hssc_id": "de4e072e-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "sy",
             "diclist": "de287ad6-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "失业",
+            "value": "失业",
             "icpc": null
         },
         {
@@ -1260,7 +1260,7 @@
             "hssc_id": "de51ef10-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "hr",
             "diclist": "de340608-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "红润",
+            "value": "红润",
             "icpc": null
         },
         {
@@ -1269,7 +1269,7 @@
             "hssc_id": "de55e3e0-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "zn",
             "diclist": "de26a332-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "子女",
+            "value": "子女",
             "icpc": null
         },
         {
@@ -1278,7 +1278,7 @@
             "hssc_id": "de59e6ca-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "fcbfb",
             "diclist": "de25c214-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "非常不方便",
+            "value": "非常不方便",
             "icpc": null
         },
         {
@@ -1287,7 +1287,7 @@
             "hssc_id": "730285b2-a659-11ec-a3d3-f6197eef9f67",
             "pym": null,
             "diclist": "73021c58-a659-11ec-a3d3-f6197eef9f67",
-            "item": "健康",
+            "value": "健康",
             "icpc": null
         },
         {
@@ -1296,7 +1296,7 @@
             "hssc_id": "de5d388e-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "bxsdygbxs",
             "diclist": "de24d020-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "半小时到一个半小时",
+            "value": "半小时到一个半小时",
             "icpc": null
         },
         {
@@ -1305,7 +1305,7 @@
             "hssc_id": "de600a00-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "byd",
             "diclist": "de23c81a-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "不运动",
+            "value": "不运动",
             "icpc": null
         },
         {
@@ -1314,7 +1314,7 @@
             "hssc_id": "de629d56-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "fch",
             "diclist": "de21b21e-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "非常好",
+            "value": "非常好",
             "icpc": null
         },
         {
@@ -1323,7 +1323,7 @@
             "hssc_id": "de65254e-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "oe",
             "diclist": "de20b71a-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "偶尔",
+            "value": "偶尔",
             "icpc": null
         },
         {
@@ -1332,7 +1332,7 @@
             "hssc_id": "de65a884-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "cw",
             "diclist": "de20b71a-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "从无",
+            "value": "从无",
             "icpc": null
         },
         {
@@ -1341,7 +1341,7 @@
             "hssc_id": "de662a2a-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "hmy",
             "diclist": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "很满意",
+            "value": "很满意",
             "icpc": null
         },
         {
@@ -1350,7 +1350,7 @@
             "hssc_id": "de66a07c-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "my",
             "diclist": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "满意",
+            "value": "满意",
             "icpc": null
         },
         {
@@ -1359,7 +1359,7 @@
             "hssc_id": "de671890-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "jfmyyfbmy",
             "diclist": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "既非满意也非不满意",
+            "value": "既非满意也非不满意",
             "icpc": null
         },
         {
@@ -1368,7 +1368,7 @@
             "hssc_id": "de678df2-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "bmy",
             "diclist": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "不满意",
+            "value": "不满意",
             "icpc": null
         },
         {
@@ -1377,7 +1377,7 @@
             "hssc_id": "de6807b4-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "hbmy",
             "diclist": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "很不满意",
+            "value": "很不满意",
             "icpc": null
         },
         {
@@ -1386,7 +1386,7 @@
             "hssc_id": "de687c94-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "wx",
             "diclist": "de1f127a-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "外向",
+            "value": "外向",
             "icpc": null
         },
         {
@@ -1395,7 +1395,7 @@
             "hssc_id": "de69174e-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "nx",
             "diclist": "de1f127a-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "内向",
+            "value": "内向",
             "icpc": null
         },
         {
@@ -1404,7 +1404,7 @@
             "hssc_id": "de72474c-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "dcsz",
             "diclist": "de316146-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "单侧水肿",
+            "value": "单侧水肿",
             "icpc": "K0702"
         },
         {
@@ -1413,7 +1413,7 @@
             "hssc_id": "de7358a8-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "scbdcsz",
             "diclist": "de316146-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "双侧不对称水肿",
+            "value": "双侧不对称水肿",
             "icpc": "K0702"
         },
         {
@@ -1422,7 +1422,7 @@
             "hssc_id": "de748818-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "scdcsz",
             "diclist": "de316146-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "双侧对称水肿",
+            "value": "双侧对称水肿",
             "icpc": "K0702"
         },
         {
@@ -1431,7 +1431,7 @@
             "hssc_id": "de75fb94-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "cx",
             "diclist": "de3247a0-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "充血",
+            "value": "充血",
             "icpc": "R2902"
         },
         {
@@ -1440,7 +1440,7 @@
             "hssc_id": "de76e752-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "lblpzs",
             "diclist": "de3247a0-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "淋巴滤泡增生",
+            "value": "淋巴滤泡增生",
             "icpc": "R8528"
         },
         {
@@ -1449,7 +1449,7 @@
             "hssc_id": "de7842aa-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "qc",
             "diclist": "de332d5a-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "缺齿",
+            "value": "缺齿",
             "icpc": "D8268"
         },
         {
@@ -1458,7 +1458,7 @@
             "hssc_id": "de790992-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "qc",
             "diclist": "de332d5a-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "龋齿",
+            "value": "龋齿",
             "icpc": "D8214"
         },
         {
@@ -1467,7 +1467,7 @@
             "hssc_id": "de79d73c-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "yc（jy）",
             "diclist": "de332d5a-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "义齿（假牙）",
+            "value": "义齿（假牙）",
             "icpc": "D8268"
         },
         {
@@ -1476,7 +1476,7 @@
             "hssc_id": "de7a8ae2-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "cb",
             "diclist": "de340608-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "苍白",
+            "value": "苍白",
             "icpc": "D2001"
         },
         {
@@ -1485,7 +1485,7 @@
             "hssc_id": "de7b4b76-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "fg",
             "diclist": "de340608-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "发绀",
+            "value": "发绀",
             "icpc": "D2001"
         },
         {
@@ -1494,7 +1494,7 @@
             "hssc_id": "de7c0476-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "jl",
             "diclist": "de340608-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "皲裂",
+            "value": "皲裂",
             "icpc": "D2001"
         },
         {
@@ -1503,7 +1503,7 @@
             "hssc_id": "de7cbfba-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "pz",
             "diclist": "de340608-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "疱疹",
+            "value": "疱疹",
             "icpc": "D2001"
         },
         {
@@ -1512,7 +1512,7 @@
             "hssc_id": "de7d8882-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "tbqhwftj",
             "diclist": "de34d862-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "听不清或无法听见",
+            "value": "听不清或无法听见",
             "icpc": "H0201"
         },
         {
@@ -1521,7 +1521,7 @@
             "hssc_id": "de7e72f6-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "jr",
             "diclist": "de1df50c-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "减弱",
+            "value": "减弱",
             "icpc": "L1701"
         },
         {
@@ -1530,7 +1530,7 @@
             "hssc_id": "de7f3330-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "xs",
             "diclist": "de1df50c-9aa1-11ec-bde1-8a6e55faf877",
-            "item": "消失",
+            "value": "消失",
             "icpc": "L1701"
         },
         {
@@ -1539,7 +1539,7 @@
             "hssc_id": "d80519b6-a528-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "d804af3a-a528-11ec-9b14-2ec403f6c47b",
-            "item": "头痛",
+            "value": "头痛",
             "icpc": "L99"
         },
         {
@@ -1548,7 +1548,7 @@
             "hssc_id": "d80556a6-a528-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "d804af3a-a528-11ec-9b14-2ec403f6c47b",
-            "item": "头晕",
+            "value": "头晕",
             "icpc": "N1701"
         },
         {
@@ -1557,7 +1557,7 @@
             "hssc_id": "d8057e92-a528-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "d804af3a-a528-11ec-9b14-2ec403f6c47b",
-            "item": "咳嗽",
+            "value": "咳嗽",
             "icpc": "R0501"
         },
         {
@@ -1566,7 +1566,7 @@
             "hssc_id": "d805bf9c-a528-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "d804af3a-a528-11ec-9b14-2ec403f6c47b",
-            "item": "打喷嚏/鼻塞",
+            "value": "打喷嚏/鼻塞",
             "icpc": "R0701"
         },
         {
@@ -1575,7 +1575,7 @@
             "hssc_id": "d805e74c-a528-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "d804af3a-a528-11ec-9b14-2ec403f6c47b",
-            "item": "发热",
+            "value": "发热",
             "icpc": "A0301"
         },
         {
@@ -1584,7 +1584,7 @@
             "hssc_id": "d8060e84-a528-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "d804af3a-a528-11ec-9b14-2ec403f6c47b",
-            "item": "腹痛",
+            "value": "腹痛",
             "icpc": "D0101"
         },
         {
@@ -1593,7 +1593,7 @@
             "hssc_id": "d80634fe-a528-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "d804af3a-a528-11ec-9b14-2ec403f6c47b",
-            "item": "腹泻",
+            "value": "腹泻",
             "icpc": "D1101"
         },
         {
@@ -1602,7 +1602,7 @@
             "hssc_id": "d8065ccc-a528-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "d804af3a-a528-11ec-9b14-2ec403f6c47b",
-            "item": "全身疼痛",
+            "value": "全身疼痛",
             "icpc": "A0101"
         },
         {
@@ -1611,7 +1611,7 @@
             "hssc_id": "ca8037ca-a529-11ec-a478-2ec403f6c47b",
             "pym": null,
             "diclist": "ca7fc18c-a529-11ec-a478-2ec403f6c47b",
-            "item": "烦渴",
+            "value": "烦渴",
             "icpc": "T010"
         },
         {
@@ -1620,7 +1620,7 @@
             "hssc_id": "ca807032-a529-11ec-a478-2ec403f6c47b",
             "pym": null,
             "diclist": "ca7fc18c-a529-11ec-a478-2ec403f6c47b",
-            "item": "多尿",
+            "value": "多尿",
             "icpc": "U0202"
         },
         {
@@ -1629,7 +1629,7 @@
             "hssc_id": "ca809756-a529-11ec-a478-2ec403f6c47b",
             "pym": null,
             "diclist": "ca7fc18c-a529-11ec-a478-2ec403f6c47b",
-            "item": "体重减轻",
+            "value": "体重减轻",
             "icpc": "T0801"
         },
         {
@@ -1638,7 +1638,7 @@
             "hssc_id": "ca80bde4-a529-11ec-a478-2ec403f6c47b",
             "pym": null,
             "diclist": "ca7fc18c-a529-11ec-a478-2ec403f6c47b",
-            "item": "体重增加",
+            "value": "体重增加",
             "icpc": "T0701"
         },
         {
@@ -1647,7 +1647,7 @@
             "hssc_id": "ca80e30a-a529-11ec-a478-2ec403f6c47b",
             "pym": null,
             "diclist": "ca7fc18c-a529-11ec-a478-2ec403f6c47b",
-            "item": "乏力",
+            "value": "乏力",
             "icpc": "A0401"
         },
         {
@@ -1656,7 +1656,7 @@
             "hssc_id": "ca8109c0-a529-11ec-a478-2ec403f6c47b",
             "pym": null,
             "diclist": "ca7fc18c-a529-11ec-a478-2ec403f6c47b",
-            "item": "皮肤瘙痒",
+            "value": "皮肤瘙痒",
             "icpc": "S7601"
         },
         {
@@ -1665,7 +1665,7 @@
             "hssc_id": "be33bce8-a52a-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "be334bc8-a52a-11ec-9b14-2ec403f6c47b",
-            "item": "不吸烟",
+            "value": "不吸烟",
             "icpc": null
         },
         {
@@ -1674,7 +1674,7 @@
             "hssc_id": "be341b2a-a52a-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "be334bc8-a52a-11ec-9b14-2ec403f6c47b",
-            "item": "偶尔吸烟",
+            "value": "偶尔吸烟",
             "icpc": "Z2921"
         },
         {
@@ -1683,7 +1683,7 @@
             "hssc_id": "be347548-a52a-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "be334bc8-a52a-11ec-9b14-2ec403f6c47b",
-            "item": "经常吸烟",
+            "value": "经常吸烟",
             "icpc": "Z2921"
         },
         {
@@ -1692,7 +1692,7 @@
             "hssc_id": "3093c274-a52b-11ec-a478-2ec403f6c47b",
             "pym": null,
             "diclist": "309344b6-a52b-11ec-a478-2ec403f6c47b",
-            "item": "不饮酒",
+            "value": "不饮酒",
             "icpc": null
         },
         {
@@ -1701,7 +1701,7 @@
             "hssc_id": "309407ca-a52b-11ec-a478-2ec403f6c47b",
             "pym": null,
             "diclist": "309344b6-a52b-11ec-a478-2ec403f6c47b",
-            "item": "少量饮酒",
+            "value": "少量饮酒",
             "icpc": null
         },
         {
@@ -1710,7 +1710,7 @@
             "hssc_id": "309434ac-a52b-11ec-a478-2ec403f6c47b",
             "pym": null,
             "diclist": "309344b6-a52b-11ec-a478-2ec403f6c47b",
-            "item": "大量饮酒",
+            "value": "大量饮酒",
             "icpc": "Z2920"
         },
         {
@@ -1719,7 +1719,7 @@
             "hssc_id": "82ffcc42-a52b-11ec-a478-2ec403f6c47b",
             "pym": null,
             "diclist": "82fef984-a52b-11ec-a478-2ec403f6c47b",
-            "item": "已到达",
+            "value": "已到达",
             "icpc": null
         },
         {
@@ -1728,7 +1728,7 @@
             "hssc_id": "83000b58-a52b-11ec-a478-2ec403f6c47b",
             "pym": null,
             "diclist": "82fef984-a52b-11ec-a478-2ec403f6c47b",
-            "item": "未到达",
+            "value": "未到达",
             "icpc": null
         },
         {
@@ -1737,7 +1737,7 @@
             "hssc_id": "e360d126-a52b-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "e3605de0-a52b-11ec-9b14-2ec403f6c47b",
-            "item": "无",
+            "value": "无",
             "icpc": null
         },
         {
@@ -1746,7 +1746,7 @@
             "hssc_id": "e36112d0-a52b-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "e3605de0-a52b-11ec-9b14-2ec403f6c47b",
-            "item": "偶尔失眠",
+            "value": "偶尔失眠",
             "icpc": null
         },
         {
@@ -1755,7 +1755,7 @@
             "hssc_id": "e361425a-a52b-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "e3605de0-a52b-11ec-9b14-2ec403f6c47b",
-            "item": "经常失眠",
+            "value": "经常失眠",
             "icpc": "Z2920"
         },
         {
@@ -1764,7 +1764,7 @@
             "hssc_id": "2c04dd8c-a52c-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "2c047e32-a52c-11ec-9b14-2ec403f6c47b",
-            "item": "正常",
+            "value": "正常",
             "icpc": null
         },
         {
@@ -1773,7 +1773,7 @@
             "hssc_id": "2c050abe-a52c-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "2c047e32-a52c-11ec-9b14-2ec403f6c47b",
-            "item": "异常",
+            "value": "异常",
             "icpc": "D1803"
         },
         {
@@ -1782,7 +1782,7 @@
             "hssc_id": "f3003dd2-a52c-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "f2ffc58c-a52c-11ec-9b14-2ec403f6c47b",
-            "item": "没有压力",
+            "value": "没有压力",
             "icpc": null
         },
         {
@@ -1791,7 +1791,7 @@
             "hssc_id": "f300773e-a52c-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "f2ffc58c-a52c-11ec-9b14-2ec403f6c47b",
-            "item": "有一定压力",
+            "value": "有一定压力",
             "icpc": "Z2912"
         },
         {
@@ -1800,7 +1800,7 @@
             "hssc_id": "f300a1f0-a52c-11ec-9b14-2ec403f6c47b",
             "pym": null,
             "diclist": "f2ffc58c-a52c-11ec-9b14-2ec403f6c47b",
-            "item": "有很大压力",
+            "value": "有很大压力",
             "icpc": "Z2912"
         },
         {
@@ -1809,7 +1809,7 @@
             "hssc_id": "54e49d9a-a591-11ec-b3d7-5651f16caabc",
             "pym": null,
             "diclist": "54e43936-a591-11ec-b3d7-5651f16caabc",
-            "item": "无",
+            "value": "无",
             "icpc": null
         },
         {
@@ -1818,7 +1818,7 @@
             "hssc_id": "54e4cc02-a591-11ec-b3d7-5651f16caabc",
             "pym": null,
             "diclist": "54e43936-a591-11ec-b3d7-5651f16caabc",
-            "item": "有",
+            "value": "有",
             "icpc": "Z2903"
         },
         {
@@ -1827,7 +1827,7 @@
             "hssc_id": "7f30d8a2-a591-11ec-b3d7-5651f16caabc",
             "pym": null,
             "diclist": "7f308d34-a591-11ec-b3d7-5651f16caabc",
-            "item": "无",
+            "value": "无",
             "icpc": null
         },
         {
@@ -1836,7 +1836,7 @@
             "hssc_id": "7f30fb02-a591-11ec-b3d7-5651f16caabc",
             "pym": null,
             "diclist": "7f308d34-a591-11ec-b3d7-5651f16caabc",
-            "item": "有",
+            "value": "有",
             "icpc": "Z2908"
         },
         {
@@ -1845,7 +1845,7 @@
             "hssc_id": "b42bcd32-a591-11ec-9632-5651f16caabc",
             "pym": null,
             "diclist": "b42b6ed2-a591-11ec-9632-5651f16caabc",
-            "item": "安全",
+            "value": "安全",
             "icpc": null
         },
         {
@@ -1854,7 +1854,7 @@
             "hssc_id": "b42bf988-a591-11ec-9632-5651f16caabc",
             "pym": null,
             "diclist": "b42b6ed2-a591-11ec-9632-5651f16caabc",
-            "item": "不安全",
+            "value": "不安全",
             "icpc": "Z0201"
         },
         {
@@ -1863,7 +1863,7 @@
             "hssc_id": "01228fae-a592-11ec-b3d7-5651f16caabc",
             "pym": null,
             "diclist": "012232c0-a592-11ec-b3d7-5651f16caabc",
-            "item": "规律",
+            "value": "规律",
             "icpc": null
         },
         {
@@ -1872,7 +1872,7 @@
             "hssc_id": "0122b43e-a592-11ec-b3d7-5651f16caabc",
             "pym": null,
             "diclist": "012232c0-a592-11ec-b3d7-5651f16caabc",
-            "item": "不规律",
+            "value": "不规律",
             "icpc": "Z2920"
         },
         {
@@ -1881,7 +1881,7 @@
             "hssc_id": "236c277c-a593-11ec-b3d7-5651f16caabc",
             "pym": null,
             "diclist": "236bc3f4-a593-11ec-b3d7-5651f16caabc",
-            "item": "无",
+            "value": "无",
             "icpc": null
         },
         {
@@ -1890,7 +1890,7 @@
             "hssc_id": "236c526a-a593-11ec-b3d7-5651f16caabc",
             "pym": null,
             "diclist": "236bc3f4-a593-11ec-b3d7-5651f16caabc",
-            "item": "有",
+            "value": "有",
             "icpc": "Z2909"
         },
         {
@@ -1899,7 +1899,7 @@
             "hssc_id": "c9f2e8d6-a658-11ec-a3d3-f6197eef9f67",
             "pym": null,
             "diclist": "c9f18fa4-a658-11ec-a3d3-f6197eef9f67",
-            "item": "是",
+            "value": "是",
             "icpc": null
         },
         {
@@ -1908,7 +1908,7 @@
             "hssc_id": "c9f3cc4c-a658-11ec-a3d3-f6197eef9f67",
             "pym": null,
             "diclist": "c9f18fa4-a658-11ec-a3d3-f6197eef9f67",
-            "item": "否",
+            "value": "否",
             "icpc": null
         },
         {
@@ -1917,7 +1917,7 @@
             "hssc_id": "d8d28122-a658-11ec-a3d3-f6197eef9f67",
             "pym": null,
             "diclist": "d8d2266e-a658-11ec-a3d3-f6197eef9f67",
-            "item": "是",
+            "value": "是",
             "icpc": null
         },
         {
@@ -1926,7 +1926,7 @@
             "hssc_id": "d8d2adaa-a658-11ec-a3d3-f6197eef9f67",
             "pym": null,
             "diclist": "d8d2266e-a658-11ec-a3d3-f6197eef9f67",
-            "item": "否",
+            "value": "否",
             "icpc": null
         },
         {
@@ -1935,7 +1935,7 @@
             "hssc_id": "4849f7ce-a659-11ec-9221-f6197eef9f67",
             "pym": null,
             "diclist": "484992ac-a659-11ec-9221-f6197eef9f67",
-            "item": "有",
+            "value": "有",
             "icpc": null
         },
         {
@@ -1944,7 +1944,7 @@
             "hssc_id": "484a2988-a659-11ec-9221-f6197eef9f67",
             "pym": null,
             "diclist": "484992ac-a659-11ec-9221-f6197eef9f67",
-            "item": "无",
+            "value": "无",
             "icpc": null
         },
         {
@@ -1953,7 +1953,7 @@
             "hssc_id": "7302ae8e-a659-11ec-a3d3-f6197eef9f67",
             "pym": null,
             "diclist": "73021c58-a659-11ec-a3d3-f6197eef9f67",
-            "item": "亚健康",
+            "value": "亚健康",
             "icpc": null
         },
         {
@@ -1962,7 +1962,7 @@
             "hssc_id": "7302d4b8-a659-11ec-a3d3-f6197eef9f67",
             "pym": null,
             "diclist": "73021c58-a659-11ec-a3d3-f6197eef9f67",
-            "item": "不健康",
+            "value": "不健康",
             "icpc": null
         },
         {
@@ -1971,7 +1971,7 @@
             "hssc_id": "a1086acc-aa45-11ec-9f15-ee7ade4bced6",
             "pym": null,
             "diclist": "a107f2c2-aa45-11ec-9f15-ee7ade4bced6",
-            "item": "同意",
+            "value": "同意",
             "icpc": null
         },
         {
@@ -1980,7 +1980,7 @@
             "hssc_id": "a1089f10-aa45-11ec-9f15-ee7ade4bced6",
             "pym": null,
             "diclist": "a107f2c2-aa45-11ec-9f15-ee7ade4bced6",
-            "item": "不同意",
+            "value": "不同意",
             "icpc": null
         },
         {
@@ -1989,7 +1989,7 @@
             "hssc_id": "8e5a9bae-aa48-11ec-8f0c-ee7ade4bced6",
             "pym": null,
             "diclist": "8e5a0892-aa48-11ec-8f0c-ee7ade4bced6",
-            "item": "控制没有到达预期",
+            "value": "控制没有到达预期",
             "icpc": null
         },
         {
@@ -1998,7 +1998,7 @@
             "hssc_id": "8e5ae122-aa48-11ec-8f0c-ee7ade4bced6",
             "pym": null,
             "diclist": "8e5a0892-aa48-11ec-8f0c-ee7ade4bced6",
-            "item": "控制没有到达预期",
+            "value": "控制没有到达预期",
             "icpc": null
         }
     ],
