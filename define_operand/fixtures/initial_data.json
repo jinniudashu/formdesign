@@ -1,7 +1,6 @@
 [
     {
         "model": "define_operand.SystemOperand",
-        "pk": "1",
         "fields": {
             "label": "推荐后续作业", 
             "name": "recommend_next_operation", 
@@ -14,7 +13,6 @@
     },
     {
         "model": "define_operand.SystemOperand",
-        "pk": "2",
         "fields": {
             "label": "生成后续作业", 
             "name": "create_next_operation", 
@@ -27,7 +25,6 @@
     },
     {
         "model": "define_operand.SystemOperand",
-        "pk": "3",
         "fields": {
             "label": "推荐后续服务", 
             "name": "recommend_next_service", 
@@ -40,7 +37,6 @@
     },
     {
         "model": "define_operand.SystemOperand",
-        "pk": "4",
         "fields": {
             "label": "生成后续服务", 
             "name": "create_next_service", 
@@ -53,7 +49,6 @@
     },
     {
         "model": "define_operand.SystemOperand",
-        "pk": "5",
         "fields": {
             "label": "提示内容违反业务规则", 
             "name": "prompt_violate_business_rule", 
@@ -66,7 +61,6 @@
     },
     {
         "model": "define_operand.SystemOperand",
-        "pk": "6",
         "fields": {
             "label": "发送提醒消息", 
             "name": "send_message", 
@@ -79,7 +73,6 @@
     },
     {
         "model": "define_operand.Instruction",
-        "pk": "1",
         "fields": {
             "label": "创建作业进程",
             "name": "create_operation_proc",
@@ -91,7 +84,6 @@
     },
     {
         "model": "define_operand.ServiceSpec",
-        "pk": "1",
         "fields": {
             "label": "常规服务", 
             "name": "general_service_spec",

@@ -186,6 +186,8 @@ dict_admin_content = '''
 # ICPC字典models.py文件头
 icpc_models_head = '''
 from django.db import models
+from django.dispatch import receiver
+from django.db.models.signals import post_save, post_delete
 from pypinyin import Style, lazy_pinyin
 
 class IcpcBase(models.Model):
@@ -211,7 +213,6 @@ class IcpcBase(models.Model):
 
 # ICPC子类抽象类
 class IcpcSubBase(IcpcBase):
-
     def save(self, *args, **kwargs):
         if self.iname:
             self.pym = ''.join(lazy_pinyin(self.iname, style=Style.FIRST_LETTER))
@@ -219,6 +220,7 @@ class IcpcSubBase(IcpcBase):
 
     class Meta:
         abstract = True
+
 
 # ICPC总表
 class Icpc(IcpcBase):
@@ -270,8 +272,7 @@ def icpc_post_delete_handler(sender, instance, **kwargs):
 '''
 
 # ICPC字典admin.py文件头
-icpc_admin_head = '''
-from django.contrib import admin
+icpc_admin_head = '''from django.contrib import admin
 from .models import Icpc
 
 @admin.register(Icpc)

@@ -103,24 +103,24 @@ def generate_source_code(modeladmin, request, queryset):
     source_code['forms'] = forms_script
 
     # 导出业务表单views.py，template.html, urls.py, index.html脚本
-    for service in Service.objects.all():
-        if service.script:          
-            script = json.loads(service.script)
-            views_script = f'{views_script}{script["views"]}'
-            urls_script = f'{urls_script}{script["urls"]}'
-            templates_code.extend(script['templates'])
+#     for service in Service.objects.all():
+#         if service.script:          
+#             script = json.loads(service.script)
+#             views_script = f'{views_script}{script["views"]}'
+#             urls_script = f'{urls_script}{script["urls"]}'
+#             templates_code.extend(script['templates'])
 
-        # construct index.html script
-        ihs = f'''<a class='list-group-item' href='{{% url "{service.first_operation.name}_create_url" %}}'>
-{service.first_operation.label}
-</a>
-'''
-        index_html_script = index_html_script + ihs
-    templates_code.append({'index.html': f"{index_html_script}'\n</section>\n{{% endblock %}}'"})
+#         # construct index.html script
+#         ihs = f'''<a class='list-group-item' href='{{% url "{service.first_operation.name}_create_url" %}}'>
+# {service.first_operation.label}
+# </a>
+# '''
+#         index_html_script = index_html_script + ihs
+#     templates_code.append({'index.html': f"{index_html_script}'\n</section>\n{{% endblock %}}'"})
 
-    source_code['views'] = views_script
-    source_code['urls'] = f'{urls_script}\n]'
-    source_code['templates'] = templates_code
+#     source_code['views'] = views_script
+#     source_code['urls'] = f'{urls_script}\n]'
+#     source_code['templates'] = templates_code
 
     # 写入数据库
     result = write_to_db(SourceCode, source_code)
@@ -140,9 +140,9 @@ def export_dict_models_admin():
         # 生成model脚本
         _model_script = f'''
 class {name}(DictBase):
-class Meta:
-verbose_name = '{dict.label}'
-verbose_name_plural = verbose_name'''
+    class Meta:
+        verbose_name = '{dict.label}'
+        verbose_name_plural = verbose_name'''
         models_script = f'{models_script}\n\n{_model_script}'
 
         # 生成admin脚本
@@ -157,11 +157,10 @@ class {name}Admin(admin.ModelAdmin):{dict_admin_content}'''
 # 导出字典Json数据
 def export_dict_data():
     dict_data = []  # 字典明细数据
-    for index, item in enumerate(DicDetail.objects.all(), 1):
+    for item in DicDetail.objects.all():
         # 构造字典明细数据
         dict_item = {}
-        dict_item['model'] = 'dictionaries.' + item.diclist.__class__.__name__  # 字典Model名称
-        dict_item['pk'] = index  # pk
+        dict_item['model'] = 'dictionaries.' + item.diclist.name.capitalize()  # 字典Model名称
         # 构造fields
         item_dict = model_to_dict(item)
         if item_dict['icpc']:
@@ -184,10 +183,9 @@ def export_icpc_models_admin():
 
     for icpc in icpc_list:
         # 生成model脚本
-        _model_script = f'''
-class {icpc['name']}(IcpcSubBase):
+        _model_script = f'''class {icpc['name']}(IcpcSubBase):
     class Meta:
-        verbose_name = {icpc['label']}
+        verbose_name = '{icpc['label']}'
         verbose_name_plural = verbose_name
 '''
         models_script = f'{models_script}\n\n{_model_script}'
@@ -206,11 +204,10 @@ def export_icpc_data():
     for icpc in icpc_list:
         icpc_model = eval(icpc['name'])
         # 构造ICPC明细数据
-        for _index, _item in enumerate(icpc_model.objects.all(), 1):
+        for _item in icpc_model.objects.all():
             # 构造字典明细数据
             item = {}
             item['model'] = 'icpc.' + icpc['name']  # 字典Model名称
-            item['pk'] = _index  # pk
             # 构造fields
             item_dict = model_to_dict(_item)
             item_dict.pop('id')
