@@ -182,3 +182,108 @@ dict_admin_content = '''
     search_fields = ['value', 'pym']
     list_display = ["value"]
 '''
+
+# ICPC字典models.py文件头
+icpc_models_head = '''
+from django.db import models
+from pypinyin import Style, lazy_pinyin
+
+class IcpcBase(models.Model):
+    icpc_code = models.CharField(max_length=5, unique=True, blank=True, null=True, verbose_name="icpc码")
+    icode = models.CharField(max_length=3, blank=True, null=True, verbose_name="分类码")
+    iname = models.CharField(max_length=255, blank=True, null=True, verbose_name="名称")
+    iename = models.CharField(max_length=255, blank=True, null=True, verbose_name="English Name")
+    include = models.CharField(max_length=1024, blank=True, null=True, verbose_name="包含")
+    criteria = models.CharField(max_length=1024, blank=True, null=True, verbose_name="准则")
+    exclude = models.CharField(max_length=1024, blank=True, null=True, verbose_name="排除")
+    consider = models.CharField(max_length=1024, blank=True, null=True, verbose_name="考虑")
+    icd10 = models.CharField(max_length=8, blank=True, null=True, verbose_name="ICD10")
+    icpc2 = models.CharField(max_length=10, blank=True, null=True, verbose_name="ICPC2")
+    note = models.CharField(max_length=1024, blank=True, null=True, verbose_name="备注")
+    pym = models.CharField(max_length=255, blank=True, null=True, verbose_name="拼音码")
+
+    def __str__(self):
+        return str(self.iname)
+
+    class Meta:
+        abstract = True
+
+
+# ICPC子类抽象类
+class IcpcSubBase(IcpcBase):
+
+    def save(self, *args, **kwargs):
+        if self.iname:
+            self.pym = ''.join(lazy_pinyin(self.iname, style=Style.FIRST_LETTER))
+        super().save(*args, **kwargs)
+
+    class Meta:
+        abstract = True
+
+# ICPC总表
+class Icpc(IcpcBase):
+    subclass = models.CharField(max_length=255, blank=True, null=True, verbose_name="ICPC子类")
+
+    class Meta:
+        verbose_name = "ICPC总表"
+        verbose_name_plural = verbose_name
+'''
+
+icpc_models_post_save = '''
+def icpc_post_save_handler(sender, instance, created, **kwargs):
+	if created:
+		Icpc.objects.create(
+			icpc_code=instance.icpc_code,
+			icode=instance.icode,
+			iname=instance.iname,
+			iename=instance.iename,
+			include=instance.include,
+			criteria=instance.criteria,
+			exclude=instance.exclude,
+			consider=instance.consider,
+			icd10=instance.icd10,
+			icpc2=instance.icpc2,
+			note=instance.note,
+			pym=instance.pym,
+			subclass=instance._meta.object_name
+		)
+	else:
+		Icpc.objects.filter(icpc_code=instance.icpc_code).update(
+			icode=instance.icode,
+			iname=instance.iname,
+			iename=instance.iename,
+			include=instance.include,
+			criteria=instance.criteria,
+			exclude=instance.exclude,
+			consider=instance.consider,
+			icd10=instance.icd10,
+			icpc2=instance.icpc2,
+			note=instance.note,
+			pym=instance.pym,
+			subclass=instance._meta.object_name
+		)
+'''
+
+icpc_models_post_delete = '''
+def icpc_post_delete_handler(sender, instance, **kwargs):
+	Icpc.objects.filter(icpc_code=instance.icpc_code).delete()
+'''
+
+# ICPC字典admin.py文件头
+icpc_admin_head = '''
+from django.contrib import admin
+from .models import Icpc
+
+@admin.register(Icpc)
+class IcpcAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in Icpc._meta.fields]
+    search_fields=["iname", "pym", "icpc_code"]
+    ordering = ["icpc_code"]
+    readonly_fields = [field.name for field in Icpc._meta.fields]
+    actions = None
+
+    def has_add_permission(self, request):
+        return False
+    def has_delete_permission(self, request, obj=None):
+        return False
+'''

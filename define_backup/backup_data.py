@@ -79,9 +79,9 @@ def generate_source_code(modeladmin, request, queryset):
     source_code['dict_models'], source_code['dict_admin'] = export_dict_models_admin()
     source_code['dict_data'] = export_dict_data()
     
-    # 导出ICPC表models.py, admin.py脚本???
-    # source_code['icpc_models'], source_code['icpc_admin'] = IcpcList.export_icpc.models_admin_script()
-    # source_code['icpc_data'] = IcpcList.export_icpc.icpc_data()
+    # 导出ICPC表models.py, admin.py脚本
+    source_code['icpc_models'], source_code['icpc_admin'] = export_icpc_models_admin()
+    source_code['icpc_data'] = export_icpc_data()
 
     # 导出业务表单models.py, admin.py, forms.py脚本
     models_script = models_file_head
@@ -156,22 +156,68 @@ class {name}Admin(admin.ModelAdmin):{dict_admin_content}'''
 
 # 导出字典Json数据
 def export_dict_data():
-    dicts_data = []  # 字典明细数据
+    dict_data = []  # 字典明细数据
     for index, item in enumerate(DicDetail.objects.all(), 1):
         # 构造字典明细数据
-        dict_data = {}
-        dict_data['model'] = item.diclist.__class__.__name__  # 字典Model名称
-        dict_data['pk'] = index  # pk
+        dict_item = {}
+        dict_item['model'] = 'dictionaries.' + item.diclist.__class__.__name__  # 字典Model名称
+        dict_item['pk'] = index  # pk
         # 构造fields
         item_dict = model_to_dict(item)
         if item_dict['icpc']:
             item_dict['icpc'] = item.icpc.icpc_code
         item_dict.pop('id')
         item_dict.pop('diclist')
-        dict_data['fields'] = item_dict
+        dict_item['fields'] = item_dict
 
-        dicts_data.append(dict_data)
-    return dicts_data
+        dict_data.append(dict_item)
+    return dict_data
+
+
+# 导出ICPC字典models.py, admin.py脚本
+def export_icpc_models_admin():
+    models_script = icpc_models_head
+    models_receiver_post_save = models_receiver_post_delete = ''
+
+    # admin.py脚本
+    admin_script = icpc_admin_head
+
+    for icpc in icpc_list:
+        # 生成model脚本
+        _model_script = f'''
+class {icpc['name']}(IcpcSubBase):
+    class Meta:
+        verbose_name = {icpc['label']}
+        verbose_name_plural = verbose_name
+'''
+        models_script = f'{models_script}\n\n{_model_script}'
+        models_receiver_post_save = f'{models_receiver_post_save}\n@receiver(post_save, sender={icpc["name"]}, weak=True, dispatch_uid=None)'
+        models_receiver_post_delete = f'{models_receiver_post_delete}\n@receiver(post_delete, sender={icpc["name"]}, weak=True, dispatch_uid=None)'
+
+    models_receiver_post_save = models_receiver_post_save + icpc_models_post_save
+    models_receiver_post_delete = models_receiver_post_delete + icpc_models_post_delete
+    models_script = models_script + models_receiver_post_save + models_receiver_post_delete
+    return models_script, admin_script
+
+
+# 导出ICPC字典Json数据
+def export_icpc_data():
+    icpc_data = []  # ICPC明细数据
+    for icpc in icpc_list:
+        icpc_model = eval(icpc['name'])
+        # 构造ICPC明细数据
+        for _index, _item in enumerate(icpc_model.objects.all(), 1):
+            # 构造字典明细数据
+            item = {}
+            item['model'] = 'icpc.' + icpc['name']  # 字典Model名称
+            item['pk'] = _index  # pk
+            # 构造fields
+            item_dict = model_to_dict(_item)
+            item_dict.pop('id')
+            item['fields'] = item_dict
+
+            icpc_data.append(item)
+    return icpc_data
 
 
 # 把备份数据写入备份数据库

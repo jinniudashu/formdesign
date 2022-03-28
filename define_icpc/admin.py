@@ -62,6 +62,7 @@ class Icpc10_test_results_and_statisticsAdmin(admin.ModelAdmin):
 	ordering = ["icpc_code"]
 admin.site.register(Icpc10_test_results_and_statistics, Icpc10_test_results_and_statisticsAdmin)
 
+@admin.register(Icpc)
 class IcpcAdmin(admin.ModelAdmin):
     list_display = [field.name for field in Icpc._meta.fields]
     search_fields=["iname", "pym", "icpc_code"]
@@ -73,5 +74,3 @@ class IcpcAdmin(admin.ModelAdmin):
         return False
     def has_delete_permission(self, request, obj=None):
         return False
-
-admin.site.register(Icpc, IcpcAdmin)

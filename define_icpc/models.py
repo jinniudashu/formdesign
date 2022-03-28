@@ -81,67 +81,67 @@ class Icpc(IcpcBase):
 
     class Meta:
         verbose_name = "ICPC总表"
-        verbose_name_plural = "ICPC总表"
+        verbose_name_plural = verbose_name
 
 
 class Icpc1_register_logins(IcpcSubBase):
     class Meta:
         verbose_name = "注册登录（行政管理）"
-        verbose_name_plural = "注册登录（行政管理）"
+        verbose_name_plural = verbose_name
 
 
 class Icpc2_reservation_investigations(IcpcSubBase):
     class Meta:
         verbose_name = "预约咨询调查（行政管理）"
-        verbose_name_plural = "预约咨询调查（行政管理）"
+        verbose_name_plural = verbose_name
 
 
 class Icpc3_symptoms_and_problems(IcpcSubBase):
     class Meta:
         verbose_name = "症状和问题"
-        verbose_name_plural = "症状和问题"
+        verbose_name_plural = verbose_name
 
 
 class Icpc4_physical_examination_and_tests(IcpcSubBase):
     class Meta:
         verbose_name = "体格和其他检查"
-        verbose_name_plural = "体格和其他检查"
+        verbose_name_plural = verbose_name
 
 
 class Icpc5_evaluation_and_diagnoses(IcpcSubBase):
     class Meta:
         verbose_name = "评估和诊断"
-        verbose_name_plural = "评估和诊断"
+        verbose_name_plural = verbose_name
 
 
 class Icpc6_prescribe_medicines(IcpcSubBase):
     class Meta:
         verbose_name = "开药"
-        verbose_name_plural = "开药"
+        verbose_name_plural = verbose_name
 
 
 class Icpc7_treatments(IcpcSubBase):
     class Meta:
         verbose_name = "治疗"
-        verbose_name_plural = "治疗"
+        verbose_name_plural = verbose_name
 
 
 class Icpc8_other_health_interventions(IcpcSubBase):
     class Meta:
         verbose_name = "其他健康干预"
-        verbose_name_plural = "其他健康干预"
+        verbose_name_plural = verbose_name
 
 
 class Icpc9_referral_consultations(IcpcSubBase):
     class Meta:
         verbose_name = "转诊会诊"
-        verbose_name_plural = "转诊会诊"
+        verbose_name_plural = verbose_name
 
 
 class Icpc10_test_results_and_statistics(IcpcBase):
     class Meta:
         verbose_name = "检查结果和统计"
-        verbose_name_plural = "检查结果和统计"
+        verbose_name_plural = verbose_name
 
 
 # 如果ICPC子类表项目有变化，则更新ICPC总表
