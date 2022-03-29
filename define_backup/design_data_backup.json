@@ -134,7 +134,8 @@
             "hssc_id": "de87315c-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "zy",
             "app_name": "core",
-            "model_name": "Staff"
+            "model_name": "Staff",
+            "base_form": null
         },
         {
             "label": "客户",
@@ -142,7 +143,8 @@
             "hssc_id": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "kh",
             "app_name": "core",
-            "model_name": "Customer"
+            "model_name": "Customer",
+            "base_form": null
         },
         {
             "label": "供应商",
@@ -150,7 +152,8 @@
             "hssc_id": "de889948-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "gys",
             "app_name": "core",
-            "model_name": "Supplier"
+            "model_name": "Supplier",
+            "base_form": null
         },
         {
             "label": "药品",
@@ -158,7 +161,8 @@
             "hssc_id": "de896698-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "yp",
             "app_name": "core",
-            "model_name": "Medicine"
+            "model_name": "Medicine",
+            "base_form": null
         },
         {
             "label": "设备",
@@ -166,7 +170,8 @@
             "hssc_id": "de8a1c64-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "sb",
             "app_name": "core",
-            "model_name": "Device"
+            "model_name": "Device",
+            "base_form": null
         },
         {
             "label": "角色",
@@ -174,7 +179,8 @@
             "hssc_id": "de8b82fc-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "js",
             "app_name": "core",
-            "model_name": "Group"
+            "model_name": "Group",
+            "base_form": null
         },
         {
             "label": "机构",
@@ -182,7 +188,8 @@
             "hssc_id": "de8ad1a4-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "jg",
             "app_name": "core",
-            "model_name": "Institution"
+            "model_name": "Institution",
+            "base_form": null
         }
     ],
     "icpclist": [
@@ -3178,10 +3185,7 @@
                 "ded859ba-9aa1-11ec-bde1-8a6e55faf877",
                 "ded93d62-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "遗传病史",
@@ -3195,10 +3199,7 @@
             "components": [
                 "ded3d502-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "身高体重测量",
@@ -3206,18 +3207,15 @@
             "hssc_id": "0b9d151a-9e23-11ec-aa2c-fe35a7065cdd",
             "pym": "sgtzcl",
             "name_icpc": null,
-            "description": "",
+            "description": null,
             "meta_data": "{\n    \"name\": \"A3101\",\n    \"label\": \"身高体重测量\",\n    \"hssc_id\": \"0b9d151a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_hight\",\n            \"label\": \"身高\",\n            \"hssc_id\": \"deb08872-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_weight\",\n            \"label\": \"体重\",\n            \"hssc_id\": \"deb135ec-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_body_mass_index\",\n            \"label\": \"体质指数\",\n            \"hssc_id\": \"deb1ef6e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A3101(HsscBuessinessFormBase):\\n    numberfield_hight = models.IntegerField(null=True, blank=True, verbose_name='身高')\\n    numberfield_hight_standard_value = models.IntegerField(null=True, blank=True, verbose_name='身高标准值')\\n    numberfield_hight_up_limit = models.IntegerField(null=True, blank=True, verbose_name='身高上限')\\n    numberfield_hight_down_limit = models.IntegerField(null=True, blank=True, verbose_name='身高下限')\\n    numberfield_weight = models.IntegerField(null=True, blank=True, verbose_name='体重')\\n    numberfield_weight_standard_value = models.IntegerField(null=True, blank=True, verbose_name='体重标准值')\\n    numberfield_weight_up_limit = models.IntegerField(null=True, blank=True, verbose_name='体重上限')\\n    numberfield_weight_down_limit = models.IntegerField(null=True, blank=True, verbose_name='体重下限')\\n    numberfield_body_mass_index = models.IntegerField(null=True, blank=True, verbose_name='体质指数')\\n    numberfield_body_mass_index_standard_value = models.IntegerField(null=True, blank=True, verbose_name='体质指数标准值')\\n    numberfield_body_mass_index_up_limit = models.IntegerField(default=23.9, null=True, blank=True, verbose_name='体质指数上限')\\n    numberfield_body_mass_index_down_limit = models.IntegerField(default=18.5, null=True, blank=True, verbose_name='体质指数下限')\\n    class Meta:\\n        verbose_name = '体格检查/部分健康评估'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A3101_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A3101_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nadmin.site.register(A3101)\\n\", \"forms\": \"\\nclass A3101_ModelForm(ModelForm):\\n    class Meta:\\n        model = A3101\\n        fields = ['numberfield_hight', 'numberfield_weight', 'numberfield_body_mass_index', ]\\n        \\n    \"}",
+            "script": "{\"models\": \"class A3101(HsscBuessinessFormBase):\\n    numberfield_hight = models.IntegerField(null=True, blank=True, verbose_name='身高')\\n    numberfield_hight_standard_value = models.IntegerField(null=True, blank=True, verbose_name='身高标准值')\\n    numberfield_hight_up_limit = models.IntegerField(null=True, blank=True, verbose_name='身高上限')\\n    numberfield_hight_down_limit = models.IntegerField(null=True, blank=True, verbose_name='身高下限')\\n    numberfield_weight = models.IntegerField(null=True, blank=True, verbose_name='体重')\\n    numberfield_weight_standard_value = models.IntegerField(null=True, blank=True, verbose_name='体重标准值')\\n    numberfield_weight_up_limit = models.IntegerField(null=True, blank=True, verbose_name='体重上限')\\n    numberfield_weight_down_limit = models.IntegerField(null=True, blank=True, verbose_name='体重下限')\\n    numberfield_body_mass_index = models.IntegerField(null=True, blank=True, verbose_name='体质指数')\\n    numberfield_body_mass_index_standard_value = models.IntegerField(null=True, blank=True, verbose_name='体质指数标准值')\\n    numberfield_body_mass_index_up_limit = models.IntegerField(default=23.9, null=True, blank=True, verbose_name='体质指数上限')\\n    numberfield_body_mass_index_down_limit = models.IntegerField(default=18.5, null=True, blank=True, verbose_name='体质指数下限')\\n    class Meta:\\n        verbose_name = '身高体重测量'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A3101_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A3101_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nadmin.site.register(A3101)\\n\", \"forms\": \"\\nclass A3101_ModelForm(ModelForm):\\n    class Meta:\\n        model = A3101\\n        fields = ['numberfield_hight', 'numberfield_weight', 'numberfield_body_mass_index', ]\\n        \\n    \"}",
             "components": [
                 "deb08872-9aa1-11ec-bde1-8a6e55faf877",
                 "deb135ec-9aa1-11ec-bde1-8a6e55faf877",
                 "deb1ef6e-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "过敏史",
@@ -3231,10 +3229,7 @@
             "components": [
                 "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "糖尿病诊断表",
@@ -3251,10 +3246,7 @@
                 "5b880f4c-9e93-11ec-b91b-aa434405c3fc",
                 "da184332-9e92-11ec-a013-aa434405c3fc"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "家族病史",
@@ -3268,10 +3260,7 @@
             "components": [
                 "ded3d502-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "生命体征检查",
@@ -3287,10 +3276,7 @@
                 "deaf1ae6-9aa1-11ec-bde1-8a6e55faf877",
                 "deafc9f0-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "院外咨询",
@@ -3305,10 +3291,7 @@
                 "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
                 "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "听力检查",
@@ -3323,10 +3306,7 @@
                 "deda1db8-9aa1-11ec-bde1-8a6e55faf877",
                 "dedb0962-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "营养干预",
@@ -3340,10 +3320,7 @@
             "components": [
                 "abc77c0a-a4c3-11ec-8f29-cecec7a0e139"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "个人适应能力评估",
@@ -3359,10 +3336,7 @@
                 "dec7ec2e-9aa1-11ec-bde1-8a6e55faf877",
                 "dec8f9a2-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "空腹血糖检查",
@@ -3376,10 +3350,7 @@
             "components": [
                 "deb59434-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "医生",
@@ -3395,10 +3366,7 @@
                 "dea7211a-9aa1-11ec-bde1-8a6e55faf877",
                 "dea7d614-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de8b82fc-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "疾病史",
@@ -3413,10 +3381,7 @@
                 "deb70576-9aa1-11ec-bde1-8a6e55faf877",
                 "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "医生注册",
@@ -3443,10 +3408,7 @@
                 "ded78062-9aa1-11ec-bde1-8a6e55faf877",
                 "ded69094-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de8b82fc-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "运动干预",
@@ -3460,10 +3422,7 @@
             "components": [
                 "bcb64276-a4c3-11ec-a7bb-cecec7a0e139"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "门诊医生问诊",
@@ -3478,10 +3437,7 @@
                 "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
                 "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "手术史",
@@ -3496,10 +3452,7 @@
                 "deb645d2-9aa1-11ec-bde1-8a6e55faf877",
                 "dedbea3a-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "糖尿病查体表",
@@ -3515,10 +3468,7 @@
                 "ded859ba-9aa1-11ec-bde1-8a6e55faf877",
                 "ded93d62-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "个人身体健康评估",
@@ -3536,10 +3486,7 @@
                 "decf4d66-9aa1-11ec-bde1-8a6e55faf877",
                 "ded02d26-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "血压监测",
@@ -3554,10 +3501,7 @@
                 "deb35b74-9aa1-11ec-bde1-8a6e55faf877",
                 "deb416fe-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "口腔检查",
@@ -3573,10 +3517,7 @@
                 "deddcb16-9aa1-11ec-bde1-8a6e55faf877",
                 "dedebd28-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "视力检查",
@@ -3591,10 +3532,7 @@
                 "dea8864a-9aa1-11ec-bde1-8a6e55faf877",
                 "dea93de2-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "门诊分诊",
@@ -3606,10 +3544,7 @@
             "meta_data": "{\n    \"name\": \"A6502\",\n    \"label\": \"门诊分诊\",\n    \"hssc_id\": \"0d1b5014-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_yu_yue_que_ren\",\n            \"label\": \"签到确认\",\n            \"hssc_id\": \"de98e56e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"boolean\"\n        }\n    ]\n}",
             "script": null,
             "components": [],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "外伤史",
@@ -3624,10 +3559,7 @@
                 "deb645d2-9aa1-11ec-bde1-8a6e55faf877",
                 "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "用户登录",
@@ -3642,10 +3574,7 @@
                 "dea654a6-9aa1-11ec-bde1-8a6e55faf877",
                 "dea7211a-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "输血史",
@@ -3660,10 +3589,7 @@
                 "deb2a274-9aa1-11ec-bde1-8a6e55faf877",
                 "deb645d2-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "用药调查表",
@@ -3678,10 +3604,7 @@
                 "deaccd90-9aa1-11ec-bde1-8a6e55faf877",
                 "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "个人基本信息",
@@ -3712,10 +3635,7 @@
                 "dec46bf8-9aa1-11ec-bde1-8a6e55faf877",
                 "ded3d502-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "用户注册",
@@ -3737,10 +3657,7 @@
                 "dea437ac-9aa1-11ec-bde1-8a6e55faf877",
                 "deb7b0ac-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "糖化血红蛋白检查",
@@ -3754,10 +3671,7 @@
             "components": [
                 "deb4e084-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "院外辅助问诊",
@@ -3772,10 +3686,7 @@
                 "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
                 "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "代人预约挂号",
@@ -3790,10 +3701,7 @@
                 "dea7d614-9aa1-11ec-bde1-8a6e55faf877",
                 "deb85c6e-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "糖尿病自我监测",
@@ -3807,10 +3715,7 @@
             "components": [
                 "deb59434-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "健康教育",
@@ -3824,10 +3729,7 @@
             "components": [
                 "cdfeff00-a4c3-11ec-8f29-cecec7a0e139"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "眼底检查",
@@ -3841,10 +3743,7 @@
             "components": [
                 "ded5a800-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "药物/处方/新治疗/注射",
@@ -3858,10 +3757,7 @@
             "components": [
                 "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "院内辅助问诊",
@@ -3876,10 +3772,7 @@
                 "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
                 "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "运动能力调查",
@@ -3893,10 +3786,7 @@
             "components": [
                 "dec54e10-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "个人健康行为调查",
@@ -3913,10 +3803,7 @@
                 "decabc92-9aa1-11ec-bde1-8a6e55faf877",
                 "decba0ee-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "社会环境评估",
@@ -3931,10 +3818,7 @@
                 "ded110f6-9aa1-11ec-bde1-8a6e55faf877",
                 "ded206d2-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "药事服务",
@@ -3950,10 +3834,7 @@
                 "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
                 "01ae1278-a659-11ec-9221-f6197eef9f67"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "体格检查/完整的健康评估",
@@ -3980,10 +3861,7 @@
                 "deddcb16-9aa1-11ec-bde1-8a6e55faf877",
                 "dedebd28-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "个人心理综合素质调查",
@@ -3999,10 +3877,7 @@
                 "5024b3ea-a52c-11ec-9b14-2ec403f6c47b",
                 "5977c26a-a52d-11ec-a478-2ec403f6c47b"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "糖尿病一般随访",
@@ -4044,10 +3919,7 @@
                 "ded859ba-9aa1-11ec-bde1-8a6e55faf877",
                 "ded93d62-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "重大生活事件调查",
@@ -4062,10 +3934,7 @@
                 "deb645d2-9aa1-11ec-bde1-8a6e55faf877",
                 "dedfa5b2-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "糖尿病专用问诊",
@@ -4080,10 +3949,7 @@
                 "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
                 "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "家庭医生签约",
@@ -4091,7 +3957,7 @@
             "hssc_id": "d0ce09ec-aa45-11ec-9f15-ee7ade4bced6",
             "pym": "jtysqy",
             "name_icpc": "Z6261",
-            "description": "",
+            "description": null,
             "meta_data": "{\n    \"name\": \"Z6261\",\n    \"label\": \"家庭医生签约\",\n    \"hssc_id\": \"d0ce09ec-aa45-11ec-9f15-ee7ade4bced6\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_jia_ting_qian_yue_fu_wu_xie_yi\",\n            \"label\": \"家庭签约服务协议\",\n            \"hssc_id\": \"5ff67f9c-aa45-11ec-8f0c-ee7ade4bced6\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_qian_yue_que_ren\",\n            \"label\": \"签约确认\",\n            \"hssc_id\": \"b19d4830-aa45-11ec-8f0c-ee7ade4bced6\",\n            \"type\": \"Qian_yue_que_ren\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_ze_ren_ren\",\n            \"label\": \"责任人\",\n            \"hssc_id\": \"401d33d8-aa49-11ec-9f15-ee7ade4bced6\",\n            \"type\": \"Staff\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
             "script": "{\"models\": \"class Z6261(HsscBuessinessFormBase):\\n    boolfield_jia_ting_qian_yue_fu_wu_xie_yi = models.CharField(max_length=255, null=True, blank=True, verbose_name='家庭签约服务协议')\\n    boolfield_qian_yue_que_ren = models.ForeignKey(Qian_yue_que_ren, related_name='qian_yue_que_ren_for_boolfield_qian_yue_que_ren_Z6261', on_delete=models.CASCADE, null=True, blank=True, verbose_name='签约确认')\\n    boolfield_ze_ren_ren = models.ForeignKey(Staff, related_name='staff_for_boolfield_ze_ren_ren_Z6261', on_delete=models.CASCADE, null=True, blank=True, verbose_name='责任人')\\n    class Meta:\\n        verbose_name = '家庭医生签约'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('Z6261_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('Z6261_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\n@admin.register(Z6261)\\nclass Z6261Admin(admin.ModelAdmin):\\n    autocomplete_fields = [\\\"boolfield_qian_yue_que_ren\\\", \\\"boolfield_ze_ren_ren\\\", ]\\n\", \"forms\": \"\\nclass Z6261_ModelForm(ModelForm):\\n    class Meta:\\n        model = Z6261\\n        fields = ['boolfield_jia_ting_qian_yue_fu_wu_xie_yi', 'boolfield_qian_yue_que_ren', 'boolfield_ze_ren_ren', ]\\n        widgets = {'boolfield_qian_yue_que_ren': Select, 'boolfield_ze_ren_ren': Select, }\\n    \"}",
             "components": [
@@ -4099,10 +3965,7 @@
                 "b19d4830-aa45-11ec-8f0c-ee7ade4bced6",
                 "401d33d8-aa49-11ec-9f15-ee7ade4bced6"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
+            "components_groups": []
         },
         {
             "label": "监测评估",
@@ -4110,410 +3973,13 @@
             "hssc_id": "bbf2ba74-aa48-11ec-8f0c-ee7ade4bced6",
             "pym": "jcpg",
             "name_icpc": "A6220",
-            "description": "",
-            "meta_data": "{\n    \"name\": \"A6220\",\n    \"label\": \"监测评估\",\n    \"hssc_id\": \"bbf2ba74-aa48-11ec-8f0c-ee7ade4bced6\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_yuan_wai_jian_kang_ping_gu\",\n            \"label\": \"院外随访评估\",\n            \"hssc_id\": \"4bf17ad0-aa48-11ec-9f15-ee7ade4bced6\",\n            \"type\": \"Sui_fang_ping_gu\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A6220(HsscBuessinessFormBase):\\n    boolfield_yuan_wai_jian_kang_ping_gu = models.ForeignKey(Sui_fang_ping_gu, related_name='sui_fang_ping_gu_for_boolfield_yuan_wai_jian_kang_ping_gu_A6220', on_delete=models.CASCADE, null=True, blank=True, verbose_name='院外随访评估')\\n    class Meta:\\n        verbose_name = '院外随访评估'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6220_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6220_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\n@admin.register(A6220)\\nclass A6220Admin(admin.ModelAdmin):\\n    autocomplete_fields = [\\\"boolfield_yuan_wai_jian_kang_ping_gu\\\", ]\\n\", \"forms\": \"\\nclass A6220_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6220\\n        fields = ['boolfield_yuan_wai_jian_kang_ping_gu', ]\\n        widgets = {'boolfield_yuan_wai_jian_kang_ping_gu': Select, }\\n    \"}",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"A6220\",\n    \"label\": \"监测评估\",\n    \"hssc_id\": \"bbf2ba74-aa48-11ec-8f0c-ee7ade4bced6\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_yuan_wai_jian_kang_ping_gu\",\n            \"label\": \"监测评估\",\n            \"hssc_id\": \"4bf17ad0-aa48-11ec-9f15-ee7ade4bced6\",\n            \"type\": \"Sui_fang_ping_gu\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class A6220(HsscBuessinessFormBase):\\n    boolfield_yuan_wai_jian_kang_ping_gu = models.ForeignKey(Sui_fang_ping_gu, related_name='sui_fang_ping_gu_for_boolfield_yuan_wai_jian_kang_ping_gu_A6220', on_delete=models.CASCADE, null=True, blank=True, verbose_name='监测评估')\\n    class Meta:\\n        verbose_name = '监测评估'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6220_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6220_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\n@admin.register(A6220)\\nclass A6220Admin(admin.ModelAdmin):\\n    autocomplete_fields = [\\\"boolfield_yuan_wai_jian_kang_ping_gu\\\", ]\\n\", \"forms\": \"\\nclass A6220_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6220\\n        fields = ['boolfield_yuan_wai_jian_kang_ping_gu', ]\\n        widgets = {'boolfield_yuan_wai_jian_kang_ping_gu': Select, }\\n    \"}",
             "components": [
                 "4bf17ad0-aa48-11ec-9f15-ee7ade4bced6"
             ],
-            "components_groups": [],
-            "managed_entities": [
-                "de87e7d2-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        }
-    ],
-    "formentityship": [
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "d0d5dec4-aa45-11ec-9f15-ee7ade4bced6",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "d0ce09ec-aa45-11ec-9f15-ee7ade4bced6",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9b8dba-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de8b82fc-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0bbc9e76-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9bb272-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de8b82fc-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0bcfcb9a-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9ffbd4-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0ce866ae-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9a0c4c-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0b9d151a-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9a2dda-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0bd6215c-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9a7e3e-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0b5c89be-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9aa0c6-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0b54db10-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9ac06a-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0bfb5648-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9adff0-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0bcb1fc8-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9afdb4-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0bb0c86c-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9b1b6e-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0bdf33a0-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9b3ff4-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0b648650-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9b6812-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0b6e02b6-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9bd6c6-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0be59eac-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9bfa7a-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0beb43fc-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9c1c8a-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0bf1f86e-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9c3d3c-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0b787836-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9c7d4c-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0b86f50a-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9c9cbe-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0ba2ba9c-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9cbbf4-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0b8fdf12-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9cd8a0-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0b96f9f0-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9cf3ee-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0c2bb0a4-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9d0ec4-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0ba83c56-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9d29f4-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0c00501c-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9d7c74-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0c3bd51a-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9d9772-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0c4fb9cc-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9db2ac-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0c314e38-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "2f9043fa-a82a-11ec-bb27-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": true
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9dea38-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0c440b9a-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9e2002-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0cd1dcea-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9e3b46-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9e5964-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0c75d8a0-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9e78d6-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0c620622-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9e958c-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0c704264-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9f0116-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0cc8fe04-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9f36e0-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0c82d69a-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9f51a2-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0c7bdb06-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9f878a-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0c89031c-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9fa260-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0c940c94-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9fc02e-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0ca96526-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec9fdc58-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "eca0174a-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "44fd7242-a4c6-11ec-a7bb-cecec7a0e139",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "eca032d4-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0d22201a-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "eca04dfa-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "7f149618-a4c6-11ec-a7bb-cecec7a0e139",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "eca068da-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0d3821bc-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "eca0834c-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "0d1b5014-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "eca09dd2-a82a-11ec-84f4-ee2fa480f37c",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "69c663ea-a4c6-11ec-a7bb-cecec7a0e139",
-            "is_base": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "bbf7b7d6-aa48-11ec-8f0c-ee7ade4bced6",
-            "entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "form": "bbf2ba74-aa48-11ec-8f0c-ee7ade4bced6",
-            "is_base": false
+            "components_groups": []
         }
     ],
     "operation": [
@@ -5042,15 +4508,15 @@
                 "0b54db10-9e23-11ec-aa2c-fe35a7065cdd",
                 "0b96f9f0-9e23-11ec-aa2c-fe35a7065cdd",
                 "0b648650-9e23-11ec-aa2c-fe35a7065cdd",
+                "0ca96526-9e23-11ec-aa2c-fe35a7065cdd",
                 "0beb43fc-9e23-11ec-aa2c-fe35a7065cdd",
                 "0b787836-9e23-11ec-aa2c-fe35a7065cdd",
                 "0ba83c56-9e23-11ec-aa2c-fe35a7065cdd",
                 "0ba2ba9c-9e23-11ec-aa2c-fe35a7065cdd",
                 "0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd",
                 "0b6e02b6-9e23-11ec-aa2c-fe35a7065cdd",
-                "0ca96526-9e23-11ec-aa2c-fe35a7065cdd",
-                "0b5c89be-9e23-11ec-aa2c-fe35a7065cdd",
-                "0b86f50a-9e23-11ec-aa2c-fe35a7065cdd"
+                "0b86f50a-9e23-11ec-aa2c-fe35a7065cdd",
+                "0b5c89be-9e23-11ec-aa2c-fe35a7065cdd"
             ],
             "group": []
         }
@@ -5338,7 +4804,7 @@
             "name": "tang_niao_bing_tong_zhong_du_zhen_duan_gui_ze",
             "hssc_id": "711dadc4-abdd-11ec-a639-1ac10aeebbc4",
             "description": "症状 == '昏睡，呕吐，腹痛，酮尿' and 疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病'",
-            "detection_scope": 0,
+            "detection_scope": 1,
             "weight": 1,
             "expression": "deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '昏睡，呕吐，腹痛，酮尿' and ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病'"
         },
@@ -5347,7 +4813,7 @@
             "name": "gao_xue_tang_zhen_duan_gui_ze",
             "hssc_id": "35f1165a-abe2-11ec-bf5e-1ac10aeebbc4",
             "description": "症状 == '疲乏' and 疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病'",
-            "detection_scope": 0,
+            "detection_scope": 1,
             "weight": 1,
             "expression": "deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '疲乏' and ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病'"
         },
@@ -5356,7 +4822,7 @@
             "name": "tang_niao_bing_shen_bing_zhen_duan_gui_ze",
             "hssc_id": "6909de64-abe2-11ec-a639-1ac10aeebbc4",
             "description": "疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and 尿微量白蛋白 > 20",
-            "detection_scope": 0,
+            "detection_scope": 1,
             "weight": 1,
             "expression": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and 7b5ee5d2-ad5e-11ec-90c1-cad859921f34 > 20"
         },
@@ -5365,7 +4831,7 @@
             "name": "tang_niao_bing_xue_guan_bing_bian_zhou_wei_shen_jing_yan_zhen_duan_gui_ze",
             "hssc_id": "e3563d98-abe2-11ec-bf5e-1ac10aeebbc4",
             "description": "疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and 症状 == '足痛'",
-            "detection_scope": 0,
+            "detection_scope": 1,
             "weight": 1,
             "expression": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '足痛'"
         }
@@ -5377,9 +4843,9 @@
             "hssc_id": "a9235528-abda-11ec-a639-1ac10aeebbc4",
             "event_rule": "a922d698-abda-11ec-a639-1ac10aeebbc4",
             "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
-            "operator": 0,
+            "operator": null,
             "value": "烦渴，多尿，体重减轻",
-            "connection_operator": 0
+            "connection_operator": null
         },
         {
             "label": null,
@@ -5387,9 +4853,9 @@
             "hssc_id": "9dd91d40-abdc-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
             "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
-            "operator": 0,
+            "operator": null,
             "value": "烦渴，多尿",
-            "connection_operator": 0
+            "connection_operator": null
         },
         {
             "label": null,
@@ -5407,9 +4873,9 @@
             "hssc_id": "9dd9862c-abdc-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
             "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
-            "operator": 0,
+            "operator": null,
             "value": "烦渴，皮肤感染",
-            "connection_operator": 0
+            "connection_operator": null
         },
         {
             "label": null,
@@ -5427,9 +4893,9 @@
             "hssc_id": "9dd9dc8a-abdc-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
             "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
-            "operator": 0,
+            "operator": null,
             "value": "多尿，皮肤感染",
-            "connection_operator": 0
+            "connection_operator": null
         },
         {
             "label": null,
@@ -5437,9 +4903,9 @@
             "hssc_id": "711df180-abdd-11ec-a639-1ac10aeebbc4",
             "event_rule": "711dadc4-abdd-11ec-a639-1ac10aeebbc4",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 0,
+            "operator": null,
             "value": "昏睡，呕吐，腹痛，酮尿",
-            "connection_operator": 0
+            "connection_operator": null
         },
         {
             "label": null,
@@ -5457,9 +4923,9 @@
             "hssc_id": "35f14f9e-abe2-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "35f1165a-abe2-11ec-bf5e-1ac10aeebbc4",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 0,
+            "operator": null,
             "value": "疲乏",
-            "connection_operator": 0
+            "connection_operator": null
         },
         {
             "label": null,
@@ -5479,7 +4945,7 @@
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
             "operator": 6,
             "value": "非胰岛素依赖糖尿病，胰岛素依赖糖尿病",
-            "connection_operator": 0
+            "connection_operator": null
         },
         {
             "label": null,
@@ -5489,7 +4955,7 @@
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
             "operator": 6,
             "value": "非胰岛素依赖糖尿病，胰岛素依赖糖尿病",
-            "connection_operator": 0
+            "connection_operator": null
         },
         {
             "label": null,
@@ -5497,7 +4963,7 @@
             "hssc_id": "e356ace2-abe2-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "e3563d98-abe2-11ec-bf5e-1ac10aeebbc4",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 0,
+            "operator": null,
             "value": "足痛",
             "connection_operator": null
         },
@@ -5522,16 +4988,6 @@
             "connection_operator": null
         }
     ],
-    "intervalrule": [
-        {
-            "label": "大于3天",
-            "name": "da_yu_3_tian",
-            "hssc_id": "e3df3d1a-9bc9-11ec-a754-620d205b9455",
-            "rule": 2,
-            "interval": "3 days, 0:00:00",
-            "description": null
-        }
-    ],
     "service": [
         {
             "hssc_id": "9cda0454-a416-11ec-bfc4-ee2fa480f37c",
@@ -5539,8 +4995,6 @@
             "name": "chang_gui_cha_ti_biao",
             "name_icpc": null,
             "label": "门诊分诊",
-            "first_operation": "e0371aa8-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": "e02ee856-9aa1-11ec-bde1-8a6e55faf877",
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -5570,8 +5024,6 @@
             "name": "tang_niao_bing_cha_ti_biao",
             "name_icpc": null,
             "label": "糖尿病查体表",
-            "first_operation": "e02f65c4-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -5599,8 +5051,6 @@
             "name": "men_zhen_chu_fang_biao",
             "name_icpc": null,
             "label": "药物干预",
-            "first_operation": "e0305c18-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -5630,8 +5080,6 @@
             "name": "user_registry",
             "name_icpc": null,
             "label": "用户注册",
-            "first_operation": "e0317224-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -5661,8 +5109,6 @@
             "name": "user_login",
             "name_icpc": null,
             "label": "用户登录",
-            "first_operation": "e03291f4-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -5690,8 +5136,6 @@
             "name": "doctor_login",
             "name_icpc": null,
             "label": "员工登录",
-            "first_operation": "e032db46-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -5719,8 +5163,6 @@
             "name": "A6501",
             "name_icpc": "A6501",
             "label": "代人预约挂号",
-            "first_operation": "e035d648-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -5746,44 +5188,11 @@
             ]
         },
         {
-            "hssc_id": "9cdd6ca2-a416-11ec-bfc4-ee2fa480f37c",
-            "pym": "mzfz",
-            "name": "A6502",
-            "name_icpc": "A6502",
-            "label": "门诊分诊",
-            "first_operation": "e0371aa8-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": "e02ee856-9aa1-11ec-bde1-8a6e55faf877",
-            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "begin_time_setting": 0,
-            "execution_time_frame": null,
-            "awaiting_time_frame": null,
-            "priority": 3,
-            "history_services_display": 0,
-            "enable_recommanded_list": true,
-            "enable_queue_counter": true,
-            "suppliers": null,
-            "not_suitable": null,
-            "time_limits": null,
-            "working_hours": null,
-            "frequency": null,
-            "cost": null,
-            "load_feedback": false,
-            "resource_materials": null,
-            "resource_devices": null,
-            "resource_knowledge": null,
-            "script": "{\"views\": \"\\nclass A6502_CreateView(CreateView):\\n    model = A6502\\n    # basic_personal_information = Basic_personal_information.objects.get(customer=customer)\\n    context = {}\\n\\n    def get_context_data(self, **kwargs):\\n        context = super(A6502_CreateView, self).get_context_data(**kwargs)\\n        base_form = A6203_ModelForm(instance=self.customer, prefix=\\\"base_form\\\")\\n        if self.request.method == 'POST':\\n            attribute_form = A6502_ModelForm(self.request.POST, prefix=\\\"attribute_form\\\")\\n        else:\\n            attribute_form = A6502_ModelForm(prefix=\\\"attribute_form\\\")\\n        # context\\n        context['base_form'] = base_form\\n        context['attribute_form'] = attribute_form\\n        context['user'] = self.request.user\\n        return context\\n\\n    def form_valid(self, form):\\n        context = self.get_context_data()\\n        customer = Customer.objects.get(user=context['user'])\\n        operator = Staff.objects.get(user=context['user'])\\n        # form_valid\\n        f = context['attribute_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        return super(A6502_ModelForm, self).form_valid(form)\\n\", \"urls\": \"\\n    path('A6502/create', A6502_CreateView.as_view(), name='A6502_create_url'),\", \"templates\": [{\"A6502_create.html\": \"{% extends \\\"base.html\\\" %}\\n\\n    {% load crispy_forms_tags %}\\n\\n    {% block content %}\\n    \\n        <form action={% url 'A6502_create_url' %} method='POST' enctype='multipart/form-data'> \\n            {% csrf_token %}\\n                \\n                        <h5>A6502</h5>\\n                        {{ A6502.as_p }}\\n                        <hr>\\n            <input type=\\\"submit\\\" value=\\\"提交\\\" /> \\n        </form>\\n\\n    {% endblock %}\\n    \"}, {\"A6502_update.html\": \"{% extends \\\"base.html\\\" %}\\n\\n    {% load crispy_forms_tags %}\\n\\n    {% block content %}\\n    \\n        <form action={% url 'A6502_update_url' proc_id %} method='POST' enctype='multipart/form-data'> \\n            {% csrf_token %}\\n                \\n                        <h5>A6502</h5>\\n                        {{ A6502.as_p }}\\n                        <hr>\\n            <input type=\\\"submit\\\" value=\\\"提交\\\" /> \\n        </form>\\n\\n    {% endblock %}\\n    \"}]}",
-            "group": [
-                "de194c50-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
             "hssc_id": "9cddf348-a416-11ec-bfc4-ee2fa480f37c",
             "pym": "mzfzjc",
             "name": "men_zhen_fu_zhu_jian_cha",
             "name_icpc": null,
             "label": "门诊辅助检查",
-            "first_operation": "e0385d3c-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -5813,8 +5222,6 @@
             "name": "tang_niao_bing_zhuan_yong_wen_zhen",
             "name_icpc": null,
             "label": "糖尿病专用问诊",
-            "first_operation": "e0398a04-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -5844,8 +5251,6 @@
             "name": "yao_shi_fu_wu",
             "name_icpc": null,
             "label": "药事服务",
-            "first_operation": "e03abda2-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -5875,8 +5280,6 @@
             "name": "tang_niao_bing_zi_wo_jian_ce",
             "name_icpc": null,
             "label": "糖尿病自我监测",
-            "first_operation": "e03bfa96-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -5906,8 +5309,6 @@
             "name": "yuan_nei_fu_zhu_wen_zhen",
             "name_icpc": null,
             "label": "院内辅助问诊",
-            "first_operation": "e03d308c-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -5937,8 +5338,6 @@
             "name": "A6201",
             "name_icpc": "A6201",
             "label": "院外咨询",
-            "first_operation": "e03e65ba-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -5968,8 +5367,6 @@
             "name": "men_zhen_yi_sheng_wen_zhen",
             "name_icpc": null,
             "label": "门诊医生问诊",
-            "first_operation": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -5999,8 +5396,6 @@
             "name": "T8901",
             "name_icpc": "T8901",
             "label": "胰岛素依赖性糖尿病",
-            "first_operation": "e040d160-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -6030,8 +5425,6 @@
             "name": "T6301",
             "name_icpc": "T6301",
             "label": "糖尿病一般随访",
-            "first_operation": "e0420c06-9aa1-11ec-bde1-8a6e55faf877",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -6061,8 +5454,6 @@
             "name": "A6202",
             "name_icpc": "A6202",
             "label": "院外辅助问诊",
-            "first_operation": "1a3b2382-9b67-11ec-94eb-022c611b2490",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -6092,8 +5483,6 @@
             "name": "A6220",
             "name_icpc": "A6220",
             "label": "监测评估",
-            "first_operation": "66859d9c-aa55-11ec-9f15-ee7ade4bced6",
-            "last_operation": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "begin_time_setting": 0,
             "execution_time_frame": null,
@@ -6119,6 +5508,40 @@
                 "de19d6a2-9aa1-11ec-bde1-8a6e55faf877",
                 "de1b05cc-9aa1-11ec-bde1-8a6e55faf877"
             ]
+        },
+        {
+            "hssc_id": "8ad60184-af6b-11ec-82fd-4889e7cf38c9",
+            "pym": "jljmjkda",
+            "name": "A6299",
+            "name_icpc": "A6299",
+            "label": "建立居民健康档案",
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
+            "begin_time_setting": 0,
+            "execution_time_frame": null,
+            "awaiting_time_frame": null,
+            "priority": 3,
+            "history_services_display": 0,
+            "enable_recommanded_list": true,
+            "enable_queue_counter": true,
+            "suppliers": null,
+            "not_suitable": null,
+            "time_limits": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "script": null,
+            "group": [
+                "de18f0fc-9aa1-11ec-bde1-8a6e55faf877",
+                "de194c50-9aa1-11ec-bde1-8a6e55faf877",
+                "de19d6a2-9aa1-11ec-bde1-8a6e55faf877",
+                "de1b05cc-9aa1-11ec-bde1-8a6e55faf877",
+                "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877",
+                "de1ca0c6-9aa1-11ec-bde1-8a6e55faf877"
+            ]
         }
     ],
     "operationssetting": [
@@ -6131,20 +5554,7 @@
             "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
             "system_operand": "e0dc2719-a42f-11ec-905b-4889e7cf38c9",
             "next_operation": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
-            "passing_data": 2,
-            "interval_rule": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "9825cf9a-a66b-11ec-a3d3-f6197eef9f67",
-            "service": "9cdd6ca2-a416-11ec-bfc4-ee2fa480f37c",
-            "operation": "e02ee856-9aa1-11ec-bde1-8a6e55faf877",
-            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
-            "system_operand": "e0dc2719-a42f-11ec-905b-4889e7cf38c9",
-            "next_operation": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
-            "passing_data": 2,
-            "interval_rule": null
+            "passing_data": 2
         },
         {
             "label": null,
@@ -6155,8 +5565,7 @@
             "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
             "system_operand": "e0dd3887-a42f-11ec-85a9-4889e7cf38c9",
             "next_operation": "e03d308c-9aa1-11ec-bde1-8a6e55faf877",
-            "passing_data": 2,
-            "interval_rule": null
+            "passing_data": 2
         },
         {
             "label": null,
@@ -6167,8 +5576,7 @@
             "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
             "system_operand": "e0dd3887-a42f-11ec-85a9-4889e7cf38c9",
             "next_operation": "e02ee856-9aa1-11ec-bde1-8a6e55faf877",
-            "passing_data": 2,
-            "interval_rule": null
+            "passing_data": 2
         },
         {
             "label": null,
@@ -6179,8 +5587,7 @@
             "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6191,8 +5598,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6203,8 +5609,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6215,8 +5620,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6227,8 +5631,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6239,8 +5642,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6251,8 +5653,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6263,8 +5664,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6275,8 +5675,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6287,8 +5686,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6299,8 +5697,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6311,8 +5708,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6323,8 +5719,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6335,8 +5730,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6347,8 +5741,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6359,8 +5752,7 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
         },
         {
             "label": null,
@@ -6371,8 +5763,18 @@
             "event_rule": null,
             "system_operand": null,
             "next_operation": null,
-            "passing_data": 0,
-            "interval_rule": null
+            "passing_data": 0
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "8ad71393-af6b-11ec-b645-4889e7cf38c9",
+            "service": "8ad60184-af6b-11ec-82fd-4889e7cf38c9",
+            "operation": "9582b822-ab23-11ec-bf5e-1ac10aeebbc4",
+            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
+            "system_operand": null,
+            "next_operation": null,
+            "passing_data": 0
         }
     ],
     "servicepackage": [
@@ -6382,12 +5784,15 @@
             "hssc_id": "e4fbb6c6-aa54-11ec-8f0c-ee7ade4bced6",
             "pym": "mzfw",
             "name_icpc": null,
-            "first_service": "9cdce0de-a416-11ec-bfc4-ee2fa480f37c",
-            "last_service": "9ce0eb8e-a416-11ec-bfc4-ee2fa480f37c",
             "begin_time_setting": 0,
             "duration": null,
             "execution_time_frame": null,
-            "awaiting_time_frame": null
+            "awaiting_time_frame": null,
+            "services": [
+                "9cda0454-a416-11ec-bfc4-ee2fa480f37c",
+                "9cdce0de-a416-11ec-bfc4-ee2fa480f37c",
+                "9ce0eb8e-a416-11ec-bfc4-ee2fa480f37c"
+            ]
         },
         {
             "label": "糖尿病早期监测服务",
@@ -6395,131 +5800,116 @@
             "hssc_id": "bb88332a-aa57-11ec-8f0c-ee7ade4bced6",
             "pym": "tnbzqjcfw",
             "name_icpc": null,
-            "first_service": "9cdf64c6-a416-11ec-bfc4-ee2fa480f37c",
-            "last_service": "ca50d78a-abd9-11ec-a639-1ac10aeebbc4",
             "begin_time_setting": 0,
             "duration": "90 days, 0:00:00",
             "execution_time_frame": null,
-            "awaiting_time_frame": null
+            "awaiting_time_frame": null,
+            "services": [
+                "9cdf64c6-a416-11ec-bfc4-ee2fa480f37c",
+                "9ce1e05c-a416-11ec-bfc4-ee2fa480f37c",
+                "ca50d78a-abd9-11ec-a639-1ac10aeebbc4"
+            ]
         }
     ],
-    "servicessetting": [
+    "servicepackagedetail": [
         {
             "label": null,
             "name": null,
-            "hssc_id": "e4fc2138-aa54-11ec-8f0c-ee7ade4bced6",
+            "hssc_id": "f25e4dde-af6b-11ec-ba68-4889e7cf38c9",
+            "pym": null,
             "servicepackage": "e4fbb6c6-aa54-11ec-8f0c-ee7ade4bced6",
             "service": "9cdce0de-a416-11ec-bfc4-ee2fa480f37c",
             "cycle_option": 0,
             "cycle_times": 1,
+            "reference_start_tim": null,
             "duration": null,
-            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
-            "system_operand": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
-            "next_service": "9cda0454-a416-11ec-bfc4-ee2fa480f37c",
-            "passing_data": 2,
-            "complete_feedback": 0,
-            "reminders": 0,
-            "message_content": null,
-            "interval_rule": null,
             "check_awaiting_timeout": false
         },
         {
             "label": null,
             "name": null,
-            "hssc_id": "e4fc886c-aa54-11ec-8f0c-ee7ade4bced6",
+            "hssc_id": "f25e9c9e-af6b-11ec-a47c-4889e7cf38c9",
+            "pym": null,
+            "servicepackage": "e4fbb6c6-aa54-11ec-8f0c-ee7ade4bced6",
+            "service": "9cda0454-a416-11ec-bfc4-ee2fa480f37c",
+            "cycle_option": 0,
+            "cycle_times": 1,
+            "reference_start_tim": null,
+            "duration": null,
+            "check_awaiting_timeout": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "f25e9c9f-af6b-11ec-8edc-4889e7cf38c9",
+            "pym": null,
             "servicepackage": "e4fbb6c6-aa54-11ec-8f0c-ee7ade4bced6",
             "service": "9ce0eb8e-a416-11ec-bfc4-ee2fa480f37c",
             "cycle_option": 0,
             "cycle_times": 1,
+            "reference_start_tim": null,
             "duration": null,
-            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
-            "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
-            "next_service": null,
-            "passing_data": 0,
-            "complete_feedback": 0,
-            "reminders": 0,
-            "message_content": null,
-            "interval_rule": null,
             "check_awaiting_timeout": false
         },
         {
             "label": null,
             "name": null,
-            "hssc_id": "000085d4-aa58-11ec-9f15-ee7ade4bced6",
+            "hssc_id": "8f4e9e6d-af6c-11ec-a482-4889e7cf38c9",
+            "pym": null,
             "servicepackage": "bb88332a-aa57-11ec-8f0c-ee7ade4bced6",
             "service": "9cdf64c6-a416-11ec-bfc4-ee2fa480f37c",
             "cycle_option": 1,
             "cycle_times": 2,
+            "reference_start_tim": null,
             "duration": "30 days, 0:00:00",
-            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
-            "system_operand": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
-            "next_service": "9cdf64c6-a416-11ec-bfc4-ee2fa480f37c",
-            "passing_data": 2,
-            "complete_feedback": 0,
-            "reminders": 0,
-            "message_content": null,
-            "interval_rule": null,
             "check_awaiting_timeout": false
         },
         {
             "label": null,
             "name": null,
-            "hssc_id": "6a1b1c4c-aa5b-11ec-9f15-ee7ade4bced6",
+            "hssc_id": "8f4ec580-af6c-11ec-a6fe-4889e7cf38c9",
+            "pym": null,
             "servicepackage": "bb88332a-aa57-11ec-8f0c-ee7ade4bced6",
             "service": "9cdf64c6-a416-11ec-bfc4-ee2fa480f37c",
             "cycle_option": 1,
             "cycle_times": 1,
+            "reference_start_tim": "30 days, 0:00:00",
             "duration": "60 days, 0:00:00",
-            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
-            "system_operand": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
-            "next_service": "ca50d78a-abd9-11ec-a639-1ac10aeebbc4",
-            "passing_data": 2,
-            "complete_feedback": 0,
-            "reminders": 0,
-            "message_content": null,
-            "interval_rule": null,
             "check_awaiting_timeout": false
         },
         {
             "label": null,
             "name": null,
-            "hssc_id": "6a1b5cde-aa5b-11ec-9f15-ee7ade4bced6",
+            "hssc_id": "8f4ec581-af6c-11ec-bcc5-4889e7cf38c9",
+            "pym": null,
             "servicepackage": "bb88332a-aa57-11ec-8f0c-ee7ade4bced6",
             "service": "ca50d78a-abd9-11ec-a639-1ac10aeebbc4",
             "cycle_option": 0,
-            "cycle_times": 1,
+            "cycle_times": 3,
+            "reference_start_tim": "30 days, 0:00:00",
             "duration": "90 days, 0:00:00",
-            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
-            "system_operand": null,
-            "next_service": null,
-            "passing_data": 0,
-            "complete_feedback": 0,
-            "reminders": 0,
-            "message_content": null,
-            "interval_rule": null,
-            "check_awaiting_timeout": true
+            "check_awaiting_timeout": false
         },
         {
             "label": null,
             "name": null,
-            "hssc_id": "081b0c18-abe2-11ec-bf5e-1ac10aeebbc4",
+            "hssc_id": "8f4ec582-af6c-11ec-aa15-4889e7cf38c9",
+            "pym": null,
             "servicepackage": "bb88332a-aa57-11ec-8f0c-ee7ade4bced6",
             "service": "9ce1e05c-a416-11ec-bfc4-ee2fa480f37c",
             "cycle_option": 0,
             "cycle_times": 1,
-            "duration": "0:01:30",
-            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
-            "system_operand": null,
-            "next_service": null,
-            "passing_data": 0,
-            "complete_feedback": 0,
-            "reminders": 0,
-            "message_content": null,
-            "interval_rule": null,
+            "reference_start_tim": "90 days, 0:00:00",
+            "duration": "90 days, 0:00:00",
             "check_awaiting_timeout": false
         }
     ],
-    "servicepackagedetail": [],
-    "servicespec": [],
+    "servicespec": [
+        {
+            "label": "常规服务",
+            "name": "general_service_spec",
+            "hssc_id": "aa5d9abb-ac19-11ec-9e47-4889e7cf38c9"
+        }
+    ],
     "serviceprogramsetting": []
 }

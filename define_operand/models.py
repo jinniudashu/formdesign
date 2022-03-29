@@ -361,7 +361,7 @@ class ServicePackageDetail(HsscPymBase):
     Cycle_options = [(0, '总共'), (1, '每天'), (2, '每周'), (3, '每月'), (4, '每季'), (5, '每年')]
     cycle_option = models.PositiveSmallIntegerField(choices=Cycle_options, default=0, blank=True, null=True, verbose_name='周期')
     cycle_times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="次数")
-    reference_start_tim = models.DurationField(blank=True, null=True, default='0 days, 00:00:00', verbose_name="参考起始时间", help_text='例如：3 days, 22:00:00')
+    reference_start_tim = models.DurationField(blank=True, null=True, verbose_name="参考起始时间", help_text='例如：3 days, 22:00:00')
     duration = models.DurationField(blank=True, null=True, verbose_name="持续周期", help_text='例如：3 days, 22:00:00')
     check_awaiting_timeout = models.BooleanField(default=False, verbose_name='检查等待超时')
 
@@ -402,6 +402,8 @@ class ServiceProgramSetting(HsscBase):
     Interval_rule_options = [(0, '等于'), (1, '小于'), (2, '大于')]
     interval_rule = models.PositiveSmallIntegerField(choices=Interval_rule_options, blank=True, null=True, verbose_name='间隔条件')
     interval_time = models.DurationField(blank=True, null=True, verbose_name="间隔时间", help_text='例如：3 days, 22:00:00')
+    Is_active = [(False, '否'), (True, '是')]
+    is_active = models.BooleanField(choices=Is_active, default=True, verbose_name='启用')
 
     def __str__(self):
         return str(self.service)

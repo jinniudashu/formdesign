@@ -84,43 +84,10 @@ def generate_source_code(modeladmin, request, queryset):
     source_code['icpc_data'] = export_icpc_data()
 
     # 导出业务表单models.py, admin.py, forms.py脚本
-    models_script = models_file_head
-    admin_script =  admin_file_head
-    forms_script = forms_file_head
-    views_script = views_file_head
-    urls_script = urls_file_head
-    templates_code = []
-    index_html_script = index_html_file_head
-
-    for form in BuessinessForm.objects.all():
-        if form.script:
-            script = json.loads(form.script)
-            models_script = f'{models_script}{script["models"]}'
-            admin_script = f'{admin_script}{script["admin"]}'
-            forms_script = f'{forms_script}{script["forms"]}'
-    source_code['models'] = models_script
-    source_code['admin'] = admin_script
-    source_code['forms'] = forms_script
+    source_code['models'], source_code['admin'], source_code['forms'] = export_forms_models_admin_forms()
 
     # 导出业务表单views.py，template.html, urls.py, index.html脚本
-#     for service in Service.objects.all():
-#         if service.script:          
-#             script = json.loads(service.script)
-#             views_script = f'{views_script}{script["views"]}'
-#             urls_script = f'{urls_script}{script["urls"]}'
-#             templates_code.extend(script['templates'])
-
-#         # construct index.html script
-#         ihs = f'''<a class='list-group-item' href='{{% url "{service.first_operation.name}_create_url" %}}'>
-# {service.first_operation.label}
-# </a>
-# '''
-#         index_html_script = index_html_script + ihs
-#     templates_code.append({'index.html': f"{index_html_script}'\n</section>\n{{% endblock %}}'"})
-
-#     source_code['views'] = views_script
-#     source_code['urls'] = f'{urls_script}\n]'
-#     source_code['templates'] = templates_code
+    source_code['views'], source_code['urls'], source_code['templates'] = export_views_urls_templates()
 
     # 写入数据库
     result = write_to_db(SourceCode, source_code)
@@ -217,6 +184,53 @@ def export_icpc_data():
     return icpc_data
 
 
+# 导出forms models.py, admin.py, forms.py脚本
+def export_forms_models_admin_forms():
+    models_script = models_file_head
+    admin_script =  admin_file_head
+    forms_script = forms_file_head
+
+    for form in BuessinessForm.objects.all():
+        if form.script:
+            script = json.loads(form.script)
+            models_script = f'{models_script}{script["models"]}'
+            admin_script = f'{admin_script}{script["admin"]}'
+            forms_script = f'{forms_script}{script["forms"]}'
+
+    return models_script, admin_script, forms_script
+
+
+# 导出forms views.py, urls.py, templates.py脚本
+def export_views_urls_templates():
+    views_script = views_file_head
+    urls_script = urls_file_head
+    templates_code = []
+    index_html_script = index_html_file_head
+
+    for service in Service.objects.all():
+        if service.script:          
+            script = json.loads(service.script)
+            views_script = f'{views_script}{script["views"]}'
+            urls_script = f'{urls_script}{script["urls"]}'
+            templates_code.extend(script['templates'])
+
+        # construct index.html script
+        index_html_script = index_html_script + generate_index_html(service.first_operation)        
+    
+    urls_script = f'{urls_script}\n]'
+    templates_code.append({'index.html': f"{index_html_script}'\n</section>\n{{% endblock %}}'"})
+
+    return views_script, urls_script, templates_code
+
+
+# construct index.html script
+def generate_index_html(operation):
+    return f'''<a class='list-group-item' href='{{% url "{operation.name}_create_url" %}}'>
+{operation.label}
+</a>
+'''
+
+
 # 把备份数据写入备份数据库
 def write_to_db(model, data):
     s = model.objects.create(
@@ -224,3 +238,8 @@ def write_to_db(model, data):
         code = json.dumps(data, indent=4, ensure_ascii=False),
     )
     return s.id
+
+
+def write_file(file_name, content):
+    with open(file_name, 'w', encoding='utf-8') as f:
+        f.write(content)

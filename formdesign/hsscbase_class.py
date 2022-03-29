@@ -25,6 +25,7 @@ class HsscBackupManager(models.Manager):
                         elif field.__class__.__name__ == 'DurationField':  # duration字段
                             item_dict[field.name] = str(item_dict[field.name])
 
+
             # 遍历模型多对多字段，用hssc_id或icpc_code替换外键id
             for field in self.model._meta.many_to_many:
                 if item_dict[field.name]:  # 如果字段不为空，进行检查替换
@@ -68,7 +69,7 @@ class HsscBackupManager(models.Manager):
                         else:
                             item[field.name] = item_dict[field.name]
 
-            # 插入构造好的记录，不包括多对多字段    
+            # 插入构造好的记录，不包括多对多字段
             _instance=self.model.objects.create(**item)
 
             # 遍历模型多对多字段，用hssc_id或icpc_code获取对象
