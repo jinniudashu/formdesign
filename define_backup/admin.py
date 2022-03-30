@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import *
-from .backup_data import design_backup, icpc_backup, generate_source_code
+from .backup_data import design_backup, icpc_backup, export_source_code
 
 @admin.register(DesignBackup)
 class DesignBackupAdmin(admin.ModelAdmin):
@@ -15,4 +15,4 @@ admin.site.register(IcpcBackup, IcpcBackupAdmin)
 
 @admin.register(SourceCode)
 class SourceCodeAdmin(admin.ModelAdmin):
-    actions = [generate_source_code]
+    actions = [export_source_code]

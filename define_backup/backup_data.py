@@ -70,9 +70,9 @@ icpc_backup.short_description = '备份ICPC数据'
 
 
 ########################################################################################################################
-# 生成作业脚本, 被define_backup.admin调用
+# 导出作业脚本, 被define_backup.admin调用
 ########################################################################################################################
-def generate_source_code(modeladmin, request, queryset):
+def export_source_code(modeladmin, request, queryset):
     source_code = {}
     
     # 导出字典表models.py, admin.py脚本
@@ -93,7 +93,7 @@ def generate_source_code(modeladmin, request, queryset):
     result = write_to_db(SourceCode, source_code)
     print(f'作业脚本写入数据库成功, id: {result}')
 
-generate_source_code.short_description = '生成作业脚本'
+export_source_code.short_description = '生成作业脚本'
 
 
 # 导出字典models.py, admin.py脚本

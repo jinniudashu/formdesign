@@ -53,6 +53,10 @@ class BuessinessForm(GenerateModelsScriptMixin, HsscPymBase):
     meta_data = models.JSONField(null=True, blank=True, verbose_name="元数据")
     script = models.TextField(blank=True, null=True, verbose_name='运行时脚本')
     
+    class Meta:
+        verbose_name = '业务表单'
+        verbose_name_plural = verbose_name
+
     def save(self, *args, **kwargs):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
@@ -71,10 +75,6 @@ class BuessinessForm(GenerateModelsScriptMixin, HsscPymBase):
         # 更新meta_data，类型为dict
         self.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
         super().save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = '业务表单'
-        verbose_name_plural = verbose_name
 
     # 生成BuessinessForm的meta_data
     def generate_meta_data(self):
@@ -135,15 +135,15 @@ class SystemOperand(HsscBase):
     Applicable = [(0, '作业'), (1, '单元服务'), (2, '服务包'), (3, '全部')]
     applicable = models.PositiveSmallIntegerField(choices=Applicable, default=1, verbose_name='适用范围')
 
-    def save(self, *args, **kwargs):
-        if self.name is None or self.name == '':
-            self.name = f'{"_".join(lazy_pinyin(self.label))}'
-        super().save(*args, **kwargs)
-
     class Meta:
         verbose_name = '系统自动作业'
         verbose_name_plural = verbose_name
         ordering = ['id']
+
+    def save(self, *args, **kwargs):
+        if self.name is None or self.name == '':
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
 
 
 # 事件规则表
@@ -154,15 +154,15 @@ class EventRule(HsscBase):
     weight = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="权重")
     expression = models.TextField(max_length=1024, blank=True, null=True, verbose_name="内部表达式")
 
-    def save(self, *args, **kwargs):
-        if self.name is None or self.name == '':
-            self.name = f'{"_".join(lazy_pinyin(self.label))}'
-        super().save(*args, **kwargs)
-
     class Meta:
         verbose_name = '条件事件'
         verbose_name_plural = verbose_name
         ordering = ['id']
+
+    def save(self, *args, **kwargs):
+        if self.name is None or self.name == '':
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
 
     def generate_expression(self):  # 在EventRuleAdmin.save_formset中调用
         expressions = []
@@ -200,13 +200,13 @@ class EventExpression(HsscBase):
     Connection_operator = [(0, 'and'), (1, 'or')]
     connection_operator = models.PositiveSmallIntegerField(choices=Connection_operator, blank=True, null=True, verbose_name='连接操作符')
 
-    def __str__(self):
-        return str(self.event_rule.label)
-
     class Meta:
         verbose_name = '事件表达式'
         verbose_name_plural = verbose_name
         ordering = ['id']
+
+    def __str__(self):
+        return str(self.event_rule.label)
 
 
 # 作业基础信息表
@@ -235,6 +235,11 @@ class Operation(HsscPymBase):
     resource_devices = models.CharField(max_length=255, blank=True, null=True, verbose_name='配套设备')
     resource_knowledge = models.CharField(max_length=255, blank=True, null=True, verbose_name='服务知识')
 
+    class Meta:
+        verbose_name = "作业"
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
     def save(self, *args, **kwargs):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
@@ -243,24 +248,19 @@ class Operation(HsscPymBase):
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
-    class Meta:
-        verbose_name = "作业"
-        verbose_name_plural = verbose_name
-        ordering = ['id']
-
 
 class BuessinessFormsSetting(HsscBase):
     operation = models.ForeignKey(Operation, on_delete=models.CASCADE, verbose_name="作业")
     buessiness_form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="表单")
     is_list = models.BooleanField(default=False, verbose_name="列表样式")
 
-    def __str__(self):
-        return str(self.buessiness_form)
-
     class Meta:
         verbose_name = '作业表单设置'
         verbose_name_plural = verbose_name
         ordering = ['id']
+
+    def __str__(self):
+        return str(self.buessiness_form)
 
 
 # # 单元服务类型信息表
@@ -269,6 +269,7 @@ class Service(GenerateViewsScriptMixin, HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     label = models.CharField(max_length=255, verbose_name="名称")
     managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, null=True, verbose_name="管理实体")
+    operations = models.ManyToManyField(Operation, through='OperationsSetting', through_fields=('service', 'operation'), verbose_name="包含作业")
     Begin_time_setting = [(0, '人工指定时间'), (1, '引用出生日期')]
     begin_time_setting = models.PositiveSmallIntegerField(choices=Begin_time_setting, default=0, verbose_name='开始时间设置')
     execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='执行时限')
@@ -322,13 +323,13 @@ class OperationsSetting(HsscBase):
     next_operation = models.ForeignKey(Operation, on_delete=models.CASCADE, blank=True, null=True, related_name='next_operation', verbose_name='后续作业')
     passing_data = models.PositiveSmallIntegerField(choices=Receive_form, default=0, verbose_name='接收表单')
 
-    def __str__(self):
-        return str(self.service) + '--' + str(self.operation)
-
     class Meta:
         verbose_name = '作业关系设置'
         verbose_name_plural = verbose_name
         ordering = ['id']
+
+    def __str__(self):
+        return str(self.service) + '--' + str(self.operation)
 
 
 # 服务包类型信息表
@@ -341,6 +342,11 @@ class ServicePackage(HsscPymBase):
     execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='执行时限')
     awaiting_time_frame = models.DurationField(blank=True, null=True, verbose_name='等待执行时限')
 
+    class Meta:
+        verbose_name = "服务包"
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
     def save(self, *args, **kwargs):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
@@ -348,11 +354,6 @@ class ServicePackage(HsscPymBase):
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = "服务包"
-        verbose_name_plural = verbose_name
-        ordering = ['id']
 
 
 class ServicePackageDetail(HsscPymBase):
@@ -365,26 +366,26 @@ class ServicePackageDetail(HsscPymBase):
     duration = models.DurationField(blank=True, null=True, verbose_name="持续周期", help_text='例如：3 days, 22:00:00')
     check_awaiting_timeout = models.BooleanField(default=False, verbose_name='检查等待超时')
 
-    def __str__(self):
-        return str(self.service)
-
     class Meta:
         verbose_name = "服务内容模板"
         verbose_name_plural = verbose_name
         ordering = ['id']
 
+    def __str__(self):
+        return str(self.service)
+
 
 # 服务规格设置
 class ServiceSpec(HsscBase):
-    def save(self, *args, **kwargs):
-        if self.name is None or self.name == '':
-            self.name = f'{"_".join(lazy_pinyin(self.label))}'
-        super().save(*args, **kwargs)
-
     class Meta:
         verbose_name = "服务规则"
         verbose_name_plural = verbose_name
         ordering = ['id']
+
+    def save(self, *args, **kwargs):
+        if self.name is None or self.name == '':
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
 
 
 class ServiceProgramSetting(HsscBase):
@@ -405,13 +406,13 @@ class ServiceProgramSetting(HsscBase):
     Is_active = [(False, '否'), (True, '是')]
     is_active = models.BooleanField(choices=Is_active, default=True, verbose_name='启用')
 
-    def __str__(self):
-        return str(self.service)
-
     class Meta:
         verbose_name = '服务程序设置'
         verbose_name_plural = verbose_name
         ordering = ['id']
+
+    def __str__(self):
+        return str(self.service)
 
 
 # 判断传入的字符串是否是数字

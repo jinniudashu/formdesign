@@ -14,7 +14,7 @@ class HsscBackupManager(models.Manager):
 
             # 遍历模型非多对多字段，如果是外键，则用外键的hssc_id替换外键id
             for field in self.model._meta.fields:
-                if item_dict[field.name]:  # 如果字段不为空，进行检查替换                    
+                if item_dict[field.name] or field.__class__.__name__ == 'DurationField':  # 如果字段不为空或字段为DurationField类型，进行检查替换
                     if field.name in ['name_icpc', 'icpc']:  # 如果是ICPC外键，获取icpc_code
                         _object = field.related_model.objects.get(id=item_dict[field.name])
                         item_dict[field.name] = _object.icpc_code
