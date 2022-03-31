@@ -11,7 +11,7 @@ from formdesign.hsscbase_class import HsscBase, HsscPymBase
 from define.models import Component, ComponentsGroup, Role, RelateFieldModel
 from define_icpc.models import Icpc
 from .utils import keyword_search
-from define_backup.utils import GenerateModelsScriptMixin, GenerateViewsScriptMixin
+from define_backup.mixins import GenerateModelsScriptMixin, GenerateViewsScriptMixin
 
 
 # 管理实体定义
@@ -306,8 +306,8 @@ class Service(GenerateViewsScriptMixin, HsscPymBase):
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
 
         # 生成views, template, urls 脚本
-        if self.operations.all().count() > 0:
-            self.script = json.dumps(self.generate_script(), ensure_ascii=False)
+        # if self.operations.all().count() > 0:
+        #     self.script = json.dumps(self.generate_script(), ensure_ascii=False)
 
         super().save(*args, **kwargs)
     
