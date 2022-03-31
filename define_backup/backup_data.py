@@ -208,14 +208,14 @@ def export_views_urls_templates():
     index_html_script = index_html_file_head
 
     for service in Service.objects.all():
-        if service.script:          
+        if service.script:
             script = json.loads(service.script)
             views_script = f'{views_script}{script["views"]}'
             urls_script = f'{urls_script}{script["urls"]}'
             templates_code.extend(script['templates'])
 
         # construct index.html script
-        index_html_script = index_html_script + generate_index_html(service.first_operation)        
+        index_html_script = index_html_script + generate_index_html(service)
     
     urls_script = f'{urls_script}\n]'
     templates_code.append({'index.html': f"{index_html_script}'\n</section>\n{{% endblock %}}'"})
@@ -224,9 +224,9 @@ def export_views_urls_templates():
 
 
 # construct index.html script
-def generate_index_html(operation):
-    return f'''<a class='list-group-item' href='{{% url "{operation.name}_create_url" %}}'>
-{operation.label}
+def generate_index_html(service):
+    return f'''<a class='list-group-item' href='{{% url "{service.name}_create_url" %}}'>
+{service.label}
 </a>
 '''
 

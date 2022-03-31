@@ -6,7 +6,7 @@ class GenerateModelsScriptMixin:
         script['forms'] = self.__create_form_script()
         return script
 
-        # generate model and admin script
+    # generate model and admin script
     def __create_model_script(self):
         # construct model script
         head_script = f'class {self.name.capitalize()}(HsscBuessinessFormBase):'
@@ -212,49 +212,33 @@ class {self.name.capitalize()}_ModelForm(ModelForm):
 class GenerateViewsScriptMixin:
     # 生成运行时脚本的views, urls, templates
     def generate_script(self):
+        #     self.edit_template_name = f'{self.operand_name}_edit.html'
+        #     self.success_url = '/'
+        #     self.attribute_form_name = f'{self.model_class_name}_ModelForm'
+        create_view_name = self.__class__.__name__ + '_CreateView'
+        update_view_name = self.__class__.__name__ + '_UpdateView'
+
         script = {}
-        operation = self.first_operation
-        # base_info_form = FormEntityShip.objects.get(entity=self.managed_entity, is_base=True).form
-        # base_form_name = f'{base_info_form.name.capitalize()}_ModelForm'
-        base_form_name = ''
-        # create views.py, template.html, urls.py, index.html script
-        _s = self.__CreateViewScript(operation, base_form_name)
-        script['views'], script['urls'], script['templates'] = _s.create_script()
+        script['views'] = self.__construct_view_script(create_view_name, update_view_name)
+        script['urls'] = self.__construct_url_script()
+        script['templates'] = self.__construct_html_script(create_view_name, update_view_name)
+
         return script
 
-    # create views.py, template.html, urls.py, index.html script
-    class __CreateViewScript:
-        def __init__(self, operation, base_form_name):
-            self.operand_name = operation.name
-            self.operand_label = operation.label
-            # form_meta_data = json.loads(operation.buessiness_form.meta_data)
-
-            self.model_class_name = operation.buessiness_forms.all().first().name.capitalize()
-            self.create_view_name = f'{self.model_class_name}_CreateView'
-            self.update_view_name = f'{self.model_class_name}_UpdateView'
-            self.edit_template_name = f'{self.operand_name}_edit.html'
-            self.success_url = '/'
-            self.base_form_name = base_form_name
-            self.attribute_form_name = f'{self.model_class_name}_ModelForm'
-            self.url = f'{self.operand_name}_update_url'
-
-        def create_script(self):
-            return self.__construct_view_script(), self.__construct_url_script(), self.__construct_html_script()
-
-        # 构造views脚本
-        def __construct_view_script(self):
-            # create view
-            create_script_head = f'''
-class {self.create_view_name}(CreateView):
-    model = {self.model_class_name}
+    # 构造views脚本
+    def __construct_view_script(self, create_view_name, update_view_name):
+        # create view
+        create_script_head = f'''
+class {create_view_name}(CreateView):
+    model = {self.__class__.__name__}
     # basic_personal_information = Basic_personal_information.objects.get(customer=customer)
     context = {{}}
 '''
 
-            create_script_body = f'''
+        create_script_body = f'''
     def get_context_data(self, **kwargs):
-        context = super({self.create_view_name}, self).get_context_data(**kwargs)
-        base_form = {self.base_form_name}(instance=self.customer, prefix="base_form")
+        context = super({create_view_name}, self).get_context_data(**kwargs)
+        base_form = {self.managed_entity.base_formname.capitalize()}_ModelForm(instance=self.customer, prefix="base_form")
         if self.request.method == 'POST':
             attribute_form = {self.attribute_form_name}(self.request.POST, prefix="attribute_form")
         else:
@@ -276,83 +260,80 @@ class {self.create_view_name}(CreateView):
         f.save()
         return super({self.attribute_form_name}, self).form_valid(form)
 '''
-            return f'{create_script_head}{create_script_body}'
 
-#             # update view
-#             update_script_head = f'''
-# class {self.update_view_name}(CreateView):
-#     model = {self.model_class_name}
+#         # update view
+#         update_script_head = f'''
+# class {update_view_name}(CreateView):
+#     model = {self.__class__.__name__}
 #     operation_proc = get_object_or_404(Operation_proc, id=kwargs['id'])
 
 #     if operation_proc.group is None:  # 如果进程角色已经被置为空，说明已有其他人处理，退出本修改作业进程
 #         return redirect(reverse('index'))
 #     operation_proc.group.set([])  # 设置作业进程所属角色组为空
+
 #     # 构造作业开始消息参数
-#     operand_started.send(sender={self.operand_name}_update, operation_proc=operation_proc, ocode='rtr', operator=request.user)
+#     operand_started.send(sender={self.name}_update, operation_proc=operation_proc, ocode='rtr', operator=request.user)
 
 #     customer = operation_proc.customer
 #     basic_personal_information = Basic_personal_information.objects.get(customer=customer)
 #     context = {{}}
 #         '''
 
-#             update_script_body = vs[7] + f'''
-#         # inquire_forms''' + vs[0] + f'''
-#         # mutate_formsets''' + vs[1] + f'''
-#         # mutate_forms
-#         if request.method == 'POST':'''+ vs[2] + f'''
-#             ''' + vs[6] + vs[5] + f'''
+#         update_script_body = f'''
+#         if request.method == 'POST':
 #                 # 构造作业完成消息参数
-#                 operand_finished.send(sender={self.operand_name}_update, pid=kwargs['id'], ocode='rtc', field_values=request.POST)
+#                 operand_finished.send(sender={self.name}_update, pid=kwargs['id'], ocode='rtc', field_values=request.POST)
 #                 return redirect(reverse('index'))
-#         else:''' + vs[3] + f'''
-#         # context''' + vs[4]
+#         else:
+#             pass
+#         # context'''
 
-#             update_script_foot = f'''
+#         update_script_foot = f'''
 #         context['proc_id'] = kwargs['id']
-#         return render(request, '{self.operand_name}_update.html', context)
+#         return render(request, '{self.name}_update.html', context)
 
 #         '''
 
-            # s = f'{create_script_head}{create_script_body}{create_script_foot}\n\n{update_script_head}{update_script_body}{update_script_foot}'
+#         return f'{create_script_head}{create_script_body}\n\n{update_script_head}{update_script_body}{update_script_foot}'
+        return f'{create_script_head}{create_script_body}'
 
-
-        # 构造html脚本
-        def __construct_html_script(self):
-            _hs = f'''
-                        <h5>{self.operand_name}</h5>
-                        {{{{ {self.operand_name}.as_p }}}}
-                        <hr>'''            
-            script_head = f'''{{% extends "base.html" %}}
+    # 构造html脚本
+    def __construct_html_script(self):
+        _hs = f'''
+                    <h5>{self.name}</h5>
+                    {{{{ {self.name}.as_p }}}}
+                    <hr>'''            
+        script_head = f'''{{% extends "base.html" %}}
 
     {{% load crispy_forms_tags %}}
 
     {{% block content %}}
     '''
 
-            create_script_body = f'''
-        <form action={{% url '{self.operand_name}_create_url' %}} method='POST' enctype='multipart/form-data'> 
+        create_script_body = f'''
+        <form action={{% url '{self.name}_create_url' %}} method='POST' enctype='multipart/form-data'> 
             {{% csrf_token %}}
                 ''' + _hs
 
-            update_script_body = f'''
-        <form action={{% url '{self.operand_name}_update_url' proc_id %}} method='POST' enctype='multipart/form-data'> 
+        update_script_body = f'''
+        <form action={{% url '{self.name}_update_url' proc_id %}} method='POST' enctype='multipart/form-data'> 
             {{% csrf_token %}}
                 ''' + _hs
 
-            script_foot = f'''
+        script_foot = f'''
             <input type="submit" value="提交" /> 
         </form>
 
     {{% endblock %}}
     '''
 
-            s_create = f'{script_head}{create_script_body}{script_foot}'
-            s_update = f'{script_head}{update_script_body}{script_foot}'
-            return [{f'{self.operand_name}_create.html': s_create}, {f'{self.operand_name}_update.html': s_update}]
+        s_create = f'{script_head}{create_script_body}{script_foot}'
+        s_update = f'{script_head}{update_script_body}{script_foot}'
+        return [{f'{self.name}_create.html': s_create}, {f'{self.name}_update.html': s_update}]
 
         # 构造urls脚本
-        def __construct_url_script(self):
-            return f'''
-    path('{self.operand_name}/create', {self.model_class_name}_CreateView.as_view(), name='{self.operand_name}_create_url'),'''
-    # path('{self.operand_name}/<int:id>/update', {self.model_class_name}_UpdateView, name='{self.operand_name}_update_url'),'''
+    def __construct_url_script(self, create_view_name, update_view_name):
+        return f'''
+    path('{self.name}/create', {create_view_name}.as_view(), name='{self.name}_create_url'),'''
+    # path('{self.name}/<int:id>/update', {update_view_name}.as_view(), name='{self.name}_update_url'),'''
 

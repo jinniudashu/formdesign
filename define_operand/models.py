@@ -306,8 +306,8 @@ class Service(GenerateViewsScriptMixin, HsscPymBase):
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
 
         # 生成views, template, urls 脚本
-        # if self.first_operation.buessiness_form:
-        #     self.script = json.dumps(self.generate_script(), ensure_ascii=False)
+        if self.operations.all().count() > 0:
+            self.script = json.dumps(self.generate_script(), ensure_ascii=False)
 
         super().save(*args, **kwargs)
     
