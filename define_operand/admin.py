@@ -90,7 +90,7 @@ class ServiceAdmin(admin.ModelAdmin):
             'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
         }),
         ('资源配置', {
-            'fields': ('resource_materials','resource_devices','resource_knowledge', 'script')
+            'fields': ('resource_materials','resource_devices','resource_knowledge')
         }),
     )
     search_fields=['label', 'pym']
