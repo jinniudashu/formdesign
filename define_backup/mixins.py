@@ -212,47 +212,52 @@ class {self.name.capitalize()}_ModelForm(ModelForm):
 class GenerateViewsScriptMixin:
     # 生成运行时脚本的views, urls, templates
     def generate_script(self):
-        #     self.edit_template_name = f'{self.operand_name}_edit.html'
-        #     self.success_url = '/'
+        create_view_name = self.name.capitalize() + '_CreateView'
+        update_view_name = self.name.capitalize() + '_UpdateView'
+        # self.edit_template_name = f'{self.operand_name}_edit.html'
+        # self.success_url = '/'
         script = {}
-        script['views'] = self.__construct_view_script()
-        script['urls'] = self.__construct_url_script()
+        script['views'] = self.__construct_view_script(create_view_name, update_view_name)
+        script['urls'] = self.__construct_url_script(create_view_name, update_view_name)
         script['templates'] = self.__construct_html_script()
 
         return script
 
     # 构造views脚本
-    def __construct_view_script(self):
-        create_view_name = self.__class__.__name__ + '_CreateView'
-        update_view_name = self.__class__.__name__ + '_UpdateView'
+    def __construct_view_script(self, create_view_name, update_view_name):
+        view_model_name = self.operations.all()[0].buessiness_forms.all()[0].name.capitalize()
+        base_form_name = f'{self.managed_entity.base_form.name.capitalize()}_ModelForm'
 
-        attribute_forms = []
-        create_script_attribute_froms_post = ''
-        create_script_attribute_froms_get = ''
-        create_script_attribute_froms_context = ''
+        create_script_attribute_forms_post = ''
+        create_script_attribute_forms_get = ''
+        create_script_attribute_forms_context = ''
+        create_script_attribute_forms_valid = ''
         form_index = 0
 
         for operation in self.operations.all():
             for form in operation.buessiness_forms.all():
-                attribute_forms.append((form.name, f'{form.name.capitalize()}__ModelForm'))
-
-            # attribute_form = {self.attribute_form_name}(self.request.POST, prefix="attribute_form")
-                create_script_attribute_froms_post = f'''{create_script_attribute_froms_post}
-            attribute_form = {self.attribute_form_name}(self.request.POST, prefix="attribute_form")                
+                create_script_attribute_forms_post = f'''{create_script_attribute_forms_post}
+            attribute_form[{form_index}] = {form.name.capitalize()}__ModelForm(self.request.POST, prefix="attribute_form[{form_index}]")                
                 '''
-            
-            # attribute_form = {self.attribute_form_name}(prefix="attribute_form")
-                create_script_attribute_froms_get = f'{create_script_attribute_froms_get}\n'
-
-            # context['attribute_form'] = attribute_form
-                create_script_attribute_froms_context = f'{create_script_attribute_froms_context}\n'
+                create_script_attribute_forms_get = f'''{create_script_attribute_forms_get}
+            attribute_form[{form_index}] = {form.name.capitalize()}__ModelForm(prefix="attribute_form[{form_index}]")
+                '''
+                create_script_attribute_forms_context = f'''{create_script_attribute_forms_context}
+            context['attribute_form{form_index}'] = attribute_form[{form_index}]
+                '''
+                create_script_attribute_forms_valid = f'''{create_script_attribute_forms_valid}
+        f = context['attribute_form{form_index}'].save(commit=False)
+        f.customer = customer
+        f.operator = operator
+        f.save()
+                '''
 
                 form_index += 1
 
         # create view
         create_script_head = f'''
 class {create_view_name}(CreateView):
-    model = {self.__class__.__name__}
+    model = {view_model_name}
     # basic_personal_information = Basic_personal_information.objects.get(customer=customer)
     context = {{}}
 '''
@@ -260,14 +265,14 @@ class {create_view_name}(CreateView):
         create_script_body = f'''
     def get_context_data(self, **kwargs):
         context = super({create_view_name}, self).get_context_data(**kwargs)
-        base_form = {self.managed_entity.base_form.name.capitalize()}_ModelForm(instance=self.customer, prefix="base_form")
+        base_form = {base_form_name}(instance=self.customer, prefix="base_form")
         if self.request.method == 'POST':
-            {create_script_attribute_froms_post}
+{create_script_attribute_forms_post}
         else:
-            {create_script_attribute_froms_get}
+{create_script_attribute_forms_get}
         # context
         context['base_form'] = base_form
-        {create_script_attribute_froms_context}
+{create_script_attribute_forms_context}
         context['user'] = self.request.user
         return context
 
@@ -276,11 +281,8 @@ class {create_view_name}(CreateView):
         customer = Customer.objects.get(user=context['user'])
         operator = Staff.objects.get(user=context['user'])
         # form_valid
-        f = context['attribute_form'].save(commit=False)
-        f.customer = customer
-        f.operator = operator
-        f.save()
-        return super({self.attribute_form_name}, self).form_valid(form)
+{create_script_attribute_forms_valid}
+        return super({create_view_name}, self).form_valid(form)
 '''
 
 #         # update view

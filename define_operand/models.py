@@ -304,14 +304,8 @@ class Service(GenerateViewsScriptMixin, HsscPymBase):
             self.label = self.name_icpc.iname
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
-
-        # 生成views, template, urls 脚本
-        # if self.operations.all().count() > 0:
-        #     self.script = json.dumps(self.generate_script(), ensure_ascii=False)
-
         super().save(*args, **kwargs)
     
-
 # 接收表单数据
 Receive_form = [(0, '否'), (1, '接收，不可编辑'), (2, '接收，可以编辑')]
 
@@ -329,7 +323,14 @@ class OperationsSetting(HsscBase):
         ordering = ['id']
 
     def __str__(self):
-        return str(self.service) + '--' + str(self.operation)
+        return str(self.operation)
+
+# 生成views, template, urls 脚本
+@receiver(m2m_changed, sender=Service.operations.through)
+def service_operations_changed_handler(sender, instance, action, reverse, model, pk_set, **kwargs):
+    if action in ['post_add', 'post_remove', 'post_clear']:
+        instance.script = json.dumps(instance.generate_script(), ensure_ascii=False)
+        instance.save()
 
 
 # 服务包类型信息表

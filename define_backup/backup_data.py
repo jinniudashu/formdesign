@@ -18,10 +18,10 @@ from .script_file_header import *
 # 不备份在其他表新增内容时自动插入内容的表，Component, RelateFieldModel
 Backup_models = [
     Role, 
-    ManagedEntity, 
     IcpcList,
     DicList, 
     DicDetail,
+    ManagedEntity, 
     CharacterField,
     NumberField,
     DTField,

@@ -20,16 +20,30 @@ class Command(BaseCommand):
         else:
             print('start restore design data...')
 
+            # 恢复ManagedEntity的base_form字段
+            # 说明：这是一个特殊处理，因为在恢复ManagedEntity时，base_form字段指向的BuessinessForm是不存在的，
+            def restore_managed_entity_base_form():
+                for entity in design_data['managedentity']:
+                    if entity['base_form']:
+                        base_form = BuessinessForm.objects.get(hssc_id=entity['base_form'])
+                        entity_obj = ManagedEntity.objects.get(hssc_id=entity['hssc_id'])
+                        entity_obj.base_form = base_form
+                        entity_obj.save()
+
+
             # 读取备份数据文件
             backuped_json_file = 'define_backup/design_data_backup.json'
             with open(backuped_json_file, encoding="utf8") as f:
                 design_data = json.loads(f.read())
 
+
             Component.objects.all().delete()
             RelateFieldModel.objects.all().delete()
             for model in Backup_models:
                 print(model._meta.model_name)
+                if model == Service:  # 导入Service前先恢复ManagedEntity的base_form字段
+                    restore_managed_entity_base_form()
                 result = model.objects.restore_data(design_data[model._meta.model_name])
                 print(result)
-                
+            
             print('恢复设计数据完成！')

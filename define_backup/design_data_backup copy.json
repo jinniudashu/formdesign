@@ -138,6 +138,15 @@
             "base_form": null
         },
         {
+            "label": "客户",
+            "name": "customer",
+            "hssc_id": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
+            "pym": "kh",
+            "app_name": "core",
+            "model_name": "Customer",
+            "base_form": "0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd"
+        },
+        {
             "label": "供应商",
             "name": "supplier",
             "hssc_id": "de889948-9aa1-11ec-bde1-8a6e55faf877",
@@ -181,15 +190,6 @@
             "app_name": "core",
             "model_name": "Institution",
             "base_form": null
-        },
-        {
-            "label": "客户",
-            "name": "customer",
-            "hssc_id": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "kh",
-            "app_name": "core",
-            "model_name": "Customer",
-            "base_form": "0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd"
         }
     ],
     "icpclist": [
@@ -538,24 +538,6 @@
             "name": "sui_fang_ping_gu",
             "hssc_id": "8e5a0892-aa48-11ec-8f0c-ee7ade4bced6",
             "pym": "jcpg"
-        },
-        {
-            "label": "酮体",
-            "name": "tong_ti",
-            "hssc_id": "60bf01ea-b091-11ec-9cae-5ed0e34457d3",
-            "pym": "tt"
-        },
-        {
-            "label": "尿糖",
-            "name": "niao_tang",
-            "hssc_id": "9a81089c-b091-11ec-9cae-5ed0e34457d3",
-            "pym": "nt"
-        },
-        {
-            "label": "蛋白质",
-            "name": "dan_bai_zhi",
-            "hssc_id": "bf10e8da-b091-11ec-b42a-5ed0e34457d3",
-            "pym": "dbz"
         }
     ],
     "dicdetail": [
@@ -2025,60 +2007,6 @@
             "diclist": "8e5a0892-aa48-11ec-8f0c-ee7ade4bced6",
             "value": "控制没有到达预期",
             "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "60bf820a-b091-11ec-9cae-5ed0e34457d3",
-            "pym": null,
-            "diclist": "60bf01ea-b091-11ec-9cae-5ed0e34457d3",
-            "value": "阴性",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "60bfc6d4-b091-11ec-9cae-5ed0e34457d3",
-            "pym": null,
-            "diclist": "60bf01ea-b091-11ec-9cae-5ed0e34457d3",
-            "value": "阳性",
-            "icpc": "U9810"
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "9a816094-b091-11ec-9cae-5ed0e34457d3",
-            "pym": null,
-            "diclist": "9a81089c-b091-11ec-9cae-5ed0e34457d3",
-            "value": "阴性",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "9a818c4a-b091-11ec-9cae-5ed0e34457d3",
-            "pym": null,
-            "diclist": "9a81089c-b091-11ec-9cae-5ed0e34457d3",
-            "value": "阳性",
-            "icpc": "U9804"
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "bf11abee-b091-11ec-b42a-5ed0e34457d3",
-            "pym": null,
-            "diclist": "bf10e8da-b091-11ec-b42a-5ed0e34457d3",
-            "value": "阴性",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "bf11f400-b091-11ec-b42a-5ed0e34457d3",
-            "pym": null,
-            "diclist": "bf10e8da-b091-11ec-b42a-5ed0e34457d3",
-            "value": "阳性",
-            "icpc": "U9802"
         }
     ],
     "characterfield": [
@@ -3228,33 +3156,6 @@
             "name_icpc": null,
             "type": "Select",
             "related_content": "8e5a0892-aa48-11ec-8f0c-ee7ade4bced6"
-        },
-        {
-            "label": "尿糖",
-            "name": "boolfield_niao_tang",
-            "hssc_id": "f9eed08e-b091-11ec-b42a-5ed0e34457d3",
-            "pym": "nt",
-            "name_icpc": null,
-            "type": "Select",
-            "related_content": "9a81089c-b091-11ec-9cae-5ed0e34457d3"
-        },
-        {
-            "label": "蛋白质",
-            "name": "boolfield_dan_bai_zhi",
-            "hssc_id": "04381988-b092-11ec-b42a-5ed0e34457d3",
-            "pym": "dbz",
-            "name_icpc": null,
-            "type": "Select",
-            "related_content": "bf10e8da-b091-11ec-b42a-5ed0e34457d3"
-        },
-        {
-            "label": "酮体",
-            "name": "boolfield_tong_ti",
-            "hssc_id": "15957162-b092-11ec-b42a-5ed0e34457d3",
-            "pym": "tt",
-            "name_icpc": null,
-            "type": "Select",
-            "related_content": "60bf01ea-b091-11ec-9cae-5ed0e34457d3"
         }
     ],
     "componentsgroup": [
@@ -3283,22 +3184,6 @@
             "components": [
                 "ded859ba-9aa1-11ec-bde1-8a6e55faf877",
                 "ded93d62-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "尿常规检查",
-            "name": "A3502",
-            "hssc_id": "2abcc130-b092-11ec-9cae-5ed0e34457d3",
-            "pym": "ncgjc",
-            "name_icpc": "A3502",
-            "description": "",
-            "meta_data": "{\n    \"name\": \"A3502\",\n    \"label\": \"尿常规检查\",\n    \"hssc_id\": \"2abcc130-b092-11ec-9cae-5ed0e34457d3\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_niao_tang\",\n            \"label\": \"尿糖\",\n            \"hssc_id\": \"f9eed08e-b091-11ec-b42a-5ed0e34457d3\",\n            \"type\": \"Niao_tang\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_dan_bai_zhi\",\n            \"label\": \"蛋白质\",\n            \"hssc_id\": \"04381988-b092-11ec-b42a-5ed0e34457d3\",\n            \"type\": \"Dan_bai_zhi\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_tong_ti\",\n            \"label\": \"酮体\",\n            \"hssc_id\": \"15957162-b092-11ec-b42a-5ed0e34457d3\",\n            \"type\": \"Tong_ti\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A3502(HsscBuessinessFormBase):\\n    boolfield_niao_tang = models.ForeignKey(Niao_tang, related_name='niao_tang_for_boolfield_niao_tang_A3502', on_delete=models.CASCADE, null=True, blank=True, verbose_name='尿糖')\\n    boolfield_dan_bai_zhi = models.ForeignKey(Dan_bai_zhi, related_name='dan_bai_zhi_for_boolfield_dan_bai_zhi_A3502', on_delete=models.CASCADE, null=True, blank=True, verbose_name='蛋白质')\\n    boolfield_tong_ti = models.ForeignKey(Tong_ti, related_name='tong_ti_for_boolfield_tong_ti_A3502', on_delete=models.CASCADE, null=True, blank=True, verbose_name='酮体')\\n    class Meta:\\n        verbose_name = '尿常规检查'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A3502_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A3502_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\n@admin.register(A3502)\\nclass A3502Admin(admin.ModelAdmin):\\n    autocomplete_fields = [\\\"boolfield_niao_tang\\\", \\\"boolfield_dan_bai_zhi\\\", \\\"boolfield_tong_ti\\\", ]\\n\", \"forms\": \"\\nclass A3502_ModelForm(ModelForm):\\n    class Meta:\\n        model = A3502\\n        fields = ['boolfield_niao_tang', 'boolfield_dan_bai_zhi', 'boolfield_tong_ti', ]\\n        widgets = {'boolfield_niao_tang': Select, 'boolfield_dan_bai_zhi': Select, 'boolfield_tong_ti': Select, }\\n    \"}",
-            "components": [
-                "f9eed08e-b091-11ec-b42a-5ed0e34457d3",
-                "04381988-b092-11ec-b42a-5ed0e34457d3",
-                "15957162-b092-11ec-b42a-5ed0e34457d3"
             ],
             "components_groups": []
         },
@@ -3921,33 +3806,6 @@
             "components_groups": []
         },
         {
-            "label": "体格检查/完整的健康评估",
-            "name": "A3001",
-            "hssc_id": "0cd1dcea-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "tgjc/wzdjkpg",
-            "name_icpc": "A3001",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A3001\",\n    \"label\": \"体格检查/完整的健康评估\",\n    \"hssc_id\": \"0cd1dcea-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_left_eye_vision\",\n            \"label\": \"左眼视力\",\n            \"hssc_id\": \"dea8864a-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_right_eye_vision\",\n            \"label\": \"右眼视力\",\n            \"hssc_id\": \"dea93de2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"numberfield_body_temperature\",\n            \"label\": \"体温\",\n            \"hssc_id\": \"deae47e2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_pulse\",\n            \"label\": \"脉搏\",\n            \"hssc_id\": \"deaf1ae6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_respiratory_rate\",\n            \"label\": \"呼吸频率\",\n            \"hssc_id\": \"deafc9f0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_hight\",\n            \"label\": \"身高\",\n            \"hssc_id\": \"deb08872-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_weight\",\n            \"label\": \"体重\",\n            \"hssc_id\": \"deb135ec-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_body_mass_index\",\n            \"label\": \"体质指数\",\n            \"hssc_id\": \"deb1ef6e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"relatedfield_athletic_ability\",\n            \"label\": \"运动能力\",\n            \"hssc_id\": \"dec54e10-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Exercise_time\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_left_ear_hearing\",\n            \"label\": \"左耳听力\",\n            \"hssc_id\": \"deda1db8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Hearing\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_right_ear_hearing\",\n            \"label\": \"右耳听力\",\n            \"hssc_id\": \"dedb0962-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Hearing\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_lips\",\n            \"label\": \"口唇\",\n            \"hssc_id\": \"dedcdfee-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Lips\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_dentition\",\n            \"label\": \"齿列\",\n            \"hssc_id\": \"deddcb16-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Dentition\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_pharynx\",\n            \"label\": \"咽部\",\n            \"hssc_id\": \"dedebd28-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Pharynx\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A3001(HsscBuessinessFormBase):\\n    characterfield_left_eye_vision = models.CharField(max_length=255, null=True, blank=True, verbose_name='左眼视力')\\n    characterfield_right_eye_vision = models.CharField(max_length=255, null=True, blank=True, verbose_name='右眼视力')\\n    numberfield_body_temperature = models.IntegerField(null=True, blank=True, verbose_name='体温')\\n    numberfield_body_temperature_standard_value = models.IntegerField(null=True, blank=True, verbose_name='体温标准值')\\n    numberfield_body_temperature_up_limit = models.IntegerField(default=37.4, null=True, blank=True, verbose_name='体温上限')\\n    numberfield_body_temperature_down_limit = models.IntegerField(default=36.0, null=True, blank=True, verbose_name='体温下限')\\n    numberfield_pulse = models.IntegerField(null=True, blank=True, verbose_name='脉搏')\\n    numberfield_pulse_standard_value = models.IntegerField(null=True, blank=True, verbose_name='脉搏标准值')\\n    numberfield_pulse_up_limit = models.IntegerField(default=100.0, null=True, blank=True, verbose_name='脉搏上限')\\n    numberfield_pulse_down_limit = models.IntegerField(default=60.0, null=True, blank=True, verbose_name='脉搏下限')\\n    numberfield_respiratory_rate = models.IntegerField(null=True, blank=True, verbose_name='呼吸频率')\\n    numberfield_respiratory_rate_standard_value = models.IntegerField(null=True, blank=True, verbose_name='呼吸频率标准值')\\n    numberfield_respiratory_rate_up_limit = models.IntegerField(default=20.0, null=True, blank=True, verbose_name='呼吸频率上限')\\n    numberfield_respiratory_rate_down_limit = models.IntegerField(default=10.0, null=True, blank=True, verbose_name='呼吸频率下限')\\n    numberfield_hight = models.IntegerField(null=True, blank=True, verbose_name='身高')\\n    numberfield_hight_standard_value = models.IntegerField(null=True, blank=True, verbose_name='身高标准值')\\n    numberfield_hight_up_limit = models.IntegerField(null=True, blank=True, verbose_name='身高上限')\\n    numberfield_hight_down_limit = models.IntegerField(null=True, blank=True, verbose_name='身高下限')\\n    numberfield_weight = models.IntegerField(null=True, blank=True, verbose_name='体重')\\n    numberfield_weight_standard_value = models.IntegerField(null=True, blank=True, verbose_name='体重标准值')\\n    numberfield_weight_up_limit = models.IntegerField(null=True, blank=True, verbose_name='体重上限')\\n    numberfield_weight_down_limit = models.IntegerField(null=True, blank=True, verbose_name='体重下限')\\n    numberfield_body_mass_index = models.IntegerField(null=True, blank=True, verbose_name='体质指数')\\n    numberfield_body_mass_index_standard_value = models.IntegerField(null=True, blank=True, verbose_name='体质指数标准值')\\n    numberfield_body_mass_index_up_limit = models.IntegerField(default=23.9, null=True, blank=True, verbose_name='体质指数上限')\\n    numberfield_body_mass_index_down_limit = models.IntegerField(default=18.5, null=True, blank=True, verbose_name='体质指数下限')\\n    relatedfield_athletic_ability = models.ForeignKey(Exercise_time, related_name='exercise_time_for_relatedfield_athletic_ability_A3001', on_delete=models.CASCADE, null=True, blank=True, verbose_name='运动能力')\\n    relatedfield_left_ear_hearing = models.ForeignKey(Hearing, related_name='hearing_for_relatedfield_left_ear_hearing_A3001', on_delete=models.CASCADE, null=True, blank=True, verbose_name='左耳听力')\\n    relatedfield_right_ear_hearing = models.ForeignKey(Hearing, related_name='hearing_for_relatedfield_right_ear_hearing_A3001', on_delete=models.CASCADE, null=True, blank=True, verbose_name='右耳听力')\\n    relatedfield_lips = models.ForeignKey(Lips, related_name='lips_for_relatedfield_lips_A3001', on_delete=models.CASCADE, null=True, blank=True, verbose_name='口唇')\\n    relatedfield_dentition = models.ForeignKey(Dentition, related_name='dentition_for_relatedfield_dentition_A3001', on_delete=models.CASCADE, null=True, blank=True, verbose_name='齿列')\\n    relatedfield_pharynx = models.ForeignKey(Pharynx, related_name='pharynx_for_relatedfield_pharynx_A3001', on_delete=models.CASCADE, null=True, blank=True, verbose_name='咽部')\\n    class Meta:\\n        verbose_name = '体格检查/完整的健康评估'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A3001_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A3001_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\n@admin.register(A3001)\\nclass A3001Admin(admin.ModelAdmin):\\n    autocomplete_fields = [\\\"relatedfield_athletic_ability\\\", \\\"relatedfield_left_ear_hearing\\\", \\\"relatedfield_right_ear_hearing\\\", \\\"relatedfield_lips\\\", \\\"relatedfield_dentition\\\", \\\"relatedfield_pharynx\\\", ]\\n\", \"forms\": \"\\nclass A3001_ModelForm(ModelForm):\\n    class Meta:\\n        model = A3001\\n        fields = ['characterfield_left_eye_vision', 'characterfield_right_eye_vision', 'numberfield_body_temperature', 'numberfield_pulse', 'numberfield_respiratory_rate', 'numberfield_hight', 'numberfield_weight', 'numberfield_body_mass_index', 'relatedfield_athletic_ability', 'relatedfield_left_ear_hearing', 'relatedfield_right_ear_hearing', 'relatedfield_lips', 'relatedfield_dentition', 'relatedfield_pharynx', ]\\n        widgets = {'relatedfield_athletic_ability': Select, 'relatedfield_left_ear_hearing': Select, 'relatedfield_right_ear_hearing': Select, 'relatedfield_lips': RadioSelect, 'relatedfield_dentition': RadioSelect, 'relatedfield_pharynx': Select, }\\n    \"}",
-            "components": [
-                "dea8864a-9aa1-11ec-bde1-8a6e55faf877",
-                "dea93de2-9aa1-11ec-bde1-8a6e55faf877",
-                "deae47e2-9aa1-11ec-bde1-8a6e55faf877",
-                "deaf1ae6-9aa1-11ec-bde1-8a6e55faf877",
-                "deafc9f0-9aa1-11ec-bde1-8a6e55faf877",
-                "deb08872-9aa1-11ec-bde1-8a6e55faf877",
-                "deb135ec-9aa1-11ec-bde1-8a6e55faf877",
-                "deb1ef6e-9aa1-11ec-bde1-8a6e55faf877",
-                "dec54e10-9aa1-11ec-bde1-8a6e55faf877",
-                "deda1db8-9aa1-11ec-bde1-8a6e55faf877",
-                "dedb0962-9aa1-11ec-bde1-8a6e55faf877",
-                "dedcdfee-9aa1-11ec-bde1-8a6e55faf877",
-                "deddcb16-9aa1-11ec-bde1-8a6e55faf877",
-                "dedebd28-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": []
-        },
-        {
             "label": "社会环境评估",
             "name": "A6216",
             "hssc_id": "0b86f50a-9e23-11ec-aa2c-fe35a7065cdd",
@@ -3975,6 +3833,33 @@
                 "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
                 "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
                 "01ae1278-a659-11ec-9221-f6197eef9f67"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "体格检查/完整的健康评估",
+            "name": "A3001",
+            "hssc_id": "0cd1dcea-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "tgjc/wzdjkpg",
+            "name_icpc": "A3001",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"A3001\",\n    \"label\": \"体格检查/完整的健康评估\",\n    \"hssc_id\": \"0cd1dcea-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_left_eye_vision\",\n            \"label\": \"左眼视力\",\n            \"hssc_id\": \"dea8864a-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_right_eye_vision\",\n            \"label\": \"右眼视力\",\n            \"hssc_id\": \"dea93de2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"numberfield_body_temperature\",\n            \"label\": \"体温\",\n            \"hssc_id\": \"deae47e2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_pulse\",\n            \"label\": \"脉搏\",\n            \"hssc_id\": \"deaf1ae6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_respiratory_rate\",\n            \"label\": \"呼吸频率\",\n            \"hssc_id\": \"deafc9f0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_hight\",\n            \"label\": \"身高\",\n            \"hssc_id\": \"deb08872-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_weight\",\n            \"label\": \"体重\",\n            \"hssc_id\": \"deb135ec-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_body_mass_index\",\n            \"label\": \"体质指数\",\n            \"hssc_id\": \"deb1ef6e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"relatedfield_athletic_ability\",\n            \"label\": \"运动能力\",\n            \"hssc_id\": \"dec54e10-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Exercise_time\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_left_ear_hearing\",\n            \"label\": \"左耳听力\",\n            \"hssc_id\": \"deda1db8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Hearing\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_right_ear_hearing\",\n            \"label\": \"右耳听力\",\n            \"hssc_id\": \"dedb0962-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Hearing\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_lips\",\n            \"label\": \"口唇\",\n            \"hssc_id\": \"dedcdfee-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Lips\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_dentition\",\n            \"label\": \"齿列\",\n            \"hssc_id\": \"deddcb16-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Dentition\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_pharynx\",\n            \"label\": \"咽部\",\n            \"hssc_id\": \"dedebd28-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Pharynx\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class A3001(HsscBuessinessFormBase):\\n    characterfield_left_eye_vision = models.CharField(max_length=255, null=True, blank=True, verbose_name='左眼视力')\\n    characterfield_right_eye_vision = models.CharField(max_length=255, null=True, blank=True, verbose_name='右眼视力')\\n    numberfield_body_temperature = models.IntegerField(null=True, blank=True, verbose_name='体温')\\n    numberfield_body_temperature_standard_value = models.IntegerField(null=True, blank=True, verbose_name='体温标准值')\\n    numberfield_body_temperature_up_limit = models.IntegerField(default=37.4, null=True, blank=True, verbose_name='体温上限')\\n    numberfield_body_temperature_down_limit = models.IntegerField(default=36.0, null=True, blank=True, verbose_name='体温下限')\\n    numberfield_pulse = models.IntegerField(null=True, blank=True, verbose_name='脉搏')\\n    numberfield_pulse_standard_value = models.IntegerField(null=True, blank=True, verbose_name='脉搏标准值')\\n    numberfield_pulse_up_limit = models.IntegerField(default=100.0, null=True, blank=True, verbose_name='脉搏上限')\\n    numberfield_pulse_down_limit = models.IntegerField(default=60.0, null=True, blank=True, verbose_name='脉搏下限')\\n    numberfield_respiratory_rate = models.IntegerField(null=True, blank=True, verbose_name='呼吸频率')\\n    numberfield_respiratory_rate_standard_value = models.IntegerField(null=True, blank=True, verbose_name='呼吸频率标准值')\\n    numberfield_respiratory_rate_up_limit = models.IntegerField(default=20.0, null=True, blank=True, verbose_name='呼吸频率上限')\\n    numberfield_respiratory_rate_down_limit = models.IntegerField(default=10.0, null=True, blank=True, verbose_name='呼吸频率下限')\\n    numberfield_hight = models.IntegerField(null=True, blank=True, verbose_name='身高')\\n    numberfield_hight_standard_value = models.IntegerField(null=True, blank=True, verbose_name='身高标准值')\\n    numberfield_hight_up_limit = models.IntegerField(null=True, blank=True, verbose_name='身高上限')\\n    numberfield_hight_down_limit = models.IntegerField(null=True, blank=True, verbose_name='身高下限')\\n    numberfield_weight = models.IntegerField(null=True, blank=True, verbose_name='体重')\\n    numberfield_weight_standard_value = models.IntegerField(null=True, blank=True, verbose_name='体重标准值')\\n    numberfield_weight_up_limit = models.IntegerField(null=True, blank=True, verbose_name='体重上限')\\n    numberfield_weight_down_limit = models.IntegerField(null=True, blank=True, verbose_name='体重下限')\\n    numberfield_body_mass_index = models.IntegerField(null=True, blank=True, verbose_name='体质指数')\\n    numberfield_body_mass_index_standard_value = models.IntegerField(null=True, blank=True, verbose_name='体质指数标准值')\\n    numberfield_body_mass_index_up_limit = models.IntegerField(default=23.9, null=True, blank=True, verbose_name='体质指数上限')\\n    numberfield_body_mass_index_down_limit = models.IntegerField(default=18.5, null=True, blank=True, verbose_name='体质指数下限')\\n    relatedfield_athletic_ability = models.ForeignKey(Exercise_time, related_name='exercise_time_for_relatedfield_athletic_ability_A3001', on_delete=models.CASCADE, null=True, blank=True, verbose_name='运动能力')\\n    relatedfield_left_ear_hearing = models.ForeignKey(Hearing, related_name='hearing_for_relatedfield_left_ear_hearing_A3001', on_delete=models.CASCADE, null=True, blank=True, verbose_name='左耳听力')\\n    relatedfield_right_ear_hearing = models.ForeignKey(Hearing, related_name='hearing_for_relatedfield_right_ear_hearing_A3001', on_delete=models.CASCADE, null=True, blank=True, verbose_name='右耳听力')\\n    relatedfield_lips = models.ForeignKey(Lips, related_name='lips_for_relatedfield_lips_A3001', on_delete=models.CASCADE, null=True, blank=True, verbose_name='口唇')\\n    relatedfield_dentition = models.ForeignKey(Dentition, related_name='dentition_for_relatedfield_dentition_A3001', on_delete=models.CASCADE, null=True, blank=True, verbose_name='齿列')\\n    relatedfield_pharynx = models.ForeignKey(Pharynx, related_name='pharynx_for_relatedfield_pharynx_A3001', on_delete=models.CASCADE, null=True, blank=True, verbose_name='咽部')\\n    class Meta:\\n        verbose_name = '体格检查/完整的健康评估'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A3001_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A3001_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\n@admin.register(A3001)\\nclass A3001Admin(admin.ModelAdmin):\\n    autocomplete_fields = [\\\"relatedfield_athletic_ability\\\", \\\"relatedfield_left_ear_hearing\\\", \\\"relatedfield_right_ear_hearing\\\", \\\"relatedfield_lips\\\", \\\"relatedfield_dentition\\\", \\\"relatedfield_pharynx\\\", ]\\n\", \"forms\": \"\\nclass A3001_ModelForm(ModelForm):\\n    class Meta:\\n        model = A3001\\n        fields = ['characterfield_left_eye_vision', 'characterfield_right_eye_vision', 'numberfield_body_temperature', 'numberfield_pulse', 'numberfield_respiratory_rate', 'numberfield_hight', 'numberfield_weight', 'numberfield_body_mass_index', 'relatedfield_athletic_ability', 'relatedfield_left_ear_hearing', 'relatedfield_right_ear_hearing', 'relatedfield_lips', 'relatedfield_dentition', 'relatedfield_pharynx', ]\\n        widgets = {'relatedfield_athletic_ability': Select, 'relatedfield_left_ear_hearing': Select, 'relatedfield_right_ear_hearing': Select, 'relatedfield_lips': RadioSelect, 'relatedfield_dentition': RadioSelect, 'relatedfield_pharynx': Select, }\\n    \"}",
+            "components": [
+                "dea8864a-9aa1-11ec-bde1-8a6e55faf877",
+                "dea93de2-9aa1-11ec-bde1-8a6e55faf877",
+                "deae47e2-9aa1-11ec-bde1-8a6e55faf877",
+                "deaf1ae6-9aa1-11ec-bde1-8a6e55faf877",
+                "deafc9f0-9aa1-11ec-bde1-8a6e55faf877",
+                "deb08872-9aa1-11ec-bde1-8a6e55faf877",
+                "deb135ec-9aa1-11ec-bde1-8a6e55faf877",
+                "deb1ef6e-9aa1-11ec-bde1-8a6e55faf877",
+                "dec54e10-9aa1-11ec-bde1-8a6e55faf877",
+                "deda1db8-9aa1-11ec-bde1-8a6e55faf877",
+                "dedb0962-9aa1-11ec-bde1-8a6e55faf877",
+                "dedcdfee-9aa1-11ec-bde1-8a6e55faf877",
+                "deddcb16-9aa1-11ec-bde1-8a6e55faf877",
+                "dedebd28-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": []
         },
@@ -4198,7 +4083,7 @@
             "resource_devices": null,
             "resource_knowledge": null,
             "buessiness_forms": [
-                "0c314e38-9e23-11ec-aa2c-fe35a7065cdd"
+                "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd"
             ],
             "group": [
                 "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877"
@@ -4225,7 +4110,7 @@
             "resource_devices": null,
             "resource_knowledge": null,
             "buessiness_forms": [
-                "0bcb1fc8-9e23-11ec-aa2c-fe35a7065cdd"
+                "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd"
             ],
             "group": []
         },
@@ -4250,7 +4135,7 @@
             "resource_devices": null,
             "resource_knowledge": null,
             "buessiness_forms": [
-                "0bcb1fc8-9e23-11ec-aa2c-fe35a7065cdd"
+                "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd"
             ],
             "group": []
         },
@@ -4640,31 +4525,6 @@
                 "0b5c89be-9e23-11ec-aa2c-fe35a7065cdd"
             ],
             "group": []
-        },
-        {
-            "label": "尿常规检查",
-            "name": "A3502",
-            "hssc_id": "43a1842e-b092-11ec-9cae-5ed0e34457d3",
-            "pym": "ncgjc",
-            "name_icpc": "A3502",
-            "execution_time_frame": null,
-            "awaiting_time_frame": null,
-            "priority": 3,
-            "enable_queue_counter": true,
-            "suppliers": null,
-            "not_suitable": null,
-            "time_limits": null,
-            "working_hours": null,
-            "frequency": null,
-            "cost": null,
-            "load_feedback": false,
-            "resource_materials": null,
-            "resource_devices": null,
-            "resource_knowledge": null,
-            "buessiness_forms": [
-                "2abcc130-b092-11ec-9cae-5ed0e34457d3"
-            ],
-            "group": []
         }
     ],
     "buessinessformssetting": [
@@ -4915,38 +4775,6 @@
             "operation": "e02ee856-9aa1-11ec-bde1-8a6e55faf877",
             "buessiness_form": "0bf1f86e-9e23-11ec-aa2c-fe35a7065cdd",
             "is_list": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "43a1c326-b092-11ec-9cae-5ed0e34457d3",
-            "operation": "43a1842e-b092-11ec-9cae-5ed0e34457d3",
-            "buessiness_form": "2abcc130-b092-11ec-9cae-5ed0e34457d3",
-            "is_list": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "eadb09e4-b354-11ec-b38b-468daa7d16bf",
-            "operation": "e0317224-9aa1-11ec-bde1-8a6e55faf877",
-            "buessiness_form": "0c314e38-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_list": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "f766705e-b354-11ec-b38b-468daa7d16bf",
-            "operation": "e03291f4-9aa1-11ec-bde1-8a6e55faf877",
-            "buessiness_form": "0bcb1fc8-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_list": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "1900897a-b355-11ec-941d-468daa7d16bf",
-            "operation": "e032db46-9aa1-11ec-bde1-8a6e55faf877",
-            "buessiness_form": "0bcb1fc8-9e23-11ec-aa2c-fe35a7065cdd",
-            "is_list": false
         }
     ],
     "eventrule": [
@@ -5012,24 +4840,6 @@
             "detection_scope": 1,
             "weight": 1,
             "expression": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '足痛'"
-        },
-        {
-            "label": "一项糖尿病症状",
-            "name": "yi_xiang_tang_niao_bing_zheng_zhuang",
-            "hssc_id": "05d0c7fa-afc9-11ec-9129-925bd788f441",
-            "description": "症状 in '烦渴，多尿，多食，乏力，体重减轻，体重增加，皮肤感染，'",
-            "detection_scope": 1,
-            "weight": 1,
-            "expression": "deb93f26-9aa1-11ec-bde1-8a6e55faf877 in '烦渴，多尿，多食，乏力，体重减轻，体重增加，皮肤感染，'"
-        },
-        {
-            "label": "两项糖尿病症状",
-            "name": "liang_xiang_tang_niao_bing_zheng_zhuang",
-            "hssc_id": "1013b7c6-afca-11ec-b226-925bd788f441",
-            "description": "症状 == '烦渴，多尿' or 症状 == '烦渴，体重增加' or 症状 == '多尿，皮肤感染' or 症状 == '烦渴，皮肤感染'",
-            "detection_scope": 1,
-            "weight": 1,
-            "expression": "deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '烦渴，多尿' or deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '烦渴，体重增加' or deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '多尿，皮肤感染' or deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '烦渴，皮肤感染'"
         }
     ],
     "eventexpression": [
@@ -5182,56 +4992,6 @@
             "operator": 2,
             "value": "20",
             "connection_operator": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "05d17be6-afc9-11ec-9129-925bd788f441",
-            "event_rule": "05d0c7fa-afc9-11ec-9129-925bd788f441",
-            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 6,
-            "value": "烦渴，多尿，多食，乏力，体重减轻，体重增加，皮肤感染，",
-            "connection_operator": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "1014ec7c-afca-11ec-b226-925bd788f441",
-            "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
-            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 0,
-            "value": "烦渴，多尿",
-            "connection_operator": 1
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "1015d74a-afca-11ec-b226-925bd788f441",
-            "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
-            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 0,
-            "value": "烦渴，体重增加",
-            "connection_operator": 1
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "101614d0-afca-11ec-b226-925bd788f441",
-            "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
-            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 0,
-            "value": "多尿，皮肤感染",
-            "connection_operator": 1
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "101649dc-afca-11ec-b226-925bd788f441",
-            "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
-            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 0,
-            "value": "烦渴，皮肤感染",
-            "connection_operator": 1
         }
     ],
     "service": [
@@ -5847,38 +5607,6 @@
                 "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877",
                 "de1ca0c6-9aa1-11ec-bde1-8a6e55faf877"
             ]
-        },
-        {
-            "hssc_id": "df227a5c-b092-11ec-b42a-5ed0e34457d3",
-            "pym": "ncgjc",
-            "name": "A3502",
-            "name_icpc": "A3502",
-            "label": "尿常规检查",
-            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "begin_time_setting": 0,
-            "execution_time_frame": null,
-            "awaiting_time_frame": null,
-            "priority": 3,
-            "history_services_display": 0,
-            "enable_recommanded_list": true,
-            "enable_queue_counter": true,
-            "suppliers": null,
-            "not_suitable": null,
-            "time_limits": null,
-            "working_hours": null,
-            "frequency": null,
-            "cost": null,
-            "load_feedback": false,
-            "resource_materials": null,
-            "resource_devices": null,
-            "resource_knowledge": null,
-            "script": null,
-            "operations": [
-                "43a1842e-b092-11ec-9cae-5ed0e34457d3"
-            ],
-            "group": [
-                "de1ce450-9aa1-11ec-bde1-8a6e55faf877"
-            ]
         }
     ],
     "operationssetting": [
@@ -6108,17 +5836,6 @@
             "hssc_id": "8ad71393-af6b-11ec-b645-4889e7cf38c9",
             "service": "8ad60184-af6b-11ec-82fd-4889e7cf38c9",
             "operation": "9582b822-ab23-11ec-bf5e-1ac10aeebbc4",
-            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
-            "system_operand": null,
-            "next_operation": null,
-            "passing_data": 0
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "df2362c8-b092-11ec-b42a-5ed0e34457d3",
-            "service": "df227a5c-b092-11ec-b42a-5ed0e34457d3",
-            "operation": "43a1842e-b092-11ec-9cae-5ed0e34457d3",
             "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
             "system_operand": null,
             "next_operation": null,
