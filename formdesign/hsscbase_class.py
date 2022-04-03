@@ -63,7 +63,10 @@ class HsscBackupManager(models.Manager):
                         item[field.name] = _object
                     else:
                         if (field.one_to_one or field.many_to_one):  # 一对一、多对一字段, 用hssc_id获取对象
-                            _object = field.related_model.objects.get(hssc_id=item_dict[field.name])
+                            try:
+                                _object = field.related_model.objects.get(hssc_id=item_dict[field.name])
+                            except field.related_model.DoesNotExist:  # ManagedEntity.base_form中的hssc_id可能为空
+                                _object = None
                             item[field.name] = _object
                         elif field.__class__.__name__ == 'DurationField':  # duration字段
                             item[field.name] = parse_timedelta(item_dict[field.name])
