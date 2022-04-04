@@ -3655,10 +3655,12 @@
             "hssc_id": "0d1b5014-9e23-11ec-aa2c-fe35a7065cdd",
             "pym": "mzfz",
             "name_icpc": "A6502",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A6502\",\n    \"label\": \"门诊分诊\",\n    \"hssc_id\": \"0d1b5014-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_yu_yue_que_ren\",\n            \"label\": \"签到确认\",\n            \"hssc_id\": \"de98e56e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"boolean\"\n        }\n    ]\n}",
-            "script": null,
-            "components": [],
+            "description": "",
+            "meta_data": "{\n    \"name\": \"A6502\",\n    \"label\": \"门诊分诊\",\n    \"hssc_id\": \"0d1b5014-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_name\",\n            \"label\": \"姓名\",\n            \"hssc_id\": \"de9de26c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class A6502(HsscBuessinessFormBase):\\n    characterfield_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='姓名')\\n    class Meta:\\n        verbose_name = '门诊分诊'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6502_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6502_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nadmin.site.register(A6502)\\n\", \"forms\": \"\\nclass A6502_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6502\\n        fields = ['characterfield_name', ]\\n        \\n    \"}",
+            "components": [
+                "de9de26c-9aa1-11ec-bde1-8a6e55faf877"
+            ],
             "components_groups": []
         },
         {
@@ -5008,10 +5010,10 @@
             "label": "糖尿病血管病变周围神经炎诊断规则",
             "name": "tang_niao_bing_xue_guan_bing_bian_zhou_wei_shen_jing_yan_zhen_duan_gui_ze",
             "hssc_id": "e3563d98-abe2-11ec-bf5e-1ac10aeebbc4",
-            "description": "疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and 症状 == '足痛'",
+            "description": "疾病名称 in ['非胰岛素依赖糖尿病', '胰岛素依赖糖尿病']  症状 == '足痛'",
             "detection_scope": 1,
             "weight": 1,
-            "expression": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '足痛'"
+            "expression": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in ['非胰岛素依赖糖尿病', '胰岛素依赖糖尿病']  deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '足痛'"
         },
         {
             "label": "一项糖尿病症状",
@@ -5150,7 +5152,7 @@
             "event_rule": "e3563d98-abe2-11ec-bf5e-1ac10aeebbc4",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
             "operator": 6,
-            "value": "非胰岛素依赖糖尿病，胰岛素依赖糖尿病",
+            "value": "'非胰岛素依赖糖尿病', '胰岛素依赖糖尿病'",
             "connection_operator": null
         },
         {
@@ -5159,7 +5161,7 @@
             "hssc_id": "e356ace2-abe2-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "e3563d98-abe2-11ec-bf5e-1ac10aeebbc4",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
+            "operator": 0,
             "value": "足痛",
             "connection_operator": null
         },

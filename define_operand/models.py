@@ -31,7 +31,7 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
         RelateFieldModel.objects.create(
             name=instance.name,
             label=instance.label,
-            related_content=instance.name.capitalize(),
+            related_content=instance.model_name,
             related_content_type=sender._meta.model_name,
             hssc_id = instance.hssc_id
         )
@@ -39,7 +39,7 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
         RelateFieldModel.objects.filter(hssc_id=instance.hssc_id).update(
             name=instance.name,
             label=instance.label,
-            related_content=instance.name.capitalize(),
+            related_content=instance.model_name,
             related_content_type=sender._meta.model_name,
         )
 

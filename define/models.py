@@ -204,6 +204,10 @@ class IcpcList(HsscPymBase):
 @receiver(post_save, sender=DicList, weak=True, dispatch_uid=None)
 @receiver(post_save, sender=IcpcList, weak=True, dispatch_uid=None)
 def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
+    # if sender==DicList:
+    #     _related_content = instance.name.capitalize()
+    # elif sender==IcpcList:
+    #     _related_content = instance.model_name
     if created:
         RelateFieldModel.objects.create(
             name=instance.name,
