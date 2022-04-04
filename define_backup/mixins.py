@@ -254,14 +254,12 @@ class GenerateViewsScriptMixin:
         create_script_head = f'''
 class {create_view_name}(CreateView):
     model = {view_model_name}
-    customer = None
-    entity_base_info = {base_model_name}.objects.get(customer=customer)
     context = {{}}
 '''
         create_script_body = f'''
     def get_context_data(self, **kwargs):
         context = super({create_view_name}, self).get_context_data(**kwargs)
-        base_form = {base_form_name}(instance=self.entity_base_info, prefix="base_form")
+        base_form = {base_form_name}(instance={base_model_name}.objects.get(customer=1), prefix="base_form")
         if self.request.method == 'POST':{create_script_attribute_forms_post}
         else:{create_script_attribute_forms_get}
         # context

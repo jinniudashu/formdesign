@@ -87,10 +87,7 @@ import json
 
 from core.models import Operation_proc, Staff, Customer
 from core.signals import operand_started, operand_finished
-
-from django.contrib.messages.views import SuccessMessageMixin
 from forms.utils import *
-
 from forms.models import *
 from forms.forms import *
 
