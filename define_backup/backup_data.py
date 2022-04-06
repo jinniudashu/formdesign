@@ -159,9 +159,27 @@ def export_icpc_models_admin():
         models_receiver_post_save = f'{models_receiver_post_save}\n@receiver(post_save, sender={icpc["name"]}, weak=True, dispatch_uid=None)'
         models_receiver_post_delete = f'{models_receiver_post_delete}\n@receiver(post_delete, sender={icpc["name"]}, weak=True, dispatch_uid=None)'
 
+        # 生成admin脚本
+        _admin_script = f'''
+@admin.register({icpc['name']})
+class {icpc['name']}Admin(admin.ModelAdmin):
+    list_display = [field.name for field in {icpc['name']}._meta.fields]
+    search_fields=["iname", "pym", "icpc_code"]
+    ordering = ["icpc_code"]
+    readonly_fields = [field.name for field in {icpc['name']}._meta.fields]
+    actions = None
+
+    def has_add_permission(self, request):
+        return False
+    def has_delete_permission(self, request, obj=None):
+        return False
+'''
+        admin_script = f'{admin_script}\n{_admin_script}'
+
     models_receiver_post_save = models_receiver_post_save + icpc_models_post_save
     models_receiver_post_delete = models_receiver_post_delete + icpc_models_post_delete
     models_script = models_script + models_receiver_post_save + models_receiver_post_delete
+
     return models_script, admin_script
 
 

@@ -23,8 +23,8 @@ class HsscBuessinessFormBase(models.Model):
     creater = models.ForeignKey(Staff, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="创建人")
     create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
     update_time = models.DateTimeField(auto_now=True, verbose_name="更新时间")
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="客户")
-    operator = models.ForeignKey(Staff, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="作业人员")
+    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, related_name='%(class)s_customer', blank=True, null=True, verbose_name="客户")
+    operator = models.ForeignKey(Staff, on_delete=models.SET_NULL, related_name='%(class)s_operator', blank=True, null=True, verbose_name="作业人员")
     pid = models.ForeignKey(Operation_proc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="作业进程id")
     slug = models.SlugField(max_length=250, blank=True, null=True, verbose_name="slug")
 
@@ -272,7 +272,7 @@ def icpc_post_delete_handler(sender, instance, **kwargs):
 
 # ICPC字典admin.py文件头
 icpc_admin_head = '''from django.contrib import admin
-from .models import Icpc
+from .models import *
 
 @admin.register(Icpc)
 class IcpcAdmin(admin.ModelAdmin):

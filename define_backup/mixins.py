@@ -231,6 +231,7 @@ class GenerateViewsScriptMixin:
 
         create_script_attribute_forms_post = ''
         create_script_attribute_forms_get = ''
+        update_script_attribute_forms_get = ''
         create_script_attribute_forms_context = ''
         create_script_attribute_forms_valid = ''
         form_index = 0
@@ -241,6 +242,8 @@ class GenerateViewsScriptMixin:
             attribute_form{form_index} = {form.name.capitalize()}_ModelForm(self.request.POST, prefix="attribute_form{form_index}")'''
                 create_script_attribute_forms_get = f'''{create_script_attribute_forms_get}
             attribute_form{form_index} = {form.name.capitalize()}_ModelForm(prefix="attribute_form{form_index}")'''
+                update_script_attribute_forms_get = f'''{update_script_attribute_forms_get}
+            attribute_form{form_index} = {form.name.capitalize()}_ModelForm(instance={form.name.capitalize()}.objects.get(pid=kwargs['id']), prefix="attribute_form{form_index}")'''
                 create_script_attribute_forms_context = f'''{create_script_attribute_forms_context}
         context['attribute_form{form_index}'] = attribute_form{form_index}'''
                 create_script_attribute_forms_valid = f'''{create_script_attribute_forms_valid}
@@ -253,6 +256,9 @@ class GenerateViewsScriptMixin:
         # create view
         create_script_head = f'''
 class {create_view_name}(CreateView):
+    # success_url
+    # template_name
+    form_class = {view_model_name}_ModelForm # the first form ModelForm class
     model = {view_model_name}
     context = {{}}
 '''
@@ -275,41 +281,49 @@ class {create_view_name}(CreateView):
         return super({create_view_name}, self).form_valid(form)
 '''
 
-#         # update view
-#         update_script_head = f'''
-# class {update_view_name}(CreateView):
-#     model = {self.__class__.__name__}
-#     operation_proc = get_object_or_404(Operation_proc, id=kwargs['id'])
+        # update view
+        update_script_head = f'''
+class {update_view_name}(UpdateView):
+    # success_url
+    # template_name
+    form_class = {view_model_name}_ModelForm # the first form ModelForm class
+    model = {view_model_name}
 
-#     if operation_proc.group is None:  # 如果进程角色已经被置为空，说明已有其他人处理，退出本修改作业进程
-#         return redirect(reverse('index'))
-#     operation_proc.group.set([])  # 设置作业进程所属角色组为空
+    # if operation_proc.group is None:  # 如果进程角色已经被置为空，说明已有其他人处理，退出本修改作业进程
+    #     return redirect(reverse('index'))
+    # operation_proc.group.set([])  # 设置作业进程所属角色组为空
 
-#     # 构造作业开始消息参数
-#     operand_started.send(sender={self.name}_update, operation_proc=operation_proc, ocode='rtr', operator=request.user)
+    # # 构造作业开始消息参数
+    # operand_started.send(sender=self, operation_proc=operation_proc, ocode='rtr', operator=self.request.user)
 
-#     customer = operation_proc.customer
-#     basic_personal_information = Basic_personal_information.objects.get(customer=customer)
-#     context = {{}}
-#         '''
+    context = {{}}
+        '''
 
-#         update_script_body = f'''
-#         if request.method == 'POST':
-#                 # 构造作业完成消息参数
-#                 operand_finished.send(sender={self.name}_update, pid=kwargs['id'], ocode='rtc', field_values=request.POST)
-#                 return redirect(reverse('index'))
-#         else:
-#             pass
-#         # context'''
+        update_script_body = f'''
+    def get_context_data(self, **kwargs):
+        context = super({update_view_name}, self).get_context_data(**kwargs)
+        operation_proc = get_object_or_404(Operation_proc, id=kwargs['id'])
+        customer = operation_proc.customer
+        base_form = {base_form_name}(instance={base_model_name}.objects.get(customer=1), prefix="base_form")
+        if self.request.method == 'POST':{create_script_attribute_forms_post}
+            # 构造作业完成消息参数
+            operand_finished.send(sender=self, pid=kwargs['id'], ocode='rtc', field_values=self.request.POST)
+            return redirect(reverse('index'))
+        else:{update_script_attribute_forms_get}
+        # context
+        context['base_form'] = base_form{create_script_attribute_forms_context}
+        context['user'] = self.request.user
+        return context
 
-#         update_script_foot = f'''
-#         context['proc_id'] = kwargs['id']
-#         return render(request, '{self.name}_update.html', context)
+    def form_valid(self, form):
+        context = self.get_context_data()
+        customer = Customer.objects.get(user=context['user'])
+        operator = Staff.objects.get(user=context['user'])
+        # form_valid{create_script_attribute_forms_valid}
+        return super({create_view_name}, self).form_valid(form)
+'''
 
-#         '''
-
-#         return f'{create_script_head}{create_script_body}\n\n{update_script_head}{update_script_body}{update_script_foot}'
-        return f'{create_script_head}{create_script_body}'
+        return f'{create_script_head}{create_script_body}\n\n{update_script_head}{update_script_body}'
 
     # 构造html脚本
     def __construct_html_script(self):
