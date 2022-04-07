@@ -214,8 +214,7 @@ class GenerateViewsScriptMixin:
     def generate_script(self):
         create_view_name = self.name.capitalize() + '_CreateView'
         update_view_name = self.name.capitalize() + '_UpdateView'
-        # self.edit_template_name = f'{self.operand_name}_edit.html'
-        # self.success_url = '/'
+        # edit_template_name = f'{self.name}_edit.html'
         script = {}
         script['views'] = self.__construct_view_script(create_view_name, update_view_name)
         script['urls'] = self.__construct_url_script(create_view_name, update_view_name)
@@ -256,8 +255,8 @@ class GenerateViewsScriptMixin:
         # create view
         create_script_head = f'''
 class {create_view_name}(CreateView):
-    # success_url
-    # template_name
+    success_url = 'forms/'
+    template_name = '{self.name}_create.html'
     form_class = {view_model_name}_ModelForm # the first form ModelForm class
     model = {view_model_name}
     context = {{}}
@@ -265,9 +264,12 @@ class {create_view_name}(CreateView):
         create_script_body = f'''
     def get_context_data(self, **kwargs):
         context = super({create_view_name}, self).get_context_data(**kwargs)
-        base_form = {base_form_name}(instance={base_model_name}.objects.get(customer=1), prefix="base_form")
-        if self.request.method == 'POST':{create_script_attribute_forms_post}
-        else:{create_script_attribute_forms_get}
+        if self.request.method == 'POST':
+            base_form = {base_form_name}(self.request.POST, prefix="base_form")
+{create_script_attribute_forms_post}
+        else:
+            base_form = {base_form_name}(prefix="base_form")
+{create_script_attribute_forms_get}
         # context
         context['base_form'] = base_form{create_script_attribute_forms_context}
         context['user'] = self.request.user
@@ -284,8 +286,8 @@ class {create_view_name}(CreateView):
         # update view
         update_script_head = f'''
 class {update_view_name}(UpdateView):
-    # success_url
-    # template_name
+    success_url = 'forms/'
+    template_name = '{self.name}_update.html'
     form_class = {view_model_name}_ModelForm # the first form ModelForm class
     model = {view_model_name}
 
@@ -328,9 +330,34 @@ class {update_view_name}(UpdateView):
     # 构造html脚本
     def __construct_html_script(self):
         _hs = f'''
-                    <h5>{self.name}</h5>
-                    {{{{ {self.name}.as_p }}}}
-                    <hr>'''            
+        <form action='' method='GET' enctype='multipart/form-data'> 
+            {{% csrf_token %}}                
+            <h5>{self.managed_entity.base_form.label}</h5>
+            {{{{ base_form.as_table }}}}
+        </form>
+        <hr>'''
+        create_hs = update_hs = ''
+        form_index = 0
+        for operation in self.operations.all():
+            for form in operation.buessiness_forms.all():
+                create_hs = f'''{create_hs}
+        <form id='attribute_form{form_index}' action={{% url '{self.name}_create_url' %}} method='POST' enctype='multipart/form-data'> 
+            {{% csrf_token %}}                
+            <h5>{form.label}</h5>
+            {{{{ attribute_form{form_index}.as_p }}}}
+            <input type="submit" value="保存表单" onclick="formSave('attribute_form{form_index}')" />
+        </form>
+        <hr>'''
+                update_hs = f'''{update_hs}
+        <form id='attribute_form{form_index}' action={{% url '{self.name}_update_url' %}} method='POST' enctype='multipart/form-data'> 
+            {{% csrf_token %}}                
+            <h5>{form.label}</h5>
+            {{{{ attribute_form{form_index}.as_p }}}}
+            <input type="submit" value="保存表单" onclick="formSave('attribute_form{form_index}')" />
+        </form>
+        <hr>'''
+                form_index += 1
+
         script_head = f'''{{% extends "base.html" %}}
 
     {{% load crispy_forms_tags %}}
@@ -338,20 +365,12 @@ class {update_view_name}(UpdateView):
     {{% block content %}}
     '''
 
-        create_script_body = f'''
-        <form action={{% url '{self.name}_create_url' %}} method='POST' enctype='multipart/form-data'> 
-            {{% csrf_token %}}
-                ''' + _hs
+        create_script_body = _hs + create_hs
 
-        update_script_body = f'''
-        <form action={{% url '{self.name}_update_url' proc_id %}} method='POST' enctype='multipart/form-data'> 
-            {{% csrf_token %}}
-                ''' + _hs
+        update_script_body = _hs + update_hs
 
         script_foot = f'''
-            <input type="submit" value="提交" /> 
-        </form>
-
+        <input type="submit" value="完成服务" onclick="formSave('attribute_form{form_index}')" />
     {{% endblock %}}
     '''
 
@@ -362,6 +381,6 @@ class {update_view_name}(UpdateView):
         # 构造urls脚本
     def __construct_url_script(self, create_view_name, update_view_name):
         return f'''
-    path('{self.name}/create', {create_view_name}.as_view(), name='{self.name}_create_url'),'''
-    # path('{self.name}/<int:id>/update', {update_view_name}.as_view(), name='{self.name}_update_url'),'''
+    path('{self.name}/create', {create_view_name}.as_view(), name='{self.name}_create_url'),
+    path('{self.name}/<int:id>/update', {update_view_name}.as_view(), name='{self.name}_update_url'),'''
 
