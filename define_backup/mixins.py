@@ -33,13 +33,13 @@ class GenerateModelsScriptMixin:
         name = self.name.capitalize()
         if autocomplete_fields == '':
             admin_script = f'''
-admin.site.register({name})
+hssc_clinic_admin_site.register({name})
 '''
         else:
             admin_script = f'''
-@admin.register({name})
 class {name}Admin(admin.ModelAdmin):
     autocomplete_fields = [{autocomplete_fields}]
+hssc_clinic_admin_site.register({name}, {name}Admin)
 '''
         return admin_script
 
@@ -224,7 +224,7 @@ class GenerateViewsScriptMixin:
 
     # 构造views脚本
     def __construct_view_script(self, create_view_name, update_view_name):
-        view_model_name = self.operations.all()[0].buessiness_forms.all()[0].name.capitalize()
+        view_model_name = self.buessiness_forms.all()[0].name.capitalize()
         base_model_name = self.managed_entity.base_form.name.capitalize()
         base_form_name = f'{base_model_name}_ModelForm'
 
@@ -235,29 +235,28 @@ class GenerateViewsScriptMixin:
         create_script_attribute_forms_valid = ''
         form_index = 0
 
-        for operation in self.operations.all():
-            for form in operation.buessiness_forms.all():
-                create_script_attribute_forms_post = f'''{create_script_attribute_forms_post}
+        for form in self.buessiness_forms.all():
+            create_script_attribute_forms_post = f'''{create_script_attribute_forms_post}
             attribute_form{form_index} = {form.name.capitalize()}_ModelForm(self.request.POST, prefix="attribute_form{form_index}")'''
-                create_script_attribute_forms_get = f'''{create_script_attribute_forms_get}
+            create_script_attribute_forms_get = f'''{create_script_attribute_forms_get}
             attribute_form{form_index} = {form.name.capitalize()}_ModelForm(prefix="attribute_form{form_index}")'''
-                update_script_attribute_forms_get = f'''{update_script_attribute_forms_get}
+            update_script_attribute_forms_get = f'''{update_script_attribute_forms_get}
             attribute_form{form_index} = {form.name.capitalize()}_ModelForm(instance={form.name.capitalize()}.objects.get(pid=kwargs['id']), prefix="attribute_form{form_index}")'''
-                create_script_attribute_forms_context = f'''{create_script_attribute_forms_context}
+            create_script_attribute_forms_context = f'''{create_script_attribute_forms_context}
         context['attribute_form{form_index}'] = attribute_form{form_index}'''
-                create_script_attribute_forms_valid = f'''{create_script_attribute_forms_valid}
+            create_script_attribute_forms_valid = f'''{create_script_attribute_forms_valid}
         f = context['attribute_form{form_index}'].save(commit=False)
         f.customer = customer
         f.operator = operator
         f.save()'''
-                form_index += 1
+            form_index += 1
 
         # create view
         create_script_head = f'''
 class {create_view_name}(CreateView):
     success_url = 'forms/'
     template_name = '{self.name}_create.html'
-    form_class = {view_model_name}_ModelForm # the first form ModelForm class
+    form_class = {view_model_name}_ModelForm  # the first form ModelForm class
     model = {view_model_name}
     context = {{}}
 '''
@@ -338,9 +337,8 @@ class {update_view_name}(UpdateView):
         <hr>'''
         create_hs = update_hs = ''
         form_index = 0
-        for operation in self.operations.all():
-            for form in operation.buessiness_forms.all():
-                create_hs = f'''{create_hs}
+        for form in self.buessiness_forms.all():
+            create_hs = f'''{create_hs}
         <form id='attribute_form{form_index}' action={{% url '{self.name}_create_url' %}} method='POST' enctype='multipart/form-data'> 
             {{% csrf_token %}}                
             <h5>{form.label}</h5>
@@ -348,7 +346,7 @@ class {update_view_name}(UpdateView):
             <input type="submit" value="保存表单" onclick="formSave('attribute_form{form_index}')" />
         </form>
         <hr>'''
-                update_hs = f'''{update_hs}
+            update_hs = f'''{update_hs}
         <form id='attribute_form{form_index}' action={{% url '{self.name}_update_url' %}} method='POST' enctype='multipart/form-data'> 
             {{% csrf_token %}}                
             <h5>{form.label}</h5>
@@ -356,7 +354,7 @@ class {update_view_name}(UpdateView):
             <input type="submit" value="保存表单" onclick="formSave('attribute_form{form_index}')" />
         </form>
         <hr>'''
-                form_index += 1
+            form_index += 1
 
         script_head = f'''{{% extends "base.html" %}}
 

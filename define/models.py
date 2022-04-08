@@ -227,7 +227,7 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
 
 # 角色表
 class Role(HsscPymBase):
-    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="角色描述")
+    description = models.CharField(max_length=255, blank=True, null=True, verbose_name="岗位描述")
 
     def save(self, *args, **kwargs):
         if self.name is None or self.name == '':
@@ -235,6 +235,6 @@ class Role(HsscPymBase):
         super().save(*args, **kwargs)
 
     class Meta:
-        verbose_name = "角色"
+        verbose_name = "业务岗位"
         verbose_name_plural = verbose_name
         ordering = ['id']

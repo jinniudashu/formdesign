@@ -45,7 +45,14 @@ class HsscBuessinessFormBase(models.Model):
 # admin.py文件头
 admin_file_head = '''from django.contrib import admin
 from .models import *
-    '''
+
+class HsscClinicAdminSite(admin.AdminSite):
+    site_header = '智益诊所管理系统'
+    site_title = 'HsscClinic'
+    index_title = '医生工作站'
+
+hssc_clinic_admin_site = HsscClinicAdminSite(name='HsscClinicAdmin')
+'''
 
 # forms.py文件头
 forms_file_head = '''from django.forms import ModelForm, Form,  widgets, fields, RadioSelect, Select, CheckboxSelectMultiple, CheckboxInput, SelectMultiple, NullBooleanSelect

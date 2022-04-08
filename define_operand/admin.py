@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BuessinessForm, Operation, BuessinessFormsSetting, Service, OperationsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceProgramSetting, SystemOperand, EventRule, EventExpression, ManagedEntity
+from .models import BuessinessForm, Service, BuessinessFormsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceProgramSetting, SystemOperand, EventRule, EventExpression, ManagedEntity
 
 
 class EventExpressionInline(admin.TabularInline):
@@ -35,10 +35,11 @@ class BuessinessFormAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), ('components', 'components_groups'), 'description', ('name', 'hssc_id'), )
+            'fields': (('label', 'name_icpc'), 'components', 'components_groups', 'description', ('name', 'hssc_id'), )
         }),
     )
-    search_fields = ['name', 'label']
+    search_fields = ['name', 'label', 'pym']
+    filter_horizontal = ("components",)
     readonly_fields = ['name', 'hssc_id', 'meta_data']
     autocomplete_fields = ['name_icpc',]
 
@@ -46,34 +47,8 @@ class BuessinessFormAdmin(admin.ModelAdmin):
 class BuessinessFormsSettingInline(admin.TabularInline):
     model = BuessinessFormsSetting
     exclude = ['name', 'label', 'hssc_id']
+    autocomplete_fields = ['buessiness_form']
 
-
-@admin.register(Operation)
-class OperationAdmin(admin.ModelAdmin):
-    list_display = ['name_icpc', 'label', 'name', 'id']
-    list_display_links = ['label', 'name',]
-    fieldsets = (
-        ('基本信息', {
-            'fields': (('label', 'name_icpc'), ('group', 'priority'), ('awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
-        }),
-        ('作业管理', {
-            'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
-        }),
-        ('资源配置', {
-            'fields': ('resource_materials','resource_devices','resource_knowledge')
-        }),
-    )
-    search_fields=['label', 'pym']
-    ordering = ['id']
-    readonly_fields = ['group', 'name', 'hssc_id']
-    inlines = [BuessinessFormsSettingInline]
-    autocomplete_fields = ["name_icpc", ]
-
-
-class OperationsSettingInline(admin.TabularInline):
-    model = OperationsSetting
-    exclude = ['name', 'label', 'hssc_id']
-    autocomplete_fields = ['operation', 'next_operation', 'event_rule']
 
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
@@ -81,23 +56,21 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('label', 'name_icpc'), ('managed_entity', 'priority'), 'group', ('begin_time_setting', 'awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
+            'fields': (('label', 'name_icpc'), ('managed_entity', 'priority'), 'group', ('history_services_display', 'enable_queue_counter'), ('name', 'hssc_id'))
         }),
-        ('界面设置', {
-            'fields':(('history_services_display', 'enable_recommanded_list', 'enable_queue_counter', ), )
-        }),
-        ('单元服务管理', {
-            'fields': ('not_suitable', 'time_limits', 'working_hours', 'cost', 'load_feedback')
+        ('作业管理', {
+            'fields': ('suppliers', 'not_suitable', ('awaiting_time_frame' ,'execution_time_frame'), 'working_hours', 'cost', 'load_feedback')
         }),
         ('资源配置', {
-            'fields': ('resource_materials','resource_devices','resource_knowledge')
+            'fields': ('resource_materials','resource_devices','resource_knowledge', 'script')
         }),
     )
     search_fields=['label', 'pym']
-    inlines = [OperationsSettingInline]
     ordering = ['id']
     readonly_fields = ['name', 'hssc_id']
-    autocomplete_fields = ['name_icpc', ]
+    inlines = [BuessinessFormsSettingInline]
+    filter_horizontal = ("group",)
+    autocomplete_fields = ["name_icpc"]
 
 
 class ServicePackageDetailInline(admin.TabularInline):
@@ -120,22 +93,13 @@ class ServicePackageAdmin(admin.ModelAdmin):
     ordering = ['id']
 
 
-class ServiceProgramSettingInline(admin.TabularInline):
-    model = ServiceProgramSetting
-    exclude = ['name', 'label', 'hssc_id', 'pym']
-    autocomplete_fields = ['service', 'next_service']
-
-@admin.register(ServiceSpec)
-class ServiceSpecAdmin(admin.ModelAdmin):
-    list_display = ['label', 'name', 'hssc_id']
-    list_display_links = ['label', 'name']
-    fieldsets = (
-        (None, {
-            'fields': ('label', )
-        }),
-    )
+@admin.register(ServiceProgramSetting)
+class ServiceProgramSettingAdmin(admin.ModelAdmin):
+    list_display = ['label', 'service', 'event_rule', 'system_operand', 'next_service', 'passing_data', 'complete_feedback', 'is_active']
+    list_editable = ['service', 'event_rule', 'system_operand', 'next_service', 'passing_data', 'complete_feedback', 'is_active']
+    list_display_links = ['label', ]
     readonly_fields = ['name', 'hssc_id']
-    inlines = [ServiceProgramSettingInline]
+    autocomplete_fields = ['service', 'next_service', 'event_rule']
     ordering = ['id']
 
 
