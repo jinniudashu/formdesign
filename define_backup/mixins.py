@@ -33,13 +33,13 @@ class GenerateModelsScriptMixin:
         name = self.name.capitalize()
         if autocomplete_fields == '':
             admin_script = f'''
-hssc_clinic_admin_site.register({name})
+admin.site.register({name})
 '''
         else:
             admin_script = f'''
 class {name}Admin(admin.ModelAdmin):
     autocomplete_fields = [{autocomplete_fields}]
-hssc_clinic_admin_site.register({name}, {name}Admin)
+admin.site.register({name}, {name}Admin)
 '''
         return admin_script
 
