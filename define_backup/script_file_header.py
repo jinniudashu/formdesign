@@ -276,14 +276,25 @@ from .models import *
 
 @admin.register(Icpc)
 class IcpcAdmin(admin.ModelAdmin):
-    list_display = [field.name for field in Icpc._meta.fields]
-    search_fields=["iname", "pym", "icpc_code"]
+    list_display = ["icpc_code", "icode", "iname", "pym", "subclass"]
+    search_fields=["iname", "pym", "icpc_code", "icode"]
     ordering = ["icpc_code"]
-    readonly_fields = [field.name for field in Icpc._meta.fields]
+    readonly_fields = ['icpc_code','icode','iname','iename','include','criteria','exclude','consider','icd10','icpc2','note','pym', 'subclass']
     actions = None
 
     def has_add_permission(self, request):
         return False
     def has_delete_permission(self, request, obj=None):
         return False
-'''
+
+class SubIcpcAdmin(admin.ModelAdmin):
+    list_display = ["icpc_code", "icode", "iname", "pym"]
+    search_fields=["iname", "pym", "icpc_code", "icode"]
+    ordering = ["icpc_code"]
+    readonly_fields = ['icpc_code','icode','iname','iename','include','criteria','exclude','consider','icd10','icpc2','note','pym']
+    actions = None
+
+    def has_add_permission(self, request):
+        return False
+    def has_delete_permission(self, request, obj=None):
+        return False'''

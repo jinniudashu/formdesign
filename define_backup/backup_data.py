@@ -159,19 +159,7 @@ def export_icpc_models_admin():
 
         # 生成admin脚本
         _admin_script = f'''
-@admin.register({icpc['name']})
-class {icpc['name']}Admin(admin.ModelAdmin):
-    list_display = [field.name for field in {icpc['name']}._meta.fields]
-    search_fields=["iname", "pym", "icpc_code"]
-    ordering = ["icpc_code"]
-    readonly_fields = [field.name for field in {icpc['name']}._meta.fields]
-    actions = None
-
-    def has_add_permission(self, request):
-        return False
-    def has_delete_permission(self, request, obj=None):
-        return False
-'''
+admin.site.register({icpc['name']}, SubIcpcAdmin)'''
         admin_script = f'{admin_script}\n{_admin_script}'
 
     models_receiver_post_save = models_receiver_post_save + icpc_models_post_save
@@ -234,7 +222,7 @@ def export_views_urls_templates():
         index_html_script = index_html_script + generate_index_html(service)
     
     urls_script = f'{urls_script}\n]'
-    templates_code.append({'index.html': f"{index_html_script}'\n</section>\n{{% endblock %}}'"})
+    templates_code.append({'index.html': f"{index_html_script}\n</section>\n{{% endblock %}}"})
 
     return views_script, urls_script, templates_code
 
@@ -244,6 +232,7 @@ def generate_index_html(service):
     return f'''<a class='list-group-item' href='{{% url "{service.name}_create_url" %}}'>
 {service.label}
 </a>
+<hr>
 '''
 
 

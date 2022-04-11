@@ -10,8 +10,8 @@ class EventExpressionInline(admin.TabularInline):
 
 @admin.register(EventRule)
 class EventRuleAdmin(admin.ModelAdmin):
-    list_display = ('label', 'name', 'description', 'detection_scope', 'weight', 'id')
-    list_display_links = ['label', 'name', 'description']
+    list_display = ('label', 'description', 'detection_scope', 'weight')
+    list_display_links = ['label', 'description']
     search_fields=['label', 'name', 'pym']
     readonly_fields = ['expression', 'hssc_id']
     inlines = [EventExpressionInline]

@@ -335,31 +335,23 @@ class {update_view_name}(UpdateView):
             {{{{ base_form.as_table }}}}
         </form>
         <hr>'''
-        create_hs = update_hs = ''
+        create_hs = f'''<form action={{% url '{self.name}_create_url' %}} method='POST' enctype='multipart/form-data'> '''
+        update_hs = f'''<form action={{% url '{self.name}_update_url' %}} method='POST' enctype='multipart/form-data'> '''
         form_index = 0
         for form in self.buessiness_forms.all():
             create_hs = f'''{create_hs}
-        <form id='attribute_form{form_index}' action={{% url '{self.name}_create_url' %}} method='POST' enctype='multipart/form-data'> 
             {{% csrf_token %}}                
             <h5>{form.label}</h5>
             {{{{ attribute_form{form_index}.as_p }}}}
-            <input type="submit" value="保存表单" onclick="formSave('attribute_form{form_index}')" />
-        </form>
         <hr>'''
             update_hs = f'''{update_hs}
-        <form id='attribute_form{form_index}' action={{% url '{self.name}_update_url' %}} method='POST' enctype='multipart/form-data'> 
             {{% csrf_token %}}                
             <h5>{form.label}</h5>
             {{{{ attribute_form{form_index}.as_p }}}}
-            <input type="submit" value="保存表单" onclick="formSave('attribute_form{form_index}')" />
-        </form>
         <hr>'''
             form_index += 1
 
         script_head = f'''{{% extends "base.html" %}}
-
-    {{% load crispy_forms_tags %}}
-
     {{% block content %}}
     '''
 
@@ -368,6 +360,7 @@ class {update_view_name}(UpdateView):
         update_script_body = _hs + update_hs
 
         script_foot = f'''
+        </form>
         <input type="submit" value="完成服务" onclick="formSave('attribute_form{form_index}')" />
     {{% endblock %}}
     '''
@@ -381,4 +374,3 @@ class {update_view_name}(UpdateView):
         return f'''
     path('{self.name}/create', {create_view_name}.as_view(), name='{self.name}_create_url'),
     path('{self.name}/<int:id>/update', {update_view_name}.as_view(), name='{self.name}_update_url'),'''
-
