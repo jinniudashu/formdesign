@@ -11,6 +11,7 @@ from django.contrib.auth.models import Group
 from time import time
 from datetime import date
 from django.utils import timezone
+import uuid
 
 from icpc.models import *
 from dictionaries.models import *
@@ -35,16 +36,38 @@ class HsscBuessinessFormBase(models.Model):
         return str(self.customer)
 
     def save(self, *args, **kwargs):
+        if self.hssc_id is None:
+            self.hssc_id = uuid.uuid1()
         if not self.id:
-            self.slug = slugify(self._meta.model_name, allow_unicode=True) + f'-{{int(time())}}'
+            self.slug = slugify(self._meta.model_name, allow_unicode=True) + f'-{int(time())}'
         super().save(*args, **kwargs)
 
+    def get_autocomplete_fields(self):
+        autocompelte_fields_name=[]
+        for field in self.__class__._meta.get_fields():
+            if (field.one_to_one or field.many_to_one):  # 一对一、多对一字段
+                autocompelte_fields_name.append(field.name)
+        return autocompelte_fields_name
 
 '''
 
 # admin.py文件头
 admin_file_head = '''from django.contrib import admin
 from .models import *
+
+from hssc.site import clinic_site
+from forms.forms import A6203_ModelForm
+
+class HsscFormAdmin(admin.ModelAdmin):
+    exclude = ('hssc_id','slug')
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        extra_context = extra_context or {}
+        base_form = A6203_ModelForm(prefix="base_form")
+        extra_context['base_form'] = base_form
+        return super().change_view(
+            request, object_id, form_url, extra_context=extra_context,
+        )
 '''
 
 # forms.py文件头
@@ -155,6 +178,7 @@ index_html_file_head = f'''{{% extends "base.html" %}}
 
 # 字典models.py文件头
 dict_models_head = '''from django.db import models
+from pypinyin import Style, lazy_pinyin
 
 
 class DictBase(models.Model):
@@ -169,10 +193,18 @@ class DictBase(models.Model):
         abstract = True
 
     def __str__(self):
-        return self.value'''
+        return self.value
+
+    def save(self, *args, **kwargs):
+        if self.label:
+            self.pym = ''.join(lazy_pinyin(self.label, style=Style.FIRST_LETTER))
+            if self.name is None or self.name=='':
+                self.name = "_".join(lazy_pinyin(self.label))
+        super().save(*args, **kwargs)'''
 
 # 字典admin.py文件头
 dict_admin_head = '''from django.contrib import admin
+from hssc.site import clinic_site
 from .models import *
 '''
 
@@ -272,6 +304,7 @@ def icpc_post_delete_handler(sender, instance, **kwargs):
 
 # ICPC字典admin.py文件头
 icpc_admin_head = '''from django.contrib import admin
+from hssc.site import clinic_site
 from .models import *
 
 @admin.register(Icpc)

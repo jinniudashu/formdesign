@@ -113,7 +113,9 @@ class {name}(DictBase):
         # 生成admin脚本
         _admin_script = f'''
 @admin.register({name})
-class {name}Admin(admin.ModelAdmin):{dict_admin_content}'''
+class {name}Admin(admin.ModelAdmin):{dict_admin_content}
+clinic_site.register({name}, {name}Admin)
+'''
         admin_script = f'{admin_script}\n{_admin_script}'
 
     return models_script, admin_script
@@ -159,7 +161,8 @@ def export_icpc_models_admin():
 
         # 生成admin脚本
         _admin_script = f'''
-admin.site.register({icpc['name']}, SubIcpcAdmin)'''
+admin.site.register({icpc['name']}, SubIcpcAdmin)
+clinic_site.register({icpc['name']}, SubIcpcAdmin)'''
         admin_script = f'{admin_script}\n{_admin_script}'
 
     models_receiver_post_save = models_receiver_post_save + icpc_models_post_save
