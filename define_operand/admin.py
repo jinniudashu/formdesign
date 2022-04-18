@@ -105,7 +105,7 @@ class ServiceProgramSettingAdmin(admin.ModelAdmin):
 
 @admin.register(ManagedEntity)
 class ManagedEntityAdmin(admin.ModelAdmin):
-    readonly_fields = ['hssc_id', 'pym', 'name', 'app_name', 'model_name']
+    readonly_fields = ['hssc_id', 'pym', 'name', 'model_name']
 
 
 # @admin.register(SystemOperand)

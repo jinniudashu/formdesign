@@ -81,9 +81,10 @@ def export_source_code(modeladmin, request, queryset):
     source_code['icpc_models'], source_code['icpc_admin'] = export_icpc_models_admin()
     source_code['icpc_data'] = export_icpc_data()
 
+    # for entity in managed_entities:
+    #   source_code[entity.app_name]
     # 导出业务表单models.py, admin.py, forms.py脚本
     source_code['models'], source_code['admin'], source_code['forms'] = export_forms_models_admin_forms()
-
     # 导出业务表单views.py，template.html, urls.py, index.html脚本
     source_code['views'], source_code['urls'], source_code['templates'] = export_views_urls_templates()
 

@@ -9,7 +9,7 @@ class GenerateModelsScriptMixin:
     # generate model and admin script
     def __create_model_script(self):
         # construct model script
-        head_script = f'class {self.name.capitalize()}(HsscBuessinessFormBase):'
+        head_script = f'class {self.name.capitalize()}(HsscFormModel):'
         fields_script = autocomplete_fields = ''
 
         # !!!待修改：compontents = form.components.all() + form.component_groups.all()
@@ -304,7 +304,7 @@ class {update_view_name}(UpdateView):
         update_script_body = f'''
     def get_context_data(self, **kwargs):
         context = super({update_view_name}, self).get_context_data(**kwargs)
-        operation_proc = get_object_or_404(Operation_proc, id=kwargs['id'])
+        operation_proc = get_object_or_404(OperationProc, id=kwargs['id'])
         customer = operation_proc.customer
         base_form = {base_form_name}(instance={base_model_name}.objects.get(customer=1), prefix="base_form")
         if self.request.method == 'POST':{create_script_attribute_forms_post}

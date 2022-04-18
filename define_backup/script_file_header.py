@@ -5,49 +5,13 @@
 # models.py文件头
 models_file_head = '''from django.db import models
 from django.shortcuts import reverse
-from django.utils.text import slugify
 from django.contrib.auth.models import Group
-
-from time import time
-from datetime import date
-from django.utils import timezone
-import uuid
 
 from icpc.models import *
 from dictionaries.models import *
-from core.models import Staff, Customer, Operation_proc
+from core.models import HsscFormModel, Staff, Customer, OperationProc, ServiceProc
 from entities.models import *
 
-
-class HsscBuessinessFormBase(models.Model):
-    hssc_id = models.CharField(max_length=50, unique=True, null=True, blank=True, verbose_name="hsscID")
-    creater = models.ForeignKey(Staff, on_delete=models.SET_NULL, null=True, blank=True, verbose_name="创建人")
-    create_time = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
-    update_time = models.DateTimeField(auto_now=True, verbose_name="更新时间")
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, related_name='%(class)s_customer', blank=True, null=True, verbose_name="客户")
-    operator = models.ForeignKey(Staff, on_delete=models.SET_NULL, related_name='%(class)s_operator', blank=True, null=True, verbose_name="作业人员")
-    pid = models.ForeignKey(Operation_proc, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="作业进程id")
-    slug = models.SlugField(max_length=250, blank=True, null=True, verbose_name="slug")
-
-    class Meta:
-        abstract = True
-
-    def __str__(self):
-        return str(self.customer)
-
-    def save(self, *args, **kwargs):
-        if self.hssc_id is None:
-            self.hssc_id = uuid.uuid1()
-        if not self.id:
-            self.slug = slugify(self._meta.model_name, allow_unicode=True) + f'-{int(time())}'
-        super().save(*args, **kwargs)
-
-    def get_autocomplete_fields(self):
-        autocompelte_fields_name=[]
-        for field in self.__class__._meta.get_fields():
-            if (field.one_to_one or field.many_to_one):  # 一对一、多对一字段
-                autocompelte_fields_name.append(field.name)
-        return autocompelte_fields_name
 
 '''
 
@@ -108,25 +72,25 @@ from django.db.models import Q
 from django.forms import modelformset_factory, inlineformset_factory
 import json
 
-from core.models import Operation_proc, Staff, Customer
+from core.models import OperationProc, Staff, Customer
 from core.signals import operand_started, operand_finished
 from forms.utils import *
 from forms.models import *
 from forms.forms import *
 
 class Index_view(ListView):
-    model = Operation_proc
+    model = OperationProc
     template_name = 'index.html'
 
     # def get(self, request, *args, **kwargs):
-    #     self.object = self.get_object(queryset=Operation_proc.objects.exclude(state=4))
+    #     self.object = self.get_object(queryset=OperationProc.objects.exclude(state=4))
 
     def get_context_data(self, **kwargs):
         # 如果用户当前未登录，request.user将被设置为AnonymousUser。用user.is_authenticated()判断用户登录状态：
         operator=Staff.objects.get(user=self.request.user)
         group = Group.objects.filter(user=self.request.user)
         # 获取当前用户所属角色组的所有作业进程
-        procs = Operation_proc.objects.exclude(state=4).filter(Q(group__in=group) | Q(operator=operator)).distinct()
+        procs = OperationProc.objects.exclude(state=4).filter(Q(group__in=group) | Q(operator=operator)).distinct()
 
         todos = []
         for proc in procs:
