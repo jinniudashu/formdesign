@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BuessinessForm, Service, BuessinessFormsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceProgramSetting, SystemOperand, EventRule, EventExpression, ManagedEntity
+from .models import BuessinessForm, Service, BuessinessFormsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceRule, SystemOperand, EventRule, EventExpression, ManagedEntity
 
 
 class EventExpressionInline(admin.TabularInline):
@@ -93,8 +93,8 @@ class ServicePackageAdmin(admin.ModelAdmin):
     ordering = ['id']
 
 
-@admin.register(ServiceProgramSetting)
-class ServiceProgramSettingAdmin(admin.ModelAdmin):
+@admin.register(ServiceRule)
+class ServiceRuleAdmin(admin.ModelAdmin):
     list_display = ['label', 'service', 'event_rule', 'system_operand', 'next_service', 'passing_data', 'complete_feedback', 'is_active']
     list_editable = ['service', 'event_rule', 'system_operand', 'next_service', 'passing_data', 'complete_feedback', 'is_active']
     list_display_links = ['label', ]
