@@ -9,7 +9,7 @@ from django.contrib.auth.models import Group
 
 from icpc.models import *
 from dictionaries.models import *
-from core.models import HsscFormModel, Staff, Customer, OperationProc, ServiceProc
+from core.models import HsscFormModel, Role, Staff, Customer, OperationProc, ServiceProc
 from entities.models import *
 
 

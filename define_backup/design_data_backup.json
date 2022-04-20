@@ -2041,7 +2041,7 @@
             "hssc_id": "de8b82fc-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "js",
             "app_name": "core",
-            "model_name": "Group",
+            "model_name": "Role",
             "base_form": null
         },
         {

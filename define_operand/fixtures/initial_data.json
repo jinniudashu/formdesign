@@ -27,7 +27,7 @@
         "model": "define_operand.SystemOperand",
         "fields": {
             "label": "推荐后续服务", 
-            "name": "recommend_next_service", 
+            "name": "RECOMMEND_NEXT_SERVICE", 
             "hssc_id": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
             "func": "recommend_next_service", 
             "parameters": "service_id", 
@@ -41,7 +41,7 @@
             "label": "生成后续服务", 
             "name": "create_next_service", 
             "hssc_id": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
-            "func": "create_next_service", 
+            "func": "CREATE_NEXT_SERVICE", 
             "parameters": "service_id", 
             "description": "",
             "applicable": 1
@@ -50,10 +50,10 @@
     {
         "model": "define_operand.SystemOperand",
         "fields": {
-            "label": "提示内容违反业务规则", 
+            "label": "违规提示", 
             "name": "prompt_violate_business_rule", 
             "hssc_id": "e0dfa946-a42f-11ec-848a-4889e7cf38c9",
-            "func": "prompt_violate_business_rule", 
+            "func": "VIOLATION_ALERT", 
             "parameters": "violation_info", 
             "description": "",
             "applicable": 3
@@ -63,9 +63,9 @@
         "model": "define_operand.SystemOperand",
         "fields": {
             "label": "发送提醒消息", 
-            "name": "send_message", 
+            "name": "send_notification", 
             "hssc_id": "e0e045ac-a42f-11ec-93c3-4889e7cf38c9",
-            "func": "send_message", 
+            "func": "SEND_NOTIFICATION", 
             "parameters": "user_id, message_type, message_content", 
             "description": "",
             "applicable": 3

@@ -88,6 +88,23 @@ def export_source_code(modeladmin, request, queryset):
     # 导出业务表单views.py，template.html, urls.py, index.html脚本
     source_code['views'], source_code['urls'], source_code['templates'] = export_views_urls_templates()
 
+    # 导出core业务定义数据：
+    # 需要导出的模块清单
+    exported_core_models=[
+        Role,
+        BuessinessForm,
+        ManagedEntity,
+        Service,
+        BuessinessFormsSetting,
+        ServicePackage,
+        ServicePackageDetail,
+        SystemOperand,
+        EventRule,
+        ServiceSpec,
+        ServiceProgramSetting,
+    ]
+    source_code['core_initial_data'] = export_core_data(exported_core_models)
+
     # 写入数据库
     result = write_to_db(SourceCode, source_code)
     print(f'作业脚本写入数据库成功, id: {result}')
@@ -240,6 +257,15 @@ def generate_index_html(service):
 '''
 
 
+# 导出core业务定义数据
+def export_core_data(models):
+    models_data = {}
+    for model in models:
+        _model = model.__name__.lower()
+        models_data[_model]=model.objects.backup_data()
+    return models_data
+
+
 # 把备份数据写入备份数据库
 def write_to_db(model, data):
     s = model.objects.create(
@@ -248,7 +274,7 @@ def write_to_db(model, data):
     )
     return s.id
 
-
+# 写入文件
 def write_file(file_name, content):
     with open(file_name, 'w', encoding='utf-8') as f:
         f.write(content)
