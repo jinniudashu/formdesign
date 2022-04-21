@@ -280,7 +280,7 @@ class EventRule(HsscPymBase):
                 connection_operator = EventExpression.Connection_operator[_expression.connection_operator][1]  # 连接符
             else:
                 connection_operator = ''
-            expressions.extend([field.hssc_id, operator, value, connection_operator])
+            expressions.extend([field.name, operator, value, connection_operator])
             descriptions.extend([field.label, operator, value, connection_operator])
         expressions.pop()   # 去掉最后一个连接符
         descriptions.pop()  # 去掉最后一个连接符
