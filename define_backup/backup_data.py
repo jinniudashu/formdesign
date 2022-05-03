@@ -220,14 +220,18 @@ def export_icpc_data():
 
 # 导出forms models.py, admin.py, forms.py脚本
 def export_service_models_admin():
+
     models_script = service_models_file_head
     admin_script =  service_admin_file_head
 
     for service in Service.objects.all():
-        if service.script:
-            script = json.loads(service.script)
-            models_script = f'{models_script}{script["models"]}'
-            admin_script = f'{admin_script}{script["admin"]}'
+        script = service.generate_script()  # 生成最新脚本
+        models_script = f'{models_script}{script["models"]}'
+        admin_script = f'{admin_script}{script["admin"]}'
+        # if service.script:
+        #     script = json.loads(service.script)
+        #     models_script = f'{models_script}{script["models"]}'
+        #     admin_script = f'{admin_script}{script["admin"]}'
 
     return models_script, admin_script
 
@@ -238,11 +242,15 @@ def export_forms_models_admin_forms():
     forms_script = forms_forms_file_head
 
     for form in BuessinessForm.objects.all():
-        if form.script:
-            script = json.loads(form.script)
-            models_script = f'{models_script}{script["models"]}'
-            admin_script = f'{admin_script}{script["admin"]}'
-            forms_script = f'{forms_script}{script["forms"]}'
+        script = form.generate_script()  # 生成最新脚本
+        models_script = f'{models_script}{script["models"]}'
+        admin_script = f'{admin_script}{script["admin"]}'
+        forms_script = f'{forms_script}{script["forms"]}'
+        # if form.script:
+        #     script = json.loads(form.script)
+        #     models_script = f'{models_script}{script["models"]}'
+        #     admin_script = f'{admin_script}{script["admin"]}'
+        #     forms_script = f'{forms_script}{script["forms"]}'
 
     return models_script, admin_script, forms_script
 

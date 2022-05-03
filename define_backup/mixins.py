@@ -211,7 +211,7 @@ class {self.name.capitalize()}_ModelForm(ModelForm):
 
 
 class GenerateServiceScriptMixin:
-    # 生成运行时脚本的views, urls, templates
+    # 生成运行时脚本的models, admin, views, urls, templates
     def generate_script(self):
         create_view_name = self.name.capitalize() + '_CreateView'
         update_view_name = self.name.capitalize() + '_UpdateView'
