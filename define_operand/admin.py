@@ -24,9 +24,9 @@ class EventRuleAdmin(admin.ModelAdmin):
             instances[0].event_rule.generate_expression()
 
 
-@admin.register(EventExpression)
-class EventExpressionAdmin(admin.ModelAdmin):
-    autocomplete_fields = ['field']
+# @admin.register(EventExpression)
+# class EventExpressionAdmin(admin.ModelAdmin):
+#     autocomplete_fields = ['field']
 
 
 @admin.register(BuessinessForm)
@@ -108,8 +108,8 @@ class ManagedEntityAdmin(admin.ModelAdmin):
     readonly_fields = ['hssc_id', 'pym', 'name', 'model_name']
 
 
-@admin.register(SystemOperand)
-class SystemOperandAdmin(admin.ModelAdmin):
-    list_display = ('id', 'label', 'name', 'func', 'parameters')
-    readonly_fields = ('label','name','hssc_id','func','parameters','description','Applicable','applicable')
-    ordering = ('id',)
+# @admin.register(SystemOperand)
+# class SystemOperandAdmin(admin.ModelAdmin):
+#     list_display = ('id', 'label', 'name', 'func', 'parameters')
+#     readonly_fields = ('label','name','hssc_id','func','parameters','description','Applicable','applicable')
+#     ordering = ('id',)
