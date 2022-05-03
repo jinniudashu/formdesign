@@ -24,9 +24,9 @@ class EventRuleAdmin(admin.ModelAdmin):
             instances[0].event_rule.generate_expression()
 
 
-# @admin.register(EventExpression)
-# class EventExpressionAdmin(admin.ModelAdmin):
-#     autocomplete_fields = ['field']
+@admin.register(EventExpression)
+class EventExpressionAdmin(admin.ModelAdmin):
+    autocomplete_fields = ['field']
 
 
 @admin.register(BuessinessForm)
@@ -108,34 +108,8 @@ class ManagedEntityAdmin(admin.ModelAdmin):
     readonly_fields = ['hssc_id', 'pym', 'name', 'model_name']
 
 
-# @admin.register(SystemOperand)
-# class SystemOperandAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'label', 'name', 'func', 'parameters')
-#     readonly_fields = ('label','name','hssc_id','func','parameters','description','Applicable','applicable')
-#     ordering = ('id',)
-
-
-# @admin.register(Event)
-# class EventAdmin(admin.ModelAdmin):
-# #     change_form_template = "core/templates/change_form.html"
-#     list_display = ['label', 'operation', 'name', 'id']
-#     list_display_links = ['label', 'name', 'operation',]
-#     search_fields = ['name', 'label']
-#     readonly_fields = ['fields', 'parameters', 'event_id']
-#     ordering = ['id']
-
-
-# @admin.register(Event_instructions)
-# class Event_instructionsAdmin(admin.ModelAdmin):
-#     list_display = ['event', 'instruction', 'order', 'params', 'id']
-#     list_display_links = ['event', 'instruction', 'order', 'params']
-#     search_fields = ['event']
-#     ordering = ['id']
-
-
-# @admin.register(Instruction)
-# class InstructionAdmin(admin.ModelAdmin):
-#     list_display = ['label', 'name', 'code', 'func', 'description', 'id']
-#     list_display_links = ['label', 'name', 'code', 'func']
-#     search_fields = ['name']
-#     ordering = ['id']
+@admin.register(SystemOperand)
+class SystemOperandAdmin(admin.ModelAdmin):
+    list_display = ('id', 'label', 'name', 'func', 'parameters')
+    readonly_fields = ('label','name','hssc_id','func','parameters','description','Applicable','applicable')
+    ordering = ('id',)
