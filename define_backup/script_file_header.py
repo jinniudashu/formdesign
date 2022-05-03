@@ -2,21 +2,99 @@
 # 文件头设置
 #***********************************************************************************************************************
 
-# models.py文件头
-models_file_head = '''from django.db import models
+service_models_file_head = '''from django.db import models
 from django.shortcuts import reverse
-from django.contrib.auth.models import Group
+import json
 
 from icpc.models import *
 from dictionaries.models import *
-from core.models import HsscFormModel, Role, Staff, Customer, OperationProc, ServiceProc
+from core.models import HsscFormModel, Role, Staff, OperationProc
 from entities.models import *
+
+@receiver(post_save, sender=OperationProc)
+def operation_proc_created(sender, instance, created, **kwargs):
+    # 创建服务进程里使用的表单实例, 将form_slugs保存到进程实例中
+    if created and instance.state == 0:  # 系统保留作业(state=4)不创建model进程
+        model_name = instance.service.name.capitalize()
+        print('创建表单实例:', model_name)
+        form = eval(model_name).objects.create(
+            customer=instance.customer,
+            creater=instance.operator,
+            pid=instance,
+            cpid=instance.contract_service_proc,
+        )
+        # 更新OperationProc服务进程的入口url
+        instance.entry = f'/clinic/service/{instance.service.name.lower()}/{form.id}/change'
+        instance.save()
+
+
+'''
+service_admin_file_head = '''# from django.forms import ModelForm, Select, CheckboxSelectMultiple
+from django.shortcuts import redirect
+from django.contrib import admin
+
+from hssc.site import clinic_site
+from service.models import *
+# from forms.models import A6203
+
+
+# class A6203_ModelForm(ModelForm):
+#     class Meta:
+#         model = A6203
+#         fields = ['characterfield_name', 'characterhssc_identification_number', 'characterfield_resident_file_number', 'characterfield_family_address', 'characterfield_contact_number', 'characterfield_medical_ic_card_number', 'datetimefield_date_of_birth', 'relatedfield_gender', 'relatedfield_nationality', 'relatedfield_marital_status', 'relatedfield_education', 'relatedfield_occupational_status', 'relatedfield_medical_expenses_burden', 'relatedfield_type_of_residence', 'relatedfield_blood_type', 'relatedfield_signed_family_doctor', 'relatedfield_family_relationship', ]
+#         widgets = {'relatedfield_gender': Select, 'relatedfield_nationality': Select, 'relatedfield_marital_status': Select, 'relatedfield_education': Select, 'relatedfield_occupational_status': Select, 'relatedfield_medical_expenses_burden': CheckboxSelectMultiple, 'relatedfield_type_of_residence': Select, 'relatedfield_blood_type': Select, 'relatedfield_signed_family_doctor': Select, 'relatedfield_family_relationship': Select, }
+
+class HsscFormAdmin(admin.ModelAdmin):
+    exclude = ["hssc_id", "label", "name", "customer", "operator", "creater", "pid", "cpid", "slug", "created_time", "updated_time", ]
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        extra_context = extra_context or {}
+        # base_form = A6203_ModelForm(prefix="base_form")
+        base_form = 'base_form'
+        extra_context['base_form'] = base_form
+        return super().change_view(
+            request, object_id, form_url, extra_context=extra_context,
+        )
+
+    def response_change(self, request, obj):
+        return redirect('/clinic/')
+
+'''
+
+# forms/models.py文件头
+forms_models_file_head = '''from django.db import models
+from django.shortcuts import reverse
+import json
+
+from icpc.models import *
+from dictionaries.models import *
+from core.models import HsscFormModel, Role, Staff, OperationProc
+from entities.models import *
+
+
+@receiver(post_save, sender=OperationProc)
+def operation_proc_created(sender, instance, created, **kwargs):
+    # 创建服务进程里使用的表单实例, 将form_slugs保存到进程实例中
+    if created:
+        form_slugs = []
+        for form in instance.service.buessiness_forms.all():
+            form_class_name = form.name.capitalize()
+            print('创建表单实例:', form_class_name)
+            form = eval(form_class_name).objects.create(
+                customer=instance.customer,
+                creater=instance.operator,
+                pid=instance,
+                cpid=instance.contract_service_proc,
+            )
+            form_slugs.append({'form_name': form_class_name, 'slug': form.slug})
+        instance.form_slugs = json.dumps(form_slugs, ensure_ascii=False, indent=4)
+        instance.save()
 
 
 '''
 
-# admin.py文件头
-admin_file_head = '''from django.contrib import admin
+# forms/admin.py文件头
+forms_admin_file_head = '''from django.contrib import admin
 from .models import *
 
 from hssc.site import clinic_site
@@ -32,10 +110,11 @@ class HsscFormAdmin(admin.ModelAdmin):
         return super().change_view(
             request, object_id, form_url, extra_context=extra_context,
         )
+
 '''
 
-# forms.py文件头
-forms_file_head = '''from django.forms import ModelForm, Form,  widgets, fields, RadioSelect, Select, CheckboxSelectMultiple, CheckboxInput, SelectMultiple, NullBooleanSelect
+# forms/forms.py文件头
+forms_forms_file_head = '''from django.forms import ModelForm, Form,  widgets, fields, RadioSelect, Select, CheckboxSelectMultiple, CheckboxInput, SelectMultiple, NullBooleanSelect
 from django.core.exceptions import ValidationError
 
 from crispy_forms.helper import FormHelper
@@ -73,30 +152,28 @@ from django.forms import modelformset_factory, inlineformset_factory
 import json
 
 from core.models import OperationProc, Staff, Customer
-from core.signals import operand_started, operand_finished
+from core.utils import SendSignalsMixin
 from forms.utils import *
 from forms.models import *
 from forms.forms import *
+
 
 class Index_view(ListView):
     model = OperationProc
     template_name = 'index.html'
 
-    # def get(self, request, *args, **kwargs):
-    #     self.object = self.get_object(queryset=OperationProc.objects.exclude(state=4))
-
     def get_context_data(self, **kwargs):
         # 如果用户当前未登录，request.user将被设置为AnonymousUser。用user.is_authenticated()判断用户登录状态：
-        operator=Staff.objects.get(user=self.request.user)
-        group = Group.objects.filter(user=self.request.user)
-        # 获取当前用户所属角色组的所有作业进程
-        procs = OperationProc.objects.exclude(state=4).filter(Q(group__in=group) | Q(operator=operator)).distinct()
+        operator=User.objects.get(username=self.request.user).customer
+        role = operator.staff.role.all()
+        # 获取当前用户所属角色的所有作业进程
+        procs = OperationProc.objects.exclude(state=4).filter(Q(role__in=role) | Q(operator=operator)).distinct()
 
         todos = []
         for proc in procs:
             todo = {{}}
-            todo['operation'] = proc.operation.label
-            todo['url'] = f'{{proc.operation.name}}_update_url'
+            todo['operation'] = proc.service.label
+            todo['url'] = f'{{proc.service.name}}_update_url'
             todo['proc_id'] = proc.id
             todos.append(todo)
         context = super().get_context_data(**kwargs)

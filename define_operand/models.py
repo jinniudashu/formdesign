@@ -3,15 +3,13 @@ from django.db.models import Q
 from django.dispatch import receiver
 from django.db.models.signals import post_save, m2m_changed
 import json
-import uuid
 
 from pypinyin import lazy_pinyin
 
 from formdesign.hsscbase_class import HsscBase, HsscPymBase
 from define.models import Component, ComponentsGroup, Role, RelateFieldModel
 from define_icpc.models import Icpc
-from .utils import keyword_search
-from define_backup.mixins import GenerateModelsScriptMixin, GenerateViewsScriptMixin
+from define_backup.mixins import GenerateModelsScriptMixin, GenerateServiceScriptMixin
 
 
 # 管理实体定义
@@ -19,7 +17,7 @@ class ManagedEntity(HsscPymBase):
     app_name = models.CharField(max_length=100, null=True, blank=True, verbose_name="所属app名")
     model_name = models.CharField(max_length=100, null=True, blank=True, verbose_name="模型名")
     base_form = models.OneToOneField('BuessinessForm', on_delete=models.SET_NULL, null=True, verbose_name="基础表单")
-
+    header_fields = models.ManyToManyField(Component, blank=True, verbose_name="表头字段")
     class Meta:
         verbose_name = "业务管理实体"
         verbose_name_plural = verbose_name
@@ -128,13 +126,13 @@ def buessiness_form_components_groups_changed_handler(sender, instance, action, 
 
 
 # 作业基础信息表
-class Service(GenerateViewsScriptMixin, HsscPymBase):
+class Service(GenerateServiceScriptMixin, HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     buessiness_forms = models.ManyToManyField(BuessinessForm, through='BuessinessFormsSetting', verbose_name="作业表单")
     managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, null=True, verbose_name="管理实体")
     Operation_priority = [(0, '0级'), (1, '紧急'), (2, '优先'), (3, '一般')]
     priority = models.PositiveSmallIntegerField(choices=Operation_priority, default=3, verbose_name='优先级')
-    group = models.ManyToManyField(Role, blank=True, verbose_name="服务岗位")
+    role = models.ManyToManyField(Role, blank=True, verbose_name="服务岗位")
     History_services_display=[(0, '所有历史服务'), (1, '当日服务')]
     history_services_display = models.PositiveBigIntegerField(choices=History_services_display, default=0, blank=True, null=True, verbose_name='历史服务默认显示')
     enable_queue_counter = models.BooleanField(default=True, verbose_name='显示队列数量')
@@ -253,6 +251,7 @@ class EventRule(HsscPymBase):
     detection_scope = models.PositiveSmallIntegerField(choices=Detection_scope, default=1, blank=True, null=True, verbose_name='检测范围')
     weight = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="权重")
     expression = models.TextField(max_length=1024, blank=True, null=True, verbose_name="内部表达式")
+    expression_fields = models.CharField(max_length=1024, blank=True, null=True, verbose_name="内部表达式字段")
 
     class Meta:
         verbose_name = '条件事件'
@@ -267,6 +266,7 @@ class EventRule(HsscPymBase):
     def generate_expression(self):  # 在EventRuleAdmin.save_formset中调用
         expressions = []
         descriptions = []
+        expression_fields = []
         for _expression in self.eventexpression_set.all():
             field = _expression.field  # 字段
             operator = EventExpression.Operator[_expression.operator][1]  # 操作符
@@ -282,10 +282,12 @@ class EventRule(HsscPymBase):
                 connection_operator = ''
             expressions.extend([field.name, operator, value, connection_operator])
             descriptions.extend([field.label, operator, value, connection_operator])
+            expression_fields.append(field.name)
         expressions.pop()   # 去掉最后一个连接符
         descriptions.pop()  # 去掉最后一个连接符
         self.expression = ' '.join(expressions)
         self.description = ' '.join(descriptions)
+        self.expression_fields = ','.join(expression_fields)
         self.save()
         return self.expression
 
@@ -333,7 +335,7 @@ class ServiceRule(HsscBase):
     complete_feedback = models.PositiveSmallIntegerField(choices=Complete_feedback, default=0,  blank=True, null=True, verbose_name='完成反馈')
     Reminders = [(0, '客户'), (1, '服务人员'), (2, '服务小组')]
     reminders = models.PositiveSmallIntegerField(choices=Reminders, default=0,  blank=True, null=True, verbose_name='提醒对象')
-    message_content = models.CharField(max_length=255, blank=True, null=True, verbose_name='消息内容')
+    message = models.CharField(max_length=255, blank=True, null=True, verbose_name='消息内容')
     Interval_rule_options = [(0, '等于'), (1, '小于'), (2, '大于')]
     interval_rule = models.PositiveSmallIntegerField(choices=Interval_rule_options, blank=True, null=True, verbose_name='间隔条件')
     interval_time = models.DurationField(blank=True, null=True, verbose_name="间隔时间", help_text='例如：3 days, 22:00:00')

@@ -1,4 +1,3 @@
-from cProfile import label
 from django.forms.models import model_to_dict
 from time import time
 import json
@@ -83,10 +82,20 @@ def export_source_code(modeladmin, request, queryset):
 
     # for entity in managed_entities:
     #   source_code[entity.app_name]
-    # 导出业务表单models.py, admin.py, forms.py脚本
-    source_code['models'], source_code['admin'], source_code['forms'] = export_forms_models_admin_forms()
-    # 导出业务表单views.py，template.html, urls.py, index.html脚本
-    source_code['views'], source_code['urls'], source_code['templates'] = export_views_urls_templates()
+
+    # 导出App:forms脚本
+    forms = {}
+    # 导出forms/models.py, admin.py, forms.py脚本
+    forms['models'], forms['admin'], forms['forms'] = export_forms_models_admin_forms()
+    # 导出forms/views.py，template.html, urls.py, index.html脚本
+    forms['views'], forms['urls'], forms['templates'] = export_views_urls_templates()
+    source_code['forms'] = forms
+
+    # 导出App:service脚本
+    service = {}
+    # 导出service/models.py, admin.py脚本
+    service['models'], service['admin'] = export_service_models_admin()
+    source_code['service'] = service
 
     # 导出core业务定义数据：
     # 需要导出的模块清单
@@ -210,10 +219,23 @@ def export_icpc_data():
 
 
 # 导出forms models.py, admin.py, forms.py脚本
+def export_service_models_admin():
+    models_script = service_models_file_head
+    admin_script =  service_admin_file_head
+
+    for service in Service.objects.all():
+        if service.script:
+            script = json.loads(service.script)
+            models_script = f'{models_script}{script["models"]}'
+            admin_script = f'{admin_script}{script["admin"]}'
+
+    return models_script, admin_script
+
+# 导出forms models.py, admin.py, forms.py脚本
 def export_forms_models_admin_forms():
-    models_script = models_file_head
-    admin_script =  admin_file_head
-    forms_script = forms_file_head
+    models_script = forms_models_file_head
+    admin_script =  forms_admin_file_head
+    forms_script = forms_forms_file_head
 
     for form in BuessinessForm.objects.all():
         if form.script:

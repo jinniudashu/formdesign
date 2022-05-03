@@ -24,11 +24,17 @@ class Command(BaseCommand):
             # 说明：这是一个特殊处理，因为在恢复ManagedEntity时，base_form字段指向的BuessinessForm是不存在的，
             def restore_managed_entity_base_form():
                 for entity in design_data['managedentity']:
-                    if entity['base_form']:
+                    entity_obj = ManagedEntity.objects.get(hssc_id=entity['hssc_id'])
+                    if entity['base_form']:  
                         base_form = BuessinessForm.objects.get(hssc_id=entity['base_form'])
-                        entity_obj = ManagedEntity.objects.get(hssc_id=entity['hssc_id'])
                         entity_obj.base_form = base_form
                         entity_obj.save()
+                    if entity['header_fields']:  # 如果有header_fields字段，则恢复header_fields字段
+                        header_fields = []
+                        for _field in entity['header_fields']:
+                            field_obj = Component.objects.get(hssc_id=_field)
+                            header_fields.append(field_obj)
+                        entity_obj.header_fields.set(header_fields)
 
 
             # 读取备份数据文件
