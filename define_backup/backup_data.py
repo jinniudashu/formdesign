@@ -224,7 +224,7 @@ def export_service_models_admin():
     models_script = service_models_file_head
     admin_script =  service_admin_file_head
 
-    for service in Service.objects.all():
+    for service in Service.objects.filter(is_system_service=False):
         script = service.generate_script()  # 生成最新脚本
         models_script = f'{models_script}{script["models"]}'
         admin_script = f'{admin_script}{script["admin"]}'

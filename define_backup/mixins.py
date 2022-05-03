@@ -436,7 +436,9 @@ clinic_site.register({name}, {name}Admin)
             _script = self.__create_model_field_script(component)
             fields_script = fields_script + _script
             header_fields = header_fields + f'"{component.content_object.name}", '
-
+        # 如果服务表单内包含基本信息表，返回空表头字段
+        if self.managed_entity.base_form in self.buessiness_forms.all():
+            header_fields = ''
         return fields_script, header_fields
 
     # generate model field script
