@@ -34,6 +34,8 @@ from django.shortcuts import redirect
 from django.contrib import admin
 
 from hssc.site import clinic_site
+# 导入自定义作业完成信号
+from core.signals import operand_finished
 from service.models import *
 # from forms.models import A6203
 
@@ -56,6 +58,18 @@ class HsscFormAdmin(admin.ModelAdmin):
         return super().change_view(
             request, object_id, form_url, extra_context=extra_context,
         )
+
+    def save_model(self, request, obj, form, change):
+        # 发送服务作业完成信号
+        pid = obj.pid.id
+        ocode = 'RTC'
+        uid = request.user.id
+        form_data = request.POST.copy()
+        form_data.pop('csrfmiddlewaretoken')
+        form_data.pop('_save')
+        operand_finished.send(sender=self, pid=pid, ocode=ocode, uid=uid, form_data=form_data)
+        print('发送操作完成信号：', pid, ocode, uid, form_data)
+        super().save_model(request, obj, form, change)
 
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
         context.update({
