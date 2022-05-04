@@ -3275,16 +3275,6 @@
             "required": false
         },
         {
-            "label": "出生日期",
-            "name": "datetimefield_date_of_birth",
-            "hssc_id": "deb7b0ac-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "csrq",
-            "name_icpc": null,
-            "type": "DateTimeField",
-            "default_now": false,
-            "required": false
-        },
-        {
             "label": "预约时间",
             "name": "datetimefield_ri_qi_shi_jian",
             "hssc_id": "deb85c6e-9aa1-11ec-bde1-8a6e55faf877",
@@ -3341,6 +3331,16 @@
             "pym": "zsrq",
             "name_icpc": null,
             "type": "DateTimeField",
+            "default_now": false,
+            "required": false
+        },
+        {
+            "label": "出生日期",
+            "name": "datetimefield_date_of_birth",
+            "hssc_id": "deb7b0ac-9aa1-11ec-bde1-8a6e55faf877",
+            "pym": "csrq",
+            "name_icpc": null,
+            "type": "DateField",
             "default_now": false,
             "required": false
         }
@@ -5582,11 +5582,11 @@
             "role": []
         },
         {
-            "label": "建立居民健康档案",
+            "label": "居民健康信息调查",
             "name": "A6299",
             "hssc_id": "9582b822-ab23-11ec-bf5e-1ac10aeebbc4",
-            "pym": "jljmjkda",
-            "name_icpc": "A6299",
+            "pym": "jmjkxxdc",
+            "name_icpc": null,
             "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "priority": 3,
             "is_system_service": false,
@@ -5606,7 +5606,6 @@
             "script": "{\"views\": \"\\nclass A6299_CreateView(CreateView):\\n    success_url = 'forms/'\\n    template_name = 'A6299_create.html'\\n    form_class = A6209_ModelForm  # the first form ModelForm class\\n    model = A6209\\n    context = {}\\n\\n    def get_context_data(self, **kwargs):\\n        context = super(A6299_CreateView, self).get_context_data(**kwargs)\\n        if self.request.method == 'POST':\\n            base_form = A6203_ModelForm(self.request.POST, prefix=\\\"base_form\\\")\\n            a6209_form = A6209_ModelForm(self.request.POST, prefix=\\\"a6209_form\\\")\\n            a6204_form = A6204_ModelForm(self.request.POST, prefix=\\\"a6204_form\\\")\\n            a6216_form = A6216_ModelForm(self.request.POST, prefix=\\\"a6216_form\\\")\\n            a6206_form = A6206_ModelForm(self.request.POST, prefix=\\\"a6206_form\\\")\\n            a6205_form = A6205_ModelForm(self.request.POST, prefix=\\\"a6205_form\\\")\\n            a6208_form = A6208_ModelForm(self.request.POST, prefix=\\\"a6208_form\\\")\\n            a6214_form = A6214_ModelForm(self.request.POST, prefix=\\\"a6214_form\\\")\\n            a6210_form = A6210_ModelForm(self.request.POST, prefix=\\\"a6210_form\\\")\\n            a6212_form = A6212_ModelForm(self.request.POST, prefix=\\\"a6212_form\\\")\\n            a6203_form = A6203_ModelForm(self.request.POST, prefix=\\\"a6203_form\\\")\\n            a6213_form = A6213_ModelForm(self.request.POST, prefix=\\\"a6213_form\\\")\\n            a6207_form = A6207_ModelForm(self.request.POST, prefix=\\\"a6207_form\\\")\\n            a6215_form = A6215_ModelForm(self.request.POST, prefix=\\\"a6215_form\\\")\\n        else:\\n            base_form = A6203_ModelForm(prefix=\\\"base_form\\\")\\n            a6209_form = A6209_ModelForm(prefix=\\\"a6209_form\\\")\\n            a6204_form = A6204_ModelForm(prefix=\\\"a6204_form\\\")\\n            a6216_form = A6216_ModelForm(prefix=\\\"a6216_form\\\")\\n            a6206_form = A6206_ModelForm(prefix=\\\"a6206_form\\\")\\n            a6205_form = A6205_ModelForm(prefix=\\\"a6205_form\\\")\\n            a6208_form = A6208_ModelForm(prefix=\\\"a6208_form\\\")\\n            a6214_form = A6214_ModelForm(prefix=\\\"a6214_form\\\")\\n            a6210_form = A6210_ModelForm(prefix=\\\"a6210_form\\\")\\n            a6212_form = A6212_ModelForm(prefix=\\\"a6212_form\\\")\\n            a6203_form = A6203_ModelForm(prefix=\\\"a6203_form\\\")\\n            a6213_form = A6213_ModelForm(prefix=\\\"a6213_form\\\")\\n            a6207_form = A6207_ModelForm(prefix=\\\"a6207_form\\\")\\n            a6215_form = A6215_ModelForm(prefix=\\\"a6215_form\\\")\\n        # context\\n        context['base_form'] = base_form\\n        context['a6209_form'] = a6209_form\\n        context['a6204_form'] = a6204_form\\n        context['a6216_form'] = a6216_form\\n        context['a6206_form'] = a6206_form\\n        context['a6205_form'] = a6205_form\\n        context['a6208_form'] = a6208_form\\n        context['a6214_form'] = a6214_form\\n        context['a6210_form'] = a6210_form\\n        context['a6212_form'] = a6212_form\\n        context['a6203_form'] = a6203_form\\n        context['a6213_form'] = a6213_form\\n        context['a6207_form'] = a6207_form\\n        context['a6215_form'] = a6215_form\\n        context['user'] = self.request.user\\n        return context\\n\\n    def form_valid(self, form):\\n        context = self.get_context_data()\\n        customer = Customer.objects.get(user=context['user'])\\n        operator = Staff.objects.get(user=context['user'])\\n        # form_valid\\n        f = context['a6209_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6204_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6216_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6206_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6205_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6208_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6214_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6210_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6212_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6203_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6213_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6207_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6215_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        return super(A6299_CreateView, self).form_valid(form)\\n\\n\\n\\nclass A6299_UpdateView(SendSignalsMixin, UpdateView):\\n    success_url = 'forms/'\\n    template_name = 'A6299_update.html'\\n    form_class = A6209_ModelForm # the first form ModelForm class\\n    model = A6209\\n\\n    # if operation_proc.group is None:  # 如果进程角色已经被置为空，说明已有其他人处理，退出本修改作业进程\\n    #     return redirect(reverse('index'))\\n    # operation_proc.group.set([])  # 设置作业进程所属角色组为空\\n\\n    context = {}\\n        \\n    def get_context_data(self, **kwargs):\\n        context = super(A6299_UpdateView, self).get_context_data(**kwargs)\\n        operation_proc = get_object_or_404(OperationProc, id=kwargs['id'])\\n        customer = operation_proc.customer\\n        base_form = A6203_ModelForm(instance=A6203.objects.get(customer=1), prefix=\\\"base_form\\\")\\n        if self.request.method == 'POST':\\n            a6209_form = A6209_ModelForm(self.request.POST, prefix=\\\"a6209_form\\\")\\n            a6204_form = A6204_ModelForm(self.request.POST, prefix=\\\"a6204_form\\\")\\n            a6216_form = A6216_ModelForm(self.request.POST, prefix=\\\"a6216_form\\\")\\n            a6206_form = A6206_ModelForm(self.request.POST, prefix=\\\"a6206_form\\\")\\n            a6205_form = A6205_ModelForm(self.request.POST, prefix=\\\"a6205_form\\\")\\n            a6208_form = A6208_ModelForm(self.request.POST, prefix=\\\"a6208_form\\\")\\n            a6214_form = A6214_ModelForm(self.request.POST, prefix=\\\"a6214_form\\\")\\n            a6210_form = A6210_ModelForm(self.request.POST, prefix=\\\"a6210_form\\\")\\n            a6212_form = A6212_ModelForm(self.request.POST, prefix=\\\"a6212_form\\\")\\n            a6203_form = A6203_ModelForm(self.request.POST, prefix=\\\"a6203_form\\\")\\n            a6213_form = A6213_ModelForm(self.request.POST, prefix=\\\"a6213_form\\\")\\n            a6207_form = A6207_ModelForm(self.request.POST, prefix=\\\"a6207_form\\\")\\n            a6215_form = A6215_ModelForm(self.request.POST, prefix=\\\"a6215_form\\\")\\n            # 构造作业完成消息参数\\n            self.send_operand_finished(kwargs)\\n            return redirect(reverse('index'))\\n        else:\\n            a6209_form = A6209_ModelForm(instance=A6209.objects.get(pid=kwargs['id']), prefix=\\\"a6209_form\\\")\\n            a6204_form = A6204_ModelForm(instance=A6204.objects.get(pid=kwargs['id']), prefix=\\\"a6204_form\\\")\\n            a6216_form = A6216_ModelForm(instance=A6216.objects.get(pid=kwargs['id']), prefix=\\\"a6216_form\\\")\\n            a6206_form = A6206_ModelForm(instance=A6206.objects.get(pid=kwargs['id']), prefix=\\\"a6206_form\\\")\\n            a6205_form = A6205_ModelForm(instance=A6205.objects.get(pid=kwargs['id']), prefix=\\\"a6205_form\\\")\\n            a6208_form = A6208_ModelForm(instance=A6208.objects.get(pid=kwargs['id']), prefix=\\\"a6208_form\\\")\\n            a6214_form = A6214_ModelForm(instance=A6214.objects.get(pid=kwargs['id']), prefix=\\\"a6214_form\\\")\\n            a6210_form = A6210_ModelForm(instance=A6210.objects.get(pid=kwargs['id']), prefix=\\\"a6210_form\\\")\\n            a6212_form = A6212_ModelForm(instance=A6212.objects.get(pid=kwargs['id']), prefix=\\\"a6212_form\\\")\\n            a6203_form = A6203_ModelForm(instance=A6203.objects.get(pid=kwargs['id']), prefix=\\\"a6203_form\\\")\\n            a6213_form = A6213_ModelForm(instance=A6213.objects.get(pid=kwargs['id']), prefix=\\\"a6213_form\\\")\\n            a6207_form = A6207_ModelForm(instance=A6207.objects.get(pid=kwargs['id']), prefix=\\\"a6207_form\\\")\\n            a6215_form = A6215_ModelForm(instance=A6215.objects.get(pid=kwargs['id']), prefix=\\\"a6215_form\\\")\\n            # 构造作业开始消息参数\\n            self.send_operand_started(kwargs['id'])\\n        # context\\n        context['base_form'] = base_form\\n        context['a6209_form'] = a6209_form\\n        context['a6204_form'] = a6204_form\\n        context['a6216_form'] = a6216_form\\n        context['a6206_form'] = a6206_form\\n        context['a6205_form'] = a6205_form\\n        context['a6208_form'] = a6208_form\\n        context['a6214_form'] = a6214_form\\n        context['a6210_form'] = a6210_form\\n        context['a6212_form'] = a6212_form\\n        context['a6203_form'] = a6203_form\\n        context['a6213_form'] = a6213_form\\n        context['a6207_form'] = a6207_form\\n        context['a6215_form'] = a6215_form\\n        context['user'] = self.request.user\\n        return context\\n\\n    def form_valid(self, form):\\n        context = self.get_context_data()\\n        customer = Customer.objects.get(user=context['user'])\\n        operator = Staff.objects.get(user=context['user'])\\n        # form_valid\\n        f = context['a6209_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6204_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6216_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6206_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6205_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6208_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6214_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6210_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6212_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6203_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6213_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6207_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6215_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        return super(A6299_CreateView, self).form_valid(form)\\n\", \"urls\": \"\\n    path('A6299/create', A6299_CreateView.as_view(), name='A6299_create_url'),\\n    path('A6299/<int:id>/update', A6299_UpdateView.as_view(), name='A6299_update_url'),\", \"templates\": [{\"A6299_create.html\": \"{% extends \\\"base.html\\\" %}\\n    {% block content %}\\n    \\n        <form action='' method='GET' enctype='multipart/form-data'> \\n            {% csrf_token %}                \\n            <h5>个人基本信息</h5>\\n            {{ base_form.as_table }}\\n        </form>\\n        <hr><form action={% url 'A6299_create_url' %} method='POST' enctype='multipart/form-data'> \\n            {% csrf_token %}                \\n            <h5>家族病史</h5>\\n            {{ a6209_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>疾病史</h5>\\n            {{ a6204_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>社会环境评估</h5>\\n            {{ a6216_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>外伤史</h5>\\n            {{ a6206_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>手术史</h5>\\n            {{ a6205_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>输血史</h5>\\n            {{ a6208_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人身体健康评估</h5>\\n            {{ a6214_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>遗传病史</h5>\\n            {{ a6210_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人健康行为调查</h5>\\n            {{ a6212_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人基本信息</h5>\\n            {{ a6203_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人心理综合素质调查</h5>\\n            {{ a6213_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>过敏史</h5>\\n            {{ a6207_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人适应能力评估</h5>\\n            {{ a6215_form.as_p }}\\n        <hr>\\n        </form>\\n        <input type=\\\"submit\\\" value=\\\"完成服务\\\" onclick=\\\"formSave('a6215_form')\\\" />\\n    {% endblock %}\\n    \"}, {\"A6299_update.html\": \"{% extends \\\"base.html\\\" %}\\n    {% block content %}\\n    \\n        <form action='' method='GET' enctype='multipart/form-data'> \\n            {% csrf_token %}                \\n            <h5>个人基本信息</h5>\\n            {{ base_form.as_table }}\\n        </form>\\n        <hr><form action={% url 'A6299_update_url' id %} method='POST' enctype='multipart/form-data'> \\n            {% csrf_token %}                \\n            <h5>家族病史</h5>\\n            {{ a6209_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>疾病史</h5>\\n            {{ a6204_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>社会环境评估</h5>\\n            {{ a6216_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>外伤史</h5>\\n            {{ a6206_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>手术史</h5>\\n            {{ a6205_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>输血史</h5>\\n            {{ a6208_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人身体健康评估</h5>\\n            {{ a6214_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>遗传病史</h5>\\n            {{ a6210_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人健康行为调查</h5>\\n            {{ a6212_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人基本信息</h5>\\n            {{ a6203_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人心理综合素质调查</h5>\\n            {{ a6213_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>过敏史</h5>\\n            {{ a6207_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人适应能力评估</h5>\\n            {{ a6215_form.as_p }}\\n        <hr>\\n        </form>\\n        <input type=\\\"submit\\\" value=\\\"完成服务\\\" onclick=\\\"formSave('a6215_form')\\\" />\\n    {% endblock %}\\n    \"}], \"models\": \"class A6299(HsscFormModel):\\n    characterfield_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='姓名')\\n    characterfield_gender = models.CharField(max_length=255, null=True, blank=True, verbose_name='性别')\\n    characterfield_age = models.CharField(max_length=255, null=True, blank=True, verbose_name='年龄')\\n    characterfield_contact_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系地址')\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    relatedfield_family_relationship = models.ForeignKey(Family_relationship, related_name='family_relationship_for_relatedfield_family_relationship_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='家庭成员关系')\\n    relatedfield_disease_name = models.ForeignKey(Icpc5_evaluation_and_diagnoses, related_name='icpc5_evaluation_and_diagnoses_for_relatedfield_disease_name_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='疾病名称')\\n    datetimefield_time_of_diagnosis = models.DateTimeField(null=True, blank=True, verbose_name='确诊时间')\\n    relatedfield_disease_name = models.ForeignKey(Icpc5_evaluation_and_diagnoses, related_name='icpc5_evaluation_and_diagnoses_for_relatedfield_disease_name_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='疾病名称')\\n    relatedfield_is_the_living_environment_satisfactory = models.ForeignKey(Satisfaction, related_name='satisfaction_for_relatedfield_is_the_living_environment_satisfactory_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='您对居住环境满意吗')\\n    relatedfield_is_the_transportation_convenient = models.ForeignKey(Convenience, related_name='convenience_for_relatedfield_is_the_transportation_convenient_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='您所在的社区交通方便吗')\\n    boolfield_wai_shang_ri_qi = models.DateField(null=True, blank=True, verbose_name='外伤日期')\\n    relatedfield_disease_name = models.ForeignKey(Icpc5_evaluation_and_diagnoses, related_name='icpc5_evaluation_and_diagnoses_for_relatedfield_disease_name_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='疾病名称')\\n    datetimefield_date = models.DateField(null=True, blank=True, verbose_name='手术日期')\\n    relatedfield_name_of_operation = models.ForeignKey(Icpc7_treatments, related_name='icpc7_treatments_for_relatedfield_name_of_operation_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='手术名称')\\n    numberfield_blood_transfusion = models.IntegerField(null=True, blank=True, verbose_name='输血量')\\n    numberfield_blood_transfusion_standard_value = models.IntegerField(null=True, blank=True, verbose_name='输血量标准值')\\n    numberfield_blood_transfusion_up_limit = models.IntegerField(default=400.0, null=True, blank=True, verbose_name='输血量上限')\\n    numberfield_blood_transfusion_down_limit = models.IntegerField(null=True, blank=True, verbose_name='输血量下限')\\n    boolfield_shu_xue_ri_qi = models.DateField(null=True, blank=True, verbose_name='输血日期')\\n    relatedfield_own_health = models.ForeignKey(State_degree, related_name='state_degree_for_relatedfield_own_health_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='觉得自身健康状况如何')\\n    relatedfield_compared_to_last_year = models.ForeignKey(Comparative_expression, related_name='comparative_expression_for_relatedfield_compared_to_last_year_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='较之过去一年状态如何')\\n    relatedfield_sports_preference = models.ForeignKey(Sports_preference, related_name='sports_preference_for_relatedfield_sports_preference_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='运动偏好')\\n    relatedfield_exercise_time = models.ForeignKey(Exercise_time, related_name='exercise_time_for_relatedfield_exercise_time_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='运动时长')\\n    relatedfield_have_any_recent_symptoms_of_physical_discomfort = models.ManyToManyField(Icpc3_symptoms_and_problems, related_name='icpc3_symptoms_and_problems_for_relatedfield_have_any_recent_symptoms_of_physical_discomfort_A6299', verbose_name='近来有无身体不适症状')\\n    relatedfield_family_relationship = models.ForeignKey(Family_relationship, related_name='family_relationship_for_relatedfield_family_relationship_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='家庭成员关系')\\n    relatedfield_disease_name = models.ForeignKey(Icpc5_evaluation_and_diagnoses, related_name='icpc5_evaluation_and_diagnoses_for_relatedfield_disease_name_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='疾病名称')\\n    characterfield_average_sleep_duration = models.CharField(max_length=255, null=True, blank=True, verbose_name='平均睡眠时长')\\n    characterfield_duration_of_insomnia = models.CharField(max_length=255, null=True, blank=True, verbose_name='持续失眠时间')\\n    relatedfield_drinking_frequency = models.ForeignKey(Frequency, related_name='frequency_for_relatedfield_drinking_frequency_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='饮酒频次')\\n    relatedfield_smoking_frequency = models.ForeignKey(Frequency, related_name='frequency_for_relatedfield_smoking_frequency_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='吸烟频次')\\n    characterfield_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='姓名')\\n    characterhssc_identification_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='身份证号码')\\n    characterfield_resident_file_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='居民档案号')\\n    characterfield_family_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='家庭地址')\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    characterfield_medical_ic_card_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='医疗ic卡号')\\n    datetimefield_date_of_birth = models.DateTimeField(null=True, blank=True, verbose_name='出生日期')\\n    relatedfield_gender = models.ForeignKey(Gender, related_name='gender_for_relatedfield_gender_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='性别')\\n    relatedfield_nationality = models.ForeignKey(Nationality, related_name='nationality_for_relatedfield_nationality_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='民族')\\n    relatedfield_marital_status = models.ForeignKey(Marital_status, related_name='marital_status_for_relatedfield_marital_status_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='婚姻状况')\\n    relatedfield_education = models.ForeignKey(Education, related_name='education_for_relatedfield_education_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='文化程度')\\n    relatedfield_occupational_status = models.ForeignKey(Occupational_status, related_name='occupational_status_for_relatedfield_occupational_status_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='职业状况')\\n    relatedfield_medical_expenses_burden = models.ManyToManyField(Medical_expenses_burden, related_name='medical_expenses_burden_for_relatedfield_medical_expenses_burden_A6299', verbose_name='医疗费用负担')\\n    relatedfield_type_of_residence = models.ForeignKey(Type_of_residence, related_name='type_of_residence_for_relatedfield_type_of_residence_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='居住类型')\\n    relatedfield_blood_type = models.ForeignKey(Blood_type, related_name='blood_type_for_relatedfield_blood_type_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='血型')\\n    relatedfield_signed_family_doctor = models.ForeignKey(Staff, related_name='staff_for_relatedfield_signed_family_doctor_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='签约家庭医生')\\n    relatedfield_family_relationship = models.ForeignKey(Family_relationship, related_name='family_relationship_for_relatedfield_family_relationship_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='家庭成员关系')\\n    relatedfield_personality_tendency = models.ForeignKey(Character, related_name='character_for_relatedfield_personality_tendency_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='性格倾向')\\n    boolfield_shi_mian_qing_kuang = models.ForeignKey(Shi_mian_qing_kuang, related_name='shi_mian_qing_kuang_for_boolfield_shi_mian_qing_kuang_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='失眠情况')\\n    boolfield_sheng_huo_gong_zuo_ya_li_qing_kuang = models.ForeignKey(Ya_li_qing_kuang, related_name='ya_li_qing_kuang_for_boolfield_sheng_huo_gong_zuo_ya_li_qing_kuang_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='生活工作压力情况')\\n    relatedfield_drug_name = models.ManyToManyField(Medicine, related_name='medicine_for_relatedfield_drug_name_A6299', verbose_name='药品名称')\\n    characterfield_working_hours_per_day = models.TextField(max_length=255, null=True, blank=True, verbose_name='每天工作及工作往返总时长')\\n    relatedfield_are_you_satisfied_with_the_job_and_life = models.ForeignKey(Satisfaction, related_name='satisfaction_for_relatedfield_are_you_satisfied_with_the_job_and_life_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='对目前生活和工作满意吗')\\n    relatedfield_are_you_satisfied_with_your_adaptability = models.ForeignKey(Satisfaction, related_name='satisfaction_for_relatedfield_are_you_satisfied_with_your_adaptability_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='对自己的适应能力满意吗')\\n\\n    class Meta:\\n        verbose_name = '建立居民健康档案'\\n        verbose_name_plural = verbose_name\\n\\n    def __str__(self):\\n        return self.customer.name\\n\\n        \\n\\n\", \"admin\": \"\\nclass A6299Admin(HsscFormAdmin):\\n    fieldsets = ((\\\"基本信息\\\", {\\\"fields\\\": ((\\\"characterfield_name\\\", \\\"characterfield_gender\\\", \\\"characterfield_age\\\", \\\"characterfield_contact_address\\\", \\\"characterfield_contact_number\\\", ),)}), \\n        (\\\"家族病史\\\", {\\\"fields\\\": (\\\"relatedfield_family_relationship\\\", \\\"relatedfield_disease_name\\\", )}), \\n        (\\\"疾病史\\\", {\\\"fields\\\": (\\\"datetimefield_time_of_diagnosis\\\", \\\"relatedfield_disease_name\\\", )}), \\n        (\\\"社会环境评估\\\", {\\\"fields\\\": (\\\"relatedfield_is_the_living_environment_satisfactory\\\", \\\"relatedfield_is_the_transportation_convenient\\\", )}), \\n        (\\\"外伤史\\\", {\\\"fields\\\": (\\\"boolfield_wai_shang_ri_qi\\\", \\\"relatedfield_disease_name\\\", )}), \\n        (\\\"手术史\\\", {\\\"fields\\\": (\\\"datetimefield_date\\\", \\\"relatedfield_name_of_operation\\\", )}), \\n        (\\\"输血史\\\", {\\\"fields\\\": (\\\"numberfield_blood_transfusion\\\", \\\"boolfield_shu_xue_ri_qi\\\", )}), \\n        (\\\"个人身体健康评估\\\", {\\\"fields\\\": (\\\"relatedfield_own_health\\\", \\\"relatedfield_compared_to_last_year\\\", \\\"relatedfield_sports_preference\\\", \\\"relatedfield_exercise_time\\\", \\\"relatedfield_have_any_recent_symptoms_of_physical_discomfort\\\", )}), \\n        (\\\"遗传病史\\\", {\\\"fields\\\": (\\\"relatedfield_family_relationship\\\", \\\"relatedfield_disease_name\\\", )}), \\n        (\\\"个人健康行为调查\\\", {\\\"fields\\\": (\\\"characterfield_average_sleep_duration\\\", \\\"characterfield_duration_of_insomnia\\\", \\\"relatedfield_drinking_frequency\\\", \\\"relatedfield_smoking_frequency\\\", )}), \\n        (\\\"个人基本信息\\\", {\\\"fields\\\": (\\\"characterfield_name\\\", \\\"characterhssc_identification_number\\\", \\\"characterfield_resident_file_number\\\", \\\"characterfield_family_address\\\", \\\"characterfield_contact_number\\\", \\\"characterfield_medical_ic_card_number\\\", \\\"datetimefield_date_of_birth\\\", \\\"relatedfield_gender\\\", \\\"relatedfield_nationality\\\", \\\"relatedfield_marital_status\\\", \\\"relatedfield_education\\\", \\\"relatedfield_occupational_status\\\", \\\"relatedfield_medical_expenses_burden\\\", \\\"relatedfield_type_of_residence\\\", \\\"relatedfield_blood_type\\\", \\\"relatedfield_signed_family_doctor\\\", \\\"relatedfield_family_relationship\\\", )}), \\n        (\\\"个人心理综合素质调查\\\", {\\\"fields\\\": (\\\"relatedfield_personality_tendency\\\", \\\"boolfield_shi_mian_qing_kuang\\\", \\\"boolfield_sheng_huo_gong_zuo_ya_li_qing_kuang\\\", )}), \\n        (\\\"过敏史\\\", {\\\"fields\\\": (\\\"relatedfield_drug_name\\\", )}), \\n        (\\\"个人适应能力评估\\\", {\\\"fields\\\": (\\\"characterfield_working_hours_per_day\\\", \\\"relatedfield_are_you_satisfied_with_the_job_and_life\\\", \\\"relatedfield_are_you_satisfied_with_your_adaptability\\\", )}), )\\n    autocomplete_fields = [\\\"relatedfield_family_relationship\\\", \\\"relatedfield_disease_name\\\", \\\"relatedfield_disease_name\\\", \\\"relatedfield_is_the_living_environment_satisfactory\\\", \\\"relatedfield_is_the_transportation_convenient\\\", \\\"relatedfield_disease_name\\\", \\\"relatedfield_name_of_operation\\\", \\\"relatedfield_own_health\\\", \\\"relatedfield_compared_to_last_year\\\", \\\"relatedfield_sports_preference\\\", \\\"relatedfield_exercise_time\\\", \\\"relatedfield_have_any_recent_symptoms_of_physical_discomfort\\\", \\\"relatedfield_family_relationship\\\", \\\"relatedfield_disease_name\\\", \\\"relatedfield_drinking_frequency\\\", \\\"relatedfield_smoking_frequency\\\", \\\"relatedfield_gender\\\", \\\"relatedfield_nationality\\\", \\\"relatedfield_marital_status\\\", \\\"relatedfield_education\\\", \\\"relatedfield_occupational_status\\\", \\\"relatedfield_medical_expenses_burden\\\", \\\"relatedfield_type_of_residence\\\", \\\"relatedfield_blood_type\\\", \\\"relatedfield_signed_family_doctor\\\", \\\"relatedfield_family_relationship\\\", \\\"relatedfield_personality_tendency\\\", \\\"boolfield_shi_mian_qing_kuang\\\", \\\"boolfield_sheng_huo_gong_zuo_ya_li_qing_kuang\\\", \\\"relatedfield_drug_name\\\", \\\"relatedfield_are_you_satisfied_with_the_job_and_life\\\", \\\"relatedfield_are_you_satisfied_with_your_adaptability\\\", ]\\n    readonly_fields = [\\\"characterfield_name\\\", \\\"characterfield_gender\\\", \\\"characterfield_age\\\", \\\"characterfield_contact_address\\\", \\\"characterfield_contact_number\\\", ]\\nadmin.site.register(A6299, A6299Admin)\\nclinic_site.register(A6299, A6299Admin)\\n\"}",
             "buessiness_forms": [
                 "0ba2ba9c-9e23-11ec-aa2c-fe35a7065cdd",
-                "0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd",
                 "0b54db10-9e23-11ec-aa2c-fe35a7065cdd",
                 "0ba83c56-9e23-11ec-aa2c-fe35a7065cdd",
                 "0b648650-9e23-11ec-aa2c-fe35a7065cdd",
@@ -5869,6 +5868,50 @@
             "role": [
                 "de194c50-9aa1-11ec-bde1-8a6e55faf877"
             ]
+        },
+        {
+            "label": "居民基本信息调查",
+            "name": "ju_min_ji_ben_xin_xi_diao_cha",
+            "hssc_id": "d090a8a8-cb7f-11ec-8161-aa5274efe6de",
+            "pym": "jmjbxxdc",
+            "name_icpc": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
+            "priority": 3,
+            "is_system_service": false,
+            "history_services_display": 0,
+            "enable_queue_counter": true,
+            "suppliers": null,
+            "not_suitable": null,
+            "execution_time_frame": null,
+            "awaiting_time_frame": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "script": "",
+            "buessiness_forms": [
+                "0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd"
+            ],
+            "role": [
+                "de18f0fc-9aa1-11ec-bde1-8a6e55faf877",
+                "de194c50-9aa1-11ec-bde1-8a6e55faf877",
+                "de1992d2-9aa1-11ec-bde1-8a6e55faf877",
+                "de19d6a2-9aa1-11ec-bde1-8a6e55faf877",
+                "de1a6f7c-9aa1-11ec-bde1-8a6e55faf877",
+                "de1ab716-9aa1-11ec-bde1-8a6e55faf877",
+                "de1b05cc-9aa1-11ec-bde1-8a6e55faf877",
+                "de1b4cc6-9aa1-11ec-bde1-8a6e55faf877",
+                "de1b9046-9aa1-11ec-bde1-8a6e55faf877",
+                "de1bcda4-9aa1-11ec-bde1-8a6e55faf877",
+                "de1c1052-9aa1-11ec-bde1-8a6e55faf877",
+                "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877",
+                "de1ca0c6-9aa1-11ec-bde1-8a6e55faf877",
+                "de1ce450-9aa1-11ec-bde1-8a6e55faf877",
+                "de1d24ec-9aa1-11ec-bde1-8a6e55faf877"
+            ]
         }
     ],
     "buessinessformssetting": [
@@ -5982,14 +6025,6 @@
             "hssc_id": "8acbe6a0-ab1f-11ec-8223-32f453b6622c",
             "service": "66859d9c-aa55-11ec-9f15-ee7ade4bced6",
             "buessiness_form": "bbf2ba74-aa48-11ec-8f0c-ee7ade4bced6",
-            "is_list": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "9582fd46-ab23-11ec-bf5e-1ac10aeebbc4",
-            "service": "9582b822-ab23-11ec-bf5e-1ac10aeebbc4",
-            "buessiness_form": "0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd",
             "is_list": false
         },
         {
@@ -6215,6 +6250,14 @@
             "service": "e0420c06-9aa1-11ec-bde1-8a6e55faf877",
             "buessiness_form": "0c3bd51a-9e23-11ec-aa2c-fe35a7065cdd",
             "is_list": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "d09197cc-cb7f-11ec-8161-aa5274efe6de",
+            "service": "d090a8a8-cb7f-11ec-8161-aa5274efe6de",
+            "buessiness_form": "0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd",
+            "is_list": false
         }
     ],
     "eventrule": [
@@ -6234,88 +6277,88 @@
             "name": "wen_zhen_fa_xian_tang_niao_bing_zheng_zhuang",
             "hssc_id": "a922d698-abda-11ec-a639-1ac10aeebbc4",
             "pym": "yxtnbzdgz",
-            "description": "糖尿病症状 == '烦渴，多尿，体重减轻'",
+            "description": "糖尿病症状 == ['烦渴','多尿','体重减轻']",
             "detection_scope": 1,
             "weight": 1,
-            "expression": "1cad2116-a52a-11ec-a478-2ec403f6c47b == '烦渴，多尿，体重减轻'",
-            "expression_fields": null
+            "expression": "boolfield_tang_niao_bing_zheng_zhuang == ['烦渴','多尿','体重减轻']",
+            "expression_fields": "boolfield_tang_niao_bing_zheng_zhuang"
         },
         {
             "label": "二型糖尿病诊断规则",
             "name": "fa_xian_er_lian_tang_niao_bing_zheng_zhuang_qie_xue_tang_chao_biao",
             "hssc_id": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
             "pym": "extnbzdgz",
-            "description": "糖尿病症状 == '烦渴，多尿' and 空腹血糖 >= 7.0 or 糖尿病症状 == '烦渴，皮肤感染' and 空腹血糖 >= 7.0 or 糖尿病症状 == '多尿，皮肤感染' and 空腹血糖 >= 7.0",
+            "description": "糖尿病症状 == [‘烦渴’,‘多尿’] and 空腹血糖 >= 7.0 or 糖尿病症状 == ['烦渴','皮肤感染'] and 空腹血糖 >= 7.0 or 糖尿病症状 == ['多尿','皮肤感染'] and 空腹血糖 >= 7.0",
             "detection_scope": 1,
             "weight": 1,
-            "expression": "1cad2116-a52a-11ec-a478-2ec403f6c47b == '烦渴，多尿' and deb59434-9aa1-11ec-bde1-8a6e55faf877 >= 7.0 or 1cad2116-a52a-11ec-a478-2ec403f6c47b == '烦渴，皮肤感染' and deb59434-9aa1-11ec-bde1-8a6e55faf877 >= 7.0 or 1cad2116-a52a-11ec-a478-2ec403f6c47b == '多尿，皮肤感染' and deb59434-9aa1-11ec-bde1-8a6e55faf877 >= 7.0",
-            "expression_fields": null
+            "expression": "boolfield_tang_niao_bing_zheng_zhuang == [‘烦渴’,‘多尿’] and numberfield_kong_fu_xue_tang >= 7.0 or boolfield_tang_niao_bing_zheng_zhuang == ['烦渴','皮肤感染'] and numberfield_kong_fu_xue_tang >= 7.0 or boolfield_tang_niao_bing_zheng_zhuang == ['多尿','皮肤感染'] and numberfield_kong_fu_xue_tang >= 7.0",
+            "expression_fields": "boolfield_tang_niao_bing_zheng_zhuang,numberfield_kong_fu_xue_tang,boolfield_tang_niao_bing_zheng_zhuang,numberfield_kong_fu_xue_tang,boolfield_tang_niao_bing_zheng_zhuang,numberfield_kong_fu_xue_tang"
         },
         {
             "label": "糖尿病酮中毒诊断规则",
             "name": "tang_niao_bing_tong_zhong_du_zhen_duan_gui_ze",
             "hssc_id": "711dadc4-abdd-11ec-a639-1ac10aeebbc4",
             "pym": "tnbtzdzdgz",
-            "description": "症状 == '昏睡，呕吐，腹痛' and 疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and 尿酮体 == '阳性'",
+            "description": "症状 == ['昏睡','呕吐','腹痛'] and 疾病名称 in ['非胰岛素依赖糖尿病','胰岛素依赖糖尿病'] and 尿酮体 == ''阳性''",
             "detection_scope": 1,
             "weight": 1,
-            "expression": "deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '昏睡，呕吐，腹痛' and ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and 15957162-b092-11ec-b42a-5ed0e34457d3 == '阳性'",
-            "expression_fields": null
+            "expression": "relatedfield_symptom_list == ['昏睡','呕吐','腹痛'] and relatedfield_disease_name in ['非胰岛素依赖糖尿病','胰岛素依赖糖尿病'] and boolfield_tong_ti == ''阳性''",
+            "expression_fields": "relatedfield_symptom_list,relatedfield_disease_name,boolfield_tong_ti"
         },
         {
             "label": "高血糖诊断规则",
             "name": "gao_xue_tang_zhen_duan_gui_ze",
             "hssc_id": "35f1165a-abe2-11ec-bf5e-1ac10aeebbc4",
             "pym": "gxtzdgz",
-            "description": "症状 == '疲乏' and 疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病'",
+            "description": "症状 == ''疲乏'' and 疾病名称 in ['非胰岛素依赖糖尿病','胰岛素依赖糖尿病']",
             "detection_scope": 1,
             "weight": 1,
-            "expression": "deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '疲乏' and ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病'",
-            "expression_fields": null
+            "expression": "relatedfield_symptom_list == ''疲乏'' and relatedfield_disease_name in ['非胰岛素依赖糖尿病','胰岛素依赖糖尿病']",
+            "expression_fields": "relatedfield_symptom_list,relatedfield_disease_name"
         },
         {
             "label": "糖尿病肾病诊断规则",
             "name": "tang_niao_bing_shen_bing_zhen_duan_gui_ze",
             "hssc_id": "6909de64-abe2-11ec-a639-1ac10aeebbc4",
             "pym": "tnbsbzdgz",
-            "description": "疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and 尿微量白蛋白 > 20",
+            "description": "疾病名称 in ['非胰岛素依赖糖尿','胰岛素依赖糖尿病'] and 尿微量白蛋白 > 20",
             "detection_scope": 1,
             "weight": 1,
-            "expression": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and 7b5ee5d2-ad5e-11ec-90c1-cad859921f34 > 20",
-            "expression_fields": null
+            "expression": "relatedfield_disease_name in ['非胰岛素依赖糖尿','胰岛素依赖糖尿病'] and A3501 > 20",
+            "expression_fields": "relatedfield_disease_name,A3501"
         },
         {
             "label": "糖尿病血管病变周围神经炎诊断规则",
             "name": "tang_niao_bing_xue_guan_bing_bian_zhou_wei_shen_jing_yan_zhen_duan_gui_ze",
             "hssc_id": "e3563d98-abe2-11ec-bf5e-1ac10aeebbc4",
             "pym": "tnbxgbbzwsjyzdgz",
-            "description": "疾病名称 in ['非胰岛素依赖糖尿病', '胰岛素依赖糖尿病'] and 症状 == '足痛'",
+            "description": "疾病名称 in ['非胰岛素依赖糖尿病', '胰岛素依赖糖尿病'] and 症状 == '’足痛‘'",
             "detection_scope": 1,
             "weight": 1,
-            "expression": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in ['非胰岛素依赖糖尿病', '胰岛素依赖糖尿病'] and deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '足痛'",
-            "expression_fields": null
+            "expression": "relatedfield_disease_name in ['非胰岛素依赖糖尿病', '胰岛素依赖糖尿病'] and relatedfield_symptom_list == '’足痛‘'",
+            "expression_fields": "relatedfield_disease_name,relatedfield_symptom_list"
         },
         {
             "label": "一项糖尿病症状",
             "name": "yi_xiang_tang_niao_bing_zheng_zhuang",
             "hssc_id": "05d0c7fa-afc9-11ec-9129-925bd788f441",
             "pym": "yxtnbzz",
-            "description": "症状 in '烦渴，多尿，多食，乏力，体重减轻，体重增加，皮肤感染，'",
+            "description": "症状 in ['烦渴','多尿','多食','乏力','体重减轻','体重增加','皮肤感染']",
             "detection_scope": 1,
             "weight": 1,
-            "expression": "deb93f26-9aa1-11ec-bde1-8a6e55faf877 in '烦渴，多尿，多食，乏力，体重减轻，体重增加，皮肤感染，'",
-            "expression_fields": null
+            "expression": "relatedfield_symptom_list in ['烦渴','多尿','多食','乏力','体重减轻','体重增加','皮肤感染']",
+            "expression_fields": "relatedfield_symptom_list"
         },
         {
             "label": "两项糖尿病症状",
             "name": "liang_xiang_tang_niao_bing_zheng_zhuang",
             "hssc_id": "1013b7c6-afca-11ec-b226-925bd788f441",
             "pym": "lxtnbzz",
-            "description": "症状 == '烦渴，多尿' or 症状 == '烦渴，体重增加' or 症状 == '多尿，皮肤感染' or 症状 == '烦渴，皮肤感染'",
+            "description": "症状 == ['烦渴','多尿'] or 症状 == ['烦渴','体重增加'] or 症状 == ['多尿','皮肤感染'] or 症状 == ['烦渴','皮肤感染']",
             "detection_scope": 1,
             "weight": 1,
-            "expression": "deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '烦渴，多尿' or deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '烦渴，体重增加' or deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '多尿，皮肤感染' or deb93f26-9aa1-11ec-bde1-8a6e55faf877 == '烦渴，皮肤感染'",
-            "expression_fields": null
+            "expression": "relatedfield_symptom_list == ['烦渴','多尿'] or relatedfield_symptom_list == ['烦渴','体重增加'] or relatedfield_symptom_list == ['多尿','皮肤感染'] or relatedfield_symptom_list == ['烦渴','皮肤感染']",
+            "expression_fields": "relatedfield_symptom_list,relatedfield_symptom_list,relatedfield_symptom_list,relatedfield_symptom_list"
         },
         {
             "label": "空腹血糖超过正常值",
@@ -6325,8 +6368,8 @@
             "description": "空腹血糖 >= 7.0",
             "detection_scope": 1,
             "weight": 1,
-            "expression": "deb59434-9aa1-11ec-bde1-8a6e55faf877 >= 7.0",
-            "expression_fields": null
+            "expression": "numberfield_kong_fu_xue_tang >= 7.0",
+            "expression_fields": "numberfield_kong_fu_xue_tang"
         },
         {
             "label": "糖化血红蛋白超出正常值",
@@ -6336,30 +6379,30 @@
             "description": "糖化血红蛋白 > 6",
             "detection_scope": 1,
             "weight": 1,
-            "expression": "deb4e084-9aa1-11ec-bde1-8a6e55faf877 > 6",
-            "expression_fields": null
+            "expression": "numberfield_tang_hua_xue_hong_dan_bai > 6",
+            "expression_fields": "numberfield_tang_hua_xue_hong_dan_bai"
         },
         {
             "label": "糖尿病不适用药品规则",
             "name": "tang_niao_bing_bu_shi_yong_yao_pin_gui_ze",
             "hssc_id": "ebbdfb30-b6d5-11ec-8121-0ebea05fc526",
             "pym": "tnbbsyypgz",
-            "description": "疾病名称 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and 药品名称 in '5%葡萄糖注射液，止咳糖浆'",
+            "description": "疾病名称 in ['非胰岛素依赖糖尿病','胰岛素依赖糖尿病'] and 药品名称 in ['5%葡萄糖注射液','止咳糖浆']",
             "detection_scope": 1,
             "weight": 1,
-            "expression": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877 in '非胰岛素依赖糖尿病，胰岛素依赖糖尿病' and dec637d0-9aa1-11ec-bde1-8a6e55faf877 in '5%葡萄糖注射液，止咳糖浆'",
-            "expression_fields": null
+            "expression": "relatedfield_disease_name in ['非胰岛素依赖糖尿病','胰岛素依赖糖尿病'] and relatedfield_drug_name in ['5%葡萄糖注射液','止咳糖浆']",
+            "expression_fields": "relatedfield_disease_name,relatedfield_drug_name"
         },
         {
             "label": "开具注射类处方",
             "name": "kai_ju_zhu_she_lei_chu_fang",
             "hssc_id": "302378de-c9f2-11ec-b369-168d53e8234e",
             "pym": "kjzslcf",
-            "description": "用药途径 == '注射类'",
+            "description": "用药途径 == ''注射类''",
             "detection_scope": 1,
             "weight": 1,
-            "expression": "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902 == '注射类'",
-            "expression_fields": null
+            "expression": "boolfield_yong_yao_tu_jing == ''注射类''",
+            "expression_fields": "boolfield_yong_yao_tu_jing"
         }
     ],
     "eventexpression": [
@@ -6369,8 +6412,8 @@
             "hssc_id": "a9235528-abda-11ec-a639-1ac10aeebbc4",
             "event_rule": "a922d698-abda-11ec-a639-1ac10aeebbc4",
             "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
-            "operator": null,
-            "value": "烦渴，多尿，体重减轻",
+            "operator": 0,
+            "value": "'烦渴','多尿','体重减轻'",
             "connection_operator": null
         },
         {
@@ -6379,9 +6422,9 @@
             "hssc_id": "9dd91d40-abdc-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
             "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
-            "operator": null,
-            "value": "烦渴，多尿",
-            "connection_operator": null
+            "operator": 0,
+            "value": "‘烦渴’,‘多尿’",
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -6399,9 +6442,9 @@
             "hssc_id": "9dd9862c-abdc-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
             "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
-            "operator": null,
-            "value": "烦渴，皮肤感染",
-            "connection_operator": null
+            "operator": 0,
+            "value": "'烦渴','皮肤感染'",
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -6419,9 +6462,9 @@
             "hssc_id": "9dd9dc8a-abdc-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
             "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
-            "operator": null,
-            "value": "多尿，皮肤感染",
-            "connection_operator": null
+            "operator": 0,
+            "value": "'多尿','皮肤感染'",
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -6429,9 +6472,9 @@
             "hssc_id": "711df180-abdd-11ec-a639-1ac10aeebbc4",
             "event_rule": "711dadc4-abdd-11ec-a639-1ac10aeebbc4",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
-            "value": "昏睡，呕吐，腹痛",
-            "connection_operator": null
+            "operator": 0,
+            "value": "'昏睡','呕吐','腹痛'",
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -6440,8 +6483,8 @@
             "event_rule": "711dadc4-abdd-11ec-a639-1ac10aeebbc4",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
             "operator": 6,
-            "value": "非胰岛素依赖糖尿病，胰岛素依赖糖尿病",
-            "connection_operator": null
+            "value": "'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'",
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -6449,9 +6492,9 @@
             "hssc_id": "35f14f9e-abe2-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "35f1165a-abe2-11ec-bf5e-1ac10aeebbc4",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
-            "value": "疲乏",
-            "connection_operator": null
+            "operator": 0,
+            "value": "'疲乏'",
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -6460,7 +6503,7 @@
             "event_rule": "35f1165a-abe2-11ec-bf5e-1ac10aeebbc4",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
             "operator": 6,
-            "value": "非胰岛素依赖糖尿病，胰岛素依赖糖尿病",
+            "value": "'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'",
             "connection_operator": null
         },
         {
@@ -6470,8 +6513,8 @@
             "event_rule": "6909de64-abe2-11ec-a639-1ac10aeebbc4",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
             "operator": 6,
-            "value": "非胰岛素依赖糖尿病，胰岛素依赖糖尿病",
-            "connection_operator": null
+            "value": "'非胰岛素依赖糖尿','胰岛素依赖糖尿病'",
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -6481,7 +6524,7 @@
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
             "operator": 6,
             "value": "'非胰岛素依赖糖尿病', '胰岛素依赖糖尿病'",
-            "connection_operator": null
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -6489,8 +6532,8 @@
             "hssc_id": "e356ace2-abe2-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "e3563d98-abe2-11ec-bf5e-1ac10aeebbc4",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
-            "value": "足痛",
+            "operator": 0,
+            "value": "’足痛‘",
             "connection_operator": null
         },
         {
@@ -6520,7 +6563,7 @@
             "event_rule": "05d0c7fa-afc9-11ec-9129-925bd788f441",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
             "operator": 6,
-            "value": "烦渴，多尿，多食，乏力，体重减轻，体重增加，皮肤感染，",
+            "value": "'烦渴','多尿','多食','乏力','体重减轻','体重增加','皮肤感染'",
             "connection_operator": null
         },
         {
@@ -6529,8 +6572,8 @@
             "hssc_id": "1014ec7c-afca-11ec-b226-925bd788f441",
             "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
-            "value": "烦渴，多尿",
+            "operator": 0,
+            "value": "'烦渴','多尿'",
             "connection_operator": 1
         },
         {
@@ -6539,8 +6582,8 @@
             "hssc_id": "1015d74a-afca-11ec-b226-925bd788f441",
             "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
-            "value": "烦渴，体重增加",
+            "operator": 0,
+            "value": "'烦渴','体重增加'",
             "connection_operator": 1
         },
         {
@@ -6549,8 +6592,8 @@
             "hssc_id": "101614d0-afca-11ec-b226-925bd788f441",
             "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
-            "value": "多尿，皮肤感染",
+            "operator": 0,
+            "value": "'多尿','皮肤感染'",
             "connection_operator": 1
         },
         {
@@ -6559,9 +6602,9 @@
             "hssc_id": "101649dc-afca-11ec-b226-925bd788f441",
             "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
-            "value": "烦渴，皮肤感染",
-            "connection_operator": 1
+            "operator": 0,
+            "value": "'烦渴','皮肤感染'",
+            "connection_operator": null
         },
         {
             "label": null,
@@ -6589,8 +6632,8 @@
             "hssc_id": "0448e7f6-b6d5-11ec-8121-0ebea05fc526",
             "event_rule": "711dadc4-abdd-11ec-a639-1ac10aeebbc4",
             "field": "15957162-b092-11ec-b42a-5ed0e34457d3",
-            "operator": null,
-            "value": "阳性",
+            "operator": 0,
+            "value": "'阳性'",
             "connection_operator": null
         },
         {
@@ -6600,8 +6643,8 @@
             "event_rule": "ebbdfb30-b6d5-11ec-8121-0ebea05fc526",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
             "operator": 6,
-            "value": "非胰岛素依赖糖尿病，胰岛素依赖糖尿病",
-            "connection_operator": null
+            "value": "'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'",
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -6610,7 +6653,7 @@
             "event_rule": "ebbdfb30-b6d5-11ec-8121-0ebea05fc526",
             "field": "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
             "operator": 6,
-            "value": "5%葡萄糖注射液，止咳糖浆",
+            "value": "'5%葡萄糖注射液','止咳糖浆'",
             "connection_operator": null
         },
         {
@@ -6619,8 +6662,8 @@
             "hssc_id": "3023c596-c9f2-11ec-b369-168d53e8234e",
             "event_rule": "302378de-c9f2-11ec-b369-168d53e8234e",
             "field": "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-            "operator": null,
-            "value": "注射类",
+            "operator": 0,
+            "value": "'注射类'",
             "connection_operator": null
         }
     ],

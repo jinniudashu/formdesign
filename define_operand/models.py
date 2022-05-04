@@ -264,7 +264,8 @@ class EventRule(HsscPymBase):
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
-    def generate_expression(self):  # 在EventRuleAdmin.save_formset中调用
+    def generate_expression(self):
+        # 在EventRuleAdmin.save_formset中调用
         expressions = []
         descriptions = []
         expression_fields = []
@@ -272,7 +273,7 @@ class EventRule(HsscPymBase):
             field = _expression.field  # 字段
             operator = EventExpression.Operator[_expression.operator][1]  # 操作符
             if ',' in _expression.value:
-                value = f"[{_expression.value}]"  # 值为数组
+                value = f"{{{_expression.value}}}"  # 值为集合
             elif is_number(_expression.value):
                 value = _expression.value  # 值为数字
             else:
