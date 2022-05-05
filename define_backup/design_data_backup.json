@@ -6280,7 +6280,7 @@
             "description": "糖尿病症状 == {'烦渴','多尿','体重减轻'}",
             "detection_scope": 1,
             "weight": 1,
-            "expression": "len({'烦渴','多尿','体重减轻'}.intersection({'烦渴','多尿','体重减轻'}))==3",
+            "expression": "len({'烦渴','多尿','体重减轻'}.intersection(boolfield_tang_niao_bing_zheng_zhuang))==3",
             "expression_fields": "boolfield_tang_niao_bing_zheng_zhuang"
         },
         {
@@ -6412,7 +6412,7 @@
             "hssc_id": "a9235528-abda-11ec-a639-1ac10aeebbc4",
             "event_rule": "a922d698-abda-11ec-a639-1ac10aeebbc4",
             "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
-            "operator": null,
+            "operator": 0,
             "value": "'烦渴','多尿','体重减轻'",
             "connection_operator": null
         },
