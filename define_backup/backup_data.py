@@ -97,6 +97,11 @@ def export_source_code(modeladmin, request, queryset):
     service['models'], service['admin'] = export_service_models_admin()
     source_code['service'] = service
 
+    # 导出core:fields_dict脚本
+    core = {}
+    core['fields_type'] = export_fields_type(Component)
+    source_code['core'] = core
+
     # 导出core业务定义数据：
     # 需要导出的模块清单
     exported_core_models=[
@@ -294,6 +299,32 @@ def export_core_data(models):
         _model = model.__name__.lower()
         models_data[_model]=model.objects.backup_data()
     return models_data
+
+
+# 导出字段类型字典脚本
+def export_fields_type(fields_model: Component):
+    def __get_field_type(component):
+        _type = component.content_type.model
+        print('_type', component.label, _type)
+        if _type == 'characterfield':
+            return 'String'
+        elif _type == 'numberfield':
+            return 'Numbers'
+        elif _type == 'dtfield':
+            return 'Datetime' if component.content_object.type == 'DateTimeField' else 'Date'
+        elif _type == 'relatedfield':
+            # 返回关联字段的类型: Model name
+            model_name = component.content_object.related_content.related_content
+            app_label = component.content_object.related_content.related_content_type
+            return f'{app_label}.{model_name}'
+
+    fields_type_script = ''
+    for component in fields_model.objects.all():
+        field_type = __get_field_type(component)
+        fields_type_script = f'{fields_type_script}\n    {component.name} = "{field_type}"  # {component.label}'
+
+    fields_type_header = f'from enum import Enum\nclass FieldsType(Enum):\n'
+    return f'{fields_type_header}{fields_type_script}'
 
 
 # 把备份数据写入备份数据库

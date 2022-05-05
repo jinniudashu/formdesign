@@ -74,6 +74,6 @@ class RoleAdmin(admin.ModelAdmin):
 # class IcpcListAdmin(admin.ModelAdmin):
 #     readonly_fields = ['hssc_id', 'pym']
 
-# @admin.register(RelateFieldModel)
-# class RelateFieldModelAdmin(admin.ModelAdmin):
-#     readonly_fields = ['name', 'hssc_id']
+@admin.register(RelateFieldModel)
+class RelateFieldModelAdmin(admin.ModelAdmin):
+    readonly_fields = ['name', 'hssc_id']
