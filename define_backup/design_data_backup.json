@@ -2422,7 +2422,7 @@
             "name": "medicine",
             "hssc_id": "de896698-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "yp",
-            "app_name": "core",
+            "app_name": "entities",
             "model_name": "Medicine",
             "base_form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
             "header_fields": []
@@ -2442,7 +2442,7 @@
             "name": "institution",
             "hssc_id": "de8ad1a4-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "jg",
-            "app_name": "core",
+            "app_name": "entities",
             "model_name": "Institution",
             "base_form": "43464b44-c5c9-11ec-b819-725badf7393d",
             "header_fields": []
@@ -2452,7 +2452,7 @@
             "name": "device",
             "hssc_id": "de8a1c64-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "sb",
-            "app_name": "core",
+            "app_name": "entities",
             "model_name": "Device",
             "base_form": "7c8caaba-c5c9-11ec-b9d4-725badf7393d",
             "header_fields": []
@@ -2462,7 +2462,7 @@
             "name": "supplier",
             "hssc_id": "de889948-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "gys",
-            "app_name": "core",
+            "app_name": "entities",
             "model_name": "Supplier",
             "base_form": "63347e8a-c5c9-11ec-b819-725badf7393d",
             "header_fields": []

@@ -30,7 +30,7 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
             name=instance.name,
             label=instance.label,
             related_content=instance.model_name,
-            related_content_type=sender._meta.model_name,
+            related_content_type=instance.app_name,
             hssc_id = instance.hssc_id
         )
     else:
@@ -38,7 +38,7 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
             name=instance.name,
             label=instance.label,
             related_content=instance.model_name,
-            related_content_type=sender._meta.model_name,
+            related_content_type=instance.app_name,
         )
 
 
