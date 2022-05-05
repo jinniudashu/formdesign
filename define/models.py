@@ -205,15 +205,15 @@ class IcpcList(HsscPymBase):
 @receiver(post_save, sender=IcpcList, weak=True, dispatch_uid=None)
 def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
     if sender==DicList:
-        _related_content_type = 'dictionaries'
+        app_name = 'dictionaries'
     elif sender==IcpcList:
-        _related_content_type = 'icpc'
+        app_name = 'icpc'
     if created:
         RelateFieldModel.objects.create(
             name=instance.name,
             label=instance.label,
             related_content=instance.name.capitalize(),
-            related_content_type=_related_content_type,
+            related_content_type=app_name,
             hssc_id = instance.hssc_id
         )
     else:
@@ -221,7 +221,7 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
             name=instance.name,
             label=instance.label,
             related_content=instance.name.capitalize(),
-            related_content_type=_related_content_type,
+            related_content_type=app_name,
         )
 
 
