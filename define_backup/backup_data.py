@@ -69,34 +69,28 @@ icpc_backup.short_description = '备份ICPC数据'
 ########################################################################################################################
 # 导出作业脚本, 被define_backup.admin调用
 ########################################################################################################################
+from enum import Enum
 def export_source_code(modeladmin, request, queryset):
     source_code = {
         'script': {},
         'data': {}
     }
     
-    # 导出App dictionaries: models.py, admin.py脚本
-    dictionaries = {}
-    dictionaries['models'], dictionaries['admin'] = get_dict_models_admin_script()
-    source_code['script']['dictionaries'] = dictionaries
+    apps = ['dictionaries','icpc','forms','service',]
 
-    # 导出App icpc: models.py, admin.py脚本
-    icpc = {}
-    icpc['models'], icpc['admin'] = get_icpc_models_admin_script()
-    source_code['script']['icpc'] = icpc
+    class GetAppScript(Enum):
+        dictionaries = get_dict_models_admin_script  # 导出App dictionaries: models.py, admin.py脚本
+        icpc = get_icpc_models_admin_script  # 导出App icpc: models.py, admin.py脚本
+        forms = get_forms_models_admin_script  # 导出App: forms: models.py, admin.py脚本
+        service = get_service_models_admin_script  # 导出App:service脚本
 
-    # for entity in managed_entities:
-    #   source_code[entity.app_name]
+    for app in apps:
+        _script = {}
+        _script['models'], _script['admin'] = eval(f'GetAppScript.{app}')()
+        source_code['script'][app] = _script
 
-    # 导出App: forms: models.py, admin.py脚本
-    forms = {}
-    forms['models'], forms['admin'] = get_forms_models_admin_script()
-    source_code['script']['forms'] = forms
-
-    # 导出App:service脚本
-    service = {}
-    service['models'], service['admin'] = get_service_models_admin_script()
-    source_code['script']['service'] = service
+    # # for entity in managed_entities:
+    # #   source_code[entity.app_name]
 
     # 导出App:core/hsscbase_class.py脚本
     core = {}
@@ -104,10 +98,13 @@ def export_source_code(modeladmin, request, queryset):
     source_code['script']['core'] = core
 
 
-    # 导出字典数据json
-    source_code['data']['dictionaries'] = get_dict_data()
-    # 导出ICPC数据json
-    source_code['data']['icpc'] = get_icpc_data()
+    # 导出数据
+    class GetAppData(Enum):
+        dictionaries = get_dict_data  # 导出字典数据json
+        icpc = get_icpc_data  # 导出ICPC数据json
+
+    for app in ['dictionaries', 'icpc']:
+        source_code['data'][app] = eval(f'GetAppData.{app}')()
 
     # 导出core业务定义数据：
     # 需要导出的模块清单
@@ -125,6 +122,7 @@ def export_source_code(modeladmin, request, queryset):
         ServiceRule,
     ]
     source_code['data']['core'] = get_init_core_data(exported_core_models)
+
 
     # 写入数据库
     result = write_to_db(SourceCode, source_code)
@@ -203,7 +201,6 @@ def get_forms_models_admin_script():
 
 # 导出service models.py, admin.py脚本
 def get_service_models_admin_script():
-
     models_script = service_models_file_head
     admin_script =  service_admin_file_head
 
@@ -211,10 +208,6 @@ def get_service_models_admin_script():
         script = service.generate_script()  # 生成最新脚本
         models_script = f'{models_script}{script["models"]}'
         admin_script = f'{admin_script}{script["admin"]}'
-        # if service.script:
-        #     script = json.loads(service.script)
-        #     models_script = f'{models_script}{script["models"]}'
-        #     admin_script = f'{admin_script}{script["admin"]}'
 
     return models_script, admin_script
 
@@ -222,7 +215,6 @@ def get_service_models_admin_script():
 def get_export_hsscbase_class_script(hsscbase_class_filename, fields_model: Component):
     def _get_field_type(component):
         _type = component.content_type.model
-        print('_type', component.label, _type)
         if _type == 'characterfield':
             return 'String'
         elif _type == 'numberfield':
@@ -263,7 +255,6 @@ def get_dict_data():
         item_dict.pop('id')
         item_dict.pop('diclist')
         dict_item['fields'] = item_dict
-
         dict_data.append(dict_item)
     return dict_data
 
@@ -281,7 +272,6 @@ def get_icpc_data():
             item_dict = model_to_dict(_item)
             item_dict.pop('id')
             item['fields'] = item_dict
-
             icpc_data.append(item)
     return icpc_data
 
