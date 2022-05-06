@@ -57,7 +57,7 @@ class HsscBackupManager(models.Manager):
             item = {}
             # 遍历模型非多对多字段，如果是外键，则用外键的hssc_id找回关联对象
             for field in self.model._meta.fields:
-                if item_dict.get(field.name) is not None:  # 如果字段存在且不为空，进行检查替换                    
+                if item_dict.get(field.name) is not None:  # 如果字段不为空，进行检查替换                    
                     if field.name in ['name_icpc', 'icpc']:  # 如果是ICPC外键，用icpc_code获取对象
                         _object = field.related_model.objects.get(icpc_code=item_dict[field.name])
                         item[field.name] = _object
@@ -69,7 +69,7 @@ class HsscBackupManager(models.Manager):
                                 _object = None
                             item[field.name] = _object
                         elif field.__class__.__name__ == 'DurationField':  # duration字段
-                            item[field.name] = parse_timedelta(item_dict[field.name])
+                            item[field.name] = self._parse_timedelta(item_dict[field.name])
                         else:
                             item[field.name] = item_dict[field.name]
 
@@ -92,6 +92,25 @@ class HsscBackupManager(models.Manager):
                     eval(f'_instance.{field.name}').set(objects)
             
         return f'{self.model} 已恢复'
+
+    # 转换string to timedelta
+    def _parse_timedelta(stamp):
+        if 'day' in stamp:
+            m = re.match(r'(?P<d>[-\d]+) day[s]*, (?P<h>\d+):'
+                        r'(?P<m>\d+):(?P<s>\d[\.\d+]*)', stamp)
+        else:
+            m = re.match(r'(?P<h>\d+):(?P<m>\d+):'
+                        r'(?P<s>\d[\.\d+]*)', stamp)
+        if not m:
+            return ''
+
+        time_dict = {key: float(val) for key, val in m.groupdict().items()}
+        if 'd' in time_dict:
+            return timedelta(days=time_dict['d'], hours=time_dict['h'],
+                            minutes=time_dict['m'], seconds=time_dict['s'])
+        else:
+            return timedelta(hours=time_dict['h'],
+                            minutes=time_dict['m'], seconds=time_dict['s'])
 
 
 # Hssc基类
@@ -125,23 +144,3 @@ class HsscPymBase(HsscBase):
             if self.name is None or self.name=='':
                 self.name = "_".join(lazy_pinyin(self.label))
         super().save(*args, **kwargs)
-
-
-# 转换string to timedelta
-def parse_timedelta(stamp):
-    if 'day' in stamp:
-        m = re.match(r'(?P<d>[-\d]+) day[s]*, (?P<h>\d+):'
-                     r'(?P<m>\d+):(?P<s>\d[\.\d+]*)', stamp)
-    else:
-        m = re.match(r'(?P<h>\d+):(?P<m>\d+):'
-                     r'(?P<s>\d[\.\d+]*)', stamp)
-    if not m:
-        return ''
-
-    time_dict = {key: float(val) for key, val in m.groupdict().items()}
-    if 'd' in time_dict:
-        return timedelta(days=time_dict['d'], hours=time_dict['h'],
-                         minutes=time_dict['m'], seconds=time_dict['s'])
-    else:
-        return timedelta(hours=time_dict['h'],
-                         minutes=time_dict['m'], seconds=time_dict['s'])

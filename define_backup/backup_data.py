@@ -99,7 +99,7 @@ def export_source_code(modeladmin, request, queryset):
 
     # 导出core:fields_dict脚本
     core = {}
-    core['fields_type'] = export_fields_type(Component)
+    core['hsscbase_class'] = export_hsscbase_class('./formdesign/hsscbase_class.py', Component)
     source_code['core'] = core
 
     # 导出core业务定义数据：
@@ -152,7 +152,6 @@ clinic_site.register({name}, {name}Admin)
 
     return models_script, admin_script
 
-
 # 导出字典Json数据
 def export_dict_data():
     dict_data = []  # 字典明细数据
@@ -203,7 +202,6 @@ clinic_site.register({icpc['name']}, SubIcpcAdmin)'''
 
     return models_script, admin_script
 
-
 # 导出ICPC字典Json数据
 def export_icpc_data():
     icpc_data = []  # ICPC明细数据
@@ -251,14 +249,8 @@ def export_forms_models_admin_forms():
         models_script = f'{models_script}{script["models"]}'
         admin_script = f'{admin_script}{script["admin"]}'
         forms_script = f'{forms_script}{script["forms"]}'
-        # if form.script:
-        #     script = json.loads(form.script)
-        #     models_script = f'{models_script}{script["models"]}'
-        #     admin_script = f'{admin_script}{script["admin"]}'
-        #     forms_script = f'{forms_script}{script["forms"]}'
 
     return models_script, admin_script, forms_script
-
 
 # 导出forms views.py, urls.py, templates.py脚本
 def export_views_urls_templates():
@@ -282,7 +274,6 @@ def export_views_urls_templates():
 
     return views_script, urls_script, templates_code
 
-
 # construct index.html script
 def generate_index_html(service):
     return f'''<a class='list-group-item' href='{{% url "{service.name}_create_url" %}}'>
@@ -301,9 +292,9 @@ def export_core_data(models):
     return models_data
 
 
-# 导出字段类型字典脚本
-def export_fields_type(fields_model: Component):
-    def __get_field_type(component):
+# 导出基类脚本hsscbase_class.py
+def export_hsscbase_class(hsscbase_class_filename, fields_model: Component):
+    def _get_field_type(component):
         _type = component.content_type.model
         print('_type', component.label, _type)
         if _type == 'characterfield':
@@ -318,13 +309,18 @@ def export_fields_type(fields_model: Component):
             app_label = component.content_object.related_content.related_content_type
             return f'{app_label}.{model_name}'
 
-    fields_type_script = ''
+    # 生成FieldsType内容
+    fields_type_script = f'from enum import Enum\nclass FieldsType(Enum):'
     for component in fields_model.objects.all():
-        field_type = __get_field_type(component)
+        field_type = _get_field_type(component)
         fields_type_script = f'{fields_type_script}\n    {component.name} = "{field_type}"  # {component.label}'
 
-    fields_type_header = f'from enum import Enum\nclass FieldsType(Enum):\n'
-    return f'{fields_type_header}{fields_type_script}'
+    # 获取hsscbase_class脚本内容
+    with open(hsscbase_class_filename, 'r', encoding="utf8") as f:
+        hsscbase_class = f.read()
+    
+    # 返回合并内容
+    return f'{hsscbase_class}\n\n{fields_type_script}'
 
 
 # 把备份数据写入备份数据库

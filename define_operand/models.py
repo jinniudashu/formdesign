@@ -62,67 +62,7 @@ class BuessinessForm(GenerateModelsScriptMixin, HsscPymBase):
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
 
-        # 生成meta_data
-        # if self.meta_data:
-        #     meta_data = json.loads(self.meta_data)
-        # else:
-        #     meta_data = {}
-        # meta_data['name'] = self.name
-        # meta_data['label'] = self.label
-        # meta_data['hssc_id'] = str(self.hssc_id)
-        # # 更新meta_data，类型为dict
-        # self.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
         super().save(*args, **kwargs)
-
-    # 生成BuessinessForm的meta_data
-    # def generate_meta_data(self):
-    #     meta_data = json.loads(self.meta_data)
-    #     meta_data['fields'] = self.generate_components_meta_data(self.components.all())  # 根据components重新生成字段记录
-    #     for components_group in self.components_groups.all():  # 根据components_groups重新生成字段记录
-    #         meta_data['fields'].extend(self.generate_components_meta_data(components_group.components.all()))
-    #     self.meta_data = json.dumps(meta_data, ensure_ascii=False, indent=4)
-
-        # # 生成models, admin, forms脚本
-        # self.script = json.dumps(self.generate_script(), ensure_ascii=False)
-        # self.save()
-
-    # # 生成BuessinessForm的字段的meta_data
-    # def generate_components_meta_data(self, components):
-    #     fields = []
-    #     for component in components:
-    #         field = {}
-    #         field['name'] = component.name
-    #         field['label'] = component.label
-    #         field['hssc_id'] = component.hssc_id
-    #         _type = component.content_object._meta.object_name
-    #         if _type == 'CharacterField':
-    #             field['type'] = 'string'
-    #         elif _type == 'NumberField':
-    #             field['type'] = 'number'
-    #         elif _type == 'DTField':
-    #             field['type'] = 'datetime'
-    #         elif _type == 'RelatedField':
-    #             field['type'] = component.content_object.related_content.related_content  # 关联表的Model名称
-    #             # 关联Model所属app名称，待补充!!!
-    #             # related_content_type = component.content_object.related_content.related_content_type
-    #             hssc_app_label = ''
-    #             # if hssc_app_label == 'diclist':  # 字典表
-    #             #     hssc_app_label = 'dictionaries'  # 指向hssc.dictionaries
-    #             # elif hssc_app_label == 'managedentity':  # 实体表
-    #             #     hssc_app_label = component.content_object.related_content.content_object.app_name  # 指向hssc.app_name
-    #             field['app_label'] = hssc_app_label
-    #         fields.append(field)
-    #     return fields
-
-# # 重新生成字段的meta_data
-# @receiver(m2m_changed, sender=BuessinessForm.components.through)
-# def buessiness_form_components_changed_handler(sender, instance, action, reverse, model, pk_set, **kwargs):
-#     instance.generate_meta_data()
-
-# # 重新生成字段的meta_data
-# @receiver(m2m_changed, sender=BuessinessForm.components_groups.through)
-# def buessiness_form_components_groups_changed_handler(sender, instance, action, reverse, model, pk_set, **kwargs):
-#     instance.generate_meta_data()
 
 
 # 作业基础信息表
