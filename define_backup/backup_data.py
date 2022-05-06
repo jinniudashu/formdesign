@@ -73,33 +73,29 @@ def export_source_code(modeladmin, request, queryset):
     source_code = {}
     
     # 导出字典表models.py, admin.py脚本
-    source_code['dict_models'], source_code['dict_admin'] = export_dict_models_admin()
-    source_code['dict_data'] = export_dict_data()
+    source_code['dict_models'], source_code['dict_admin'] = get_dict_models_admin_script()
+    source_code['dict_data'] = get_dict_data()
     
     # 导出ICPC表models.py, admin.py脚本
-    source_code['icpc_models'], source_code['icpc_admin'] = export_icpc_models_admin()
-    source_code['icpc_data'] = export_icpc_data()
+    source_code['icpc_models'], source_code['icpc_admin'] = get_icpc_models_admin_script()
+    source_code['icpc_data'] = get_icpc_data()
 
     # for entity in managed_entities:
     #   source_code[entity.app_name]
 
     # 导出App:forms脚本
     forms = {}
-    # 导出forms/models.py, admin.py, forms.py脚本
-    forms['models'], forms['admin'], forms['forms'] = export_forms_models_admin_forms()
-    # 导出forms/views.py，template.html, urls.py, index.html脚本
-    forms['views'], forms['urls'], forms['templates'] = export_views_urls_templates()
+    forms['models'], forms['admin'] = get_forms_models_admin_script()
     source_code['forms'] = forms
 
     # 导出App:service脚本
     service = {}
-    # 导出service/models.py, admin.py脚本
-    service['models'], service['admin'] = export_service_models_admin()
+    service['models'], service['admin'] = get_service_models_admin_script()
     source_code['service'] = service
 
-    # 导出core:fields_dict脚本
+    # 导出App:core/hsscbase_class.py脚本
     core = {}
-    core['hsscbase_class'] = export_hsscbase_class('./formdesign/hsscbase_class.py', Component)
+    core['hsscbase_class'] = get_export_hsscbase_class_script('./formdesign/hsscbase_class.py', Component)
     source_code['core'] = core
 
     # 导出core业务定义数据：
@@ -117,7 +113,7 @@ def export_source_code(modeladmin, request, queryset):
         ServiceSpec,
         ServiceRule,
     ]
-    source_code['core_initial_data'] = export_core_data(exported_core_models)
+    source_code['init_core_data'] = get_init_core_data(exported_core_models)
 
     # 写入数据库
     result = write_to_db(SourceCode, source_code)
@@ -127,7 +123,7 @@ export_source_code.short_description = '生成作业脚本'
 
 
 # 导出字典models.py, admin.py脚本
-def export_dict_models_admin():
+def get_dict_models_admin_script():
     models_script = dict_models_head
     admin_script = dict_admin_head
 
@@ -153,7 +149,7 @@ clinic_site.register({name}, {name}Admin)
     return models_script, admin_script
 
 # 导出字典Json数据
-def export_dict_data():
+def get_dict_data():
     dict_data = []  # 字典明细数据
     for item in DicDetail.objects.all():
         # 构造字典明细数据
@@ -172,7 +168,7 @@ def export_dict_data():
 
 
 # 导出ICPC字典models.py, admin.py脚本
-def export_icpc_models_admin():
+def get_icpc_models_admin_script():
     models_script = icpc_models_head
     models_receiver_post_save = models_receiver_post_delete = ''
 
@@ -203,7 +199,7 @@ clinic_site.register({icpc['name']}, SubIcpcAdmin)'''
     return models_script, admin_script
 
 # 导出ICPC字典Json数据
-def export_icpc_data():
+def get_icpc_data():
     icpc_data = []  # ICPC明细数据
     for icpc in icpc_list:
         icpc_model = eval(icpc['name'])
@@ -221,8 +217,8 @@ def export_icpc_data():
     return icpc_data
 
 
-# 导出forms models.py, admin.py, forms.py脚本
-def export_service_models_admin():
+# 导出service models.py, admin.py脚本
+def get_service_models_admin_script():
 
     models_script = service_models_file_head
     admin_script =  service_admin_file_head
@@ -238,41 +234,18 @@ def export_service_models_admin():
 
     return models_script, admin_script
 
-# 导出forms models.py, admin.py, forms.py脚本
-def export_forms_models_admin_forms():
+# 导出forms models.py, admin.py脚本
+def get_forms_models_admin_script():
     models_script = forms_models_file_head
     admin_script =  forms_admin_file_head
-    forms_script = forms_forms_file_head
 
     for form in BuessinessForm.objects.all():
         script = form.generate_script()  # 生成最新脚本
         models_script = f'{models_script}{script["models"]}'
         admin_script = f'{admin_script}{script["admin"]}'
-        forms_script = f'{forms_script}{script["forms"]}'
 
-    return models_script, admin_script, forms_script
+    return models_script, admin_script
 
-# 导出forms views.py, urls.py, templates.py脚本
-def export_views_urls_templates():
-    views_script = views_file_head
-    urls_script = urls_file_head
-    templates_code = []
-    index_html_script = index_html_file_head
-
-    for service in Service.objects.all():
-        if service.script:
-            script = json.loads(service.script)
-            views_script = f'{views_script}{script["views"]}'
-            urls_script = f'{urls_script}{script["urls"]}'
-            templates_code.extend(script['templates'])
-
-        # construct index.html script
-        index_html_script = index_html_script + generate_index_html(service)
-    
-    urls_script = f'{urls_script}\n]'
-    templates_code.append({'index.html': f"{index_html_script}\n</section>\n{{% endblock %}}"})
-
-    return views_script, urls_script, templates_code
 
 # construct index.html script
 def generate_index_html(service):
@@ -283,17 +256,8 @@ def generate_index_html(service):
 '''
 
 
-# 导出core业务定义数据
-def export_core_data(models):
-    models_data = {}
-    for model in models:
-        _model = model.__name__.lower()
-        models_data[_model]=model.objects.backup_data()
-    return models_data
-
-
 # 导出基类脚本hsscbase_class.py
-def export_hsscbase_class(hsscbase_class_filename, fields_model: Component):
+def get_export_hsscbase_class_script(hsscbase_class_filename, fields_model: Component):
     def _get_field_type(component):
         _type = component.content_type.model
         print('_type', component.label, _type)
@@ -321,6 +285,15 @@ def export_hsscbase_class(hsscbase_class_filename, fields_model: Component):
     
     # 返回合并内容
     return f'{hsscbase_class}\n\n{fields_type_script}'
+
+
+# 导出core业务定义数据
+def get_init_core_data(models):
+    models_data = {}
+    for model in models:
+        _model = model.__name__.lower()
+        models_data[_model]=model.objects.backup_data()
+    return models_data
 
 
 # 把备份数据写入备份数据库

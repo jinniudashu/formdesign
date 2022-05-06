@@ -92,27 +92,8 @@ import json
 
 from icpc.models import *
 from dictionaries.models import *
-from core.models import HsscFormModel, Role, Staff, OperationProc
+from core.models import HsscFormModel, Staff
 from entities.models import *
-
-
-@receiver(post_save, sender=OperationProc)
-def operation_proc_created(sender, instance, created, **kwargs):
-    # 创建服务进程里使用的表单实例, 将form_slugs保存到进程实例中
-    if created:
-        form_slugs = []
-        for form in instance.service.buessiness_forms.all():
-            form_class_name = form.name.capitalize()
-            print('创建表单实例:', form_class_name)
-            form = eval(form_class_name).objects.create(
-                customer=instance.customer,
-                creater=instance.operator,
-                pid=instance,
-                cpid=instance.contract_service_proc,
-            )
-            form_slugs.append({'form_name': form_class_name, 'slug': form.slug})
-        instance.form_slugs = json.dumps(form_slugs, ensure_ascii=False, indent=4)
-        instance.save()
 
 
 '''
@@ -121,98 +102,8 @@ def operation_proc_created(sender, instance, created, **kwargs):
 forms_admin_file_head = '''from django.contrib import admin
 from .models import *
 
-from hssc.site import clinic_site
-from forms.forms import A6203_ModelForm
-
-class HsscFormAdmin(admin.ModelAdmin):
-    exclude = ('hssc_id','slug')
-
-    def change_view(self, request, object_id, form_url='', extra_context=None):
-        extra_context = extra_context or {}
-        base_form = A6203_ModelForm(prefix="base_form")
-        extra_context['base_form'] = base_form
-        return super().change_view(
-            request, object_id, form_url, extra_context=extra_context,
-        )
-
 '''
 
-# forms/forms.py文件头
-forms_forms_file_head = '''from django.forms import ModelForm, Form,  widgets, fields, RadioSelect, Select, CheckboxSelectMultiple, CheckboxInput, SelectMultiple, NullBooleanSelect
-from django.core.exceptions import ValidationError
-
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Field, HTML, Submit
-
-from .models import *
-'''
-
-# form固定内容
-form_footer = '''
-    @property
-    def helper(self):
-        helper = FormHelper()
-        helper.layout = Layout(HTML("<hr />"))
-        for field in self.Meta().fields:
-            helper.layout.append(Field(field, wrapper_class="row"))
-        helper.layout.append(Submit("submit", "保存", css_class="btn-success"))
-        helper.field_class = "col-8"
-        helper.label_class = "col-2"
-        return helper
-
-    def clean_slug(self):
-        new_slug = self.cleaned_data.get("slug").lower()
-        if new_slug == "create":
-            raise ValidationError("Slug may not be create")
-        return new_slug
-'''
-
-# views.py文件头
-views_file_head = f'''from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View, RedirectView, TemplateView
-from django.views.generic.detail import DetailView
-from django.contrib.auth.models import User, Group
-from django.db.models import Q
-from django.forms import modelformset_factory, inlineformset_factory
-import json
-
-from core.models import OperationProc, Staff, Customer
-from core.utils import SendSignalsMixin
-from forms.utils import *
-from forms.models import *
-from forms.forms import *
-
-
-class Index_view(ListView):
-    model = OperationProc
-    template_name = 'index.html'
-
-    def get_context_data(self, **kwargs):
-        # 如果用户当前未登录，request.user将被设置为AnonymousUser。用user.is_authenticated()判断用户登录状态：
-        operator=User.objects.get(username=self.request.user).customer
-        role = operator.staff.role.all()
-        # 获取当前用户所属角色的所有作业进程
-        procs = OperationProc.objects.exclude(state=4).filter(Q(role__in=role) | Q(operator=operator)).distinct()
-
-        todos = []
-        for proc in procs:
-            todo = {{}}
-            todo['operation'] = proc.service.label
-            todo['url'] = f'{{proc.service.name}}_update_url'
-            todo['proc_id'] = proc.id
-            todos.append(todo)
-        context = super().get_context_data(**kwargs)
-        context['todos'] = todos
-        return context
-
-'''
-
-# urls.py文件头
-urls_file_head = '''from django.urls import path
-from .views import *
-
-urlpatterns = [
-	path('', Index_view.as_view(), name='index'),
-	path('index/', Index_view.as_view(), name='index'),'''
 
 # index.html文件头
 index_html_file_head = f'''{{% extends "base.html" %}}
