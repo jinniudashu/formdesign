@@ -9,7 +9,7 @@ from pypinyin import lazy_pinyin
 from formdesign.hsscbase_class import HsscBase, HsscPymBase
 from define.models import Component, ComponentsGroup, Role, RelateFieldModel
 from define_icpc.models import Icpc
-from define_backup.mixins import GenerateModelsScriptMixin, GenerateServiceScriptMixin
+from define_backup.mixins import GenerateFormsScriptMixin, GenerateServiceScriptMixin
 
 
 # 管理实体定义
@@ -43,7 +43,7 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
 
 
 # 业务表单定义
-class BuessinessForm(GenerateModelsScriptMixin, HsscPymBase):
+class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     components = models.ManyToManyField(Component, blank=True, verbose_name="字段")
     components_groups = models.ManyToManyField(ComponentsGroup, blank=True, verbose_name="组件")
