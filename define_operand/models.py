@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models import Q
 from django.dispatch import receiver
 from django.db.models.signals import post_save, m2m_changed
-import json
 
 from pypinyin import lazy_pinyin
 
@@ -50,7 +49,7 @@ class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
     meta_data = models.JSONField(null=True, blank=True, verbose_name="元数据")
     script = models.TextField(blank=True, null=True, verbose_name='运行时脚本')
-    
+
     class Meta:
         verbose_name = '业务表单'
         verbose_name_plural = verbose_name
@@ -115,13 +114,6 @@ class BuessinessFormsSetting(HsscBase):
 
     def __str__(self):
         return str(self.buessiness_form)
-
-# # 生成views, template, urls 脚本
-# @receiver(m2m_changed, sender=Service.buessiness_forms.through)
-# def operation_buessiness_forms_changed_handler(sender, instance, action, reverse, model, pk_set, **kwargs):
-#     if action in ['post_add', 'post_remove', 'post_clear']:
-#         instance.script = json.dumps(instance.generate_script(), ensure_ascii=False)
-#         instance.save()
 
 
 # 服务包类型信息表
@@ -214,7 +206,7 @@ class EventRule(HsscPymBase):
             operator = EventExpression.Operator[_expression.operator][1]  # 操作符
             if ',' in _expression.value:
                 value = f"{{{_expression.value}}}"  # 值为集合
-            elif is_number(_expression.value):
+            elif self._is_number(_expression.value):
                 value = _expression.value  # 值为数字
             else:
                 value = f"'{_expression.value}'"  # 值为字符串
@@ -232,6 +224,23 @@ class EventRule(HsscPymBase):
         self.expression_fields = ','.join(expression_fields)
         self.save()
         return self.expression
+
+    @staticmethod
+    def _is_number(s):
+    # 判断传入的字符串是否是数字
+        try:
+            float(s)
+            return True
+        except ValueError:
+            pass
+    
+        try:
+            import unicodedata
+            unicodedata.numeric(s)
+            return True
+        except (TypeError, ValueError):
+            pass
+        return False
 
 
 # 事件表达式表
@@ -292,21 +301,3 @@ class ServiceRule(HsscBase):
 
     def __str__(self):
         return str(self.service)
-
-
-# 判断传入的字符串是否是数字
-def is_number(s):
-    try:
-        float(s)
-        return True
-    except ValueError:
-        pass
- 
-    try:
-        import unicodedata
-        unicodedata.numeric(s)
-        return True
-    except (TypeError, ValueError):
-        pass
- 
-    return False
