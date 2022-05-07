@@ -93,8 +93,9 @@ class HsscBackupManager(models.Manager):
             
         return f'{self.model} 已恢复'
 
+    @staticmethod
+    def _parse_timedelta(stamp):
     # 转换string to timedelta
-    def _parse_timedelta(self, stamp):
         if 'day' in stamp:
             m = re.match(r'(?P<d>[-\d]+) day[s]*, (?P<h>\d+):'
                         r'(?P<m>\d+):(?P<s>\d[\.\d+]*)', stamp)
