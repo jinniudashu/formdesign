@@ -6267,7 +6267,7 @@
             "hssc_id": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
             "pym": "wc",
             "description": "完成",
-            "detection_scope": 1,
+            "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
             "expression": "completed",
             "expression_fields": null
@@ -6278,7 +6278,7 @@
             "hssc_id": "a922d698-abda-11ec-a639-1ac10aeebbc4",
             "pym": "yxtnbzdgz",
             "description": "糖尿病症状 == {'烦渴','多尿','体重减轻'}",
-            "detection_scope": 1,
+            "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
             "expression": "len({'烦渴','多尿','体重减轻'}.intersection(boolfield_tang_niao_bing_zheng_zhuang )) == 3",
             "expression_fields": "boolfield_tang_niao_bing_zheng_zhuang"
@@ -6289,7 +6289,7 @@
             "hssc_id": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
             "pym": "extnbzdgz",
             "description": "糖尿病症状 == {‘烦渴’,‘多尿’} and 空腹血糖 >= 7.0 or 糖尿病症状 == {'烦渴','皮肤感染'} and 空腹血糖 >= 7.0 or 糖尿病症状 == {'多尿','皮肤感染'} and 空腹血糖 >= 7.0",
-            "detection_scope": 1,
+            "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
             "expression": "len({'烦渴','多尿','皮肤感染'}.intersection(boolfield_tang_niao_bing_zheng_zhuang))>=2 and numberfield_kong_fu_xue_tang >= 7.0",
             "expression_fields": "boolfield_tang_niao_bing_zheng_zhuang,numberfield_kong_fu_xue_tang,boolfield_tang_niao_bing_zheng_zhuang,numberfield_kong_fu_xue_tang,boolfield_tang_niao_bing_zheng_zhuang,numberfield_kong_fu_xue_tang"
@@ -6300,7 +6300,7 @@
             "hssc_id": "711dadc4-abdd-11ec-a639-1ac10aeebbc4",
             "pym": "tnbtzdzdgz",
             "description": "症状 == {'昏睡','呕吐','腹痛'} and 疾病名称 in {'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'} and 尿酮体 == ''阳性''",
-            "detection_scope": 1,
+            "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
             "expression": "len({'昏睡','呕吐','腹痛'}.intersection(relatedfield_symptom_list))==3 and len({'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'}.intersection(relatedfield_disease_name))==1 and len({'阳性'}.intersection(boolfield_tong_ti))==1",
             "expression_fields": "relatedfield_symptom_list,relatedfield_disease_name,boolfield_tong_ti"
@@ -6311,7 +6311,7 @@
             "hssc_id": "35f1165a-abe2-11ec-bf5e-1ac10aeebbc4",
             "pym": "gxtzdgz",
             "description": "症状 == ''疲乏'' and 疾病名称 in {'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'}",
-            "detection_scope": 1,
+            "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
             "expression": "len({'疲乏'}.intersection(relatedfield_symptom_list))==1 and len({'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'}.intersection(relatedfield_disease_name))==1",
             "expression_fields": "relatedfield_symptom_list,relatedfield_disease_name"
@@ -6322,7 +6322,7 @@
             "hssc_id": "6909de64-abe2-11ec-a639-1ac10aeebbc4",
             "pym": "tnbsbzdgz",
             "description": "疾病名称 in {'非胰岛素依赖糖尿','胰岛素依赖糖尿病'} and 尿微量白蛋白 > 20",
-            "detection_scope": 1,
+            "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
             "expression": "len({'非胰岛素依赖糖尿','胰岛素依赖糖尿病'}.intersection(relatedfield_disease_name))==1 and A3501>20",
             "expression_fields": "relatedfield_disease_name,A3501"
@@ -6333,7 +6333,7 @@
             "hssc_id": "e3563d98-abe2-11ec-bf5e-1ac10aeebbc4",
             "pym": "tnbxgbbzwsjyzdgz",
             "description": "疾病名称 in {'非胰岛素依赖糖尿病', '胰岛素依赖糖尿病'} and 症状 == '’足痛‘'",
-            "detection_scope": 1,
+            "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
             "expression": "len({'非胰岛素依赖糖尿','胰岛素依赖糖尿病'}.intersection(relatedfield_disease_name))==1 and len({'足痛'}.intersection(relatedfield_symptom_list))==1",
             "expression_fields": "relatedfield_disease_name,relatedfield_symptom_list"
@@ -6344,7 +6344,7 @@
             "hssc_id": "05d0c7fa-afc9-11ec-9129-925bd788f441",
             "pym": "yxtnbzz",
             "description": "症状 in {'烦渴','多尿','多食','乏力','体重减轻','体重增加','皮肤感染'}",
-            "detection_scope": 1,
+            "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
             "expression": "len({'烦渴','多尿','多食','乏力','体重减轻','体重增加','皮肤感染'}.intersection(relatedfield_symptom_list)) == 1",
             "expression_fields": "relatedfield_symptom_list"
@@ -6355,7 +6355,7 @@
             "hssc_id": "1013b7c6-afca-11ec-b226-925bd788f441",
             "pym": "lxtnbzz",
             "description": "症状 == {'烦渴','多尿'} or 症状 == {'烦渴','体重增加'} or 症状 == {'多尿','皮肤感染'} or 症状 == {'烦渴','皮肤感染'}",
-            "detection_scope": 1,
+            "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
             "expression": "len({'烦渴','多尿','体重增加','皮肤感染'}.intersection(relatedfield_symptom_list)) >= 2",
             "expression_fields": "relatedfield_symptom_list,relatedfield_symptom_list,relatedfield_symptom_list,relatedfield_symptom_list"
@@ -6366,7 +6366,7 @@
             "hssc_id": "3c360bfe-b6d4-11ec-8425-0ebea05fc526",
             "pym": "kfxtcgzcz",
             "description": "空腹血糖 >= 7.0",
-            "detection_scope": 1,
+            "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
             "expression": "numberfield_kong_fu_xue_tang >= 7.0",
             "expression_fields": "numberfield_kong_fu_xue_tang"
@@ -6377,7 +6377,7 @@
             "hssc_id": "9bfb4a40-b6d4-11ec-8121-0ebea05fc526",
             "pym": "thxhdbcczcz",
             "description": "糖化血红蛋白 > 6",
-            "detection_scope": 1,
+            "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
             "expression": "numberfield_tang_hua_xue_hong_dan_bai > 6",
             "expression_fields": "numberfield_tang_hua_xue_hong_dan_bai"
@@ -6388,7 +6388,7 @@
             "hssc_id": "ebbdfb30-b6d5-11ec-8121-0ebea05fc526",
             "pym": "tnbbsyypgz",
             "description": "疾病名称 in {'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'} and 药品名称 == {'5%葡萄糖注射液','止咳糖浆'}",
-            "detection_scope": 1,
+            "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
             "expression": "len({'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'}.intersection(relatedfield_disease_name))==1 and len({'5%葡萄糖注射液','止咳糖浆'}.intersection(relatedfield_drug_name))==1",
             "expression_fields": "relatedfield_disease_name,relatedfield_drug_name"
@@ -6399,7 +6399,7 @@
             "hssc_id": "302378de-c9f2-11ec-b369-168d53e8234e",
             "pym": "kjzslcf",
             "description": "用药途径 == ''注射类''",
-            "detection_scope": 1,
+            "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
             "expression": "len({'注射类'}.intersection(boolfield_yong_yao_tu_jing)) == 1",
             "expression_fields": "boolfield_yong_yao_tu_jing"
