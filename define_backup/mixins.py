@@ -2,6 +2,23 @@ class GenerateModelFieldScript(object):
     '''
     生成Model字段定义脚本
     '''
+    # 生成models, admin, forms脚本
+    def generate_script(self):
+        script = {}
+        script['models'], script['admin'], script['serializers'] = self._create_model_script()
+        return script
+
+    # generate serializers script
+    def _create_serializers_script(self):
+        name = self.name.capitalize()
+        serializers_script = f'''
+class {name}Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = {name}
+        fields = '__all__'
+'''
+        return serializers_script
+
     # generate model field script
     def _create_model_field_script(self, component):
         script = ''
@@ -122,12 +139,6 @@ class GenerateModelFieldScript(object):
 
 
 class GenerateFormsScriptMixin(GenerateModelFieldScript):
-    # 生成models, admin, forms脚本
-    def generate_script(self):
-        script = {}
-        script['models'], script['admin'] = self._create_model_script()
-        return script
-
     # generate model and admin script
     def _create_model_script(self):
         # construct model script
@@ -145,10 +156,11 @@ class GenerateFormsScriptMixin(GenerateModelFieldScript):
 
         footer_script = self._create_model_footer_script()
 
-        # construct model and admin script
+        # construct model, admin, serializers script
         model_script = f'{head_script}{fields_script}{footer_script}\n\n'
         admin_script = self._create_admin_script(autocomplete_fields)
-        return model_script, admin_script
+        serializers_script = self._create_serializers_script()
+        return model_script, admin_script, serializers_script
 
     # generate admin script
     def _create_admin_script(self, autocomplete_fields):
@@ -174,13 +186,7 @@ admin.site.register({name}, {name}Admin)
         '''
 
 
-class GenerateServiceScriptMixin(GenerateModelFieldScript):
-    # 生成运行时脚本的models, admin, views, urls, templates
-    def generate_script(self):
-        script = {}
-        script['models'], script['admin'] = self._create_model_script()
-        return script
-    
+class GenerateServiceScriptMixin(GenerateModelFieldScript):    
     # generate model and admin script
     def _create_model_script(self):
         # construct model script
@@ -209,12 +215,14 @@ class GenerateServiceScriptMixin(GenerateModelFieldScript):
             fieldssets = fieldssets + fieldssets_set
         # construct admin script
         admin_script = self._create_admin_script(fieldssets, autocomplete_fields, header_fields)
+        # construct serializers script
+        serializers_script = self._create_serializers_script()
 
         # construct model script
         footer_script = self._create_model_footer_script()
         model_script = f'{head_script}{fields_script}{footer_script}\n\n'
 
-        return model_script, admin_script
+        return model_script, admin_script, serializers_script
 
     # generate admin script
     def _create_admin_script(self, fieldssets, autocomplete_fields, readonly_fields):

@@ -3,6 +3,7 @@
 #***********************************************************************************************************************
 
 service_models_file_head = '''from django.db import models
+from django.forms.models import model_to_dict
 
 from icpc.models import *
 from dictionaries.models import *
@@ -12,7 +13,7 @@ from entities.models import *
 
 def create_form_instance(operation_proc):
     model_name = operation_proc.service.name.capitalize()
-    print('创建表单实例:', model_name)
+    print('From service.models, 创建表单实例:', model_name)
     form_instance = eval(model_name).objects.create(
         customer=operation_proc.customer,
         creater=operation_proc.operator,
@@ -23,29 +24,21 @@ def create_form_instance(operation_proc):
 
 def get_form_instance(operation_proc):
     model_name = operation_proc.service.name.capitalize()
-    print('获取表单实例:', model_name)
     form_instance = eval(model_name).objects.get(pid=operation_proc)
+    print('From service.models, 获取表单实例:', model_name, model_to_dict(form_instance))
     return form_instance
 
 
 '''
 
-service_admin_file_head = '''# from django.forms import ModelForm, Select, CheckboxSelectMultiple
-from django.shortcuts import redirect
+service_admin_file_head = '''from django.shortcuts import redirect
 from django.contrib import admin
 
 from hssc.site import clinic_site
 # 导入自定义作业完成信号
 from core.signals import operand_finished
 from service.models import *
-# from forms.models import A6203
 
-
-# class A6203_ModelForm(ModelForm):
-#     class Meta:
-#         model = A6203
-#         fields = ['characterfield_name', 'characterhssc_identification_number', 'characterfield_resident_file_number', 'characterfield_family_address', 'characterfield_contact_number', 'characterfield_medical_ic_card_number', 'datetimefield_date_of_birth', 'relatedfield_gender', 'relatedfield_nationality', 'relatedfield_marital_status', 'relatedfield_education', 'relatedfield_occupational_status', 'relatedfield_medical_expenses_burden', 'relatedfield_type_of_residence', 'relatedfield_blood_type', 'relatedfield_signed_family_doctor', 'relatedfield_family_relationship', ]
-#         widgets = {'relatedfield_gender': Select, 'relatedfield_nationality': Select, 'relatedfield_marital_status': Select, 'relatedfield_education': Select, 'relatedfield_occupational_status': Select, 'relatedfield_medical_expenses_burden': CheckboxSelectMultiple, 'relatedfield_type_of_residence': Select, 'relatedfield_blood_type': Select, 'relatedfield_signed_family_doctor': Select, 'relatedfield_family_relationship': Select, }
 
 class HsscFormAdmin(admin.ModelAdmin):
     exclude = ["hssc_id", "label", "name", "customer", "operator", "creater", "pid", "cpid", "slug", "created_time", "updated_time", ]
@@ -53,7 +46,6 @@ class HsscFormAdmin(admin.ModelAdmin):
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
         extra_context = extra_context or {}
-        # base_form = A6203_ModelForm(prefix="base_form")
         base_form = 'base_form'
         extra_context['base_form'] = base_form
         return super().change_view(
@@ -82,7 +74,12 @@ class HsscFormAdmin(admin.ModelAdmin):
         return super().render_change_form(request, context, add, change, form_url, obj)
 
     def response_change(self, request, obj):
-        return redirect('/clinic/')
+        # 按照service.route_to的配置跳转
+        redirect_option = obj.pid.service.route_to
+        if redirect_option == 'CUSTOMER_HOMEPAGE':
+            return redirect(obj.customer)
+        else:
+            return redirect('index')
 
 '''
 
@@ -287,3 +284,7 @@ class SubIcpcAdmin(admin.ModelAdmin):
         return False
     def has_delete_permission(self, request, obj=None):
         return False'''
+
+# serializers.py文件头
+serializers_head = '''from rest_framework import serializers
+from .models import *'''
