@@ -76,6 +76,8 @@ class Service(GenerateServiceScriptMixin, HsscPymBase):
     History_services_display=[(0, '所有历史服务'), (1, '当日服务')]
     history_services_display = models.PositiveBigIntegerField(choices=History_services_display, default=0, blank=True, null=True, verbose_name='历史服务默认显示')
     enable_queue_counter = models.BooleanField(default=True, verbose_name='显示队列数量')
+    Route_to = [('INDEX', '任务工作台'), ('CUSTOMER_HOMEPAGE', '客户病例首页')]
+    route_to = models.CharField(max_length=50, choices=Route_to, default='CUSTOMER_HOMEPAGE', blank=True, null=True, verbose_name='完成跳转至')
     suppliers = models.CharField(max_length=255, blank=True, null=True, verbose_name="供应商")
     not_suitable = models.CharField(max_length=255, blank=True, null=True, verbose_name='不适用对象')
     execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='完成时限')
@@ -290,8 +292,7 @@ class ServiceRule(HsscBase):
     Interval_rule_options = [(0, '等于'), (1, '小于'), (2, '大于')]
     interval_rule = models.PositiveSmallIntegerField(choices=Interval_rule_options, blank=True, null=True, verbose_name='间隔条件')
     interval_time = models.DurationField(blank=True, null=True, verbose_name="间隔时间", help_text='例如：3 days, 22:00:00')
-    Is_active = [(False, '否'), (True, '是')]
-    is_active = models.BooleanField(choices=Is_active, default=True, verbose_name='启用')
+    is_active = models.BooleanField(choices=[(False, '否'), (True, '是')], default=True, verbose_name='启用')
     service_spec = models.ForeignKey(ServiceSpec, on_delete=models.CASCADE, null=True, verbose_name='服务规格')
 
     class Meta:
