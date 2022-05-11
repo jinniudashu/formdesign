@@ -211,6 +211,12 @@
     ],
     "diclist": [
         {
+            "label": "安排确认",
+            "name": "an_pai_que_ren",
+            "hssc_id": "7d3495a8-d100-11ec-b369-823d1f108281",
+            "pym": "apqr"
+        },
+        {
             "label": "性格",
             "name": "character",
             "hssc_id": "de1f127a-9aa1-11ec-bde1-8a6e55faf877",
@@ -2393,6 +2399,24 @@
         {
             "label": null,
             "name": null,
+            "hssc_id": "7d35f254-d100-11ec-b369-823d1f108281",
+            "pym": null,
+            "diclist": "7d3495a8-d100-11ec-b369-823d1f108281",
+            "value": "yes",
+            "icpc": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "7d37a964-d100-11ec-b369-823d1f108281",
+            "pym": null,
+            "diclist": "7d3495a8-d100-11ec-b369-823d1f108281",
+            "value": "no",
+            "icpc": null
+        },
+        {
+            "label": null,
+            "name": null,
             "hssc_id": "6c05d60e-cab9-11ec-b358-8e39d789b675",
             "pym": null,
             "diclist": "6c02dbb6-cab9-11ec-b358-8e39d789b675",
@@ -2470,6 +2494,39 @@
     ],
     "characterfield": [
         {
+            "label": "身份证号码",
+            "name": "characterhssc_identification_number",
+            "hssc_id": "dea0045c-9aa1-11ec-bde1-8a6e55faf877",
+            "pym": "sfzhm",
+            "name_icpc": null,
+            "type": "CharField",
+            "length": 255,
+            "required": true,
+            "default": null
+        },
+        {
+            "label": "药品名称",
+            "name": "boolfield_yao_pin_ming_cheng",
+            "hssc_id": "18cfcb9a-d11a-11ec-ab0d-823d1f108281",
+            "pym": "ypmc",
+            "name_icpc": null,
+            "type": "CharField",
+            "length": 255,
+            "required": false,
+            "default": null
+        },
+        {
+            "label": "用药频次",
+            "name": "boolfield_fu_yong_pin_ci",
+            "hssc_id": "1bf942da-c5ce-11ec-b9d4-725badf7393d",
+            "pym": "yypc",
+            "name_icpc": null,
+            "type": "CharField",
+            "length": 255,
+            "required": true,
+            "default": null
+        },
+        {
             "label": "右眼视力",
             "name": "characterfield_right_eye_vision",
             "hssc_id": "dea93de2-9aa1-11ec-bde1-8a6e55faf877",
@@ -2518,50 +2575,6 @@
             "name": "characterfield_duration_of_insomnia",
             "hssc_id": "de9d30a6-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "cxsmsj",
-            "name_icpc": null,
-            "type": "CharField",
-            "length": 255,
-            "required": false,
-            "default": null
-        },
-        {
-            "label": "姓名",
-            "name": "characterfield_name",
-            "hssc_id": "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "xm",
-            "name_icpc": null,
-            "type": "CharField",
-            "length": 255,
-            "required": false,
-            "default": null
-        },
-        {
-            "label": "性别",
-            "name": "characterfield_gender",
-            "hssc_id": "de9e99dc-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "xb",
-            "name_icpc": null,
-            "type": "CharField",
-            "length": 255,
-            "required": false,
-            "default": null
-        },
-        {
-            "label": "年龄",
-            "name": "characterfield_age",
-            "hssc_id": "de9f4ea4-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "nl",
-            "name_icpc": null,
-            "type": "CharField",
-            "length": 255,
-            "required": false,
-            "default": null
-        },
-        {
-            "label": "身份证号码",
-            "name": "characterhssc_identification_number",
-            "hssc_id": "dea0045c-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "sfzhm",
             "name_icpc": null,
             "type": "CharField",
             "length": 255,
@@ -2683,17 +2696,6 @@
             "name": "characterfield_family_address",
             "hssc_id": "deaaac2c-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "jtdz",
-            "name_icpc": null,
-            "type": "CharField",
-            "length": 255,
-            "required": false,
-            "default": null
-        },
-        {
-            "label": "联系电话",
-            "name": "characterfield_contact_number",
-            "hssc_id": "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "lxdh",
             "name_icpc": null,
             "type": "CharField",
             "length": 255,
@@ -2888,32 +2890,10 @@
             "default": null
         },
         {
-            "label": "供应商名称",
-            "name": "boolfield_gong_ying_shang_ming_cheng",
-            "hssc_id": "7c53c810-c5cb-11ec-b819-725badf7393d",
-            "pym": "gysmc",
-            "name_icpc": null,
-            "type": "CharField",
-            "length": 255,
-            "required": false,
-            "default": null
-        },
-        {
             "label": "专业服务",
             "name": "boolfield_zhuan_ye_fu_wu",
             "hssc_id": "2c8ed21a-c5cc-11ec-b9d4-725badf7393d",
             "pym": "zyfw",
-            "name_icpc": null,
-            "type": "CharField",
-            "length": 255,
-            "required": false,
-            "default": null
-        },
-        {
-            "label": "设备名称",
-            "name": "boolfield_she_bei_ming_cheng",
-            "hssc_id": "66ae19e2-c5cc-11ec-b9d4-725badf7393d",
-            "pym": "sbmc",
             "name_icpc": null,
             "type": "CharField",
             "length": 255,
@@ -2958,17 +2938,6 @@
             "name": "boolfield_she_bei_jian_xiu_zhou_qi",
             "hssc_id": "8cc15d92-c5cc-11ec-b9d4-725badf7393d",
             "pym": "sbjxzq",
-            "name_icpc": null,
-            "type": "CharField",
-            "length": 255,
-            "required": false,
-            "default": null
-        },
-        {
-            "label": "用药疗程",
-            "name": "boolfield_yong_yao_zhou_qi",
-            "hssc_id": "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
-            "pym": "yylc",
             "name_icpc": null,
             "type": "CharField",
             "length": 255,
@@ -3038,18 +3007,84 @@
             "name_icpc": null,
             "type": "CharField",
             "length": 255,
-            "required": false,
+            "required": true,
             "default": null
         },
         {
-            "label": "用药频次",
-            "name": "boolfield_fu_yong_pin_ci",
-            "hssc_id": "1bf942da-c5ce-11ec-b9d4-725badf7393d",
-            "pym": "yypc",
+            "label": "用药疗程",
+            "name": "boolfield_yong_yao_zhou_qi",
+            "hssc_id": "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
+            "pym": "yylc",
             "name_icpc": null,
             "type": "CharField",
             "length": 255,
-            "required": false,
+            "required": true,
+            "default": null
+        },
+        {
+            "label": "设备名称",
+            "name": "boolfield_she_bei_ming_cheng",
+            "hssc_id": "66ae19e2-c5cc-11ec-b9d4-725badf7393d",
+            "pym": "sbmc",
+            "name_icpc": null,
+            "type": "CharField",
+            "length": 255,
+            "required": true,
+            "default": null
+        },
+        {
+            "label": "供应商名称",
+            "name": "boolfield_gong_ying_shang_ming_cheng",
+            "hssc_id": "7c53c810-c5cb-11ec-b819-725badf7393d",
+            "pym": "gysmc",
+            "name_icpc": null,
+            "type": "CharField",
+            "length": 255,
+            "required": true,
+            "default": null
+        },
+        {
+            "label": "联系电话",
+            "name": "characterfield_contact_number",
+            "hssc_id": "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
+            "pym": "lxdh",
+            "name_icpc": null,
+            "type": "CharField",
+            "length": 255,
+            "required": true,
+            "default": null
+        },
+        {
+            "label": "姓名",
+            "name": "characterfield_name",
+            "hssc_id": "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
+            "pym": "xm",
+            "name_icpc": null,
+            "type": "CharField",
+            "length": 255,
+            "required": true,
+            "default": null
+        },
+        {
+            "label": "性别",
+            "name": "characterfield_gender",
+            "hssc_id": "de9e99dc-9aa1-11ec-bde1-8a6e55faf877",
+            "pym": "xb",
+            "name_icpc": null,
+            "type": "CharField",
+            "length": 255,
+            "required": true,
+            "default": null
+        },
+        {
+            "label": "年龄",
+            "name": "characterfield_age",
+            "hssc_id": "de9f4ea4-9aa1-11ec-bde1-8a6e55faf877",
+            "pym": "nl",
+            "name_icpc": null,
+            "type": "CharField",
+            "length": 255,
+            "required": true,
             "default": null
         }
     ],
@@ -3261,6 +3296,38 @@
             "unit": null,
             "default": null,
             "required": false
+        },
+        {
+            "label": "当前排队人数",
+            "name": "boolfield_dang_qian_pai_dui_ren_shu",
+            "hssc_id": "1cdf93ec-d100-11ec-b369-823d1f108281",
+            "pym": "dqpdrs",
+            "name_icpc": null,
+            "type": "IntegerField",
+            "max_digits": 10,
+            "decimal_places": 0,
+            "standard_value": null,
+            "up_limit": null,
+            "down_limit": null,
+            "unit": null,
+            "default": null,
+            "required": false
+        },
+        {
+            "label": "预计等候时间",
+            "name": "boolfield_yu_ji_deng_hou_shi_jian",
+            "hssc_id": "3604f812-d100-11ec-ab0d-823d1f108281",
+            "pym": "yjdhsj",
+            "name_icpc": null,
+            "type": "IntegerField",
+            "max_digits": 10,
+            "decimal_places": 0,
+            "standard_value": null,
+            "up_limit": null,
+            "down_limit": null,
+            "unit": null,
+            "default": null,
+            "required": false
         }
     ],
     "dtfield": [
@@ -3269,16 +3336,6 @@
             "name": "datetimefield_time_of_diagnosis",
             "hssc_id": "deb70576-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "qzsj",
-            "name_icpc": null,
-            "type": "DateTimeField",
-            "default_now": false,
-            "required": false
-        },
-        {
-            "label": "预约时间",
-            "name": "datetimefield_ri_qi_shi_jian",
-            "hssc_id": "deb85c6e-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "yysj",
             "name_icpc": null,
             "type": "DateTimeField",
             "default_now": false,
@@ -3325,16 +3382,6 @@
             "required": false
         },
         {
-            "label": "注射日期",
-            "name": "boolfield_zhu_she_ri_qi",
-            "hssc_id": "abe7baaa-c9ef-11ec-b369-168d53e8234e",
-            "pym": "zsrq",
-            "name_icpc": null,
-            "type": "DateTimeField",
-            "default_now": false,
-            "required": false
-        },
-        {
             "label": "出生日期",
             "name": "datetimefield_date_of_birth",
             "hssc_id": "deb7b0ac-9aa1-11ec-bde1-8a6e55faf877",
@@ -3343,6 +3390,26 @@
             "type": "DateField",
             "default_now": false,
             "required": false
+        },
+        {
+            "label": "预约时间",
+            "name": "datetimefield_ri_qi_shi_jian",
+            "hssc_id": "deb85c6e-9aa1-11ec-bde1-8a6e55faf877",
+            "pym": "yysj",
+            "name_icpc": null,
+            "type": "DateTimeField",
+            "default_now": false,
+            "required": true
+        },
+        {
+            "label": "注射日期",
+            "name": "boolfield_zhu_she_ri_qi",
+            "hssc_id": "abe7baaa-c9ef-11ec-b369-168d53e8234e",
+            "pym": "zsrq",
+            "name_icpc": null,
+            "type": "DateTimeField",
+            "default_now": false,
+            "required": true
         }
     ],
     "relatedfield": [
@@ -3399,15 +3466,6 @@
             "name_icpc": null,
             "type": "Select",
             "related_content": "de82074a-9aa1-11ec-bde1-8a6e55faf877"
-        },
-        {
-            "label": "药品名称",
-            "name": "relatedfield_drug_name",
-            "hssc_id": "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "ypmc",
-            "name_icpc": null,
-            "type": "SelectMultiple",
-            "related_content": "de896698-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
             "label": "所属机构",
@@ -4101,6 +4159,33 @@
             "name_icpc": null,
             "type": "SelectMultiple",
             "related_content": "6c02dbb6-cab9-11ec-b358-8e39d789b675"
+        },
+        {
+            "label": "服务项目名称",
+            "name": "boolfield_fu_wu_xiang_mu_ming_cheng",
+            "hssc_id": "cde598b8-d0ff-11ec-b369-823d1f108281",
+            "pym": "fwxmmc",
+            "name_icpc": null,
+            "type": "Select",
+            "related_content": "de82074a-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "label": "安排确认",
+            "name": "boolfield_an_pai_que_ren",
+            "hssc_id": "9e873f3a-d100-11ec-ab0d-823d1f108281",
+            "pym": "apqr",
+            "name_icpc": null,
+            "type": "Select",
+            "related_content": "7d3495a8-d100-11ec-b369-823d1f108281"
+        },
+        {
+            "label": "药品名",
+            "name": "relatedfield_drug_name",
+            "hssc_id": "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
+            "pym": "ypm",
+            "name_icpc": null,
+            "type": "SelectMultiple",
+            "related_content": "de896698-9aa1-11ec-bde1-8a6e55faf877"
         }
     ],
     "componentsgroup": [
@@ -4130,20 +4215,6 @@
                 "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
                 "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
                 "1287193a-a52a-11ec-a478-2ec403f6c47b"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "门诊分诊",
-            "name": "A6502",
-            "hssc_id": "0d1b5014-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "mzfz",
-            "name_icpc": "A6502",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A6502\",\n    \"label\": \"门诊分诊\",\n    \"hssc_id\": \"0d1b5014-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_qian_dao_que_ren\",\n            \"label\": \"签到确认\",\n            \"hssc_id\": \"98dbd7f4-a52b-11ec-9b14-2ec403f6c47b\",\n            \"type\": \"Qian_dao_que_ren\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A6502(HsscFormModel):\\n    boolfield_qian_dao_que_ren = models.ForeignKey(Qian_dao_que_ren, related_name='qian_dao_que_ren_for_boolfield_qian_dao_que_ren_A6502', on_delete=models.CASCADE, null=True, blank=True, verbose_name='签到确认')\\n    class Meta:\\n        verbose_name = '门诊分诊'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6502_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6502_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6502Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"boolfield_qian_dao_que_ren\\\", ]\\nadmin.site.register(A6502, A6502Admin)\\nclinic_site.register(A6502, A6502Admin)\\n\", \"forms\": \"\\nclass A6502_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6502\\n        fields = ['boolfield_qian_dao_que_ren', ]\\n        widgets = {'boolfield_qian_dao_que_ren': RadioSelect, }\\n    \"}",
-            "components": [
-                "98dbd7f4-a52b-11ec-9b14-2ec403f6c47b"
             ],
             "components_groups": []
         },
@@ -4178,6 +4249,51 @@
                 "decabc92-9aa1-11ec-bde1-8a6e55faf877",
                 "decba0ee-9aa1-11ec-bde1-8a6e55faf877",
                 "1cad2116-a52a-11ec-a478-2ec403f6c47b"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "申请服务表",
+            "name": "fu_wu",
+            "hssc_id": "1abe9fdc-d0ff-11ec-b369-823d1f108281",
+            "pym": "sqfwb",
+            "name_icpc": null,
+            "description": "",
+            "meta_data": null,
+            "script": null,
+            "components": [
+                "401d33d8-aa49-11ec-9f15-ee7ade4bced6",
+                "cde598b8-d0ff-11ec-b369-823d1f108281",
+                "1cdf93ec-d100-11ec-b369-823d1f108281",
+                "3604f812-d100-11ec-ab0d-823d1f108281",
+                "9e873f3a-d100-11ec-ab0d-823d1f108281"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "药品基本信息表",
+            "name": "yao_pin_ji_ben_xin_xi_biao",
+            "hssc_id": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "pym": "ypjbxxb",
+            "name_icpc": null,
+            "description": "",
+            "meta_data": "{\n    \"name\": \"yao_pin_ji_ben_xin_xi_biao\",\n    \"label\": \"药品基本信息表\",\n    \"hssc_id\": \"a2fc46f0-c115-11ec-9685-2617a93150cd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_yao_pin_bian_ma\",\n            \"label\": \"药品编码\",\n            \"hssc_id\": \"afe6851a-c115-11ec-9685-2617a93150cd\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_yao_pin_gui_ge\",\n            \"label\": \"药品规格\",\n            \"hssc_id\": \"fbdc40fe-c115-11ec-b731-2617a93150cd\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_yong_yao_zhou_qi\",\n            \"label\": \"用药疗程\",\n            \"hssc_id\": \"a6c0522e-bf7e-11ec-843b-6afc6c25d902\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_chang_yong_chu_fang_liang\",\n            \"label\": \"常用处方量\",\n            \"hssc_id\": \"2b80da60-c5ce-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_dui_zhao_yi_bao_ming_cheng\",\n            \"label\": \"对照医保名称\",\n            \"hssc_id\": \"33bc581c-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_dui_zhao_ji_yao_ming_cheng\",\n            \"label\": \"对照基药名称\",\n            \"hssc_id\": \"3e18992e-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_huan_suan_gui_ze\",\n            \"label\": \"换算规则\",\n            \"hssc_id\": \"4a10254e-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_fu_yong_pin_ci\",\n            \"label\": \"用药频次\",\n            \"hssc_id\": \"1bf942da-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_chu_fang_ji_liang_dan_wei\",\n            \"label\": \"处方计量单位\",\n            \"hssc_id\": \"77226cfe-c5ce-11ec-b819-725badf7393d\",\n            \"type\": \"Yao_pin_dan_wei\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_ru_ku_ji_liang_dan_wei\",\n            \"label\": \"入库计量单位\",\n            \"hssc_id\": \"654dfc0a-c5ce-11ec-b819-725badf7393d\",\n            \"type\": \"Yao_pin_dan_wei\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_xiao_shou_ji_liang_dan_wei\",\n            \"label\": \"销售计量单位\",\n            \"hssc_id\": \"6da75824-c5ce-11ec-b819-725badf7393d\",\n            \"type\": \"Yao_pin_dan_wei\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_yong_yao_tu_jing\",\n            \"label\": \"用药途径\",\n            \"hssc_id\": \"db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902\",\n            \"type\": \"Yong_yao_tu_jing\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_yao_pin_fen_lei\",\n            \"label\": \"药品分类\",\n            \"hssc_id\": \"5dc1e618-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"Yao_pin_fen_lei\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Yao_pin_ji_ben_xin_xi_biao(HsscFormModel):\\n    boolfield_yao_pin_bian_ma = models.CharField(max_length=255, null=True, blank=True, verbose_name='药品编码')\\n    boolfield_yao_pin_gui_ge = models.CharField(max_length=255, null=True, blank=True, verbose_name='药品规格')\\n    boolfield_yong_yao_zhou_qi = models.CharField(max_length=255, null=True, blank=True, verbose_name='用药疗程')\\n    boolfield_chang_yong_chu_fang_liang = models.CharField(max_length=255, null=True, blank=True, verbose_name='常用处方量')\\n    boolfield_dui_zhao_yi_bao_ming_cheng = models.CharField(max_length=255, null=True, blank=True, verbose_name='对照医保名称')\\n    boolfield_dui_zhao_ji_yao_ming_cheng = models.CharField(max_length=255, null=True, blank=True, verbose_name='对照基药名称')\\n    boolfield_huan_suan_gui_ze = models.CharField(max_length=255, null=True, blank=True, verbose_name='换算规则')\\n    boolfield_fu_yong_pin_ci = models.CharField(max_length=255, null=True, blank=True, verbose_name='用药频次')\\n    boolfield_chu_fang_ji_liang_dan_wei = models.ForeignKey(Yao_pin_dan_wei, related_name='yao_pin_dan_wei_for_boolfield_chu_fang_ji_liang_dan_wei_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='处方计量单位')\\n    boolfield_ru_ku_ji_liang_dan_wei = models.ForeignKey(Yao_pin_dan_wei, related_name='yao_pin_dan_wei_for_boolfield_ru_ku_ji_liang_dan_wei_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='入库计量单位')\\n    boolfield_xiao_shou_ji_liang_dan_wei = models.ForeignKey(Yao_pin_dan_wei, related_name='yao_pin_dan_wei_for_boolfield_xiao_shou_ji_liang_dan_wei_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='销售计量单位')\\n    relatedfield_drug_name = models.ManyToManyField(Medicine, related_name='medicine_for_relatedfield_drug_name_yao_pin_ji_ben_xin_xi_biao', verbose_name='药品名称')\\n    boolfield_yong_yao_tu_jing = models.ForeignKey(Yong_yao_tu_jing, related_name='yong_yao_tu_jing_for_boolfield_yong_yao_tu_jing_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='用药途径')\\n    boolfield_yao_pin_fen_lei = models.ForeignKey(Yao_pin_fen_lei, related_name='yao_pin_fen_lei_for_boolfield_yao_pin_fen_lei_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='药品分类')\\n    class Meta:\\n        verbose_name = '药品基本信息表'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('yao_pin_ji_ben_xin_xi_biao_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('yao_pin_ji_ben_xin_xi_biao_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass Yao_pin_ji_ben_xin_xi_biaoAdmin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"boolfield_chu_fang_ji_liang_dan_wei\\\", \\\"boolfield_ru_ku_ji_liang_dan_wei\\\", \\\"boolfield_xiao_shou_ji_liang_dan_wei\\\", \\\"relatedfield_drug_name\\\", \\\"boolfield_yong_yao_tu_jing\\\", \\\"boolfield_yao_pin_fen_lei\\\", ]\\nadmin.site.register(Yao_pin_ji_ben_xin_xi_biao, Yao_pin_ji_ben_xin_xi_biaoAdmin)\\nclinic_site.register(Yao_pin_ji_ben_xin_xi_biao, Yao_pin_ji_ben_xin_xi_biaoAdmin)\\n\", \"forms\": \"\\nclass Yao_pin_ji_ben_xin_xi_biao_ModelForm(ModelForm):\\n    class Meta:\\n        model = Yao_pin_ji_ben_xin_xi_biao\\n        fields = ['boolfield_yao_pin_bian_ma', 'boolfield_yao_pin_gui_ge', 'boolfield_yong_yao_zhou_qi', 'boolfield_chang_yong_chu_fang_liang', 'boolfield_dui_zhao_yi_bao_ming_cheng', 'boolfield_dui_zhao_ji_yao_ming_cheng', 'boolfield_huan_suan_gui_ze', 'boolfield_fu_yong_pin_ci', 'boolfield_chu_fang_ji_liang_dan_wei', 'boolfield_ru_ku_ji_liang_dan_wei', 'boolfield_xiao_shou_ji_liang_dan_wei', 'relatedfield_drug_name', 'boolfield_yong_yao_tu_jing', 'boolfield_yao_pin_fen_lei', ]\\n        widgets = {'boolfield_chu_fang_ji_liang_dan_wei': Select, 'boolfield_ru_ku_ji_liang_dan_wei': Select, 'boolfield_xiao_shou_ji_liang_dan_wei': Select, 'relatedfield_drug_name': SelectMultiple, 'boolfield_yong_yao_tu_jing': Select, 'boolfield_yao_pin_fen_lei': Select, }\\n    \"}",
+            "components": [
+                "afe6851a-c115-11ec-9685-2617a93150cd",
+                "fbdc40fe-c115-11ec-b731-2617a93150cd",
+                "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
+                "2b80da60-c5ce-11ec-b819-725badf7393d",
+                "33bc581c-c5ce-11ec-b9d4-725badf7393d",
+                "3e18992e-c5ce-11ec-b9d4-725badf7393d",
+                "4a10254e-c5ce-11ec-b9d4-725badf7393d",
+                "1bf942da-c5ce-11ec-b9d4-725badf7393d",
+                "77226cfe-c5ce-11ec-b819-725badf7393d",
+                "654dfc0a-c5ce-11ec-b819-725badf7393d",
+                "6da75824-c5ce-11ec-b819-725badf7393d",
+                "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
+                "5dc1e618-c5ce-11ec-b9d4-725badf7393d",
+                "18cfcb9a-d11a-11ec-ab0d-823d1f108281"
             ],
             "components_groups": []
         },
@@ -4429,33 +4545,6 @@
             "components": [
                 "dea654a6-9aa1-11ec-bde1-8a6e55faf877",
                 "dea7211a-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "药品基本信息表",
-            "name": "yao_pin_ji_ben_xin_xi_biao",
-            "hssc_id": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "pym": "ypjbxxb",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"yao_pin_ji_ben_xin_xi_biao\",\n    \"label\": \"药品基本信息表\",\n    \"hssc_id\": \"a2fc46f0-c115-11ec-9685-2617a93150cd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_yao_pin_bian_ma\",\n            \"label\": \"药品编码\",\n            \"hssc_id\": \"afe6851a-c115-11ec-9685-2617a93150cd\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_yao_pin_gui_ge\",\n            \"label\": \"药品规格\",\n            \"hssc_id\": \"fbdc40fe-c115-11ec-b731-2617a93150cd\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_yong_yao_zhou_qi\",\n            \"label\": \"用药疗程\",\n            \"hssc_id\": \"a6c0522e-bf7e-11ec-843b-6afc6c25d902\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_chang_yong_chu_fang_liang\",\n            \"label\": \"常用处方量\",\n            \"hssc_id\": \"2b80da60-c5ce-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_dui_zhao_yi_bao_ming_cheng\",\n            \"label\": \"对照医保名称\",\n            \"hssc_id\": \"33bc581c-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_dui_zhao_ji_yao_ming_cheng\",\n            \"label\": \"对照基药名称\",\n            \"hssc_id\": \"3e18992e-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_huan_suan_gui_ze\",\n            \"label\": \"换算规则\",\n            \"hssc_id\": \"4a10254e-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_fu_yong_pin_ci\",\n            \"label\": \"用药频次\",\n            \"hssc_id\": \"1bf942da-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_chu_fang_ji_liang_dan_wei\",\n            \"label\": \"处方计量单位\",\n            \"hssc_id\": \"77226cfe-c5ce-11ec-b819-725badf7393d\",\n            \"type\": \"Yao_pin_dan_wei\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_ru_ku_ji_liang_dan_wei\",\n            \"label\": \"入库计量单位\",\n            \"hssc_id\": \"654dfc0a-c5ce-11ec-b819-725badf7393d\",\n            \"type\": \"Yao_pin_dan_wei\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_xiao_shou_ji_liang_dan_wei\",\n            \"label\": \"销售计量单位\",\n            \"hssc_id\": \"6da75824-c5ce-11ec-b819-725badf7393d\",\n            \"type\": \"Yao_pin_dan_wei\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_yong_yao_tu_jing\",\n            \"label\": \"用药途径\",\n            \"hssc_id\": \"db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902\",\n            \"type\": \"Yong_yao_tu_jing\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_yao_pin_fen_lei\",\n            \"label\": \"药品分类\",\n            \"hssc_id\": \"5dc1e618-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"Yao_pin_fen_lei\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Yao_pin_ji_ben_xin_xi_biao(HsscFormModel):\\n    boolfield_yao_pin_bian_ma = models.CharField(max_length=255, null=True, blank=True, verbose_name='药品编码')\\n    boolfield_yao_pin_gui_ge = models.CharField(max_length=255, null=True, blank=True, verbose_name='药品规格')\\n    boolfield_yong_yao_zhou_qi = models.CharField(max_length=255, null=True, blank=True, verbose_name='用药疗程')\\n    boolfield_chang_yong_chu_fang_liang = models.CharField(max_length=255, null=True, blank=True, verbose_name='常用处方量')\\n    boolfield_dui_zhao_yi_bao_ming_cheng = models.CharField(max_length=255, null=True, blank=True, verbose_name='对照医保名称')\\n    boolfield_dui_zhao_ji_yao_ming_cheng = models.CharField(max_length=255, null=True, blank=True, verbose_name='对照基药名称')\\n    boolfield_huan_suan_gui_ze = models.CharField(max_length=255, null=True, blank=True, verbose_name='换算规则')\\n    boolfield_fu_yong_pin_ci = models.CharField(max_length=255, null=True, blank=True, verbose_name='用药频次')\\n    boolfield_chu_fang_ji_liang_dan_wei = models.ForeignKey(Yao_pin_dan_wei, related_name='yao_pin_dan_wei_for_boolfield_chu_fang_ji_liang_dan_wei_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='处方计量单位')\\n    boolfield_ru_ku_ji_liang_dan_wei = models.ForeignKey(Yao_pin_dan_wei, related_name='yao_pin_dan_wei_for_boolfield_ru_ku_ji_liang_dan_wei_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='入库计量单位')\\n    boolfield_xiao_shou_ji_liang_dan_wei = models.ForeignKey(Yao_pin_dan_wei, related_name='yao_pin_dan_wei_for_boolfield_xiao_shou_ji_liang_dan_wei_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='销售计量单位')\\n    relatedfield_drug_name = models.ManyToManyField(Medicine, related_name='medicine_for_relatedfield_drug_name_yao_pin_ji_ben_xin_xi_biao', verbose_name='药品名称')\\n    boolfield_yong_yao_tu_jing = models.ForeignKey(Yong_yao_tu_jing, related_name='yong_yao_tu_jing_for_boolfield_yong_yao_tu_jing_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='用药途径')\\n    boolfield_yao_pin_fen_lei = models.ForeignKey(Yao_pin_fen_lei, related_name='yao_pin_fen_lei_for_boolfield_yao_pin_fen_lei_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='药品分类')\\n    class Meta:\\n        verbose_name = '药品基本信息表'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('yao_pin_ji_ben_xin_xi_biao_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('yao_pin_ji_ben_xin_xi_biao_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass Yao_pin_ji_ben_xin_xi_biaoAdmin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"boolfield_chu_fang_ji_liang_dan_wei\\\", \\\"boolfield_ru_ku_ji_liang_dan_wei\\\", \\\"boolfield_xiao_shou_ji_liang_dan_wei\\\", \\\"relatedfield_drug_name\\\", \\\"boolfield_yong_yao_tu_jing\\\", \\\"boolfield_yao_pin_fen_lei\\\", ]\\nadmin.site.register(Yao_pin_ji_ben_xin_xi_biao, Yao_pin_ji_ben_xin_xi_biaoAdmin)\\nclinic_site.register(Yao_pin_ji_ben_xin_xi_biao, Yao_pin_ji_ben_xin_xi_biaoAdmin)\\n\", \"forms\": \"\\nclass Yao_pin_ji_ben_xin_xi_biao_ModelForm(ModelForm):\\n    class Meta:\\n        model = Yao_pin_ji_ben_xin_xi_biao\\n        fields = ['boolfield_yao_pin_bian_ma', 'boolfield_yao_pin_gui_ge', 'boolfield_yong_yao_zhou_qi', 'boolfield_chang_yong_chu_fang_liang', 'boolfield_dui_zhao_yi_bao_ming_cheng', 'boolfield_dui_zhao_ji_yao_ming_cheng', 'boolfield_huan_suan_gui_ze', 'boolfield_fu_yong_pin_ci', 'boolfield_chu_fang_ji_liang_dan_wei', 'boolfield_ru_ku_ji_liang_dan_wei', 'boolfield_xiao_shou_ji_liang_dan_wei', 'relatedfield_drug_name', 'boolfield_yong_yao_tu_jing', 'boolfield_yao_pin_fen_lei', ]\\n        widgets = {'boolfield_chu_fang_ji_liang_dan_wei': Select, 'boolfield_ru_ku_ji_liang_dan_wei': Select, 'boolfield_xiao_shou_ji_liang_dan_wei': Select, 'relatedfield_drug_name': SelectMultiple, 'boolfield_yong_yao_tu_jing': Select, 'boolfield_yao_pin_fen_lei': Select, }\\n    \"}",
-            "components": [
-                "afe6851a-c115-11ec-9685-2617a93150cd",
-                "fbdc40fe-c115-11ec-b731-2617a93150cd",
-                "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
-                "2b80da60-c5ce-11ec-b819-725badf7393d",
-                "33bc581c-c5ce-11ec-b9d4-725badf7393d",
-                "3e18992e-c5ce-11ec-b9d4-725badf7393d",
-                "4a10254e-c5ce-11ec-b9d4-725badf7393d",
-                "1bf942da-c5ce-11ec-b9d4-725badf7393d",
-                "77226cfe-c5ce-11ec-b819-725badf7393d",
-                "654dfc0a-c5ce-11ec-b819-725badf7393d",
-                "6da75824-c5ce-11ec-b819-725badf7393d",
-                "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
-                "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-                "5dc1e618-c5ce-11ec-b9d4-725badf7393d"
             ],
             "components_groups": []
         },
@@ -5062,6 +5151,22 @@
             "components": [
                 "5245480e-cab3-11ec-a675-8e39d789b675",
                 "888d068a-cab9-11ec-a675-8e39d789b675"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "门诊分诊",
+            "name": "A6502",
+            "hssc_id": "0d1b5014-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "mzfz",
+            "name_icpc": "A6502",
+            "description": "",
+            "meta_data": "{\n    \"name\": \"A6502\",\n    \"label\": \"门诊分诊\",\n    \"hssc_id\": \"0d1b5014-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_qian_dao_que_ren\",\n            \"label\": \"签到确认\",\n            \"hssc_id\": \"98dbd7f4-a52b-11ec-9b14-2ec403f6c47b\",\n            \"type\": \"Qian_dao_que_ren\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class A6502(HsscFormModel):\\n    boolfield_qian_dao_que_ren = models.ForeignKey(Qian_dao_que_ren, related_name='qian_dao_que_ren_for_boolfield_qian_dao_que_ren_A6502', on_delete=models.CASCADE, null=True, blank=True, verbose_name='签到确认')\\n    class Meta:\\n        verbose_name = '门诊分诊'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6502_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6502_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6502Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"boolfield_qian_dao_que_ren\\\", ]\\nadmin.site.register(A6502, A6502Admin)\\nclinic_site.register(A6502, A6502Admin)\\n\", \"forms\": \"\\nclass A6502_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6502\\n        fields = ['boolfield_qian_dao_que_ren', ]\\n        widgets = {'boolfield_qian_dao_que_ren': RadioSelect, }\\n    \"}",
+            "components": [
+                "deb85c6e-9aa1-11ec-bde1-8a6e55faf877",
+                "98dbd7f4-a52b-11ec-9b14-2ec403f6c47b",
+                "401d33d8-aa49-11ec-9f15-ee7ade4bced6"
             ],
             "components_groups": []
         }
@@ -5748,7 +5853,9 @@
             "buessiness_forms": [
                 "0c3bd51a-9e23-11ec-aa2c-fe35a7065cdd"
             ],
-            "role": []
+            "role": [
+                "de1ce450-9aa1-11ec-bde1-8a6e55faf877"
+            ]
         },
         {
             "label": "糖化血红蛋白检查表",
@@ -5910,6 +6017,226 @@
                 "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877",
                 "de1ca0c6-9aa1-11ec-bde1-8a6e55faf877",
                 "de1ce450-9aa1-11ec-bde1-8a6e55faf877",
+                "de1d24ec-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "label": "申请空腹血糖检查服务",
+            "name": "shen_qing_kong_fu_xue_tang_jian_cha_fu_wu",
+            "hssc_id": "17c608fa-d119-11ec-ab0d-823d1f108281",
+            "pym": "sqkfxtjcfw",
+            "name_icpc": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
+            "priority": 3,
+            "is_system_service": false,
+            "history_services_display": 0,
+            "enable_queue_counter": true,
+            "suppliers": null,
+            "not_suitable": null,
+            "execution_time_frame": null,
+            "awaiting_time_frame": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "script": "",
+            "buessiness_forms": [
+                "1abe9fdc-d0ff-11ec-b369-823d1f108281"
+            ],
+            "role": [
+                "de18f0fc-9aa1-11ec-bde1-8a6e55faf877",
+                "de194c50-9aa1-11ec-bde1-8a6e55faf877",
+                "de1992d2-9aa1-11ec-bde1-8a6e55faf877",
+                "de19d6a2-9aa1-11ec-bde1-8a6e55faf877",
+                "de1b05cc-9aa1-11ec-bde1-8a6e55faf877",
+                "de1c1052-9aa1-11ec-bde1-8a6e55faf877",
+                "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877",
+                "de1ca0c6-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "label": "药品基本信息维护",
+            "name": "yao_pin_ji_ben_xin_xi_diao_cha",
+            "hssc_id": "b411a830-d11a-11ec-b369-823d1f108281",
+            "pym": "ypjbxxwh",
+            "name_icpc": null,
+            "managed_entity": "de896698-9aa1-11ec-bde1-8a6e55faf877",
+            "priority": 3,
+            "is_system_service": false,
+            "history_services_display": 0,
+            "enable_queue_counter": true,
+            "suppliers": null,
+            "not_suitable": null,
+            "execution_time_frame": null,
+            "awaiting_time_frame": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "script": "",
+            "buessiness_forms": [
+                "a2fc46f0-c115-11ec-9685-2617a93150cd"
+            ],
+            "role": [
+                "de1a6f7c-9aa1-11ec-bde1-8a6e55faf877",
+                "de1ab716-9aa1-11ec-bde1-8a6e55faf877",
+                "de1d24ec-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "label": "物料供应商基本信息维护",
+            "name": "gong_ying_shang_ji_ben_xin_xi_diao_cha",
+            "hssc_id": "d43aaba2-d11a-11ec-b369-823d1f108281",
+            "pym": "wlgysjbxxwh",
+            "name_icpc": null,
+            "managed_entity": "de889948-9aa1-11ec-bde1-8a6e55faf877",
+            "priority": 3,
+            "is_system_service": false,
+            "history_services_display": 0,
+            "enable_queue_counter": true,
+            "suppliers": null,
+            "not_suitable": null,
+            "execution_time_frame": null,
+            "awaiting_time_frame": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "script": "",
+            "buessiness_forms": [
+                "63347e8a-c5c9-11ec-b819-725badf7393d"
+            ],
+            "role": [
+                "de1d24ec-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "label": "设备基本信息维护",
+            "name": "she_bei_ji_ben_xin_xi_ji_lu",
+            "hssc_id": "f1d556ee-d11a-11ec-b369-823d1f108281",
+            "pym": "sbjbxxwh",
+            "name_icpc": null,
+            "managed_entity": "de8a1c64-9aa1-11ec-bde1-8a6e55faf877",
+            "priority": 3,
+            "is_system_service": false,
+            "history_services_display": 0,
+            "enable_queue_counter": true,
+            "suppliers": null,
+            "not_suitable": null,
+            "execution_time_frame": null,
+            "awaiting_time_frame": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "script": "",
+            "buessiness_forms": [
+                "7c8caaba-c5c9-11ec-b9d4-725badf7393d"
+            ],
+            "role": [
+                "de1d24ec-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "label": "服务分供机构基本信息维护",
+            "name": "fu_wu_fen_gong_ji_gou_ji_ben_xin_xi_diao_cha",
+            "hssc_id": "38083bae-d11b-11ec-ab0d-823d1f108281",
+            "pym": "fwfgjgjbxxwh",
+            "name_icpc": null,
+            "managed_entity": "de889948-9aa1-11ec-bde1-8a6e55faf877",
+            "priority": 3,
+            "is_system_service": false,
+            "history_services_display": 0,
+            "enable_queue_counter": true,
+            "suppliers": null,
+            "not_suitable": null,
+            "execution_time_frame": null,
+            "awaiting_time_frame": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "script": "",
+            "buessiness_forms": [
+                "73e24eec-c5c9-11ec-b9d4-725badf7393d"
+            ],
+            "role": [
+                "de1d24ec-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "label": "职员基本信息维护",
+            "name": "zhi_yuan_ji_ben_xin_xi_wei_hu",
+            "hssc_id": "51b8426a-d11b-11ec-ab0d-823d1f108281",
+            "pym": "zyjbxxwh",
+            "name_icpc": null,
+            "managed_entity": "de87315c-9aa1-11ec-bde1-8a6e55faf877",
+            "priority": 3,
+            "is_system_service": false,
+            "history_services_display": 0,
+            "enable_queue_counter": true,
+            "suppliers": null,
+            "not_suitable": null,
+            "execution_time_frame": null,
+            "awaiting_time_frame": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "script": "",
+            "buessiness_forms": [
+                "bca10e04-c5c7-11ec-b819-725badf7393d"
+            ],
+            "role": [
+                "de1b4cc6-9aa1-11ec-bde1-8a6e55faf877",
+                "de1d24ec-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "label": "机构基本信息维护",
+            "name": "ji_gou_ji_ben_xin_xi_wei_hu",
+            "hssc_id": "ae0189fa-d11b-11ec-ab0d-823d1f108281",
+            "pym": "jgjbxxwh",
+            "name_icpc": null,
+            "managed_entity": "de8ad1a4-9aa1-11ec-bde1-8a6e55faf877",
+            "priority": 3,
+            "is_system_service": false,
+            "history_services_display": 0,
+            "enable_queue_counter": true,
+            "suppliers": null,
+            "not_suitable": null,
+            "execution_time_frame": null,
+            "awaiting_time_frame": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "script": "",
+            "buessiness_forms": [
+                "43464b44-c5c9-11ec-b819-725badf7393d"
+            ],
+            "role": [
                 "de1d24ec-9aa1-11ec-bde1-8a6e55faf877"
             ]
         }
@@ -6258,6 +6585,62 @@
             "service": "d090a8a8-cb7f-11ec-8161-aa5274efe6de",
             "buessiness_form": "0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd",
             "is_list": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "17c910f4-d119-11ec-ab0d-823d1f108281",
+            "service": "17c608fa-d119-11ec-ab0d-823d1f108281",
+            "buessiness_form": "1abe9fdc-d0ff-11ec-b369-823d1f108281",
+            "is_list": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "b4126c8e-d11a-11ec-b369-823d1f108281",
+            "service": "b411a830-d11a-11ec-b369-823d1f108281",
+            "buessiness_form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "is_list": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "d43b46c0-d11a-11ec-b369-823d1f108281",
+            "service": "d43aaba2-d11a-11ec-b369-823d1f108281",
+            "buessiness_form": "63347e8a-c5c9-11ec-b819-725badf7393d",
+            "is_list": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "f1d602ce-d11a-11ec-b369-823d1f108281",
+            "service": "f1d556ee-d11a-11ec-b369-823d1f108281",
+            "buessiness_form": "7c8caaba-c5c9-11ec-b9d4-725badf7393d",
+            "is_list": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "38090cc8-d11b-11ec-ab0d-823d1f108281",
+            "service": "38083bae-d11b-11ec-ab0d-823d1f108281",
+            "buessiness_form": "73e24eec-c5c9-11ec-b9d4-725badf7393d",
+            "is_list": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "51b8d9a0-d11b-11ec-ab0d-823d1f108281",
+            "service": "51b8426a-d11b-11ec-ab0d-823d1f108281",
+            "buessiness_form": "bca10e04-c5c7-11ec-b819-725badf7393d",
+            "is_list": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "ae02239c-d11b-11ec-ab0d-823d1f108281",
+            "service": "ae0189fa-d11b-11ec-ab0d-823d1f108281",
+            "buessiness_form": "43464b44-c5c9-11ec-b819-725badf7393d",
+            "is_list": false
         }
     ],
     "eventrule": [
@@ -6403,6 +6786,17 @@
             "weight": 1,
             "expression": "len({'注射类'}.intersection(boolfield_yong_yao_tu_jing)) == 1",
             "expression_fields": "boolfield_yong_yao_tu_jing"
+        },
+        {
+            "label": "申请服务确认",
+            "name": "shen_qing_fu_wu_que_ren",
+            "hssc_id": "b317b70e-d119-11ec-ab0d-823d1f108281",
+            "pym": "sqfwqr",
+            "description": "安排确认 == ''yes''",
+            "detection_scope": "CURRENT_SERVICE",
+            "weight": 1,
+            "expression": "boolfield_an_pai_que_ren == ''yes''",
+            "expression_fields": "boolfield_an_pai_que_ren"
         }
     ],
     "eventexpression": [
@@ -6665,6 +7059,16 @@
             "operator": null,
             "value": "'注射类'",
             "connection_operator": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "b3182bb2-d119-11ec-ab0d-823d1f108281",
+            "event_rule": "b317b70e-d119-11ec-ab0d-823d1f108281",
+            "field": "9e873f3a-d100-11ec-ab0d-823d1f108281",
+            "operator": 0,
+            "value": "'yes'",
+            "connection_operator": null
         }
     ],
     "servicepackage": [
@@ -6819,7 +7223,7 @@
             "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
             "system_operand": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
             "next_service": "1a3b2382-9b67-11ec-94eb-022c611b2490",
-            "passing_data": 2,
+            "passing_data": 1,
             "complete_feedback": 0,
             "reminders": 1,
             "message": null,
@@ -6937,7 +7341,7 @@
             "service": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
             "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
             "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
-            "next_service": "cb6fe794-b6da-11ec-8425-0ebea05fc526",
+            "next_service": "17c608fa-d119-11ec-ab0d-823d1f108281",
             "passing_data": 2,
             "complete_feedback": 0,
             "reminders": 1,
@@ -6989,7 +7393,7 @@
             "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
             "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
             "next_service": "e0305c18-9aa1-11ec-bde1-8a6e55faf877",
-            "passing_data": 0,
+            "passing_data": 1,
             "complete_feedback": 0,
             "reminders": 0,
             "message": null,
@@ -7040,7 +7444,7 @@
             "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
             "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
             "next_service": "e03bfa96-9aa1-11ec-bde1-8a6e55faf877",
-            "passing_data": 0,
+            "passing_data": 1,
             "complete_feedback": 0,
             "reminders": 0,
             "message": null,
@@ -7101,13 +7505,13 @@
             "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
         },
         {
-            "label": "空腹血糖超过正常值",
+            "label": "空腹血糖超过正常值且有糖尿病症状",
             "name": null,
             "hssc_id": "474758e8-cce3-11ec-8d9d-6ee4b739d297",
             "service": "cb6fe794-b6da-11ec-8425-0ebea05fc526",
             "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
             "system_operand": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
-            "next_service": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
+            "next_service": "9fb42996-b6dd-11ec-8425-0ebea05fc526",
             "passing_data": 1,
             "complete_feedback": 0,
             "reminders": 0,
@@ -7125,6 +7529,40 @@
             "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
             "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
             "next_service": "9582b822-ab23-11ec-bf5e-1ac10aeebbc4",
+            "passing_data": 0,
+            "complete_feedback": 0,
+            "reminders": 0,
+            "message": null,
+            "interval_rule": null,
+            "interval_time": null,
+            "is_active": true,
+            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+        },
+        {
+            "label": "二型糖尿病推荐诊断规则",
+            "name": null,
+            "hssc_id": "a33fe4e8-d0fe-11ec-ab0d-823d1f108281",
+            "service": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
+            "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
+            "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
+            "next_service": "9fb42996-b6dd-11ec-8425-0ebea05fc526",
+            "passing_data": 0,
+            "complete_feedback": 0,
+            "reminders": 0,
+            "message": null,
+            "interval_rule": null,
+            "interval_time": null,
+            "is_active": true,
+            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+        },
+        {
+            "label": "申请空腹血糖检查服务",
+            "name": null,
+            "hssc_id": "758e1b9e-d119-11ec-b369-823d1f108281",
+            "service": "17c608fa-d119-11ec-ab0d-823d1f108281",
+            "event_rule": "b317b70e-d119-11ec-ab0d-823d1f108281",
+            "system_operand": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
+            "next_service": "cb6fe794-b6da-11ec-8425-0ebea05fc526",
             "passing_data": 0,
             "complete_feedback": 0,
             "reminders": 0,

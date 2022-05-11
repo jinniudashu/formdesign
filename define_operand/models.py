@@ -25,18 +25,26 @@ class ManagedEntity(HsscPymBase):
 @receiver(post_save, sender=ManagedEntity, weak=True, dispatch_uid=None)
 def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
     if created:
-        RelateFieldModel.objects.create(
-            name=instance.name,
-            label=instance.label,
-            related_content=instance.model_name,
-            related_content_type=instance.app_name,
-            hssc_id = instance.hssc_id
-        )
+        try:
+            RelateFieldModel.objects.create(
+                name=instance.name,
+                label=instance.label,
+                related_content=instance.base_form.name.capitalize(),
+                related_content_type=instance.app_name,
+                hssc_id = instance.hssc_id
+            )
+        except Exception as e:
+            RelateFieldModel.objects.create(
+                name=instance.name,
+                label=instance.label,
+                related_content_type=instance.app_name,
+                hssc_id = instance.hssc_id
+            )
     else:
         RelateFieldModel.objects.filter(hssc_id=instance.hssc_id).update(
             name=instance.name,
             label=instance.label,
-            related_content=instance.model_name,
+            related_content=instance.base_form.name.capitalize(),
             related_content_type=instance.app_name,
         )
 

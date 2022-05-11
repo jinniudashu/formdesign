@@ -78,7 +78,7 @@ def export_source_code(modeladmin, request, queryset):
     }
     
     # 生成脚本的apps
-    apps = ['dictionaries','icpc','forms','service', 'entities',]
+    apps = ['dictionaries','icpc','forms','service', ]
 
     forms_query_set = BuessinessForm.objects.all()
     forms_file_header = {
