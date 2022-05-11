@@ -2434,11 +2434,11 @@
             "model_name": "Customer",
             "base_form": "0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd",
             "header_fields": [
+                "dea1797c-9aa1-11ec-bde1-8a6e55faf877",
+                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
                 "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
                 "de9e99dc-9aa1-11ec-bde1-8a6e55faf877",
-                "de9f4ea4-9aa1-11ec-bde1-8a6e55faf877",
-                "dea1797c-9aa1-11ec-bde1-8a6e55faf877",
-                "deab5d16-9aa1-11ec-bde1-8a6e55faf877"
+                "de9f4ea4-9aa1-11ec-bde1-8a6e55faf877"
             ]
         },
         {
@@ -4203,6 +4203,205 @@
     ],
     "buessinessform": [
         {
+            "label": "过敏史",
+            "name": "A6207",
+            "hssc_id": "0b54db10-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "gms",
+            "name_icpc": "A6207",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"A6207\",\n    \"label\": \"过敏史\",\n    \"hssc_id\": \"0b54db10-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class A6207(HsscFormModel):\\n    relatedfield_drug_name = models.ManyToManyField(Medicine, related_name='medicine_for_relatedfield_drug_name_A6207', verbose_name='药品名称')\\n    class Meta:\\n        verbose_name = '过敏史'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6207_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6207_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6207Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_drug_name\\\", ]\\nadmin.site.register(A6207, A6207Admin)\\nclinic_site.register(A6207, A6207Admin)\\n\", \"forms\": \"\\nclass A6207_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6207\\n        fields = ['relatedfield_drug_name', ]\\n        widgets = {'relatedfield_drug_name': SelectMultiple, }\\n    \"}",
+            "components": [
+                "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "营养干预",
+            "name": "T4501",
+            "hssc_id": "69c663ea-a4c6-11ec-a7bb-cecec7a0e139",
+            "pym": "yygy",
+            "name_icpc": "T4501",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"T4501\",\n    \"label\": \"营养干预\",\n    \"hssc_id\": \"69c663ea-a4c6-11ec-a7bb-cecec7a0e139\",\n    \"fields\": [\n        {\n            \"name\": \"T4501\",\n            \"label\": \"营养干预\",\n            \"hssc_id\": \"abc77c0a-a4c3-11ec-8f29-cecec7a0e139\",\n            \"type\": \"Icpc8_other_health_interventions\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class T4501(HsscFormModel):\\n    T4501 = models.ManyToManyField(Icpc8_other_health_interventions, related_name='icpc8_other_health_interventions_for_T4501_T4501', verbose_name='营养干预')\\n    class Meta:\\n        verbose_name = '营养干预'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('T4501_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('T4501_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass T4501Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"T4501\\\", ]\\nadmin.site.register(T4501, T4501Admin)\\nclinic_site.register(T4501, T4501Admin)\\n\", \"forms\": \"\\nclass T4501_ModelForm(ModelForm):\\n    class Meta:\\n        model = T4501\\n        fields = ['T4501', ]\\n        widgets = {'T4501': SelectMultiple, }\\n    \"}",
+            "components": [
+                "abc77c0a-a4c3-11ec-8f29-cecec7a0e139"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "外伤史",
+            "name": "A6206",
+            "hssc_id": "0ba83c56-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "wss",
+            "name_icpc": "A6206",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"A6206\",\n    \"label\": \"外伤史\",\n    \"hssc_id\": \"0ba83c56-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_wai_shang_ri_qi\",\n            \"label\": \"外伤日期\",\n            \"hssc_id\": \"35091e02-c9ee-11ec-b369-168d53e8234e\",\n            \"type\": \"datetime\"\n        },\n        {\n            \"name\": \"boolfield_wai_shang_xing_ji_bing\",\n            \"label\": \"外伤性疾病\",\n            \"hssc_id\": \"df91ce4e-cab3-11ec-b358-8e39d789b675\",\n            \"type\": \"Icpc5_evaluation_and_diagnoses\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class A6206(HsscFormModel):\\n    boolfield_wai_shang_ri_qi = models.DateField(null=True, blank=True, verbose_name='外伤日期')\\n    boolfield_wai_shang_xing_ji_bing = models.ForeignKey(Icpc5_evaluation_and_diagnoses, related_name='icpc5_evaluation_and_diagnoses_for_boolfield_wai_shang_xing_ji_bing_A6206', on_delete=models.CASCADE, null=True, blank=True, verbose_name='外伤性疾病')\\n    class Meta:\\n        verbose_name = '外伤史'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6206_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6206_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6206Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"boolfield_wai_shang_xing_ji_bing\\\", ]\\nadmin.site.register(A6206, A6206Admin)\\nclinic_site.register(A6206, A6206Admin)\\n\", \"forms\": \"\\nclass A6206_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6206\\n        fields = ['boolfield_wai_shang_ri_qi', 'boolfield_wai_shang_xing_ji_bing', ]\\n        widgets = {'boolfield_wai_shang_xing_ji_bing': Select, }\\n    \"}",
+            "components": [
+                "35091e02-c9ee-11ec-b369-168d53e8234e",
+                "df91ce4e-cab3-11ec-b358-8e39d789b675"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "生命体征检查",
+            "name": "A3103",
+            "hssc_id": "0b8fdf12-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "smtzjc",
+            "name_icpc": "A3103",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"A3103\",\n    \"label\": \"生命体征检查\",\n    \"hssc_id\": \"0b8fdf12-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_body_temperature\",\n            \"label\": \"体温\",\n            \"hssc_id\": \"deae47e2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_pulse\",\n            \"label\": \"脉搏\",\n            \"hssc_id\": \"deaf1ae6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_respiratory_rate\",\n            \"label\": \"呼吸频率\",\n            \"hssc_id\": \"deafc9f0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class A3103(HsscFormModel):\\n    numberfield_body_temperature = models.IntegerField(null=True, blank=True, verbose_name='体温')\\n    numberfield_body_temperature_standard_value = models.IntegerField(null=True, blank=True, verbose_name='体温标准值')\\n    numberfield_body_temperature_up_limit = models.IntegerField(default=37.4, null=True, blank=True, verbose_name='体温上限')\\n    numberfield_body_temperature_down_limit = models.IntegerField(default=36.0, null=True, blank=True, verbose_name='体温下限')\\n    numberfield_pulse = models.IntegerField(null=True, blank=True, verbose_name='脉搏')\\n    numberfield_pulse_standard_value = models.IntegerField(null=True, blank=True, verbose_name='脉搏标准值')\\n    numberfield_pulse_up_limit = models.IntegerField(default=100.0, null=True, blank=True, verbose_name='脉搏上限')\\n    numberfield_pulse_down_limit = models.IntegerField(default=60.0, null=True, blank=True, verbose_name='脉搏下限')\\n    numberfield_respiratory_rate = models.IntegerField(null=True, blank=True, verbose_name='呼吸频率')\\n    numberfield_respiratory_rate_standard_value = models.IntegerField(null=True, blank=True, verbose_name='呼吸频率标准值')\\n    numberfield_respiratory_rate_up_limit = models.IntegerField(default=20.0, null=True, blank=True, verbose_name='呼吸频率上限')\\n    numberfield_respiratory_rate_down_limit = models.IntegerField(default=10.0, null=True, blank=True, verbose_name='呼吸频率下限')\\n    class Meta:\\n        verbose_name = '生命体征检查'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A3103_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A3103_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A3103Admin(HsscFormAdmin):\\n    pass\\nadmin.site.register(A3103, A3103Admin)\\nclinic_site.register(A3103, A3103Admin)\\n\", \"forms\": \"\\nclass A3103_ModelForm(ModelForm):\\n    class Meta:\\n        model = A3103\\n        fields = ['numberfield_body_temperature', 'numberfield_pulse', 'numberfield_respiratory_rate', ]\\n        \\n    \"}",
+            "components": [
+                "deae47e2-9aa1-11ec-bde1-8a6e55faf877",
+                "deaf1ae6-9aa1-11ec-bde1-8a6e55faf877",
+                "deafc9f0-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "个人适应能力评估",
+            "name": "A6215",
+            "hssc_id": "0b648650-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "grsynlpg",
+            "name_icpc": "A6215",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"A6215\",\n    \"label\": \"个人适应能力评估\",\n    \"hssc_id\": \"0b648650-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_working_hours_per_day\",\n            \"label\": \"每天工作及工作往返总时长\",\n            \"hssc_id\": \"de9bbcf8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_are_you_satisfied_with_the_job_and_life\",\n            \"label\": \"对目前生活和工作满意吗\",\n            \"hssc_id\": \"dec7ec2e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Satisfaction\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_are_you_satisfied_with_your_adaptability\",\n            \"label\": \"对自己的适应能力满意吗\",\n            \"hssc_id\": \"dec8f9a2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Satisfaction\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class A6215(HsscFormModel):\\n    characterfield_working_hours_per_day = models.TextField(max_length=255, null=True, blank=True, verbose_name='每天工作及工作往返总时长')\\n    relatedfield_are_you_satisfied_with_the_job_and_life = models.ForeignKey(Satisfaction, related_name='satisfaction_for_relatedfield_are_you_satisfied_with_the_job_and_life_A6215', on_delete=models.CASCADE, null=True, blank=True, verbose_name='对目前生活和工作满意吗')\\n    relatedfield_are_you_satisfied_with_your_adaptability = models.ForeignKey(Satisfaction, related_name='satisfaction_for_relatedfield_are_you_satisfied_with_your_adaptability_A6215', on_delete=models.CASCADE, null=True, blank=True, verbose_name='对自己的适应能力满意吗')\\n    class Meta:\\n        verbose_name = '个人适应能力评估'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6215_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6215_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6215Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_are_you_satisfied_with_the_job_and_life\\\", \\\"relatedfield_are_you_satisfied_with_your_adaptability\\\", ]\\nadmin.site.register(A6215, A6215Admin)\\nclinic_site.register(A6215, A6215Admin)\\n\", \"forms\": \"\\nclass A6215_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6215\\n        fields = ['characterfield_working_hours_per_day', 'relatedfield_are_you_satisfied_with_the_job_and_life', 'relatedfield_are_you_satisfied_with_your_adaptability', ]\\n        widgets = {'relatedfield_are_you_satisfied_with_the_job_and_life': Select, 'relatedfield_are_you_satisfied_with_your_adaptability': Select, }\\n    \"}",
+            "components": [
+                "de9bbcf8-9aa1-11ec-bde1-8a6e55faf877",
+                "dec7ec2e-9aa1-11ec-bde1-8a6e55faf877",
+                "dec8f9a2-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "用户注册",
+            "name": "Z6201",
+            "hssc_id": "0c314e38-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "yhzc",
+            "name_icpc": "Z6201",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"Z6201\",\n    \"label\": \"用户注册\",\n    \"hssc_id\": \"0c314e38-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_name\",\n            \"label\": \"姓名\",\n            \"hssc_id\": \"de9de26c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_gender\",\n            \"label\": \"性别\",\n            \"hssc_id\": \"de9e99dc-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_age\",\n            \"label\": \"年龄\",\n            \"hssc_id\": \"de9f4ea4-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterhssc_identification_number\",\n            \"label\": \"身份证号码\",\n            \"hssc_id\": \"dea0045c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_contact_address\",\n            \"label\": \"联系地址\",\n            \"hssc_id\": \"dea1797c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_password_setting\",\n            \"label\": \"密码设置\",\n            \"hssc_id\": \"dea37b46-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_confirm_password\",\n            \"label\": \"确认密码\",\n            \"hssc_id\": \"dea437ac-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"datetimefield_date_of_birth\",\n            \"label\": \"出生日期\",\n            \"hssc_id\": \"deb7b0ac-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"datetime\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Z6201(HsscFormModel):\\n    characterfield_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='姓名')\\n    characterfield_gender = models.CharField(max_length=255, null=True, blank=True, verbose_name='性别')\\n    characterfield_age = models.CharField(max_length=255, null=True, blank=True, verbose_name='年龄')\\n    characterhssc_identification_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='身份证号码')\\n    characterfield_contact_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系地址')\\n    characterfield_password_setting = models.CharField(max_length=255, null=True, blank=True, verbose_name='密码设置')\\n    characterfield_confirm_password = models.CharField(max_length=255, null=True, blank=True, verbose_name='确认密码')\\n    datetimefield_date_of_birth = models.DateTimeField(null=True, blank=True, verbose_name='出生日期')\\n    class Meta:\\n        verbose_name = '用户注册'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('Z6201_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('Z6201_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass Z6201Admin(HsscFormAdmin):\\n    pass\\nadmin.site.register(Z6201, Z6201Admin)\\nclinic_site.register(Z6201, Z6201Admin)\\n\", \"forms\": \"\\nclass Z6201_ModelForm(ModelForm):\\n    class Meta:\\n        model = Z6201\\n        fields = ['characterfield_name', 'characterfield_gender', 'characterfield_age', 'characterhssc_identification_number', 'characterfield_contact_address', 'characterfield_password_setting', 'characterfield_confirm_password', 'datetimefield_date_of_birth', ]\\n        \\n    \"}",
+            "components": [
+                "dea0045c-9aa1-11ec-bde1-8a6e55faf877",
+                "dea1797c-9aa1-11ec-bde1-8a6e55faf877",
+                "dea37b46-9aa1-11ec-bde1-8a6e55faf877",
+                "dea437ac-9aa1-11ec-bde1-8a6e55faf877",
+                "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
+                "de9e99dc-9aa1-11ec-bde1-8a6e55faf877",
+                "de9f4ea4-9aa1-11ec-bde1-8a6e55faf877",
+                "deb7b0ac-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "空腹血糖检查",
+            "name": "T3404",
+            "hssc_id": "0c3bd51a-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "kfxtjc",
+            "name_icpc": "T3404",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"T3404\",\n    \"label\": \"空腹血糖检查\",\n    \"hssc_id\": \"0c3bd51a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_kong_fu_xue_tang\",\n            \"label\": \"空腹血糖\",\n            \"hssc_id\": \"deb59434-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class T3404(HsscFormModel):\\n    numberfield_kong_fu_xue_tang = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name='空腹血糖')\\n    numberfield_kong_fu_xue_tang_standard_value = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name='空腹血糖标准值')\\n    numberfield_kong_fu_xue_tang_up_limit = models.DecimalField(max_digits=10, decimal_places=2, default=7.0, null=True, blank=True, verbose_name='空腹血糖上限')\\n    numberfield_kong_fu_xue_tang_down_limit = models.DecimalField(max_digits=10, decimal_places=2, default=3.9, null=True, blank=True, verbose_name='空腹血糖下限')\\n    class Meta:\\n        verbose_name = '空腹血糖检查'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('T3404_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('T3404_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass T3404Admin(HsscFormAdmin):\\n    pass\\nadmin.site.register(T3404, T3404Admin)\\nclinic_site.register(T3404, T3404Admin)\\n\", \"forms\": \"\\nclass T3404_ModelForm(ModelForm):\\n    class Meta:\\n        model = T3404\\n        fields = ['numberfield_kong_fu_xue_tang', ]\\n        \\n    \"}",
+            "components": [
+                "deb59434-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "听力检查",
+            "name": "A3110",
+            "hssc_id": "0bdf33a0-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "tljc",
+            "name_icpc": "A3110",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"A3110\",\n    \"label\": \"听力检查\",\n    \"hssc_id\": \"0bdf33a0-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_left_ear_hearing\",\n            \"label\": \"左耳听力\",\n            \"hssc_id\": \"deda1db8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Hearing\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_right_ear_hearing\",\n            \"label\": \"右耳听力\",\n            \"hssc_id\": \"dedb0962-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Hearing\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class A3110(HsscFormModel):\\n    relatedfield_left_ear_hearing = models.ForeignKey(Hearing, related_name='hearing_for_relatedfield_left_ear_hearing_A3110', on_delete=models.CASCADE, null=True, blank=True, verbose_name='左耳听力')\\n    relatedfield_right_ear_hearing = models.ForeignKey(Hearing, related_name='hearing_for_relatedfield_right_ear_hearing_A3110', on_delete=models.CASCADE, null=True, blank=True, verbose_name='右耳听力')\\n    class Meta:\\n        verbose_name = '听力检查'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A3110_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A3110_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A3110Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_left_ear_hearing\\\", \\\"relatedfield_right_ear_hearing\\\", ]\\nadmin.site.register(A3110, A3110Admin)\\nclinic_site.register(A3110, A3110Admin)\\n\", \"forms\": \"\\nclass A3110_ModelForm(ModelForm):\\n    class Meta:\\n        model = A3110\\n        fields = ['relatedfield_left_ear_hearing', 'relatedfield_right_ear_hearing', ]\\n        widgets = {'relatedfield_left_ear_hearing': Select, 'relatedfield_right_ear_hearing': Select, }\\n    \"}",
+            "components": [
+                "deda1db8-9aa1-11ec-bde1-8a6e55faf877",
+                "dedb0962-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "社会环境评估",
+            "name": "A6216",
+            "hssc_id": "0b86f50a-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "shhjpg",
+            "name_icpc": "A6216",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"A6216\",\n    \"label\": \"社会环境评估\",\n    \"hssc_id\": \"0b86f50a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_is_the_living_environment_satisfactory\",\n            \"label\": \"您对居住环境满意吗\",\n            \"hssc_id\": \"ded110f6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Satisfaction\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_is_the_transportation_convenient\",\n            \"label\": \"您所在的社区交通方便吗\",\n            \"hssc_id\": \"ded206d2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Convenience\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class A6216(HsscFormModel):\\n    relatedfield_is_the_living_environment_satisfactory = models.ForeignKey(Satisfaction, related_name='satisfaction_for_relatedfield_is_the_living_environment_satisfactory_A6216', on_delete=models.CASCADE, null=True, blank=True, verbose_name='您对居住环境满意吗')\\n    relatedfield_is_the_transportation_convenient = models.ForeignKey(Convenience, related_name='convenience_for_relatedfield_is_the_transportation_convenient_A6216', on_delete=models.CASCADE, null=True, blank=True, verbose_name='您所在的社区交通方便吗')\\n    class Meta:\\n        verbose_name = '社会环境评估'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6216_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6216_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6216Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_is_the_living_environment_satisfactory\\\", \\\"relatedfield_is_the_transportation_convenient\\\", ]\\nadmin.site.register(A6216, A6216Admin)\\nclinic_site.register(A6216, A6216Admin)\\n\", \"forms\": \"\\nclass A6216_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6216\\n        fields = ['relatedfield_is_the_living_environment_satisfactory', 'relatedfield_is_the_transportation_convenient', ]\\n        widgets = {'relatedfield_is_the_living_environment_satisfactory': Select, 'relatedfield_is_the_transportation_convenient': Select, }\\n    \"}",
+            "components": [
+                "ded110f6-9aa1-11ec-bde1-8a6e55faf877",
+                "ded206d2-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "血压监测",
+            "name": "A3105",
+            "hssc_id": "0c940c94-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "xyjc",
+            "name_icpc": "A3105",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"A3105\",\n    \"label\": \"血压监测\",\n    \"hssc_id\": \"0c940c94-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_systolic_blood_pressure\",\n            \"label\": \"收缩压\",\n            \"hssc_id\": \"deb35b74-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_diastolic_blood_pressure\",\n            \"label\": \"舒张压\",\n            \"hssc_id\": \"deb416fe-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class A3105(HsscFormModel):\\n    numberfield_systolic_blood_pressure = models.IntegerField(null=True, blank=True, verbose_name='收缩压')\\n    numberfield_systolic_blood_pressure_standard_value = models.IntegerField(null=True, blank=True, verbose_name='收缩压标准值')\\n    numberfield_systolic_blood_pressure_up_limit = models.IntegerField(default=139.0, null=True, blank=True, verbose_name='收缩压上限')\\n    numberfield_systolic_blood_pressure_down_limit = models.IntegerField(default=90.0, null=True, blank=True, verbose_name='收缩压下限')\\n    numberfield_diastolic_blood_pressure = models.IntegerField(null=True, blank=True, verbose_name='舒张压')\\n    numberfield_diastolic_blood_pressure_standard_value = models.IntegerField(null=True, blank=True, verbose_name='舒张压标准值')\\n    numberfield_diastolic_blood_pressure_up_limit = models.IntegerField(default=89.0, null=True, blank=True, verbose_name='舒张压上限')\\n    numberfield_diastolic_blood_pressure_down_limit = models.IntegerField(default=60.0, null=True, blank=True, verbose_name='舒张压下限')\\n    class Meta:\\n        verbose_name = '血压监测'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A3105_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A3105_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A3105Admin(HsscFormAdmin):\\n    pass\\nadmin.site.register(A3105, A3105Admin)\\nclinic_site.register(A3105, A3105Admin)\\n\", \"forms\": \"\\nclass A3105_ModelForm(ModelForm):\\n    class Meta:\\n        model = A3105\\n        fields = ['numberfield_systolic_blood_pressure', 'numberfield_diastolic_blood_pressure', ]\\n        \\n    \"}",
+            "components": [
+                "deb35b74-9aa1-11ec-bde1-8a6e55faf877",
+                "deb416fe-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "院内辅助问诊",
+            "name": "A6217",
+            "hssc_id": "0c82d69a-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "ynfzwz",
+            "name_icpc": "A6217",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"A6217\",\n    \"label\": \"院内辅助问诊\",\n    \"hssc_id\": \"0c82d69a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_supplementary_description_of_the_condition\",\n            \"label\": \"病情补充描述\",\n            \"hssc_id\": \"de9ad1a8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_symptom_list\",\n            \"label\": \"症状\",\n            \"hssc_id\": \"deb93f26-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc3_symptoms_and_problems\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class A6217(HsscFormModel):\\n    characterfield_supplementary_description_of_the_condition = models.CharField(max_length=255, null=True, blank=True, verbose_name='病情补充描述')\\n    relatedfield_symptom_list = models.ManyToManyField(Icpc3_symptoms_and_problems, related_name='icpc3_symptoms_and_problems_for_relatedfield_symptom_list_A6217', verbose_name='症状')\\n    class Meta:\\n        verbose_name = '院内辅助问诊'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6217_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6217_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6217Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_symptom_list\\\", ]\\nadmin.site.register(A6217, A6217Admin)\\nclinic_site.register(A6217, A6217Admin)\\n\", \"forms\": \"\\nclass A6217_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6217\\n        fields = ['characterfield_supplementary_description_of_the_condition', 'relatedfield_symptom_list', ]\\n        widgets = {'relatedfield_symptom_list': SelectMultiple, }\\n    \"}",
+            "components": [
+                "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
+                "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "糖化血红蛋白检查",
+            "name": "T3405",
+            "hssc_id": "0c440b9a-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "thxhdbjc",
+            "name_icpc": "T3405",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"T3405\",\n    \"label\": \"糖化血红蛋白检查\",\n    \"hssc_id\": \"0c440b9a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_tang_hua_xue_hong_dan_bai\",\n            \"label\": \"糖化血红蛋白\",\n            \"hssc_id\": \"deb4e084-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class T3405(HsscFormModel):\\n    numberfield_tang_hua_xue_hong_dan_bai = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name='糖化血红蛋白')\\n    numberfield_tang_hua_xue_hong_dan_bai_standard_value = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name='糖化血红蛋白标准值')\\n    numberfield_tang_hua_xue_hong_dan_bai_up_limit = models.DecimalField(max_digits=10, decimal_places=2, default=6.0, null=True, blank=True, verbose_name='糖化血红蛋白上限')\\n    numberfield_tang_hua_xue_hong_dan_bai_down_limit = models.DecimalField(max_digits=10, decimal_places=2, default=4.0, null=True, blank=True, verbose_name='糖化血红蛋白下限')\\n    class Meta:\\n        verbose_name = '糖化血红蛋白检查'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('T3405_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('T3405_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass T3405Admin(HsscFormAdmin):\\n    pass\\nadmin.site.register(T3405, T3405Admin)\\nclinic_site.register(T3405, T3405Admin)\\n\", \"forms\": \"\\nclass T3405_ModelForm(ModelForm):\\n    class Meta:\\n        model = T3405\\n        fields = ['numberfield_tang_hua_xue_hong_dan_bai', ]\\n        \\n    \"}",
+            "components": [
+                "deb4e084-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "院外辅助问诊",
+            "name": "A6202",
+            "hssc_id": "0c704264-9e23-11ec-aa2c-fe35a7065cdd",
+            "pym": "ywfzwz",
+            "name_icpc": "A6202",
+            "description": null,
+            "meta_data": "{\n    \"name\": \"A6202\",\n    \"label\": \"院外辅助问诊\",\n    \"hssc_id\": \"0c704264-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_supplementary_description_of_the_condition\",\n            \"label\": \"病情补充描述\",\n            \"hssc_id\": \"de9ad1a8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_symptom_list\",\n            \"label\": \"症状\",\n            \"hssc_id\": \"deb93f26-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc3_symptoms_and_problems\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class A6202(HsscFormModel):\\n    characterfield_supplementary_description_of_the_condition = models.CharField(max_length=255, null=True, blank=True, verbose_name='病情补充描述')\\n    relatedfield_symptom_list = models.ManyToManyField(Icpc3_symptoms_and_problems, related_name='icpc3_symptoms_and_problems_for_relatedfield_symptom_list_A6202', verbose_name='症状')\\n    class Meta:\\n        verbose_name = '院外辅助问诊'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6202_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6202_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6202Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_symptom_list\\\", ]\\nadmin.site.register(A6202, A6202Admin)\\nclinic_site.register(A6202, A6202Admin)\\n\", \"forms\": \"\\nclass A6202_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6202\\n        fields = ['characterfield_supplementary_description_of_the_condition', 'relatedfield_symptom_list', ]\\n        widgets = {'relatedfield_symptom_list': SelectMultiple, }\\n    \"}",
+            "components": [
+                "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
+                "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "components_groups": []
+        },
+        {
             "label": "院外咨询",
             "name": "A6201",
             "hssc_id": "0c89031c-9e23-11ec-aa2c-fe35a7065cdd",
@@ -4245,10 +4444,10 @@
             "components": [
                 "1bf942da-c5ce-11ec-b9d4-725badf7393d",
                 "873f9a88-c13e-11ec-b731-2617a93150cd",
-                "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
                 "decabc92-9aa1-11ec-bde1-8a6e55faf877",
                 "decba0ee-9aa1-11ec-bde1-8a6e55faf877",
-                "1cad2116-a52a-11ec-a478-2ec403f6c47b"
+                "1cad2116-a52a-11ec-a478-2ec403f6c47b",
+                "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": []
         },
@@ -4262,10 +4461,10 @@
             "meta_data": null,
             "script": null,
             "components": [
-                "401d33d8-aa49-11ec-9f15-ee7ade4bced6",
-                "cde598b8-d0ff-11ec-b369-823d1f108281",
                 "1cdf93ec-d100-11ec-b369-823d1f108281",
                 "3604f812-d100-11ec-ab0d-823d1f108281",
+                "401d33d8-aa49-11ec-9f15-ee7ade4bced6",
+                "cde598b8-d0ff-11ec-b369-823d1f108281",
                 "9e873f3a-d100-11ec-ab0d-823d1f108281"
             ],
             "components_groups": []
@@ -4280,20 +4479,40 @@
             "meta_data": "{\n    \"name\": \"yao_pin_ji_ben_xin_xi_biao\",\n    \"label\": \"药品基本信息表\",\n    \"hssc_id\": \"a2fc46f0-c115-11ec-9685-2617a93150cd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_yao_pin_bian_ma\",\n            \"label\": \"药品编码\",\n            \"hssc_id\": \"afe6851a-c115-11ec-9685-2617a93150cd\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_yao_pin_gui_ge\",\n            \"label\": \"药品规格\",\n            \"hssc_id\": \"fbdc40fe-c115-11ec-b731-2617a93150cd\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_yong_yao_zhou_qi\",\n            \"label\": \"用药疗程\",\n            \"hssc_id\": \"a6c0522e-bf7e-11ec-843b-6afc6c25d902\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_chang_yong_chu_fang_liang\",\n            \"label\": \"常用处方量\",\n            \"hssc_id\": \"2b80da60-c5ce-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_dui_zhao_yi_bao_ming_cheng\",\n            \"label\": \"对照医保名称\",\n            \"hssc_id\": \"33bc581c-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_dui_zhao_ji_yao_ming_cheng\",\n            \"label\": \"对照基药名称\",\n            \"hssc_id\": \"3e18992e-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_huan_suan_gui_ze\",\n            \"label\": \"换算规则\",\n            \"hssc_id\": \"4a10254e-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_fu_yong_pin_ci\",\n            \"label\": \"用药频次\",\n            \"hssc_id\": \"1bf942da-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_chu_fang_ji_liang_dan_wei\",\n            \"label\": \"处方计量单位\",\n            \"hssc_id\": \"77226cfe-c5ce-11ec-b819-725badf7393d\",\n            \"type\": \"Yao_pin_dan_wei\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_ru_ku_ji_liang_dan_wei\",\n            \"label\": \"入库计量单位\",\n            \"hssc_id\": \"654dfc0a-c5ce-11ec-b819-725badf7393d\",\n            \"type\": \"Yao_pin_dan_wei\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_xiao_shou_ji_liang_dan_wei\",\n            \"label\": \"销售计量单位\",\n            \"hssc_id\": \"6da75824-c5ce-11ec-b819-725badf7393d\",\n            \"type\": \"Yao_pin_dan_wei\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_yong_yao_tu_jing\",\n            \"label\": \"用药途径\",\n            \"hssc_id\": \"db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902\",\n            \"type\": \"Yong_yao_tu_jing\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_yao_pin_fen_lei\",\n            \"label\": \"药品分类\",\n            \"hssc_id\": \"5dc1e618-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"Yao_pin_fen_lei\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
             "script": "{\"models\": \"class Yao_pin_ji_ben_xin_xi_biao(HsscFormModel):\\n    boolfield_yao_pin_bian_ma = models.CharField(max_length=255, null=True, blank=True, verbose_name='药品编码')\\n    boolfield_yao_pin_gui_ge = models.CharField(max_length=255, null=True, blank=True, verbose_name='药品规格')\\n    boolfield_yong_yao_zhou_qi = models.CharField(max_length=255, null=True, blank=True, verbose_name='用药疗程')\\n    boolfield_chang_yong_chu_fang_liang = models.CharField(max_length=255, null=True, blank=True, verbose_name='常用处方量')\\n    boolfield_dui_zhao_yi_bao_ming_cheng = models.CharField(max_length=255, null=True, blank=True, verbose_name='对照医保名称')\\n    boolfield_dui_zhao_ji_yao_ming_cheng = models.CharField(max_length=255, null=True, blank=True, verbose_name='对照基药名称')\\n    boolfield_huan_suan_gui_ze = models.CharField(max_length=255, null=True, blank=True, verbose_name='换算规则')\\n    boolfield_fu_yong_pin_ci = models.CharField(max_length=255, null=True, blank=True, verbose_name='用药频次')\\n    boolfield_chu_fang_ji_liang_dan_wei = models.ForeignKey(Yao_pin_dan_wei, related_name='yao_pin_dan_wei_for_boolfield_chu_fang_ji_liang_dan_wei_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='处方计量单位')\\n    boolfield_ru_ku_ji_liang_dan_wei = models.ForeignKey(Yao_pin_dan_wei, related_name='yao_pin_dan_wei_for_boolfield_ru_ku_ji_liang_dan_wei_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='入库计量单位')\\n    boolfield_xiao_shou_ji_liang_dan_wei = models.ForeignKey(Yao_pin_dan_wei, related_name='yao_pin_dan_wei_for_boolfield_xiao_shou_ji_liang_dan_wei_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='销售计量单位')\\n    relatedfield_drug_name = models.ManyToManyField(Medicine, related_name='medicine_for_relatedfield_drug_name_yao_pin_ji_ben_xin_xi_biao', verbose_name='药品名称')\\n    boolfield_yong_yao_tu_jing = models.ForeignKey(Yong_yao_tu_jing, related_name='yong_yao_tu_jing_for_boolfield_yong_yao_tu_jing_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='用药途径')\\n    boolfield_yao_pin_fen_lei = models.ForeignKey(Yao_pin_fen_lei, related_name='yao_pin_fen_lei_for_boolfield_yao_pin_fen_lei_yao_pin_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='药品分类')\\n    class Meta:\\n        verbose_name = '药品基本信息表'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('yao_pin_ji_ben_xin_xi_biao_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('yao_pin_ji_ben_xin_xi_biao_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass Yao_pin_ji_ben_xin_xi_biaoAdmin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"boolfield_chu_fang_ji_liang_dan_wei\\\", \\\"boolfield_ru_ku_ji_liang_dan_wei\\\", \\\"boolfield_xiao_shou_ji_liang_dan_wei\\\", \\\"relatedfield_drug_name\\\", \\\"boolfield_yong_yao_tu_jing\\\", \\\"boolfield_yao_pin_fen_lei\\\", ]\\nadmin.site.register(Yao_pin_ji_ben_xin_xi_biao, Yao_pin_ji_ben_xin_xi_biaoAdmin)\\nclinic_site.register(Yao_pin_ji_ben_xin_xi_biao, Yao_pin_ji_ben_xin_xi_biaoAdmin)\\n\", \"forms\": \"\\nclass Yao_pin_ji_ben_xin_xi_biao_ModelForm(ModelForm):\\n    class Meta:\\n        model = Yao_pin_ji_ben_xin_xi_biao\\n        fields = ['boolfield_yao_pin_bian_ma', 'boolfield_yao_pin_gui_ge', 'boolfield_yong_yao_zhou_qi', 'boolfield_chang_yong_chu_fang_liang', 'boolfield_dui_zhao_yi_bao_ming_cheng', 'boolfield_dui_zhao_ji_yao_ming_cheng', 'boolfield_huan_suan_gui_ze', 'boolfield_fu_yong_pin_ci', 'boolfield_chu_fang_ji_liang_dan_wei', 'boolfield_ru_ku_ji_liang_dan_wei', 'boolfield_xiao_shou_ji_liang_dan_wei', 'relatedfield_drug_name', 'boolfield_yong_yao_tu_jing', 'boolfield_yao_pin_fen_lei', ]\\n        widgets = {'boolfield_chu_fang_ji_liang_dan_wei': Select, 'boolfield_ru_ku_ji_liang_dan_wei': Select, 'boolfield_xiao_shou_ji_liang_dan_wei': Select, 'relatedfield_drug_name': SelectMultiple, 'boolfield_yong_yao_tu_jing': Select, 'boolfield_yao_pin_fen_lei': Select, }\\n    \"}",
             "components": [
+                "18cfcb9a-d11a-11ec-ab0d-823d1f108281",
+                "1bf942da-c5ce-11ec-b9d4-725badf7393d",
                 "afe6851a-c115-11ec-9685-2617a93150cd",
                 "fbdc40fe-c115-11ec-b731-2617a93150cd",
-                "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
                 "2b80da60-c5ce-11ec-b819-725badf7393d",
                 "33bc581c-c5ce-11ec-b9d4-725badf7393d",
                 "3e18992e-c5ce-11ec-b9d4-725badf7393d",
                 "4a10254e-c5ce-11ec-b9d4-725badf7393d",
-                "1bf942da-c5ce-11ec-b9d4-725badf7393d",
+                "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
                 "77226cfe-c5ce-11ec-b819-725badf7393d",
                 "654dfc0a-c5ce-11ec-b819-725badf7393d",
                 "6da75824-c5ce-11ec-b819-725badf7393d",
                 "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-                "5dc1e618-c5ce-11ec-b9d4-725badf7393d",
-                "18cfcb9a-d11a-11ec-ab0d-823d1f108281"
+                "5dc1e618-c5ce-11ec-b9d4-725badf7393d"
+            ],
+            "components_groups": []
+        },
+        {
+            "label": "物料供应商基本信息表",
+            "name": "wu_liu_gong_ying_shang_ji_ben_xin_xi_biao",
+            "hssc_id": "63347e8a-c5c9-11ec-b819-725badf7393d",
+            "pym": "wlgysjbxxb",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"wu_liu_gong_ying_shang_ji_ben_xin_xi_biao\",\n    \"label\": \"物料供应商基本信息表\",\n    \"hssc_id\": \"63347e8a-c5c9-11ec-b819-725badf7393d\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_contact_address\",\n            \"label\": \"联系地址\",\n            \"hssc_id\": \"dea1797c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_contact_number\",\n            \"label\": \"联系电话\",\n            \"hssc_id\": \"deab5d16-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_gong_ying_shang_bian_ma\",\n            \"label\": \"供应商编码\",\n            \"hssc_id\": \"2bb30548-c5ca-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_zhu_yao_gong_ying_chan_pin\",\n            \"label\": \"主要供应产品\",\n            \"hssc_id\": \"36fae812-c5ca-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_gong_huo_zhou_qi\",\n            \"label\": \"供货周期\",\n            \"hssc_id\": \"42583a7a-c5ca-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_gong_ying_shang_ming_cheng\",\n            \"label\": \"供应商名称\",\n            \"hssc_id\": \"7c53c810-c5cb-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_xin_yu_ping_ji\",\n            \"label\": \"信誉评级\",\n            \"hssc_id\": \"5f80d88c-c5ca-11ec-b819-725badf7393d\",\n            \"type\": \"Xin_yu_ping_ji\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao(HsscFormModel):\\n    characterfield_contact_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系地址')\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    boolfield_gong_ying_shang_bian_ma = models.CharField(max_length=255, null=True, blank=True, verbose_name='供应商编码')\\n    boolfield_zhu_yao_gong_ying_chan_pin = models.CharField(max_length=255, null=True, blank=True, verbose_name='主要供应产品')\\n    boolfield_gong_huo_zhou_qi = models.CharField(max_length=255, null=True, blank=True, verbose_name='供货周期')\\n    boolfield_gong_ying_shang_ming_cheng = models.CharField(max_length=255, null=True, blank=True, verbose_name='供应商名称')\\n    boolfield_xin_yu_ping_ji = models.ForeignKey(Xin_yu_ping_ji, related_name='xin_yu_ping_ji_for_boolfield_xin_yu_ping_ji_wu_liu_gong_ying_shang_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='信誉评级')\\n    class Meta:\\n        verbose_name = '物料供应商基本信息表'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('wu_liu_gong_ying_shang_ji_ben_xin_xi_biao_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('wu_liu_gong_ying_shang_ji_ben_xin_xi_biao_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass Wu_liu_gong_ying_shang_ji_ben_xin_xi_biaoAdmin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"boolfield_xin_yu_ping_ji\\\", ]\\nadmin.site.register(Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao, Wu_liu_gong_ying_shang_ji_ben_xin_xi_biaoAdmin)\\nclinic_site.register(Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao, Wu_liu_gong_ying_shang_ji_ben_xin_xi_biaoAdmin)\\n\", \"forms\": \"\\nclass Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao_ModelForm(ModelForm):\\n    class Meta:\\n        model = Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao\\n        fields = ['characterfield_contact_address', 'characterfield_contact_number', 'boolfield_gong_ying_shang_bian_ma', 'boolfield_zhu_yao_gong_ying_chan_pin', 'boolfield_gong_huo_zhou_qi', 'boolfield_gong_ying_shang_ming_cheng', 'boolfield_xin_yu_ping_ji', ]\\n        widgets = {'boolfield_xin_yu_ping_ji': Select, }\\n    \"}",
+            "components": [
+                "dea1797c-9aa1-11ec-bde1-8a6e55faf877",
+                "2bb30548-c5ca-11ec-b9d4-725badf7393d",
+                "36fae812-c5ca-11ec-b819-725badf7393d",
+                "42583a7a-c5ca-11ec-b819-725badf7393d",
+                "7c53c810-c5cb-11ec-b819-725badf7393d",
+                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
+                "5f80d88c-c5ca-11ec-b819-725badf7393d"
             ],
             "components_groups": []
         },
@@ -4307,9 +4526,6 @@
             "meta_data": "{\n    \"name\": \"Z6205\",\n    \"label\": \"医生注册\",\n    \"hssc_id\": \"0bbc9e76-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_name\",\n            \"label\": \"姓名\",\n            \"hssc_id\": \"de9de26c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_gender\",\n            \"label\": \"性别\",\n            \"hssc_id\": \"de9e99dc-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_age\",\n            \"label\": \"年龄\",\n            \"hssc_id\": \"de9f4ea4-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterhssc_identification_number\",\n            \"label\": \"身份证号码\",\n            \"hssc_id\": \"dea0045c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_contact_address\",\n            \"label\": \"联系地址\",\n            \"hssc_id\": \"dea1797c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_practice_qualification\",\n            \"label\": \"执业资质\",\n            \"hssc_id\": \"dea24708-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_password_setting\",\n            \"label\": \"密码设置\",\n            \"hssc_id\": \"dea37b46-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_confirm_password\",\n            \"label\": \"确认密码\",\n            \"hssc_id\": \"dea437ac-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_expertise\",\n            \"label\": \"专长\",\n            \"hssc_id\": \"dea4f05c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_practice_time\",\n            \"label\": \"执业时间\",\n            \"hssc_id\": \"dea5a43e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"datetimefield_date_of_birth\",\n            \"label\": \"出生日期\",\n            \"hssc_id\": \"deb7b0ac-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"datetime\"\n        },\n        {\n            \"name\": \"relatedfield_affiliation\",\n            \"label\": \"所属机构\",\n            \"hssc_id\": \"ded78062-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Institution\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_service_role\",\n            \"label\": \"服务角色\",\n            \"hssc_id\": \"ded69094-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Fu_wu_jue_se\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
             "script": "{\"models\": \"class Z6205(HsscFormModel):\\n    characterfield_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='姓名')\\n    characterfield_gender = models.CharField(max_length=255, null=True, blank=True, verbose_name='性别')\\n    characterfield_age = models.CharField(max_length=255, null=True, blank=True, verbose_name='年龄')\\n    characterhssc_identification_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='身份证号码')\\n    characterfield_contact_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系地址')\\n    characterfield_practice_qualification = models.CharField(max_length=255, null=True, blank=True, verbose_name='执业资质')\\n    characterfield_password_setting = models.CharField(max_length=255, null=True, blank=True, verbose_name='密码设置')\\n    characterfield_confirm_password = models.CharField(max_length=255, null=True, blank=True, verbose_name='确认密码')\\n    characterfield_expertise = models.CharField(max_length=255, null=True, blank=True, verbose_name='专长')\\n    characterfield_practice_time = models.CharField(max_length=255, null=True, blank=True, verbose_name='执业时间')\\n    datetimefield_date_of_birth = models.DateTimeField(null=True, blank=True, verbose_name='出生日期')\\n    relatedfield_affiliation = models.ForeignKey(Institution, related_name='institution_for_relatedfield_affiliation_Z6205', on_delete=models.CASCADE, null=True, blank=True, verbose_name='所属机构')\\n    relatedfield_service_role = models.ManyToManyField(Fu_wu_jue_se, related_name='fu_wu_jue_se_for_relatedfield_service_role_Z6205', verbose_name='服务角色')\\n    class Meta:\\n        verbose_name = '医生注册'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('Z6205_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('Z6205_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass Z6205Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_affiliation\\\", \\\"relatedfield_service_role\\\", ]\\nadmin.site.register(Z6205, Z6205Admin)\\nclinic_site.register(Z6205, Z6205Admin)\\n\", \"forms\": \"\\nclass Z6205_ModelForm(ModelForm):\\n    class Meta:\\n        model = Z6205\\n        fields = ['characterfield_name', 'characterfield_gender', 'characterfield_age', 'characterhssc_identification_number', 'characterfield_contact_address', 'characterfield_practice_qualification', 'characterfield_password_setting', 'characterfield_confirm_password', 'characterfield_expertise', 'characterfield_practice_time', 'datetimefield_date_of_birth', 'relatedfield_affiliation', 'relatedfield_service_role', ]\\n        widgets = {'relatedfield_affiliation': Select, 'relatedfield_service_role': CheckboxSelectMultiple, }\\n    \"}",
             "components": [
-                "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
-                "de9e99dc-9aa1-11ec-bde1-8a6e55faf877",
-                "de9f4ea4-9aa1-11ec-bde1-8a6e55faf877",
                 "dea0045c-9aa1-11ec-bde1-8a6e55faf877",
                 "dea1797c-9aa1-11ec-bde1-8a6e55faf877",
                 "dea24708-9aa1-11ec-bde1-8a6e55faf877",
@@ -4317,6 +4533,9 @@
                 "dea437ac-9aa1-11ec-bde1-8a6e55faf877",
                 "dea4f05c-9aa1-11ec-bde1-8a6e55faf877",
                 "dea5a43e-9aa1-11ec-bde1-8a6e55faf877",
+                "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
+                "de9e99dc-9aa1-11ec-bde1-8a6e55faf877",
+                "de9f4ea4-9aa1-11ec-bde1-8a6e55faf877",
                 "deb7b0ac-9aa1-11ec-bde1-8a6e55faf877",
                 "ded78062-9aa1-11ec-bde1-8a6e55faf877",
                 "ded69094-9aa1-11ec-bde1-8a6e55faf877"
@@ -4379,7 +4598,6 @@
             "script": "{\"models\": \"class Ji_gou_ji_ben_xin_xi_biao(HsscFormModel):\\n    characterfield_contact_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系地址')\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    boolfield_ji_gou_bian_ma = models.CharField(max_length=255, null=True, blank=True, verbose_name='机构编码')\\n    boolfield_ji_gou_ming_cheng = models.CharField(max_length=255, null=True, blank=True, verbose_name='机构名称')\\n    boolfield_ji_gou_dai_ma = models.CharField(max_length=255, null=True, blank=True, verbose_name='机构代码')\\n    boolfield_ji_gou_shu_xing = models.CharField(max_length=255, null=True, blank=True, verbose_name='机构属性')\\n    boolfield_ji_gou_ceng_ji = models.CharField(max_length=255, null=True, blank=True, verbose_name='机构层级')\\n    boolfield_suo_zai_hang_zheng_qu_hua_dai_ma = models.CharField(max_length=255, null=True, blank=True, verbose_name='所在行政区划代码')\\n    boolfield_xing_zheng_qu_hua_gui_shu = models.CharField(max_length=255, null=True, blank=True, verbose_name='行政区划归属')\\n    boolfield_fa_ding_fu_ze_ren = models.CharField(max_length=255, null=True, blank=True, verbose_name='法定负责人')\\n    class Meta:\\n        verbose_name = '机构基本信息表'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('ji_gou_ji_ben_xin_xi_biao_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('ji_gou_ji_ben_xin_xi_biao_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass Ji_gou_ji_ben_xin_xi_biaoAdmin(HsscFormAdmin):\\n    pass\\nadmin.site.register(Ji_gou_ji_ben_xin_xi_biao, Ji_gou_ji_ben_xin_xi_biaoAdmin)\\nclinic_site.register(Ji_gou_ji_ben_xin_xi_biao, Ji_gou_ji_ben_xin_xi_biaoAdmin)\\n\", \"forms\": \"\\nclass Ji_gou_ji_ben_xin_xi_biao_ModelForm(ModelForm):\\n    class Meta:\\n        model = Ji_gou_ji_ben_xin_xi_biao\\n        fields = ['characterfield_contact_address', 'characterfield_contact_number', 'boolfield_ji_gou_bian_ma', 'boolfield_ji_gou_ming_cheng', 'boolfield_ji_gou_dai_ma', 'boolfield_ji_gou_shu_xing', 'boolfield_ji_gou_ceng_ji', 'boolfield_suo_zai_hang_zheng_qu_hua_dai_ma', 'boolfield_xing_zheng_qu_hua_gui_shu', 'boolfield_fa_ding_fu_ze_ren', ]\\n        \\n    \"}",
             "components": [
                 "dea1797c-9aa1-11ec-bde1-8a6e55faf877",
-                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
                 "b65a7d04-c5c8-11ec-b819-725badf7393d",
                 "d31f31aa-c5c8-11ec-b819-725badf7393d",
                 "d8aa48a8-c5c8-11ec-b9d4-725badf7393d",
@@ -4387,27 +4605,8 @@
                 "eb5c311e-c5c8-11ec-b819-725badf7393d",
                 "0443bd28-c5c9-11ec-b819-725badf7393d",
                 "0b72d3cc-c5c9-11ec-b819-725badf7393d",
-                "13299560-c5c9-11ec-b9d4-725badf7393d"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "物料供应商基本信息表",
-            "name": "wu_liu_gong_ying_shang_ji_ben_xin_xi_biao",
-            "hssc_id": "63347e8a-c5c9-11ec-b819-725badf7393d",
-            "pym": "wlgysjbxxb",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"wu_liu_gong_ying_shang_ji_ben_xin_xi_biao\",\n    \"label\": \"物料供应商基本信息表\",\n    \"hssc_id\": \"63347e8a-c5c9-11ec-b819-725badf7393d\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_contact_address\",\n            \"label\": \"联系地址\",\n            \"hssc_id\": \"dea1797c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_contact_number\",\n            \"label\": \"联系电话\",\n            \"hssc_id\": \"deab5d16-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_gong_ying_shang_bian_ma\",\n            \"label\": \"供应商编码\",\n            \"hssc_id\": \"2bb30548-c5ca-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_zhu_yao_gong_ying_chan_pin\",\n            \"label\": \"主要供应产品\",\n            \"hssc_id\": \"36fae812-c5ca-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_gong_huo_zhou_qi\",\n            \"label\": \"供货周期\",\n            \"hssc_id\": \"42583a7a-c5ca-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_gong_ying_shang_ming_cheng\",\n            \"label\": \"供应商名称\",\n            \"hssc_id\": \"7c53c810-c5cb-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_xin_yu_ping_ji\",\n            \"label\": \"信誉评级\",\n            \"hssc_id\": \"5f80d88c-c5ca-11ec-b819-725badf7393d\",\n            \"type\": \"Xin_yu_ping_ji\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao(HsscFormModel):\\n    characterfield_contact_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系地址')\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    boolfield_gong_ying_shang_bian_ma = models.CharField(max_length=255, null=True, blank=True, verbose_name='供应商编码')\\n    boolfield_zhu_yao_gong_ying_chan_pin = models.CharField(max_length=255, null=True, blank=True, verbose_name='主要供应产品')\\n    boolfield_gong_huo_zhou_qi = models.CharField(max_length=255, null=True, blank=True, verbose_name='供货周期')\\n    boolfield_gong_ying_shang_ming_cheng = models.CharField(max_length=255, null=True, blank=True, verbose_name='供应商名称')\\n    boolfield_xin_yu_ping_ji = models.ForeignKey(Xin_yu_ping_ji, related_name='xin_yu_ping_ji_for_boolfield_xin_yu_ping_ji_wu_liu_gong_ying_shang_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='信誉评级')\\n    class Meta:\\n        verbose_name = '物料供应商基本信息表'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('wu_liu_gong_ying_shang_ji_ben_xin_xi_biao_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('wu_liu_gong_ying_shang_ji_ben_xin_xi_biao_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass Wu_liu_gong_ying_shang_ji_ben_xin_xi_biaoAdmin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"boolfield_xin_yu_ping_ji\\\", ]\\nadmin.site.register(Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao, Wu_liu_gong_ying_shang_ji_ben_xin_xi_biaoAdmin)\\nclinic_site.register(Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao, Wu_liu_gong_ying_shang_ji_ben_xin_xi_biaoAdmin)\\n\", \"forms\": \"\\nclass Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao_ModelForm(ModelForm):\\n    class Meta:\\n        model = Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao\\n        fields = ['characterfield_contact_address', 'characterfield_contact_number', 'boolfield_gong_ying_shang_bian_ma', 'boolfield_zhu_yao_gong_ying_chan_pin', 'boolfield_gong_huo_zhou_qi', 'boolfield_gong_ying_shang_ming_cheng', 'boolfield_xin_yu_ping_ji', ]\\n        widgets = {'boolfield_xin_yu_ping_ji': Select, }\\n    \"}",
-            "components": [
-                "dea1797c-9aa1-11ec-bde1-8a6e55faf877",
-                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
-                "2bb30548-c5ca-11ec-b9d4-725badf7393d",
-                "36fae812-c5ca-11ec-b819-725badf7393d",
-                "42583a7a-c5ca-11ec-b819-725badf7393d",
-                "7c53c810-c5cb-11ec-b819-725badf7393d",
-                "5f80d88c-c5ca-11ec-b819-725badf7393d"
+                "13299560-c5c9-11ec-b9d4-725badf7393d",
+                "deab5d16-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": []
         },
@@ -4421,13 +4620,13 @@
             "meta_data": "{\n    \"name\": \"zhi_yuan_ji_ben_xin_xi_biao\",\n    \"label\": \"职员基本信息表\",\n    \"hssc_id\": \"bca10e04-c5c7-11ec-b819-725badf7393d\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_name\",\n            \"label\": \"姓名\",\n            \"hssc_id\": \"de9de26c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterhssc_identification_number\",\n            \"label\": \"身份证号码\",\n            \"hssc_id\": \"dea0045c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_practice_qualification\",\n            \"label\": \"执业资质\",\n            \"hssc_id\": \"dea24708-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_expertise\",\n            \"label\": \"专长\",\n            \"hssc_id\": \"dea4f05c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_practice_time\",\n            \"label\": \"执业时间\",\n            \"hssc_id\": \"dea5a43e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_contact_number\",\n            \"label\": \"联系电话\",\n            \"hssc_id\": \"deab5d16-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_zhi_yuan_bian_ma\",\n            \"label\": \"职员编码\",\n            \"hssc_id\": \"f586a648-c5c7-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_affiliation\",\n            \"label\": \"所属机构\",\n            \"hssc_id\": \"ded78062-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Institution\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_service_role\",\n            \"label\": \"服务角色\",\n            \"hssc_id\": \"ded69094-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Fu_wu_jue_se\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
             "script": "{\"models\": \"class Zhi_yuan_ji_ben_xin_xi_biao(HsscFormModel):\\n    characterfield_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='姓名')\\n    characterhssc_identification_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='身份证号码')\\n    characterfield_practice_qualification = models.CharField(max_length=255, null=True, blank=True, verbose_name='执业资质')\\n    characterfield_expertise = models.CharField(max_length=255, null=True, blank=True, verbose_name='专长')\\n    characterfield_practice_time = models.CharField(max_length=255, null=True, blank=True, verbose_name='执业时间')\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    boolfield_zhi_yuan_bian_ma = models.CharField(max_length=255, null=True, blank=True, verbose_name='职员编码')\\n    relatedfield_affiliation = models.ForeignKey(Institution, related_name='institution_for_relatedfield_affiliation_zhi_yuan_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='所属机构')\\n    relatedfield_service_role = models.ManyToManyField(Fu_wu_jue_se, related_name='fu_wu_jue_se_for_relatedfield_service_role_zhi_yuan_ji_ben_xin_xi_biao', verbose_name='服务角色')\\n    class Meta:\\n        verbose_name = '职员基本信息表'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('zhi_yuan_ji_ben_xin_xi_biao_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('zhi_yuan_ji_ben_xin_xi_biao_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass Zhi_yuan_ji_ben_xin_xi_biaoAdmin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_affiliation\\\", \\\"relatedfield_service_role\\\", ]\\nadmin.site.register(Zhi_yuan_ji_ben_xin_xi_biao, Zhi_yuan_ji_ben_xin_xi_biaoAdmin)\\nclinic_site.register(Zhi_yuan_ji_ben_xin_xi_biao, Zhi_yuan_ji_ben_xin_xi_biaoAdmin)\\n\", \"forms\": \"\\nclass Zhi_yuan_ji_ben_xin_xi_biao_ModelForm(ModelForm):\\n    class Meta:\\n        model = Zhi_yuan_ji_ben_xin_xi_biao\\n        fields = ['characterfield_name', 'characterhssc_identification_number', 'characterfield_practice_qualification', 'characterfield_expertise', 'characterfield_practice_time', 'characterfield_contact_number', 'boolfield_zhi_yuan_bian_ma', 'relatedfield_affiliation', 'relatedfield_service_role', ]\\n        widgets = {'relatedfield_affiliation': Select, 'relatedfield_service_role': CheckboxSelectMultiple, }\\n    \"}",
             "components": [
-                "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
                 "dea0045c-9aa1-11ec-bde1-8a6e55faf877",
                 "dea24708-9aa1-11ec-bde1-8a6e55faf877",
                 "dea4f05c-9aa1-11ec-bde1-8a6e55faf877",
                 "dea5a43e-9aa1-11ec-bde1-8a6e55faf877",
-                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
                 "f586a648-c5c7-11ec-b9d4-725badf7393d",
+                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
+                "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
                 "ded78062-9aa1-11ec-bde1-8a6e55faf877",
                 "ded69094-9aa1-11ec-bde1-8a6e55faf877"
             ],
@@ -4443,13 +4642,13 @@
             "meta_data": "{\n    \"name\": \"she_bei_ji_ben_xin_xi_biao\",\n    \"label\": \"设备基本信息表\",\n    \"hssc_id\": \"7c8caaba-c5c9-11ec-b9d4-725badf7393d\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_contact_number\",\n            \"label\": \"联系电话\",\n            \"hssc_id\": \"deab5d16-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_she_bei_ming_cheng\",\n            \"label\": \"设备名称\",\n            \"hssc_id\": \"66ae19e2-c5cc-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_she_bei_bian_ma\",\n            \"label\": \"设备编码\",\n            \"hssc_id\": \"6f02d90c-c5cc-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_sheng_chan_chang_jia\",\n            \"label\": \"生产厂家\",\n            \"hssc_id\": \"761f6a66-c5cc-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_she_bei_fu_wu_dan_wei_hao_shi\",\n            \"label\": \"设备服务单位耗时\",\n            \"hssc_id\": \"856e1558-c5cc-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_she_bei_jian_xiu_zhou_qi\",\n            \"label\": \"设备检修周期\",\n            \"hssc_id\": \"8cc15d92-c5cc-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_she_bei_shi_yong_cheng_ben\",\n            \"label\": \"设备使用成本\",\n            \"hssc_id\": \"939876dc-c5cc-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_she_bei_shi_yong_fu_wu_gong_neng\",\n            \"label\": \"设备适用服务功能\",\n            \"hssc_id\": \"ca6c7ec4-c5cc-11ec-b819-725badf7393d\",\n            \"type\": \"Icpc4_physical_examination_and_tests\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
             "script": "{\"models\": \"class She_bei_ji_ben_xin_xi_biao(HsscFormModel):\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    boolfield_she_bei_ming_cheng = models.CharField(max_length=255, null=True, blank=True, verbose_name='设备名称')\\n    boolfield_she_bei_bian_ma = models.CharField(max_length=255, null=True, blank=True, verbose_name='设备编码')\\n    boolfield_sheng_chan_chang_jia = models.CharField(max_length=255, null=True, blank=True, verbose_name='生产厂家')\\n    boolfield_she_bei_fu_wu_dan_wei_hao_shi = models.CharField(max_length=255, null=True, blank=True, verbose_name='设备服务单位耗时')\\n    boolfield_she_bei_jian_xiu_zhou_qi = models.CharField(max_length=255, null=True, blank=True, verbose_name='设备检修周期')\\n    boolfield_she_bei_shi_yong_cheng_ben = models.CharField(max_length=255, null=True, blank=True, verbose_name='设备使用成本')\\n    boolfield_she_bei_shi_yong_fu_wu_gong_neng = models.ForeignKey(Icpc4_physical_examination_and_tests, related_name='icpc4_physical_examination_and_tests_for_boolfield_she_bei_shi_yong_fu_wu_gong_neng_she_bei_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='设备适用服务功能')\\n    class Meta:\\n        verbose_name = '设备基本信息表'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('she_bei_ji_ben_xin_xi_biao_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('she_bei_ji_ben_xin_xi_biao_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass She_bei_ji_ben_xin_xi_biaoAdmin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"boolfield_she_bei_shi_yong_fu_wu_gong_neng\\\", ]\\nadmin.site.register(She_bei_ji_ben_xin_xi_biao, She_bei_ji_ben_xin_xi_biaoAdmin)\\nclinic_site.register(She_bei_ji_ben_xin_xi_biao, She_bei_ji_ben_xin_xi_biaoAdmin)\\n\", \"forms\": \"\\nclass She_bei_ji_ben_xin_xi_biao_ModelForm(ModelForm):\\n    class Meta:\\n        model = She_bei_ji_ben_xin_xi_biao\\n        fields = ['characterfield_contact_number', 'boolfield_she_bei_ming_cheng', 'boolfield_she_bei_bian_ma', 'boolfield_sheng_chan_chang_jia', 'boolfield_she_bei_fu_wu_dan_wei_hao_shi', 'boolfield_she_bei_jian_xiu_zhou_qi', 'boolfield_she_bei_shi_yong_cheng_ben', 'boolfield_she_bei_shi_yong_fu_wu_gong_neng', ]\\n        widgets = {'boolfield_she_bei_shi_yong_fu_wu_gong_neng': Select, }\\n    \"}",
             "components": [
-                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
-                "66ae19e2-c5cc-11ec-b9d4-725badf7393d",
                 "6f02d90c-c5cc-11ec-b9d4-725badf7393d",
                 "761f6a66-c5cc-11ec-b819-725badf7393d",
                 "856e1558-c5cc-11ec-b819-725badf7393d",
                 "8cc15d92-c5cc-11ec-b9d4-725badf7393d",
                 "939876dc-c5cc-11ec-b9d4-725badf7393d",
+                "66ae19e2-c5cc-11ec-b9d4-725badf7393d",
+                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
                 "ca6c7ec4-c5cc-11ec-b819-725badf7393d"
             ],
             "components_groups": []
@@ -4508,12 +4707,12 @@
             "script": "{\"models\": \"class Fu_wu_fen_gong_ji_gou_ji_ben_xin_xi_biao(HsscFormModel):\\n    characterfield_contact_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系地址')\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    boolfield_ji_gou_dai_ma = models.CharField(max_length=255, null=True, blank=True, verbose_name='机构代码')\\n    boolfield_ji_gou_shu_xing = models.CharField(max_length=255, null=True, blank=True, verbose_name='机构属性')\\n    boolfield_gong_ying_shang_bian_ma = models.CharField(max_length=255, null=True, blank=True, verbose_name='供应商编码')\\n    boolfield_gong_ying_shang_ming_cheng = models.CharField(max_length=255, null=True, blank=True, verbose_name='供应商名称')\\n    boolfield_zhuan_ye_fu_wu = models.CharField(max_length=255, null=True, blank=True, verbose_name='专业服务')\\n    boolfield_xin_yu_ping_ji = models.ForeignKey(Xin_yu_ping_ji, related_name='xin_yu_ping_ji_for_boolfield_xin_yu_ping_ji_fu_wu_fen_gong_ji_gou_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='信誉评级')\\n    class Meta:\\n        verbose_name = '服务分供机构基本信息表'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('fu_wu_fen_gong_ji_gou_ji_ben_xin_xi_biao_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('fu_wu_fen_gong_ji_gou_ji_ben_xin_xi_biao_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass Fu_wu_fen_gong_ji_gou_ji_ben_xin_xi_biaoAdmin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"boolfield_xin_yu_ping_ji\\\", ]\\nadmin.site.register(Fu_wu_fen_gong_ji_gou_ji_ben_xin_xi_biao, Fu_wu_fen_gong_ji_gou_ji_ben_xin_xi_biaoAdmin)\\nclinic_site.register(Fu_wu_fen_gong_ji_gou_ji_ben_xin_xi_biao, Fu_wu_fen_gong_ji_gou_ji_ben_xin_xi_biaoAdmin)\\n\", \"forms\": \"\\nclass Fu_wu_fen_gong_ji_gou_ji_ben_xin_xi_biao_ModelForm(ModelForm):\\n    class Meta:\\n        model = Fu_wu_fen_gong_ji_gou_ji_ben_xin_xi_biao\\n        fields = ['characterfield_contact_address', 'characterfield_contact_number', 'boolfield_ji_gou_dai_ma', 'boolfield_ji_gou_shu_xing', 'boolfield_gong_ying_shang_bian_ma', 'boolfield_gong_ying_shang_ming_cheng', 'boolfield_zhuan_ye_fu_wu', 'boolfield_xin_yu_ping_ji', ]\\n        widgets = {'boolfield_xin_yu_ping_ji': Select, }\\n    \"}",
             "components": [
                 "dea1797c-9aa1-11ec-bde1-8a6e55faf877",
-                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
                 "d8aa48a8-c5c8-11ec-b9d4-725badf7393d",
                 "dec11cee-c5c8-11ec-b819-725badf7393d",
                 "2bb30548-c5ca-11ec-b9d4-725badf7393d",
-                "7c53c810-c5cb-11ec-b819-725badf7393d",
                 "2c8ed21a-c5cc-11ec-b9d4-725badf7393d",
+                "7c53c810-c5cb-11ec-b819-725badf7393d",
+                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
                 "5f80d88c-c5ca-11ec-b819-725badf7393d"
             ],
             "components_groups": []
@@ -4558,11 +4757,11 @@
             "meta_data": "{\n    \"name\": \"A5001\",\n    \"label\": \"药物处方\",\n    \"hssc_id\": \"0ce117aa-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_yong_yao_zhou_qi\",\n            \"label\": \"用药疗程\",\n            \"hssc_id\": \"a6c0522e-bf7e-11ec-843b-6afc6c25d902\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_chang_yong_chu_fang_liang\",\n            \"label\": \"常用处方量\",\n            \"hssc_id\": \"2b80da60-c5ce-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_fu_yong_pin_ci\",\n            \"label\": \"用药频次\",\n            \"hssc_id\": \"1bf942da-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_yong_yao_tu_jing\",\n            \"label\": \"用药途径\",\n            \"hssc_id\": \"db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902\",\n            \"type\": \"Yong_yao_tu_jing\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
             "script": "{\"models\": \"class A5001(HsscFormModel):\\n    boolfield_yong_yao_zhou_qi = models.CharField(max_length=255, null=True, blank=True, verbose_name='用药疗程')\\n    boolfield_chang_yong_chu_fang_liang = models.CharField(max_length=255, null=True, blank=True, verbose_name='常用处方量')\\n    boolfield_fu_yong_pin_ci = models.CharField(max_length=255, null=True, blank=True, verbose_name='用药频次')\\n    relatedfield_drug_name = models.ManyToManyField(Medicine, related_name='medicine_for_relatedfield_drug_name_A5001', verbose_name='药品名称')\\n    boolfield_yong_yao_tu_jing = models.ForeignKey(Yong_yao_tu_jing, related_name='yong_yao_tu_jing_for_boolfield_yong_yao_tu_jing_A5001', on_delete=models.CASCADE, null=True, blank=True, verbose_name='用药途径')\\n    class Meta:\\n        verbose_name = '药物处方'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A5001_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A5001_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A5001Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_drug_name\\\", \\\"boolfield_yong_yao_tu_jing\\\", ]\\nadmin.site.register(A5001, A5001Admin)\\nclinic_site.register(A5001, A5001Admin)\\n\", \"forms\": \"\\nclass A5001_ModelForm(ModelForm):\\n    class Meta:\\n        model = A5001\\n        fields = ['boolfield_yong_yao_zhou_qi', 'boolfield_chang_yong_chu_fang_liang', 'boolfield_fu_yong_pin_ci', 'relatedfield_drug_name', 'boolfield_yong_yao_tu_jing', ]\\n        widgets = {'relatedfield_drug_name': SelectMultiple, 'boolfield_yong_yao_tu_jing': Select, }\\n    \"}",
             "components": [
-                "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
-                "2b80da60-c5ce-11ec-b819-725badf7393d",
                 "1bf942da-c5ce-11ec-b9d4-725badf7393d",
-                "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
-                "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902"
+                "2b80da60-c5ce-11ec-b819-725badf7393d",
+                "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
+                "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
+                "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": []
         },
@@ -4590,11 +4789,11 @@
             "meta_data": "{\n    \"name\": \"shu_ye_zhu_she_dan\",\n    \"label\": \"输液注射单\",\n    \"hssc_id\": \"3e88f758-c9ef-11ec-b369-168d53e8234e\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_yao_pin_gui_ge\",\n            \"label\": \"药品规格\",\n            \"hssc_id\": \"fbdc40fe-c115-11ec-b731-2617a93150cd\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_yong_yao_zhou_qi\",\n            \"label\": \"用药疗程\",\n            \"hssc_id\": \"a6c0522e-bf7e-11ec-843b-6afc6c25d902\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_chang_yong_chu_fang_liang\",\n            \"label\": \"常用处方量\",\n            \"hssc_id\": \"2b80da60-c5ce-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_zhi_xing_qian_ming\",\n            \"label\": \"执行签名\",\n            \"hssc_id\": \"e98d52f2-c9ef-11ec-b452-168d53e8234e\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_fu_yong_pin_ci\",\n            \"label\": \"用药频次\",\n            \"hssc_id\": \"1bf942da-c5ce-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_zhu_she_ri_qi\",\n            \"label\": \"注射日期\",\n            \"hssc_id\": \"abe7baaa-c9ef-11ec-b369-168d53e8234e\",\n            \"type\": \"datetime\"\n        },\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
             "script": "{\"models\": \"class Shu_ye_zhu_she_dan(HsscFormModel):\\n    boolfield_yao_pin_gui_ge = models.CharField(max_length=255, null=True, blank=True, verbose_name='药品规格')\\n    boolfield_yong_yao_zhou_qi = models.CharField(max_length=255, null=True, blank=True, verbose_name='用药疗程')\\n    boolfield_chang_yong_chu_fang_liang = models.CharField(max_length=255, null=True, blank=True, verbose_name='常用处方量')\\n    boolfield_zhi_xing_qian_ming = models.CharField(max_length=255, null=True, blank=True, verbose_name='执行签名')\\n    boolfield_fu_yong_pin_ci = models.CharField(max_length=255, null=True, blank=True, verbose_name='用药频次')\\n    boolfield_zhu_she_ri_qi = models.DateTimeField(null=True, blank=True, verbose_name='注射日期')\\n    relatedfield_drug_name = models.ManyToManyField(Medicine, related_name='medicine_for_relatedfield_drug_name_shu_ye_zhu_she_dan', verbose_name='药品名称')\\n    class Meta:\\n        verbose_name = '输液注射单'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('shu_ye_zhu_she_dan_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('shu_ye_zhu_she_dan_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass Shu_ye_zhu_she_danAdmin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_drug_name\\\", ]\\nadmin.site.register(Shu_ye_zhu_she_dan, Shu_ye_zhu_she_danAdmin)\\nclinic_site.register(Shu_ye_zhu_she_dan, Shu_ye_zhu_she_danAdmin)\\n\", \"forms\": \"\\nclass Shu_ye_zhu_she_dan_ModelForm(ModelForm):\\n    class Meta:\\n        model = Shu_ye_zhu_she_dan\\n        fields = ['boolfield_yao_pin_gui_ge', 'boolfield_yong_yao_zhou_qi', 'boolfield_chang_yong_chu_fang_liang', 'boolfield_zhi_xing_qian_ming', 'boolfield_fu_yong_pin_ci', 'boolfield_zhu_she_ri_qi', 'relatedfield_drug_name', ]\\n        widgets = {'relatedfield_drug_name': SelectMultiple, }\\n    \"}",
             "components": [
+                "1bf942da-c5ce-11ec-b9d4-725badf7393d",
                 "fbdc40fe-c115-11ec-b731-2617a93150cd",
-                "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
                 "2b80da60-c5ce-11ec-b819-725badf7393d",
                 "e98d52f2-c9ef-11ec-b452-168d53e8234e",
-                "1bf942da-c5ce-11ec-b9d4-725badf7393d",
+                "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
                 "abe7baaa-c9ef-11ec-b369-168d53e8234e",
                 "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
             ],
@@ -4626,12 +4825,12 @@
             "meta_data": "{\n    \"name\": \"A6203\",\n    \"label\": \"个人基本信息\",\n    \"hssc_id\": \"0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_name\",\n            \"label\": \"姓名\",\n            \"hssc_id\": \"de9de26c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterhssc_identification_number\",\n            \"label\": \"身份证号码\",\n            \"hssc_id\": \"dea0045c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_resident_file_number\",\n            \"label\": \"居民档案号\",\n            \"hssc_id\": \"dea9f25a-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_family_address\",\n            \"label\": \"家庭地址\",\n            \"hssc_id\": \"deaaac2c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_contact_number\",\n            \"label\": \"联系电话\",\n            \"hssc_id\": \"deab5d16-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_medical_ic_card_number\",\n            \"label\": \"医疗ic卡号\",\n            \"hssc_id\": \"deac1aa8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"datetimefield_date_of_birth\",\n            \"label\": \"出生日期\",\n            \"hssc_id\": \"deb7b0ac-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"datetime\"\n        },\n        {\n            \"name\": \"relatedfield_gender\",\n            \"label\": \"性别\",\n            \"hssc_id\": \"debcb08e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Gender\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_nationality\",\n            \"label\": \"民族\",\n            \"hssc_id\": \"debdab56-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Nationality\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_marital_status\",\n            \"label\": \"婚姻状况\",\n            \"hssc_id\": \"debf042e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Marital_status\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_education\",\n            \"label\": \"文化程度\",\n            \"hssc_id\": \"debff348-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Education\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_occupational_status\",\n            \"label\": \"职业状况\",\n            \"hssc_id\": \"dec0d42a-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Occupational_status\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_medical_expenses_burden\",\n            \"label\": \"医疗费用负担\",\n            \"hssc_id\": \"dec1c100-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medical_expenses_burden\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_type_of_residence\",\n            \"label\": \"居住类型\",\n            \"hssc_id\": \"dec2ab9c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Type_of_residence\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_blood_type\",\n            \"label\": \"血型\",\n            \"hssc_id\": \"dec38ce2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Blood_type\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_signed_family_doctor\",\n            \"label\": \"签约家庭医生\",\n            \"hssc_id\": \"dec46bf8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Staff\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_family_relationship\",\n            \"label\": \"家庭成员关系\",\n            \"hssc_id\": \"ded3d502-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Family_relationship\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
             "script": "{\"models\": \"class A6203(HsscFormModel):\\n    characterfield_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='姓名')\\n    characterhssc_identification_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='身份证号码')\\n    characterfield_resident_file_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='居民档案号')\\n    characterfield_family_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='家庭地址')\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    characterfield_medical_ic_card_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='医疗ic卡号')\\n    datetimefield_date_of_birth = models.DateTimeField(null=True, blank=True, verbose_name='出生日期')\\n    relatedfield_gender = models.ForeignKey(Gender, related_name='gender_for_relatedfield_gender_A6203', on_delete=models.CASCADE, null=True, blank=True, verbose_name='性别')\\n    relatedfield_nationality = models.ForeignKey(Nationality, related_name='nationality_for_relatedfield_nationality_A6203', on_delete=models.CASCADE, null=True, blank=True, verbose_name='民族')\\n    relatedfield_marital_status = models.ForeignKey(Marital_status, related_name='marital_status_for_relatedfield_marital_status_A6203', on_delete=models.CASCADE, null=True, blank=True, verbose_name='婚姻状况')\\n    relatedfield_education = models.ForeignKey(Education, related_name='education_for_relatedfield_education_A6203', on_delete=models.CASCADE, null=True, blank=True, verbose_name='文化程度')\\n    relatedfield_occupational_status = models.ForeignKey(Occupational_status, related_name='occupational_status_for_relatedfield_occupational_status_A6203', on_delete=models.CASCADE, null=True, blank=True, verbose_name='职业状况')\\n    relatedfield_medical_expenses_burden = models.ManyToManyField(Medical_expenses_burden, related_name='medical_expenses_burden_for_relatedfield_medical_expenses_burden_A6203', verbose_name='医疗费用负担')\\n    relatedfield_type_of_residence = models.ForeignKey(Type_of_residence, related_name='type_of_residence_for_relatedfield_type_of_residence_A6203', on_delete=models.CASCADE, null=True, blank=True, verbose_name='居住类型')\\n    relatedfield_blood_type = models.ForeignKey(Blood_type, related_name='blood_type_for_relatedfield_blood_type_A6203', on_delete=models.CASCADE, null=True, blank=True, verbose_name='血型')\\n    relatedfield_signed_family_doctor = models.ForeignKey(Staff, related_name='staff_for_relatedfield_signed_family_doctor_A6203', on_delete=models.CASCADE, null=True, blank=True, verbose_name='签约家庭医生')\\n    relatedfield_family_relationship = models.ForeignKey(Family_relationship, related_name='family_relationship_for_relatedfield_family_relationship_A6203', on_delete=models.CASCADE, null=True, blank=True, verbose_name='家庭成员关系')\\n    class Meta:\\n        verbose_name = '个人基本信息'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6203_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6203_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6203Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_gender\\\", \\\"relatedfield_nationality\\\", \\\"relatedfield_marital_status\\\", \\\"relatedfield_education\\\", \\\"relatedfield_occupational_status\\\", \\\"relatedfield_medical_expenses_burden\\\", \\\"relatedfield_type_of_residence\\\", \\\"relatedfield_blood_type\\\", \\\"relatedfield_signed_family_doctor\\\", \\\"relatedfield_family_relationship\\\", ]\\nadmin.site.register(A6203, A6203Admin)\\nclinic_site.register(A6203, A6203Admin)\\n\", \"forms\": \"\\nclass A6203_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6203\\n        fields = ['characterfield_name', 'characterhssc_identification_number', 'characterfield_resident_file_number', 'characterfield_family_address', 'characterfield_contact_number', 'characterfield_medical_ic_card_number', 'datetimefield_date_of_birth', 'relatedfield_gender', 'relatedfield_nationality', 'relatedfield_marital_status', 'relatedfield_education', 'relatedfield_occupational_status', 'relatedfield_medical_expenses_burden', 'relatedfield_type_of_residence', 'relatedfield_blood_type', 'relatedfield_signed_family_doctor', 'relatedfield_family_relationship', ]\\n        widgets = {'relatedfield_gender': Select, 'relatedfield_nationality': Select, 'relatedfield_marital_status': Select, 'relatedfield_education': Select, 'relatedfield_occupational_status': Select, 'relatedfield_medical_expenses_burden': CheckboxSelectMultiple, 'relatedfield_type_of_residence': Select, 'relatedfield_blood_type': Select, 'relatedfield_signed_family_doctor': Select, 'relatedfield_family_relationship': Select, }\\n    \"}",
             "components": [
-                "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
                 "dea0045c-9aa1-11ec-bde1-8a6e55faf877",
                 "dea9f25a-9aa1-11ec-bde1-8a6e55faf877",
                 "deaaac2c-9aa1-11ec-bde1-8a6e55faf877",
-                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
                 "deac1aa8-9aa1-11ec-bde1-8a6e55faf877",
+                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
+                "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
                 "deb7b0ac-9aa1-11ec-bde1-8a6e55faf877",
                 "debcb08e-9aa1-11ec-bde1-8a6e55faf877",
                 "debdab56-9aa1-11ec-bde1-8a6e55faf877",
@@ -4754,146 +4953,6 @@
             "components_groups": []
         },
         {
-            "label": "营养干预",
-            "name": "T4501",
-            "hssc_id": "69c663ea-a4c6-11ec-a7bb-cecec7a0e139",
-            "pym": "yygy",
-            "name_icpc": "T4501",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"T4501\",\n    \"label\": \"营养干预\",\n    \"hssc_id\": \"69c663ea-a4c6-11ec-a7bb-cecec7a0e139\",\n    \"fields\": [\n        {\n            \"name\": \"T4501\",\n            \"label\": \"营养干预\",\n            \"hssc_id\": \"abc77c0a-a4c3-11ec-8f29-cecec7a0e139\",\n            \"type\": \"Icpc8_other_health_interventions\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class T4501(HsscFormModel):\\n    T4501 = models.ManyToManyField(Icpc8_other_health_interventions, related_name='icpc8_other_health_interventions_for_T4501_T4501', verbose_name='营养干预')\\n    class Meta:\\n        verbose_name = '营养干预'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('T4501_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('T4501_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass T4501Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"T4501\\\", ]\\nadmin.site.register(T4501, T4501Admin)\\nclinic_site.register(T4501, T4501Admin)\\n\", \"forms\": \"\\nclass T4501_ModelForm(ModelForm):\\n    class Meta:\\n        model = T4501\\n        fields = ['T4501', ]\\n        widgets = {'T4501': SelectMultiple, }\\n    \"}",
-            "components": [
-                "abc77c0a-a4c3-11ec-8f29-cecec7a0e139"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "过敏史",
-            "name": "A6207",
-            "hssc_id": "0b54db10-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "gms",
-            "name_icpc": "A6207",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A6207\",\n    \"label\": \"过敏史\",\n    \"hssc_id\": \"0b54db10-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A6207(HsscFormModel):\\n    relatedfield_drug_name = models.ManyToManyField(Medicine, related_name='medicine_for_relatedfield_drug_name_A6207', verbose_name='药品名称')\\n    class Meta:\\n        verbose_name = '过敏史'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6207_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6207_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6207Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_drug_name\\\", ]\\nadmin.site.register(A6207, A6207Admin)\\nclinic_site.register(A6207, A6207Admin)\\n\", \"forms\": \"\\nclass A6207_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6207\\n        fields = ['relatedfield_drug_name', ]\\n        widgets = {'relatedfield_drug_name': SelectMultiple, }\\n    \"}",
-            "components": [
-                "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "外伤史",
-            "name": "A6206",
-            "hssc_id": "0ba83c56-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "wss",
-            "name_icpc": "A6206",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A6206\",\n    \"label\": \"外伤史\",\n    \"hssc_id\": \"0ba83c56-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"boolfield_wai_shang_ri_qi\",\n            \"label\": \"外伤日期\",\n            \"hssc_id\": \"35091e02-c9ee-11ec-b369-168d53e8234e\",\n            \"type\": \"datetime\"\n        },\n        {\n            \"name\": \"boolfield_wai_shang_xing_ji_bing\",\n            \"label\": \"外伤性疾病\",\n            \"hssc_id\": \"df91ce4e-cab3-11ec-b358-8e39d789b675\",\n            \"type\": \"Icpc5_evaluation_and_diagnoses\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A6206(HsscFormModel):\\n    boolfield_wai_shang_ri_qi = models.DateField(null=True, blank=True, verbose_name='外伤日期')\\n    boolfield_wai_shang_xing_ji_bing = models.ForeignKey(Icpc5_evaluation_and_diagnoses, related_name='icpc5_evaluation_and_diagnoses_for_boolfield_wai_shang_xing_ji_bing_A6206', on_delete=models.CASCADE, null=True, blank=True, verbose_name='外伤性疾病')\\n    class Meta:\\n        verbose_name = '外伤史'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6206_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6206_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6206Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"boolfield_wai_shang_xing_ji_bing\\\", ]\\nadmin.site.register(A6206, A6206Admin)\\nclinic_site.register(A6206, A6206Admin)\\n\", \"forms\": \"\\nclass A6206_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6206\\n        fields = ['boolfield_wai_shang_ri_qi', 'boolfield_wai_shang_xing_ji_bing', ]\\n        widgets = {'boolfield_wai_shang_xing_ji_bing': Select, }\\n    \"}",
-            "components": [
-                "35091e02-c9ee-11ec-b369-168d53e8234e",
-                "df91ce4e-cab3-11ec-b358-8e39d789b675"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "生命体征检查",
-            "name": "A3103",
-            "hssc_id": "0b8fdf12-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "smtzjc",
-            "name_icpc": "A3103",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A3103\",\n    \"label\": \"生命体征检查\",\n    \"hssc_id\": \"0b8fdf12-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_body_temperature\",\n            \"label\": \"体温\",\n            \"hssc_id\": \"deae47e2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_pulse\",\n            \"label\": \"脉搏\",\n            \"hssc_id\": \"deaf1ae6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_respiratory_rate\",\n            \"label\": \"呼吸频率\",\n            \"hssc_id\": \"deafc9f0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A3103(HsscFormModel):\\n    numberfield_body_temperature = models.IntegerField(null=True, blank=True, verbose_name='体温')\\n    numberfield_body_temperature_standard_value = models.IntegerField(null=True, blank=True, verbose_name='体温标准值')\\n    numberfield_body_temperature_up_limit = models.IntegerField(default=37.4, null=True, blank=True, verbose_name='体温上限')\\n    numberfield_body_temperature_down_limit = models.IntegerField(default=36.0, null=True, blank=True, verbose_name='体温下限')\\n    numberfield_pulse = models.IntegerField(null=True, blank=True, verbose_name='脉搏')\\n    numberfield_pulse_standard_value = models.IntegerField(null=True, blank=True, verbose_name='脉搏标准值')\\n    numberfield_pulse_up_limit = models.IntegerField(default=100.0, null=True, blank=True, verbose_name='脉搏上限')\\n    numberfield_pulse_down_limit = models.IntegerField(default=60.0, null=True, blank=True, verbose_name='脉搏下限')\\n    numberfield_respiratory_rate = models.IntegerField(null=True, blank=True, verbose_name='呼吸频率')\\n    numberfield_respiratory_rate_standard_value = models.IntegerField(null=True, blank=True, verbose_name='呼吸频率标准值')\\n    numberfield_respiratory_rate_up_limit = models.IntegerField(default=20.0, null=True, blank=True, verbose_name='呼吸频率上限')\\n    numberfield_respiratory_rate_down_limit = models.IntegerField(default=10.0, null=True, blank=True, verbose_name='呼吸频率下限')\\n    class Meta:\\n        verbose_name = '生命体征检查'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A3103_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A3103_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A3103Admin(HsscFormAdmin):\\n    pass\\nadmin.site.register(A3103, A3103Admin)\\nclinic_site.register(A3103, A3103Admin)\\n\", \"forms\": \"\\nclass A3103_ModelForm(ModelForm):\\n    class Meta:\\n        model = A3103\\n        fields = ['numberfield_body_temperature', 'numberfield_pulse', 'numberfield_respiratory_rate', ]\\n        \\n    \"}",
-            "components": [
-                "deae47e2-9aa1-11ec-bde1-8a6e55faf877",
-                "deaf1ae6-9aa1-11ec-bde1-8a6e55faf877",
-                "deafc9f0-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "个人适应能力评估",
-            "name": "A6215",
-            "hssc_id": "0b648650-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "grsynlpg",
-            "name_icpc": "A6215",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A6215\",\n    \"label\": \"个人适应能力评估\",\n    \"hssc_id\": \"0b648650-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_working_hours_per_day\",\n            \"label\": \"每天工作及工作往返总时长\",\n            \"hssc_id\": \"de9bbcf8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_are_you_satisfied_with_the_job_and_life\",\n            \"label\": \"对目前生活和工作满意吗\",\n            \"hssc_id\": \"dec7ec2e-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Satisfaction\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_are_you_satisfied_with_your_adaptability\",\n            \"label\": \"对自己的适应能力满意吗\",\n            \"hssc_id\": \"dec8f9a2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Satisfaction\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A6215(HsscFormModel):\\n    characterfield_working_hours_per_day = models.TextField(max_length=255, null=True, blank=True, verbose_name='每天工作及工作往返总时长')\\n    relatedfield_are_you_satisfied_with_the_job_and_life = models.ForeignKey(Satisfaction, related_name='satisfaction_for_relatedfield_are_you_satisfied_with_the_job_and_life_A6215', on_delete=models.CASCADE, null=True, blank=True, verbose_name='对目前生活和工作满意吗')\\n    relatedfield_are_you_satisfied_with_your_adaptability = models.ForeignKey(Satisfaction, related_name='satisfaction_for_relatedfield_are_you_satisfied_with_your_adaptability_A6215', on_delete=models.CASCADE, null=True, blank=True, verbose_name='对自己的适应能力满意吗')\\n    class Meta:\\n        verbose_name = '个人适应能力评估'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6215_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6215_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6215Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_are_you_satisfied_with_the_job_and_life\\\", \\\"relatedfield_are_you_satisfied_with_your_adaptability\\\", ]\\nadmin.site.register(A6215, A6215Admin)\\nclinic_site.register(A6215, A6215Admin)\\n\", \"forms\": \"\\nclass A6215_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6215\\n        fields = ['characterfield_working_hours_per_day', 'relatedfield_are_you_satisfied_with_the_job_and_life', 'relatedfield_are_you_satisfied_with_your_adaptability', ]\\n        widgets = {'relatedfield_are_you_satisfied_with_the_job_and_life': Select, 'relatedfield_are_you_satisfied_with_your_adaptability': Select, }\\n    \"}",
-            "components": [
-                "de9bbcf8-9aa1-11ec-bde1-8a6e55faf877",
-                "dec7ec2e-9aa1-11ec-bde1-8a6e55faf877",
-                "dec8f9a2-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "用户注册",
-            "name": "Z6201",
-            "hssc_id": "0c314e38-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "yhzc",
-            "name_icpc": "Z6201",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"Z6201\",\n    \"label\": \"用户注册\",\n    \"hssc_id\": \"0c314e38-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_name\",\n            \"label\": \"姓名\",\n            \"hssc_id\": \"de9de26c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_gender\",\n            \"label\": \"性别\",\n            \"hssc_id\": \"de9e99dc-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_age\",\n            \"label\": \"年龄\",\n            \"hssc_id\": \"de9f4ea4-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterhssc_identification_number\",\n            \"label\": \"身份证号码\",\n            \"hssc_id\": \"dea0045c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_contact_address\",\n            \"label\": \"联系地址\",\n            \"hssc_id\": \"dea1797c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_password_setting\",\n            \"label\": \"密码设置\",\n            \"hssc_id\": \"dea37b46-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_confirm_password\",\n            \"label\": \"确认密码\",\n            \"hssc_id\": \"dea437ac-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"datetimefield_date_of_birth\",\n            \"label\": \"出生日期\",\n            \"hssc_id\": \"deb7b0ac-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"datetime\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Z6201(HsscFormModel):\\n    characterfield_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='姓名')\\n    characterfield_gender = models.CharField(max_length=255, null=True, blank=True, verbose_name='性别')\\n    characterfield_age = models.CharField(max_length=255, null=True, blank=True, verbose_name='年龄')\\n    characterhssc_identification_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='身份证号码')\\n    characterfield_contact_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系地址')\\n    characterfield_password_setting = models.CharField(max_length=255, null=True, blank=True, verbose_name='密码设置')\\n    characterfield_confirm_password = models.CharField(max_length=255, null=True, blank=True, verbose_name='确认密码')\\n    datetimefield_date_of_birth = models.DateTimeField(null=True, blank=True, verbose_name='出生日期')\\n    class Meta:\\n        verbose_name = '用户注册'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('Z6201_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('Z6201_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass Z6201Admin(HsscFormAdmin):\\n    pass\\nadmin.site.register(Z6201, Z6201Admin)\\nclinic_site.register(Z6201, Z6201Admin)\\n\", \"forms\": \"\\nclass Z6201_ModelForm(ModelForm):\\n    class Meta:\\n        model = Z6201\\n        fields = ['characterfield_name', 'characterfield_gender', 'characterfield_age', 'characterhssc_identification_number', 'characterfield_contact_address', 'characterfield_password_setting', 'characterfield_confirm_password', 'datetimefield_date_of_birth', ]\\n        \\n    \"}",
-            "components": [
-                "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
-                "de9e99dc-9aa1-11ec-bde1-8a6e55faf877",
-                "de9f4ea4-9aa1-11ec-bde1-8a6e55faf877",
-                "dea0045c-9aa1-11ec-bde1-8a6e55faf877",
-                "dea1797c-9aa1-11ec-bde1-8a6e55faf877",
-                "dea37b46-9aa1-11ec-bde1-8a6e55faf877",
-                "dea437ac-9aa1-11ec-bde1-8a6e55faf877",
-                "deb7b0ac-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "空腹血糖检查",
-            "name": "T3404",
-            "hssc_id": "0c3bd51a-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "kfxtjc",
-            "name_icpc": "T3404",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"T3404\",\n    \"label\": \"空腹血糖检查\",\n    \"hssc_id\": \"0c3bd51a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_kong_fu_xue_tang\",\n            \"label\": \"空腹血糖\",\n            \"hssc_id\": \"deb59434-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class T3404(HsscFormModel):\\n    numberfield_kong_fu_xue_tang = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name='空腹血糖')\\n    numberfield_kong_fu_xue_tang_standard_value = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name='空腹血糖标准值')\\n    numberfield_kong_fu_xue_tang_up_limit = models.DecimalField(max_digits=10, decimal_places=2, default=7.0, null=True, blank=True, verbose_name='空腹血糖上限')\\n    numberfield_kong_fu_xue_tang_down_limit = models.DecimalField(max_digits=10, decimal_places=2, default=3.9, null=True, blank=True, verbose_name='空腹血糖下限')\\n    class Meta:\\n        verbose_name = '空腹血糖检查'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('T3404_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('T3404_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass T3404Admin(HsscFormAdmin):\\n    pass\\nadmin.site.register(T3404, T3404Admin)\\nclinic_site.register(T3404, T3404Admin)\\n\", \"forms\": \"\\nclass T3404_ModelForm(ModelForm):\\n    class Meta:\\n        model = T3404\\n        fields = ['numberfield_kong_fu_xue_tang', ]\\n        \\n    \"}",
-            "components": [
-                "deb59434-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "听力检查",
-            "name": "A3110",
-            "hssc_id": "0bdf33a0-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "tljc",
-            "name_icpc": "A3110",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A3110\",\n    \"label\": \"听力检查\",\n    \"hssc_id\": \"0bdf33a0-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_left_ear_hearing\",\n            \"label\": \"左耳听力\",\n            \"hssc_id\": \"deda1db8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Hearing\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_right_ear_hearing\",\n            \"label\": \"右耳听力\",\n            \"hssc_id\": \"dedb0962-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Hearing\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A3110(HsscFormModel):\\n    relatedfield_left_ear_hearing = models.ForeignKey(Hearing, related_name='hearing_for_relatedfield_left_ear_hearing_A3110', on_delete=models.CASCADE, null=True, blank=True, verbose_name='左耳听力')\\n    relatedfield_right_ear_hearing = models.ForeignKey(Hearing, related_name='hearing_for_relatedfield_right_ear_hearing_A3110', on_delete=models.CASCADE, null=True, blank=True, verbose_name='右耳听力')\\n    class Meta:\\n        verbose_name = '听力检查'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A3110_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A3110_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A3110Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_left_ear_hearing\\\", \\\"relatedfield_right_ear_hearing\\\", ]\\nadmin.site.register(A3110, A3110Admin)\\nclinic_site.register(A3110, A3110Admin)\\n\", \"forms\": \"\\nclass A3110_ModelForm(ModelForm):\\n    class Meta:\\n        model = A3110\\n        fields = ['relatedfield_left_ear_hearing', 'relatedfield_right_ear_hearing', ]\\n        widgets = {'relatedfield_left_ear_hearing': Select, 'relatedfield_right_ear_hearing': Select, }\\n    \"}",
-            "components": [
-                "deda1db8-9aa1-11ec-bde1-8a6e55faf877",
-                "dedb0962-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "社会环境评估",
-            "name": "A6216",
-            "hssc_id": "0b86f50a-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "shhjpg",
-            "name_icpc": "A6216",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A6216\",\n    \"label\": \"社会环境评估\",\n    \"hssc_id\": \"0b86f50a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_is_the_living_environment_satisfactory\",\n            \"label\": \"您对居住环境满意吗\",\n            \"hssc_id\": \"ded110f6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Satisfaction\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_is_the_transportation_convenient\",\n            \"label\": \"您所在的社区交通方便吗\",\n            \"hssc_id\": \"ded206d2-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Convenience\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A6216(HsscFormModel):\\n    relatedfield_is_the_living_environment_satisfactory = models.ForeignKey(Satisfaction, related_name='satisfaction_for_relatedfield_is_the_living_environment_satisfactory_A6216', on_delete=models.CASCADE, null=True, blank=True, verbose_name='您对居住环境满意吗')\\n    relatedfield_is_the_transportation_convenient = models.ForeignKey(Convenience, related_name='convenience_for_relatedfield_is_the_transportation_convenient_A6216', on_delete=models.CASCADE, null=True, blank=True, verbose_name='您所在的社区交通方便吗')\\n    class Meta:\\n        verbose_name = '社会环境评估'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6216_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6216_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6216Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_is_the_living_environment_satisfactory\\\", \\\"relatedfield_is_the_transportation_convenient\\\", ]\\nadmin.site.register(A6216, A6216Admin)\\nclinic_site.register(A6216, A6216Admin)\\n\", \"forms\": \"\\nclass A6216_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6216\\n        fields = ['relatedfield_is_the_living_environment_satisfactory', 'relatedfield_is_the_transportation_convenient', ]\\n        widgets = {'relatedfield_is_the_living_environment_satisfactory': Select, 'relatedfield_is_the_transportation_convenient': Select, }\\n    \"}",
-            "components": [
-                "ded110f6-9aa1-11ec-bde1-8a6e55faf877",
-                "ded206d2-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": []
-        },
-        {
             "label": "门诊医生问诊",
             "name": "A6218",
             "hssc_id": "0c75d8a0-9e23-11ec-aa2c-fe35a7065cdd",
@@ -4957,65 +5016,6 @@
             "components_groups": []
         },
         {
-            "label": "血压监测",
-            "name": "A3105",
-            "hssc_id": "0c940c94-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "xyjc",
-            "name_icpc": "A3105",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A3105\",\n    \"label\": \"血压监测\",\n    \"hssc_id\": \"0c940c94-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_systolic_blood_pressure\",\n            \"label\": \"收缩压\",\n            \"hssc_id\": \"deb35b74-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        },\n        {\n            \"name\": \"numberfield_diastolic_blood_pressure\",\n            \"label\": \"舒张压\",\n            \"hssc_id\": \"deb416fe-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A3105(HsscFormModel):\\n    numberfield_systolic_blood_pressure = models.IntegerField(null=True, blank=True, verbose_name='收缩压')\\n    numberfield_systolic_blood_pressure_standard_value = models.IntegerField(null=True, blank=True, verbose_name='收缩压标准值')\\n    numberfield_systolic_blood_pressure_up_limit = models.IntegerField(default=139.0, null=True, blank=True, verbose_name='收缩压上限')\\n    numberfield_systolic_blood_pressure_down_limit = models.IntegerField(default=90.0, null=True, blank=True, verbose_name='收缩压下限')\\n    numberfield_diastolic_blood_pressure = models.IntegerField(null=True, blank=True, verbose_name='舒张压')\\n    numberfield_diastolic_blood_pressure_standard_value = models.IntegerField(null=True, blank=True, verbose_name='舒张压标准值')\\n    numberfield_diastolic_blood_pressure_up_limit = models.IntegerField(default=89.0, null=True, blank=True, verbose_name='舒张压上限')\\n    numberfield_diastolic_blood_pressure_down_limit = models.IntegerField(default=60.0, null=True, blank=True, verbose_name='舒张压下限')\\n    class Meta:\\n        verbose_name = '血压监测'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A3105_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A3105_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A3105Admin(HsscFormAdmin):\\n    pass\\nadmin.site.register(A3105, A3105Admin)\\nclinic_site.register(A3105, A3105Admin)\\n\", \"forms\": \"\\nclass A3105_ModelForm(ModelForm):\\n    class Meta:\\n        model = A3105\\n        fields = ['numberfield_systolic_blood_pressure', 'numberfield_diastolic_blood_pressure', ]\\n        \\n    \"}",
-            "components": [
-                "deb35b74-9aa1-11ec-bde1-8a6e55faf877",
-                "deb416fe-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "院内辅助问诊",
-            "name": "A6217",
-            "hssc_id": "0c82d69a-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "ynfzwz",
-            "name_icpc": "A6217",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A6217\",\n    \"label\": \"院内辅助问诊\",\n    \"hssc_id\": \"0c82d69a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_supplementary_description_of_the_condition\",\n            \"label\": \"病情补充描述\",\n            \"hssc_id\": \"de9ad1a8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_symptom_list\",\n            \"label\": \"症状\",\n            \"hssc_id\": \"deb93f26-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc3_symptoms_and_problems\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A6217(HsscFormModel):\\n    characterfield_supplementary_description_of_the_condition = models.CharField(max_length=255, null=True, blank=True, verbose_name='病情补充描述')\\n    relatedfield_symptom_list = models.ManyToManyField(Icpc3_symptoms_and_problems, related_name='icpc3_symptoms_and_problems_for_relatedfield_symptom_list_A6217', verbose_name='症状')\\n    class Meta:\\n        verbose_name = '院内辅助问诊'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6217_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6217_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6217Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_symptom_list\\\", ]\\nadmin.site.register(A6217, A6217Admin)\\nclinic_site.register(A6217, A6217Admin)\\n\", \"forms\": \"\\nclass A6217_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6217\\n        fields = ['characterfield_supplementary_description_of_the_condition', 'relatedfield_symptom_list', ]\\n        widgets = {'relatedfield_symptom_list': SelectMultiple, }\\n    \"}",
-            "components": [
-                "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
-                "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "糖化血红蛋白检查",
-            "name": "T3405",
-            "hssc_id": "0c440b9a-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "thxhdbjc",
-            "name_icpc": "T3405",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"T3405\",\n    \"label\": \"糖化血红蛋白检查\",\n    \"hssc_id\": \"0c440b9a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"numberfield_tang_hua_xue_hong_dan_bai\",\n            \"label\": \"糖化血红蛋白\",\n            \"hssc_id\": \"deb4e084-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"number\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class T3405(HsscFormModel):\\n    numberfield_tang_hua_xue_hong_dan_bai = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name='糖化血红蛋白')\\n    numberfield_tang_hua_xue_hong_dan_bai_standard_value = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name='糖化血红蛋白标准值')\\n    numberfield_tang_hua_xue_hong_dan_bai_up_limit = models.DecimalField(max_digits=10, decimal_places=2, default=6.0, null=True, blank=True, verbose_name='糖化血红蛋白上限')\\n    numberfield_tang_hua_xue_hong_dan_bai_down_limit = models.DecimalField(max_digits=10, decimal_places=2, default=4.0, null=True, blank=True, verbose_name='糖化血红蛋白下限')\\n    class Meta:\\n        verbose_name = '糖化血红蛋白检查'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('T3405_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('T3405_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass T3405Admin(HsscFormAdmin):\\n    pass\\nadmin.site.register(T3405, T3405Admin)\\nclinic_site.register(T3405, T3405Admin)\\n\", \"forms\": \"\\nclass T3405_ModelForm(ModelForm):\\n    class Meta:\\n        model = T3405\\n        fields = ['numberfield_tang_hua_xue_hong_dan_bai', ]\\n        \\n    \"}",
-            "components": [
-                "deb4e084-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "院外辅助问诊",
-            "name": "A6202",
-            "hssc_id": "0c704264-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "ywfzwz",
-            "name_icpc": "A6202",
-            "description": null,
-            "meta_data": "{\n    \"name\": \"A6202\",\n    \"label\": \"院外辅助问诊\",\n    \"hssc_id\": \"0c704264-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_supplementary_description_of_the_condition\",\n            \"label\": \"病情补充描述\",\n            \"hssc_id\": \"de9ad1a8-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"relatedfield_symptom_list\",\n            \"label\": \"症状\",\n            \"hssc_id\": \"deb93f26-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc3_symptoms_and_problems\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class A6202(HsscFormModel):\\n    characterfield_supplementary_description_of_the_condition = models.CharField(max_length=255, null=True, blank=True, verbose_name='病情补充描述')\\n    relatedfield_symptom_list = models.ManyToManyField(Icpc3_symptoms_and_problems, related_name='icpc3_symptoms_and_problems_for_relatedfield_symptom_list_A6202', verbose_name='症状')\\n    class Meta:\\n        verbose_name = '院外辅助问诊'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A6202_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A6202_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A6202Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_symptom_list\\\", ]\\nadmin.site.register(A6202, A6202Admin)\\nclinic_site.register(A6202, A6202Admin)\\n\", \"forms\": \"\\nclass A6202_ModelForm(ModelForm):\\n    class Meta:\\n        model = A6202\\n        fields = ['characterfield_supplementary_description_of_the_condition', 'relatedfield_symptom_list', ]\\n        widgets = {'relatedfield_symptom_list': SelectMultiple, }\\n    \"}",
-            "components": [
-                "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
-                "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "components_groups": []
-        },
-        {
             "label": "监测评估",
             "name": "A6220",
             "hssc_id": "bbf2ba74-aa48-11ec-8f0c-ee7ade4bced6",
@@ -5072,9 +5072,9 @@
             "meta_data": "{\n    \"name\": \"A5002\",\n    \"label\": \"药事服务\",\n    \"hssc_id\": \"0d22201a-9e23-11ec-aa2c-fe35a7065cdd\",\n    \"fields\": [\n        {\n            \"name\": \"relatedfield_drug_name\",\n            \"label\": \"药品名称\",\n            \"hssc_id\": \"dec637d0-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Medicine\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"relatedfield_disease_name\",\n            \"label\": \"疾病名称\",\n            \"hssc_id\": \"ded4c1a6-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"Icpc5_evaluation_and_diagnoses\",\n            \"app_label\": \"\"\n        },\n        {\n            \"name\": \"boolfield_shi_fou_ji_xu_shi_yong\",\n            \"label\": \"是否继续使用\",\n            \"hssc_id\": \"01ae1278-a659-11ec-9221-f6197eef9f67\",\n            \"type\": \"Ji_xu_shi_yong_qing_kuang\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
             "script": "{\"models\": \"class A5002(HsscFormModel):\\n    relatedfield_drug_name = models.ManyToManyField(Medicine, related_name='medicine_for_relatedfield_drug_name_A5002', verbose_name='药品名称')\\n    relatedfield_disease_name = models.ForeignKey(Icpc5_evaluation_and_diagnoses, related_name='icpc5_evaluation_and_diagnoses_for_relatedfield_disease_name_A5002', on_delete=models.CASCADE, null=True, blank=True, verbose_name='疾病名称')\\n    boolfield_shi_fou_ji_xu_shi_yong = models.ForeignKey(Ji_xu_shi_yong_qing_kuang, related_name='ji_xu_shi_yong_qing_kuang_for_boolfield_shi_fou_ji_xu_shi_yong_A5002', on_delete=models.CASCADE, null=True, blank=True, verbose_name='是否继续使用')\\n    class Meta:\\n        verbose_name = '药事服务'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('A5002_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('A5002_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass A5002Admin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"relatedfield_drug_name\\\", \\\"relatedfield_disease_name\\\", \\\"boolfield_shi_fou_ji_xu_shi_yong\\\", ]\\nadmin.site.register(A5002, A5002Admin)\\nclinic_site.register(A5002, A5002Admin)\\n\", \"forms\": \"\\nclass A5002_ModelForm(ModelForm):\\n    class Meta:\\n        model = A5002\\n        fields = ['relatedfield_drug_name', 'relatedfield_disease_name', 'boolfield_shi_fou_ji_xu_shi_yong', ]\\n        widgets = {'relatedfield_drug_name': SelectMultiple, 'relatedfield_disease_name': Select, 'boolfield_shi_fou_ji_xu_shi_yong': RadioSelect, }\\n    \"}",
             "components": [
-                "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
                 "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
-                "01ae1278-a659-11ec-9221-f6197eef9f67"
+                "01ae1278-a659-11ec-9221-f6197eef9f67",
+                "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "components_groups": []
         },
@@ -5183,6 +5183,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5213,6 +5214,7 @@
             "is_system_service": true,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5243,6 +5245,7 @@
             "is_system_service": true,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5273,6 +5276,7 @@
             "is_system_service": true,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5301,6 +5305,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5332,6 +5337,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5362,6 +5368,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5392,6 +5399,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5422,6 +5430,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5452,6 +5461,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5482,6 +5492,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5512,6 +5523,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5542,6 +5554,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5572,6 +5585,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5602,6 +5616,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5615,11 +5630,11 @@
             "resource_knowledge": null,
             "script": "{\"views\": \"\\nclass T6301_CreateView(CreateView):\\n    success_url = 'forms/'\\n    template_name = 'T6301_create.html'\\n    form_class = T6301_ModelForm  # the first form ModelForm class\\n    model = T6301\\n    context = {}\\n\\n    def get_context_data(self, **kwargs):\\n        context = super(T6301_CreateView, self).get_context_data(**kwargs)\\n        if self.request.method == 'POST':\\n            base_form = A6203_ModelForm(self.request.POST, prefix=\\\"base_form\\\")\\n            t6301_form = T6301_ModelForm(self.request.POST, prefix=\\\"t6301_form\\\")\\n        else:\\n            base_form = A6203_ModelForm(prefix=\\\"base_form\\\")\\n            t6301_form = T6301_ModelForm(prefix=\\\"t6301_form\\\")\\n        # context\\n        context['base_form'] = base_form\\n        context['t6301_form'] = t6301_form\\n        context['user'] = self.request.user\\n        return context\\n\\n    def form_valid(self, form):\\n        context = self.get_context_data()\\n        customer = Customer.objects.get(user=context['user'])\\n        operator = Staff.objects.get(user=context['user'])\\n        # form_valid\\n        f = context['t6301_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        return super(T6301_CreateView, self).form_valid(form)\\n\\n\\n\\nclass T6301_UpdateView(SendSignalsMixin, UpdateView):\\n    success_url = 'forms/'\\n    template_name = 'T6301_update.html'\\n    form_class = T6301_ModelForm # the first form ModelForm class\\n    model = T6301\\n\\n    # if operation_proc.group is None:  # 如果进程角色已经被置为空，说明已有其他人处理，退出本修改作业进程\\n    #     return redirect(reverse('index'))\\n    # operation_proc.group.set([])  # 设置作业进程所属角色组为空\\n\\n    context = {}\\n        \\n    def get_context_data(self, **kwargs):\\n        context = super(T6301_UpdateView, self).get_context_data(**kwargs)\\n        operation_proc = get_object_or_404(OperationProc, id=kwargs['id'])\\n        customer = operation_proc.customer\\n        base_form = A6203_ModelForm(instance=A6203.objects.get(customer=1), prefix=\\\"base_form\\\")\\n        if self.request.method == 'POST':\\n            t6301_form = T6301_ModelForm(self.request.POST, prefix=\\\"t6301_form\\\")\\n            # 构造作业完成消息参数\\n            self.send_operand_finished(kwargs)\\n            return redirect(reverse('index'))\\n        else:\\n            t6301_form = T6301_ModelForm(instance=T6301.objects.get(pid=kwargs['id']), prefix=\\\"t6301_form\\\")\\n            # 构造作业开始消息参数\\n            self.send_operand_started(kwargs['id'])\\n        # context\\n        context['base_form'] = base_form\\n        context['t6301_form'] = t6301_form\\n        context['user'] = self.request.user\\n        return context\\n\\n    def form_valid(self, form):\\n        context = self.get_context_data()\\n        customer = Customer.objects.get(user=context['user'])\\n        operator = Staff.objects.get(user=context['user'])\\n        # form_valid\\n        f = context['t6301_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        return super(T6301_CreateView, self).form_valid(form)\\n\", \"urls\": \"\\n    path('T6301/create', T6301_CreateView.as_view(), name='T6301_create_url'),\\n    path('T6301/<int:id>/update', T6301_UpdateView.as_view(), name='T6301_update_url'),\", \"templates\": [{\"T6301_create.html\": \"{% extends \\\"base.html\\\" %}\\n    {% block content %}\\n    \\n        <form action='' method='GET' enctype='multipart/form-data'> \\n            {% csrf_token %}                \\n            <h5>个人基本信息</h5>\\n            {{ base_form.as_table }}\\n        </form>\\n        <hr><form action={% url 'T6301_create_url' %} method='POST' enctype='multipart/form-data'> \\n            {% csrf_token %}                \\n            <h5>糖尿病一般随访</h5>\\n            {{ t6301_form.as_p }}\\n        <hr>\\n        </form>\\n        <input type=\\\"submit\\\" value=\\\"完成服务\\\" onclick=\\\"formSave('t6301_form')\\\" />\\n    {% endblock %}\\n    \"}, {\"T6301_update.html\": \"{% extends \\\"base.html\\\" %}\\n    {% block content %}\\n    \\n        <form action='' method='GET' enctype='multipart/form-data'> \\n            {% csrf_token %}                \\n            <h5>个人基本信息</h5>\\n            {{ base_form.as_table }}\\n        </form>\\n        <hr><form action={% url 'T6301_update_url' id %} method='POST' enctype='multipart/form-data'> \\n            {% csrf_token %}                \\n            <h5>糖尿病一般随访</h5>\\n            {{ t6301_form.as_p }}\\n        <hr>\\n        </form>\\n        <input type=\\\"submit\\\" value=\\\"完成服务\\\" onclick=\\\"formSave('t6301_form')\\\" />\\n    {% endblock %}\\n    \"}], \"models\": \"class T6301(HsscFormModel):\\n    characterfield_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='姓名')\\n    characterfield_gender = models.CharField(max_length=255, null=True, blank=True, verbose_name='性别')\\n    characterfield_age = models.CharField(max_length=255, null=True, blank=True, verbose_name='年龄')\\n    characterfield_contact_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系地址')\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    characterfield_average_sleep_duration = models.CharField(max_length=255, null=True, blank=True, verbose_name='平均睡眠时长')\\n    characterfield_duration_of_insomnia = models.CharField(max_length=255, null=True, blank=True, verbose_name='持续失眠时间')\\n    characterfield_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='姓名')\\n    characterhssc_identification_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='身份证号码')\\n    characterfield_resident_file_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='居民档案号')\\n    characterfield_family_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='家庭地址')\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    characterfield_medical_ic_card_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='医疗ic卡号')\\n    numberfield_systolic_blood_pressure = models.IntegerField(null=True, blank=True, verbose_name='收缩压')\\n    numberfield_systolic_blood_pressure_standard_value = models.IntegerField(null=True, blank=True, verbose_name='收缩压标准值')\\n    numberfield_systolic_blood_pressure_up_limit = models.IntegerField(default=139.0, null=True, blank=True, verbose_name='收缩压上限')\\n    numberfield_systolic_blood_pressure_down_limit = models.IntegerField(default=90.0, null=True, blank=True, verbose_name='收缩压下限')\\n    numberfield_diastolic_blood_pressure = models.IntegerField(null=True, blank=True, verbose_name='舒张压')\\n    numberfield_diastolic_blood_pressure_standard_value = models.IntegerField(null=True, blank=True, verbose_name='舒张压标准值')\\n    numberfield_diastolic_blood_pressure_up_limit = models.IntegerField(default=89.0, null=True, blank=True, verbose_name='舒张压上限')\\n    numberfield_diastolic_blood_pressure_down_limit = models.IntegerField(default=60.0, null=True, blank=True, verbose_name='舒张压下限')\\n    datetimefield_date_of_birth = models.DateTimeField(null=True, blank=True, verbose_name='出生日期')\\n    relatedfield_drug_name = models.ManyToManyField(Medicine, related_name='medicine_for_relatedfield_drug_name_T6301', verbose_name='药品名称')\\n    relatedfield_gender = models.ForeignKey(Gender, related_name='gender_for_relatedfield_gender_T6301', on_delete=models.CASCADE, null=True, blank=True, verbose_name='性别')\\n    relatedfield_nationality = models.ForeignKey(Nationality, related_name='nationality_for_relatedfield_nationality_T6301', on_delete=models.CASCADE, null=True, blank=True, verbose_name='民族')\\n    relatedfield_marital_status = models.ForeignKey(Marital_status, related_name='marital_status_for_relatedfield_marital_status_T6301', on_delete=models.CASCADE, null=True, blank=True, verbose_name='婚姻状况')\\n    relatedfield_education = models.ForeignKey(Education, related_name='education_for_relatedfield_education_T6301', on_delete=models.CASCADE, null=True, blank=True, verbose_name='文化程度')\\n    relatedfield_occupational_status = models.ForeignKey(Occupational_status, related_name='occupational_status_for_relatedfield_occupational_status_T6301', on_delete=models.CASCADE, null=True, blank=True, verbose_name='职业状况')\\n    relatedfield_medical_expenses_burden = models.ManyToManyField(Medical_expenses_burden, related_name='medical_expenses_burden_for_relatedfield_medical_expenses_burden_T6301', verbose_name='医疗费用负担')\\n    relatedfield_type_of_residence = models.ForeignKey(Type_of_residence, related_name='type_of_residence_for_relatedfield_type_of_residence_T6301', on_delete=models.CASCADE, null=True, blank=True, verbose_name='居住类型')\\n    relatedfield_blood_type = models.ForeignKey(Blood_type, related_name='blood_type_for_relatedfield_blood_type_T6301', on_delete=models.CASCADE, null=True, blank=True, verbose_name='血型')\\n    relatedfield_signed_family_doctor = models.ForeignKey(Staff, related_name='staff_for_relatedfield_signed_family_doctor_T6301', on_delete=models.CASCADE, null=True, blank=True, verbose_name='签约家庭医生')\\n    relatedfield_drinking_frequency = models.ForeignKey(Frequency, related_name='frequency_for_relatedfield_drinking_frequency_T6301', on_delete=models.CASCADE, null=True, blank=True, verbose_name='饮酒频次')\\n    relatedfield_smoking_frequency = models.ForeignKey(Frequency, related_name='frequency_for_relatedfield_smoking_frequency_T6301', on_delete=models.CASCADE, null=True, blank=True, verbose_name='吸烟频次')\\n    relatedfield_family_relationship = models.ForeignKey(Family_relationship, related_name='family_relationship_for_relatedfield_family_relationship_T6301', on_delete=models.CASCADE, null=True, blank=True, verbose_name='家庭成员关系')\\n    relatedfield_fundus = models.ForeignKey(Normality, related_name='normality_for_relatedfield_fundus_T6301', on_delete=models.CASCADE, null=True, blank=True, verbose_name='眼底')\\n    relatedfield_left_foot = models.ForeignKey(Dorsal_artery_pulsation, related_name='dorsal_artery_pulsation_for_relatedfield_left_foot_T6301', on_delete=models.CASCADE, null=True, blank=True, verbose_name='左脚')\\n    relatedfield_right_foot = models.ForeignKey(Dorsal_artery_pulsation, related_name='dorsal_artery_pulsation_for_relatedfield_right_foot_T6301', on_delete=models.CASCADE, null=True, blank=True, verbose_name='右脚')\\n\\n    class Meta:\\n        verbose_name = '糖尿病一般随访'\\n        verbose_name_plural = verbose_name\\n\\n    def __str__(self):\\n        return self.customer.name\\n\\n        \\n\\n\", \"admin\": \"\\nclass T6301Admin(HsscFormAdmin):\\n    fieldsets = ((\\\"基本信息\\\", {\\\"fields\\\": ((\\\"characterfield_name\\\", \\\"characterfield_gender\\\", \\\"characterfield_age\\\", \\\"characterfield_contact_address\\\", \\\"characterfield_contact_number\\\", ),)}), \\n        (\\\"糖尿病一般随访\\\", {\\\"fields\\\": (\\\"characterfield_average_sleep_duration\\\", \\\"characterfield_duration_of_insomnia\\\", \\\"characterfield_name\\\", \\\"characterhssc_identification_number\\\", \\\"characterfield_resident_file_number\\\", \\\"characterfield_family_address\\\", \\\"characterfield_contact_number\\\", \\\"characterfield_medical_ic_card_number\\\", \\\"numberfield_systolic_blood_pressure\\\", \\\"numberfield_diastolic_blood_pressure\\\", \\\"datetimefield_date_of_birth\\\", \\\"relatedfield_drug_name\\\", \\\"relatedfield_gender\\\", \\\"relatedfield_nationality\\\", \\\"relatedfield_marital_status\\\", \\\"relatedfield_education\\\", \\\"relatedfield_occupational_status\\\", \\\"relatedfield_medical_expenses_burden\\\", \\\"relatedfield_type_of_residence\\\", \\\"relatedfield_blood_type\\\", \\\"relatedfield_signed_family_doctor\\\", \\\"relatedfield_drinking_frequency\\\", \\\"relatedfield_smoking_frequency\\\", \\\"relatedfield_family_relationship\\\", \\\"relatedfield_fundus\\\", \\\"relatedfield_left_foot\\\", \\\"relatedfield_right_foot\\\", )}), )\\n    autocomplete_fields = [\\\"relatedfield_drug_name\\\", \\\"relatedfield_gender\\\", \\\"relatedfield_nationality\\\", \\\"relatedfield_marital_status\\\", \\\"relatedfield_education\\\", \\\"relatedfield_occupational_status\\\", \\\"relatedfield_medical_expenses_burden\\\", \\\"relatedfield_type_of_residence\\\", \\\"relatedfield_blood_type\\\", \\\"relatedfield_signed_family_doctor\\\", \\\"relatedfield_drinking_frequency\\\", \\\"relatedfield_smoking_frequency\\\", \\\"relatedfield_family_relationship\\\", \\\"relatedfield_fundus\\\", \\\"relatedfield_left_foot\\\", \\\"relatedfield_right_foot\\\", ]\\n    readonly_fields = [\\\"characterfield_name\\\", \\\"characterfield_gender\\\", \\\"characterfield_age\\\", \\\"characterfield_contact_address\\\", \\\"characterfield_contact_number\\\", ]\\nadmin.site.register(T6301, T6301Admin)\\nclinic_site.register(T6301, T6301Admin)\\n\"}",
             "buessiness_forms": [
+                "0c3bd51a-9e23-11ec-aa2c-fe35a7065cdd",
+                "0c940c94-9e23-11ec-aa2c-fe35a7065cdd",
                 "0ce866ae-9e23-11ec-aa2c-fe35a7065cdd",
                 "0bd6215c-9e23-11ec-aa2c-fe35a7065cdd",
-                "0bb0c86c-9e23-11ec-aa2c-fe35a7065cdd",
-                "0c3bd51a-9e23-11ec-aa2c-fe35a7065cdd",
-                "0c940c94-9e23-11ec-aa2c-fe35a7065cdd"
+                "0bb0c86c-9e23-11ec-aa2c-fe35a7065cdd"
             ],
             "role": [
                 "de18f0fc-9aa1-11ec-bde1-8a6e55faf877",
@@ -5639,6 +5654,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5669,6 +5685,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5697,6 +5714,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5710,12 +5728,12 @@
             "resource_knowledge": null,
             "script": "{\"views\": \"\\nclass A6299_CreateView(CreateView):\\n    success_url = 'forms/'\\n    template_name = 'A6299_create.html'\\n    form_class = A6209_ModelForm  # the first form ModelForm class\\n    model = A6209\\n    context = {}\\n\\n    def get_context_data(self, **kwargs):\\n        context = super(A6299_CreateView, self).get_context_data(**kwargs)\\n        if self.request.method == 'POST':\\n            base_form = A6203_ModelForm(self.request.POST, prefix=\\\"base_form\\\")\\n            a6209_form = A6209_ModelForm(self.request.POST, prefix=\\\"a6209_form\\\")\\n            a6204_form = A6204_ModelForm(self.request.POST, prefix=\\\"a6204_form\\\")\\n            a6216_form = A6216_ModelForm(self.request.POST, prefix=\\\"a6216_form\\\")\\n            a6206_form = A6206_ModelForm(self.request.POST, prefix=\\\"a6206_form\\\")\\n            a6205_form = A6205_ModelForm(self.request.POST, prefix=\\\"a6205_form\\\")\\n            a6208_form = A6208_ModelForm(self.request.POST, prefix=\\\"a6208_form\\\")\\n            a6214_form = A6214_ModelForm(self.request.POST, prefix=\\\"a6214_form\\\")\\n            a6210_form = A6210_ModelForm(self.request.POST, prefix=\\\"a6210_form\\\")\\n            a6212_form = A6212_ModelForm(self.request.POST, prefix=\\\"a6212_form\\\")\\n            a6203_form = A6203_ModelForm(self.request.POST, prefix=\\\"a6203_form\\\")\\n            a6213_form = A6213_ModelForm(self.request.POST, prefix=\\\"a6213_form\\\")\\n            a6207_form = A6207_ModelForm(self.request.POST, prefix=\\\"a6207_form\\\")\\n            a6215_form = A6215_ModelForm(self.request.POST, prefix=\\\"a6215_form\\\")\\n        else:\\n            base_form = A6203_ModelForm(prefix=\\\"base_form\\\")\\n            a6209_form = A6209_ModelForm(prefix=\\\"a6209_form\\\")\\n            a6204_form = A6204_ModelForm(prefix=\\\"a6204_form\\\")\\n            a6216_form = A6216_ModelForm(prefix=\\\"a6216_form\\\")\\n            a6206_form = A6206_ModelForm(prefix=\\\"a6206_form\\\")\\n            a6205_form = A6205_ModelForm(prefix=\\\"a6205_form\\\")\\n            a6208_form = A6208_ModelForm(prefix=\\\"a6208_form\\\")\\n            a6214_form = A6214_ModelForm(prefix=\\\"a6214_form\\\")\\n            a6210_form = A6210_ModelForm(prefix=\\\"a6210_form\\\")\\n            a6212_form = A6212_ModelForm(prefix=\\\"a6212_form\\\")\\n            a6203_form = A6203_ModelForm(prefix=\\\"a6203_form\\\")\\n            a6213_form = A6213_ModelForm(prefix=\\\"a6213_form\\\")\\n            a6207_form = A6207_ModelForm(prefix=\\\"a6207_form\\\")\\n            a6215_form = A6215_ModelForm(prefix=\\\"a6215_form\\\")\\n        # context\\n        context['base_form'] = base_form\\n        context['a6209_form'] = a6209_form\\n        context['a6204_form'] = a6204_form\\n        context['a6216_form'] = a6216_form\\n        context['a6206_form'] = a6206_form\\n        context['a6205_form'] = a6205_form\\n        context['a6208_form'] = a6208_form\\n        context['a6214_form'] = a6214_form\\n        context['a6210_form'] = a6210_form\\n        context['a6212_form'] = a6212_form\\n        context['a6203_form'] = a6203_form\\n        context['a6213_form'] = a6213_form\\n        context['a6207_form'] = a6207_form\\n        context['a6215_form'] = a6215_form\\n        context['user'] = self.request.user\\n        return context\\n\\n    def form_valid(self, form):\\n        context = self.get_context_data()\\n        customer = Customer.objects.get(user=context['user'])\\n        operator = Staff.objects.get(user=context['user'])\\n        # form_valid\\n        f = context['a6209_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6204_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6216_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6206_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6205_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6208_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6214_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6210_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6212_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6203_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6213_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6207_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6215_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        return super(A6299_CreateView, self).form_valid(form)\\n\\n\\n\\nclass A6299_UpdateView(SendSignalsMixin, UpdateView):\\n    success_url = 'forms/'\\n    template_name = 'A6299_update.html'\\n    form_class = A6209_ModelForm # the first form ModelForm class\\n    model = A6209\\n\\n    # if operation_proc.group is None:  # 如果进程角色已经被置为空，说明已有其他人处理，退出本修改作业进程\\n    #     return redirect(reverse('index'))\\n    # operation_proc.group.set([])  # 设置作业进程所属角色组为空\\n\\n    context = {}\\n        \\n    def get_context_data(self, **kwargs):\\n        context = super(A6299_UpdateView, self).get_context_data(**kwargs)\\n        operation_proc = get_object_or_404(OperationProc, id=kwargs['id'])\\n        customer = operation_proc.customer\\n        base_form = A6203_ModelForm(instance=A6203.objects.get(customer=1), prefix=\\\"base_form\\\")\\n        if self.request.method == 'POST':\\n            a6209_form = A6209_ModelForm(self.request.POST, prefix=\\\"a6209_form\\\")\\n            a6204_form = A6204_ModelForm(self.request.POST, prefix=\\\"a6204_form\\\")\\n            a6216_form = A6216_ModelForm(self.request.POST, prefix=\\\"a6216_form\\\")\\n            a6206_form = A6206_ModelForm(self.request.POST, prefix=\\\"a6206_form\\\")\\n            a6205_form = A6205_ModelForm(self.request.POST, prefix=\\\"a6205_form\\\")\\n            a6208_form = A6208_ModelForm(self.request.POST, prefix=\\\"a6208_form\\\")\\n            a6214_form = A6214_ModelForm(self.request.POST, prefix=\\\"a6214_form\\\")\\n            a6210_form = A6210_ModelForm(self.request.POST, prefix=\\\"a6210_form\\\")\\n            a6212_form = A6212_ModelForm(self.request.POST, prefix=\\\"a6212_form\\\")\\n            a6203_form = A6203_ModelForm(self.request.POST, prefix=\\\"a6203_form\\\")\\n            a6213_form = A6213_ModelForm(self.request.POST, prefix=\\\"a6213_form\\\")\\n            a6207_form = A6207_ModelForm(self.request.POST, prefix=\\\"a6207_form\\\")\\n            a6215_form = A6215_ModelForm(self.request.POST, prefix=\\\"a6215_form\\\")\\n            # 构造作业完成消息参数\\n            self.send_operand_finished(kwargs)\\n            return redirect(reverse('index'))\\n        else:\\n            a6209_form = A6209_ModelForm(instance=A6209.objects.get(pid=kwargs['id']), prefix=\\\"a6209_form\\\")\\n            a6204_form = A6204_ModelForm(instance=A6204.objects.get(pid=kwargs['id']), prefix=\\\"a6204_form\\\")\\n            a6216_form = A6216_ModelForm(instance=A6216.objects.get(pid=kwargs['id']), prefix=\\\"a6216_form\\\")\\n            a6206_form = A6206_ModelForm(instance=A6206.objects.get(pid=kwargs['id']), prefix=\\\"a6206_form\\\")\\n            a6205_form = A6205_ModelForm(instance=A6205.objects.get(pid=kwargs['id']), prefix=\\\"a6205_form\\\")\\n            a6208_form = A6208_ModelForm(instance=A6208.objects.get(pid=kwargs['id']), prefix=\\\"a6208_form\\\")\\n            a6214_form = A6214_ModelForm(instance=A6214.objects.get(pid=kwargs['id']), prefix=\\\"a6214_form\\\")\\n            a6210_form = A6210_ModelForm(instance=A6210.objects.get(pid=kwargs['id']), prefix=\\\"a6210_form\\\")\\n            a6212_form = A6212_ModelForm(instance=A6212.objects.get(pid=kwargs['id']), prefix=\\\"a6212_form\\\")\\n            a6203_form = A6203_ModelForm(instance=A6203.objects.get(pid=kwargs['id']), prefix=\\\"a6203_form\\\")\\n            a6213_form = A6213_ModelForm(instance=A6213.objects.get(pid=kwargs['id']), prefix=\\\"a6213_form\\\")\\n            a6207_form = A6207_ModelForm(instance=A6207.objects.get(pid=kwargs['id']), prefix=\\\"a6207_form\\\")\\n            a6215_form = A6215_ModelForm(instance=A6215.objects.get(pid=kwargs['id']), prefix=\\\"a6215_form\\\")\\n            # 构造作业开始消息参数\\n            self.send_operand_started(kwargs['id'])\\n        # context\\n        context['base_form'] = base_form\\n        context['a6209_form'] = a6209_form\\n        context['a6204_form'] = a6204_form\\n        context['a6216_form'] = a6216_form\\n        context['a6206_form'] = a6206_form\\n        context['a6205_form'] = a6205_form\\n        context['a6208_form'] = a6208_form\\n        context['a6214_form'] = a6214_form\\n        context['a6210_form'] = a6210_form\\n        context['a6212_form'] = a6212_form\\n        context['a6203_form'] = a6203_form\\n        context['a6213_form'] = a6213_form\\n        context['a6207_form'] = a6207_form\\n        context['a6215_form'] = a6215_form\\n        context['user'] = self.request.user\\n        return context\\n\\n    def form_valid(self, form):\\n        context = self.get_context_data()\\n        customer = Customer.objects.get(user=context['user'])\\n        operator = Staff.objects.get(user=context['user'])\\n        # form_valid\\n        f = context['a6209_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6204_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6216_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6206_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6205_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6208_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6214_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6210_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6212_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6203_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6213_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6207_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        f = context['a6215_form'].save(commit=False)\\n        f.customer = customer\\n        f.operator = operator\\n        f.save()\\n        return super(A6299_CreateView, self).form_valid(form)\\n\", \"urls\": \"\\n    path('A6299/create', A6299_CreateView.as_view(), name='A6299_create_url'),\\n    path('A6299/<int:id>/update', A6299_UpdateView.as_view(), name='A6299_update_url'),\", \"templates\": [{\"A6299_create.html\": \"{% extends \\\"base.html\\\" %}\\n    {% block content %}\\n    \\n        <form action='' method='GET' enctype='multipart/form-data'> \\n            {% csrf_token %}                \\n            <h5>个人基本信息</h5>\\n            {{ base_form.as_table }}\\n        </form>\\n        <hr><form action={% url 'A6299_create_url' %} method='POST' enctype='multipart/form-data'> \\n            {% csrf_token %}                \\n            <h5>家族病史</h5>\\n            {{ a6209_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>疾病史</h5>\\n            {{ a6204_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>社会环境评估</h5>\\n            {{ a6216_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>外伤史</h5>\\n            {{ a6206_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>手术史</h5>\\n            {{ a6205_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>输血史</h5>\\n            {{ a6208_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人身体健康评估</h5>\\n            {{ a6214_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>遗传病史</h5>\\n            {{ a6210_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人健康行为调查</h5>\\n            {{ a6212_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人基本信息</h5>\\n            {{ a6203_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人心理综合素质调查</h5>\\n            {{ a6213_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>过敏史</h5>\\n            {{ a6207_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人适应能力评估</h5>\\n            {{ a6215_form.as_p }}\\n        <hr>\\n        </form>\\n        <input type=\\\"submit\\\" value=\\\"完成服务\\\" onclick=\\\"formSave('a6215_form')\\\" />\\n    {% endblock %}\\n    \"}, {\"A6299_update.html\": \"{% extends \\\"base.html\\\" %}\\n    {% block content %}\\n    \\n        <form action='' method='GET' enctype='multipart/form-data'> \\n            {% csrf_token %}                \\n            <h5>个人基本信息</h5>\\n            {{ base_form.as_table }}\\n        </form>\\n        <hr><form action={% url 'A6299_update_url' id %} method='POST' enctype='multipart/form-data'> \\n            {% csrf_token %}                \\n            <h5>家族病史</h5>\\n            {{ a6209_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>疾病史</h5>\\n            {{ a6204_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>社会环境评估</h5>\\n            {{ a6216_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>外伤史</h5>\\n            {{ a6206_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>手术史</h5>\\n            {{ a6205_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>输血史</h5>\\n            {{ a6208_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人身体健康评估</h5>\\n            {{ a6214_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>遗传病史</h5>\\n            {{ a6210_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人健康行为调查</h5>\\n            {{ a6212_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人基本信息</h5>\\n            {{ a6203_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人心理综合素质调查</h5>\\n            {{ a6213_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>过敏史</h5>\\n            {{ a6207_form.as_p }}\\n        <hr>\\n            {% csrf_token %}                \\n            <h5>个人适应能力评估</h5>\\n            {{ a6215_form.as_p }}\\n        <hr>\\n        </form>\\n        <input type=\\\"submit\\\" value=\\\"完成服务\\\" onclick=\\\"formSave('a6215_form')\\\" />\\n    {% endblock %}\\n    \"}], \"models\": \"class A6299(HsscFormModel):\\n    characterfield_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='姓名')\\n    characterfield_gender = models.CharField(max_length=255, null=True, blank=True, verbose_name='性别')\\n    characterfield_age = models.CharField(max_length=255, null=True, blank=True, verbose_name='年龄')\\n    characterfield_contact_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系地址')\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    relatedfield_family_relationship = models.ForeignKey(Family_relationship, related_name='family_relationship_for_relatedfield_family_relationship_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='家庭成员关系')\\n    relatedfield_disease_name = models.ForeignKey(Icpc5_evaluation_and_diagnoses, related_name='icpc5_evaluation_and_diagnoses_for_relatedfield_disease_name_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='疾病名称')\\n    datetimefield_time_of_diagnosis = models.DateTimeField(null=True, blank=True, verbose_name='确诊时间')\\n    relatedfield_disease_name = models.ForeignKey(Icpc5_evaluation_and_diagnoses, related_name='icpc5_evaluation_and_diagnoses_for_relatedfield_disease_name_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='疾病名称')\\n    relatedfield_is_the_living_environment_satisfactory = models.ForeignKey(Satisfaction, related_name='satisfaction_for_relatedfield_is_the_living_environment_satisfactory_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='您对居住环境满意吗')\\n    relatedfield_is_the_transportation_convenient = models.ForeignKey(Convenience, related_name='convenience_for_relatedfield_is_the_transportation_convenient_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='您所在的社区交通方便吗')\\n    boolfield_wai_shang_ri_qi = models.DateField(null=True, blank=True, verbose_name='外伤日期')\\n    relatedfield_disease_name = models.ForeignKey(Icpc5_evaluation_and_diagnoses, related_name='icpc5_evaluation_and_diagnoses_for_relatedfield_disease_name_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='疾病名称')\\n    datetimefield_date = models.DateField(null=True, blank=True, verbose_name='手术日期')\\n    relatedfield_name_of_operation = models.ForeignKey(Icpc7_treatments, related_name='icpc7_treatments_for_relatedfield_name_of_operation_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='手术名称')\\n    numberfield_blood_transfusion = models.IntegerField(null=True, blank=True, verbose_name='输血量')\\n    numberfield_blood_transfusion_standard_value = models.IntegerField(null=True, blank=True, verbose_name='输血量标准值')\\n    numberfield_blood_transfusion_up_limit = models.IntegerField(default=400.0, null=True, blank=True, verbose_name='输血量上限')\\n    numberfield_blood_transfusion_down_limit = models.IntegerField(null=True, blank=True, verbose_name='输血量下限')\\n    boolfield_shu_xue_ri_qi = models.DateField(null=True, blank=True, verbose_name='输血日期')\\n    relatedfield_own_health = models.ForeignKey(State_degree, related_name='state_degree_for_relatedfield_own_health_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='觉得自身健康状况如何')\\n    relatedfield_compared_to_last_year = models.ForeignKey(Comparative_expression, related_name='comparative_expression_for_relatedfield_compared_to_last_year_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='较之过去一年状态如何')\\n    relatedfield_sports_preference = models.ForeignKey(Sports_preference, related_name='sports_preference_for_relatedfield_sports_preference_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='运动偏好')\\n    relatedfield_exercise_time = models.ForeignKey(Exercise_time, related_name='exercise_time_for_relatedfield_exercise_time_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='运动时长')\\n    relatedfield_have_any_recent_symptoms_of_physical_discomfort = models.ManyToManyField(Icpc3_symptoms_and_problems, related_name='icpc3_symptoms_and_problems_for_relatedfield_have_any_recent_symptoms_of_physical_discomfort_A6299', verbose_name='近来有无身体不适症状')\\n    relatedfield_family_relationship = models.ForeignKey(Family_relationship, related_name='family_relationship_for_relatedfield_family_relationship_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='家庭成员关系')\\n    relatedfield_disease_name = models.ForeignKey(Icpc5_evaluation_and_diagnoses, related_name='icpc5_evaluation_and_diagnoses_for_relatedfield_disease_name_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='疾病名称')\\n    characterfield_average_sleep_duration = models.CharField(max_length=255, null=True, blank=True, verbose_name='平均睡眠时长')\\n    characterfield_duration_of_insomnia = models.CharField(max_length=255, null=True, blank=True, verbose_name='持续失眠时间')\\n    relatedfield_drinking_frequency = models.ForeignKey(Frequency, related_name='frequency_for_relatedfield_drinking_frequency_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='饮酒频次')\\n    relatedfield_smoking_frequency = models.ForeignKey(Frequency, related_name='frequency_for_relatedfield_smoking_frequency_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='吸烟频次')\\n    characterfield_name = models.CharField(max_length=255, null=True, blank=True, verbose_name='姓名')\\n    characterhssc_identification_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='身份证号码')\\n    characterfield_resident_file_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='居民档案号')\\n    characterfield_family_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='家庭地址')\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    characterfield_medical_ic_card_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='医疗ic卡号')\\n    datetimefield_date_of_birth = models.DateTimeField(null=True, blank=True, verbose_name='出生日期')\\n    relatedfield_gender = models.ForeignKey(Gender, related_name='gender_for_relatedfield_gender_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='性别')\\n    relatedfield_nationality = models.ForeignKey(Nationality, related_name='nationality_for_relatedfield_nationality_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='民族')\\n    relatedfield_marital_status = models.ForeignKey(Marital_status, related_name='marital_status_for_relatedfield_marital_status_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='婚姻状况')\\n    relatedfield_education = models.ForeignKey(Education, related_name='education_for_relatedfield_education_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='文化程度')\\n    relatedfield_occupational_status = models.ForeignKey(Occupational_status, related_name='occupational_status_for_relatedfield_occupational_status_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='职业状况')\\n    relatedfield_medical_expenses_burden = models.ManyToManyField(Medical_expenses_burden, related_name='medical_expenses_burden_for_relatedfield_medical_expenses_burden_A6299', verbose_name='医疗费用负担')\\n    relatedfield_type_of_residence = models.ForeignKey(Type_of_residence, related_name='type_of_residence_for_relatedfield_type_of_residence_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='居住类型')\\n    relatedfield_blood_type = models.ForeignKey(Blood_type, related_name='blood_type_for_relatedfield_blood_type_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='血型')\\n    relatedfield_signed_family_doctor = models.ForeignKey(Staff, related_name='staff_for_relatedfield_signed_family_doctor_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='签约家庭医生')\\n    relatedfield_family_relationship = models.ForeignKey(Family_relationship, related_name='family_relationship_for_relatedfield_family_relationship_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='家庭成员关系')\\n    relatedfield_personality_tendency = models.ForeignKey(Character, related_name='character_for_relatedfield_personality_tendency_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='性格倾向')\\n    boolfield_shi_mian_qing_kuang = models.ForeignKey(Shi_mian_qing_kuang, related_name='shi_mian_qing_kuang_for_boolfield_shi_mian_qing_kuang_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='失眠情况')\\n    boolfield_sheng_huo_gong_zuo_ya_li_qing_kuang = models.ForeignKey(Ya_li_qing_kuang, related_name='ya_li_qing_kuang_for_boolfield_sheng_huo_gong_zuo_ya_li_qing_kuang_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='生活工作压力情况')\\n    relatedfield_drug_name = models.ManyToManyField(Medicine, related_name='medicine_for_relatedfield_drug_name_A6299', verbose_name='药品名称')\\n    characterfield_working_hours_per_day = models.TextField(max_length=255, null=True, blank=True, verbose_name='每天工作及工作往返总时长')\\n    relatedfield_are_you_satisfied_with_the_job_and_life = models.ForeignKey(Satisfaction, related_name='satisfaction_for_relatedfield_are_you_satisfied_with_the_job_and_life_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='对目前生活和工作满意吗')\\n    relatedfield_are_you_satisfied_with_your_adaptability = models.ForeignKey(Satisfaction, related_name='satisfaction_for_relatedfield_are_you_satisfied_with_your_adaptability_A6299', on_delete=models.CASCADE, null=True, blank=True, verbose_name='对自己的适应能力满意吗')\\n\\n    class Meta:\\n        verbose_name = '建立居民健康档案'\\n        verbose_name_plural = verbose_name\\n\\n    def __str__(self):\\n        return self.customer.name\\n\\n        \\n\\n\", \"admin\": \"\\nclass A6299Admin(HsscFormAdmin):\\n    fieldsets = ((\\\"基本信息\\\", {\\\"fields\\\": ((\\\"characterfield_name\\\", \\\"characterfield_gender\\\", \\\"characterfield_age\\\", \\\"characterfield_contact_address\\\", \\\"characterfield_contact_number\\\", ),)}), \\n        (\\\"家族病史\\\", {\\\"fields\\\": (\\\"relatedfield_family_relationship\\\", \\\"relatedfield_disease_name\\\", )}), \\n        (\\\"疾病史\\\", {\\\"fields\\\": (\\\"datetimefield_time_of_diagnosis\\\", \\\"relatedfield_disease_name\\\", )}), \\n        (\\\"社会环境评估\\\", {\\\"fields\\\": (\\\"relatedfield_is_the_living_environment_satisfactory\\\", \\\"relatedfield_is_the_transportation_convenient\\\", )}), \\n        (\\\"外伤史\\\", {\\\"fields\\\": (\\\"boolfield_wai_shang_ri_qi\\\", \\\"relatedfield_disease_name\\\", )}), \\n        (\\\"手术史\\\", {\\\"fields\\\": (\\\"datetimefield_date\\\", \\\"relatedfield_name_of_operation\\\", )}), \\n        (\\\"输血史\\\", {\\\"fields\\\": (\\\"numberfield_blood_transfusion\\\", \\\"boolfield_shu_xue_ri_qi\\\", )}), \\n        (\\\"个人身体健康评估\\\", {\\\"fields\\\": (\\\"relatedfield_own_health\\\", \\\"relatedfield_compared_to_last_year\\\", \\\"relatedfield_sports_preference\\\", \\\"relatedfield_exercise_time\\\", \\\"relatedfield_have_any_recent_symptoms_of_physical_discomfort\\\", )}), \\n        (\\\"遗传病史\\\", {\\\"fields\\\": (\\\"relatedfield_family_relationship\\\", \\\"relatedfield_disease_name\\\", )}), \\n        (\\\"个人健康行为调查\\\", {\\\"fields\\\": (\\\"characterfield_average_sleep_duration\\\", \\\"characterfield_duration_of_insomnia\\\", \\\"relatedfield_drinking_frequency\\\", \\\"relatedfield_smoking_frequency\\\", )}), \\n        (\\\"个人基本信息\\\", {\\\"fields\\\": (\\\"characterfield_name\\\", \\\"characterhssc_identification_number\\\", \\\"characterfield_resident_file_number\\\", \\\"characterfield_family_address\\\", \\\"characterfield_contact_number\\\", \\\"characterfield_medical_ic_card_number\\\", \\\"datetimefield_date_of_birth\\\", \\\"relatedfield_gender\\\", \\\"relatedfield_nationality\\\", \\\"relatedfield_marital_status\\\", \\\"relatedfield_education\\\", \\\"relatedfield_occupational_status\\\", \\\"relatedfield_medical_expenses_burden\\\", \\\"relatedfield_type_of_residence\\\", \\\"relatedfield_blood_type\\\", \\\"relatedfield_signed_family_doctor\\\", \\\"relatedfield_family_relationship\\\", )}), \\n        (\\\"个人心理综合素质调查\\\", {\\\"fields\\\": (\\\"relatedfield_personality_tendency\\\", \\\"boolfield_shi_mian_qing_kuang\\\", \\\"boolfield_sheng_huo_gong_zuo_ya_li_qing_kuang\\\", )}), \\n        (\\\"过敏史\\\", {\\\"fields\\\": (\\\"relatedfield_drug_name\\\", )}), \\n        (\\\"个人适应能力评估\\\", {\\\"fields\\\": (\\\"characterfield_working_hours_per_day\\\", \\\"relatedfield_are_you_satisfied_with_the_job_and_life\\\", \\\"relatedfield_are_you_satisfied_with_your_adaptability\\\", )}), )\\n    autocomplete_fields = [\\\"relatedfield_family_relationship\\\", \\\"relatedfield_disease_name\\\", \\\"relatedfield_disease_name\\\", \\\"relatedfield_is_the_living_environment_satisfactory\\\", \\\"relatedfield_is_the_transportation_convenient\\\", \\\"relatedfield_disease_name\\\", \\\"relatedfield_name_of_operation\\\", \\\"relatedfield_own_health\\\", \\\"relatedfield_compared_to_last_year\\\", \\\"relatedfield_sports_preference\\\", \\\"relatedfield_exercise_time\\\", \\\"relatedfield_have_any_recent_symptoms_of_physical_discomfort\\\", \\\"relatedfield_family_relationship\\\", \\\"relatedfield_disease_name\\\", \\\"relatedfield_drinking_frequency\\\", \\\"relatedfield_smoking_frequency\\\", \\\"relatedfield_gender\\\", \\\"relatedfield_nationality\\\", \\\"relatedfield_marital_status\\\", \\\"relatedfield_education\\\", \\\"relatedfield_occupational_status\\\", \\\"relatedfield_medical_expenses_burden\\\", \\\"relatedfield_type_of_residence\\\", \\\"relatedfield_blood_type\\\", \\\"relatedfield_signed_family_doctor\\\", \\\"relatedfield_family_relationship\\\", \\\"relatedfield_personality_tendency\\\", \\\"boolfield_shi_mian_qing_kuang\\\", \\\"boolfield_sheng_huo_gong_zuo_ya_li_qing_kuang\\\", \\\"relatedfield_drug_name\\\", \\\"relatedfield_are_you_satisfied_with_the_job_and_life\\\", \\\"relatedfield_are_you_satisfied_with_your_adaptability\\\", ]\\n    readonly_fields = [\\\"characterfield_name\\\", \\\"characterfield_gender\\\", \\\"characterfield_age\\\", \\\"characterfield_contact_address\\\", \\\"characterfield_contact_number\\\", ]\\nadmin.site.register(A6299, A6299Admin)\\nclinic_site.register(A6299, A6299Admin)\\n\"}",
             "buessiness_forms": [
-                "0ca96526-9e23-11ec-aa2c-fe35a7065cdd",
-                "0ba2ba9c-9e23-11ec-aa2c-fe35a7065cdd",
                 "0b54db10-9e23-11ec-aa2c-fe35a7065cdd",
                 "0ba83c56-9e23-11ec-aa2c-fe35a7065cdd",
                 "0b648650-9e23-11ec-aa2c-fe35a7065cdd",
                 "0b86f50a-9e23-11ec-aa2c-fe35a7065cdd",
+                "0ca96526-9e23-11ec-aa2c-fe35a7065cdd",
+                "0ba2ba9c-9e23-11ec-aa2c-fe35a7065cdd",
                 "0beb43fc-9e23-11ec-aa2c-fe35a7065cdd",
                 "0b787836-9e23-11ec-aa2c-fe35a7065cdd",
                 "0b6e02b6-9e23-11ec-aa2c-fe35a7065cdd",
@@ -5753,6 +5771,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5781,6 +5800,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5810,6 +5830,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5838,6 +5859,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5868,6 +5890,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5896,6 +5919,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5924,6 +5948,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5957,6 +5982,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -5987,6 +6013,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -6031,6 +6058,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -6068,6 +6096,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -6100,6 +6129,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -6130,6 +6160,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -6160,6 +6191,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -6190,6 +6222,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
@@ -6221,6 +6254,7 @@
             "is_system_service": false,
             "history_services_display": 0,
             "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
             "suppliers": null,
             "not_suitable": null,
             "execution_time_frame": null,
