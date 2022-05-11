@@ -301,7 +301,9 @@ from .models import *
 # entities
 entities_models_file_head = '''from django.db import models
 from core.models import HsscFormModel
+from icpc.models import *
 from dictionaries.models import *
+
 '''
 
 entities_admin_file_head = '''from django.contrib import admin
