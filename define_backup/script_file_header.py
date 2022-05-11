@@ -294,4 +294,17 @@ class SubIcpcAdmin(admin.ModelAdmin):
 
 # serializers.py文件头
 serializers_head = '''from rest_framework import serializers
-from .models import *'''
+from .models import *
+'''
+
+
+# entities
+entities_models_file_head = '''from django.db import models
+from core.models import HsscFormModel
+from dictionaries.models import *
+'''
+
+entities_admin_file_head = '''from django.contrib import admin
+from .models import *
+'''
+

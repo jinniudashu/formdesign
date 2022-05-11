@@ -1,3 +1,4 @@
+from html import entities
 from django.forms.models import model_to_dict
 from time import time
 import json
@@ -76,7 +77,8 @@ def export_source_code(modeladmin, request, queryset):
         'data': {}
     }
     
-    apps = ['dictionaries','icpc','forms','service',]
+    # 生成脚本的apps
+    apps = ['dictionaries','icpc','forms','service', 'entities',]
 
     forms_query_set = BuessinessForm.objects.all()
     forms_file_header = {
@@ -91,12 +93,22 @@ def export_source_code(modeladmin, request, queryset):
         'admin_file_head': service_admin_file_head,
         'serializers_head': serializers_head,
     }
+    
+    entities_query_set = []
+    for entity in ManagedEntity.objects.all():
+        entities_query_set.append(entity.base_form)
+    entities_file_header = {
+        'models_file_head': entities_models_file_head,
+        'admin_file_head': entities_admin_file_head,
+        'serializers_head': serializers_head,
+    }
 
     class GetAppScript(Enum):
         dictionaries = get_dict_models_admin_serializers_script()  # 导出App dictionaries: models.py, admin.py脚本
         icpc = get_icpc_models_admin_serializers_script()  # 导出App icpc: models.py, admin.py脚本
         forms = get_models_admin_serializers_script(forms_query_set, forms_file_header)  # 导出App: forms: models.py, admin.py脚本
         service = get_models_admin_serializers_script(service_query_set, service_file_header)  # 导出App:service脚本
+        entities = get_models_admin_serializers_script(entities_query_set, entities_file_header)  # 导出App:entities脚本
         
     for app in apps:
         _script = {}
