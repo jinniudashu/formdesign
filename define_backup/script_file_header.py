@@ -148,6 +148,9 @@ class DictBase(models.Model):
     def __str__(self):
         return self.value
 
+    def natural_key(self):
+        return self.value
+
     def save(self, *args, **kwargs):
         if self.label:
             self.pym = ''.join(lazy_pinyin(self.label, style=Style.FIRST_LETTER))
@@ -174,6 +177,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save, post_delete
 from pypinyin import Style, lazy_pinyin
 
+
 class IcpcBase(models.Model):
     icpc_code = models.CharField(max_length=5, unique=True, blank=True, null=True, verbose_name="icpc码")
     icode = models.CharField(max_length=3, blank=True, null=True, verbose_name="分类码")
@@ -188,11 +192,14 @@ class IcpcBase(models.Model):
     note = models.CharField(max_length=1024, blank=True, null=True, verbose_name="备注")
     pym = models.CharField(max_length=255, blank=True, null=True, verbose_name="拼音码")
 
+    class Meta:
+        abstract = True
+
     def __str__(self):
         return str(self.iname)
 
-    class Meta:
-        abstract = True
+    def natural_key(self):
+        return self.iname
 
 
 # ICPC子类抽象类
