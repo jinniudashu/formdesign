@@ -22,8 +22,9 @@ class DTFieldAdmin(admin.ModelAdmin):
 
 @admin.register(RelatedField)
 class RelatedFieldAdmin(admin.ModelAdmin):
+    list_display = ['label', 'name']
     readonly_fields = ['name', 'hssc_id']
-    search_fields=['label', 'pym']
+    search_fields=['label', 'pym', 'name']
     autocomplete_fields = ['name_icpc']
 
 @admin.register(Component)

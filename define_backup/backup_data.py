@@ -78,7 +78,8 @@ def export_source_code(modeladmin, request, queryset):
     }
     
     # 生成脚本的apps
-    apps = ['dictionaries','icpc','forms','service', 'entities']
+    # apps = ['dictionaries','icpc','forms','service']
+    apps = ['dictionaries','icpc', 'entities', 'service', 'forms']
 
     forms_query_set = BuessinessForm.objects.all()
     forms_file_header = {
@@ -156,6 +157,20 @@ def export_source_code(modeladmin, request, queryset):
 
 export_source_code.short_description = '生成作业脚本'
 
+# 导出forms models.py, admin.py, serializers.py脚本
+def get_models_admin_serializers_script(query_set, file_header):
+    models_script = file_header['models_file_head']
+    admin_script =  file_header['admin_file_head']
+    serializers_script = file_header['serializers_head']
+
+    for item in query_set:
+        script = item.generate_script()  # 生成最新脚本
+        models_script = f'{models_script}{script["models"]}'
+        admin_script = f'{admin_script}{script["admin"]}'
+        serializers_script = f'{serializers_script}{script["serializers"]}'
+
+    return models_script, admin_script, serializers_script
+
 # 导出字典models.py, admin.py脚本
 def get_dict_models_admin_serializers_script():
     models_script = dict_models_head
@@ -230,20 +245,6 @@ clinic_site.register({icpc['name']}, SubIcpcAdmin)'''
     models_receiver_post_save = models_receiver_post_save + icpc_models_post_save
     models_receiver_post_delete = models_receiver_post_delete + icpc_models_post_delete
     models_script = models_script + models_receiver_post_save + models_receiver_post_delete
-
-    return models_script, admin_script, serializers_script
-
-# 导出forms models.py, admin.py, serializers.py脚本
-def get_models_admin_serializers_script(query_set, file_header):
-    models_script = file_header['models_file_head']
-    admin_script =  file_header['admin_file_head']
-    serializers_script = file_header['serializers_head']
-
-    for item in query_set:
-        script = item.generate_script()  # 生成最新脚本
-        models_script = f'{models_script}{script["models"]}'
-        admin_script = f'{admin_script}{script["admin"]}'
-        serializers_script = f'{serializers_script}{script["serializers"]}'
 
     return models_script, admin_script, serializers_script
 

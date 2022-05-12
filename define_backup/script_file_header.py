@@ -91,7 +91,7 @@ import json
 from icpc.models import *
 from dictionaries.models import *
 from core.models import HsscFormModel, Staff
-from entities.models import *
+# from entities.models import *
 
 
 '''
@@ -307,6 +307,7 @@ from dictionaries.models import *
 '''
 
 entities_admin_file_head = '''from django.contrib import admin
+from hssc.site import clinic_site
 from .models import *
 '''
 
