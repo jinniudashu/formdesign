@@ -1,6 +1,6 @@
-class GenerateModelFieldScript(object):
+class GenerateFormsScriptMixin(object):
     '''
-    生成Model字段定义脚本
+    生成models.py, admin.py, serializers.py 定义脚本
     '''
     # 生成models, admin, forms脚本
     def generate_script(self):
@@ -8,11 +8,56 @@ class GenerateModelFieldScript(object):
         script['models'], script['admin'], script['serializers'] = self._create_model_script()
         return script
 
+    # generate model and admin script
+    def _create_model_script(self):
+        # construct model script
+        head_script = f'class {self.name.capitalize()}(HsscFormModel):'
+        fields_script = autocomplete_fields = ''
+
+        # !!!待修改：compontents = form.components.all() + form.component_groups.all()
+        for component in self.components.all():
+            # construct fields script
+            _script = self._create_model_field_script(component)
+            fields_script = fields_script + _script
+            # construct admin autocomplete_fields script
+            if component.content_object.__class__.__name__ == 'RelatedField':
+                autocomplete_fields = autocomplete_fields + f'"{component.content_object.name}", '
+
+        footer_script = self._create_model_footer_script()
+
+        # construct model, admin, serializers script
+        model_script = f'{head_script}{fields_script}{footer_script}\n\n'
+        admin_script = self._create_admin_script(autocomplete_fields)
+        serializers_script = self._create_serializers_script()
+        return model_script, admin_script, serializers_script
+
+    # generate model footer script
+    def _create_model_footer_script(self):
+        return f'''
+    class Meta:
+        verbose_name = '{self.label}'
+        verbose_name_plural = verbose_name
+        '''
+
+    # generate admin script
+    def _create_admin_script(self, autocomplete_fields):
+        name = self.name.capitalize()
+        if autocomplete_fields == '':
+            _body = f'pass'
+        else:
+            _body = f'autocomplete_fields = [{autocomplete_fields}]'
+
+        admin_script = f'''
+class {name}Admin(admin.ModelAdmin):
+    {_body}
+admin.site.register({name}, {name}Admin)
+'''
+        return admin_script
+
     # generate serializers script
     def _create_serializers_script(self):
         name = self.name.capitalize()
-        serializers_script = f'''
-class {name}Serializer(serializers.ModelSerializer):
+        serializers_script = f'''class {name}Serializer(serializers.ModelSerializer):
     class Meta:
         model = {name}
         fields = '__all__'
@@ -138,57 +183,17 @@ class {name}Serializer(serializers.ModelSerializer):
     {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', verbose_name='{field['label']}')'''
 
 
-class GenerateFormsScriptMixin(GenerateModelFieldScript):
-    # generate model and admin script
-    def _create_model_script(self):
-        # construct model script
-        head_script = f'class {self.name.capitalize()}(HsscFormModel):'
-        fields_script = autocomplete_fields = ''
-
-        # !!!待修改：compontents = form.components.all() + form.component_groups.all()
-        for component in self.components.all():
-            # construct fields script
-            _script = self._create_model_field_script(component)
-            fields_script = fields_script + _script
-            # construct admin autocomplete_fields script
-            if component.content_object.__class__.__name__ == 'RelatedField':
-                autocomplete_fields = autocomplete_fields + f'"{component.content_object.name}", '
-
-        footer_script = self._create_model_footer_script()
-
-        # construct model, admin, serializers script
-        model_script = f'{head_script}{fields_script}{footer_script}\n\n'
-        admin_script = self._create_admin_script(autocomplete_fields)
-        serializers_script = self._create_serializers_script()
-        return model_script, admin_script, serializers_script
-
-    # generate admin script
-    def _create_admin_script(self, autocomplete_fields):
-        name = self.name.capitalize()
-        if autocomplete_fields == '':
-            _body = f'pass'
+class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
+    # 是否基本信息表服务
+    def _is_base_form_service(self):
+        if self.buessiness_forms.all().first() in ManagedEntity.objects.get_base_forms():
+            return True
         else:
-            _body = f'autocomplete_fields = [{autocomplete_fields}]'
+            return False
 
-        admin_script = f'''
-class {name}Admin(admin.ModelAdmin):
-    {_body}
-admin.site.register({name}, {name}Admin)
-'''
-        return admin_script
-
-    # generate model footer script
-    def _create_model_footer_script(self):
-        return f'''
-    class Meta:
-        verbose_name = '{self.label}'
-        verbose_name_plural = verbose_name
-        '''
-
-
-class GenerateServiceScriptMixin(GenerateModelFieldScript):    
     # generate model and admin script
     def _create_model_script(self):
+
         # construct model script
         head_script = f'class {self.name.capitalize()}(HsscFormModel):'
 

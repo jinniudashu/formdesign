@@ -78,8 +78,7 @@ def export_source_code(modeladmin, request, queryset):
     }
     
     # 生成脚本的apps
-    # apps = ['dictionaries','icpc','forms','service']
-    apps = ['dictionaries','icpc', 'entities', 'service', 'forms']
+    apps = ['dictionaries','icpc','forms','service']
 
     forms_query_set = BuessinessForm.objects.all()
     forms_file_header = {
@@ -88,7 +87,8 @@ def export_source_code(modeladmin, request, queryset):
         'serializers_head': serializers_head,
     }
 
-    service_query_set = Service.objects.filter(is_system_service=False)
+    # 基本信息服务排在前面
+    service_query_set = Service.objects.filter(is_system_service=False).order_by('generate_script_order')
     service_file_header = {
         'models_file_head': service_models_file_head,
         'admin_file_head': service_admin_file_head,
@@ -116,8 +116,6 @@ def export_source_code(modeladmin, request, queryset):
         _script['models'], _script['admin'], _script['serializers'] = eval(f'GetAppScript.{app}').value
         source_code['script'][app] = _script
 
-    # # for entity in managed_entities:
-    # #   source_code[entity.app_name]
 
     # 导出App:core/hsscbase_class.py脚本
     core = {}

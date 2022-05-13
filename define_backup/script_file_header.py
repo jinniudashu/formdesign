@@ -7,8 +7,8 @@ from django.forms.models import model_to_dict
 
 from icpc.models import *
 from dictionaries.models import *
-from core.models import HsscFormModel, Staff
-from entities.models import *
+from core.models import HsscFormModel, HsscBaseFormModel, Staff
+# from entities.models import *
 
 
 def create_form_instance(operation_proc):
@@ -27,7 +27,6 @@ def get_form_instance(operation_proc):
     form_instance = eval(model_name).objects.get(pid=operation_proc)
     print('From service.models, 获取表单实例:', model_name, model_to_dict(form_instance))
     return form_instance
-
 
 '''
 

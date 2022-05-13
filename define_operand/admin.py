@@ -62,7 +62,7 @@ class ServiceAdmin(admin.ModelAdmin):
             'fields': ('suppliers', 'not_suitable', ('awaiting_time_frame' ,'execution_time_frame'), 'working_hours', 'cost', 'load_feedback')
         }),
         ('资源配置', {
-            'fields': ('resource_materials','resource_devices','resource_knowledge', 'script')
+            'fields': ('resource_materials','resource_devices','resource_knowledge', 'generate_script_order','script')
         }),
     )
     search_fields=['label', 'pym']
