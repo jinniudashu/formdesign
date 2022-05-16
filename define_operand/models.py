@@ -8,7 +8,6 @@ from pypinyin import lazy_pinyin
 from formdesign.hsscbase_class import HsscBase, HsscPymBase
 from define.models import Component, ComponentsGroup, Role, RelateFieldModel
 from define_icpc.models import Icpc
-# from define_operand.mixins import GenerateFormsScriptMixin, GenerateServiceScriptMixin
 
 
 class ManagedEntityManager(models.Manager):
@@ -250,8 +249,6 @@ class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
     components = models.ManyToManyField(Component, blank=True, verbose_name="字段")
     components_groups = models.ManyToManyField(ComponentsGroup, blank=True, verbose_name="组件")
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
-    meta_data = models.JSONField(null=True, blank=True, verbose_name="元数据")
-    script = models.TextField(blank=True, null=True, verbose_name='运行时脚本')
 
     class Meta:
         verbose_name = '业务表单'
@@ -318,7 +315,7 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
 
         # construct model script
         footer_script = self._create_model_footer_script()
-        model_script = f'{head_script}{fields_script}{footer_script}\n\n'
+        model_script = f'{head_script}{fields_script}{footer_script}\n'
 
         return model_script, admin_script, serializers_script
 
@@ -395,7 +392,6 @@ class Service(GenerateServiceScriptMixin, HsscPymBase):
     resource_devices = models.CharField(max_length=255, blank=True, null=True, verbose_name='配套设备')
     resource_knowledge = models.CharField(max_length=255, blank=True, null=True, verbose_name='服务知识')
     generate_script_order = models.PositiveSmallIntegerField(default=100, verbose_name='生成脚本顺序')
-    script = models.TextField(blank=True, null=True, verbose_name='运行时脚本', help_text="script['views'] , script['urls'], script['templates']")
 
     class Meta:
         verbose_name = "服务"

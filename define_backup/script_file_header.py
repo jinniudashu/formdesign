@@ -3,17 +3,16 @@
 #***********************************************************************************************************************
 
 service_models_file_head = '''from django.db import models
-from django.forms.models import model_to_dict
 
 from icpc.models import *
 from dictionaries.models import *
-from core.models import HsscFormModel, HsscBaseFormModel, Staff
-# from entities.models import *
+from core.models import HsscFormModel, HsscBaseFormModel
 
 
+# 创建一个服务表单实例
 def create_form_instance(operation_proc):
     model_name = operation_proc.service.name.capitalize()
-    print('From service.models, 创建表单实例:', model_name)
+    print('From service.models.create_form_instance, 创建表单实例:', model_name)
     form_instance = eval(model_name).objects.create(
         customer=operation_proc.customer,
         creater=operation_proc.operator,
@@ -22,20 +21,16 @@ def create_form_instance(operation_proc):
     )
     return form_instance
 
-def get_form_instance(operation_proc):
-    model_name = operation_proc.service.name.capitalize()
-    form_instance = eval(model_name).objects.get(pid=operation_proc)
-    print('From service.models, 获取表单实例:', model_name, model_to_dict(form_instance))
-    return form_instance
 
+# **********************************************************************************************************************
+# Service表单Model
+# **********************************************************************************************************************
 '''
 
-service_admin_file_head = '''from django.shortcuts import redirect
-from django.contrib import admin
+service_admin_file_head = '''from django.contrib import admin
+from django.shortcuts import redirect
 
-from hssc.site import clinic_site
-# 导入自定义作业完成信号
-from core.signals import operand_finished
+from core.admin import clinic_site
 from service.models import *
 
 
@@ -52,15 +47,8 @@ class HsscFormAdmin(admin.ModelAdmin):
         )
 
     def save_model(self, request, obj, form, change):
-        # 发送服务作业完成信号
-        pid = obj.pid.id
-        ocode = 'RTC'
-        uid = request.user.id
-        form_data = request.POST.copy()
-        form_data.pop('csrfmiddlewaretoken')
-        form_data.pop('_save')
-        operand_finished.send(sender=self, pid=pid, ocode=ocode, uid=uid, form_data=form_data)
-        print('发送操作完成信号：', pid, ocode, uid, form_data)
+        # 更新作业进程状态为RTC
+        obj.pid.update_state('RTC')
         super().save_model(request, obj, form, change)
 
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
@@ -80,6 +68,10 @@ class HsscFormAdmin(admin.ModelAdmin):
         else:
             return redirect('index')
 
+
+# **********************************************************************************************************************
+# Service表单Admin
+# **********************************************************************************************************************
 '''
 
 # forms/models.py文件头
@@ -90,7 +82,6 @@ import json
 from icpc.models import *
 from dictionaries.models import *
 from core.models import HsscFormModel, Staff
-# from entities.models import *
 
 
 '''
@@ -155,12 +146,15 @@ class DictBase(models.Model):
             self.pym = ''.join(lazy_pinyin(self.label, style=Style.FIRST_LETTER))
             if self.name is None or self.name=='':
                 self.name = "_".join(lazy_pinyin(self.label))
-        super().save(*args, **kwargs)'''
+        super().save(*args, **kwargs)
+
+'''
 
 # 字典admin.py文件头
 dict_admin_head = '''from django.contrib import admin
-from hssc.site import clinic_site
+from core.admin import clinic_site
 from .models import *
+
 '''
 
 # 字典admin固定内容
@@ -263,7 +257,7 @@ def icpc_post_delete_handler(sender, instance, **kwargs):
 
 # ICPC字典admin.py文件头
 icpc_admin_head = '''from django.contrib import admin
-from hssc.site import clinic_site
+from core.admin import clinic_site
 from .models import *
 
 @admin.register(Icpc)
@@ -295,18 +289,3 @@ class SubIcpcAdmin(admin.ModelAdmin):
 serializers_head = '''from rest_framework import serializers
 from .models import *
 '''
-
-
-# entities
-entities_models_file_head = '''from django.db import models
-from core.models import HsscFormModel
-from icpc.models import *
-from dictionaries.models import *
-
-'''
-
-entities_admin_file_head = '''from django.contrib import admin
-from hssc.site import clinic_site
-from .models import *
-'''
-

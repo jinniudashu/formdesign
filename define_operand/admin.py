@@ -40,7 +40,7 @@ class BuessinessFormAdmin(admin.ModelAdmin):
     )
     search_fields = ['name', 'label', 'pym']
     filter_horizontal = ("components",)
-    readonly_fields = ['name', 'hssc_id', 'meta_data']
+    readonly_fields = ['name', 'hssc_id']
     autocomplete_fields = ['name_icpc',]
 
 
@@ -62,12 +62,12 @@ class ServiceAdmin(admin.ModelAdmin):
             'fields': ('suppliers', 'not_suitable', ('awaiting_time_frame' ,'execution_time_frame'), 'working_hours', 'cost', 'load_feedback')
         }),
         ('资源配置', {
-            'fields': ('resource_materials','resource_devices','resource_knowledge', 'generate_script_order','script')
+            'fields': ('resource_materials','resource_devices','resource_knowledge', 'generate_script_order')
         }),
     )
     search_fields=['label', 'pym']
     ordering = ['id']
-    readonly_fields = ['name', 'hssc_id']
+    readonly_fields = ['hssc_id']
     inlines = [BuessinessFormsSettingInline]
     filter_horizontal = ("role",)
     autocomplete_fields = ["name_icpc"]
