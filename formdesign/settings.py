@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'define_operand',
     'define_backup',
     'rest_framework',
+    'import_export',
 ]
 
 MIDDLEWARE = [

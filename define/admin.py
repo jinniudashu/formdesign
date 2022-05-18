@@ -2,6 +2,14 @@ from django.contrib import admin
 
 from define.models import *
 
+from import_export.admin import ImportExportModelAdmin
+from define.resource import MedcineResource
+
+class MedcineAdmin(ImportExportModelAdmin):
+    resource_class = MedcineResource
+admin.site.register(Medcine, MedcineAdmin)
+
+
 @admin.register(CharacterField)
 class CharacterFieldAdmin(admin.ModelAdmin):
     readonly_fields = ['name', 'hssc_id']
