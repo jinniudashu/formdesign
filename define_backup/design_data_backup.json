@@ -2430,15 +2430,15 @@
             "name": "customer",
             "hssc_id": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "kh",
-            "app_name": "core",
+            "app_name": "service",
             "model_name": "Customer",
             "base_form": "0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd",
             "header_fields": [
-                "dea1797c-9aa1-11ec-bde1-8a6e55faf877",
+                "deaaac2c-9aa1-11ec-bde1-8a6e55faf877",
                 "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
                 "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
-                "de9e99dc-9aa1-11ec-bde1-8a6e55faf877",
-                "de9f4ea4-9aa1-11ec-bde1-8a6e55faf877"
+                "deb7b0ac-9aa1-11ec-bde1-8a6e55faf877",
+                "debcb08e-9aa1-11ec-bde1-8a6e55faf877"
             ]
         },
         {
@@ -2446,7 +2446,7 @@
             "name": "medicine",
             "hssc_id": "de896698-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "yp",
-            "app_name": "entities",
+            "app_name": "service",
             "model_name": "Medicine",
             "base_form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
             "header_fields": []
@@ -2456,7 +2456,7 @@
             "name": "staff",
             "hssc_id": "de87315c-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "zy",
-            "app_name": "core",
+            "app_name": "service",
             "model_name": "Staff",
             "base_form": "bca10e04-c5c7-11ec-b819-725badf7393d",
             "header_fields": []
@@ -2466,7 +2466,7 @@
             "name": "institution",
             "hssc_id": "de8ad1a4-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "jg",
-            "app_name": "entities",
+            "app_name": "service",
             "model_name": "Institution",
             "base_form": "43464b44-c5c9-11ec-b819-725badf7393d",
             "header_fields": []
@@ -2476,7 +2476,7 @@
             "name": "device",
             "hssc_id": "de8a1c64-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "sb",
-            "app_name": "entities",
+            "app_name": "service",
             "model_name": "Device",
             "base_form": "7c8caaba-c5c9-11ec-b9d4-725badf7393d",
             "header_fields": []
@@ -2486,13 +2486,24 @@
             "name": "supplier",
             "hssc_id": "de889948-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "gys",
-            "app_name": "entities",
+            "app_name": "service",
             "model_name": "Supplier",
             "base_form": "63347e8a-c5c9-11ec-b819-725badf7393d",
             "header_fields": []
         }
     ],
     "characterfield": [
+        {
+            "label": "药品通用名",
+            "name": "boolfield_yao_pin_tong_yong_zi_duan",
+            "hssc_id": "2c4ebf36-d5b7-11ec-a897-52d938fbdf73",
+            "pym": "yptym",
+            "name_icpc": null,
+            "type": "CharField",
+            "length": 255,
+            "required": false,
+            "default": null
+        },
         {
             "label": "身份证号码",
             "name": "characterhssc_identification_number",
@@ -3332,26 +3343,6 @@
     ],
     "dtfield": [
         {
-            "label": "确诊时间",
-            "name": "datetimefield_time_of_diagnosis",
-            "hssc_id": "deb70576-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "qzsj",
-            "name_icpc": null,
-            "type": "DateTimeField",
-            "default_now": false,
-            "required": false
-        },
-        {
-            "label": "保质期",
-            "name": "boolfield_bao_zhi_qi",
-            "hssc_id": "3d412b40-c116-11ec-b731-2617a93150cd",
-            "pym": "bzq",
-            "name_icpc": null,
-            "type": "DateField",
-            "default_now": false,
-            "required": true
-        },
-        {
             "label": "手术日期",
             "name": "datetimefield_date",
             "hssc_id": "deb645d2-9aa1-11ec-bde1-8a6e55faf877",
@@ -3380,6 +3371,26 @@
             "type": "DateField",
             "default_now": false,
             "required": false
+        },
+        {
+            "label": "确诊时间",
+            "name": "datetimefield_time_of_diagnosis",
+            "hssc_id": "deb70576-9aa1-11ec-bde1-8a6e55faf877",
+            "pym": "qzsj",
+            "name_icpc": null,
+            "type": "DateTimeField",
+            "default_now": false,
+            "required": false
+        },
+        {
+            "label": "保质期",
+            "name": "boolfield_bao_zhi_qi",
+            "hssc_id": "3d412b40-c116-11ec-b731-2617a93150cd",
+            "pym": "bzq",
+            "name_icpc": null,
+            "type": "DateField",
+            "default_now": false,
+            "required": true
         },
         {
             "label": "出生日期",
@@ -4470,6 +4481,26 @@
             "components_groups": []
         },
         {
+            "label": "物料供应商基本信息表",
+            "name": "wu_liu_gong_ying_shang_ji_ben_xin_xi_biao",
+            "hssc_id": "63347e8a-c5c9-11ec-b819-725badf7393d",
+            "pym": "wlgysjbxxb",
+            "name_icpc": null,
+            "description": null,
+            "meta_data": "{\n    \"name\": \"wu_liu_gong_ying_shang_ji_ben_xin_xi_biao\",\n    \"label\": \"物料供应商基本信息表\",\n    \"hssc_id\": \"63347e8a-c5c9-11ec-b819-725badf7393d\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_contact_address\",\n            \"label\": \"联系地址\",\n            \"hssc_id\": \"dea1797c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_contact_number\",\n            \"label\": \"联系电话\",\n            \"hssc_id\": \"deab5d16-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_gong_ying_shang_bian_ma\",\n            \"label\": \"供应商编码\",\n            \"hssc_id\": \"2bb30548-c5ca-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_zhu_yao_gong_ying_chan_pin\",\n            \"label\": \"主要供应产品\",\n            \"hssc_id\": \"36fae812-c5ca-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_gong_huo_zhou_qi\",\n            \"label\": \"供货周期\",\n            \"hssc_id\": \"42583a7a-c5ca-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_gong_ying_shang_ming_cheng\",\n            \"label\": \"供应商名称\",\n            \"hssc_id\": \"7c53c810-c5cb-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_xin_yu_ping_ji\",\n            \"label\": \"信誉评级\",\n            \"hssc_id\": \"5f80d88c-c5ca-11ec-b819-725badf7393d\",\n            \"type\": \"Xin_yu_ping_ji\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
+            "script": "{\"models\": \"class Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao(HsscFormModel):\\n    characterfield_contact_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系地址')\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    boolfield_gong_ying_shang_bian_ma = models.CharField(max_length=255, null=True, blank=True, verbose_name='供应商编码')\\n    boolfield_zhu_yao_gong_ying_chan_pin = models.CharField(max_length=255, null=True, blank=True, verbose_name='主要供应产品')\\n    boolfield_gong_huo_zhou_qi = models.CharField(max_length=255, null=True, blank=True, verbose_name='供货周期')\\n    boolfield_gong_ying_shang_ming_cheng = models.CharField(max_length=255, null=True, blank=True, verbose_name='供应商名称')\\n    boolfield_xin_yu_ping_ji = models.ForeignKey(Xin_yu_ping_ji, related_name='xin_yu_ping_ji_for_boolfield_xin_yu_ping_ji_wu_liu_gong_ying_shang_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='信誉评级')\\n    class Meta:\\n        verbose_name = '物料供应商基本信息表'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('wu_liu_gong_ying_shang_ji_ben_xin_xi_biao_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('wu_liu_gong_ying_shang_ji_ben_xin_xi_biao_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass Wu_liu_gong_ying_shang_ji_ben_xin_xi_biaoAdmin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"boolfield_xin_yu_ping_ji\\\", ]\\nadmin.site.register(Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao, Wu_liu_gong_ying_shang_ji_ben_xin_xi_biaoAdmin)\\nclinic_site.register(Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao, Wu_liu_gong_ying_shang_ji_ben_xin_xi_biaoAdmin)\\n\", \"forms\": \"\\nclass Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao_ModelForm(ModelForm):\\n    class Meta:\\n        model = Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao\\n        fields = ['characterfield_contact_address', 'characterfield_contact_number', 'boolfield_gong_ying_shang_bian_ma', 'boolfield_zhu_yao_gong_ying_chan_pin', 'boolfield_gong_huo_zhou_qi', 'boolfield_gong_ying_shang_ming_cheng', 'boolfield_xin_yu_ping_ji', ]\\n        widgets = {'boolfield_xin_yu_ping_ji': Select, }\\n    \"}",
+            "components": [
+                "dea1797c-9aa1-11ec-bde1-8a6e55faf877",
+                "2bb30548-c5ca-11ec-b9d4-725badf7393d",
+                "36fae812-c5ca-11ec-b819-725badf7393d",
+                "42583a7a-c5ca-11ec-b819-725badf7393d",
+                "7c53c810-c5cb-11ec-b819-725badf7393d",
+                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
+                "5f80d88c-c5ca-11ec-b819-725badf7393d"
+            ],
+            "components_groups": []
+        },
+        {
             "label": "药品基本信息表",
             "name": "yao_pin_ji_ben_xin_xi_biao",
             "hssc_id": "a2fc46f0-c115-11ec-9685-2617a93150cd",
@@ -4492,27 +4523,8 @@
                 "654dfc0a-c5ce-11ec-b819-725badf7393d",
                 "6da75824-c5ce-11ec-b819-725badf7393d",
                 "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-                "5dc1e618-c5ce-11ec-b9d4-725badf7393d"
-            ],
-            "components_groups": []
-        },
-        {
-            "label": "物料供应商基本信息表",
-            "name": "wu_liu_gong_ying_shang_ji_ben_xin_xi_biao",
-            "hssc_id": "63347e8a-c5c9-11ec-b819-725badf7393d",
-            "pym": "wlgysjbxxb",
-            "name_icpc": null,
-            "description": null,
-            "meta_data": "{\n    \"name\": \"wu_liu_gong_ying_shang_ji_ben_xin_xi_biao\",\n    \"label\": \"物料供应商基本信息表\",\n    \"hssc_id\": \"63347e8a-c5c9-11ec-b819-725badf7393d\",\n    \"fields\": [\n        {\n            \"name\": \"characterfield_contact_address\",\n            \"label\": \"联系地址\",\n            \"hssc_id\": \"dea1797c-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"characterfield_contact_number\",\n            \"label\": \"联系电话\",\n            \"hssc_id\": \"deab5d16-9aa1-11ec-bde1-8a6e55faf877\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_gong_ying_shang_bian_ma\",\n            \"label\": \"供应商编码\",\n            \"hssc_id\": \"2bb30548-c5ca-11ec-b9d4-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_zhu_yao_gong_ying_chan_pin\",\n            \"label\": \"主要供应产品\",\n            \"hssc_id\": \"36fae812-c5ca-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_gong_huo_zhou_qi\",\n            \"label\": \"供货周期\",\n            \"hssc_id\": \"42583a7a-c5ca-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_gong_ying_shang_ming_cheng\",\n            \"label\": \"供应商名称\",\n            \"hssc_id\": \"7c53c810-c5cb-11ec-b819-725badf7393d\",\n            \"type\": \"string\"\n        },\n        {\n            \"name\": \"boolfield_xin_yu_ping_ji\",\n            \"label\": \"信誉评级\",\n            \"hssc_id\": \"5f80d88c-c5ca-11ec-b819-725badf7393d\",\n            \"type\": \"Xin_yu_ping_ji\",\n            \"app_label\": \"\"\n        }\n    ]\n}",
-            "script": "{\"models\": \"class Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao(HsscFormModel):\\n    characterfield_contact_address = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系地址')\\n    characterfield_contact_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='联系电话')\\n    boolfield_gong_ying_shang_bian_ma = models.CharField(max_length=255, null=True, blank=True, verbose_name='供应商编码')\\n    boolfield_zhu_yao_gong_ying_chan_pin = models.CharField(max_length=255, null=True, blank=True, verbose_name='主要供应产品')\\n    boolfield_gong_huo_zhou_qi = models.CharField(max_length=255, null=True, blank=True, verbose_name='供货周期')\\n    boolfield_gong_ying_shang_ming_cheng = models.CharField(max_length=255, null=True, blank=True, verbose_name='供应商名称')\\n    boolfield_xin_yu_ping_ji = models.ForeignKey(Xin_yu_ping_ji, related_name='xin_yu_ping_ji_for_boolfield_xin_yu_ping_ji_wu_liu_gong_ying_shang_ji_ben_xin_xi_biao', on_delete=models.CASCADE, null=True, blank=True, verbose_name='信誉评级')\\n    class Meta:\\n        verbose_name = '物料供应商基本信息表'\\n        verbose_name_plural = verbose_name\\n\\n    def get_absolute_url(self):\\n        return reverse('wu_liu_gong_ying_shang_ji_ben_xin_xi_biao_detail_url', kwargs={'slug': self.slug})\\n\\n    def get_update_url(self):\\n        return reverse('wu_liu_gong_ying_shang_ji_ben_xin_xi_biao_update_url', kwargs={'slug': self.slug})\\n        \\n\\n\", \"admin\": \"\\nclass Wu_liu_gong_ying_shang_ji_ben_xin_xi_biaoAdmin(HsscFormAdmin):\\n    autocomplete_fields = [\\\"boolfield_xin_yu_ping_ji\\\", ]\\nadmin.site.register(Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao, Wu_liu_gong_ying_shang_ji_ben_xin_xi_biaoAdmin)\\nclinic_site.register(Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao, Wu_liu_gong_ying_shang_ji_ben_xin_xi_biaoAdmin)\\n\", \"forms\": \"\\nclass Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao_ModelForm(ModelForm):\\n    class Meta:\\n        model = Wu_liu_gong_ying_shang_ji_ben_xin_xi_biao\\n        fields = ['characterfield_contact_address', 'characterfield_contact_number', 'boolfield_gong_ying_shang_bian_ma', 'boolfield_zhu_yao_gong_ying_chan_pin', 'boolfield_gong_huo_zhou_qi', 'boolfield_gong_ying_shang_ming_cheng', 'boolfield_xin_yu_ping_ji', ]\\n        widgets = {'boolfield_xin_yu_ping_ji': Select, }\\n    \"}",
-            "components": [
-                "dea1797c-9aa1-11ec-bde1-8a6e55faf877",
-                "2bb30548-c5ca-11ec-b9d4-725badf7393d",
-                "36fae812-c5ca-11ec-b819-725badf7393d",
-                "42583a7a-c5ca-11ec-b819-725badf7393d",
-                "7c53c810-c5cb-11ec-b819-725badf7393d",
-                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
-                "5f80d88c-c5ca-11ec-b819-725badf7393d"
+                "5dc1e618-c5ce-11ec-b9d4-725badf7393d",
+                "2c4ebf36-d5b7-11ec-a897-52d938fbdf73"
             ],
             "components_groups": []
         },
@@ -6087,7 +6099,7 @@
         },
         {
             "label": "药品基本信息维护",
-            "name": "yao_pin_ji_ben_xin_xi_diao_cha",
+            "name": "yao_pin_ji_ben_xin_xi_biao",
             "hssc_id": "b411a830-d11a-11ec-b369-823d1f108281",
             "pym": "ypjbxxwh",
             "name_icpc": null,
@@ -6213,7 +6225,7 @@
         },
         {
             "label": "职员基本信息维护",
-            "name": "zhi_yuan_ji_ben_xin_xi_wei_hu",
+            "name": "zhi_yuan_ji_ben_xin_xi_biao",
             "hssc_id": "51b8426a-d11b-11ec-ab0d-823d1f108281",
             "pym": "zyjbxxwh",
             "name_icpc": null,
@@ -6245,7 +6257,7 @@
         },
         {
             "label": "机构基本信息维护",
-            "name": "ji_gou_ji_ben_xin_xi_wei_hu",
+            "name": "ji_gou_ji_ben_xin_xi_biao",
             "hssc_id": "ae0189fa-d11b-11ec-ab0d-823d1f108281",
             "pym": "jgjbxxwh",
             "name_icpc": null,
@@ -6705,11 +6717,11 @@
             "name": "fa_xian_er_lian_tang_niao_bing_zheng_zhuang_qie_xue_tang_chao_biao",
             "hssc_id": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
             "pym": "extnbzdgz",
-            "description": "糖尿病症状 == {‘烦渴’,‘多尿’} and 空腹血糖 >= 7.0 or 糖尿病症状 == {'烦渴','皮肤感染'} and 空腹血糖 >= 7.0 or 糖尿病症状 == {'多尿','皮肤感染'} and 空腹血糖 >= 7.0",
-            "detection_scope": "CURRENT_SERVICE",
+            "description": "症状 == {‘烦渴’,‘多尿’} and 空腹血糖 >= 7.0 or 症状 == {'烦渴','皮肤感染'}  空腹血糖 >= 7.0 or 症状 == {'多尿','皮肤感染'} and 空腹血糖 >= 7.0",
+            "detection_scope": "LAST_WEEK_SERVICES",
             "weight": 1,
-            "expression": "len({'烦渴','多尿','皮肤感染'}.intersection(boolfield_tang_niao_bing_zheng_zhuang))>=2 and numberfield_kong_fu_xue_tang >= 7.0",
-            "expression_fields": "boolfield_tang_niao_bing_zheng_zhuang,numberfield_kong_fu_xue_tang,boolfield_tang_niao_bing_zheng_zhuang,numberfield_kong_fu_xue_tang,boolfield_tang_niao_bing_zheng_zhuang,numberfield_kong_fu_xue_tang"
+            "expression": "len({'烦渴','多尿','皮肤感染'}.intersection(relatedfield_symptom_list)) >= 2 and numberfield_kong_fu_xue_tang >= 7.0",
+            "expression_fields": "relatedfield_symptom_list,numberfield_kong_fu_xue_tang,relatedfield_symptom_list,numberfield_kong_fu_xue_tang,relatedfield_symptom_list,numberfield_kong_fu_xue_tang"
         },
         {
             "label": "糖尿病酮中毒诊断规则",
@@ -6849,10 +6861,10 @@
             "name": null,
             "hssc_id": "9dd91d40-abdc-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
-            "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
-            "operator": null,
+            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
+            "operator": 0,
             "value": "‘烦渴’,‘多尿’",
-            "connection_operator": null
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -6869,8 +6881,8 @@
             "name": null,
             "hssc_id": "9dd9862c-abdc-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
-            "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
-            "operator": null,
+            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
+            "operator": 0,
             "value": "'烦渴','皮肤感染'",
             "connection_operator": null
         },
@@ -6889,10 +6901,10 @@
             "name": null,
             "hssc_id": "9dd9dc8a-abdc-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
-            "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
-            "operator": null,
+            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
+            "operator": 0,
             "value": "'多尿','皮肤感染'",
-            "connection_operator": null
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -7399,7 +7411,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": false,
+            "is_active": true,
             "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
         },
         {
