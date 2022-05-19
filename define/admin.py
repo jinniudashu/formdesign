@@ -12,26 +12,26 @@ admin.site.register(Medcine, MedcineAdmin)
 
 @admin.register(CharacterField)
 class CharacterFieldAdmin(admin.ModelAdmin):
-    readonly_fields = ['name', 'hssc_id']
+    readonly_fields = ['hssc_id']
     search_fields=['label', 'pym']
     autocomplete_fields = ['name_icpc']
 
 @admin.register(NumberField)
 class NumberFieldAdmin(admin.ModelAdmin):
-    readonly_fields = ['name', 'hssc_id']
+    readonly_fields = ['hssc_id']
     search_fields=['label', 'pym']
     autocomplete_fields = ['name_icpc']
 
 @admin.register(DTField)
 class DTFieldAdmin(admin.ModelAdmin):
-    readonly_fields = ['name', 'hssc_id']
+    readonly_fields = ['hssc_id']
     search_fields=['label', 'pym']
     autocomplete_fields = ['name_icpc']
 
 @admin.register(RelatedField)
 class RelatedFieldAdmin(admin.ModelAdmin):
     list_display = ['label', 'name']
-    readonly_fields = ['name', 'hssc_id']
+    readonly_fields = ['hssc_id']
     search_fields=['label', 'pym', 'name']
     autocomplete_fields = ['name_icpc']
 
