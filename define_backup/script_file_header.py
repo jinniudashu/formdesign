@@ -3,39 +3,10 @@
 #***********************************************************************************************************************
 
 service_models_file_head = '''from django.db import models
-from django.forms.models import model_to_dict
 
 from icpc.models import *
 from dictionaries.models import *
 from core.models import HsscFormModel, HsscBaseFormModel
-
-
-# 创建一个服务表单实例
-def create_form_instance(operation_proc):
-    # 1. 创建空表单
-    model_name = operation_proc.service.name.capitalize()
-    form_instance = eval(model_name).objects.create(
-        customer=operation_proc.customer,
-        creater=operation_proc.operator,
-        pid=operation_proc,
-        cpid=operation_proc.contract_service_proc,
-    )
-    print('From service.models.create_form_instance, 创建表单实例:', model_name, form_instance, model_to_dict(form_instance))
-
-    # 2. 如果不是基本信息表作业(作业服务表单!=作业服务的实体基本信息表单)，则为属性表，填入表头字段
-    service = operation_proc.service
-    if service.buessiness_forms.all().first() != service.managed_entity.base_form:
-        # 判断当前实体，填入实体基本信息表头字段
-        # 通用代码里customer应改为entity
-        base_info = eval(service.managed_entity.base_form.service_set.all().first().name.capitalize()).objects.filter(customer=operation_proc.customer).first()
-        # *********以下应为生成代码！************
-        form_instance.characterfield_family_address = base_info.characterfield_family_address
-        form_instance.characterfield_contact_number = base_info.characterfield_contact_number
-        form_instance.characterfield_name = base_info.characterfield_name
-        form_instance.relatedfield_gender = base_info.relatedfield_gender
-        form_instance.datetimefield_date_of_birth = base_info.datetimefield_date_of_birth
-        form_instance.save()
-    return form_instance
 
 
 # **********************************************************************************************************************
@@ -45,13 +16,10 @@ def create_form_instance(operation_proc):
 
 service_admin_file_head = '''from django.contrib import admin
 from django.shortcuts import redirect
-from enum import Enum
-from django.core.exceptions import ObjectDoesNotExist
 
 from core.admin import clinic_site
-from core.hsscbase_class import FieldsType
 from core.signals import operand_finished
-from core.models import CustomerServiceLog
+from core.business_functions import create_customer_service_log
 from service.models import *
 
 
@@ -70,61 +38,13 @@ class HsscFormAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         # 把表单内容存入CustomerServiceLog
-        def _preprocess_data_format(post_data):
-            def _get_set_value(field_type, id_list):
-                # 转换id列表为对应的字典值列表
-                _model_list = field_type.split('.')  # 分割模型名称field_type: app_label.model_name
-                app_label = _model_list[0]  # 应用名称
-                model_name = _model_list[1]  # 模型名称
-                class ConvertIdToValue(Enum):
-                    icpc = map(lambda x: eval(model_name).objects.get(id=x).iname, id_list)
-                    dictionaries = map(lambda x: eval(model_name).objects.get(id=x).value, id_list)
-                    service = map(lambda x: eval(model_name).objects.get(id=x).name, id_list)
-                val_iterator = eval(f'ConvertIdToValue.{app_label}').value
-                return f'{set(val_iterator)}'
-
-            post_data.pop('csrfmiddlewaretoken')
-            post_data.pop('_save')
-            form_data = {**post_data}  # 把QuerySet对象转为Dict
-            for field_name, field_val in form_data.items():
-                # 根据字段类型做字段值的格式转换
-                field_type = eval(f'FieldsType.{field_name}').value
-                if field_type == 'Datetime' or field_type == 'Date':  # 日期类型暂时不处理
-                    form_data[field_name] = f'{field_val}'
-                elif field_type == 'Numbers':  # 如果字段类型是Numbers，直接使用字符串数值
-                    form_data[field_name] = field_val[0]
-                elif field_type == 'String':  # 如果字段类型是String，转换为集合字符串
-                    form_data[field_name] = f'{set(field_val)}' if field_val else '{}'
-                else:  # 如果字段类型是关联字段，转换为集合字符串
-                    form_data[field_name] = _get_set_value(field_type, field_val) if field_val else '{}'
-            return form_data
-
-        def _add_customer_service_log(form_data):
-            try:
-                log = CustomerServiceLog.objects.get(pid = obj.pid)
-                log.data = form_data
-                log.save()
-            except ObjectDoesNotExist:
-                log = CustomerServiceLog.objects.create(
-                    name=obj.name,
-                    label=obj.label,
-                    customer=obj.customer,
-                    operator=obj.operator,
-                    creater=obj.creater,
-                    pid=obj.pid,
-                    cpid=obj.cpid,
-                    data=form_data,
-                )
-            return log
-
         _post_data = request.POST.copy()
-        _form_data = _preprocess_data_format(_post_data)
-        log = _add_customer_service_log(_form_data)
-        print('Added log:', log.__dict__)
+        log = create_customer_service_log(_post_data, obj)
+        print('把表单内容存入CustomerServiceLog, From service.admin.HsscFormAdmin.save_model, Added log:', log.__dict__)
 
         # 发送服务作业完成信号
         pid = obj.pid
-        print('发送操作完成信号：', pid)
+        print('发送操作完成信号, From service.admin.HsscFormAdmin.save_model：', pid)
         operand_finished.send(sender=self, pid=pid)
         super().save_model(request, obj, form, change)
 
