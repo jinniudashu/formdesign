@@ -45,7 +45,7 @@ class HsscFormAdmin(admin.ModelAdmin):
         # 发送服务作业完成信号
         pid = obj.pid
         print('发送操作完成信号, From service.admin.HsscFormAdmin.save_model：', pid)
-        operand_finished.send(sender=self, pid=pid)
+        operand_finished.send(sender=self, pid=pid, request=request)
         super().save_model(request, obj, form, change)
 
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
