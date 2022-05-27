@@ -28,6 +28,7 @@ Backup_models = [
     RelatedField,
     ComponentsGroup,
     BuessinessForm,
+    FormComponentsSetting,
     Service,
     BuessinessFormsSetting,
     EventRule,

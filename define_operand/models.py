@@ -28,7 +28,7 @@ class ManagedEntity(HsscPymBase):
     entities = ManagedEntityManager()
 
     class Meta:
-        verbose_name = "业务管理实体"
+        verbose_name = "管理实体"
         verbose_name_plural = verbose_name
 
 # Sync Create and update RelateFieldModel
@@ -77,8 +77,10 @@ class GenerateFormsScriptMixin(object):
 
         # !!!待修改：compontents = form.components.all() + form.component_groups.all()
         for component in self.components.all():
+
             # construct fields script
-            _script = self._create_model_field_script(component)
+            _script = self._create_model_field_script(component, is_required=False)
+            
             fields_script = fields_script + _script
             # construct admin autocomplete_fields script
             if component.content_object.__class__.__name__ == 'RelatedField':
@@ -130,40 +132,40 @@ admin.site.register({name}, {name}Admin)
         script = ''
         field = component.content_object.__dict__
         component_type = component.content_type.__dict__['model']
+
+        # 从表单组件设置中间表中获取is_required属性
+        is_blank = self.formcomponentssetting_set.get(component=component).is_required
+
         if component_type == 'characterfield':
-            script = self._create_char_field_script(field)
+            script = self._create_char_field_script(field, is_blank)
         elif component_type == 'numberfield':
-            script = self._create_number_field_script(field)
+            script = self._create_number_field_script(field, is_blank)
         elif component_type == 'dtfield':
-            script = self._create_datetime_field_script(field)
+            script = self._create_datetime_field_script(field, is_blank)
         elif component_type == 'relatedfield':
             field['foreign_key'] = component.content_object.related_content.related_content
-            script = self._create_related_field_script(field)
+            script = self._create_related_field_script(field, is_blank)
         return script
 
     # 生成字符型字段定义脚本
-    def _create_char_field_script(self, field):
+    def _create_char_field_script(self, field, is_blank):
         if field['type'] == 'CharField':
             f_type = 'CharField'
         else:
             f_type = 'TextField'
-
-        if field['required']:
-            f_required = ''
-        else:
-            f_required = 'null=True, blank=True, '
-        f_required = 'null=True, blank=True, '
 
         if field['default']:
             f_default = f'default="{field["default"]}", '
         else:
             f_default = ''
 
+        f_required = f'null=True, blank={str(is_blank)}, '
+
         return f'''
     {field['name']} = models.{f_type}(max_length={field['length']}, {f_default}{f_required}verbose_name='{field['label']}')'''
 
     # 生成数字型字段定义脚本
-    def _create_number_field_script(self, field):
+    def _create_number_field_script(self, field, is_blank):
         if field['type'] == 'IntegerField':
             f_type = 'IntegerField'
             f_dicimal = ''
@@ -192,10 +194,6 @@ admin.site.register({name}, {name}Admin)
         else:
             f_default = ''
 
-        if field['required']:
-            f_required = 'null=True, '
-        else:
-            f_required = 'null=True, blank=True, '
         f_required = 'null=True, blank=True, '
 
         return f'''
@@ -205,7 +203,7 @@ admin.site.register({name}, {name}Admin)
     {field['name']}_down_limit = models.{f_type}({f_dicimal}{f_down_limit}{f_required}verbose_name='{field['label']}下限')'''
 
     # 生成日期型字段定义脚本
-    def _create_datetime_field_script(self, field):
+    def _create_datetime_field_script(self, field, is_blank):
         f_default = ''
         if field['type'] == 'DateTimeField':
             f_type = 'DateTimeField'
@@ -214,21 +212,19 @@ admin.site.register({name}, {name}Admin)
             f_type = 'DateField'
             if field['default_now']: f_default = 'default=date.today(), '
         
-        if field['required']:
-            f_required = 'null=True, '
-        else:
-            f_required = 'null=True, blank=True, '
+        f_required = 'null=True, blank=True, '
 
         return f'''
     {field['name']} = models.{f_type}({f_default}{f_required}verbose_name='{field['label']}')'''
 
     # 生成关联型字段定义脚本
-    def _create_related_field_script(self, field):
+    def _create_related_field_script(self, field, is_blank):
         if field['type'] in ['Select', 'RadioSelect']:
             if field['type'] == 'Select':
                 f_type = 'Select'
             else:
                 f_type = 'RadioSelect'
+
             f_required = 'null=True, blank=True, '
 
             return f'''
@@ -240,13 +236,15 @@ admin.site.register({name}, {name}Admin)
             else:
                 f_type = 'CheckboxSelectMultiple'
 
+            f_required = 'blank=True, '
+
             return f'''
-    {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', verbose_name='{field['label']}')'''
+    {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', {f_required}verbose_name='{field['label']}')'''
 
 # 业务表单定义
 class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
-    components = models.ManyToManyField(Component, blank=True, verbose_name="字段")
+    components = models.ManyToManyField(Component, through='FormComponentsSetting', verbose_name="字段")
     components_groups = models.ManyToManyField(ComponentsGroup, blank=True, verbose_name="组件")
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
 
@@ -262,6 +260,21 @@ class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
 
         super().save(*args, **kwargs)
+
+class FormComponentsSetting(HsscBase):
+    form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="表单")
+    component = models.ForeignKey(Component, on_delete=models.CASCADE, verbose_name="组件")
+    is_required = models.BooleanField(default=False, verbose_name="是否必填")
+    position = models.PositiveSmallIntegerField(default=0, verbose_name="位置顺序")
+
+    class Meta:
+        verbose_name = '表单组件设置'
+        verbose_name_plural = verbose_name
+
+def tmp_migrate_data():
+    for form in BuessinessForm.objects.all():
+        for component in form.components.all():
+            FormComponentsSetting.objects.create(form=form, component=component)
 
 
 class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
@@ -412,7 +425,7 @@ class BuessinessFormsSetting(HsscBase):
     is_list = models.BooleanField(default=False, verbose_name="列表样式")
 
     class Meta:
-        verbose_name = '作业表单设置'
+        verbose_name = '服务表单设置'
         verbose_name_plural = verbose_name
         ordering = ['id']
 

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BuessinessForm, Service, BuessinessFormsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceRule, SystemOperand, EventRule, EventExpression, ManagedEntity
+from .models import BuessinessForm, FormComponentsSetting, Service, BuessinessFormsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceRule, SystemOperand, EventRule, EventExpression, ManagedEntity
 
 
 class EventExpressionInline(admin.TabularInline):
@@ -29,18 +29,24 @@ class EventRuleAdmin(admin.ModelAdmin):
 #     autocomplete_fields = ['field']
 
 
+class FormComponentsSettingInline(admin.TabularInline):
+    model = FormComponentsSetting
+    exclude = ['label', 'name', 'hssc_id']
+    autocomplete_fields = ['component']
+
 @admin.register(BuessinessForm)
 class BuessinessFormAdmin(admin.ModelAdmin):
     list_display = ['name_icpc', 'label', 'name', 'id']
     list_display_links = ['label', 'name',]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), 'components', 'components_groups', 'description', ('name', 'hssc_id'), )
+            'fields': (('label', 'name_icpc'), 'components_groups', 'description', ('name', 'hssc_id'), )
         }),
     )
     search_fields = ['name', 'label', 'pym']
     filter_horizontal = ("components",)
     readonly_fields = ['name', 'hssc_id']
+    inlines = [FormComponentsSettingInline]
     autocomplete_fields = ['name_icpc',]
 
 

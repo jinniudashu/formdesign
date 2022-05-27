@@ -35,7 +35,6 @@ class CharacterField(HsscFieldBase):
     CHAR_TYPE = [('CharField', '单行文本'), ('TextField', '多行文本')]
     type = models.CharField(max_length=50, choices=CHAR_TYPE, default='CharField', verbose_name="类型")
     length = models.PositiveSmallIntegerField(default=255, verbose_name="字符长度")
-    required = models.BooleanField(default=False, verbose_name="必填")
     default = models.CharField(max_length=255, null=True, blank=True, verbose_name="默认值")
     # component = GenericRelation(to='Component')
 
@@ -55,7 +54,6 @@ class NumberField(HsscFieldBase):
     down_limit = models.FloatField(null=True, blank=True, verbose_name="下限")
     unit = models.CharField(max_length=50, null=True, blank=True, verbose_name="单位")
     default = models.FloatField(null=True, blank=True, verbose_name="默认值")
-    required = models.BooleanField(default=False, verbose_name="必填")
 
     class Meta:
         verbose_name = "数值字段"
@@ -67,7 +65,6 @@ class DTField(HsscFieldBase):
     DT_TYPE = [('DateTimeField', '日期时间'), ('DateField', '日期')]
     type = models.CharField(max_length=50, choices=DT_TYPE, default='DateTimeField', verbose_name="类型")
     default_now = models.BooleanField(default=False, verbose_name="默认为当前时间")
-    required = models.BooleanField(default=False, verbose_name="必填")
 
     class Meta:
         verbose_name = "日期字段"
