@@ -79,7 +79,7 @@ class GenerateFormsScriptMixin(object):
         for component in self.components.all():
 
             # construct fields script
-            _script = self._create_model_field_script(component, is_required=False)
+            _script = self._create_model_field_script(component, self)
             
             fields_script = fields_script + _script
             # construct admin autocomplete_fields script
@@ -128,13 +128,13 @@ admin.site.register({name}, {name}Admin)
         return serializers_script
 
     # generate model field script
-    def _create_model_field_script(self, component):
+    def _create_model_field_script(self, component, form):
         script = ''
         field = component.content_object.__dict__
         component_type = component.content_type.__dict__['model']
 
         # 从表单组件设置中间表中获取is_required属性
-        is_blank = self.formcomponentssetting_set.get(component=component).is_required
+        is_blank = not form.formcomponentssetting_set.get(component=component).is_required
 
         if component_type == 'characterfield':
             script = self._create_char_field_script(field, is_blank)
@@ -194,7 +194,7 @@ admin.site.register({name}, {name}Admin)
         else:
             f_default = ''
 
-        f_required = 'null=True, blank=True, '
+        f_required = f'null=True, blank={str(is_blank)}, '
 
         return f'''
     {field['name']} = models.{f_type}({f_dicimal}{f_default}{f_required}verbose_name='{field['label']}')
@@ -212,7 +212,7 @@ admin.site.register({name}, {name}Admin)
             f_type = 'DateField'
             if field['default_now']: f_default = 'default=date.today(), '
         
-        f_required = 'null=True, blank=True, '
+        f_required = f'null=True, blank={str(is_blank)}, '
 
         return f'''
     {field['name']} = models.{f_type}({f_default}{f_required}verbose_name='{field['label']}')'''
@@ -225,7 +225,7 @@ admin.site.register({name}, {name}Admin)
             else:
                 f_type = 'RadioSelect'
 
-            f_required = 'null=True, blank=True, '
+            f_required = f'null=True, blank={str(is_blank)}, '
 
             return f'''
     {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, {f_required}verbose_name='{field['label']}')'''
@@ -236,7 +236,7 @@ admin.site.register({name}, {name}Admin)
             else:
                 f_type = 'CheckboxSelectMultiple'
 
-            f_required = 'blank=True, '
+            f_required = f'blank={str(is_blank)}, '
 
             return f'''
     {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', {f_required}verbose_name='{field['label']}')'''
@@ -270,6 +270,9 @@ class FormComponentsSetting(HsscBase):
     class Meta:
         verbose_name = '表单组件设置'
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return str(self.form.name) + '_' + str(self.component.name)
 
 def tmp_migrate_data():
     for form in BuessinessForm.objects.all():
@@ -312,7 +315,7 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             form_fields = ''
             for component in form.components.all():
                 # construct fields script
-                _script = self._create_model_field_script(component)
+                _script = self._create_model_field_script(component, form)
                 fields_script = fields_script + _script
                 # construct admin body fields script
                 form_fields = form_fields + f'"{component.content_object.name}", '
@@ -358,7 +361,7 @@ clinic_site.register({name}, {name}Admin)
         header_fields = ''
         for component in self.managed_entity.header_fields.all():
             # construct fields script
-            _script = self._create_model_field_script(component)
+            _script = self._create_model_field_script(component, self.managed_entity.base_form)
             fields_script = fields_script + _script
             header_fields = header_fields + f'"{component.content_object.name}", '
         # 如果服务表单内包含基本信息表，返回空表头字段
