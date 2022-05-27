@@ -274,11 +274,6 @@ class FormComponentsSetting(HsscBase):
     def __str__(self):
         return str(self.form.name) + '_' + str(self.component.name)
 
-def tmp_migrate_data():
-    for form in BuessinessForm.objects.all():
-        for component in form.components.all():
-            FormComponentsSetting.objects.create(form=form, component=component)
-
 
 class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
     # 是否基本信息表服务
