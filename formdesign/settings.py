@@ -137,6 +137,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
-
-# 配置部署heroku: https://devcenter.heroku.com/articles/django-app-configuration
-# 备份数据库: heroku pg:backups:schedule DATABASE --at '02:00 Asia/Shanghai' --app hssc-formdesign
