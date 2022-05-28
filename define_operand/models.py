@@ -263,7 +263,7 @@ class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
 
 class FormComponentsSetting(HsscBase):
     form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="表单")
-    component = models.ForeignKey(Component, on_delete=models.CASCADE, verbose_name="组件")
+    component = models.ForeignKey(Component, on_delete=models.CASCADE, verbose_name="字段")
     is_required = models.BooleanField(default=False, verbose_name="是否必填")
     position = models.PositiveSmallIntegerField(default=0, verbose_name="位置顺序")
 
