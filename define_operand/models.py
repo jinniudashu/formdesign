@@ -84,7 +84,15 @@ class GenerateFormsScriptMixin(object):
             fields_script = fields_script + _script
             # construct admin autocomplete_fields script
             if component.content_object.__class__.__name__ == 'RelatedField':
+                pass
+                # 如果是关联字典，则判断是否单选，如果是单选，是否Radio
+                # if component.content_object.related_content.related_content_type == 'dictionaries':
+                    # if field['type'] == 'RadioSelect':
+                        # radio_fields = {"group": admin.VERTICAL}  # 或admin.HORIZONTAL
+            else:
+                # 否则是关联实体或关联ICPC，需要自动完成
                 autocomplete_fields = autocomplete_fields + f'"{component.content_object.name}", '
+
 
         footer_script = self._create_model_footer_script()
 
@@ -220,24 +228,12 @@ admin.site.register({name}, {name}Admin)
     # 生成关联型字段定义脚本
     def _create_related_field_script(self, field, is_blank):
         if field['type'] in ['Select', 'RadioSelect']:
-            if field['type'] == 'Select':
-                f_type = 'Select'
-            else:
-                f_type = 'RadioSelect'
-
             f_required = f'null=True, blank={str(is_blank)}, '
-
             return f'''
     {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, {f_required}verbose_name='{field['label']}')'''
 
         elif field['type'] in ['SelectMultiple', 'CheckboxSelectMultiple']:
-            if field['type'] == 'SelectMultiple':
-                f_type = 'SelectMultiple'
-            else:
-                f_type = 'CheckboxSelectMultiple'
-
             f_required = f'blank={str(is_blank)}, '
-
             return f'''
     {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', {f_required}verbose_name='{field['label']}')'''
 
