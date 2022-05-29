@@ -79,7 +79,6 @@ class GenerateFormsScriptMixin(object):
 
         # !!!待修改：compontents = form.components.all() + form.component_groups.all()
         for component in self.components.all():
-
             # construct fields script
             _script = self._create_model_field_script(component, self)
             
@@ -91,12 +90,16 @@ class GenerateFormsScriptMixin(object):
                 # 如果是关联字典，则判断是否单选，如果是单选，是否Radio
                 if component.content_object.related_content.related_content_type == 'dictionaries':
                     if component.content_object.__dict__['type'] == 'RadioSelect':
-                        modeladmin_body['radio_fields'] = radio_fields + f'{{"{field_name}": admin.VERTICAL}}, '  # 或admin.HORIZONTAL
+                        radio_fields = radio_fields + f'"{field_name}": admin.VERTICAL, '  # 或admin.HORIZONTAL
                 # 否则是关联实体或关联ICPC，需要autocomplete_fields
                 else:
                     # construct admin autocomplete_fields script
                     autocomplete_fields = autocomplete_fields + f'"{field_name}", '
-                    modeladmin_body['autocomplete_fields'] = autocomplete_fields
+        
+        if radio_fields:
+            modeladmin_body['radio_fields'] = radio_fields
+        if autocomplete_fields:
+            modeladmin_body['autocomplete_fields'] = autocomplete_fields
 
         footer_script = self._create_model_footer_script()
 
@@ -115,14 +118,16 @@ class GenerateFormsScriptMixin(object):
         '''
 
     # generate admin script
-    def _create_admin_script(self, body_dict):
+    def _create_admin_script(self, modeladmin_body_dict):
         modeladmin_body = ''
-        if not body_dict:
+        if not modeladmin_body_dict:
             modeladmin_body = f'pass'
         else:
-            for key, value in body_dict.items():
-                modeladmin_body = modeladmin_body + f'{key} = [{value}]\n'
-            # _body = f'autocomplete_fields = [{autocomplete_fields}]'
+            for key, value in modeladmin_body_dict.items():
+                if key == 'radio_fields':
+                    modeladmin_body = modeladmin_body + f'    {key} = {{{value}}}\n'
+                else:
+                    modeladmin_body = modeladmin_body + f'    {key} = [{value}]\n'
 
         name = self.name.capitalize()
 
@@ -289,25 +294,23 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
 
     # generate model and admin script
     def _create_model_script(self):
+        head_script = ''
+        fields_script = header_fields = ''
+        modeladmin_body = {}
+        fieldssets = autocomplete_fields = radio_fields = search_fields = ''
 
         if self._is_base_form_service():  # 基础信息表
             # construct model script
             head_script = f'class {self.name.capitalize()}(HsscBaseFormModel):'
-            fields_script = header_fields = ''
             # admin.py脚本设置
-            fieldssets = ''
-            autocomplete_fields = ''
             search_fields = f'"name", "pym", '
         else:  # 属性表
             # construct model script
             head_script = f'class {self.name.capitalize()}(HsscFormModel):'
             # 添加表头字段
             fields_script, header_fields = self._construct_header_fields_script()
-
             # admin.py脚本设置
-            fieldssets = f'("基本信息", {{"fields": (({header_fields}),)}}), '
-            autocomplete_fields = ''
-            search_fields = ''
+            fieldssets = f'\n        ("基本信息", {{"fields": (({header_fields}),)}}), '
 
         for form in self.buessiness_forms.all():
         # !!!待修改：compontents = form.components.all() + form.component_groups.all()
@@ -315,16 +318,40 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             for component in form.components.all():
                 # construct fields script
                 _script = self._create_model_field_script(component, form)
+
                 fields_script = fields_script + _script
+                
                 # construct admin body fields script
                 form_fields = form_fields + f'"{component.content_object.name}", '
+
+                # 如果是关联字段，构造ModelAdmin body内容
                 if component.content_object.__class__.__name__ == 'RelatedField':
-                    autocomplete_fields = autocomplete_fields + f'"{component.content_object.name}", '
+                    field_name = component.content_object.name
+                    # 如果是关联字典，则判断是否单选，如果是单选，是否Radio
+                    if component.content_object.related_content.related_content_type == 'dictionaries':
+                        if component.content_object.__dict__['type'] == 'RadioSelect':
+                            radio_fields = radio_fields + f'"{field_name}": admin.VERTICAL, '  # 或admin.HORIZONTAL
+                    # 否则是关联实体或关联ICPC，需要autocomplete_fields
+                    else:
+                        # construct admin autocomplete_fields script
+                        autocomplete_fields = autocomplete_fields + f'"{field_name}", '
+            
             # construct admin fieldset script
-            fieldssets_set = f'\n        ("{form.label}", {{"fields": ({form_fields})}}), '
-            fieldssets = fieldssets + fieldssets_set
+            fieldssets = fieldssets + f'\n        ("{form.label}", {{"fields": ({form_fields})}}), '
+
+        if fieldssets:
+            modeladmin_body['fieldssets'] = fieldssets
+        if autocomplete_fields:
+            modeladmin_body['autocomplete_fields'] = autocomplete_fields
+        if radio_fields:
+            modeladmin_body['radio_fields'] = radio_fields
+        if header_fields:
+            modeladmin_body['readonly_fields'] = header_fields
+        if search_fields:
+            modeladmin_body['search_fields'] = search_fields
+
         # construct admin script
-        admin_script = self._create_admin_script(fieldssets, autocomplete_fields, header_fields, search_fields)
+        admin_script = self._create_admin_script(modeladmin_body)
         # construct serializers script
         serializers_script = self._create_serializers_script()
 
@@ -335,20 +362,22 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         return model_script, admin_script, serializers_script
 
     # generate admin script
-    def _create_admin_script(self, fieldssets, autocomplete_fields, readonly_fields, search_fields):
+    def _create_admin_script(self, modeladmin_body_dict):
+        modeladmin_body = ''
+        if not modeladmin_body_dict:
+            modeladmin_body = f'pass'
+        else:
+            for key, value in modeladmin_body_dict.items():
+                if key == 'radio_fields':
+                    modeladmin_body = modeladmin_body + f'    {key} = {{{value}}}\n'
+                else:
+                    modeladmin_body = modeladmin_body + f'    {key} = [{value}]\n'
+
         name = self.name.capitalize()
-        fieldssets = f'fieldsets = ({fieldssets})'
-        readonly_fields = f'readonly_fields = [{readonly_fields}]'
-        search_fields = f'search_fields = [{search_fields}]'
-        if autocomplete_fields:
-            autocomplete_fields = f'autocomplete_fields = [{autocomplete_fields}]'
 
         admin_script = f'''
 class {name}Admin(HsscFormAdmin):
-    {fieldssets}
-    {autocomplete_fields}
-    {readonly_fields}
-    {search_fields}
+{modeladmin_body}
 admin.site.register({name}, {name}Admin)
 clinic_site.register({name}, {name}Admin)
 '''
