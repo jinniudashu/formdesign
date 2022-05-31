@@ -238,7 +238,7 @@ class Role(HsscPymBase):
 
 
 # 药品基本信息表
-class Medcine(models.Model):
+class Medicine(models.Model):
     YPCode = models.CharField(max_length=10, verbose_name="药品编码")
     PYM = models.CharField(max_length=100, null=True, verbose_name="拼音码")
     YPName = models.CharField(max_length=200, null=True, verbose_name="药品名称")

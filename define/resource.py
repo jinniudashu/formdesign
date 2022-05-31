@@ -1,7 +1,7 @@
 from import_export import resources
-from define.models import Medcine
+from define.models import Medicine
 
-class MedcineResource(resources.ModelResource):
+class MedicineResource(resources.ModelResource):
     class Meta:
-        model = Medcine
+        model = Medicine
         exclude = ['LastCycleDate']

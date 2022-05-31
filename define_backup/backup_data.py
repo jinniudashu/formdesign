@@ -302,12 +302,69 @@ def get_icpc_data():
             icpc_data.append(item)
     return icpc_data
 
+# 导出药品基础数据, 被get_init_core_data调用
+def get_medicine_data():
+    from django.core.exceptions import ObjectDoesNotExist
+    medcine_fields_map = {
+        'YptyName' : 'boolfield_yao_pin_tong_yong_zi_duan',  # 药品通用名
+        'YPName' : 'boolfield_yao_pin_ming_cheng',  # 药品名称
+        'Usage' : 'boolfield_fu_yong_pin_ci',  # 用药频次
+        'YPCode' : 'boolfield_yao_pin_bian_ma',  # 药品编码
+        'Specification' : 'boolfield_yao_pin_gui_ge',  # 药品规格
+        'CFDosage' : 'boolfield_chang_yong_chu_fang_liang',  # 常用处方量
+        'ybypbm' : 'boolfield_dui_zhao_yi_bao_ming_cheng',  # 对照医保名称
+        'gjjbyp' : 'boolfield_dui_zhao_ji_yao_ming_cheng',  # 对照基药名称
+        'XS2CF' : 'boolfield_huan_suan_gui_ze',  # 换算规则
+        # '' : 'boolfield_yong_yao_zhou_qi',  # 用药疗程
+        'CFMeasure' : 'boolfield_chu_fang_ji_liang_dan_wei',  # 处方计量单位
+        # '' : 'boolfield_ru_ku_ji_liang_dan_wei',  # 入库计量单位
+        'XSMeasure' : 'boolfield_xiao_shou_ji_liang_dan_wei',  # 销售计量单位
+        'Type' : 'boolfield_yong_yao_tu_jing',  # 用药途径
+        'YPSort' : 'boolfield_yao_pin_fen_lei',  # 药品分类
+    }
+
+    medicine_data = []  # 药品明细数据
+    for medicine in Medicine.objects.all():
+        medicine_dict = model_to_dict(medicine)
+
+        # 构造药品明细数据 new_item
+        new_item = {}
+        for old_name, new_name in medcine_fields_map.items():
+            field_value = medicine_dict.get(old_name)
+            # 数据清理：字符串类型去空格
+            if isinstance(field_value, str):
+                new_item[new_name] = field_value.strip() 
+            else:
+                new_item[new_name] = field_value
+
+        # 外键字段的数据转换为hssc_id
+        forgin_key_fields = {
+            'boolfield_chu_fang_ji_liang_dan_wei': 'Yao_pin_dan_wei',
+            'boolfield_xiao_shou_ji_liang_dan_wei': 'Yao_pin_dan_wei',
+            'boolfield_yong_yao_tu_jing': 'Yong_yao_tu_jing',
+            'boolfield_yao_pin_fen_lei': 'Yao_pin_fen_lei',
+        }
+        for new_name, forgin_key_model in forgin_key_fields.items():
+            dic_list = DicList.objects.get(name=forgin_key_model.lower())
+            try:
+                dic_detail = DicDetail.objects.get(diclist=dic_list, value=new_item[new_name])
+                new_item[new_name] = dic_detail.hssc_id
+            except ObjectDoesNotExist:
+                new_item[new_name] = None
+
+        medicine_data.append(new_item)
+
+    return medicine_data
+
 # 导出core业务定义数据
 def get_init_core_data(models):
     models_data = {}
     for model in models:
         _model = model.__name__.lower()
         models_data[_model]=model.objects.backup_data()
+
+    # 导出药品数据
+    models_data['yao_pin_ji_ben_xin_xi_biao'] = get_medicine_data()
     return models_data
 
 
@@ -322,9 +379,10 @@ def generate_index_html(service):
 
 # 把备份数据写入备份数据库
 def write_to_db(model, data):
+    from django.core.serializers.json import DjangoJSONEncoder    
     s = model.objects.create(
         name = str(int(time())),
-        code = json.dumps(data, indent=4, ensure_ascii=False),
+        code = json.dumps(data, indent=4, ensure_ascii=False, cls=DjangoJSONEncoder),
     )
     return s.id
 

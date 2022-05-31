@@ -3,11 +3,11 @@ from django.contrib import admin
 from define.models import *
 
 from import_export.admin import ImportExportModelAdmin
-from define.resource import MedcineResource
+from define.resource import MedicineResource
 
 class MedcineAdmin(ImportExportModelAdmin):
-    resource_class = MedcineResource
-admin.site.register(Medcine, MedcineAdmin)
+    resource_class = MedicineResource
+admin.site.register(Medicine, MedcineAdmin)
 
 
 @admin.register(CharacterField)
