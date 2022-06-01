@@ -197,18 +197,18 @@ admin.site.register({name}, {name}Admin)
             f_type = 'FloatField'
             f_dicimal = ''
         
-        if field['standard_value']:
-            f_standard_value = f'default={field["standard_value"]}, '
-        else:
-            f_standard_value = ''
-        if field['up_limit']:
-            f_up_limit = f'default={field["up_limit"]}, '
-        else:
-            f_up_limit = ''
-        if field['down_limit']:
-            f_down_limit = f'default={field["down_limit"]}, '
-        else:
-            f_down_limit = ''
+        # if field['standard_value']:
+        #     f_standard_value = f'default={field["standard_value"]}, '
+        # else:
+        #     f_standard_value = ''
+        # if field['up_limit']:
+        #     f_up_limit = f'default={field["up_limit"]}, '
+        # else:
+        #     f_up_limit = ''
+        # if field['down_limit']:
+        #     f_down_limit = f'default={field["down_limit"]}, '
+        # else:
+        #     f_down_limit = ''
 
         if field['default']:
             f_default = f'default={field["default"]}, '
@@ -218,10 +218,10 @@ admin.site.register({name}, {name}Admin)
         f_required = f'null=True, blank={str(is_blank)}, '
 
         return f'''
-    {field['name']} = models.{f_type}({f_dicimal}{f_default}{f_required}verbose_name='{field['label']}')
-    {field['name']}_standard_value = models.{f_type}({f_dicimal}{f_standard_value}{f_required}verbose_name='{field['label']}标准值')
-    {field['name']}_up_limit = models.{f_type}({f_dicimal}{f_up_limit}{f_required}verbose_name='{field['label']}上限')
-    {field['name']}_down_limit = models.{f_type}({f_dicimal}{f_down_limit}{f_required}verbose_name='{field['label']}下限')'''
+    {field['name']} = models.{f_type}({f_dicimal}{f_default}{f_required}verbose_name='{field['label']}')'''
+    # {field['name']}_standard_value = models.{f_type}({f_dicimal}{f_standard_value}{f_required}verbose_name='{field['label']}标准值')
+    # {field['name']}_up_limit = models.{f_type}({f_dicimal}{f_up_limit}{f_required}verbose_name='{field['label']}上限')
+    # {field['name']}_down_limit = models.{f_type}({f_dicimal}{f_down_limit}{f_required}verbose_name='{field['label']}下限')'''
 
     # 生成日期型字段定义脚本
     def _create_datetime_field_script(self, field, is_blank):
