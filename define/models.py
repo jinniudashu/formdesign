@@ -98,6 +98,16 @@ class RelatedField(HsscFieldBase):
         verbose_name_plural = "关联字段"
 
 
+# 上传文件字段
+class FileField(HsscFieldBase):
+    FILE_TYPE = [('ImageField', '图片'), ('FileField', '文件')]
+    type = models.CharField(max_length=50, choices=FILE_TYPE, default='ImageField', verbose_name="类型")
+
+    class Meta:
+        verbose_name = "文件字段"
+        verbose_name_plural = "文件字段"
+
+
 # 字段列表
 class Component(HsscPymBase):
     q  = Q(app_label='define') & (
