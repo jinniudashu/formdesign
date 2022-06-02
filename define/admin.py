@@ -35,6 +35,13 @@ class RelatedFieldAdmin(admin.ModelAdmin):
     search_fields=['label', 'pym', 'name']
     autocomplete_fields = ['name_icpc']
 
+@admin.register(FileField)
+class FileFieldAdmin(admin.ModelAdmin):
+    list_display = ['label', 'name']
+    readonly_fields = ['hssc_id']
+    search_fields=['label', 'pym', 'name']
+    autocomplete_fields = ['name_icpc']
+
 @admin.register(Component)
 class ComponentAdmin(admin.ModelAdmin):
     search_fields=['label', 'pym']

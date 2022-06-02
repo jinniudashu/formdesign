@@ -166,6 +166,8 @@ admin.site.register({name}, {name}Admin)
         elif component_type == 'relatedfield':
             field['foreign_key'] = component.content_object.related_content.related_content
             script = self._create_related_field_script(field, is_blank)
+        elif component_type == 'filefield':
+            script = self._create_file_field_script(field, is_blank)
         return script
 
     # 生成字符型字段定义脚本
@@ -249,6 +251,19 @@ admin.site.register({name}, {name}Admin)
             f_required = f'blank={str(is_blank)}, '
             return f'''
     {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', {f_required}verbose_name='{field['label']}')'''
+
+    # 生成文件型字段定义脚本
+    def _create_file_field_script(self, field, is_blank):
+        if field['type'] == 'ImageField':
+            f_type = 'ImageField'
+        else:
+            f_type = 'FileField'
+
+        f_required = f'null=True, blank={str(is_blank)}, '
+
+        return f'''
+    {field['name']} = models.{f_type}(upload_to='uploads/', {f_required}verbose_name='{field['label']}')'''
+
 
 # 业务表单定义
 class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):

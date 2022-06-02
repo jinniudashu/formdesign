@@ -144,6 +144,7 @@ class ComponentsGroup(HsscPymBase):
 @receiver(post_save, sender=NumberField, weak=True, dispatch_uid=None)
 @receiver(post_save, sender=DTField, weak=True, dispatch_uid=None)
 @receiver(post_save, sender=RelatedField, weak=True, dispatch_uid=None)
+@receiver(post_save, sender=FileField, weak=True, dispatch_uid=None)
 def fields_post_save_handler(sender, instance, created, **kwargs):
     if instance.name_icpc:
         component_name = instance.name_icpc.icpc_code
@@ -173,6 +174,7 @@ def fields_post_save_handler(sender, instance, created, **kwargs):
 @receiver(post_delete, sender=NumberField, weak=True, dispatch_uid=None)
 @receiver(post_delete, sender=DTField, weak=True, dispatch_uid=None)
 @receiver(post_delete, sender=RelatedField, weak=True, dispatch_uid=None)
+@receiver(post_delete, sender=FileField, weak=True, dispatch_uid=None)
 def fields_post_delete_handler(sender, instance, **kwargs):
     Component.objects.filter(hssc_id=instance.hssc_id).delete()
 

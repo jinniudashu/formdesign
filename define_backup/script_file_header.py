@@ -25,7 +25,7 @@ from service.models import *
 
 class HsscFormAdmin(admin.ModelAdmin):
     list_fields = ['name', 'id']
-    exclude = ["hssc_id", "label", "name", "customer", "operator", "creater", "pid", "cpid", "slug", "created_time", "updated_time", ]
+    exclude = ["hssc_id", "label", "name", "customer", "operator", "creater", "pid", "cpid", "slug", "created_time", "updated_time", "pym"]
     view_on_site = False
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
