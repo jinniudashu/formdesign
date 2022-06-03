@@ -442,7 +442,7 @@ class Service(GenerateServiceScriptMixin, HsscPymBase):
     suppliers = models.CharField(max_length=255, blank=True, null=True, verbose_name="供应商")
     not_suitable = models.CharField(max_length=255, blank=True, null=True, verbose_name='不适用对象')
     execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='完成时限')
-    awaiting_time_frame = models.DurationField(blank=True, null=True, verbose_name='等待执行时限')
+    awaiting_time_frame = models.DurationField(blank=True, null=True, verbose_name='受理时限')
     working_hours = models.DurationField(blank=True, null=True, verbose_name='工时')
     frequency = models.CharField(max_length=255, blank=True, null=True, verbose_name='频次')
     cost = models.DecimalField(blank=True, null=True, max_digits=9, decimal_places=2, verbose_name='成本')
