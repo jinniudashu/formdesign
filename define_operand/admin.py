@@ -109,8 +109,20 @@ class ServiceRuleAdmin(admin.ModelAdmin):
     ordering = ['id']
 
 
+from django.forms import ModelForm
+from define.models import Component
+class ManagedEntityAdminForm(ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ManagedEntityAdminForm, self).__init__(*args, **kwargs)
+        # 设置管理实体的表头字段范围为当前基础表单字段
+        if self.instance.base_form:
+            self.fields['header_fields'].queryset = self.instance.base_form.components.all()
+        else:
+            self.fields['header_fields'].queryset = Component.objects.none()
+
 @admin.register(ManagedEntity)
 class ManagedEntityAdmin(admin.ModelAdmin):
+    form = ManagedEntityAdminForm
     readonly_fields = ['hssc_id', 'pym', 'name', 'model_name']
 
 
