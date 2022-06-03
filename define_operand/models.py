@@ -10,22 +10,12 @@ from define.models import Component, ComponentsGroup, Role, RelateFieldModel
 from define_icpc.models import Icpc
 
 
-class ManagedEntityManager(models.Manager):
-    def get_base_forms(self):
-        # 获取所有管理实体的基础表单
-        base_forms = []
-        for entity in self.all():
-            base_forms.append(entity.base_form)
-        return base_forms
-
 # 管理实体定义
 class ManagedEntity(HsscPymBase):
     app_name = models.CharField(max_length=100, null=True, blank=True, verbose_name="所属app名")
     model_name = models.CharField(max_length=100, null=True, blank=True, verbose_name="模型名")
     base_form = models.OneToOneField('BuessinessForm', on_delete=models.SET_NULL, null=True, verbose_name="基础表单")
     header_fields = models.ManyToManyField(Component, blank=True, verbose_name="表头字段")
-
-    entities = ManagedEntityManager()
 
     class Meta:
         verbose_name = "管理实体"
@@ -302,7 +292,7 @@ class FormComponentsSetting(HsscBase):
 class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
     # 是否基本信息表服务
     def _is_base_form_service(self):
-        if self.buessiness_forms.all().first() in ManagedEntity.entities.get_base_forms():
+        if self.buessiness_forms.all().first() in [entity.base_form for entity in ManagedEntity.objects.all()]:
             return True
         else:
             return False
