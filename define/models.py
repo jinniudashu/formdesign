@@ -91,7 +91,7 @@ class RelateFieldModel(HsscBase):
 class RelatedField(HsscFieldBase):
     CHOICE_TYPE = [('Select', '下拉单选'), ('RadioSelect', '单选按钮列表'), ('CheckboxSelectMultiple', '复选框列表'), ('SelectMultiple', '下拉多选')]
     type = models.CharField(max_length=50, choices=CHOICE_TYPE, default='ChoiceField', verbose_name="类型")
-    related_content = models.ForeignKey(RelateFieldModel, on_delete=models.CASCADE, null=True, blank=True, verbose_name="关联内容")
+    related_content = models.ForeignKey(RelateFieldModel, on_delete=models.CASCADE, null=True, verbose_name="关联内容")
 
     class Meta:
         verbose_name = "关联字段"

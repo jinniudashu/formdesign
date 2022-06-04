@@ -67,9 +67,11 @@ class GenerateFormsScriptMixin(object):
         modeladmin_body = {}
         autocomplete_fields = radio_fields = ''
 
+        print('GenerateFormsScriptMixin: form', self)
         # !!!待修改：compontents = form.components.all() + form.component_groups.all()
         for component in self.components.all():
             # construct fields script
+            print('component0: ', component, 'form0: ', self)
             _script = self._create_model_field_script(component, self)
             
             fields_script = fields_script + _script
@@ -140,6 +142,7 @@ admin.site.register({name}, {name}Admin)
 
     # generate model field script
     def _create_model_field_script(self, component, form):
+        print('component2: ', component, 'form2: ', form)
         script = ''
         field = component.content_object.__dict__
         component_type = component.content_type.__dict__['model']
@@ -317,10 +320,12 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             # admin.py脚本设置
             fieldssets = f'\n        ("基本信息", {{"fields": (({header_fields}),)}}), '
 
+        print('GenerateServiceScriptMixin: service', self)
         for form in self.buessiness_forms.all():
         # !!!待修改：compontents = form.components.all() + form.component_groups.all()
             form_fields = ''
             for component in form.components.all():
+                print('component1: ', component, 'form1: ', form)
                 # construct fields script
                 _script = self._create_model_field_script(component, form)
 
@@ -392,7 +397,9 @@ clinic_site.register({name}, {name}Admin)
     def _construct_header_fields_script(self):
         fields_script = ''
         header_fields = ''
+        print('GenerateServiceScriptMixin: service', self)
         for component in self.managed_entity.header_fields.all():
+            print('componentHeader: ', component, 'formHeader: ', self.managed_entity.base_form)
             # construct fields script
             _script = self._create_model_field_script(component, self.managed_entity.base_form)
             fields_script = fields_script + _script

@@ -250,6 +250,7 @@ def get_export_hsscbase_class_script(hsscbase_class_filename, fields_model: Comp
         elif _type == 'dtfield':
             return 'Datetime' if component.content_object.type == 'DateTimeField' else 'Date'
         elif _type == 'relatedfield':
+            print('component:', component)
             # 返回关联字段的类型: Model name
             model_name = component.content_object.related_content.related_content
             app_label = component.content_object.related_content.related_content_type
