@@ -1,5 +1,5 @@
-from html import entities
 from django.forms.models import model_to_dict
+from django.core.serializers.json import DjangoJSONEncoder
 from time import time
 import json
 
@@ -45,7 +45,7 @@ def design_backup(modeladmin, request, queryset):
     for model in Backup_models:
         _model = model.__name__.lower()
         design_data[_model]=model.objects.backup_data()
-        json.dumps(design_data[_model], indent=4, ensure_ascii=False)
+        json.dumps(design_data[_model], indent=4, ensure_ascii=False, cls=DjangoJSONEncoder)
     # 写入数据库
     result = write_to_db(DesignBackup, design_data)
     print(f'设计数据备份成功, id: {result}')
@@ -381,7 +381,6 @@ def generate_index_html(service):
 
 # 把备份数据写入备份数据库
 def write_to_db(model, data):
-    from django.core.serializers.json import DjangoJSONEncoder    
     s = model.objects.create(
         name = str(int(time())),
         code = json.dumps(data, indent=4, ensure_ascii=False, cls=DjangoJSONEncoder),
