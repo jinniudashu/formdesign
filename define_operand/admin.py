@@ -40,14 +40,23 @@ class BuessinessFormAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), 'components_groups', 'description', ('name', 'hssc_id'), )
+            'fields': (('label', 'name_icpc'), 'components_groups', 'description', ('api_fields', 'name', 'hssc_id'), )
         }),
     )
     search_fields = ['name', 'label', 'pym']
     filter_horizontal = ("components",)
-    readonly_fields = ['name', 'hssc_id']
+    readonly_fields = ['api_fields', 'name', 'hssc_id']
     inlines = [FormComponentsSettingInline]
     autocomplete_fields = ['name_icpc',]
+
+    def save_formset(self, request, form, formset, change):
+        # 更新api_fields
+        instances = formset.save()
+        if instances:
+            form = instances[0].form
+            api_fields = [form_components.component.content_object.name for form_components in FormComponentsSetting.objects.filter(form=form, api_field__isnull=False)]
+            form.api_fields = ','.join(api_fields)
+            form.save()
 
 
 class BuessinessFormsSettingInline(admin.TabularInline):

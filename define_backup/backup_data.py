@@ -128,7 +128,6 @@ def export_source_code(modeladmin, request, queryset):
     exported_core_models=[
         Role,
         BuessinessForm,
-        FormComponentsSetting,
         ManagedEntity,
         Service,
         BuessinessFormsSetting,
