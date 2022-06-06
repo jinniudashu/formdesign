@@ -282,6 +282,8 @@ class FormComponentsSetting(HsscBase):
     form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="表单")
     component = models.ForeignKey(Component, on_delete=models.CASCADE, verbose_name="字段")
     is_required = models.BooleanField(default=False, verbose_name="是否必填")
+    Api_field = [('charge_staff', '责任人'), ('operator', '作业人员'), ('scheduled_time', '计划执行时间')]
+    api_field = models.CharField(max_length=50, choices=Api_field, null=True, blank=True, verbose_name="对接系统接口")
     position = models.PositiveSmallIntegerField(default=0, verbose_name="位置顺序")
 
     class Meta:
