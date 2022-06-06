@@ -264,7 +264,7 @@ class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
     components = models.ManyToManyField(Component, through='FormComponentsSetting', verbose_name="字段")
     components_groups = models.ManyToManyField(ComponentsGroup, blank=True, verbose_name="组件")
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
-    api_fields = models.CharField(max_length=1024, null=True, blank=True, verbose_name="API字段")
+    api_fields = models.JSONField(null=True, blank=True, verbose_name="API字段")
 
     class Meta:
         verbose_name = '业务表单'

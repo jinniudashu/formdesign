@@ -51,11 +51,12 @@ class BuessinessFormAdmin(admin.ModelAdmin):
 
     def save_formset(self, request, form, formset, change):
         # 更新api_fields
+        import json
         instances = formset.save()
         if instances:
             form = instances[0].form
-            api_fields = [form_components.component.content_object.name for form_components in FormComponentsSetting.objects.filter(form=form, api_field__isnull=False)]
-            form.api_fields = ','.join(api_fields)
+            api_fields = [{form_components.api_field: form_components.component.content_object.name} for form_components in FormComponentsSetting.objects.filter(form=form, api_field__isnull=False)]
+            form.api_fields = json.dumps(api_fields)
             form.save()
 
 
