@@ -41,7 +41,7 @@ class HsscFormAdmin(admin.ModelAdmin):
 
         # 把表单内容存入CustomerServiceLog
         import copy
-        form_data = copy.deepcopy(form.cleaned_data)
+        form_data = copy.copy(form.cleaned_data)
         create_customer_service_log(form_data, obj)
 
         # 发送服务作业完成信号
