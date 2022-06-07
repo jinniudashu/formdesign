@@ -37,16 +37,16 @@ class HsscFormAdmin(admin.ModelAdmin):
         )
 
     def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+
         # 把表单内容存入CustomerServiceLog
-        _post_data = request.POST.copy()
-        log = create_customer_service_log(_post_data, obj)
-        print('把表单内容存入CustomerServiceLog, From service.admin.HsscFormAdmin.save_model, Added log:', log.__dict__)
+        import copy
+        form_data = copy.deepcopy(form.cleaned_data)
+        create_customer_service_log(form_data, obj)
 
         # 发送服务作业完成信号
-        pid = obj.pid
-        print('发送操作完成信号, From service.admin.HsscFormAdmin.save_model：', pid)
-        operand_finished.send(sender=self, pid=pid, request=request)
-        super().save_model(request, obj, form, change)
+        print('发送操作完成信号, From service.admin.HsscFormAdmin.save_model：', obj.pid)
+        operand_finished.send(sender=self, pid=obj.pid, request=request)
 
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
         context.update({
