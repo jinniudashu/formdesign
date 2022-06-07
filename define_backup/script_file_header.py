@@ -6,7 +6,7 @@ service_models_file_head = '''from django.db import models
 
 from icpc.models import *
 from dictionaries.models import *
-from core.models import HsscFormModel, HsscBaseFormModel
+from core.models import HsscFormModel, HsscBaseFormModel, Staff, Institution
 
 
 # **********************************************************************************************************************

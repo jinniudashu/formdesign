@@ -157,7 +157,10 @@ admin.site.register({name}, {name}Admin)
         elif component_type == 'dtfield':
             script = self._create_datetime_field_script(field, is_blank)
         elif component_type == 'relatedfield':
-            field['foreign_key'] = component.content_object.related_content.related_content
+            if component.content_object.related_content.related_content_type == 'entities':
+                field['foreign_key'] = component.content_object.related_content.name.capitalize()
+            else:
+                field['foreign_key'] = component.content_object.related_content.related_content
             script = self._create_related_field_script(field, is_blank)
         elif component_type == 'filefield':
             script = self._create_file_field_script(field, is_blank)
