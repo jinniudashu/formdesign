@@ -30,14 +30,14 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
                 name=instance.name,
                 label=instance.label,
                 related_content=instance.base_form.name.capitalize(),
-                related_content_type=instance.app_name,
+                related_content_type='entities',
                 hssc_id = instance.hssc_id
             )
         except Exception as e:
             RelateFieldModel.objects.create(
                 name=instance.name,
                 label=instance.label,
-                related_content_type=instance.app_name,
+                related_content_type='entities',
                 hssc_id = instance.hssc_id
             )
     else:
@@ -45,7 +45,7 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
             name=instance.name,
             label=instance.label,
             related_content=instance.base_form.name.capitalize(),
-            related_content_type=instance.app_name,
+            related_content_type='entities',
         )
 
 
@@ -67,11 +67,11 @@ class GenerateFormsScriptMixin(object):
         modeladmin_body = {}
         autocomplete_fields = radio_fields = ''
 
-        print('GenerateFormsScriptMixin: form', self)
         # !!!待修改：compontents = form.components.all() + form.component_groups.all()
-        for component in self.components.all():
+        for form_components in FormComponentsSetting.objects.filter(form=self).order_by('position'):
+            component=form_components.component
+
             # construct fields script
-            print('component0: ', component, 'form0: ', self)
             _script = self._create_model_field_script(component, self)
             
             fields_script = fields_script + _script
@@ -142,7 +142,6 @@ admin.site.register({name}, {name}Admin)
 
     # generate model field script
     def _create_model_field_script(self, component, form):
-        print('component2: ', component, 'form2: ', form)
         script = ''
         field = component.content_object.__dict__
         component_type = component.content_type.__dict__['model']
@@ -326,12 +325,11 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             # admin.py脚本设置
             fieldssets = f'\n        ("基本信息", {{"fields": (({header_fields}),)}}), '
 
-        print('GenerateServiceScriptMixin: service', self)
         for form in self.buessiness_forms.all():
         # !!!待修改：compontents = form.components.all() + form.component_groups.all()
             form_fields = ''
-            for component in form.components.all():
-                print('component1: ', component, 'form1: ', form)
+            for form_components in FormComponentsSetting.objects.filter(form=form).order_by('position'):
+                component=form_components.component
                 # construct fields script
                 _script = self._create_model_field_script(component, form)
 
@@ -403,9 +401,14 @@ clinic_site.register({name}, {name}Admin)
     def _construct_header_fields_script(self):
         fields_script = ''
         header_fields = ''
-        print('GenerateServiceScriptMixin: service', self)
-        for component in self.managed_entity.header_fields.all():
-            print('componentHeader: ', component, 'formHeader: ', self.managed_entity.base_form)
+
+        # 获得按position排序的header_components
+        base_form_components = FormComponentsSetting.objects.filter(form=self.managed_entity.base_form).order_by('position')  # 排序的基础信息表字段
+        header_components_no_order = self.managed_entity.header_fields.all()  # 没有排序的表头字段
+        # 用header_components_no_order从base_form_components中过滤出header_components
+        header_components = [component for component in base_form_components if component in header_components_no_order]
+        
+        for component in header_components:
             # construct fields script
             _script = self._create_model_field_script(component, self.managed_entity.base_form)
             fields_script = fields_script + _script
