@@ -42,6 +42,8 @@ class HsscFormAdmin(admin.ModelAdmin):
         # 把服务进程状态修改为已完成
         proc = obj.pid
         proc.state = 4
+        proc.stafftodo.state = 4
+        proc.stafftodo.save()
         proc.save()
 
         # 把表单内容存入CustomerServiceLog
