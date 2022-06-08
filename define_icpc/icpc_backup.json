@@ -84767,6 +84767,20 @@
             "icpc2": null,
             "note": null,
             "pym": "ysfw"
+        },
+        {
+            "icpc_code": "A5102",
+            "icode": "A51",
+            "iname": "种植牙",
+            "iename": null,
+            "include": null,
+            "criteria": null,
+            "exclude": null,
+            "consider": null,
+            "icd10": null,
+            "icpc2": null,
+            "note": null,
+            "pym": "zzy"
         }
     ],
     "icpc8_other_health_interventions": [

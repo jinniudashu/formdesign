@@ -39,6 +39,11 @@ class HsscFormAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
 
+        # 把服务进程状态修改为已完成
+        proc = obj.pid
+        proc.state = 4
+        proc.save()
+
         # 把表单内容存入CustomerServiceLog
         import copy
         form_data = copy.copy(form.cleaned_data)
