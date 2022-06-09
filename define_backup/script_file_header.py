@@ -41,19 +41,18 @@ class HsscFormAdmin(admin.ModelAdmin):
 
         # 把服务进程状态修改为已完成
         proc = obj.pid
-        proc.state = 4
-        proc.stafftodo.state = 4
-        proc.stafftodo.save()
-        proc.save()
+        proc.update_state('RTC')
+
+        import copy
+        form_data1 = copy.copy(form.cleaned_data)
+        form_data2 = copy.copy(form.cleaned_data)
 
         # 把表单内容存入CustomerServiceLog
-        import copy
-        form_data = copy.copy(form.cleaned_data)
-        create_customer_service_log(form_data, obj)
+        create_customer_service_log(form_data1, obj)
 
         # 发送服务作业完成信号
         print('发送操作完成信号, From service.admin.HsscFormAdmin.save_model：', obj.pid)
-        operand_finished.send(sender=self, pid=obj.pid, request=request)
+        operand_finished.send(sender=self, pid=obj.pid, request=request, form_data=form_data2)
 
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
         context.update({
