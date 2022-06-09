@@ -12,6 +12,8 @@ from define_icpc.models import Icpc
 
 
 class HsscFieldBase(HsscPymBase):
+    label = models.CharField(max_length=63, null=True, verbose_name="名称")
+    name = models.CharField(max_length=63, blank=True, null=True, verbose_name="name")
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
 
     class Meta:
@@ -21,8 +23,7 @@ class HsscFieldBase(HsscPymBase):
         if self.name_icpc is not None:
             self.name = self.name_icpc.icpc_code
             self.label = self.name_icpc.iname
-        if self.name is None or self.name == '':
-            self.name = f'boolfield_{"_".join(lazy_pinyin(self.label))}'
+        self.name = f'boolfield_{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
 
