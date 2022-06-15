@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BuessinessForm, FormComponentsSetting, Service, BuessinessFormsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceRule, SystemOperand, EventRule, EventExpression, ManagedEntity
+from .models import BuessinessForm, FormComponentsSetting, Service, BuessinessFormsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceRule, SystemOperand, EventRule, EventExpression, ManagedEntity, ExternalServiceMapping, ExtenalServiceFieldsMapping
 
 
 class EventExpressionInline(admin.TabularInline):
@@ -143,3 +143,29 @@ class ManagedEntityAdmin(admin.ModelAdmin):
 #     list_display = ('id', 'label', 'name', 'func', 'parameters')
 #     readonly_fields = ('label','name','hssc_id','func','parameters','description','Applicable','applicable')
 #     ordering = ('id',)
+
+
+class ExtenalServiceFieldsMappingInline(admin.TabularInline):
+    model = ExtenalServiceFieldsMapping
+    exclude = ['name', 'label', 'hssc_id']
+    autocomplete_fields = ['service_form_field']
+
+@admin.register(ExternalServiceMapping)
+class ExternalServiceMappingAdmin(admin.ModelAdmin):
+    list_display = ('id', 'external_form_id', 'external_form_name', 'service', 'form_source')
+    readonly_fields = ('label','name','hssc_id')
+    autocomplete_fields = ['service']
+    inlines = [ExtenalServiceFieldsMappingInline]
+    ordering = ('id',)
+
+    def save_formset(self, request, form, formset, change):
+        # 更新fields_mapping
+        import json
+        instances = formset.save()
+        external_form = instances[0].external_form
+        fields_mapping = [{instance.external_field_name: instance.service_form_field.name} for instance in ExtenalServiceFieldsMapping.objects.filter(external_form=external_form) if instance.service_form_field and instance.external_field_name]
+        print('fields_mapping:', fields_mapping)
+        if fields_mapping == []:
+            fields_mapping = None
+        external_form.fields_mapping = json.dumps(fields_mapping)
+        external_form.save()

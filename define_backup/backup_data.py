@@ -38,6 +38,8 @@ Backup_models = [
     ServicePackageDetail,
     ServiceSpec,
     ServiceRule,
+    ExternalServiceMapping,
+    ExtenalServiceFieldsMapping,
 ]
 
 def design_backup(modeladmin, request, queryset):
@@ -137,6 +139,7 @@ def export_source_code(modeladmin, request, queryset):
         EventRule,
         ServiceSpec,
         ServiceRule,
+        ExternalServiceMapping,
     ]
     source_code['data']['core'] = get_init_core_data(exported_core_models)
 

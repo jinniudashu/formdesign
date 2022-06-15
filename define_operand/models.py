@@ -669,3 +669,31 @@ class ServiceRule(HsscBase):
 
     def __str__(self):
         return str(self.service)
+
+
+class ExternalServiceMapping(HsscBase):
+    external_form_id = models.CharField(max_length=100, null=True, blank=True, verbose_name="外部表单标识")
+    external_form_name = models.CharField(max_length=100, null=True, blank=True, verbose_name="外部表单名称")
+    Form_source = [('jinshuju', '金数据'), ('other', '其它')]
+    form_source = models.CharField(max_length=50, choices=Form_source, null=True, blank=True, verbose_name="来源名称")
+    service = models.OneToOneField(Service, on_delete=models.CASCADE, null=True, blank=True, verbose_name="对应服务")
+    fields_mapping = models.JSONField(null=True, blank=True, verbose_name="字段映射")
+
+    class Meta:
+        verbose_name = '外部服务映射'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return str(self.external_form_name)
+
+class ExtenalServiceFieldsMapping(HsscBase):
+    external_form = models.ForeignKey(ExternalServiceMapping, on_delete=models.CASCADE, null=True, verbose_name="外部表单")
+    external_field_name = models.CharField(max_length=100, null=True, verbose_name="外部字段名称")
+    service_form_field = models.ForeignKey(Component, on_delete=models.CASCADE, null=True, verbose_name="服务表单字段")
+
+    class Meta:
+        verbose_name = '外部服务字段映射'
+        verbose_name_plural = verbose_name
+    
+    def __str__(self):
+        return str(self.external_field_name)
