@@ -39,7 +39,7 @@ Backup_models = [
     ServiceSpec,
     ServiceRule,
     ExternalServiceMapping,
-    ExtenalServiceFieldsMapping,
+    ExternalServiceFieldsMapping,
 ]
 
 def design_backup(modeladmin, request, queryset):

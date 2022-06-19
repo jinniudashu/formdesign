@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BuessinessForm, FormComponentsSetting, Service, BuessinessFormsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceRule, SystemOperand, EventRule, EventExpression, ManagedEntity, ExternalServiceMapping, ExtenalServiceFieldsMapping
+from .models import BuessinessForm, FormComponentsSetting, Service, BuessinessFormsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceRule, SystemOperand, EventRule, EventExpression, ManagedEntity, ExternalServiceMapping, ExternalServiceFieldsMapping
 
 
 class EventExpressionInline(admin.TabularInline):
@@ -146,7 +146,7 @@ class ManagedEntityAdmin(admin.ModelAdmin):
 
 
 class ExtenalServiceFieldsMappingInline(admin.TabularInline):
-    model = ExtenalServiceFieldsMapping
+    model = ExternalServiceFieldsMapping
     exclude = ['name', 'label', 'hssc_id']
     autocomplete_fields = ['service_form_field']
 
@@ -163,7 +163,7 @@ class ExternalServiceMappingAdmin(admin.ModelAdmin):
         import json
         instances = formset.save()
         external_form = instances[0].external_form
-        fields_mapping = [{instance.external_field_name: instance.service_form_field.name} for instance in ExtenalServiceFieldsMapping.objects.filter(external_form=external_form) if instance.service_form_field and instance.external_field_name]
+        fields_mapping = [{instance.external_field_name: instance.service_form_field.name} for instance in ExternalServiceFieldsMapping.objects.filter(external_form=external_form) if instance.service_form_field and instance.external_field_name]
         print('fields_mapping:', fields_mapping)
         if fields_mapping == []:
             fields_mapping = None

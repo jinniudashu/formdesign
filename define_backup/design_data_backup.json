@@ -3536,7 +3536,7 @@
             "related_content": "de1fdc00-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
-            "label": "是否能得到家人朋友的鼓励和支持",
+            "label": "是否能得到亲友的鼓励和支持",
             "name": "relatedfield_can_you_get_encouragement_and_support_from_family",
             "hssc_id": "dec9e4c0-9aa1-11ec-bde1-8a6e55faf877",
             "pym": "sfnddjrpydglhzc",
@@ -9481,5 +9481,7 @@
             "is_active": true,
             "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
         }
-    ]
+    ],
+    "externalservicemapping": [],
+    "externalservicefieldsmapping": []
 }

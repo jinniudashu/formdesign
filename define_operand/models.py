@@ -686,7 +686,7 @@ class ExternalServiceMapping(HsscBase):
     def __str__(self):
         return str(self.external_form_name)
 
-class ExtenalServiceFieldsMapping(HsscBase):
+class ExternalServiceFieldsMapping(HsscBase):
     external_form = models.ForeignKey(ExternalServiceMapping, on_delete=models.CASCADE, null=True, verbose_name="外部表单")
     external_field_name = models.CharField(max_length=100, null=True, verbose_name="外部字段名称")
     service_form_field = models.ForeignKey(Component, on_delete=models.CASCADE, null=True, verbose_name="服务表单字段")
