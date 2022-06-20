@@ -102,7 +102,7 @@ class ServicePackageAdmin(admin.ModelAdmin):
     list_display_links = ['label', ]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), ('begin_time_setting', 'duration', 'awaiting_time_frame' ,'execution_time_frame'), ('name', 'hssc_id'))
+            'fields': (('label', 'name_icpc'), 'execution_time_frame', ('name', 'hssc_id'))
         }),
     )
     search_fields=['label', 'pym']

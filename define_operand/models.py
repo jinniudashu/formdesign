@@ -489,11 +489,7 @@ class BuessinessFormsSetting(HsscBase):
 class ServicePackage(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     services = models.ManyToManyField(Service, through='ServicePackageDetail', verbose_name="服务项目")
-    Begin_time_setting = [(0, '人工指定'), (1, '出生日期')]
-    begin_time_setting = models.PositiveSmallIntegerField(choices=Begin_time_setting, default=0, verbose_name='开始时间参考')
-    duration = models.DurationField(blank=True, null=True, verbose_name="持续周期", help_text='例如：3 days, 22:00:00')
     execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='执行时限')
-    awaiting_time_frame = models.DurationField(blank=True, null=True, verbose_name='等待执行时限')
 
     class Meta:
         verbose_name = "服务包"
@@ -514,9 +510,9 @@ class ServicePackageDetail(HsscPymBase):
     Cycle_options = [(0, '总共'), (1, '每天'), (2, '每周'), (3, '每月'), (4, '每季'), (5, '每年')]
     cycle_option = models.PositiveSmallIntegerField(choices=Cycle_options, default=0, blank=True, null=True, verbose_name='周期')
     cycle_times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="次数")
-    reference_start_tim = models.DurationField(blank=True, null=True, verbose_name="参考起始时间", help_text='例如：3 days, 22:00:00')
     duration = models.DurationField(blank=True, null=True, verbose_name="持续周期", help_text='例如：3 days, 22:00:00')
-    check_awaiting_timeout = models.BooleanField(default=False, verbose_name='检查等待超时')
+    Default_beginning_time = [(0, '无'), (1, '当前系统时间'), (2, '客户出生日期'), (3, '上个服务结束时间')]
+    default_beginning_time = models.PositiveSmallIntegerField(choices=Default_beginning_time, default=0, verbose_name='缺省开始时间')
 
     class Meta:
         verbose_name = "服务内容模板"
