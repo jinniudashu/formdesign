@@ -511,8 +511,9 @@ class ServicePackageDetail(HsscPymBase):
     cycle_option = models.PositiveSmallIntegerField(choices=Cycle_options, default=0, blank=True, null=True, verbose_name='周期')
     cycle_times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="次数")
     duration = models.DurationField(blank=True, null=True, verbose_name="持续周期", help_text='例如：3 days, 22:00:00')
-    Default_beginning_time = [(0, '无'), (1, '当前系统时间'), (2, '客户出生日期'), (3, '上个服务结束时间')]
-    default_beginning_time = models.PositiveSmallIntegerField(choices=Default_beginning_time, default=0, verbose_name='缺省开始时间')
+    Default_beginning_time = [(0, '无'), (1, '当前系统时间'), (2, '首个服务开始时间'), (3, '上个服务结束时间'), (4, '客户出生日期')]
+    default_beginning_time = models.PositiveSmallIntegerField(choices=Default_beginning_time, default=0, verbose_name='执行时间基准')
+    base_interval = models.DurationField(blank=True, null=True, verbose_name='基准间隔', help_text='例如：3 days, 22:00:00')
 
     class Meta:
         verbose_name = "服务内容模板"
