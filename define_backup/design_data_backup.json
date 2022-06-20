@@ -9296,7 +9296,8 @@
             "cycle_option": 0,
             "cycle_times": 1,
             "duration": null,
-            "default_beginning_time": 0
+            "default_beginning_time": 0,
+            "base_interval": null
         },
         {
             "label": null,
@@ -9308,7 +9309,8 @@
             "cycle_option": 0,
             "cycle_times": 1,
             "duration": null,
-            "default_beginning_time": 0
+            "default_beginning_time": 0,
+            "base_interval": null
         },
         {
             "label": null,
@@ -9320,7 +9322,8 @@
             "cycle_option": 0,
             "cycle_times": 1,
             "duration": null,
-            "default_beginning_time": 0
+            "default_beginning_time": 0,
+            "base_interval": null
         },
         {
             "label": null,
@@ -9332,7 +9335,8 @@
             "cycle_option": 1,
             "cycle_times": 2,
             "duration": "30 days, 0:00:00",
-            "default_beginning_time": 0
+            "default_beginning_time": 0,
+            "base_interval": null
         },
         {
             "label": null,
@@ -9344,7 +9348,8 @@
             "cycle_option": 1,
             "cycle_times": 1,
             "duration": "60 days, 0:00:00",
-            "default_beginning_time": 0
+            "default_beginning_time": 0,
+            "base_interval": null
         },
         {
             "label": null,
@@ -9356,7 +9361,8 @@
             "cycle_option": 0,
             "cycle_times": 3,
             "duration": "90 days, 0:00:00",
-            "default_beginning_time": 0
+            "default_beginning_time": 0,
+            "base_interval": null
         },
         {
             "label": null,
@@ -9368,7 +9374,8 @@
             "cycle_option": 0,
             "cycle_times": 1,
             "duration": "90 days, 0:00:00",
-            "default_beginning_time": 0
+            "default_beginning_time": 0,
+            "base_interval": null
         }
     ],
     "servicespec": [
