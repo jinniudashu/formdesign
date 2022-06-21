@@ -1,7 +1,8 @@
 from django.db import models
 from django.db.models import Q
 from django.dispatch import receiver
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, m2m_changed
+import json
 
 from pypinyin import lazy_pinyin
 
@@ -16,6 +17,7 @@ class ManagedEntity(HsscPymBase):
     model_name = models.CharField(max_length=100, null=True, blank=True, verbose_name="模型名")
     base_form = models.OneToOneField('BuessinessForm', on_delete=models.SET_NULL, null=True, verbose_name="基础表单")
     header_fields = models.ManyToManyField(Component, blank=True, verbose_name="表头字段")
+    header_fields_json = models.JSONField(null=True, blank=True, verbose_name="表头字段json")
 
     class Meta:
         verbose_name = "管理实体"
@@ -48,6 +50,14 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
             related_content_type='entities',
         )
 
+@receiver(m2m_changed, sender=ManagedEntity.header_fields.through)
+def header_fields_m2m_changed_handler(sender, instance, action, **kwargs):
+    if 'post' in action:
+        header_fields = [{'name': field.name, 'label': field.label} for field in instance.header_fields.all()]
+        if header_fields == []:
+            header_fields = None
+        instance.header_fields_json = json.dumps(header_fields)
+        instance.save()
 
 class GenerateFormsScriptMixin(object):
     '''

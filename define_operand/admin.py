@@ -135,7 +135,7 @@ class ManagedEntityAdminForm(ModelForm):
 @admin.register(ManagedEntity)
 class ManagedEntityAdmin(admin.ModelAdmin):
     form = ManagedEntityAdminForm
-    readonly_fields = ['hssc_id', 'pym', 'name', 'model_name']
+    readonly_fields = ['hssc_id', 'pym', 'name', 'model_name', 'header_fields_json']
 
 
 # @admin.register(SystemOperand)
