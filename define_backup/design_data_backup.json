@@ -2426,22 +2426,6 @@
     ],
     "managedentity": [
         {
-            "label": "客户",
-            "name": "customer",
-            "hssc_id": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
-            "pym": "kh",
-            "app_name": "service",
-            "model_name": "Customer",
-            "base_form": "0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd",
-            "header_fields": [
-                "deaaac2c-9aa1-11ec-bde1-8a6e55faf877",
-                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
-                "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
-                "deb7b0ac-9aa1-11ec-bde1-8a6e55faf877",
-                "debcb08e-9aa1-11ec-bde1-8a6e55faf877"
-            ]
-        },
-        {
             "label": "药品",
             "name": "medicine",
             "hssc_id": "de896698-9aa1-11ec-bde1-8a6e55faf877",
@@ -2449,6 +2433,7 @@
             "app_name": "service",
             "model_name": "Medicine",
             "base_form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "header_fields_json": null,
             "header_fields": []
         },
         {
@@ -2459,6 +2444,7 @@
             "app_name": "service",
             "model_name": "Staff",
             "base_form": "bca10e04-c5c7-11ec-b819-725badf7393d",
+            "header_fields_json": null,
             "header_fields": []
         },
         {
@@ -2469,6 +2455,7 @@
             "app_name": "service",
             "model_name": "Institution",
             "base_form": "43464b44-c5c9-11ec-b819-725badf7393d",
+            "header_fields_json": null,
             "header_fields": []
         },
         {
@@ -2479,6 +2466,7 @@
             "app_name": "service",
             "model_name": "Device",
             "base_form": "7c8caaba-c5c9-11ec-b9d4-725badf7393d",
+            "header_fields_json": null,
             "header_fields": []
         },
         {
@@ -2489,7 +2477,25 @@
             "app_name": "service",
             "model_name": "Supplier",
             "base_form": "63347e8a-c5c9-11ec-b819-725badf7393d",
+            "header_fields_json": null,
             "header_fields": []
+        },
+        {
+            "label": "客户",
+            "name": "customer",
+            "hssc_id": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
+            "pym": "kh",
+            "app_name": "service",
+            "model_name": "Customer",
+            "base_form": "0c0f81b8-9e23-11ec-aa2c-fe35a7065cdd",
+            "header_fields_json": "[{\"name\": \"boolfield_jia_ting_di_zhi\", \"label\": \"\\u5bb6\\u5ead\\u5730\\u5740\"}, {\"name\": \"boolfield_lian_xi_dian_hua\", \"label\": \"\\u8054\\u7cfb\\u7535\\u8bdd\"}, {\"name\": \"boolfield_xing_ming\", \"label\": \"\\u59d3\\u540d\"}, {\"name\": \"boolfield_chu_sheng_ri_qi\", \"label\": \"\\u51fa\\u751f\\u65e5\\u671f\"}, {\"name\": \"boolfield_xing_bie\", \"label\": \"\\u6027\\u522b\"}]",
+            "header_fields": [
+                "deaaac2c-9aa1-11ec-bde1-8a6e55faf877",
+                "deab5d16-9aa1-11ec-bde1-8a6e55faf877",
+                "de9de26c-9aa1-11ec-bde1-8a6e55faf877",
+                "deb7b0ac-9aa1-11ec-bde1-8a6e55faf877",
+                "debcb08e-9aa1-11ec-bde1-8a6e55faf877"
+            ]
         }
     ],
     "characterfield": [
