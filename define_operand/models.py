@@ -447,8 +447,7 @@ class Service(GenerateServiceScriptMixin, HsscPymBase):
     route_to = models.CharField(max_length=50, choices=Route_to, default='CUSTOMER_HOMEPAGE', blank=True, null=True, verbose_name='完成跳转至')
     suppliers = models.CharField(max_length=255, blank=True, null=True, verbose_name="供应商")
     not_suitable = models.CharField(max_length=255, blank=True, null=True, verbose_name='不适用对象')
-    execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='完成时限')
-    awaiting_time_frame = models.DurationField(blank=True, null=True, verbose_name='受理时限', help_text='示例: 1d 2:00:00')
+    overtime = models.DurationField(blank=True, null=True, verbose_name='超期时限')
     working_hours = models.DurationField(blank=True, null=True, verbose_name='工时')
     frequency = models.CharField(max_length=255, blank=True, null=True, verbose_name='频次')
     cost = models.DecimalField(blank=True, null=True, max_digits=9, decimal_places=2, verbose_name='成本')
@@ -489,7 +488,7 @@ class BuessinessFormsSetting(HsscBase):
 class ServicePackage(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     services = models.ManyToManyField(Service, through='ServicePackageDetail', verbose_name="服务项目")
-    execution_time_frame = models.DurationField(blank=True, null=True, verbose_name='执行时限')
+    overtime = models.DurationField(blank=True, null=True, verbose_name='超期时限')
 
     class Meta:
         verbose_name = "服务包"
