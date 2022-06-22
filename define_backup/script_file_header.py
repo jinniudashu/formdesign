@@ -77,6 +77,12 @@ class HsscFormAdmin(admin.ModelAdmin):
 # **********************************************************************************************************************
 '''
 
+# service\forms.py文件头
+service_forms_file_head = '''from django.forms import ModelForm
+
+'''
+
+
 # forms/models.py文件头
 forms_models_file_head = '''from django.db import models
 from django.shortcuts import reverse
@@ -287,6 +293,7 @@ class SubIcpcAdmin(admin.ModelAdmin):
         return False
     def has_delete_permission(self, request, obj=None):
         return False'''
+
 
 # serializers.py文件头
 serializers_head = '''from rest_framework import serializers

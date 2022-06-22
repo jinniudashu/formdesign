@@ -66,7 +66,7 @@ class GenerateFormsScriptMixin(object):
     # 生成models, admin, forms脚本
     def generate_script(self):
         script = {}
-        script['models'], script['admin'], script['serializers'] = self._create_model_script()
+        script['models'], script['admin'], script['serializers'], script['forms'] = self._create_model_script()
         return script
 
     # generate model and admin script
@@ -109,7 +109,8 @@ class GenerateFormsScriptMixin(object):
         model_script = f'{head_script}{fields_script}{footer_script}\n\n'
         admin_script = self._create_admin_script(modeladmin_body)
         serializers_script = self._create_serializers_script()
-        return model_script, admin_script, serializers_script
+        forms_script = ''
+        return model_script, admin_script, serializers_script, forms_script
 
     # generate model footer script
     def _create_model_footer_script(self):
@@ -310,7 +311,7 @@ class FormComponentsSetting(HsscBase):
 class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
     # 是否基本信息表服务
     def _is_base_form_service(self):
-        if self.buessiness_forms.all().first() in [entity.base_form for entity in ManagedEntity.objects.all()]:
+        if self.buessiness_forms.all().count()==1 and self.buessiness_forms.all().first() in [entity.base_form for entity in ManagedEntity.objects.all()]:
             return True
         else:
             return False
@@ -321,12 +322,17 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         fields_script = header_fields = ''
         modeladmin_body = {}
         fieldssets = autocomplete_fields = radio_fields = search_fields = ''
+        form_script = ''
 
         if self._is_base_form_service():  # 基础信息表
             # construct model script
             head_script = f'class {self.name.capitalize()}(HsscBaseFormModel):'
             # admin.py脚本设置
             search_fields = f'"name", "pym", '
+
+            # construct ModelForm script 
+            form_script = self._create_base_model_form_script()
+
         else:  # 属性表
             # construct model script
             head_script = f'class {self.name.capitalize()}(HsscFormModel):'
@@ -382,8 +388,8 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         # construct model script
         footer_script = self._create_model_footer_script()
         model_script = f'{head_script}{fields_script}{footer_script}\n'
-
-        return model_script, admin_script, serializers_script
+        
+        return model_script, admin_script, serializers_script, form_script
 
     # generate admin script
     def _create_admin_script(self, modeladmin_body_dict):
@@ -440,6 +446,24 @@ clinic_site.register({name}, {name}Admin)
         return self.customer.name
 
         '''
+
+    # generate form script
+    def _create_base_model_form_script(self):
+        service_name = self.name.capitalize()
+        # 基础表单字段
+        form_component = [fc.component for fc in FormComponentsSetting.objects.filter(form=self.buessiness_forms.all().first()).order_by('position')]
+        # 表头字段
+        header_component = self.managed_entity.header_fields.all()
+        # 按基础表单字段排序的表头字段名
+        header_fields = [_component.name for _component in form_component if _component in header_component]
+        return f'''
+from service.models import {service_name}
+class {service_name}_HeaderForm(ModelForm):
+    class Meta:
+        model = {service_name}
+        fields = {header_fields}
+        '''
+
 
 # 作业基础信息表
 class Service(GenerateServiceScriptMixin, HsscPymBase):

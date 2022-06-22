@@ -89,6 +89,7 @@ def export_source_code(modeladmin, request, queryset):
         'models_file_head': forms_models_file_head,
         'admin_file_head': forms_admin_file_head,
         'serializers_head': serializers_head,
+        'forms_head': ''
     }
 
     # 基本信息服务排在前面
@@ -97,17 +98,18 @@ def export_source_code(modeladmin, request, queryset):
         'models_file_head': service_models_file_head,
         'admin_file_head': service_admin_file_head,
         'serializers_head': serializers_head,
+        'forms_head': service_forms_file_head,
     }
     
     class GetAppScript(Enum):
         dictionaries = get_dict_models_admin_serializers_script()  # 导出App dictionaries: models.py, admin.py脚本
         icpc = get_icpc_models_admin_serializers_script()  # 导出App icpc: models.py, admin.py脚本
-        forms = get_models_admin_serializers_script(forms_query_set, forms_file_header)  # 导出App: forms: models.py, admin.py脚本
-        service = get_models_admin_serializers_script(service_query_set, service_file_header)  # 导出App:service脚本
+        forms = get_models_admin_serializer_forms_script(forms_query_set, forms_file_header)  # 导出App: forms: models.py, admin.py脚本
+        service = get_models_admin_serializer_forms_script(service_query_set, service_file_header)  # 导出App:service脚本
         
     for app in apps:
         _script = {}
-        _script['models'], _script['admin'], _script['serializers'] = eval(f'GetAppScript.{app}').value
+        _script['models'], _script['admin'], _script['serializers'], _script['forms'] = eval(f'GetAppScript.{app}').value
         source_code['script'][app] = _script
 
 
@@ -151,24 +153,27 @@ def export_source_code(modeladmin, request, queryset):
 export_source_code.short_description = '生成作业脚本'
 
 # 导出forms models.py, admin.py, serializers.py脚本
-def get_models_admin_serializers_script(query_set, file_header):
+def get_models_admin_serializer_forms_script(query_set, file_header):
     models_script = file_header['models_file_head']
     admin_script =  file_header['admin_file_head']
     serializers_script = file_header['serializers_head']
+    forms_script = file_header['forms_head']
 
     for item in query_set:
         script = item.generate_script()  # 生成最新脚本
         models_script = f'{models_script}{script["models"]}'
         admin_script = f'{admin_script}{script["admin"]}'
         serializers_script = f'{serializers_script}{script["serializers"]}'
+        forms_script = f'{forms_script}{script["forms"]}'
 
-    return models_script, admin_script, serializers_script
+    return models_script, admin_script, serializers_script, forms_script
 
 # 导出字典models.py, admin.py脚本
 def get_dict_models_admin_serializers_script():
     models_script = dict_models_head
     admin_script = dict_admin_head
     serializers_script = serializers_head
+    forms_script = ''
 
     for dict in DicList.objects.all():
         name = dict.name.capitalize()
@@ -197,7 +202,7 @@ clinic_site.register({name}, {name}Admin)
 '''
         serializers_script = f'{serializers_script}\n{_serializers_script}'
 
-    return models_script, admin_script, serializers_script
+    return models_script, admin_script, serializers_script, forms_script
 
 # 导出ICPC字典models.py, admin.py, serializers.py脚本
 def get_icpc_models_admin_serializers_script():
@@ -209,6 +214,8 @@ def get_icpc_models_admin_serializers_script():
 
     # serializers.py脚本
     serializers_script = serializers_head
+
+    forms_script = ''
 
     for icpc in icpc_list:
         # 生成model脚本
@@ -239,7 +246,7 @@ clinic_site.register({icpc['name']}, SubIcpcAdmin)'''
     models_receiver_post_delete = models_receiver_post_delete + icpc_models_post_delete
     models_script = models_script + models_receiver_post_save + models_receiver_post_delete
 
-    return models_script, admin_script, serializers_script
+    return models_script, admin_script, serializers_script, forms_script
 
 
 # 导出基类脚本hsscbase_class.py
