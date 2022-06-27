@@ -540,10 +540,10 @@ class ServicePackage(HsscPymBase):
 class ServicePackageDetail(HsscPymBase):
     servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, verbose_name='服务包')
     service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='服务项目')
-    Cycle_options = [(0, '总共'), (1, '每天'), (2, '每周'), (3, '每月'), (4, '每季'), (5, '每年')]
-    cycle_option = models.PositiveSmallIntegerField(choices=Cycle_options, default=0, blank=True, null=True, verbose_name='周期')
-    cycle_times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="次数")
-    duration = models.DurationField(blank=True, null=True, verbose_name="持续周期", help_text='例如：3 days, 22:00:00')
+    Cycle_unit = [('TOTAL', '总共'), ('DAY', '每天'), ('WEEK', '每周'), ('MONTH', '每月'), ('QUARTER', '每季'), ('YEAR', '每年')]
+    cycle_unit = models.CharField(max_length=10, choices=Cycle_unit, default='TOTAL', blank=True, null=True, verbose_name='周期单位')
+    cycle_frequency = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="每周期频次")
+    cycle_times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="周期数/天数")
     Default_beginning_time = [(0, '无'), (1, '当前系统时间'), (2, '首个服务开始时间'), (3, '上个服务结束时间'), (4, '客户出生日期')]
     default_beginning_time = models.PositiveSmallIntegerField(choices=Default_beginning_time, default=0, verbose_name='执行时间基准')
     base_interval = models.DurationField(blank=True, null=True, verbose_name='基准间隔', help_text='例如：3 days, 22:00:00')

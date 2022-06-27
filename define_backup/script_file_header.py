@@ -6,7 +6,52 @@ service_models_file_head = '''from django.db import models
 
 from icpc.models import *
 from dictionaries.models import *
-from core.models import HsscFormModel, HsscBaseFormModel, Staff, Institution
+from core.models import HsscFormModel, HsscBaseFormModel, Staff, Institution, Service, ServicePackage, Customer
+from core.hsscbase_class import HsscBase
+
+class CustomerSchedulePackage(HsscFormModel):
+    servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, verbose_name='服务包')
+    
+    class Meta:
+        verbose_name = '安排服务包'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.servicepackage.label
+
+class CustomerScheduleDraft(HsscBase):
+    schedule_package = models.ForeignKey(CustomerSchedulePackage, null=True, on_delete=models.CASCADE, verbose_name='服务包')
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='服务项目')
+    Cycle_unit = [('TOTAL', '总共'), ('DAY', '每天'), ('WEEK', '每周'), ('MONTH', '每月'), ('QUARTER', '每季'), ('YEAR', '每年')]
+    cycle_unit = models.CharField(max_length=10, choices=Cycle_unit, default='TOTAL', blank=True, null=True, verbose_name='周期单位')
+    cycle_frequency = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="每周期频次")
+    cycle_times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="周期数/天数")
+    Default_beginning_time = [(0, '无'), (1, '当前系统时间'), (2, '首个服务开始时间'), (3, '上个服务结束时间'), (4, '客户出生日期')]
+    default_beginning_time = models.PositiveSmallIntegerField(choices=Default_beginning_time, default=0, verbose_name='执行时间基准')
+    base_interval = models.DurationField(blank=True, null=True, verbose_name='基准间隔', help_text='例如：3 days, 22:00:00')
+    scheduled_operator = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True, blank=True, verbose_name='服务人员')
+    
+    class Meta:
+        verbose_name = '服务项目安排'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.service.label
+
+class CustomerSchedule(HsscBase):
+    customer = models.ForeignKey(Customer, null=True, on_delete=models.CASCADE, verbose_name='客户')
+    schedule_package = models.ForeignKey(CustomerSchedulePackage, null=True, on_delete=models.CASCADE, verbose_name='服务包')
+    scheduled_draft = models.ForeignKey(CustomerScheduleDraft, on_delete=models.CASCADE, verbose_name='日程草案')
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='服务项目')
+    scheduled_time = models.DateTimeField(blank=True, null=True, verbose_name='计划执行时间')
+    scheduled_operator = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True, blank=True, verbose_name='服务人员')
+
+    class Meta:
+        verbose_name = '客户服务日程'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.service.label
 
 
 # **********************************************************************************************************************
@@ -16,6 +61,7 @@ from core.models import HsscFormModel, HsscBaseFormModel, Staff, Institution
 
 service_admin_file_head = '''from django.contrib import admin
 from django.shortcuts import redirect
+import nested_admin
 
 from core.admin import clinic_site
 from core.signals import operand_finished
@@ -30,8 +76,8 @@ class HsscFormAdmin(admin.ModelAdmin):
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
         extra_context = extra_context or {}
-        base_form = 'base_form'
-        extra_context['base_form'] = base_form
+        # base_form = 'base_form'
+        # extra_context['base_form'] = base_form
         return super().change_view(
             request, object_id, form_url, extra_context=extra_context,
         )
@@ -41,7 +87,8 @@ class HsscFormAdmin(admin.ModelAdmin):
 
         # 把服务进程状态修改为已完成
         proc = obj.pid
-        proc.update_state('RTC')
+        if proc:
+            proc.update_state('RTC')
 
         import copy
         form_data1 = copy.copy(form.cleaned_data)
@@ -71,6 +118,68 @@ class HsscFormAdmin(admin.ModelAdmin):
         else:
             return redirect('index')
 
+
+class CustomerScheduleAdmin(admin.ModelAdmin):
+    autocomplete_fields = ["scheduled_operator", ]
+    list_display = ['service', 'scheduled_time', 'scheduled_operator']
+    list_editable = ['scheduled_time', 'scheduled_operator']
+    ordering = ('scheduled_time',)
+clinic_site.register(CustomerSchedule, CustomerScheduleAdmin)
+admin.site.register(CustomerSchedule, CustomerScheduleAdmin)
+
+class CustomerScheduleInline(nested_admin.NestedTabularInline):
+    model = CustomerSchedule
+    extra = 0
+    can_delete = False
+    # verbose_name_plural = '服务日程安排'
+    exclude = ["hssc_id", "label", "name", ]
+    autocomplete_fields = ["scheduled_operator", ]
+
+class CustomerScheduleDraftAdmin(HsscFormAdmin):
+    autocomplete_fields = ["scheduled_operator", ]
+    inlines = [CustomerScheduleInline]
+clinic_site.register(CustomerScheduleDraft, CustomerScheduleDraftAdmin)
+admin.site.register(CustomerScheduleDraft, CustomerScheduleDraftAdmin)
+
+class CustomerScheduleDraftInline(nested_admin.NestedTabularInline):
+    model = CustomerScheduleDraft
+    inlines = [CustomerScheduleInline]
+    extra = 0
+    can_delete = False
+    # verbose_name_plural = '服务项目安排'
+    exclude = ["hssc_id", "label", "name", ]
+    autocomplete_fields = ["scheduled_operator", ]
+
+class CustomerSchedulePackageAdmin(HsscFormAdmin):
+    exclude = ["hssc_id", "label", "name", "operator", "creater", "pid", "cpid", "slug", "created_time", "updated_time", "pym"]
+    fieldsets = ((None, {'fields': (('customer', 'servicepackage'), )}),)
+    readonly_fields = ['customer', 'servicepackage']
+    inlines = [CustomerScheduleDraftInline, ]
+
+    def save_formset(self, request, form, formset, change):
+        instances = formset.save()
+        if instances:
+            schedule_package = instances[0].schedule_package
+            customer = schedule_package.customer
+            from core.business_functions import get_services_schedule
+            services_schedule = get_services_schedule(instances)
+            print('services_schedule:', services_schedule)
+            # 创建客户服务日程
+            for service_schedule in services_schedule:
+                CustomerSchedule.objects.create(
+                    customer=customer,
+                    schedule_package=schedule_package,
+                    scheduled_draft=service_schedule['scheduled_draft'],
+                    service=service_schedule['service'],
+                    scheduled_time=service_schedule['scheduled_time'],
+                    scheduled_operator=service_schedule['scheduled_operator'],
+                )
+            # 重定向到修改客户服务日程页面
+            return redirect('/clinic/service/customerschedule/', pk=instances[0].pk)
+            # return redirect('service:customer_schedule_edit', pk=instances[0].pk)
+
+clinic_site.register(CustomerSchedulePackage, CustomerSchedulePackageAdmin)
+admin.site.register(CustomerSchedulePackage, CustomerSchedulePackageAdmin)
 
 # **********************************************************************************************************************
 # Service表单Admin
