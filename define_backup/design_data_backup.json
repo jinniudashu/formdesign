@@ -8405,6 +8405,51 @@
             "role": [
                 "de1d24ec-9aa1-11ec-bde1-8a6e55faf877"
             ]
+        },
+        {
+            "label": "安排服务包",
+            "name": "CustomerSchedulePackage",
+            "hssc_id": "4775c12a-f5cd-11ec-844e-ba663fc9e8b0",
+            "pym": "apfwb",
+            "name_icpc": null,
+            "managed_entity": "de87e7d2-9aa1-11ec-bde1-8a6e55faf877",
+            "priority": 3,
+            "is_system_service": true,
+            "history_services_display": 0,
+            "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
+            "suppliers": null,
+            "not_suitable": null,
+            "overtime": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "generate_script_order": 100,
+            "buessiness_forms": [],
+            "role": [
+                "de18f0fc-9aa1-11ec-bde1-8a6e55faf877",
+                "de194c50-9aa1-11ec-bde1-8a6e55faf877",
+                "de1992d2-9aa1-11ec-bde1-8a6e55faf877",
+                "de19d6a2-9aa1-11ec-bde1-8a6e55faf877",
+                "de1a253a-9aa1-11ec-bde1-8a6e55faf877",
+                "de1a6f7c-9aa1-11ec-bde1-8a6e55faf877",
+                "de1ab716-9aa1-11ec-bde1-8a6e55faf877",
+                "de1b05cc-9aa1-11ec-bde1-8a6e55faf877",
+                "de1b4cc6-9aa1-11ec-bde1-8a6e55faf877",
+                "de1b9046-9aa1-11ec-bde1-8a6e55faf877",
+                "de1bcda4-9aa1-11ec-bde1-8a6e55faf877",
+                "de1c1052-9aa1-11ec-bde1-8a6e55faf877",
+                "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877",
+                "de1ca0c6-9aa1-11ec-bde1-8a6e55faf877",
+                "de1ce450-9aa1-11ec-bde1-8a6e55faf877",
+                "de1d24ec-9aa1-11ec-bde1-8a6e55faf877",
+                "de1d6952-9aa1-11ec-bde1-8a6e55faf877",
+                "de1daa3e-9aa1-11ec-bde1-8a6e55faf877"
+            ]
         }
     ],
     "buessinessformssetting": [
@@ -9237,8 +9282,119 @@
             "connection_operator": null
         }
     ],
-    "servicepackage": [],
-    "servicepackagedetail": [],
+    "servicepackage": [
+        {
+            "label": "门诊服务",
+            "name": "men_zhen_fu_wu",
+            "hssc_id": "e4fbb6c6-aa54-11ec-8f0c-ee7ade4bced6",
+            "pym": "mzfw",
+            "name_icpc": null,
+            "overtime": null,
+            "services": []
+        },
+        {
+            "label": "糖尿病早期监测服务",
+            "name": "tang_niao_bing_zao_qi_jian_ce_fu_wu",
+            "hssc_id": "bb88332a-aa57-11ec-8f0c-ee7ade4bced6",
+            "pym": "tnbzqjcfw",
+            "name_icpc": null,
+            "overtime": null,
+            "services": []
+        }
+    ],
+    "servicepackagedetail": [
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "f25e4dde-af6b-11ec-ba68-4889e7cf38c9",
+            "pym": null,
+            "servicepackage": "e4fbb6c6-aa54-11ec-8f0c-ee7ade4bced6",
+            "service": null,
+            "cycle_unit": "TOTAL",
+            "cycle_frequency": 1,
+            "cycle_times": 1,
+            "default_beginning_time": 0,
+            "base_interval": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "f25e9c9e-af6b-11ec-a47c-4889e7cf38c9",
+            "pym": null,
+            "servicepackage": "e4fbb6c6-aa54-11ec-8f0c-ee7ade4bced6",
+            "service": null,
+            "cycle_unit": "TOTAL",
+            "cycle_frequency": 1,
+            "cycle_times": 1,
+            "default_beginning_time": 0,
+            "base_interval": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "f25e9c9f-af6b-11ec-8edc-4889e7cf38c9",
+            "pym": null,
+            "servicepackage": "e4fbb6c6-aa54-11ec-8f0c-ee7ade4bced6",
+            "service": null,
+            "cycle_unit": "TOTAL",
+            "cycle_frequency": 1,
+            "cycle_times": 1,
+            "default_beginning_time": 0,
+            "base_interval": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "8f4e9e6d-af6c-11ec-a482-4889e7cf38c9",
+            "pym": null,
+            "servicepackage": "bb88332a-aa57-11ec-8f0c-ee7ade4bced6",
+            "service": null,
+            "cycle_unit": "TOTAL",
+            "cycle_frequency": 1,
+            "cycle_times": 2,
+            "default_beginning_time": 0,
+            "base_interval": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "8f4ec580-af6c-11ec-a6fe-4889e7cf38c9",
+            "pym": null,
+            "servicepackage": "bb88332a-aa57-11ec-8f0c-ee7ade4bced6",
+            "service": null,
+            "cycle_unit": "TOTAL",
+            "cycle_frequency": 1,
+            "cycle_times": 1,
+            "default_beginning_time": 0,
+            "base_interval": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "8f4ec581-af6c-11ec-bcc5-4889e7cf38c9",
+            "pym": null,
+            "servicepackage": "bb88332a-aa57-11ec-8f0c-ee7ade4bced6",
+            "service": null,
+            "cycle_unit": "TOTAL",
+            "cycle_frequency": 1,
+            "cycle_times": 3,
+            "default_beginning_time": 0,
+            "base_interval": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "8f4ec582-af6c-11ec-aa15-4889e7cf38c9",
+            "pym": null,
+            "servicepackage": "bb88332a-aa57-11ec-8f0c-ee7ade4bced6",
+            "service": null,
+            "cycle_unit": "TOTAL",
+            "cycle_frequency": 1,
+            "cycle_times": 1,
+            "default_beginning_time": 0,
+            "base_interval": null
+        }
+    ],
     "servicespec": [
         {
             "label": "常规规则",
