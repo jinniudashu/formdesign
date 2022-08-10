@@ -6,3 +6,5 @@ __pycache__/
 *.pot
 .env
 db.sqlite3
+data/
+.dockercommand

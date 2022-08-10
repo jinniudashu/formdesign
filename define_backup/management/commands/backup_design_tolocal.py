@@ -6,6 +6,7 @@ class Command(BaseCommand):
     help = '从设计系统导入设计数据，保存为本地JSON文件'
 
     def handle(self, *args, **kwargs):
+        # url = 'http://design-clinic.tpacn.com/define_backup/design_backup/'
         url = 'https://hssc-formdesign.herokuapp.com/define_backup/design_backup/'
         # url = 'http://127.0.0.1:8000/define_backup/design_backup/'
         output_file = 'define_backup/design_data_backup.json'
