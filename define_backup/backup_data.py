@@ -17,6 +17,7 @@ from .script_file_header import *
 # 每个需要备份的model都需要在这里添加
 # 不备份在其他表新增内容时自动插入内容的表，Component, RelateFieldModel
 Backup_models = [
+    SystemOperand,
     Role, 
     IcpcList,
     DicList, 
@@ -130,6 +131,7 @@ def export_source_code(modeladmin, request, queryset):
     # 导出core业务定义数据：
     # 需要导出的模块清单
     exported_core_models=[
+        SystemOperand,
         Role,
         BuessinessForm,
         ManagedEntity,
