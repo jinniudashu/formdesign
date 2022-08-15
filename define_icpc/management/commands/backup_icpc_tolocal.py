@@ -6,7 +6,7 @@ class Command(BaseCommand):
     help = '从设计系统导入设计数据，保存为本地JSON文件'
 
     def handle(self, *args, **kwargs):
-        url = 'https://hssc-formdesign.herokuapp.com/define_backup/get_icpc_backup/'
+        url = 'http://design-clinic.tpacn.com/define_backup/get_icpc_backup/'
         # url = 'http://127.0.0.1:8000/define_backup/get_icpc_backup/'
         print(f'从{url}导入ICPC数据备份...')
         res = requests.get(url)

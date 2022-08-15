@@ -141,7 +141,6 @@ class ManagedEntityAdmin(admin.ModelAdmin):
 # @admin.register(SystemOperand)
 # class SystemOperandAdmin(admin.ModelAdmin):
 #     list_display = ('id', 'label', 'name', 'func', 'parameters')
-#     readonly_fields = ('label','name','hssc_id','func','parameters','description','Applicable','applicable')
 #     ordering = ('id',)
 
 

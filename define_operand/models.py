@@ -562,8 +562,6 @@ class SystemOperand(HsscBase):
     func = models.CharField(max_length=255, blank=True, null=True, verbose_name="内部实现函数")
     parameters = models.CharField(max_length=255, blank=True, null=True, verbose_name="参数")
     description = models.CharField(max_length=255, blank=True, null=True, verbose_name="描述")
-    Applicable = [(0, '作业'), (1, '单元服务'), (2, '服务包'), (3, '全部')]
-    applicable = models.PositiveSmallIntegerField(choices=Applicable, default=1, verbose_name='适用范围')
 
     class Meta:
         verbose_name = '系统自动作业'
@@ -677,7 +675,7 @@ class ServiceSpec(HsscBase):
 class ServiceRule(HsscBase):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='服务项目')
     event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE,  blank=True, null=True, verbose_name='条件事件')
-    system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, limit_choices_to=Q(applicable__in = [1, 3]), blank=True, null=True, verbose_name='系统作业')
+    system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, blank=True, null=True, verbose_name='系统作业')
     next_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='next_service', verbose_name='后续服务')
     Receive_form = [(0, '否'), (1, '接收，不可编辑'), (2, '接收，可以编辑')]  # 接收表单数据
     passing_data = models.PositiveSmallIntegerField(choices=Receive_form, default=0,  blank=True, null=True, verbose_name='接收表单')
