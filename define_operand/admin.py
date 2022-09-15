@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import BuessinessForm, FormComponentsSetting, Service, BuessinessFormsSetting, ServicePackage, ServicePackageDetail, ServiceSpec, ServiceRule, SystemOperand, EventRule, EventExpression, ManagedEntity, ExternalServiceMapping, ExternalServiceFieldsMapping
+from .models import BuessinessForm, FormComponentsSetting, Service, BuessinessFormsSetting, ServicePackage, CycleUnit, ServicePackageDetail, ServiceSpec, ServiceRule, SystemOperand, EventRule, EventExpression, ManagedEntity, ExternalServiceMapping, ExternalServiceFieldsMapping
 
 
 class EventExpressionInline(admin.TabularInline):
@@ -91,6 +91,13 @@ class ServiceAdmin(admin.ModelAdmin):
     autocomplete_fields = ["name_icpc"]
 
 
+@admin.register(CycleUnit)
+class CycleUnitAdmin(admin.ModelAdmin):
+    list_display = ['cycle_unit', 'days',]
+    list_display_links = ['cycle_unit', 'days',]
+    readonly_fields = ['hssc_id', 'name', 'pym']
+
+
 class ServicePackageDetailInline(admin.TabularInline):
     model = ServicePackageDetail
     exclude = ['name', 'label', 'hssc_id', 'pym']
@@ -102,7 +109,7 @@ class ServicePackageAdmin(admin.ModelAdmin):
     list_display_links = ['label', ]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), 'overtime', ('name', 'hssc_id'))
+            'fields': (('label', 'name_icpc'), ('name', 'hssc_id'))
         }),
     )
     search_fields=['label', 'pym']

@@ -522,7 +522,6 @@ class BuessinessFormsSetting(HsscBase):
 class ServicePackage(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     services = models.ManyToManyField(Service, through='ServicePackageDetail', verbose_name="服务项目")
-    overtime = models.DurationField(blank=True, null=True, verbose_name='超期时限')
 
     class Meta:
         verbose_name = "服务包"
@@ -537,13 +536,20 @@ class ServicePackage(HsscPymBase):
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
+class CycleUnit(HsscPymBase):
+    cycle_unit = models.CharField(max_length=255, blank=True, null=True, verbose_name='周期单位')
+    days = models.PositiveSmallIntegerField(blank=True, null=True, verbose_name='天数')
+    class Meta:
+        verbose_name = "服务周期单位"
+        verbose_name_plural = verbose_name
+
 class ServicePackageDetail(HsscPymBase):
+    order = models.PositiveSmallIntegerField(default=100, verbose_name='顺序')
     servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, verbose_name='服务包')
     service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='服务项目')
-    Cycle_unit = [('TOTAL', '总共'), ('DAY', '每天'), ('WEEK', '每周'), ('MONTH', '每月'), ('QUARTER', '每季'), ('YEAR', '每年')]
-    cycle_unit = models.CharField(max_length=10, choices=Cycle_unit, default='TOTAL', blank=True, null=True, verbose_name='周期单位')
+    cycle_unit = models.ForeignKey(CycleUnit, on_delete=models.CASCADE, default=1, blank=True, null=True, verbose_name='周期单位')
     cycle_frequency = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="每周期频次")
-    cycle_times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="周期数/天数")
+    cycle_times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="天数")
     Default_beginning_time = [(1, '当前系统时间'), (2, '首个服务开始时间'), (3, '上个服务结束时间'), (4, '客户出生日期')]
     default_beginning_time = models.PositiveSmallIntegerField(choices=Default_beginning_time, default=1, verbose_name='执行时间基准')
     base_interval = models.DurationField(blank=True, null=True, verbose_name='基准间隔', help_text='例如：3 days, 22:00:00')
@@ -551,7 +557,7 @@ class ServicePackageDetail(HsscPymBase):
     class Meta:
         verbose_name = "服务内容模板"
         verbose_name_plural = verbose_name
-        ordering = ['id']
+        ordering = ['order']
 
     def __str__(self):
         return str(self.service)
