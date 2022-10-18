@@ -39,6 +39,17 @@ class CustomerScheduleDraft(HsscBase):
     def __str__(self):
         return self.service.label
 
+class CustomerScheduleList(HsscFormModel):
+    plan_serial_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='服务计划')
+    schedule_package = models.ForeignKey(CustomerSchedulePackage, null=True, on_delete=models.CASCADE, verbose_name='服务包')
+    
+    class Meta:
+        verbose_name = '客户服务计划'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.plan_serial_number
+
 class CustomerSchedule(HsscBase):
     customer = models.ForeignKey(Customer, null=True, on_delete=models.CASCADE, verbose_name='客户')
     schedule_package = models.ForeignKey(CustomerSchedulePackage, null=True, on_delete=models.CASCADE, verbose_name='服务包')
@@ -63,7 +74,6 @@ class CustomerSchedule(HsscBase):
 
 service_admin_file_head = '''from django.contrib import admin
 from django.shortcuts import redirect
-import nested_admin
 
 from core.admin import clinic_site
 from core.signals import operand_finished
@@ -113,44 +123,79 @@ class HsscFormAdmin(admin.ModelAdmin):
         return super().render_change_form(request, context, add, change, form_url, obj)
 
     def response_change(self, request, obj):
+        # 如果是创建服务包计划，保存后跳转到修改服务计划列表的页面
+        if obj.__class__.__name__ == 'CustomerSchedulePackage':
+            schedule_list = CustomerScheduleList.objects.get(schedule_package=obj)
+            print('Change CustomerSchedulePackage', obj, 'to', schedule_list)
+            return redirect(f'/clinic/service/customerschedulelist/{schedule_list.id}/change/')
+
         # 按照service.route_to的配置跳转
-        redirect_option = obj.pid.service.route_to
-        if redirect_option == 'CUSTOMER_HOMEPAGE':
+        if obj.pid.service.route_to == 'CUSTOMER_HOMEPAGE':
             return redirect(obj.customer)
         else:
             return redirect('index')
 
 
-class CustomerScheduleAdmin(admin.ModelAdmin):
+class CustomerScheduleAdmin(HsscFormAdmin):
     autocomplete_fields = ["scheduled_operator", ]
-    list_display = ['service', 'scheduled_time', 'scheduled_operator']
-    list_editable = ['scheduled_time', 'scheduled_operator']
+    list_display = ['service', 'scheduled_time', 'scheduled_operator', 'overtime']
+    list_editable = ['scheduled_time', 'scheduled_operator', 'overtime']
     ordering = ('scheduled_time',)
+
 clinic_site.register(CustomerSchedule, CustomerScheduleAdmin)
 admin.site.register(CustomerSchedule, CustomerScheduleAdmin)
 
-class CustomerScheduleInline(nested_admin.NestedTabularInline):
+class CustomerScheduleInline(admin.TabularInline):
     model = CustomerSchedule
     extra = 0
     can_delete = False
     # verbose_name_plural = '服务日程安排'
-    exclude = ["hssc_id", "label", "name", ]
+    exclude = ["hssc_id", "label", "name", 'customer', 'schedule_package', ]
     autocomplete_fields = ["scheduled_operator", ]
 
-class CustomerScheduleDraftAdmin(HsscFormAdmin):
+
+class CustomerScheduleListAdmin(admin.ModelAdmin):
+    exclude = ["hssc_id", "label", "name", "operator", "creater", "pid", "cpid", "slug", "created_time", "updated_time", "pym"]
+    fieldsets = ((None, {'fields': (('customer', 'plan_serial_number', ), )}),)
+    readonly_fields = ['customer', 'plan_serial_number', ]
+    inlines = [CustomerScheduleInline, ]
+
+    def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
+        context.update({
+            'show_save': True,
+            'show_save_and_continue': False,
+            'show_save_and_add_another': False,
+            'show_delete': False
+        })
+        return super().render_change_form(request, context, add, change, form_url, obj)
+
+    def response_change(self, request, obj):
+        return redirect(obj.customer)
+
+clinic_site.register(CustomerScheduleList, CustomerScheduleListAdmin)
+admin.site.register(CustomerScheduleList, CustomerScheduleListAdmin)
+
+
+class CustomerScheduleDraftAdmin(admin.ModelAdmin):
     autocomplete_fields = ["scheduled_operator", ]
-    inlines = [CustomerScheduleInline]
 clinic_site.register(CustomerScheduleDraft, CustomerScheduleDraftAdmin)
 admin.site.register(CustomerScheduleDraft, CustomerScheduleDraftAdmin)
 
-class CustomerScheduleDraftInline(nested_admin.NestedTabularInline):
+class CustomerScheduleDraftInline(admin.TabularInline):
     model = CustomerScheduleDraft
-    inlines = [CustomerScheduleInline]
     extra = 0
     can_delete = False
     # verbose_name_plural = '服务项目安排'
     exclude = ["hssc_id", "label", "name", ]
     autocomplete_fields = ["scheduled_operator", ]
+
+    def get_queryset(self, request):
+        # 重写get_queryset方法，设置缺省overtime为服务的overtime
+        qs = super().get_queryset(request)
+        for item in qs:
+            item.overtime = item.service.overtime
+            item.save()
+        return qs
 
 class CustomerSchedulePackageAdmin(HsscFormAdmin):
     exclude = ["hssc_id", "label", "name", "operator", "creater", "pid", "cpid", "slug", "created_time", "updated_time", "pym"]
@@ -160,25 +205,34 @@ class CustomerSchedulePackageAdmin(HsscFormAdmin):
 
     def save_formset(self, request, form, formset, change):
         instances = formset.save()
+        instances = formset.queryset
+
         if instances:
             schedule_package = instances[0].schedule_package
+
+            # 生成CustomerScheduleList记录
+            schedule_list = CustomerScheduleList.objects.create(
+                customer = schedule_package.customer,
+                operator = schedule_package.operator,
+                creater = schedule_package.creater,
+                plan_serial_number = schedule_package.servicepackage.label + '--' + schedule_package.created_time.strftime('%Y-%m-%d') + '--' + schedule_package.operator.name,
+                schedule_package = schedule_package,
+            )
+
             customer = schedule_package.customer
             from core.business_functions import get_services_schedule
-            services_schedule = get_services_schedule(instances)
-            print('services_schedule:', services_schedule)
+            schedule = get_services_schedule(instances)
             # 创建客户服务日程
-            for service_schedule in services_schedule:
+            for item in schedule:
                 CustomerSchedule.objects.create(
+                    customer_schedule_list = schedule_list,
                     customer=customer,
                     schedule_package=schedule_package,
-                    scheduled_draft=service_schedule['scheduled_draft'],
-                    service=service_schedule['service'],
-                    scheduled_time=service_schedule['scheduled_time'],
-                    scheduled_operator=service_schedule['scheduled_operator'],
+                    service=item['service'],
+                    scheduled_time=item['scheduled_time'],
+                    scheduled_operator=item['scheduled_operator'],
+                    overtime=item['overtime'],
                 )
-            # 重定向到修改客户服务日程页面
-            return redirect('/clinic/service/customerschedule/', pk=instances[0].pk)
-            # return redirect('service:customer_schedule_edit', pk=instances[0].pk)
 
 clinic_site.register(CustomerSchedulePackage, CustomerSchedulePackageAdmin)
 admin.site.register(CustomerSchedulePackage, CustomerSchedulePackageAdmin)
