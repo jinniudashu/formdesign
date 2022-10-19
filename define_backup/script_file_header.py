@@ -50,7 +50,7 @@ class CustomerScheduleList(HsscFormModel):
     def __str__(self):
         return self.plan_serial_number
 
-class CustomerSchedule(HsscBase):
+class CustomerSchedule(HsscFormModel):
     customer_schedule_list = models.ForeignKey(CustomerScheduleList, null=True, blank=True, on_delete=models.CASCADE, verbose_name='服务计划')
     customer = models.ForeignKey(Customer, null=True, on_delete=models.CASCADE, verbose_name='客户')
     schedule_package = models.ForeignKey(CustomerSchedulePackage, null=True, blank=True, on_delete=models.CASCADE, verbose_name='服务包')
