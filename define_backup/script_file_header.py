@@ -52,7 +52,6 @@ class CustomerScheduleList(HsscFormModel):
 
 class CustomerSchedule(HsscFormModel):
     customer_schedule_list = models.ForeignKey(CustomerScheduleList, null=True, blank=True, on_delete=models.CASCADE, verbose_name='服务计划')
-    customer = models.ForeignKey(Customer, null=True, on_delete=models.CASCADE, verbose_name='客户')
     schedule_package = models.ForeignKey(CustomerSchedulePackage, null=True, blank=True, on_delete=models.CASCADE, verbose_name='服务包')
     service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='服务项目')
     scheduled_time = models.DateTimeField(blank=True, null=True, verbose_name='计划执行时间')
@@ -137,11 +136,11 @@ class HsscFormAdmin(admin.ModelAdmin):
 
 
 class CustomerScheduleAdmin(HsscFormAdmin):
-    exclude = ['hssc_id', 'label', 'name', 'customer_schedule_list', 'schedule_package', ]
+    exclude = ["hssc_id", "label", "name", "operator", "creater", "pid", "cpid", "slug", "created_time", "updated_time", "pym", 'customer_schedule_list', 'schedule_package', ]
     autocomplete_fields = ["scheduled_operator", ]
     list_display = ['service', 'scheduled_time', 'scheduled_operator', 'overtime']
     list_editable = ['scheduled_time', 'scheduled_operator', 'overtime']
-    readonly_fields = ['customer', ]
+    readonly_fields = ['customer', 'service']
     ordering = ('scheduled_time',)
 
 clinic_site.register(CustomerSchedule, CustomerScheduleAdmin)
@@ -151,8 +150,7 @@ class CustomerScheduleInline(admin.TabularInline):
     model = CustomerSchedule
     extra = 0
     can_delete = False
-    # verbose_name_plural = '服务日程安排'
-    exclude = ["hssc_id", "label", "name", 'customer', 'schedule_package', ]
+    exclude = ["hssc_id", "label", "name", "operator", "creater", "pid", "cpid", "slug", 'customer', 'schedule_package', ]
     autocomplete_fields = ["scheduled_operator", ]
 
 
@@ -448,6 +446,8 @@ class IcpcAdmin(admin.ModelAdmin):
         return False
     def has_delete_permission(self, request, obj=None):
         return False
+
+clinic_site.register(Icpc, IcpcAdmin)
 
 class SubIcpcAdmin(admin.ModelAdmin):
     list_display = ["icpc_code", "icode", "iname", "pym"]

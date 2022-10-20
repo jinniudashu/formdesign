@@ -270,7 +270,15 @@ def get_export_hsscbase_class_script(hsscbase_class_filename, fields_model: Comp
             return f'{app_label}.{model_name}'
 
     # 生成FieldsType内容
-    fields_type_script = f'from enum import Enum\nclass FieldsType(Enum):'
+    fields_type_script = f'''
+from enum import Enum
+class FieldsType(Enum):
+    # 手工添加CustomerSchedule字段数据类型
+    scheduled_time = "Datetime"  # 计划执行时间
+    overtime = "Datetime"  # 超期时限
+    scheduled_operator = "entities.Stuff"  # 计划执行人员
+
+    # 以下为自动生成字段数据类型'''
     for component in fields_model.objects.all():
         field_type = _get_field_type(component)
         fields_type_script = f'{fields_type_script}\n    {component.name} = "{field_type}"  # {component.label}'
