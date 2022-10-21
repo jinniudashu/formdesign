@@ -94,8 +94,10 @@ def export_source_code(modeladmin, request, queryset):
         'forms_head': ''
     }
 
+    # service_query_set = Service.objects.filter(is_system_service=False).order_by('-id')
+    # 只导出服务类型为“用户业务服务”的服务脚本
     # 基本信息服务排在前面
-    service_query_set = Service.objects.filter(is_system_service=False).order_by('-id')
+    service_query_set = Service.objects.filter(service_type=2).order_by('-id')
     service_file_header = {
         'models_file_head': service_models_file_head,
         'admin_file_head': service_admin_file_head,
@@ -277,8 +279,9 @@ class FieldsType(Enum):
     scheduled_time = "Datetime"  # 计划执行时间
     overtime = "Datetime"  # 超期时限
     scheduled_operator = "entities.Stuff"  # 计划执行人员
+    service = "core.Service"  # 服务
 
-    # 以下为自动生成字段数据类型'''
+    # 自动生成字段数据类型'''
     for component in fields_model.objects.all():
         field_type = _get_field_type(component)
         fields_type_script = f'{fields_type_script}\n    {component.name} = "{field_type}"  # {component.label}'
