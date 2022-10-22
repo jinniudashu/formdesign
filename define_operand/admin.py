@@ -74,7 +74,7 @@ class ServiceAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         ('基本信息', {
-            'fields': (('label', 'name_icpc'), ('managed_entity', 'priority', 'service_type', 'is_system_service'), 'role', 'history_services_display', 'enable_queue_counter', 'route_to', ('working_hours' ,'overtime'), ('name', 'hssc_id'))
+            'fields': (('label', 'name_icpc'), ('managed_entity', 'priority', 'service_type'), 'role', 'history_services_display', 'enable_queue_counter', 'route_to', ('working_hours' ,'overtime'), ('name', 'hssc_id'))
         }),
         ('作业管理', {
             'fields': ('suppliers', 'not_suitable', 'cost', 'load_feedback')

@@ -94,8 +94,7 @@ def export_source_code(modeladmin, request, queryset):
         'forms_head': ''
     }
 
-    # service_query_set = Service.objects.filter(is_system_service=False).order_by('-id')
-    # 只导出服务类型为“用户业务服务”的服务脚本
+    # 导出服务类型为“用户业务服务”的服务脚本
     # 基本信息服务排在前面
     service_query_set = Service.objects.filter(service_type=2).order_by('-id')
     service_file_header = {
