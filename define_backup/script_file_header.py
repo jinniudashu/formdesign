@@ -57,6 +57,7 @@ class CustomerSchedule(HsscFormModel):
     scheduled_time = models.DateTimeField(blank=True, null=True, verbose_name='计划执行时间')
     scheduled_operator = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True, blank=True, verbose_name='服务人员')
     overtime = models.DurationField(blank=True, null=True, verbose_name='超期时限')
+    is_assigned = models.BooleanField(default=False, verbose_name='已安排')
 
     class Meta:
         verbose_name = '客户服务日程'
@@ -138,8 +139,8 @@ class HsscFormAdmin(admin.ModelAdmin):
 class CustomerScheduleAdmin(HsscFormAdmin):
     exclude = ["hssc_id", "label", "name", "operator", "creater", "pid", "cpid", "slug", "created_time", "updated_time", "pym", 'customer_schedule_list', 'schedule_package', ]
     autocomplete_fields = ["scheduled_operator", ]
-    list_display = ['service', 'scheduled_time', 'scheduled_operator', 'overtime']
-    list_editable = ['scheduled_time', 'scheduled_operator', 'overtime']
+    list_display = ['service', 'scheduled_time', 'scheduled_operator', 'overtime', 'is_assigned']
+    list_editable = ['scheduled_time', 'scheduled_operator', 'overtime', 'is_assigned']
     readonly_fields = ['customer', 'service']
     ordering = ('scheduled_time',)
 
@@ -150,7 +151,7 @@ class CustomerScheduleInline(admin.TabularInline):
     model = CustomerSchedule
     extra = 0
     can_delete = False
-    exclude = ["hssc_id", "label", "name", "operator", "creater", "pid", "cpid", "slug", 'customer', 'schedule_package', ]
+    exclude = ["hssc_id", "label", "name", "operator", "creater", "pid", "cpid", "slug", 'customer', 'schedule_package', 'is_assigned']
     autocomplete_fields = ["scheduled_operator", ]
 
 
