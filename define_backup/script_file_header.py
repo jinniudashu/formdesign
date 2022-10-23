@@ -57,7 +57,7 @@ class CustomerSchedule(HsscFormModel):
     scheduled_time = models.DateTimeField(blank=True, null=True, verbose_name='计划执行时间')
     scheduled_operator = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True, blank=True, verbose_name='服务人员')
     overtime = models.DurationField(blank=True, null=True, verbose_name='超期时限')
-    is_assigned = models.BooleanField(default=False, verbose_name='已安排')
+    is_assigned = models.BooleanField(default=False, verbose_name='已生成任务')
 
     class Meta:
         verbose_name = '客户服务日程'

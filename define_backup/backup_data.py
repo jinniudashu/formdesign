@@ -279,6 +279,7 @@ class FieldsType(Enum):
     overtime = "Datetime"  # 超期时限
     scheduled_operator = "entities.Stuff"  # 计划执行人员
     service = "core.Service"  # 服务
+    is_assigned = 'Boolean'  # 是否已生成任务
 
     # 自动生成字段数据类型'''
     for component in fields_model.objects.all():
