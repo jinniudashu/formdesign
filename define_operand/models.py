@@ -52,8 +52,13 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
 
 @receiver(m2m_changed, sender=ManagedEntity.header_fields.through)
 def header_fields_m2m_changed_handler(sender, instance, action, **kwargs):
+    # 对基本表单的表头字段排序，生成header_fields_json
     if 'post' in action:
-        header_fields = [{'name': field.name, 'label': field.label} for field in instance.header_fields.all()]
+        header_fields = []
+        selected_header_fields = FormComponentsSetting.objects.filter(form=instance.base_form, component__in=instance.header_fields.all()).order_by('position').values('component')
+        for item in selected_header_fields:
+            field = Component.objects.get(id=item['component'])
+            header_fields.append({'name': field.name, 'label': field.label})
         if header_fields == []:
             header_fields = None
         instance.header_fields_json = json.dumps(header_fields)
@@ -298,7 +303,7 @@ class FormComponentsSetting(HsscBase):
     is_required = models.BooleanField(default=False, verbose_name="是否必填")
     Api_field = [('charge_staff', '责任人'), ('operator', '作业人员'), ('scheduled_time', '计划执行时间')]
     api_field = models.CharField(max_length=50, choices=Api_field, null=True, blank=True, verbose_name="对接系统接口")
-    position = models.PositiveSmallIntegerField(default=0, verbose_name="位置顺序")
+    position = models.PositiveSmallIntegerField(default=100, verbose_name="位置顺序")
 
     class Meta:
         verbose_name = '表单组件设置'
