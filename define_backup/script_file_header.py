@@ -235,6 +235,10 @@ class CustomerSchedulePackageAdmin(HsscFormAdmin):
                     overtime=item['overtime'],
                 )
 
+            # 更新服务进程entry为'customerschedulelist/id/change/'
+            schedule_list.schedule_package.pid.entry = f'/clinic/service/customerschedulelist/{schedule_list.id}/change'
+            schedule_list.schedule_package.pid.save()
+
 clinic_site.register(CustomerSchedulePackage, CustomerSchedulePackageAdmin)
 admin.site.register(CustomerSchedulePackage, CustomerSchedulePackageAdmin)
 
