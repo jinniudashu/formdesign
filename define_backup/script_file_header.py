@@ -220,14 +220,15 @@ class CustomerSchedulePackageAdmin(HsscFormAdmin):
                 schedule_package = schedule_package,
             )
 
-            customer = schedule_package.customer
             from core.business_functions import get_services_schedule
             schedule = get_services_schedule(instances)
             # 创建客户服务日程
             for item in schedule:
                 CustomerSchedule.objects.create(
                     customer_schedule_list = schedule_list,
-                    customer=customer,
+                    customer=schedule_package.customer,
+                    operator=schedule_package.operator,
+                    creater=schedule_package.creater,
                     schedule_package=schedule_package,
                     service=item['service'],
                     scheduled_time=item['scheduled_time'],
