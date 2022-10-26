@@ -251,7 +251,38 @@ class Role(HsscPymBase):
 
 
 # 药品基本信息表
-class Medicine(models.Model):
+class Medicine(HsscPymBase):
+    yp_code = models.CharField(max_length=10, null=True, verbose_name="药品编码")
+    specification = models.CharField(max_length=100, null=True, verbose_name="规格")
+    measure = models.CharField(max_length=30, null=True, verbose_name="单位")
+    mz_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="门诊参考单价")
+    usage = models.CharField(max_length=60, null=True, verbose_name="用法")
+    dosage = models.CharField(max_length=60, null=True, verbose_name="用量")
+    type = models.CharField(max_length=40, null=True, verbose_name="药剂类型")
+    yp_sort = models.CharField(max_length=60, null=True, verbose_name="药品分类名称")
+    current_storage = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="当前库存")
+    cf_measure = models.CharField(max_length=30, null=True, verbose_name="处方计量单位")
+    xs_measure = models.CharField(max_length=30, null=True, verbose_name="销售计量单位")
+    cf_dosage = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="常用单次处方用量(处方单位)")
+    not_cfyp = models.BooleanField(default=False, verbose_name="非处方药标记")
+    mzcf_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="门诊处方价格")
+    is_use = models.BooleanField(default=True, verbose_name="是否使用中")
+    ypty_name = models.CharField(max_length=200, null=True, verbose_name="药品通用名称")
+    gjjbyp = models.CharField(max_length=100, null=True, verbose_name="国家基本药品目录名称")
+    ybypbm = models.CharField(max_length=100, null=True, verbose_name="医保药品目录对应药品编码")
+    ybyplb = models.CharField(max_length=2, null=True, verbose_name="药品报销类别（甲类、乙类）")
+
+    class Meta:
+        verbose_name = "药品基本信息表"
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
+    def __str__(self):
+        return self.label
+
+
+# 药品基本信息导入表
+class MedicineImport(models.Model):
     YPCode = models.CharField(max_length=10, verbose_name="药品编码")
     PYM = models.CharField(max_length=100, null=True, verbose_name="拼音码")
     YPName = models.CharField(max_length=200, null=True, verbose_name="药品名称")
@@ -294,10 +325,51 @@ class Medicine(models.Model):
     ybypbm = models.CharField(max_length=100, null=True, verbose_name="医保药品目录对应药品编码")
     ybyplb = models.CharField(max_length=2, null=True, verbose_name="药品报销类别（甲类、乙类）")
 
+    class Meta:
+        verbose_name = "药品基本信息导入表"
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
     def __str__(self):
         return self.YPName
 
-    class Meta:
-        verbose_name = "药品基本信息"
-        verbose_name_plural = verbose_name
-        ordering = ['id']
+
+# 从MedicineImport导入药品信息至Medicine
+def medicine_import():
+    # 字段映射
+    field_map = {
+        'label' : 'YPName',
+        'yp_code' : 'YPCode', # "药品编码"
+        'specification' : 'Specification', # "规格"
+        'measure' : 'Measure', # "单位"
+        'mz_price' : 'MZPrice', # "门诊参考单价"
+        'usage' : 'Usage', # "用法"
+        'dosage' : 'Dosage', # "用量"
+        'type' : 'Type', # "药剂类型"
+        'yp_sort' : 'YPSort', # "药品分类名称"
+        'current_storage' : 'CurrentStorage', # "当前库存"
+        'cf_measure' : 'CFMeasure', # "处方计量单位"
+        'xs_measure' : 'XSMeasure', # "销售计量单位"
+        'cf_dosage' : 'CFDosage', # "处方单位"
+        'not_cfyp' : 'NotCFYP', # "非处方药标记"
+        'mzcf_price' : 'MZPriceCF', # "门诊处方价格"
+        'is_use' : 'IsUse', # "是否使用中"
+        'ypty_name' : 'YptyName', # "药品通用名称"
+        'gjjbyp' : 'gjjbyp', # "国家基本药品目录名称"
+        'ybypbm' : 'ybypbm', # "医保药品目录对应药品编码"
+        'ybyplb' : 'ybyplb', # "药品报销类别（甲类、乙类）"
+    }
+
+    # 逐条导入MedicineImport的记录至Medicine
+    for medicine_import in MedicineImport.objects.all():
+        medicine = Medicine()
+        for field in medicine._meta.fields:
+            if field.name in field_map:
+                # 从MedicineImport中取出对应字段的值
+                value = getattr(medicine_import, field_map.get(field.name))
+                # 将值赋给Medicine
+                setattr(medicine, field.name, value)
+        medicine.save()
+
+
+

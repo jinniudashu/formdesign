@@ -5,10 +5,13 @@ from define.models import *
 from import_export.admin import ImportExportModelAdmin
 from define.resource import MedicineResource
 
-class MedcineAdmin(ImportExportModelAdmin):
-    resource_class = MedicineResource
-admin.site.register(Medicine, MedcineAdmin)
+class MedicineAdmin(ImportExportModelAdmin):
+    pass
+admin.site.register(Medicine, MedicineAdmin)
 
+class MedicineImportAdmin(ImportExportModelAdmin):
+    resource_class = MedicineResource
+admin.site.register(MedicineImport, MedicineImportAdmin)
 
 @admin.register(CharacterField)
 class CharacterFieldAdmin(admin.ModelAdmin):

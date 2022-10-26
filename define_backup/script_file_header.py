@@ -234,6 +234,7 @@ class CustomerSchedulePackageAdmin(HsscFormAdmin):
                     scheduled_time=item['scheduled_time'],
                     scheduled_operator=item['scheduled_operator'],
                     overtime=item['overtime'],
+                    pid=schedule_package.pid
                 )
 
             # 更新服务进程entry为'customerschedulelist/id/change/'
