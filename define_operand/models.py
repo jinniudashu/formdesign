@@ -527,7 +527,6 @@ class BuessinessFormsSetting(HsscBase):
 # 服务包类型信息表
 class ServicePackage(HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
-    services = models.ManyToManyField(Service, through='ServicePackageDetail', verbose_name="服务项目")
 
     class Meta:
         verbose_name = "服务包"

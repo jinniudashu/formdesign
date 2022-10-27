@@ -9676,7 +9676,7 @@
     "servicepackage": [
         {
             "label": "糖尿病服务包_发病初期",
-            "name": "tang_niao_bing_fu_wu_bao___fa_bing_chu_qi",
+            "name": "tang_niao_bing_fu_wu_bao_fa_bing_chu_qi",
             "hssc_id": "6992ad18-33de-11ed-9004-4889e7cf38c9",
             "pym": "tnbfwb_fbcq",
             "name_icpc": null,
@@ -9691,7 +9691,7 @@
         },
         {
             "label": "糖尿病服务包_稳定期",
-            "name": "tang_niao_bing_fu_wu_bao___wen_ding_qi",
+            "name": "tang_niao_bing_fu_wu_bao_wen_ding_qi",
             "hssc_id": "41722f80-33df-11ed-985d-4889e7cf38c9",
             "pym": "tnbfwb_wdq",
             "name_icpc": null,
