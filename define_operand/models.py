@@ -611,36 +611,24 @@ class EventRule(HsscPymBase):
         for _expression in self.eventexpression_set.all():
             field = _expression.field  # 字段
 
-            # if ',' in _expression.value:
-            #     value = f"{{{_expression.value}}}"  # 值为集合
-            #     print('集合value:', value, len(value)) # 测试用
-            #     print(f'len({value}.intersection({field.name}))=={len(value)}')
-            # elif self._is_number(_expression.value):
-            #     value = _expression.value  # 值为数字
-            # else:
-            #     value = f"'{_expression.value}'"  # 值为字符串
-            #     print('字符value:', value, len(value)) # 测试用
-            #     print(f'len({value}.intersection({field.name}))=={len(value)}')
-
-            # 生成子表达式左值
+            # 生成子表达式左值, 右值
             left_value = ''
+            right_value = ''
             if _expression.char_value:
                 value = str(set(_expression.char_value.replace(" ", "").split(',')))
                 left_value = f'len({value}.intersection({field.name}))'  # 集合交集判断
+                right_value = f'{int(_expression.number_value)}'
             else:
                 left_value = f'{field.name}'
+                right_value = f'{_expression.number_value}'
             
             # 生成子表达式操作符
             operator = EventExpression.Operator[_expression.operator][1]  # 操作符
-            
-            # 生成子表达式右值
-            right_value = f'{_expression.number_value}'
 
-            # 生成子表达式连接符
+            # 生成子表达式and/or连接符
+            connection_operator = ''
             if _expression.connection_operator is not None and _expression.connection_operator >= 0:
-                connection_operator = EventExpression.Connection_operator[_expression.connection_operator][1]  # 连接符
-            else:
-                connection_operator = ''
+                connection_operator = EventExpression.Connection_operator[_expression.connection_operator][1]  # 连接符                
 
             # 组合表达式
             expressions.extend([left_value, operator, right_value, connection_operator])
@@ -680,7 +668,7 @@ class EventExpression(HsscBase):
     Operator = [(0, '=='), (1, '!='), (2, '>'), (3, '<'), (4, '>='), (5, '<='), (6, 'in'), (7, 'not in')]
     operator = models.PositiveSmallIntegerField(choices=Operator, null=True, verbose_name='操作符')
     number_value = models.FloatField(blank=True, null=True, verbose_name="数字值")
-    value = models.CharField(max_length=255, null=True, verbose_name="值")
+    # value = models.CharField(max_length=255, null=True, verbose_name="值")
     Connection_operator = [(0, 'and'), (1, 'or')]
     connection_operator = models.PositiveSmallIntegerField(choices=Connection_operator, blank=True, null=True, verbose_name='连接操作符')
 
@@ -692,32 +680,6 @@ class EventExpression(HsscBase):
     def __str__(self):
         return str(self.event_rule.label)
     
-    def create_value(self):
-        def _is_number(s):
-        # 判断传入的字符串是否是数字
-            try:
-                float(s)
-                return True
-            except ValueError:
-                pass
-        
-            try:
-                import unicodedata
-                unicodedata.numeric(s)
-                return True
-            except (TypeError, ValueError):
-                pass
-            return False
-
-        if _is_number(self.value):
-            self.number_value = self.value
-        else:
-            self.char_value = self.value.replace("'", "")  # 值为集合
-            value_set = set(self.char_value.replace(" ", "").split(','))
-            self.number_value = len(value_set)
-            self.operator = 0
-        self.save()
-
 
 # 服务规格设置
 class ServiceSpec(HsscBase):
