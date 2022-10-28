@@ -26,7 +26,7 @@ class EventRuleAdmin(admin.ModelAdmin):
 
 @admin.register(EventExpression)
 class EventExpressionAdmin(admin.ModelAdmin):
-    list_display = ('event_rule', 'field', 'char_value', 'operator', 'number_value', 'connection_operator')
+    list_display = ('event_rule', 'field', 'char_value', 'operator', 'number_value', 'value', 'connection_operator')
     autocomplete_fields = ['field']
 
 

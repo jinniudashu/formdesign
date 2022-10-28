@@ -713,6 +713,9 @@ class EventExpression(HsscBase):
             self.number_value = self.value
         else:
             self.char_value = self.value.replace("'", "")  # 值为集合
+            value_set = set(self.char_value.replace(" ", "").split(','))
+            self.number_value = len(value_set)
+            self.operator = 0
         self.save()
 
 
