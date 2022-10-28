@@ -607,28 +607,49 @@ class EventRule(HsscPymBase):
     def generate_expression(self):
         # 在EventRuleAdmin.save_formset中调用
         expressions = []
-        descriptions = []
         expression_fields = []
         for _expression in self.eventexpression_set.all():
             field = _expression.field  # 字段
-            operator = EventExpression.Operator[_expression.operator][1]  # 操作符
-            if ',' in _expression.value:
-                value = f"{{{_expression.value}}}"  # 值为集合
-            elif self._is_number(_expression.value):
-                value = _expression.value  # 值为数字
+
+            # if ',' in _expression.value:
+            #     value = f"{{{_expression.value}}}"  # 值为集合
+            #     print('集合value:', value, len(value)) # 测试用
+            #     print(f'len({value}.intersection({field.name}))=={len(value)}')
+            # elif self._is_number(_expression.value):
+            #     value = _expression.value  # 值为数字
+            # else:
+            #     value = f"'{_expression.value}'"  # 值为字符串
+            #     print('字符value:', value, len(value)) # 测试用
+            #     print(f'len({value}.intersection({field.name}))=={len(value)}')
+
+            # 生成子表达式左值
+            left_value = ''
+            if _expression.char_value:
+                value = str(set(_expression.char_value.replace(" ", "").split(',')))
+                left_value = f'len({value}.intersection({field.name}))'  # 集合交集判断
             else:
-                value = f"'{_expression.value}'"  # 值为字符串
+                left_value = f'{field.name}'
+            
+            # 生成子表达式操作符
+            operator = EventExpression.Operator[_expression.operator][1]  # 操作符
+            
+            # 生成子表达式右值
+            right_value = f'{_expression.number_value}'
+
+            # 生成子表达式连接符
             if _expression.connection_operator is not None and _expression.connection_operator >= 0:
                 connection_operator = EventExpression.Connection_operator[_expression.connection_operator][1]  # 连接符
             else:
                 connection_operator = ''
-            expressions.extend([field.name, operator, value, connection_operator])
-            descriptions.extend([field.label, operator, value, connection_operator])
+
+            # 组合表达式
+            expressions.extend([left_value, operator, right_value, connection_operator])
+
+            # 组合表达式字段
             expression_fields.append(field.name)
+
         expressions.pop()   # 去掉最后一个连接符
-        descriptions.pop()  # 去掉最后一个连接符
         self.expression = ' '.join(expressions)
-        self.description = ' '.join(descriptions)
         self.expression_fields = ','.join(expression_fields)
         self.save()
         return self.expression
@@ -655,9 +676,11 @@ class EventRule(HsscPymBase):
 class EventExpression(HsscBase):
     event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE, null=True, blank=True, verbose_name="事件规则")
     field = models.ForeignKey(Component, on_delete=models.CASCADE, null=True, verbose_name="字段")
+    char_value = models.CharField(max_length=255, blank=True, null=True, verbose_name="字符值", help_text="多个值用英文逗号分隔，空格会被忽略")
     Operator = [(0, '=='), (1, '!='), (2, '>'), (3, '<'), (4, '>='), (5, '<='), (6, 'in'), (7, 'not in')]
     operator = models.PositiveSmallIntegerField(choices=Operator, null=True, verbose_name='操作符')
-    value = models.CharField(max_length=255, null=True, verbose_name="值", help_text="多个值用英文逗号分隔，空格会被忽略")
+    number_value = models.FloatField(blank=True, null=True, verbose_name="数字值")
+    value = models.CharField(max_length=255, null=True, verbose_name="值")
     Connection_operator = [(0, 'and'), (1, 'or')]
     connection_operator = models.PositiveSmallIntegerField(choices=Connection_operator, blank=True, null=True, verbose_name='连接操作符')
 
@@ -668,6 +691,29 @@ class EventExpression(HsscBase):
 
     def __str__(self):
         return str(self.event_rule.label)
+    
+    def create_value(self):
+        def _is_number(s):
+        # 判断传入的字符串是否是数字
+            try:
+                float(s)
+                return True
+            except ValueError:
+                pass
+        
+            try:
+                import unicodedata
+                unicodedata.numeric(s)
+                return True
+            except (TypeError, ValueError):
+                pass
+            return False
+
+        if _is_number(self.value):
+            self.number_value = self.value
+        else:
+            self.char_value = self.value.replace("'", "")  # 值为集合
+        self.save()
 
 
 # 服务规格设置
