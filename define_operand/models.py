@@ -668,7 +668,6 @@ class EventExpression(HsscBase):
     Operator = [(0, '=='), (1, '!='), (2, '>'), (3, '<'), (4, '>='), (5, '<='), (6, 'in'), (7, 'not in')]
     operator = models.PositiveSmallIntegerField(choices=Operator, null=True, verbose_name='操作符')
     number_value = models.FloatField(blank=True, null=True, verbose_name="数字值")
-    # value = models.CharField(max_length=255, null=True, verbose_name="值")
     Connection_operator = [(0, 'and'), (1, 'or')]
     connection_operator = models.PositiveSmallIntegerField(choices=Connection_operator, blank=True, null=True, verbose_name='连接操作符')
 
