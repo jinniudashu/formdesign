@@ -9234,8 +9234,8 @@
             "description": "症状 == {‘烦渴’,‘多尿’} and 空腹血糖 >= 7.0 or 症状 == {'烦渴','皮肤感染'}  空腹血糖 >= 7.0 or 症状 == {'多尿','皮肤感染'} and 空腹血糖 >= 7.0",
             "detection_scope": "LAST_WEEK_SERVICES",
             "weight": 1,
-            "expression": "len({'烦渴','多尿','皮肤感染'}.intersection(relatedfield_symptom_list)) >= 2 and numberfield_kong_fu_xue_tang >= 7.0",
-            "expression_fields": "relatedfield_symptom_list,numberfield_kong_fu_xue_tang,relatedfield_symptom_list,numberfield_kong_fu_xue_tang,relatedfield_symptom_list,numberfield_kong_fu_xue_tang"
+            "expression": "len({'皮肤感染', '多尿', '烦渴'}.intersection(boolfield_zheng_zhuang)) == 2 and boolfield_kong_fu_xue_tang >= 7.0",
+            "expression_fields": "boolfield_zheng_zhuang,boolfield_kong_fu_xue_tang"
         },
         {
             "label": "糖尿病酮中毒诊断规则",
@@ -9245,8 +9245,8 @@
             "description": "症状 == {'昏睡','呕吐','腹痛'} and 疾病名称 in {'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'} and 尿酮体 == ''阳性''",
             "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
-            "expression": "len({'昏睡','呕吐','腹痛'}.intersection(relatedfield_symptom_list))==3 and len({'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'}.intersection(relatedfield_disease_name))==1 and len({'阳性'}.intersection(boolfield_tong_ti))==1",
-            "expression_fields": "relatedfield_symptom_list,relatedfield_disease_name,boolfield_tong_ti"
+            "expression": "len({'腹痛', '呕吐', '昏睡'}.intersection(boolfield_zheng_zhuang)) == 3 and len({'胰岛素依赖糖尿病', '非胰岛素依赖糖尿病'}.intersection(boolfield_ji_bing_ming_cheng)) == 1 and len({'阳性'}.intersection(boolfield_niao_tong_ti)) == 1",
+            "expression_fields": "boolfield_zheng_zhuang,boolfield_ji_bing_ming_cheng,boolfield_niao_tong_ti"
         },
         {
             "label": "高血糖诊断规则",
@@ -9256,8 +9256,8 @@
             "description": "症状 == ''疲乏'' and 疾病名称 in {'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'}",
             "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
-            "expression": "len({'疲乏'}.intersection(relatedfield_symptom_list))==1 and len({'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'}.intersection(relatedfield_disease_name))==1",
-            "expression_fields": "relatedfield_symptom_list,relatedfield_disease_name"
+            "expression": "len({'疲乏'}.intersection(boolfield_zheng_zhuang)) == 1 and len({'胰岛素依赖糖尿病', '非胰岛素依赖糖尿病'}.intersection(boolfield_ji_bing_ming_cheng)) == 1",
+            "expression_fields": "boolfield_zheng_zhuang,boolfield_ji_bing_ming_cheng"
         },
         {
             "label": "糖尿病肾病诊断规则",
@@ -9267,8 +9267,8 @@
             "description": "疾病名称 in {'非胰岛素依赖糖尿','胰岛素依赖糖尿病'} and 尿微量白蛋白 > 20",
             "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
-            "expression": "len({'非胰岛素依赖糖尿','胰岛素依赖糖尿病'}.intersection(relatedfield_disease_name))==1 and A3501>20",
-            "expression_fields": "relatedfield_disease_name,A3501"
+            "expression": "len({'胰岛素依赖糖尿病', '非胰岛素依赖糖尿'}.intersection(boolfield_ji_bing_ming_cheng)) == 1 and boolfield_niao_wei_liang_bai_dan_bai > 20.0",
+            "expression_fields": "boolfield_ji_bing_ming_cheng,boolfield_niao_wei_liang_bai_dan_bai"
         },
         {
             "label": "糖尿病血管病变周围神经炎诊断规则",
@@ -9278,8 +9278,8 @@
             "description": "疾病名称 in {'非胰岛素依赖糖尿病', '胰岛素依赖糖尿病'} and 症状 == '’足痛‘'",
             "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
-            "expression": "len({'非胰岛素依赖糖尿','胰岛素依赖糖尿病'}.intersection(relatedfield_disease_name))==1 and len({'足痛'}.intersection(relatedfield_symptom_list))==1",
-            "expression_fields": "relatedfield_disease_name,relatedfield_symptom_list"
+            "expression": "len({'胰岛素依赖糖尿病', '非胰岛素依赖糖尿病'}.intersection(boolfield_ji_bing_ming_cheng)) == 1 and len({'足痛'}.intersection(boolfield_zheng_zhuang)) == 1",
+            "expression_fields": "boolfield_ji_bing_ming_cheng,boolfield_zheng_zhuang"
         },
         {
             "label": "一项糖尿病症状",
@@ -9289,8 +9289,8 @@
             "description": "症状 in {'烦渴','多尿','多食','乏力','体重减轻','体重增加','皮肤感染'}",
             "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
-            "expression": "len({'烦渴','多尿','多食','乏力','体重减轻','体重增加','皮肤感染'}.intersection(relatedfield_symptom_list)) == 1",
-            "expression_fields": "relatedfield_symptom_list"
+            "expression": "len({'多食', '体重增加', '烦渴', '皮肤感染', '体重减轻', '乏力', '多尿'}.intersection(boolfield_zheng_zhuang)) == 1",
+            "expression_fields": "boolfield_zheng_zhuang"
         },
         {
             "label": "两项糖尿病症状",
@@ -9300,8 +9300,8 @@
             "description": "症状 == {'烦渴','多尿'} or 症状 == {'烦渴','体重增加'} or 症状 == {'多尿','皮肤感染'} or 症状 == {'烦渴','皮肤感染'}",
             "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
-            "expression": "len({'烦渴','多尿','体重增加','皮肤感染'}.intersection(relatedfield_symptom_list)) >= 2",
-            "expression_fields": "relatedfield_symptom_list,relatedfield_symptom_list,relatedfield_symptom_list,relatedfield_symptom_list"
+            "expression": "len({'皮肤感染', '体重增加', '多尿', '烦渴'}.intersection(boolfield_zheng_zhuang)) == 2",
+            "expression_fields": "boolfield_zheng_zhuang"
         },
         {
             "label": "空腹血糖超过正常值",
@@ -9333,8 +9333,8 @@
             "description": "疾病名称 in {'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'} and 药品名称 == {'5%葡萄糖注射液','止咳糖浆'}",
             "detection_scope": "CURRENT_SERVICE",
             "weight": 1,
-            "expression": "len({'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'}.intersection(relatedfield_disease_name))==1 and len({'5%葡萄糖注射液','止咳糖浆'}.intersection(relatedfield_drug_name))==1",
-            "expression_fields": "relatedfield_disease_name,relatedfield_drug_name"
+            "expression": "len({'胰岛素依赖糖尿病', '非胰岛素依赖糖尿病'}.intersection(boolfield_ji_bing_ming_cheng)) == 1 and len({'5%葡萄糖注射液', '止咳糖浆'}.intersection(boolfield_yao_pin_ming)) >= 1",
+            "expression_fields": "boolfield_ji_bing_ming_cheng,boolfield_yao_pin_ming"
         },
         {
             "label": "开具注射类处方",
@@ -9388,18 +9388,22 @@
             "hssc_id": "a9235528-abda-11ec-a639-1ac10aeebbc4",
             "event_rule": "a922d698-abda-11ec-a639-1ac10aeebbc4",
             "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
+            "char_value": "烦渴,多尿,体重减轻",
             "operator": 0,
+            "number_value": 3.0,
             "value": "'烦渴','多尿','体重减轻'",
             "connection_operator": null
         },
         {
-            "label": null,
+            "label": "二型糖尿病诊断规则",
             "name": null,
             "hssc_id": "9dd91d40-abdc-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
+            "char_value": "烦渴,多尿,皮肤感染",
             "operator": 0,
-            "value": "‘烦渴’,‘多尿’",
+            "number_value": 2.0,
+            "value": "'烦渴','多尿'",
             "connection_operator": 0
         },
         {
@@ -9408,39 +9412,11 @@
             "hssc_id": "9dd95b2a-abdc-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
             "field": "deb59434-9aa1-11ec-bde1-8a6e55faf877",
+            "char_value": null,
             "operator": 4,
+            "number_value": 7.0,
             "value": "7.0",
-            "connection_operator": 1
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "9dd9862c-abdc-11ec-bf5e-1ac10aeebbc4",
-            "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
-            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 0,
-            "value": "'烦渴','皮肤感染'",
             "connection_operator": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "9dd9b1ec-abdc-11ec-bf5e-1ac10aeebbc4",
-            "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
-            "field": "deb59434-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 4,
-            "value": "7.0",
-            "connection_operator": 1
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "9dd9dc8a-abdc-11ec-bf5e-1ac10aeebbc4",
-            "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
-            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 0,
-            "value": "'多尿','皮肤感染'",
-            "connection_operator": 0
         },
         {
             "label": null,
@@ -9448,9 +9424,11 @@
             "hssc_id": "711df180-abdd-11ec-a639-1ac10aeebbc4",
             "event_rule": "711dadc4-abdd-11ec-a639-1ac10aeebbc4",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
+            "char_value": "昏睡,呕吐,腹痛",
+            "operator": 0,
+            "number_value": 3.0,
             "value": "'昏睡','呕吐','腹痛'",
-            "connection_operator": null
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -9458,9 +9436,11 @@
             "hssc_id": "711e2a92-abdd-11ec-a639-1ac10aeebbc4",
             "event_rule": "711dadc4-abdd-11ec-a639-1ac10aeebbc4",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 6,
+            "char_value": "非胰岛素依赖糖尿病,胰岛素依赖糖尿病",
+            "operator": 0,
+            "number_value": 1.0,
             "value": "'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'",
-            "connection_operator": null
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -9468,9 +9448,11 @@
             "hssc_id": "35f14f9e-abe2-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "35f1165a-abe2-11ec-bf5e-1ac10aeebbc4",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
+            "char_value": "疲乏",
+            "operator": 0,
+            "number_value": 1.0,
             "value": "'疲乏'",
-            "connection_operator": null
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -9478,7 +9460,9 @@
             "hssc_id": "35f18d9c-abe2-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "35f1165a-abe2-11ec-bf5e-1ac10aeebbc4",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 6,
+            "char_value": "非胰岛素依赖糖尿病,胰岛素依赖糖尿病",
+            "operator": 0,
+            "number_value": 1.0,
             "value": "'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'",
             "connection_operator": null
         },
@@ -9488,9 +9472,11 @@
             "hssc_id": "690a2158-abe2-11ec-a639-1ac10aeebbc4",
             "event_rule": "6909de64-abe2-11ec-a639-1ac10aeebbc4",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 6,
+            "char_value": "非胰岛素依赖糖尿,胰岛素依赖糖尿病",
+            "operator": 0,
+            "number_value": 1.0,
             "value": "'非胰岛素依赖糖尿','胰岛素依赖糖尿病'",
-            "connection_operator": null
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -9498,28 +9484,22 @@
             "hssc_id": "e35677c2-abe2-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "e3563d98-abe2-11ec-bf5e-1ac10aeebbc4",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 6,
+            "char_value": "非胰岛素依赖糖尿病, 胰岛素依赖糖尿病",
+            "operator": 0,
+            "number_value": 1.0,
             "value": "'非胰岛素依赖糖尿病', '胰岛素依赖糖尿病'",
-            "connection_operator": null
+            "connection_operator": 0
         },
         {
-            "label": null,
+            "label": "糖尿病血管病变周围神经炎诊断规则",
             "name": null,
             "hssc_id": "e356ace2-abe2-11ec-bf5e-1ac10aeebbc4",
             "event_rule": "e3563d98-abe2-11ec-bf5e-1ac10aeebbc4",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
-            "value": "’足痛‘",
-            "connection_operator": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "74f8d792-abe8-11ec-bf5e-1ac10aeebbc4",
-            "event_rule": "9dd8d736-abdc-11ec-bf5e-1ac10aeebbc4",
-            "field": "deb59434-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 4,
-            "value": "7.0",
+            "char_value": "足痛",
+            "operator": 0,
+            "number_value": 1.0,
+            "value": "'足痛'",
             "connection_operator": null
         },
         {
@@ -9528,7 +9508,9 @@
             "hssc_id": "09ecb946-ad5f-11ec-90c1-cad859921f34",
             "event_rule": "6909de64-abe2-11ec-a639-1ac10aeebbc4",
             "field": "7b5ee5d2-ad5e-11ec-90c1-cad859921f34",
+            "char_value": null,
             "operator": 2,
+            "number_value": 20.0,
             "value": "20",
             "connection_operator": null
         },
@@ -9538,7 +9520,9 @@
             "hssc_id": "05d17be6-afc9-11ec-9129-925bd788f441",
             "event_rule": "05d0c7fa-afc9-11ec-9129-925bd788f441",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 6,
+            "char_value": "烦渴,多尿,多食,乏力,体重减轻,体重增加,皮肤感染",
+            "operator": 0,
+            "number_value": 1.0,
             "value": "'烦渴','多尿','多食','乏力','体重减轻','体重增加','皮肤感染'",
             "connection_operator": null
         },
@@ -9548,38 +9532,10 @@
             "hssc_id": "1014ec7c-afca-11ec-b226-925bd788f441",
             "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
             "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
+            "char_value": "烦渴,多尿,体重增加,皮肤感染",
+            "operator": 0,
+            "number_value": 2.0,
             "value": "'烦渴','多尿'",
-            "connection_operator": 1
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "1015d74a-afca-11ec-b226-925bd788f441",
-            "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
-            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
-            "value": "'烦渴','体重增加'",
-            "connection_operator": 1
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "101614d0-afca-11ec-b226-925bd788f441",
-            "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
-            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
-            "value": "'多尿','皮肤感染'",
-            "connection_operator": 1
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "101649dc-afca-11ec-b226-925bd788f441",
-            "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
-            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
-            "value": "'烦渴','皮肤感染'",
             "connection_operator": null
         },
         {
@@ -9588,7 +9544,9 @@
             "hssc_id": "3c36792c-b6d4-11ec-8425-0ebea05fc526",
             "event_rule": "3c360bfe-b6d4-11ec-8425-0ebea05fc526",
             "field": "deb59434-9aa1-11ec-bde1-8a6e55faf877",
+            "char_value": null,
             "operator": 4,
+            "number_value": 7.0,
             "value": "7.0",
             "connection_operator": null
         },
@@ -9598,7 +9556,9 @@
             "hssc_id": "9bfba526-b6d4-11ec-8121-0ebea05fc526",
             "event_rule": "9bfb4a40-b6d4-11ec-8121-0ebea05fc526",
             "field": "deb4e084-9aa1-11ec-bde1-8a6e55faf877",
+            "char_value": null,
             "operator": 2,
+            "number_value": 6.0,
             "value": "6",
             "connection_operator": null
         },
@@ -9608,7 +9568,9 @@
             "hssc_id": "0448e7f6-b6d5-11ec-8121-0ebea05fc526",
             "event_rule": "711dadc4-abdd-11ec-a639-1ac10aeebbc4",
             "field": "15957162-b092-11ec-b42a-5ed0e34457d3",
-            "operator": null,
+            "char_value": "阳性",
+            "operator": 0,
+            "number_value": 1.0,
             "value": "'阳性'",
             "connection_operator": null
         },
@@ -9618,9 +9580,11 @@
             "hssc_id": "ebbeabf2-b6d5-11ec-8121-0ebea05fc526",
             "event_rule": "ebbdfb30-b6d5-11ec-8121-0ebea05fc526",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": 6,
+            "char_value": "非胰岛素依赖糖尿病,胰岛素依赖糖尿病",
+            "operator": 0,
+            "number_value": 1.0,
             "value": "'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'",
-            "connection_operator": null
+            "connection_operator": 0
         },
         {
             "label": null,
@@ -9628,7 +9592,9 @@
             "hssc_id": "ebbf0476-b6d5-11ec-8121-0ebea05fc526",
             "event_rule": "ebbdfb30-b6d5-11ec-8121-0ebea05fc526",
             "field": "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
-            "operator": null,
+            "char_value": "5%葡萄糖注射液,止咳糖浆",
+            "operator": 4,
+            "number_value": 1.0,
             "value": "'5%葡萄糖注射液','止咳糖浆'",
             "connection_operator": null
         },
@@ -9638,7 +9604,9 @@
             "hssc_id": "3023c596-c9f2-11ec-b369-168d53e8234e",
             "event_rule": "302378de-c9f2-11ec-b369-168d53e8234e",
             "field": "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-            "operator": null,
+            "char_value": "注射类",
+            "operator": 0,
+            "number_value": 1.0,
             "value": "'注射类'",
             "connection_operator": null
         },
@@ -9648,7 +9616,9 @@
             "hssc_id": "b3182bb2-d119-11ec-ab0d-823d1f108281",
             "event_rule": "b317b70e-d119-11ec-ab0d-823d1f108281",
             "field": "9e873f3a-d100-11ec-ab0d-823d1f108281",
+            "char_value": "yes",
             "operator": 0,
+            "number_value": 1.0,
             "value": "'yes'",
             "connection_operator": null
         },
@@ -9658,7 +9628,9 @@
             "hssc_id": "3351db3c-3300-11ed-89e6-0242ac120004",
             "event_rule": "3351be40-3300-11ed-89e6-0242ac120004",
             "field": "8c6b84ce-32fc-11ed-a506-0242ac120004",
+            "char_value": "血糖控制不稳定",
             "operator": 0,
+            "number_value": 1.0,
             "value": "'血糖控制不稳定'",
             "connection_operator": null
         },
@@ -9668,7 +9640,9 @@
             "hssc_id": "66813b60-3300-11ed-98cd-0242ac120004",
             "event_rule": "6680fa06-3300-11ed-98cd-0242ac120004",
             "field": "8c6b84ce-32fc-11ed-a506-0242ac120004",
+            "char_value": "血糖控制稳定",
             "operator": 0,
+            "number_value": 1.0,
             "value": "'血糖控制稳定'",
             "connection_operator": null
         }
@@ -9679,29 +9653,14 @@
             "name": "tang_niao_bing_fu_wu_bao_fa_bing_chu_qi",
             "hssc_id": "6992ad18-33de-11ed-9004-4889e7cf38c9",
             "pym": "tnbfwb_fbcq",
-            "name_icpc": null,
-            "services": [
-                "e0420c06-9aa1-11ec-bde1-8a6e55faf877",
-                "66859d9c-aa55-11ec-9f15-ee7ade4bced6",
-                "b6f4ecba-b6da-11ec-8121-0ebea05fc526",
-                "cb6fe794-b6da-11ec-8425-0ebea05fc526",
-                "cb7ecd6e-32fd-11ed-a506-0242ac120004",
-                "ab1007cc-32fe-11ed-aa6f-0242ac120004"
-            ]
+            "name_icpc": null
         },
         {
             "label": "糖尿病服务包_稳定期",
             "name": "tang_niao_bing_fu_wu_bao_wen_ding_qi",
             "hssc_id": "41722f80-33df-11ed-985d-4889e7cf38c9",
             "pym": "tnbfwb_wdq",
-            "name_icpc": null,
-            "services": [
-                "e0420c06-9aa1-11ec-bde1-8a6e55faf877",
-                "66859d9c-aa55-11ec-9f15-ee7ade4bced6",
-                "cb6fe794-b6da-11ec-8425-0ebea05fc526",
-                "dc931be0-b6da-11ec-8425-0ebea05fc526",
-                "cb7ecd6e-32fd-11ed-a506-0242ac120004"
-            ]
+            "name_icpc": null
         }
     ],
     "servicepackagedetail": [

@@ -24,10 +24,10 @@ class EventRuleAdmin(admin.ModelAdmin):
             instances[0].event_rule.generate_expression()
 
 
-@admin.register(EventExpression)
-class EventExpressionAdmin(admin.ModelAdmin):
-    list_display = ('event_rule', 'field', 'char_value', 'operator', 'number_value', 'connection_operator')
-    autocomplete_fields = ['field']
+# @admin.register(EventExpression)
+# class EventExpressionAdmin(admin.ModelAdmin):
+#     list_display = ('event_rule', 'field', 'char_value', 'operator', 'number_value', 'connection_operator')
+#     autocomplete_fields = ['field']
 
 
 class FormComponentsSettingInline(admin.TabularInline):

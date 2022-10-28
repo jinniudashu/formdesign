@@ -665,11 +665,13 @@ class EventExpression(HsscBase):
     event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE, null=True, blank=True, verbose_name="事件规则")
     field = models.ForeignKey(Component, on_delete=models.CASCADE, null=True, verbose_name="字段")
     char_value = models.CharField(max_length=255, blank=True, null=True, verbose_name="字符值", help_text="多个值用英文逗号分隔，空格会被忽略")
-    Operator = [(0, '=='), (1, '!='), (2, '>'), (3, '<'), (4, '>='), (5, '<='), (6, 'in'), (7, 'not in')]
+    Operator = [(0, '=='), (1, '!='), (2, '>'), (3, '<'), (4, '>='), (5, '<=')]
     operator = models.PositiveSmallIntegerField(choices=Operator, null=True, verbose_name='操作符')
     number_value = models.FloatField(blank=True, null=True, verbose_name="数字值")
+    # value = models.CharField(max_length=255, null=True, verbose_name="值")
     Connection_operator = [(0, 'and'), (1, 'or')]
     connection_operator = models.PositiveSmallIntegerField(choices=Connection_operator, blank=True, null=True, verbose_name='连接操作符')
+    
 
     class Meta:
         verbose_name = '事件表达式'
@@ -678,7 +680,32 @@ class EventExpression(HsscBase):
 
     def __str__(self):
         return str(self.event_rule.label)
-    
+
+    # def create_value(self):
+    #     def _is_number(s):
+    #     # 判断传入的字符串是否是数字
+    #         try:
+    #             float(s)
+    #             return True
+    #         except ValueError:
+    #             pass
+        
+    #         try:
+    #             import unicodedata
+    #             unicodedata.numeric(s)
+    #             return True
+    #         except (TypeError, ValueError):
+    #             pass
+    #         return False
+
+    #     if _is_number(self.value):
+    #         self.number_value = self.value
+    #     else:
+    #         self.char_value = self.value.replace("'", "")  # 值为集合
+    #         value_set = set(self.char_value.replace(" ", "").split(','))
+    #         self.number_value = len(value_set)
+    #         self.operator = 0
+    #     self.save()    
 
 # 服务规格设置
 class ServiceSpec(HsscBase):
