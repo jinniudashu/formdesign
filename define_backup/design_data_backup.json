@@ -9391,7 +9391,6 @@
             "char_value": "烦渴,多尿,体重减轻",
             "operator": 0,
             "number_value": 3.0,
-            "value": "'烦渴','多尿','体重减轻'",
             "connection_operator": null
         },
         {
@@ -9403,7 +9402,6 @@
             "char_value": "烦渴,多尿,皮肤感染",
             "operator": 0,
             "number_value": 2.0,
-            "value": "'烦渴','多尿'",
             "connection_operator": 0
         },
         {
@@ -9415,7 +9413,6 @@
             "char_value": null,
             "operator": 4,
             "number_value": 7.0,
-            "value": "7.0",
             "connection_operator": null
         },
         {
@@ -9427,7 +9424,6 @@
             "char_value": "昏睡,呕吐,腹痛",
             "operator": 0,
             "number_value": 3.0,
-            "value": "'昏睡','呕吐','腹痛'",
             "connection_operator": 0
         },
         {
@@ -9439,7 +9435,6 @@
             "char_value": "非胰岛素依赖糖尿病,胰岛素依赖糖尿病",
             "operator": 0,
             "number_value": 1.0,
-            "value": "'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'",
             "connection_operator": 0
         },
         {
@@ -9451,7 +9446,6 @@
             "char_value": "疲乏",
             "operator": 0,
             "number_value": 1.0,
-            "value": "'疲乏'",
             "connection_operator": 0
         },
         {
@@ -9463,7 +9457,6 @@
             "char_value": "非胰岛素依赖糖尿病,胰岛素依赖糖尿病",
             "operator": 0,
             "number_value": 1.0,
-            "value": "'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'",
             "connection_operator": null
         },
         {
@@ -9475,7 +9468,6 @@
             "char_value": "非胰岛素依赖糖尿,胰岛素依赖糖尿病",
             "operator": 0,
             "number_value": 1.0,
-            "value": "'非胰岛素依赖糖尿','胰岛素依赖糖尿病'",
             "connection_operator": 0
         },
         {
@@ -9487,7 +9479,6 @@
             "char_value": "非胰岛素依赖糖尿病, 胰岛素依赖糖尿病",
             "operator": 0,
             "number_value": 1.0,
-            "value": "'非胰岛素依赖糖尿病', '胰岛素依赖糖尿病'",
             "connection_operator": 0
         },
         {
@@ -9499,7 +9490,6 @@
             "char_value": "足痛",
             "operator": 0,
             "number_value": 1.0,
-            "value": "'足痛'",
             "connection_operator": null
         },
         {
@@ -9511,7 +9501,6 @@
             "char_value": null,
             "operator": 2,
             "number_value": 20.0,
-            "value": "20",
             "connection_operator": null
         },
         {
@@ -9523,7 +9512,6 @@
             "char_value": "烦渴,多尿,多食,乏力,体重减轻,体重增加,皮肤感染",
             "operator": 0,
             "number_value": 1.0,
-            "value": "'烦渴','多尿','多食','乏力','体重减轻','体重增加','皮肤感染'",
             "connection_operator": null
         },
         {
@@ -9535,7 +9523,6 @@
             "char_value": "烦渴,多尿,体重增加,皮肤感染",
             "operator": 0,
             "number_value": 2.0,
-            "value": "'烦渴','多尿'",
             "connection_operator": null
         },
         {
@@ -9547,7 +9534,6 @@
             "char_value": null,
             "operator": 4,
             "number_value": 7.0,
-            "value": "7.0",
             "connection_operator": null
         },
         {
@@ -9559,7 +9545,6 @@
             "char_value": null,
             "operator": 2,
             "number_value": 6.0,
-            "value": "6",
             "connection_operator": null
         },
         {
@@ -9571,7 +9556,6 @@
             "char_value": "阳性",
             "operator": 0,
             "number_value": 1.0,
-            "value": "'阳性'",
             "connection_operator": null
         },
         {
@@ -9583,7 +9567,6 @@
             "char_value": "非胰岛素依赖糖尿病,胰岛素依赖糖尿病",
             "operator": 0,
             "number_value": 1.0,
-            "value": "'非胰岛素依赖糖尿病','胰岛素依赖糖尿病'",
             "connection_operator": 0
         },
         {
@@ -9595,7 +9578,6 @@
             "char_value": "5%葡萄糖注射液,止咳糖浆",
             "operator": 4,
             "number_value": 1.0,
-            "value": "'5%葡萄糖注射液','止咳糖浆'",
             "connection_operator": null
         },
         {
@@ -9607,7 +9589,6 @@
             "char_value": "注射类",
             "operator": 0,
             "number_value": 1.0,
-            "value": "'注射类'",
             "connection_operator": null
         },
         {
@@ -9619,7 +9600,6 @@
             "char_value": "yes",
             "operator": 0,
             "number_value": 1.0,
-            "value": "'yes'",
             "connection_operator": null
         },
         {
@@ -9631,7 +9611,6 @@
             "char_value": "血糖控制不稳定",
             "operator": 0,
             "number_value": 1.0,
-            "value": "'血糖控制不稳定'",
             "connection_operator": null
         },
         {
@@ -9643,7 +9622,6 @@
             "char_value": "血糖控制稳定",
             "operator": 0,
             "number_value": 1.0,
-            "value": "'血糖控制稳定'",
             "connection_operator": null
         }
     ],
