@@ -1,7 +1,30 @@
 from django.contrib import admin
 
-from .models import BuessinessForm, FormComponentsSetting, Service, BuessinessFormsSetting, ServicePackage, CycleUnit, ServicePackageDetail, ServiceSpec, ServiceRule, SystemOperand, EventRule, EventExpression, ManagedEntity, ExternalServiceMapping, ExternalServiceFieldsMapping
+from .models import *
+from define_backup.backup_data import export_source_code
 
+
+@admin.register(Project)
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ('id', 'label', 'name', 'description', 'hssc_id')
+    list_display_links = ('id', 'label')
+    fieldsets = (
+        (None, {
+            'fields': (('label', 'name'), ('description'), 'services', 'service_packages', 'service_rules', 'external_services')
+        }),
+    )
+    search_fields = ('name', 'label')
+    ordering = ('id',)
+    filter_horizontal = ('services', 'service_packages', 'service_rules', 'external_services')
+    change_form_template = 'project_changeform.html'
+
+    def response_change(self, request, obj):
+        if '_export_source_code' in request.POST:
+            print("export_source_code:", self, obj, obj.services.all())
+            print('request.POST:', request.POST)            
+            # 导出作业脚本
+            # export_source_code()
+        return super().response_change(request, obj)
 
 class EventExpressionInline(admin.TabularInline):
     model = EventExpression

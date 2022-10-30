@@ -707,19 +707,8 @@ class EventExpression(HsscBase):
     #         self.operator = 0
     #     self.save()    
 
-# 服务规格设置
-class ServiceSpec(HsscBase):
-    class Meta:
-        verbose_name = "服务规格"
-        verbose_name_plural = verbose_name
-        ordering = ['id']
 
-    def save(self, *args, **kwargs):
-        if self.name is None or self.name == '':
-            self.name = f'{"_".join(lazy_pinyin(self.label))}'
-        super().save(*args, **kwargs)
-
-
+# 服务规则设置
 class ServiceRule(HsscBase):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='服务项目')
     event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE,  blank=True, null=True, verbose_name='条件事件')
@@ -736,7 +725,6 @@ class ServiceRule(HsscBase):
     interval_rule = models.PositiveSmallIntegerField(choices=Interval_rule_options, blank=True, null=True, verbose_name='间隔条件')
     interval_time = models.DurationField(blank=True, null=True, verbose_name="间隔时间", help_text='例如：3 days, 22:00:00')
     is_active = models.BooleanField(choices=[(False, '否'), (True, '是')], default=True, verbose_name='启用')
-    service_spec = models.ForeignKey(ServiceSpec, on_delete=models.CASCADE, null=True, verbose_name='服务规格')
 
     class Meta:
         verbose_name = '服务规则'
@@ -773,3 +761,22 @@ class ExternalServiceFieldsMapping(HsscBase):
     
     def __str__(self):
         return str(self.external_field_name)
+
+
+# 项目定义
+class Project(HsscBase):
+    description = models.CharField(max_length=255, null=True, blank=True, verbose_name='项目描述')  # 项目描述
+    services = models.ManyToManyField(Service, blank=True, verbose_name="包含的服务")
+    service_packages = models.ManyToManyField(ServicePackage, blank=True, verbose_name="包含的服务包")
+    service_rules = models.ManyToManyField(ServiceRule, blank=True, verbose_name="包含的服务规则")
+    external_services = models.ManyToManyField(ExternalServiceMapping, blank=True, verbose_name="包含的外部服务映射")
+
+    class Meta:
+        verbose_name = '项目列表'
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+    
+    def __str__(self):
+        return str(self.label)
+
+

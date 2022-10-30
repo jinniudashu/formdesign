@@ -9797,13 +9797,6 @@
             "base_interval": "7 days, 0:00:00"
         }
     ],
-    "servicespec": [
-        {
-            "label": "常规规则",
-            "name": "chang_gui_gui_ze",
-            "hssc_id": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
-        }
-    ],
     "servicerule": [
         {
             "label": "注册完成",
@@ -9819,8 +9812,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -9836,8 +9828,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -9853,8 +9844,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -9870,8 +9860,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -9887,8 +9876,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -9904,8 +9892,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -9921,8 +9908,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -9938,8 +9924,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -9955,8 +9940,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -9972,8 +9956,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -9989,8 +9972,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -10006,8 +9988,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -10023,8 +10004,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -10040,8 +10020,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -10057,8 +10036,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -10074,8 +10052,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": null,
@@ -10091,8 +10068,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": "注射类药品治疗规则",
@@ -10108,8 +10084,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": "空腹血糖超过正常值且有糖尿病症状",
@@ -10125,8 +10100,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": "建档调查规则",
@@ -10142,8 +10116,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": "二型糖尿病推荐诊断规则",
@@ -10159,8 +10132,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": "申请空腹血糖检查服务",
@@ -10176,8 +10148,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": "糖尿病监测评估",
@@ -10193,8 +10164,7 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
         },
         {
             "label": "糖尿病监测评估不稳定",
@@ -10210,8 +10180,96 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true,
-            "service_spec": "7250f7e8-b6df-11ec-8121-0ebea05fc526"
+            "is_active": true
+        }
+    ],
+    "project": [
+        {
+            "label": "诊所管理",
+            "name": "Clinic",
+            "hssc_id": "bb81a37b-5765-11ed-82c3-4889e7cf38c9",
+            "description": null,
+            "services": [
+                "e0305c18-9aa1-11ec-bde1-8a6e55faf877",
+                "e0317224-9aa1-11ec-bde1-8a6e55faf877",
+                "e03291f4-9aa1-11ec-bde1-8a6e55faf877",
+                "e032db46-9aa1-11ec-bde1-8a6e55faf877",
+                "e035d648-9aa1-11ec-bde1-8a6e55faf877",
+                "e0371aa8-9aa1-11ec-bde1-8a6e55faf877",
+                "e0385d3c-9aa1-11ec-bde1-8a6e55faf877",
+                "e0398a04-9aa1-11ec-bde1-8a6e55faf877",
+                "e03abda2-9aa1-11ec-bde1-8a6e55faf877",
+                "e03bfa96-9aa1-11ec-bde1-8a6e55faf877",
+                "e03d308c-9aa1-11ec-bde1-8a6e55faf877",
+                "e03e65ba-9aa1-11ec-bde1-8a6e55faf877",
+                "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
+                "e040d160-9aa1-11ec-bde1-8a6e55faf877",
+                "e0420c06-9aa1-11ec-bde1-8a6e55faf877",
+                "1a3b2382-9b67-11ec-94eb-022c611b2490",
+                "66859d9c-aa55-11ec-9f15-ee7ade4bced6",
+                "9582b822-ab23-11ec-bf5e-1ac10aeebbc4",
+                "43a1842e-b092-11ec-9cae-5ed0e34457d3",
+                "ba1582e8-b6d9-11ec-8425-0ebea05fc526",
+                "b6f4ecba-b6da-11ec-8121-0ebea05fc526",
+                "cb6fe794-b6da-11ec-8425-0ebea05fc526",
+                "dc931be0-b6da-11ec-8425-0ebea05fc526",
+                "9fb42996-b6dd-11ec-8425-0ebea05fc526",
+                "7ec806da-b89a-11ec-8bd3-322924405212",
+                "9b199d36-c9f1-11ec-b452-168d53e8234e",
+                "d090a8a8-cb7f-11ec-8161-aa5274efe6de",
+                "17c608fa-d119-11ec-ab0d-823d1f108281",
+                "b411a830-d11a-11ec-b369-823d1f108281",
+                "d43aaba2-d11a-11ec-b369-823d1f108281",
+                "f1d556ee-d11a-11ec-b369-823d1f108281",
+                "38083bae-d11b-11ec-ab0d-823d1f108281",
+                "51b8426a-d11b-11ec-ab0d-823d1f108281",
+                "ae0189fa-d11b-11ec-ab0d-823d1f108281",
+                "4775c12a-f5cd-11ec-844e-ba663fc9e8b0",
+                "cb7ecd6e-32fd-11ed-a506-0242ac120004",
+                "ab1007cc-32fe-11ed-aa6f-0242ac120004",
+                "c41cdcd6-4f7f-11ed-8dbc-4889e7cf38c9"
+            ],
+            "service_packages": [
+                "6992ad18-33de-11ed-9004-4889e7cf38c9",
+                "41722f80-33df-11ed-985d-4889e7cf38c9"
+            ],
+            "service_rules": [
+                "7251461c-b6df-11ec-8121-0ebea05fc526",
+                "72518da2-b6df-11ec-8121-0ebea05fc526",
+                "0e72b912-b6e6-11ec-8121-0ebea05fc526",
+                "0e73283e-b6e6-11ec-8121-0ebea05fc526",
+                "0e73bb96-b6e6-11ec-8121-0ebea05fc526",
+                "0e74bae6-b6e6-11ec-8121-0ebea05fc526",
+                "0e768132-b6e6-11ec-8121-0ebea05fc526",
+                "0e7754c2-b6e6-11ec-8121-0ebea05fc526",
+                "0e77df14-b6e6-11ec-8121-0ebea05fc526",
+                "0e78ae30-b6e6-11ec-8121-0ebea05fc526",
+                "0e79b41a-b6e6-11ec-8121-0ebea05fc526",
+                "0e7a029e-b6e6-11ec-8121-0ebea05fc526",
+                "0e7a79f4-b6e6-11ec-8121-0ebea05fc526",
+                "0e7ac8dc-b6e6-11ec-8121-0ebea05fc526",
+                "0e7b1198-b6e6-11ec-8121-0ebea05fc526",
+                "0e7b5a2c-b6e6-11ec-8121-0ebea05fc526",
+                "0e7ba6bc-b6e6-11ec-8121-0ebea05fc526",
+                "b4e895fe-c9f2-11ec-b452-168d53e8234e",
+                "474758e8-cce3-11ec-8d9d-6ee4b739d297",
+                "84bdd33a-cddf-11ec-a675-3eb12b65d002",
+                "a33fe4e8-d0fe-11ec-ab0d-823d1f108281",
+                "758e1b9e-d119-11ec-b369-823d1f108281",
+                "dfd4d48a-3301-11ed-872a-0242ac120004",
+                "26733f12-3302-11ed-872a-0242ac120004"
+            ],
+            "external_services": []
+        },
+        {
+            "label": "齿科保险",
+            "name": "Dental",
+            "hssc_id": "b97e01a1-576d-11ed-a1bc-4889e7cf38c9",
+            "description": null,
+            "services": [],
+            "service_packages": [],
+            "service_rules": [],
+            "external_services": []
         }
     ],
     "externalservicemapping": [],

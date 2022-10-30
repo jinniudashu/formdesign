@@ -1,5 +1,5 @@
 from django.db import models
-
+from define_operand.models import Project
 # 备份模型抽象类
 class BackupBase(models.Model):
     name = models.CharField(max_length=255, unique=True, null=True, verbose_name="版本")
@@ -33,6 +33,8 @@ class IcpcBackup(BackupBase):
 
 # 输出脚本
 class SourceCode(BackupBase):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True, verbose_name="项目")
+
     class Meta:
         verbose_name = "作业系统脚本"
         verbose_name_plural = verbose_name

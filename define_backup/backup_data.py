@@ -38,14 +38,14 @@ Backup_models = [
     EventExpression,
     ServicePackage,
     ServicePackageDetail,
-    ServiceSpec,
     ServiceRule,
+    Project,
     ExternalServiceMapping,
     ExternalServiceFieldsMapping,
     Medicine,
 ]
 
-def design_backup(modeladmin, request, queryset):
+def design_backup():
     design_data = {}
     for model in Backup_models:
         _model = model.__name__.lower()
@@ -55,13 +55,11 @@ def design_backup(modeladmin, request, queryset):
     result = write_to_db(DesignBackup, design_data)
     print(f'设计数据备份成功, id: {result}')
 
-design_backup.short_description = '备份设计数据'
-
 
 ########################################################################################################################
 # ICPC数据备份
 ########################################################################################################################
-def icpc_backup(modeladmin, request, queryset):
+def icpc_backup():
     icpc_data = {}
     for icpc in icpc_list:
         Icpc_model = eval(icpc['name'])
@@ -71,14 +69,12 @@ def icpc_backup(modeladmin, request, queryset):
     result = write_to_db(IcpcBackup, icpc_data)
     print(f'ICPC数据备份成功, id: {result}')
 
-icpc_backup.short_description = '备份ICPC数据'
-
 
 ########################################################################################################################
 # 导出作业脚本, 被define_backup.admin调用
 ########################################################################################################################
 from enum import Enum
-def export_source_code(modeladmin, request, queryset):
+def export_source_code():
     source_code = {
         'script': {},
         'data': {}
@@ -145,7 +141,6 @@ def export_source_code(modeladmin, request, queryset):
         ServicePackageDetail,
         SystemOperand,
         EventRule,
-        ServiceSpec,
         ServiceRule,
         ExternalServiceMapping,
         Medicine,
@@ -157,7 +152,6 @@ def export_source_code(modeladmin, request, queryset):
     result = write_to_db(SourceCode, source_code)
     print(f'作业脚本写入数据库成功, id: {result}')
 
-export_source_code.short_description = '生成作业脚本'
 
 # 导出forms models.py, admin.py, serializers.py脚本
 def get_models_admin_serializer_forms_script(query_set, file_header):
