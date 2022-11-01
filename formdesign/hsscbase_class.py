@@ -7,9 +7,13 @@ from pypinyin import Style, lazy_pinyin
 
 # 自定义管理器：设计数据备份、恢复
 class HsscBackupManager(models.Manager):
-    def backup_data(self):
+    def backup_data(self, queryset=None):
         backup_data = []
-        for item in self.all():
+        
+        if queryset is None:
+            queryset = self.all()
+            
+        for item in queryset:
             item_dict = model_to_dict(item)
 
             # 遍历模型非多对多字段，如果是外键，则用外键的hssc_id替换外键id

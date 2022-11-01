@@ -31,13 +31,13 @@ def export_source_code(project):
         return {'models': models_script, 'admin': admin_script, 'serializers': serializers_script, 'forms': forms_script}
 
     # 导出字典models.py, admin.py脚本
-    def __get_dict_models_admin_serializers_script():
+    def __get_dict_models_admin_serializers_script(query_set):
         models_script = dict_models_head
         admin_script = dict_admin_head
         serializers_script = serializers_head
         forms_script = ''
 
-        for dict in DicList.objects.all():
+        for dict in query_set:
             name = dict.name.capitalize()
 
             # 生成model脚本
@@ -111,7 +111,7 @@ def export_source_code(project):
         return {'models': models_script, 'admin': admin_script, 'serializers': serializers_script, 'forms': forms_script}
 
     # 导出基类脚本hsscbase_class.py
-    def __get_export_hsscbase_class_script(hsscbase_class_filename, fields_model: Component):
+    def __get_export_hsscbase_class_script(hsscbase_class_filename, queryset):
         def _get_field_type(component):
             _type = component.content_type.model
             if _type == 'characterfield':
@@ -138,7 +138,8 @@ def export_source_code(project):
         is_assigned = 'Boolean'  # 是否已生成任务
 
         # 自动生成字段数据类型'''
-        for component in fields_model.objects.all():
+
+        for component in queryset:
             field_type = _get_field_type(component)
             fields_type_script = f'{fields_type_script}\n    {component.name} = "{field_type}"  # {component.label}'
 
@@ -150,9 +151,9 @@ def export_source_code(project):
         return f'{hsscbase_class}\n\n{fields_type_script}'
 
     # 导出字典Json数据
-    def __get_dict_data():
+    def __get_dict_data(queryset):
         dict_data = []  # 字典明细数据
-        for item in DicDetail.objects.all():
+        for item in DicDetail.objects.filter(diclist__in=queryset):
             # 构造字典明细数据
             dict_item = {}
             dict_item['model'] = 'dictionaries.' + item.diclist.name.capitalize()  # 字典Model名称
@@ -184,16 +185,35 @@ def export_source_code(project):
         return icpc_data
 
     # 导出core业务定义数据
-    def __get_init_core_data(models):
+    def __get_init_core_data(models, project):
         models_data = {}
         for model in models:
             _model = model.__name__.lower()
-            models_data[_model]=model.objects.backup_data()
+            models_data[_model]=model.objects.backup_data(project)
 
         return models_data
 
+    # 获取给定项目设计数据的queryset
+    def __get_project_queryset(project):
+        print('project:', project, project.name, project.hssc_id)
+        # 项目Service
+        services = Service.objects.filter(service_type=2).order_by('-id')  # 基本信息服务排在前面
 
-    print('project:', project, project.name, project.hssc_id)
+        # 项目BuessinessForm
+
+        # 项目DictList
+        dictionaries = DicList.objects.all()
+
+        # 项目Component
+        components = Component.objects.all()
+
+        return {'services': services, 'dictionaries': dictionaries, 'components': components}
+
+
+    # 项目设计数据queryset字典
+    project_queryset = {'services': [], 'dictionaries': [], 'components': []}
+    project_queryset = __get_project_queryset(project)
+
     # 导出作业脚本, 生成json数据文件
     source_code = {
         'script': {
@@ -208,28 +228,27 @@ def export_source_code(project):
             'core': {},
         }
     }
-                
+
     # 生成apps的脚本, apps = ['dictionaries', 'icpc', 'service']
-    source_code['script']['dictionaries'] = __get_dict_models_admin_serializers_script()  # 导出App dictionaries: models.py, admin.py脚本
+    source_code['script']['dictionaries'] = __get_dict_models_admin_serializers_script(project_queryset['dictionaries'])  # 导出App dictionaries: models.py, admin.py脚本
     source_code['script']['icpc'] = __get_icpc_models_admin_serializers_script()  # 导出App icpc: models.py, admin.py脚本
 
     # 导出服务类型为“用户业务服务”的服务脚本
-    service_query_set = Service.objects.filter(service_type=2).order_by('-id')  # 基本信息服务排在前面
     service_file_header = {
         'models_file_head': service_models_file_head,
         'admin_file_head': service_admin_file_head,
         'serializers_head': serializers_head,
         'forms_head': service_forms_file_head,
     }
-    source_code['script']['service'] = __get_models_admin_serializer_forms_script(service_query_set, service_file_header)  # 导出App:service脚本
+    source_code['script']['service'] = __get_models_admin_serializer_forms_script(project_queryset['services'], service_file_header)  # 导出App:service脚本
 
     # 导出App:core/hsscbase_class.py脚本
     core = {}
-    core['hsscbase_class'] = __get_export_hsscbase_class_script('./formdesign/hsscbase_class.py', Component)
+    core['hsscbase_class'] = __get_export_hsscbase_class_script('./formdesign/hsscbase_class.py', project_queryset['components'])
     source_code['script']['core'] = core
 
     # 导出业务字典和ICPC数据
-    source_code['data']['dictionaries'] = __get_dict_data()
+    source_code['data']['dictionaries'] = __get_dict_data(project_queryset['dictionaries'])
     source_code['data']['icpc'] = __get_icpc_data()
 
     # 导出core业务定义数据
@@ -250,7 +269,7 @@ def export_source_code(project):
         ExternalServiceMapping,
         Medicine,
     ]
-    source_code['data']['core'] = __get_init_core_data(exported_core_models)
+    source_code['data']['core'] = __get_init_core_data(exported_core_models, project)
 
     # 写入数据库
     result = SourceCode.objects.create(
