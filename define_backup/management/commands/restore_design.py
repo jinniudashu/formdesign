@@ -4,7 +4,7 @@ import json
 from define.models import *
 from define_operand.models import *
 from define_icpc.models import Icpc
-from define_backup.backup_data import Backup_models
+from define_backup.admin import Backup_models
 
 
 class Command(BaseCommand):

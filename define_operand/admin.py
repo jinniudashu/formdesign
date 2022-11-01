@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import *
-from define_backup.backup_data import export_source_code
+from define_backup.export_source_code import export_source_code
 
 
 @admin.register(Project)
@@ -19,11 +19,9 @@ class ProjectAdmin(admin.ModelAdmin):
     change_form_template = 'project_changeform.html'
 
     def response_change(self, request, obj):
+        # 导出作业脚本
         if '_export_source_code' in request.POST:
-            print("export_source_code:", self, obj, obj.services.all())
-            print('request.POST:', request.POST)            
-            # 导出作业脚本
-            # export_source_code()
+            export_source_code(obj)
         return super().response_change(request, obj)
 
 class EventExpressionInline(admin.TabularInline):
