@@ -7,7 +7,7 @@ import json
 from pypinyin import lazy_pinyin
 
 from formdesign.hsscbase_class import HsscBase, HsscPymBase
-from define.models import Component, ComponentsGroup, Role, RelateFieldModel
+from define.models import Component, ComponentsGroup, Role, RelateFieldModel, DicList, Medicine
 from define_icpc.models import Icpc
 
 
@@ -766,10 +766,11 @@ class ExternalServiceFieldsMapping(HsscBase):
 # 项目定义
 class Project(HsscBase):
     description = models.CharField(max_length=255, null=True, blank=True, verbose_name='项目描述')  # 项目描述
-    services = models.ManyToManyField(Service, blank=True, verbose_name="包含的服务")
-    service_packages = models.ManyToManyField(ServicePackage, blank=True, verbose_name="包含的服务包")
-    service_rules = models.ManyToManyField(ServiceRule, blank=True, verbose_name="包含的服务规则")
-    external_services = models.ManyToManyField(ExternalServiceMapping, blank=True, verbose_name="包含的外部服务映射")
+    roles = models.ManyToManyField(Role, blank=True, verbose_name='角色')  # 项目角色
+    services = models.ManyToManyField(Service, blank=True, verbose_name="服务")
+    service_packages = models.ManyToManyField(ServicePackage, blank=True, verbose_name="服务包")
+    service_rules = models.ManyToManyField(ServiceRule, blank=True, verbose_name="服务规则")
+    external_services = models.ManyToManyField(ExternalServiceMapping, blank=True, verbose_name="外部服务映射")
 
     class Meta:
         verbose_name = '项目列表'
@@ -779,4 +780,30 @@ class Project(HsscBase):
     def __str__(self):
         return str(self.label)
 
-
+    def get_queryset_by_model(self, model_name):
+        # 返回project对应model的queryset
+        if model_name == 'Service':
+            return self.services.all()
+        elif model_name == 'BuessinessForm':
+            return BuessinessForm.objects.filter(service__in=self.services.all()).distinct()
+        elif model_name == 'BuessinessFormsSetting':
+            return BuessinessFormsSetting.objects.filter(service__in=self.services.all()).distinct()
+        elif model_name == 'Component':
+            return Component.objects.filter(buessinessform__in=BuessinessForm.objects.filter(service__in=self.services.all())).distinct()
+        elif model_name == 'ServicePackage':
+            return self.service_packages.all()
+        elif model_name == 'ServicePackageDetail':
+            return ServicePackageDetail.objects.filter(servicepackage__in=self.service_packages.all()).distinct()
+        elif model_name == 'ServiceRule':
+            return self.service_rules.all()
+        elif model_name == 'EventRule':
+            return EventRule.objects.filter(servicerule__in=self.service_rules.all()).distinct()
+        elif model_name == 'ExternalServiceMapping':
+            return self.external_services.all()
+        elif model_name == 'Role':
+            return self.roles.all()
+        elif model_name == 'DicList':
+            return DicList.objects.filter(name__in=[component.content_object.related_content.related_content.lower() for component in Component.objects.filter(buessinessform__in=BuessinessForm.objects.filter(service__in=self.services.all())).distinct() if component.content_object.__class__.__name__=='RelatedField'])
+        else:
+            # model_name in ['ManagedEntity, 'SystemOperand', 'CycleUnit', 'Medicine']
+            return eval(model_name).objects.all()

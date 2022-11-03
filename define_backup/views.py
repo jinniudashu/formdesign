@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 from .models import *
-
+from define_operand.models import Project
 
 class SourceCodeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -13,8 +13,10 @@ class SourceCodeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 @api_view(['GET'])
-def source_codes_list(request):
-    source_codes = [SourceCode.objects.last()]
+def source_codes_list(request,  **kwargs):
+    print('Project:', kwargs['project_id'])
+    project = Project.objects.get(id=kwargs['project_id'])
+    source_codes = [SourceCode.objects.filter(project=project).last()]
     serializer = SourceCodeSerializer(source_codes, many=True)
     return Response(serializer.data)
 

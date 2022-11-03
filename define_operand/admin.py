@@ -10,12 +10,12 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'label')
     fieldsets = (
         (None, {
-            'fields': (('label', 'name'), ('description'), 'services', 'service_packages', 'service_rules', 'external_services')
+            'fields': (('label', 'name'), ('description'), 'roles', 'services', 'service_packages', 'service_rules', 'external_services')
         }),
     )
     search_fields = ('name', 'label')
     ordering = ('id',)
-    filter_horizontal = ('services', 'service_packages', 'service_rules', 'external_services')
+    filter_horizontal = ('roles', 'services', 'service_packages', 'service_rules', 'external_services')
     change_form_template = 'project_changeform.html'
 
     def response_change(self, request, obj):

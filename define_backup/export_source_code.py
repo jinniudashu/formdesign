@@ -47,26 +47,26 @@ def export_source_code(project):
 
             # 生成model脚本
             _model_script = f'''
-    class {name}(DictBase):
-        class Meta:
-            verbose_name = '{dict.label}'
-            verbose_name_plural = verbose_name'''
+class {name}(DictBase):
+    class Meta:
+        verbose_name = '{dict.label}'
+        verbose_name_plural = verbose_name'''
             models_script = f'{models_script}\n\n{_model_script}'
 
             # 生成admin脚本
             _admin_script = f'''
-    @admin.register({name})
-    class {name}Admin(admin.ModelAdmin):{dict_admin_content}
-    clinic_site.register({name}, {name}Admin)
-    '''
+@admin.register({name})
+class {name}Admin(admin.ModelAdmin):{dict_admin_content}
+clinic_site.register({name}, {name}Admin)
+'''
             admin_script = f'{admin_script}\n{_admin_script}'
 
             # 生成serializers脚本
             _serializers_script = f'''class {name}Serializer(serializers.ModelSerializer):
-        class Meta:
-            model = {name}
-            fields = 'value'
-    '''
+    class Meta:
+        model = {name}
+        fields = 'value'
+'''
             serializers_script = f'{serializers_script}\n{_serializers_script}'
 
         return {'models': models_script, 'admin': admin_script, 'serializers': serializers_script, 'forms': forms_script}
@@ -87,26 +87,26 @@ def export_source_code(project):
         for icpc in icpc_list:
             # 生成model脚本
             _model_script = f'''class {icpc['name']}(IcpcSubBase):
-        class Meta:
-            verbose_name = '{icpc['label']}'
-            verbose_name_plural = verbose_name
-    '''
+    class Meta:
+        verbose_name = '{icpc['label']}'
+        verbose_name_plural = verbose_name
+'''
             models_script = f'{models_script}\n\n{_model_script}'
             models_receiver_post_save = f'{models_receiver_post_save}\n@receiver(post_save, sender={icpc["name"]}, weak=True, dispatch_uid=None)'
             models_receiver_post_delete = f'{models_receiver_post_delete}\n@receiver(post_delete, sender={icpc["name"]}, weak=True, dispatch_uid=None)'
 
             # 生成admin脚本
             _admin_script = f'''
-    admin.site.register({icpc['name']}, SubIcpcAdmin)
-    clinic_site.register({icpc['name']}, SubIcpcAdmin)'''
+admin.site.register({icpc['name']}, SubIcpcAdmin)
+clinic_site.register({icpc['name']}, SubIcpcAdmin)'''
             admin_script = f'{admin_script}\n{_admin_script}'
 
             # 生成serializers脚本
             _serializers_script = f'''class {icpc['name']}Serializer(serializers.ModelSerializer):
-        class Meta:
-            model = {icpc['name']}
-            fields = 'iname'
-    '''
+    class Meta:
+        model = {icpc['name']}
+        fields = 'iname'
+'''
             serializers_script = f'{serializers_script}\n{_serializers_script}'
 
         models_receiver_post_save = models_receiver_post_save + icpc_models_post_save
@@ -133,16 +133,16 @@ def export_source_code(project):
 
         # 生成FieldsType内容
         fields_type_script = f'''
-    from enum import Enum
-    class FieldsType(Enum):
-        # 手工添加CustomerSchedule字段数据类型
-        scheduled_time = "Datetime"  # 计划执行时间
-        overtime = "Datetime"  # 超期时限
-        scheduled_operator = "entities.Stuff"  # 计划执行人员
-        service = "core.Service"  # 服务
-        is_assigned = 'Boolean'  # 是否已生成任务
+from enum import Enum
+class FieldsType(Enum):
+    # 手工添加CustomerSchedule字段数据类型
+    scheduled_time = "Datetime"  # 计划执行时间
+    overtime = "Datetime"  # 超期时限
+    scheduled_operator = "entities.Stuff"  # 计划执行人员
+    service = "core.Service"  # 服务
+    is_assigned = 'Boolean'  # 是否已生成任务
 
-        # 自动生成字段数据类型'''
+    # 自动生成字段数据类型'''
 
         for component in queryset:
             field_type = _get_field_type(component)
@@ -202,7 +202,6 @@ def export_source_code(project):
             BuessinessFormsSetting,
             ServicePackage,
             ServicePackageDetail,
-            SystemOperand,
             EventRule,
             ServiceRule,
             ExternalServiceMapping,
@@ -211,32 +210,13 @@ def export_source_code(project):
 
         models_data = {}
         for model in exported_models:
-            _model = model.__name__.lower()
-            models_data[_model]=model.objects.backup_data()
-            # models_data[_model]=model.objects.backup_data(queryset)
+            # 获取当前model的项目数据
+            queryset = project.get_queryset_by_model(model.__name__)
+            # 构造model数据
+            models_data[model.__name__.lower()]=model.objects.backup_data(queryset)
 
         return models_data
 
-    # 获取给定项目设计数据的queryset
-    def __get_project_queryset(project):
-        print('project:', project, project.name, project.hssc_id)
-        # 项目Service
-        services = Service.objects.filter(service_type=2).order_by('-id')  # 基本信息服务排在前面
-
-        # 项目BuessinessForm
-
-        # 项目DictList
-        dictionaries = DicList.objects.all()
-
-        # 项目Component
-        components = Component.objects.all()
-
-        return {'services': services, 'dictionaries': dictionaries, 'components': components}
-
-
-    # 项目设计数据queryset字典
-    project_queryset = {'services': [], 'dictionaries': [], 'components': []}
-    project_queryset = __get_project_queryset(project)
 
     # 导出作业脚本, 生成json数据文件
     source_code = {
@@ -253,27 +233,40 @@ def export_source_code(project):
         }
     }
 
-    # 导出服务类型为“用户业务服务”的服务脚本
-    source_code['script']['service'] = __get_models_admin_serializer_forms_script(project_queryset['services'])  # 导出App:service脚本
+    # 生成apps['service']的脚本，生成服务类型为“用户业务服务”的服务
+    project_queryset = project.get_queryset_by_model('Service').filter(service_type=2).order_by('-id')
+    source_code['script']['service'] = __get_models_admin_serializer_forms_script(project_queryset)  # 导出App:service脚本
 
-    # 生成apps的脚本, apps = ['dictionaries', 'icpc', 'service']
-    source_code['script']['dictionaries'] = __get_dict_models_admin_serializers_script(project_queryset['dictionaries'])  # 导出App dictionaries: models.py, admin.py脚本
+    # 生成apps['dictionaries']的脚本和数据
+    project_queryset = project.get_queryset_by_model('DicList')
+    source_code['script']['dictionaries'] = __get_dict_models_admin_serializers_script(project_queryset)  # 导出App dictionaries: models.py, admin.py脚本
+    source_code['data']['dictionaries'] = __get_dict_data(project_queryset)
+    
+    # 生成apps['icpc']的脚本和数据
     source_code['script']['icpc'] = __get_icpc_models_admin_serializers_script()  # 导出App icpc: models.py, admin.py脚本
+    source_code['data']['icpc'] = __get_icpc_data()
 
     # 导出App:core/hsscbase_class.py脚本
-    source_code['script']['core'] = __get_export_hsscbase_class_script(project_queryset['components'])
-
-    # 导出业务字典和ICPC数据
-    source_code['data']['dictionaries'] = __get_dict_data(project_queryset['dictionaries'])
-    source_code['data']['icpc'] = __get_icpc_data()
+    project_queryset = project.get_queryset_by_model('Component')
+    source_code['script']['core'] = __get_export_hsscbase_class_script(project_queryset)
 
     # 导出core业务定义数据
     source_code['data']['core'] = __get_init_core_data(project)
 
+    # 生成json
+    script_name = str(int(time()))
+
     # 写入数据库
     result = SourceCode.objects.create(
         project = project,
-        name = str(int(time())),
+        name = script_name,
         code = json.dumps(source_code, indent=4, ensure_ascii=False, cls=DjangoJSONEncoder),
     )
     print(f'作业脚本写入数据库成功, id: {result}')
+
+    # 写入json文件
+    print('开始写入json文件...')
+    with open(f'./define_backup/backup/script/作业系统脚本_{script_name}.json', 'w', encoding='utf-8') as f:
+        json.dump(source_code, f, indent=4, ensure_ascii=False, cls=DjangoJSONEncoder)
+        print(f'作业脚本写入成功, id: {script_name}')
+

@@ -61,12 +61,21 @@ class DesignBackupAdmin(admin.ModelAdmin):
             _model = model.__name__.lower()
             design_data[_model]=model.objects.backup_data()
             json.dumps(design_data[_model], indent=4, ensure_ascii=False, cls=DjangoJSONEncoder)
+        
+        backup_name = str(int(time()))
         # 写入数据库
         result = DesignBackup.objects.create(
-            name = str(int(time())),
+            name = backup_name,
             code = json.dumps(design_data, indent=4, ensure_ascii=False, cls=DjangoJSONEncoder),
         )
         print(f'设计数据备份成功, id: {result}')
+
+        # 写入json文件
+        print('开始写入json文件...')
+        with open(f'./define_backup/backup/design/design_{backup_name}.json', 'w', encoding='utf-8') as f:
+            json.dump(design_data, f, indent=4, ensure_ascii=False, cls=DjangoJSONEncoder)
+            print(f'ICPC写入成功, id: {backup_name}')
+
         return HttpResponseRedirect("../")
 
 
@@ -90,12 +99,21 @@ class IcpcBackupAdmin(admin.ModelAdmin):
             Icpc_model = eval(icpc['name'])
             _key = icpc['name'].lower()
             icpc_data[_key] = Icpc_model.objects.backup_data()
+
+        backup_name = str(int(time()))
         # 写入数据库
         result = IcpcBackup.objects.create(
-            name = str(int(time())),
+            name = backup_name,
             code = json.dumps(icpc_data, indent=4, ensure_ascii=False, cls=DjangoJSONEncoder),
         )
         print(f'ICPC数据备份成功, id: {result}')
+
+        # 写入json文件
+        print('开始写入json文件...')
+        with open(f'./define_backup/backup/icpc/icpc_{backup_name}.json', 'w', encoding='utf-8') as f:
+            json.dump(icpc_data, f, indent=4, ensure_ascii=False, cls=DjangoJSONEncoder)
+            print(f'ICPC写入成功, id: {backup_name}')
+
         return HttpResponseRedirect("../")
 
 
