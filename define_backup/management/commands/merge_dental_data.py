@@ -58,17 +58,37 @@ class Command(BaseCommand):
         ]
 
         # Model字段变更处理
-        # ManagedEntity：1.重新生成hssc_id; 2.手工补全project.hssc_id: b97e01a1-576d-11ed-a1bc-4889e7cf38c9
+        # dental.ManagedEntity：1.手工重新生成hssc_id; 2.手工补全project.hssc_id: b97e01a1-576d-11ed-a1bc-4889e7cf38c9
         # Project: Update Dental['roles','services','service_packages','service_rules','external_services']
+
+        dental_project = Project.objects.get(hssc_id='b97e01a1-576d-11ed-a1bc-4889e7cf38c9')
 
         for model in merge_models:
             print(model._meta.model_name)
 
-            if model == Service:  # 导入Service前先恢复ManagedEntity的base_form字段
-                restore_managed_entity_base_form()
+            # if model == Service:  # 导入Service前先恢复ManagedEntity的base_form字段
+            #     restore_managed_entity_base_form()
 
             result = model.objects.merge_data(design_data[model._meta.model_name])
-
+            queryset = model.objects.filter(hssc_id__in=result)
+            print(queryset.count(), queryset)
             print(result)
+
+            # Project: Update Dental['roles','services','service_packages','service_rules','external_services']
+            if model==Role:
+                print(Role, queryset)
+                # dental_project.roles.set(queryset)
+            elif model==Service:
+                print(Service, queryset)
+                # dental_project.services.set(queryset)
+            elif model==ServicePackage:
+                print(ServicePackage, queryset)
+                # dental_project.service_packages.set(queryset)
+            elif model==ServiceRule:
+                print(ServiceRule, queryset)
+                # dental_project.service_rules.set(queryset)
+            elif model==ExternalServiceMapping:
+                print(ExternalServiceMapping, queryset)
+                # dental_project.external_services.set(queryset)
         
         print('合并设计数据完成！')
