@@ -18,6 +18,7 @@ class ManagedEntity(HsscPymBase):
     base_form = models.OneToOneField('BuessinessForm', on_delete=models.SET_NULL, null=True, verbose_name="基础表单")
     header_fields = models.ManyToManyField(Component, blank=True, verbose_name="表头字段")
     header_fields_json = models.JSONField(null=True, blank=True, verbose_name="表头字段json")
+    project = models.ForeignKey('Project', on_delete=models.SET_NULL, null=True, blank=True, verbose_name="所属项目")
 
     class Meta:
         verbose_name = "管理实体"
@@ -784,6 +785,8 @@ class Project(HsscBase):
         # 返回project对应model的queryset
         if model_name == 'Service':
             return self.services.all()
+        elif model_name == 'ManagedEntity':
+            return self.managedentity_set.all()
         elif model_name == 'BuessinessForm':
             return BuessinessForm.objects.filter(service__in=self.services.all()).distinct()
         elif model_name == 'BuessinessFormsSetting':
@@ -805,5 +808,5 @@ class Project(HsscBase):
         elif model_name == 'DicList':
             return DicList.objects.filter(name__in=[component.content_object.related_content.related_content.lower() for component in Component.objects.filter(buessinessform__in=BuessinessForm.objects.filter(service__in=self.services.all())).distinct() if component.content_object.__class__.__name__=='RelatedField'])
         else:
-            # model_name in ['ManagedEntity, 'SystemOperand', 'CycleUnit', 'Medicine']
+            # model_name in ['SystemOperand', 'CycleUnit', 'Medicine']
             return eval(model_name).objects.all()

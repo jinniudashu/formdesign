@@ -50,4 +50,12 @@ class Command(BaseCommand):
             result = model.objects.restore_data(design_data[model._meta.model_name])
             print(result)
         
+        # 恢复ManagedEntity的project字段，这是一个特殊处理，因为在恢复ManagedEntity时，project字段指向的Project是不存在的
+        for entity in design_data['managedentity']:
+            entity_obj = ManagedEntity.objects.get(hssc_id=entity['hssc_id'])
+            if entity['project']:
+                project = Project.objects.get(hssc_id=entity['project'])
+                entity_obj.project = project
+                entity_obj.save()
+
         print('恢复设计数据完成！')

@@ -102,7 +102,6 @@ class HsscBackupManager(models.Manager):
             return 'No data to restore'
 
         print('开始合并：', self.model.__name__)
-        self.all().delete()
         for item_dict in data:
             # 用hssc_id判断当前记录是否已存在
             try:
@@ -111,48 +110,45 @@ class HsscBackupManager(models.Manager):
                 _instance = None
                 print('新增记录：', item_dict)
 
-                # Model字段变更处理
-                # Service: service_type
-                # EventExpression: char_value, number_value
+                item = {}
+                # 遍历模型非多对多字段，如果是外键，则用外键的hssc_id找回关联对象
+                for field in self.model._meta.fields:
+                    if item_dict.get(field.name) is not None:  # 如果字段不为空，进行检查替换                    
+                        if field.name in ['name_icpc', 'icpc']:  # 如果是ICPC外键，用icpc_code获取对象
+                            _object = field.related_model.objects.get(icpc_code=item_dict[field.name])
+                            item[field.name] = _object
+                        else:
+                            if (field.one_to_one or field.many_to_one):  # 一对一、多对一字段, 用hssc_id获取对象
+                                try:
+                                    _object = field.related_model.objects.get(hssc_id=item_dict[field.name])
+                                except field.related_model.DoesNotExist:  # ManagedEntity.base_form中的hssc_id可能为空
+                                    _object = None
+                                item[field.name] = _object
+                            elif field.__class__.__name__ == 'DurationField':  # duration字段
+                                item[field.name] = self._parse_timedelta(item_dict[field.name])
+                            else:
+                                item[field.name] = item_dict[field.name]
 
+                # 插入构造好的记录，不包括多对多字段
+                _instance=self.model.objects.create(**item)
 
-            # item = {}
-            # # 遍历模型非多对多字段，如果是外键，则用外键的hssc_id找回关联对象
-            # for field in self.model._meta.fields:
-            #     if item_dict.get(field.name) is not None:  # 如果字段不为空，进行检查替换                    
-            #         if field.name in ['name_icpc', 'icpc']:  # 如果是ICPC外键，用icpc_code获取对象
-            #             _object = field.related_model.objects.get(icpc_code=item_dict[field.name])
-            #             item[field.name] = _object
-            #         else:
-            #             if (field.one_to_one or field.many_to_one):  # 一对一、多对一字段, 用hssc_id获取对象
-            #                 try:
-            #                     _object = field.related_model.objects.get(hssc_id=item_dict[field.name])
-            #                 except field.related_model.DoesNotExist:  # ManagedEntity.base_form中的hssc_id可能为空
-            #                     _object = None
-            #                 item[field.name] = _object
-            #             elif field.__class__.__name__ == 'DurationField':  # duration字段
-            #                 item[field.name] = self._parse_timedelta(item_dict[field.name])
-            #             else:
-            #                 item[field.name] = item_dict[field.name]
+                # 遍历模型多对多字段，用hssc_id或icpc_code获取对象
+                for field in self.model._meta.many_to_many:
+                    if item_dict.get(field.name):  # 如果字段不为空，进行检查替换
+                        objects = []
+                        # 如果是ICPC外键，用icpc_code获取对象，否则用hssc_id获取对象
+                        if field.name in ['name_icpc', 'icpc']:
+                            for _object in field.related_model.objects.filter(icpc_code__in=item_dict[field.name]):
+                                objects.append(_object)
+                        else:
+                            for _object in field.related_model.objects.filter(hssc_id__in=item_dict[field.name]):
+                                objects.append(_object)
 
-            # # 插入构造好的记录，不包括多对多字段
-            # _instance=self.model.objects.create(**item)
+                        # 将对象添加到多对多字段中
+                        eval(f'_instance.{field.name}').set(objects)
 
-            # # 遍历模型多对多字段，用hssc_id或icpc_code获取对象
-            # for field in self.model._meta.many_to_many:
-            #     if item_dict.get(field.name):  # 如果字段不为空，进行检查替换
-            #         objects = []
-            #         # 如果是ICPC外键，用icpc_code获取对象，否则用hssc_id获取对象
-            #         if field.name in ['name_icpc', 'icpc']:
-            #             for _object in field.related_model.objects.filter(icpc_code__in=item_dict[field.name]):
-            #                 objects.append(_object)
-            #         else:
-            #             for _object in field.related_model.objects.filter(hssc_id__in=item_dict[field.name]):
-            #                 objects.append(_object)
+        # Project: Update Dental['roles','services','service_packages','service_rules','external_services']
 
-            #         # 将对象添加到多对多字段中
-            #         eval(f'_instance.{field.name}').set(objects)
-            
         return f'{self.model} 已合并'
 
 
