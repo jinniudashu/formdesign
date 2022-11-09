@@ -44,12 +44,19 @@ def relate_field_model_post_save_handler(sender, instance, created, **kwargs):
                 hssc_id = instance.hssc_id
             )
     else:
-        RelateFieldModel.objects.filter(hssc_id=instance.hssc_id).update(
-            name=instance.name,
-            label=instance.label,
-            related_content=instance.base_form.name.capitalize(),
-            related_content_type='entities',
-        )
+        if instance.base_form:
+            RelateFieldModel.objects.filter(hssc_id=instance.hssc_id).update(
+                name=instance.name,
+                label=instance.label,
+                related_content=instance.base_form.name.capitalize(),
+                related_content_type='entities',
+            )
+        else:
+            RelateFieldModel.objects.filter(hssc_id=instance.hssc_id).update(
+                name=instance.name,
+                label=instance.label,
+                related_content_type='entities',
+            )
 
 @receiver(m2m_changed, sender=ManagedEntity.header_fields.through)
 def header_fields_m2m_changed_handler(sender, instance, action, **kwargs):
@@ -164,6 +171,7 @@ admin.site.register({name}, {name}Admin)
         component_type = component.content_type.__dict__['model']
 
         # 从表单组件设置中间表中获取is_required属性
+        print('form:', form, 'formcomponentssetting_set:', form.formcomponentssetting_set.all(), 'component:', component)
         is_blank = not form.formcomponentssetting_set.get(component=component).is_required
 
         if component_type == 'characterfield':

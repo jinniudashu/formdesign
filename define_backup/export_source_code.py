@@ -266,7 +266,7 @@ class FieldsType(Enum):
 
     # 写入json文件
     print('开始写入json文件...')
-    with open(f'./define_backup/backup/script/作业系统脚本_{script_name}.json', 'w', encoding='utf-8') as f:
+    with open(f'./define_backup/backup/script/作业系统脚本_{project.name}_{script_name}.json', 'w', encoding='utf-8') as f:
         json.dump(source_code, f, indent=4, ensure_ascii=False, cls=DjangoJSONEncoder)
         print(f'作业脚本写入成功, id: {script_name}')
 

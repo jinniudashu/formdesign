@@ -66,8 +66,8 @@ class Command(BaseCommand):
         for model in merge_models:
             print(model._meta.model_name)
 
-            # if model == Service:  # 导入Service前先恢复ManagedEntity的base_form字段
-            #     restore_managed_entity_base_form()
+            if model == Service:  # 导入Service前先恢复ManagedEntity的base_form字段
+                restore_managed_entity_base_form()
 
             result = model.objects.merge_data(design_data[model._meta.model_name])
             queryset = model.objects.filter(hssc_id__in=result)
@@ -77,18 +77,18 @@ class Command(BaseCommand):
             # Project: Update Dental['roles','services','service_packages','service_rules','external_services']
             if model==Role:
                 print(Role, queryset)
-                # dental_project.roles.set(queryset)
+                dental_project.roles.set(queryset)
             elif model==Service:
                 print(Service, queryset)
-                # dental_project.services.set(queryset)
+                dental_project.services.set(queryset)
             elif model==ServicePackage:
                 print(ServicePackage, queryset)
-                # dental_project.service_packages.set(queryset)
+                dental_project.service_packages.set(queryset)
             elif model==ServiceRule:
                 print(ServiceRule, queryset)
-                # dental_project.service_rules.set(queryset)
+                dental_project.service_rules.set(queryset)
             elif model==ExternalServiceMapping:
                 print(ExternalServiceMapping, queryset)
-                # dental_project.external_services.set(queryset)
+                dental_project.external_services.set(queryset)
         
         print('合并设计数据完成！')
