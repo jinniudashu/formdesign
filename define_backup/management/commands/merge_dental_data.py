@@ -45,7 +45,7 @@ class Command(BaseCommand):
             FileField,
             ComponentsGroup,
             BuessinessForm,
-            FormComponentsSetting,
+            # FormComponentsSetting,
             Service,
             BuessinessFormsSetting,
             EventRule,
@@ -72,23 +72,32 @@ class Command(BaseCommand):
             result = model.objects.merge_data(design_data[model._meta.model_name])
             queryset = model.objects.filter(hssc_id__in=result)
             print(queryset.count(), queryset)
-            print(result)
 
             # Project: Update Dental['roles','services','service_packages','service_rules','external_services']
             if model==Role:
-                print(Role, queryset)
                 dental_project.roles.set(queryset)
             elif model==Service:
-                print(Service, queryset)
                 dental_project.services.set(queryset)
             elif model==ServicePackage:
-                print(ServicePackage, queryset)
                 dental_project.service_packages.set(queryset)
             elif model==ServiceRule:
-                print(ServiceRule, queryset)
                 dental_project.service_rules.set(queryset)
             elif model==ExternalServiceMapping:
-                print(ExternalServiceMapping, queryset)
                 dental_project.external_services.set(queryset)
-        
+            elif model==BuessinessForm:
+                # Update corresponding fields['is_required', 'api_field', 'position'] in FormComponentsSetting
+                for item in design_data['formcomponentssetting']:
+                    form = BuessinessForm.objects.get(hssc_id=item['form'])
+                    component = Component.objects.get(hssc_id=item['component'])
+                    print('item:', item['is_required'], item['api_field'], item['position'])
+                    try:
+                        fc = FormComponentsSetting.objects.get(form=form, component=component)
+                        print(fc)
+                        fc.is_required = item['is_required']
+                        fc.api_field = item['api_field']
+                        fc.position = item['position']
+                        fc.save()
+                    except:
+                        pass
+                
         print('合并设计数据完成！')

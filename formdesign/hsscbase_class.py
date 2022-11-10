@@ -52,11 +52,12 @@ class HsscBackupManager(models.Manager):
         return backup_data
 
     def restore_data(self, data):
+        print('开始恢复：', self.model.__name__)
+        self.all().delete()
+
         if data is None or len(data) == 0:
             return 'No data to restore'
 
-        print('开始恢复：', self.model.__name__)
-        self.all().delete()
         for item_dict in data:
             item = {}
             # 遍历模型非多对多字段，如果是外键，则用外键的hssc_id找回关联对象
@@ -104,16 +105,16 @@ class HsscBackupManager(models.Manager):
         print('开始合并：', self.model.__name__)
         new_data_hssc_id = []
         for item_dict in data:
-            print('正在合并：',item_dict)
             # 用hssc_id判断当前记录是否已存在
             try:
-                if self.model.__name__ == 'formcomponentssetting':
-                    _instance = self.get(form=item_dict['form'], component=item_dict['component'])
+                if self.model.__name__ == 'FormComponentsSetting':                    
+                    print('formcomponentssetting:', item_dict)
+                    new_data_hssc_id.append(item_dict['hssc_id'])
                 else:
                     _instance = self.get(hssc_id=item_dict['hssc_id'])
             except self.model.DoesNotExist:
                 _instance = None
-                # print('新增记录：', item_dict)
+                print('正在合并：',item_dict)
                 
                 # 保存添加记录的hssc_id，用于生成queryset
                 new_data_hssc_id.append(item_dict['hssc_id'])
