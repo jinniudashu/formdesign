@@ -6,14 +6,13 @@ networks:
 
 services:
   app:
-    image: jinniudashu/design-clinic:v1
-    container_name: design-clinic
+    image: jinniudashu/design:v1
+    container_name: design
     command:
       - sh
       - -c
       - |
         python manage.py migrate
-        python manage.py loaddata initial_data.json
         python manage.py restore_icpc
         python manage.py restore_design
         python manage.py runserver 0.0.0.0:8000
@@ -25,9 +24,9 @@ services:
       - web
     labels:
       - "traefik.enable=true" # <== Enable traefik on itself to view dashboard and assign subdomain to view it
-      - "traefik.http.routers.clinic-http.rule=Host(`design-clinic.tpacn.com`)" # <== Setting the domain for the dashboard
-      - "traefik.http.routers.clinic-http.entrypoints=web" # <== Enabling the entrypoint for the whoami service
-      - "traefik.http.services.clinic-http.loadbalancer.server.port=8000" # <== Enabling the port for the whoami service
+      - "traefik.http.routers.design-http.rule=Host(`design.tpacn.com`)" # <== Setting the domain for the dashboard
+      - "traefik.http.routers.design-http.entrypoints=web" # <== Enabling the entrypoint for the whoami service
+      - "traefik.http.services.design-http.loadbalancer.server.port=8000" # <== Enabling the port for the whoami service
 
 volumes:
   app:

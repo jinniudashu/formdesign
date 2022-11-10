@@ -5,5 +5,5 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    image: design-clinic:v1
+    image: design:v1
   

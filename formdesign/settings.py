@@ -34,7 +34,7 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 DEBUG = True
 
 # ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1', ]
-ALLOWED_HOSTS = ["127.0.0.1", "design-clinic.tpacn.com", "design-clinic.tpahn.com", ]
+ALLOWED_HOSTS = ["127.0.0.1", "design.tpacn.com", "design.tpahn.com", ]
 
 
 # Application definition

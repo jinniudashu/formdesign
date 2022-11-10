@@ -14,8 +14,8 @@ class SourceCodeSerializer(serializers.ModelSerializer):
 
 @api_view(['GET'])
 def source_codes_list(request,  **kwargs):
-    print('Project:', kwargs['project_id'])
-    project = Project.objects.get(id=kwargs['project_id'])
+    print('Project:', kwargs['project_name'])
+    project = Project.objects.get(name=kwargs['project_name'])
     source_codes = [SourceCode.objects.filter(project=project).last()]
     serializer = SourceCodeSerializer(source_codes, many=True)
     return Response(serializer.data)
