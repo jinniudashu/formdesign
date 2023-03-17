@@ -332,15 +332,17 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
 
     # generate model and admin script
     def _create_model_script(self):
-        head_script = ''
+        # construct model script
+        head_script = f'class {self.name.capitalize()}(HsscFormModel):'
+
         fields_script = header_fields = ''
         modeladmin_body = {}
         fieldssets = autocomplete_fields = radio_fields = search_fields = ''
         form_script = ''
 
-        if self._is_base_form_service():  # 基础信息表
-            # construct model script
-            head_script = f'class {self.name.capitalize()}(HsscBaseFormModel):'
+        is_base_form = self._is_base_form_service()
+        
+        if is_base_form:  # 基础信息表
             # admin.py脚本设置
             search_fields = f'"name", "pym", '
 
@@ -348,15 +350,13 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             form_script = self._create_base_model_form_script()
 
         else:  # 属性表
-            # construct model script
-            head_script = f'class {self.name.capitalize()}(HsscFormModel):'
             # 添加表头字段
             fields_script, header_fields = self._construct_header_fields_script()
+
             # admin.py脚本设置
             fieldssets = f'\n        ("基本信息", {{"fields": (({header_fields}),)}}), '
 
         for form in self.buessiness_forms.all():
-        # !!!待修改：compontents = form.components.all() + form.component_groups.all()
             form_fields = ''
             for form_components in FormComponentsSetting.objects.filter(form=form).order_by('position'):
                 component=form_components.component
@@ -383,6 +383,9 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             # construct admin fieldset script
             fieldssets = fieldssets + f'\n        ("{form.label}", {{"fields": ({form_fields})}}), '
 
+        # construct model footer script
+        footer_script = self._create_model_footer_script(is_base_form)
+
         if fieldssets:
             modeladmin_body['fieldssets'] = fieldssets
         if autocomplete_fields:
@@ -400,7 +403,6 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         serializers_script = self._create_serializers_script()
 
         # construct model script
-        footer_script = self._create_model_footer_script()
         model_script = f'{head_script}{fields_script}{footer_script}\n'
         
         return model_script, admin_script, serializers_script, form_script
@@ -449,8 +451,8 @@ clinic_site.register({name}, {name}Admin)
         return fields_script, header_fields
 
     # generate model footer script
-    def _create_model_footer_script(self):
-        return f'''
+    def _create_model_footer_script(self, is_base_form=False):
+        footer_script = f'''
 
     class Meta:
         verbose_name = '{self.label}'
@@ -460,6 +462,25 @@ clinic_site.register({name}, {name}Admin)
         return self.customer.name
 
         '''
+
+        base_form_field_pym = f'''
+    pym = models.CharField(max_length=255, blank=True, null=True, verbose_name="拼音码")
+        '''
+        base_form_footer = f'''
+    def save(self, *args, **kwargs):
+        if self.name:
+            self.pym = ''.join(lazy_pinyin(self.label, style=Style.FIRST_LETTER))
+        super().save(*args, **kwargs)
+    
+    def natural_key(self):
+        return self.name
+
+        '''
+        
+        if is_base_form:
+            return base_form_field_pym + footer_script + base_form_footer
+        else:
+            return footer_script
 
     # generate form script
     def _create_base_model_form_script(self):

@@ -6,8 +6,10 @@ service_models_file_head = '''from django.db import models
 
 from icpc.models import *
 from dictionaries.models import *
-from core.models import HsscFormModel, HsscBaseFormModel, Staff, Institution, Service, ServicePackage, Customer, CycleUnit, Medicine
+from core.models import HsscFormModel, Staff, Institution, Service, ServicePackage, Customer, CycleUnit, Medicine
 from core.hsscbase_class import HsscBase
+
+from pypinyin import lazy_pinyin
 
 class CustomerSchedulePackage(HsscFormModel):
     servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, verbose_name='服务包')
