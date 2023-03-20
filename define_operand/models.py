@@ -515,6 +515,9 @@ class Service(GenerateServiceScriptMixin, HsscPymBase):
     enable_queue_counter = models.BooleanField(default=True, verbose_name='显示队列数量')
     Route_to = [('INDEX', '任务工作台'), ('CUSTOMER_HOMEPAGE', '客户病例首页')]
     route_to = models.CharField(max_length=50, choices=Route_to, default='CUSTOMER_HOMEPAGE', blank=True, null=True, verbose_name='完成跳转至')
+    follow_up_required = models.BooleanField(default=False, verbose_name='需要随访')
+    follow_up_interval = models.DurationField(blank=True, null=True, verbose_name='随访间隔')
+    follow_up_service = models.ForeignKey('self', on_delete=models.SET_NULL, blank=True, null=True, related_name='follow_up_services', verbose_name='随访服务')
     suppliers = models.CharField(max_length=255, blank=True, null=True, verbose_name="供应商")
     not_suitable = models.CharField(max_length=255, blank=True, null=True, verbose_name='不适用对象')
     overtime = models.DurationField(blank=True, null=True, verbose_name='超期时限')

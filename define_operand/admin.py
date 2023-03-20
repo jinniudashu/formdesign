@@ -98,6 +98,9 @@ class ServiceAdmin(admin.ModelAdmin):
         ('基本信息', {
             'fields': (('label', 'name_icpc'), ('managed_entity', 'priority', 'service_type'), 'role', 'history_services_display', 'enable_queue_counter', 'route_to', ('working_hours' ,'overtime'), ('name', 'hssc_id'))
         }),
+        ('质控管理', {
+            'fields': ('follow_up_required', 'follow_up_interval', 'follow_up_service')
+        }),
         ('作业管理', {
             'fields': ('suppliers', 'not_suitable', 'cost', 'load_feedback')
         }),
