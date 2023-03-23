@@ -6,7 +6,7 @@ service_models_file_head = '''from django.db import models
 
 from icpc.models import *
 from dictionaries.models import *
-from core.models import HsscFormModel, Staff, Institution, Service, ServicePackage, Customer, CycleUnit, Medicine
+from core.models import HsscFormModel, VirtualStaff, Staff, Institution, Service, ServicePackage, Customer, CycleUnit, Medicine
 from core.hsscbase_class import HsscBase
 
 from pypinyin import lazy_pinyin
@@ -21,26 +21,6 @@ class CustomerSchedulePackage(HsscFormModel):
     def __str__(self):
         return self.servicepackage.label
 
-class CustomerScheduleDraft(HsscBase):
-    order = models.PositiveSmallIntegerField(default=100, verbose_name='顺序')
-    schedule_package = models.ForeignKey(CustomerSchedulePackage, null=True, on_delete=models.CASCADE, verbose_name='服务包')
-    service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='服务项目')
-    cycle_unit = models.ForeignKey(CycleUnit, on_delete=models.CASCADE, default=1, blank=True, null=True, verbose_name='周期单位')
-    cycle_frequency = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="每周期频次")
-    cycle_times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="天数")
-    Default_beginning_time = [(0, '无'), (1, '当前系统时间'), (2, '首个服务开始时间'), (3, '上个服务结束时间'), (4, '客户出生日期')]
-    default_beginning_time = models.PositiveSmallIntegerField(choices=Default_beginning_time, default=0, verbose_name='执行时间基准')
-    base_interval = models.DurationField(blank=True, null=True, verbose_name='基准间隔', help_text='例如：3 days, 22:00:00')
-    scheduled_operator = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True, blank=True, verbose_name='服务人员')
-    overtime = models.DurationField(blank=True, null=True, verbose_name='超期时限')
-    
-    class Meta:
-        verbose_name = '服务项目安排'
-        verbose_name_plural = verbose_name
-
-    def __str__(self):
-        return self.service.label
-
 class CustomerScheduleList(HsscFormModel):
     plan_serial_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='服务计划')
     schedule_package = models.ForeignKey(CustomerSchedulePackage, null=True, on_delete=models.CASCADE, verbose_name='服务包')
@@ -52,12 +32,34 @@ class CustomerScheduleList(HsscFormModel):
     def __str__(self):
         return self.plan_serial_number
 
+class CustomerScheduleDraft(HsscBase):
+    order = models.PositiveSmallIntegerField(default=100, verbose_name='顺序')
+    schedule_package = models.ForeignKey(CustomerSchedulePackage, null=True, on_delete=models.CASCADE, verbose_name='服务包')
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='服务项目')
+    cycle_unit = models.ForeignKey(CycleUnit, on_delete=models.CASCADE, default=1, blank=True, null=True, verbose_name='周期单位')
+    cycle_frequency = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="每周期频次")
+    cycle_times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="天数")
+    Default_beginning_time = [(0, '无'), (1, '当前系统时间'), (2, '首个服务开始时间'), (3, '上个服务结束时间'), (4, '客户出生日期')]
+    default_beginning_time = models.PositiveSmallIntegerField(choices=Default_beginning_time, default=0, verbose_name='执行时间基准')
+    base_interval = models.DurationField(blank=True, null=True, verbose_name='基准间隔', help_text='例如：3 days, 22:00:00')
+    scheduled_operator = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True, blank=True, verbose_name='服务人员')
+    priority_operator = models.ForeignKey(VirtualStaff, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="优先操作员")
+    overtime = models.DurationField(blank=True, null=True, verbose_name='超期时限')
+    
+    class Meta:
+        verbose_name = '服务项目安排'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.service.label
+
 class CustomerSchedule(HsscFormModel):
     customer_schedule_list = models.ForeignKey(CustomerScheduleList, null=True, blank=True, on_delete=models.CASCADE, verbose_name='服务计划')
     schedule_package = models.ForeignKey(CustomerSchedulePackage, null=True, blank=True, on_delete=models.CASCADE, verbose_name='服务包')
     service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='服务项目')
     scheduled_time = models.DateTimeField(blank=True, null=True, verbose_name='计划执行时间')
     scheduled_operator = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True, blank=True, verbose_name='服务人员')
+    priority_operator = models.ForeignKey(VirtualStaff, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="优先操作员")
     overtime = models.DurationField(blank=True, null=True, verbose_name='超期时限')
     is_assigned = models.BooleanField(default=False, verbose_name='已生成任务')
 
@@ -235,6 +237,7 @@ class CustomerSchedulePackageAdmin(HsscFormAdmin):
                     service=item['service'],
                     scheduled_time=item['scheduled_time'],
                     scheduled_operator=item['scheduled_operator'],
+                    priority_operator=item['priority_operator'],
                     overtime=item['overtime'],
                     pid=schedule_package.pid
                 )
