@@ -20,6 +20,7 @@ Backup_models = [
     DicList, 
     DicDetail,
     ManagedEntity, 
+    CoreModel,
     CharacterField,
     NumberField,
     DTField,

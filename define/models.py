@@ -73,7 +73,7 @@ class DTField(HsscFieldBase):
 
 
 # 关联字段基础表
-# 内容由DicList和define_operand.ManagedEntity生成内容时自动维护
+# 内容由DicList, ICPC, define_operand.ManagedEntity, define_operand.CoreModel生成内容时自动维护
 class RelateFieldModel(HsscBase):
     related_content = models.CharField(max_length=100, null=True, blank=True, verbose_name="关联内容")
     Related_content_type = [('dictionaries', '基础字典'), ('icpc', 'ICPC'), ('service', '管理实体'), ('core', '内核')]  # 关联内容所属Hssc.app

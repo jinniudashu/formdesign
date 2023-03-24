@@ -50,6 +50,12 @@ class EventRuleAdmin(admin.ModelAdmin):
 #     list_display = ('event_rule', 'field', 'char_value', 'operator', 'number_value', 'connection_operator')
 #     autocomplete_fields = ['field']
 
+@admin.register(CoreModel)
+class CoreModelAdmin(admin.ModelAdmin):
+    list_display = ('label', 'model_name')
+    list_display_links = ['label', 'model_name']
+    search_fields=['label', 'name']
+    readonly_fields = ['name', 'hssc_id']
 
 class FormComponentsSettingInline(admin.TabularInline):
     model = FormComponentsSetting

@@ -1,7 +1,7 @@
 from django.db import models
 from django.db.models import Q
 from django.dispatch import receiver
-from django.db.models.signals import post_save, m2m_changed
+from django.db.models.signals import post_save, m2m_changed, post_delete
 import json
 
 from pypinyin import lazy_pinyin
@@ -9,6 +9,36 @@ from pypinyin import lazy_pinyin
 from formdesign.hsscbase_class import HsscBase, HsscPymBase
 from define.models import Component, ComponentsGroup, Role, RelateFieldModel, DicList, Medicine
 from define_icpc.models import Icpc
+
+# 内核模型定义
+class CoreModel(HsscBase):
+    model_name = models.CharField(max_length=100, null=True, blank=True, verbose_name="模型名")
+
+    class Meta:
+        verbose_name = "内核模型"
+        verbose_name_plural = verbose_name
+
+# 在CoreModel保存后自动同步到RelateFieldModel
+@receiver(post_save, sender=CoreModel)
+def sync_relate_field_model_on_core_model_save(sender, instance, created, **kwargs):
+    if created:
+        RelateFieldModel.objects.create(
+            label=instance.label,
+            related_content=instance.model_name,
+            related_content_type='core',
+            hssc_id=instance.hssc_id
+        )
+    else:
+        RelateFieldModel.objects.filter(hssc_id=instance.hssc_id).update(
+            label=instance.label,
+            related_content=instance.model_name,
+            related_content_type='core',
+        )
+
+# 在CoreModel删除后自动同步到RelateFieldModel
+@receiver(post_delete, sender=CoreModel)
+def sync_relate_field_model_on_core_model_delete(sender, instance, **kwargs):
+    RelateFieldModel.objects.filter(hssc_id=instance.hssc_id).delete()
 
 
 # 管理实体定义
