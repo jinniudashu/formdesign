@@ -3379,7 +3379,7 @@
         {
             "label": "虚拟职员",
             "name": null,
-            "hssc_id": "4f0ecd3e-ca41-11ed-a703-ee2fa480f37d",
+            "hssc_id": "2fad9d1e-cbd4-11ed-ab05-ee2fa480f37d",
             "model_name": "VirtualStaff"
         }
     ],
@@ -16558,7 +16558,9 @@
                 "4775c12a-f5cd-11ec-844e-ba663fc9e8b0",
                 "cb7ecd6e-32fd-11ed-a506-0242ac120004",
                 "ab1007cc-32fe-11ed-aa6f-0242ac120004",
-                "c41cdcd6-4f7f-11ed-8dbc-4889e7cf38c9"
+                "c41cdcd6-4f7f-11ed-8dbc-4889e7cf38c9",
+                "a1b9c424-c971-11ed-a51e-0242ac120003",
+                "c8855096-c971-11ed-a51e-0242ac120003"
             ],
             "service_packages": [
                 "6992ad18-33de-11ed-9004-4889e7cf38c9",
@@ -16585,7 +16587,11 @@
                 "a33fe4e8-d0fe-11ec-ab0d-823d1f108281",
                 "758e1b9e-d119-11ec-b369-823d1f108281",
                 "dfd4d48a-3301-11ed-872a-0242ac120004",
-                "26733f12-3302-11ed-872a-0242ac120004"
+                "26733f12-3302-11ed-872a-0242ac120004",
+                "a6fb98ac-c978-11ed-8f38-0242ac120003",
+                "da68b788-c978-11ed-8f38-0242ac120003",
+                "40c1bd12-c97a-11ed-a572-0242ac120003",
+                "9398f974-c97a-11ed-a572-0242ac120003"
             ],
             "external_services": []
         },
