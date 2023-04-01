@@ -5893,6 +5893,33 @@
             "name_icpc": null,
             "type": "SelectMultiple",
             "related_content": "de844762-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "hssc_id": "4a68312a-cdd5-11ed-b166-0242ac120003",
+            "pym": "zrr",
+            "label": "责任人",
+            "name": "boolfield_ze_ren_ren",
+            "name_icpc": null,
+            "type": "Select",
+            "related_content": "2fad9d1e-cbd4-11ed-ab05-ee2fa480f37d"
+        },
+        {
+            "hssc_id": "a713475c-cf6a-11ed-8299-0242ac120003",
+            "pym": "ypsyz",
+            "label": "药品适应症",
+            "name": "boolfield_yao_pin_shi_ying_zheng",
+            "name_icpc": null,
+            "type": "SelectMultiple",
+            "related_content": "de82c522-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "hssc_id": "b2f39554-cf6a-11ed-8299-0242ac120003",
+            "pym": "ypbsyz",
+            "label": "药品不适应症",
+            "name": "boolfield_yao_pin_bu_shi_ying_zheng",
+            "name_icpc": null,
+            "type": "SelectMultiple",
+            "related_content": "de82c522-9aa1-11ec-bde1-8a6e55faf877"
         }
     ],
     "filefield": [
@@ -6265,17 +6292,19 @@
                 "654dfc0a-c5ce-11ec-b819-725badf7393d",
                 "6da75824-c5ce-11ec-b819-725badf7393d",
                 "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-                "5dc1e618-c5ce-11ec-b9d4-725badf7393d"
+                "5dc1e618-c5ce-11ec-b9d4-725badf7393d",
+                "a713475c-cf6a-11ed-8299-0242ac120003",
+                "b2f39554-cf6a-11ed-8299-0242ac120003"
             ],
             "components_groups": []
         },
         {
-            "label": "医生注册",
+            "label": "员工注册",
             "name": "Z6205",
             "hssc_id": "0bbc9e76-9e23-11ec-aa2c-fe35a7065cdd",
-            "pym": "yszc",
-            "name_icpc": "Z6205",
-            "description": null,
+            "pym": "ygzc",
+            "name_icpc": null,
+            "description": "",
             "api_fields": null,
             "components": [
                 "dea0045c-9aa1-11ec-bde1-8a6e55faf877",
@@ -6492,7 +6521,7 @@
             "hssc_id": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
             "pym": "ywcf",
             "name_icpc": null,
-            "description": null,
+            "description": "",
             "api_fields": null,
             "components": [
                 "1bf942da-c5ce-11ec-b9d4-725badf7393d",
@@ -6622,10 +6651,11 @@
             "hssc_id": "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd",
             "pym": "dryygh",
             "name_icpc": "A6501",
-            "description": null,
-            "api_fields": null,
+            "description": "",
+            "api_fields": "[{\"scheduled_time\": \"boolfield_yu_yue_shi_jian\"}]",
             "components": [
-                "deb85c6e-9aa1-11ec-bde1-8a6e55faf877"
+                "deb85c6e-9aa1-11ec-bde1-8a6e55faf877",
+                "4a68312a-cdd5-11ed-b166-0242ac120003"
             ],
             "components_groups": []
         },
@@ -6858,7 +6888,6 @@
             "description": "",
             "api_fields": null,
             "components": [
-                "deb85c6e-9aa1-11ec-bde1-8a6e55faf877",
                 "98dbd7f4-a52b-11ec-9b14-2ec403f6c47b"
             ],
             "components_groups": []
@@ -7923,7 +7952,7 @@
             "hssc_id": "7b94f943-dd93-11ec-a1dd-4889e7cf38c9",
             "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
             "component": "18cfcb9a-d11a-11ec-ab0d-823d1f108281",
-            "is_required": false,
+            "is_required": true,
             "api_field": null,
             "position": 100
         },
@@ -7943,7 +7972,7 @@
             "hssc_id": "7b9658f5-dd93-11ec-b2c1-4889e7cf38c9",
             "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
             "component": "afe6851a-c115-11ec-9685-2617a93150cd",
-            "is_required": false,
+            "is_required": true,
             "api_field": null,
             "position": 100
         },
@@ -7953,7 +7982,7 @@
             "hssc_id": "7b971c4a-dd93-11ec-b0d9-4889e7cf38c9",
             "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
             "component": "fbdc40fe-c115-11ec-b731-2617a93150cd",
-            "is_required": false,
+            "is_required": true,
             "api_field": null,
             "position": 100
         },
@@ -8673,7 +8702,7 @@
             "hssc_id": "7bd91978-dd93-11ec-a07b-4889e7cf38c9",
             "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
             "component": "1bf942da-c5ce-11ec-b9d4-725badf7393d",
-            "is_required": false,
+            "is_required": true,
             "api_field": null,
             "position": 100
         },
@@ -8703,7 +8732,7 @@
             "hssc_id": "7bdb1537-dd93-11ec-badf-4889e7cf38c9",
             "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
             "component": "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-            "is_required": false,
+            "is_required": true,
             "api_field": null,
             "position": 100
         },
@@ -8713,7 +8742,7 @@
             "hssc_id": "7bdbb180-dd93-11ec-ab10-4889e7cf38c9",
             "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
             "component": "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
-            "is_required": false,
+            "is_required": true,
             "api_field": null,
             "position": 100
         },
@@ -9503,16 +9532,6 @@
             "hssc_id": "7c18ba96-dd93-11ec-a598-4889e7cf38c9",
             "form": "0b96f9f0-9e23-11ec-aa2c-fe35a7065cdd",
             "component": "888d068a-cab9-11ec-a675-8e39d789b675",
-            "is_required": false,
-            "api_field": null,
-            "position": 100
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7c197dbc-dd93-11ec-85f2-4889e7cf38c9",
-            "form": "0d1b5014-9e23-11ec-aa2c-fe35a7065cdd",
-            "component": "deb85c6e-9aa1-11ec-bde1-8a6e55faf877",
             "is_required": false,
             "api_field": null,
             "position": 100
@@ -11156,6 +11175,36 @@
             "is_required": false,
             "api_field": null,
             "position": 100
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "50a0a426-cf67-11ed-9eaf-0242ac120003",
+            "form": "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd",
+            "component": "4a68312a-cdd5-11ed-b166-0242ac120003",
+            "is_required": false,
+            "api_field": null,
+            "position": 2
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "ef726b22-cf6a-11ed-8299-0242ac120003",
+            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "component": "a713475c-cf6a-11ed-8299-0242ac120003",
+            "is_required": false,
+            "api_field": null,
+            "position": 100
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "ef72809e-cf6a-11ed-8299-0242ac120003",
+            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "component": "b2f39554-cf6a-11ed-8299-0242ac120003",
+            "is_required": false,
+            "api_field": null,
+            "position": 100
         }
     ],
     "service": [
@@ -11316,6 +11365,7 @@
             "resource_knowledge": null,
             "generate_script_order": 100,
             "buessiness_forms": [
+                "0c704264-9e23-11ec-aa2c-fe35a7065cdd",
                 "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd"
             ],
             "role": [
@@ -11350,6 +11400,8 @@
             "resource_knowledge": null,
             "generate_script_order": 100,
             "buessiness_forms": [
+                "0c704264-9e23-11ec-aa2c-fe35a7065cdd",
+                "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd",
                 "0d1b5014-9e23-11ec-aa2c-fe35a7065cdd"
             ],
             "role": [
@@ -11374,7 +11426,7 @@
             "suppliers": null,
             "not_suitable": null,
             "overtime": null,
-            "working_hours": null,
+            "working_hours": "0:00:05",
             "frequency": null,
             "cost": null,
             "load_feedback": false,
@@ -11383,6 +11435,7 @@
             "resource_knowledge": null,
             "generate_script_order": 100,
             "buessiness_forms": [
+                "0c704264-9e23-11ec-aa2c-fe35a7065cdd",
                 "0cd1dcea-9e23-11ec-aa2c-fe35a7065cdd"
             ],
             "role": [
@@ -11536,11 +11589,11 @@
             "route_to": "CUSTOMER_HOMEPAGE",
             "follow_up_required": false,
             "follow_up_interval": null,
-            "follow_up_service": null,
+            "follow_up_service": "ca482cce-e406-11ec-9eb0-42585b16dcd4",
             "suppliers": null,
             "not_suitable": null,
             "overtime": null,
-            "working_hours": "0:00:05",
+            "working_hours": "0:00:10",
             "frequency": null,
             "cost": null,
             "load_feedback": false,
@@ -11740,7 +11793,7 @@
             "suppliers": null,
             "not_suitable": null,
             "overtime": null,
-            "working_hours": null,
+            "working_hours": "0:00:10",
             "frequency": null,
             "cost": null,
             "load_feedback": false,
@@ -11849,7 +11902,7 @@
             "suppliers": null,
             "not_suitable": null,
             "overtime": null,
-            "working_hours": "0:00:04",
+            "working_hours": "0:00:05",
             "frequency": null,
             "cost": null,
             "load_feedback": false,
@@ -11882,7 +11935,7 @@
             "suppliers": null,
             "not_suitable": null,
             "overtime": null,
-            "working_hours": null,
+            "working_hours": "0:00:05",
             "frequency": null,
             "cost": null,
             "load_feedback": false,
@@ -13390,9 +13443,9 @@
             "history_services_display": 0,
             "enable_queue_counter": true,
             "route_to": "CUSTOMER_HOMEPAGE",
-            "follow_up_required": false,
-            "follow_up_interval": null,
-            "follow_up_service": null,
+            "follow_up_required": true,
+            "follow_up_interval": "3 days, 0:00:00",
+            "follow_up_service": "5e7ae356-e406-11ec-9d3a-42585b16dcd4",
             "suppliers": null,
             "not_suitable": null,
             "overtime": null,
@@ -13442,6 +13495,39 @@
             ],
             "role": [
                 "de19d6a2-9aa1-11ec-bde1-8a6e55faf877"
+            ]
+        },
+        {
+            "label": "员工注册",
+            "name": "yuan_gong_zhu_ce",
+            "hssc_id": "751aadea-cdd4-11ed-a73b-0242ac120003",
+            "pym": "ygzc",
+            "name_icpc": null,
+            "managed_entity": "de87315c-9aa1-11ec-bde1-8a6e55faf877",
+            "priority": 3,
+            "service_type": 2,
+            "history_services_display": 0,
+            "enable_queue_counter": true,
+            "route_to": "CUSTOMER_HOMEPAGE",
+            "follow_up_required": false,
+            "follow_up_interval": null,
+            "follow_up_service": null,
+            "suppliers": null,
+            "not_suitable": null,
+            "overtime": null,
+            "working_hours": null,
+            "frequency": null,
+            "cost": null,
+            "load_feedback": false,
+            "resource_materials": null,
+            "resource_devices": null,
+            "resource_knowledge": null,
+            "generate_script_order": 100,
+            "buessiness_forms": [
+                "0bbc9e76-9e23-11ec-aa2c-fe35a7065cdd"
+            ],
+            "role": [
+                "de1d24ec-9aa1-11ec-bde1-8a6e55faf877"
             ]
         }
     ],
@@ -14733,6 +14819,46 @@
             "service": "9086ce2c-c976-11ed-a229-0242ac120003",
             "buessiness_form": "0c7bdb06-9e23-11ec-aa2c-fe35a7065cdd",
             "is_list": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "751c0082-cdd4-11ed-a73b-0242ac120003",
+            "service": "751aadea-cdd4-11ed-a73b-0242ac120003",
+            "buessiness_form": "0bbc9e76-9e23-11ec-aa2c-fe35a7065cdd",
+            "is_list": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "9405018a-cf67-11ed-9eaf-0242ac120003",
+            "service": "e0371aa8-9aa1-11ec-bde1-8a6e55faf877",
+            "buessiness_form": "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd",
+            "is_list": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "a4b8d74a-cf67-11ed-9eaf-0242ac120003",
+            "service": "e035d648-9aa1-11ec-bde1-8a6e55faf877",
+            "buessiness_form": "0c704264-9e23-11ec-aa2c-fe35a7065cdd",
+            "is_list": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "bcefaf82-cf67-11ed-9eaf-0242ac120003",
+            "service": "e0371aa8-9aa1-11ec-bde1-8a6e55faf877",
+            "buessiness_form": "0c704264-9e23-11ec-aa2c-fe35a7065cdd",
+            "is_list": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "045bd2e2-cf68-11ed-a782-0242ac120003",
+            "service": "e0385d3c-9aa1-11ec-bde1-8a6e55faf877",
+            "buessiness_form": "0c704264-9e23-11ec-aa2c-fe35a7065cdd",
+            "is_list": false
         }
     ],
     "eventrule": [
@@ -15814,7 +15940,7 @@
             "service": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
             "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
             "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
-            "next_service": "17c608fa-d119-11ec-ab0d-823d1f108281",
+            "next_service": "cb6fe794-b6da-11ec-8425-0ebea05fc526",
             "passing_data": 2,
             "complete_feedback": 0,
             "reminders": 1,
@@ -16464,13 +16590,13 @@
             "is_active": true
         },
         {
-            "label": "诊后7天回访",
+            "label": "糖尿病运动处方推荐",
             "name": null,
             "hssc_id": "40c1bd12-c97a-11ed-a572-0242ac120003",
-            "service": "1b8b3fba-c974-11ed-a1d5-0242ac120003",
+            "service": "9fb42996-b6dd-11ec-8425-0ebea05fc526",
             "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
-            "system_operand": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
-            "next_service": "5e7ae356-e406-11ec-9d3a-42585b16dcd4",
+            "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
+            "next_service": "6494a7a2-c972-11ed-a51e-0242ac120003",
             "passing_data": 1,
             "complete_feedback": 1,
             "reminders": 0,
@@ -16559,8 +16685,14 @@
                 "cb7ecd6e-32fd-11ed-a506-0242ac120004",
                 "ab1007cc-32fe-11ed-aa6f-0242ac120004",
                 "c41cdcd6-4f7f-11ed-8dbc-4889e7cf38c9",
+                "5e7ae356-e406-11ec-9d3a-42585b16dcd4",
+                "ca482cce-e406-11ec-9eb0-42585b16dcd4",
                 "a1b9c424-c971-11ed-a51e-0242ac120003",
-                "c8855096-c971-11ed-a51e-0242ac120003"
+                "c8855096-c971-11ed-a51e-0242ac120003",
+                "50762b88-c972-11ed-a51e-0242ac120003",
+                "6494a7a2-c972-11ed-a51e-0242ac120003",
+                "1b8b3fba-c974-11ed-a1d5-0242ac120003",
+                "9086ce2c-c976-11ed-a229-0242ac120003"
             ],
             "service_packages": [
                 "6992ad18-33de-11ed-9004-4889e7cf38c9",
