@@ -536,7 +536,7 @@ class Service(GenerateServiceScriptMixin, HsscPymBase):
     managed_entity = models.ForeignKey(ManagedEntity, on_delete=models.CASCADE, null=True, verbose_name="管理实体")
     Operation_priority = [(0, '0级'), (1, '紧急'), (2, '优先'), (3, '一般')]
     priority = models.PositiveSmallIntegerField(choices=Operation_priority, default=3, verbose_name='优先级')
-    Service_type = [(0, '系统基础服务'), (1, '系统业务服务'), (2, '用户业务服务')]
+    Service_type = [(0, '系统服务'), (1, '管理调度服务'), (2, '诊疗服务')]
     service_type = models.PositiveSmallIntegerField(choices=Service_type, default=2, verbose_name='服务类型')
     role = models.ManyToManyField(Role, blank=True, verbose_name="服务岗位")
     History_services_display=[(0, '所有历史服务'), (1, '当日服务')]
