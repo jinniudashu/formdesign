@@ -63,7 +63,7 @@ class CustomerSchedule(HsscFormModel):
     scheduled_time = models.DateTimeField(blank=True, null=True, verbose_name='计划执行时间')
     scheduled_operator = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True, blank=True, verbose_name='服务人员')
     priority_operator = models.ForeignKey(VirtualStaff, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="优先操作员")
-    reference_operation = models.ManyToManyField(OperationProc, blank=True, limit_choices_to=Q(customer=F('customer'), created_time__gte=datetime.now() - timedelta(days=7)), verbose_name='引用表单')
+    reference_operation = models.ManyToManyField(OperationProc, blank=True, limit_choices_to=Q(customer=F('customer'), service__service_type=2, created_time__gte=datetime.now() - timedelta(days=7)), verbose_name='引用表单')
     overtime = models.DurationField(blank=True, null=True, verbose_name='超期时限')
     is_assigned = models.BooleanField(default=False, verbose_name='已生成任务')
 
