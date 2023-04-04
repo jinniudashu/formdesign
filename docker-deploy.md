@@ -11,7 +11,7 @@
 5. 查看镜像：docker images
 6. 删除镜像：docker rmi design:v1
 7. 查看volume：docker volume ls
-8. 删除volume：docker volume rm design_***_volume
+8. 删除volume：docker volume rm design_app
 9. 下载镜像：docker pull jinniudashu/design:v1
 10. 启动容器：docker-compose up
 11. 浏览器访问，修改密码
