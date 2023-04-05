@@ -62,6 +62,22 @@ class FormComponentsSettingInline(admin.TabularInline):
     exclude = ['label', 'name', 'hssc_id']
     autocomplete_fields = ['component']
 
+class ComputeComponentsSettingInline(admin.TabularInline):
+    model = ComputeComponentsSetting
+    exclude = ['label', 'name', 'hssc_id']
+    # autocomplete_fields = ['component']
+    extra = 0
+
+    # component下拉框只显示与当前BuessinessForm实例相关联的component实例
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "component":
+            form_id = request.resolver_match.kwargs.get('object_id')
+            if form_id is not None:
+                form_instance = BuessinessForm.objects.get(pk=form_id)
+                kwargs["queryset"] = Component.objects.filter(formcomponentssetting__form=form_instance)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+
 @admin.register(BuessinessForm)
 class BuessinessFormAdmin(admin.ModelAdmin):
     list_display = ['name_icpc', 'label', 'name', 'id']
@@ -74,7 +90,7 @@ class BuessinessFormAdmin(admin.ModelAdmin):
     search_fields = ['name', 'label', 'pym']
     filter_horizontal = ("components",)
     readonly_fields = ['api_fields', 'name', 'hssc_id']
-    inlines = [FormComponentsSettingInline]
+    inlines = [FormComponentsSettingInline, ComputeComponentsSettingInline]
     autocomplete_fields = ['name_icpc',]
 
     def save_formset(self, request, form, formset, change):

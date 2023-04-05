@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q, F
 from django.dispatch import receiver
 from django.db.models.signals import post_save, m2m_changed, post_delete
 import json
@@ -334,6 +335,7 @@ class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
 
         super().save(*args, **kwargs)
 
+# 业务表单字段设置
 class FormComponentsSetting(HsscBase):
     form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="表单")
     component = models.ForeignKey(Component, on_delete=models.CASCADE, verbose_name="字段")
@@ -348,6 +350,21 @@ class FormComponentsSetting(HsscBase):
 
     def __str__(self):
         return str(self.form.name) + '_' + str(self.component.name)
+
+
+# 业务表单计算字段定义
+class ComputeComponentsSetting(HsscBase):
+    form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="表单")
+    component = models.ForeignKey(Component, on_delete=models.CASCADE, limit_choices_to=Q(formcomponentssetting__form=F('formcomponentssetting__form')), verbose_name="字段")
+    description = models.TextField(max_length=512, null=True, blank=True, verbose_name="计算逻辑说明")
+    js_script = models.TextField(max_length=1024, null=True, blank=True, verbose_name="计算脚本")
+
+    class Meta:
+        verbose_name = '计算字段设置'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return str(self.form.name) + '_' + str(self.component.name) + '_计算字段'
 
 
 class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
