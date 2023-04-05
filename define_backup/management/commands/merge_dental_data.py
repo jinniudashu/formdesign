@@ -43,7 +43,6 @@ class Command(BaseCommand):
             DTField,
             RelatedField,
             FileField,
-            ComponentsGroup,
             BuessinessForm,
             # FormComponentsSetting,
             Service,

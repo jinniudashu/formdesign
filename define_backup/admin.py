@@ -26,7 +26,6 @@ Backup_models = [
     DTField,
     RelatedField,
     FileField,
-    ComponentsGroup,
     BuessinessForm,
     FormComponentsSetting,
     Service,

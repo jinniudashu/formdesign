@@ -56,12 +56,6 @@ class ComponentAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
-
-@admin.register(ComponentsGroup)
-class ComponentsGroupAdmin(admin.ModelAdmin):
-    readonly_fields = ['name', 'hssc_id']
-    search_fields=['label', 'pym']
-
 # @admin.register(DicDetail)
 # class DicDetailAdmin(admin.ModelAdmin):
 #     list_display = ('diclist', 'item', 'icpc')

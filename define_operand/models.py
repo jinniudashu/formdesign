@@ -6,7 +6,7 @@ import json
 from pypinyin import lazy_pinyin
 
 from formdesign.hsscbase_class import HsscBase, HsscPymBase
-from define.models import Component, ComponentsGroup, Role, RelateFieldModel, DicList, Medicine
+from define.models import Component, Role, RelateFieldModel, DicList, Medicine
 from define_icpc.models import Icpc
 
 # 内核模型定义
@@ -318,7 +318,6 @@ admin.site.register({name}, {name}Admin)
 class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     components = models.ManyToManyField(Component, through='FormComponentsSetting', verbose_name="字段")
-    components_groups = models.ManyToManyField(ComponentsGroup, blank=True, verbose_name="组件")
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
     api_fields = models.JSONField(null=True, blank=True, verbose_name="API字段")
 

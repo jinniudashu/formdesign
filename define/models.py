@@ -126,19 +126,6 @@ class Component(HsscPymBase):
         verbose_name_plural = verbose_name
         ordering = ['id']
 
-# 组件
-class ComponentsGroup(HsscPymBase):
-    components = models.ManyToManyField(Component, verbose_name="字段")
-
-    def save(self, *args, **kwargs):
-        if self.name is None or self.name == '':
-            self.name = f'relatedfield_{"_".join(lazy_pinyin(self.label)).lower()}'
-        super().save(*args, **kwargs)
-
-    class Meta:
-        verbose_name = "组件"
-        verbose_name_plural = "组件"
-
 
 # 如果保存字段表，则更新Component表
 @receiver(post_save, sender=CharacterField, weak=True, dispatch_uid=None)

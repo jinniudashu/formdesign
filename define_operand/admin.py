@@ -68,7 +68,7 @@ class BuessinessFormAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), 'components_groups', 'description', ('api_fields', 'name', 'hssc_id'), )
+            'fields': (('label', 'name_icpc'), 'description', ('api_fields', 'name', 'hssc_id'), )
         }),
     )
     search_fields = ['name', 'label', 'pym']
