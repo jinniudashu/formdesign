@@ -141,6 +141,7 @@ class FieldsType(Enum):
     scheduled_operator = "entities.Stuff"  # 计划执行人员
     service = "core.Service"  # 服务
     priority_operator = "core.VirtualStaff"  # 虚拟职员
+    reference_operation = "core.OperationProc"  # 引用表单
     is_assigned = "Boolean"  # 是否已生成任务
 
     # 自动生成字段数据类型'''
