@@ -109,7 +109,7 @@ class GenerateFormsScriptMixin(object):
     # 生成models, admin, forms脚本
     def generate_script(self):
         script = {}
-        script['models'], script['admin'], script['serializers'], script['forms'] = self._create_model_script()
+        script['models'], script['admin'], script['serializers'], script['forms'], script['templates'] = self._create_model_script()
         return script
 
     # generate model and admin script
@@ -201,7 +201,6 @@ admin.site.register({name}, {name}Admin)
         component_type = component.content_type.__dict__['model']
 
         # 从表单组件设置中间表中获取is_required属性
-        print('form:', form, 'formcomponentssetting_set:', form.formcomponentssetting_set.all(), 'component:', component)
         is_blank = not form.formcomponentssetting_set.get(component=component).is_required
 
         if component_type == 'characterfield':
@@ -351,13 +350,11 @@ class FormComponentsSetting(HsscBase):
     def __str__(self):
         return str(self.form.name) + '_' + str(self.component.name)
 
-
-# 业务表单计算字段定义
+# 业务表单计算字段设置
 class ComputeComponentsSetting(HsscBase):
     form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="表单")
     component = models.ForeignKey(Component, on_delete=models.CASCADE, limit_choices_to=Q(formcomponentssetting__form=F('formcomponentssetting__form')), verbose_name="字段")
     description = models.TextField(max_length=512, null=True, blank=True, verbose_name="计算逻辑说明")
-    js_script = models.TextField(max_length=1024, null=True, blank=True, verbose_name="计算脚本")
 
     class Meta:
         verbose_name = '计算字段设置'
@@ -382,8 +379,11 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
 
         fields_script = header_fields = ''
         modeladmin_body = {}
-        fieldssets = autocomplete_fields = radio_fields = search_fields = ''
+        fieldssets = autocomplete_fields = radio_fields = search_fields = change_form_template =''
         form_script = ''
+        
+        computed_fields = []  # 计算字段清单
+        service_fields = []  # 服务所有表单字段
 
         is_base_form = self._is_base_form_service()
         
@@ -405,6 +405,13 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             form_fields = ''
             for form_components in FormComponentsSetting.objects.filter(form=form).order_by('position'):
                 component=form_components.component
+
+                # 获取服务所有表单字段用户构造计算字段脚本
+                service_fields.append({
+                        'field_name': component.name,
+                        'field_label': component.label,
+                    })
+                
                 # construct fields script
                 _script = self._create_model_field_script(component, form)
 
@@ -428,9 +435,23 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             # construct admin fieldset script
             fieldssets = fieldssets + f'\n        ("{form.label}", {{"fields": ({form_fields})}}), '
 
+            # construct change_form_template script
+            # 判断当前表单是否有计算字段, 如果有，需要设置change_form_template，例如：change_form_template = 'a3101_change_form.html'
+            items = ComputeComponentsSetting.objects.filter(form=form)
+            if items.exists():
+                change_form_template = f'"{self.name.lower()}_change_form.html"'
+                # 生成计算字段清单
+                for item in items:
+                    computed_fields.append({
+                        'computed_field_name': item.component.name,
+                        'computed_field_label': item.component.label,
+                        'computation_logic': item.description
+                    })
+
         # construct model footer script
         footer_script = self._create_model_footer_script(is_base_form)
 
+        # construct modeladmin body script
         if fieldssets:
             modeladmin_body['fieldssets'] = fieldssets
         if autocomplete_fields:
@@ -441,16 +462,22 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             modeladmin_body['readonly_fields'] = header_fields
         if search_fields:
             modeladmin_body['search_fields'] = search_fields
+        if change_form_template:
+            modeladmin_body['change_form_template'] = change_form_template
 
         # construct admin script
         admin_script = self._create_admin_script(modeladmin_body)
         # construct serializers script
         serializers_script = self._create_serializers_script()
+        # construct template_script
+        template_script = None
+        if computed_fields:
+            template_script = self._create_template_script(computed_fields, service_fields)
 
         # construct model script
         model_script = f'{head_script}{fields_script}{footer_script}\n'
         
-        return model_script, admin_script, serializers_script, form_script
+        return model_script, admin_script, serializers_script, form_script, template_script
 
     # generate admin script
     def _create_admin_script(self, modeladmin_body_dict):
@@ -461,6 +488,8 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             for key, value in modeladmin_body_dict.items():
                 if key == 'radio_fields':
                     modeladmin_body = modeladmin_body + f'    {key} = {{{value}}}\n'
+                elif key == 'change_form_template':
+                    modeladmin_body = modeladmin_body + f'    {key} = {value}\n'
                 else:
                     modeladmin_body = modeladmin_body + f'    {key} = [{value}]\n'
 
@@ -544,6 +573,19 @@ class {service_name}_HeaderForm(ModelForm):
         fields = {header_fields}
         '''
 
+    # generate custom template script
+    def _create_template_script(self, computed_fields, service_fields):
+        template_script = '<script>'
+        for item in computed_fields:
+            template_script = f'{template_script}\n{item}'
+        for item in service_fields:
+            template_script = f'{template_script}\n{item}'
+        template_script = template_script + '\n</script>'
+        # 调用GPT API生成template脚本
+        # @ai_fn
+        # def get_js_script(computed_fields: list) -> string:
+        # template_script = get_js_script(computed_fields)
+        return template_script
 
 # 作业基础信息表
 class Service(GenerateServiceScriptMixin, HsscPymBase):

@@ -483,3 +483,13 @@ class SubIcpcAdmin(admin.ModelAdmin):
 serializers_head = '''from rest_framework import serializers
 from .models import *
 '''
+
+
+# template.html文件头, 文件尾
+template_head = '''{% extends "admin/change_form.html" %}
+
+{% block extrahead %}
+'''
+
+template_end = '''
+{% endblock %}'''

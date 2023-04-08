@@ -25,6 +25,7 @@ def export_source_code(project):
         admin_script =  file_header['admin_file_head']
         serializers_script = file_header['serializers_head']
         forms_script = file_header['forms_head']
+        templates_script = {}
 
         for item in query_set:
             script = item.generate_script()  # 生成最新脚本
@@ -32,8 +33,10 @@ def export_source_code(project):
             admin_script = f'{admin_script}{script["admin"]}'
             serializers_script = f'{serializers_script}{script["serializers"]}'
             forms_script = f'{forms_script}{script["forms"]}'
+            if script["templates"]:
+                templates_script[item.name.lower()] = f'{template_head}{script["templates"]}{template_end}'
 
-        return {'models': models_script, 'admin': admin_script, 'serializers': serializers_script, 'forms': forms_script}
+        return {'models': models_script, 'admin': admin_script, 'serializers': serializers_script, 'forms': forms_script, 'templates': templates_script}
 
     # 导出字典models.py, admin.py脚本
     def __get_dict_models_admin_serializers_script(query_set):
@@ -227,6 +230,7 @@ class FieldsType(Enum):
             'dictionaries': {},
             'icpc': {},
             'core': {},
+            'templates': {},
         },
         'data': {
             'dictionaries': [],
@@ -235,9 +239,11 @@ class FieldsType(Enum):
         }
     }
 
-    # 生成apps['service']的脚本，生成服务类型为“用户业务服务”的服务
+    # 生成apps['service']的脚本和用于计算字段的自定义template，生成服务类型为“用户业务服务”的服务
     project_queryset = project.get_queryset_by_model('Service').filter(service_type=2).order_by('-id')
     source_code['script']['service'] = __get_models_admin_serializer_forms_script(project_queryset)  # 导出App:service脚本
+    source_code['script']['templates'] = source_code['script']['service']['templates']
+    source_code['script']['service'].pop('templates')
 
     # 生成apps['dictionaries']的脚本和数据
     project_queryset = project.get_queryset_by_model('DicList')
