@@ -9,6 +9,7 @@ from pypinyin import lazy_pinyin
 from formdesign.hsscbase_class import HsscBase, HsscPymBase
 from define.models import Component, Role, RelateFieldModel, DicList, Medicine
 from define_icpc.models import Icpc
+from define_operand.utils import generate_js_script
 
 # 内核模型定义
 class CoreModel(HsscBase):
@@ -382,8 +383,8 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         fieldssets = autocomplete_fields = radio_fields = search_fields = change_form_template =''
         form_script = ''
         
-        computed_fields = []  # 计算字段清单
-        service_fields = []  # 服务所有表单字段
+        computation_logic = []  # 计算字段清单
+        service_fields = {}  # 表单字段清单
 
         is_base_form = self._is_base_form_service()
         
@@ -406,11 +407,8 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             for form_components in FormComponentsSetting.objects.filter(form=form).order_by('position'):
                 component=form_components.component
 
-                # 获取服务所有表单字段用户构造计算字段脚本
-                service_fields.append({
-                        'field_name': component.name,
-                        'field_label': component.label,
-                    })
+                # 获取服务所有表单字段用户构造表单字段清单
+                service_fields[component.name] = component.label
                 
                 # construct fields script
                 _script = self._create_model_field_script(component, form)
@@ -442,11 +440,7 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
                 change_form_template = f'"{self.name.lower()}_change_form.html"'
                 # 生成计算字段清单
                 for item in items:
-                    computed_fields.append({
-                        'computed_field_name': item.component.name,
-                        'computed_field_label': item.component.label,
-                        'computation_logic': item.description
-                    })
+                    computation_logic.append(item.description)
 
         # construct model footer script
         footer_script = self._create_model_footer_script(is_base_form)
@@ -471,8 +465,10 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         serializers_script = self._create_serializers_script()
         # construct template_script
         template_script = None
-        if computed_fields:
-            template_script = self._create_template_script(computed_fields, service_fields)
+        if computation_logic:
+            prompt = f'- form definition: {service_fields}\n- computation logic: {computation_logic}'
+            # generate custom template JS script
+            template_script = generate_js_script(prompt)
 
         # construct model script
         model_script = f'{head_script}{fields_script}{footer_script}\n'
@@ -573,19 +569,6 @@ class {service_name}_HeaderForm(ModelForm):
         fields = {header_fields}
         '''
 
-    # generate custom template script
-    def _create_template_script(self, computed_fields, service_fields):
-        template_script = '<script>'
-        for item in computed_fields:
-            template_script = f'{template_script}\n{item}'
-        for item in service_fields:
-            template_script = f'{template_script}\n{item}'
-        template_script = template_script + '\n</script>'
-        # 调用GPT API生成template脚本
-        # @ai_fn
-        # def get_js_script(computed_fields: list) -> string:
-        # template_script = get_js_script(computed_fields)
-        return template_script
 
 # 作业基础信息表
 class Service(GenerateServiceScriptMixin, HsscPymBase):
