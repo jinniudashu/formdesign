@@ -258,6 +258,11 @@ class Medicine(HsscPymBase):
     gjjbyp = models.CharField(max_length=100, null=True, verbose_name="国家基本药品目录名称")
     ybypbm = models.CharField(max_length=100, null=True, verbose_name="医保药品目录对应药品编码")
     ybyplb = models.CharField(max_length=2, null=True, verbose_name="药品报销类别（甲类、乙类）")
+    syz = models.CharField(max_length=255, null=True, verbose_name="适应症")
+    bsyz = models.CharField(max_length=255, null=True, verbose_name="不适应症")
+    fytj = models.CharField(max_length=255, null=True, verbose_name="服用途径")
+    fypc = models.CharField(max_length=255, null=True, verbose_name="服用频次")
+    fyzysxhbz = models.CharField(max_length=255, null=True, verbose_name="服用注意事项和备注")
 
     class Meta:
         verbose_name = "药品基本信息表"
@@ -311,6 +316,11 @@ class MedicineImport(models.Model):
     gjjbyp = models.CharField(max_length=100, null=True, verbose_name="国家基本药品目录名称")
     ybypbm = models.CharField(max_length=100, null=True, verbose_name="医保药品目录对应药品编码")
     ybyplb = models.CharField(max_length=2, null=True, verbose_name="药品报销类别（甲类、乙类）")
+    syz = models.CharField(max_length=255, null=True, verbose_name="适应症")
+    bsyz = models.CharField(max_length=255, null=True, verbose_name="不适应症")
+    fytj = models.CharField(max_length=255, null=True, verbose_name="服用途径")
+    fypc = models.CharField(max_length=255, null=True, verbose_name="服用频次")
+    fyzysxhbz = models.CharField(max_length=255, null=True, verbose_name="服用注意事项和备注")
 
     class Meta:
         verbose_name = "药品基本信息导入表"
@@ -345,6 +355,11 @@ def medicine_import():
         'gjjbyp' : 'gjjbyp', # "国家基本药品目录名称"
         'ybypbm' : 'ybypbm', # "医保药品目录对应药品编码"
         'ybyplb' : 'ybyplb', # "药品报销类别（甲类、乙类）"
+        'syz' : 'syz', # "适应症"
+        'bsyz' : 'bsyz', # "不适应症"
+        'fytj' : 'fytj', # "服用途径"
+        'fypc' : 'fypc', # "服用频次"
+        'fyzysxhbz' : 'fyzysxhbz', # "服用注意事项和备注"
     }
 
     # 逐条导入MedicineImport的记录至Medicine
