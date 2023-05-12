@@ -31,7 +31,7 @@ class EventExpressionInline(admin.TabularInline):
 
 @admin.register(EventRule)
 class EventRuleAdmin(admin.ModelAdmin):
-    list_display = ('label', 'description', 'expression', 'detection_scope', 'weight')
+    list_display = ('label', 'description', 'expression', 'detection_scope', 'event_type')
     list_display_links = ['label', 'description']
     search_fields=['label', 'name', 'pym']
     readonly_fields = ['hssc_id']
@@ -193,10 +193,10 @@ class ManagedEntityAdmin(admin.ModelAdmin):
     readonly_fields = ['hssc_id', 'pym', 'name', 'model_name', 'header_fields_json']
 
 
-# @admin.register(SystemOperand)
-# class SystemOperandAdmin(admin.ModelAdmin):
-#     list_display = ('id', 'label', 'name', 'func', 'parameters')
-#     ordering = ('id',)
+@admin.register(SystemOperand)
+class SystemOperandAdmin(admin.ModelAdmin):
+    list_display = ('operand_type', 'label', 'name', 'func', 'parameters')
+    ordering = ('id',)
 
 
 class ExtenalServiceFieldsMappingInline(admin.TabularInline):
