@@ -5893,6 +5893,33 @@
             "name_icpc": null,
             "type": "SelectMultiple",
             "related_content": "de844762-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "hssc_id": "f8c022f2-df4e-11ed-ba67-0242ac120003",
+            "pym": "syz",
+            "label": "适应症",
+            "name": "boolfield_shi_ying_zheng",
+            "name_icpc": null,
+            "type": "SelectMultiple",
+            "related_content": "de82c522-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "hssc_id": "0b9aad02-df4f-11ed-ba67-0242ac120003",
+            "pym": "bsyz",
+            "label": "不适应症",
+            "name": "boolfield_bu_shi_ying_zheng",
+            "name_icpc": null,
+            "type": "SelectMultiple",
+            "related_content": "de82c522-9aa1-11ec-bde1-8a6e55faf877"
+        },
+        {
+            "hssc_id": "3d2ec7e0-df4f-11ed-ba67-0242ac120003",
+            "pym": "zrr",
+            "label": "责任人",
+            "name": "boolfield_ze_ren_ren",
+            "name_icpc": null,
+            "type": "Select",
+            "related_content": "2fad9d1e-cbd4-11ed-ab05-ee2fa480f37d"
         }
     ],
     "filefield": [
@@ -6234,7 +6261,9 @@
                 "654dfc0a-c5ce-11ec-b819-725badf7393d",
                 "6da75824-c5ce-11ec-b819-725badf7393d",
                 "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-                "5dc1e618-c5ce-11ec-b9d4-725badf7393d"
+                "5dc1e618-c5ce-11ec-b9d4-725badf7393d",
+                "f8c022f2-df4e-11ed-ba67-0242ac120003",
+                "0b9aad02-df4f-11ed-ba67-0242ac120003"
             ]
         },
         {
@@ -6570,10 +6599,11 @@
             "hssc_id": "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd",
             "pym": "dryygh",
             "name_icpc": "A6501",
-            "description": null,
-            "api_fields": null,
+            "description": "",
+            "api_fields": "[{\"scheduled_time\": \"boolfield_yu_yue_shi_jian\"}]",
             "components": [
-                "deb85c6e-9aa1-11ec-bde1-8a6e55faf877"
+                "deb85c6e-9aa1-11ec-bde1-8a6e55faf877",
+                "3d2ec7e0-df4f-11ed-ba67-0242ac120003"
             ]
         },
         {
@@ -11056,6 +11086,46 @@
             "is_required": false,
             "api_field": null,
             "position": 100
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "2711dd56-ed48-11ed-af00-0242ac120003",
+            "form": "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd",
+            "component": "3d2ec7e0-df4f-11ed-ba67-0242ac120003",
+            "is_required": false,
+            "api_field": null,
+            "position": 100
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "712eb5d4-ed49-11ed-a403-0242ac120003",
+            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "component": "18cfcb9a-d11a-11ec-ab0d-823d1f108281",
+            "is_required": false,
+            "api_field": null,
+            "position": 100
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "712ecb32-ed49-11ed-a403-0242ac120003",
+            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "component": "f8c022f2-df4e-11ed-ba67-0242ac120003",
+            "is_required": false,
+            "api_field": null,
+            "position": 100
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "712ed942-ed49-11ed-a403-0242ac120003",
+            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "component": "0b9aad02-df4f-11ed-ba67-0242ac120003",
+            "is_required": false,
+            "api_field": null,
+            "position": 100
         }
     ],
     "computecomponentssetting": [
@@ -11230,7 +11300,11 @@
             ],
             "role": [
                 "de18f0fc-9aa1-11ec-bde1-8a6e55faf877",
-                "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877"
+                "de194c50-9aa1-11ec-bde1-8a6e55faf877",
+                "de1992d2-9aa1-11ec-bde1-8a6e55faf877",
+                "de19d6a2-9aa1-11ec-bde1-8a6e55faf877",
+                "de1c5a4e-9aa1-11ec-bde1-8a6e55faf877",
+                "de1ca0c6-9aa1-11ec-bde1-8a6e55faf877"
             ]
         },
         {
@@ -15724,7 +15798,7 @@
             "service": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
             "event_rule": "1013b7c6-afca-11ec-b226-925bd788f441",
             "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
-            "next_service": "17c608fa-d119-11ec-ab0d-823d1f108281",
+            "next_service": "cb6fe794-b6da-11ec-8425-0ebea05fc526",
             "passing_data": 2,
             "complete_feedback": 0,
             "reminders": 1,
@@ -16404,6 +16478,22 @@
             "interval_rule": null,
             "interval_time": null,
             "is_active": true
+        },
+        {
+            "label": "血糖检查完成返回复诊",
+            "name": null,
+            "hssc_id": "35f12842-ed46-11ed-bb86-0242ac120003",
+            "service": "cb6fe794-b6da-11ec-8425-0ebea05fc526",
+            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
+            "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
+            "next_service": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
+            "passing_data": 1,
+            "complete_feedback": 0,
+            "reminders": 0,
+            "message": null,
+            "interval_rule": null,
+            "interval_time": null,
+            "is_active": true
         }
     ],
     "project": [
@@ -16470,6 +16560,7 @@
                 "ab1007cc-32fe-11ed-aa6f-0242ac120004",
                 "c41cdcd6-4f7f-11ed-8dbc-4889e7cf38c9",
                 "5e7ae356-e406-11ec-9d3a-42585b16dcd4",
+                "ca482cce-e406-11ec-9eb0-42585b16dcd4",
                 "a1b9c424-c971-11ed-a51e-0242ac120003",
                 "c8855096-c971-11ed-a51e-0242ac120003",
                 "50762b88-c972-11ed-a51e-0242ac120003",
@@ -16506,7 +16597,8 @@
                 "a6fb98ac-c978-11ed-8f38-0242ac120003",
                 "da68b788-c978-11ed-8f38-0242ac120003",
                 "40c1bd12-c97a-11ed-a572-0242ac120003",
-                "9398f974-c97a-11ed-a572-0242ac120003"
+                "9398f974-c97a-11ed-a572-0242ac120003",
+                "35f12842-ed46-11ed-bb86-0242ac120003"
             ],
             "external_services": []
         },
