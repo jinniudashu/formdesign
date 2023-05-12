@@ -193,10 +193,10 @@ class ManagedEntityAdmin(admin.ModelAdmin):
     readonly_fields = ['hssc_id', 'pym', 'name', 'model_name', 'header_fields_json']
 
 
-@admin.register(SystemOperand)
-class SystemOperandAdmin(admin.ModelAdmin):
-    list_display = ('operand_type', 'label', 'name', 'func', 'parameters')
-    ordering = ('id',)
+# @admin.register(SystemOperand)
+# class SystemOperandAdmin(admin.ModelAdmin):
+#     list_display = ('operand_type', 'label', 'name', 'func', 'parameters')
+#     ordering = ('id',)
 
 
 class ExtenalServiceFieldsMappingInline(admin.TabularInline):
