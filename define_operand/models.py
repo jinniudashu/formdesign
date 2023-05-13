@@ -385,6 +385,8 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         
         computation_logic = []  # 计算字段清单
         service_fields = {}  # 表单字段清单
+        form_events = []  # 表单事件清单, 表单事件{'expression': '表达式', 'operand': '作业'}
+        generate_params = {'form_events': form_events, 'computed_fields': ''}  # 提示信息清单
 
         is_base_form = self._is_base_form_service()
         
@@ -434,13 +436,31 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             fieldssets = fieldssets + f'\n        ("{form.label}", {{"fields": ({form_fields})}}), '
 
             # construct change_form_template script
-            # 判断当前表单是否有计算字段, 如果有，需要设置change_form_template，例如：change_form_template = 'a3101_change_form.html'
-            items = ComputeComponentsSetting.objects.filter(form=form)
-            if items.exists():
-                change_form_template = f'"{self.name.lower()}_change_form.html"'
+            # 判断当前表单是否有计算字段, 如果有生成计算字段清单
+            computed_field_items = ComputeComponentsSetting.objects.filter(form=form)
+            if computed_field_items.exists():
                 # 生成计算字段清单
-                for item in items:
+                for item in computed_field_items:
                     computation_logic.append(item.description)
+                # 生成提示信息
+                generate_params['computed_fields'] = f'- form definition: {service_fields}\n- computation logic: {computation_logic}'
+
+        # 判断当前服务的服务规则中的条件事件是否是表单事件，如果是生成表单事件清单
+        form_event_items = ServiceRule.objects.filter(service=self, event_rule__event_type="FORM_EVENT")
+        if form_event_items.exists():
+            # 生成表单事件清单
+            for item in form_event_items:
+                form_events.append({'expression': item.event_rule.expression, 'operand': item.system_operand.func})
+            # 生成提示信息
+            generate_params['form_events'] = form_events
+
+        # construct template script        
+        template_script = None
+        # 设置change_form_template，例如：change_form_template = 'a3101_change_form.html'
+        if form_events or computation_logic:
+            change_form_template = f'"{self.name.lower()}_change_form.html"'
+            # generate custom template JS script
+            template_script = generate_js_script(generate_params)
 
         # construct model footer script
         footer_script = self._create_model_footer_script(is_base_form)
@@ -463,12 +483,6 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         admin_script = self._create_admin_script(modeladmin_body)
         # construct serializers script
         serializers_script = self._create_serializers_script()
-        # construct template_script
-        template_script = None
-        if computation_logic:
-            prompt = f'- form definition: {service_fields}\n- computation logic: {computation_logic}'
-            # generate custom template JS script
-            template_script = generate_js_script(prompt)
 
         # construct model script
         model_script = f'{head_script}{fields_script}{footer_script}\n'

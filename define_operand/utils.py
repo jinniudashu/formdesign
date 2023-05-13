@@ -1,12 +1,37 @@
 ########################################################################################################################
 # Generate JS script 
 ########################################################################################################################
-def generate_js_script(prompt):
+def generate_js_script(params):
     import openai
     from formdesign.settings import OPENAI_API_KEY
 
     openai.api_key = OPENAI_API_KEY
 
+    messages=[]
+    # prompt = {'form_events': form_events, 'computed_fields': ''}  # 提示信息清单
+    # 根据prompt调用不同的提示生成脚本
+    if params.get('form_events'):
+        messages = generate_form_assistance_prompt(params.get('form_events'))
+        return messages
+    elif params.get('computed_fields'):
+        messages = generate_computed_fields_prompt(params.get('computed_fields'))
+
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        temperature=0,
+        messages=messages
+    )
+    result = response['choices'][0]['message']['content']
+    print('usage:\n', response['usage'])
+    
+    return result
+
+
+def generate_form_assistance_prompt(param):
+    return f"hi, your script is generated here ...{param}"
+
+
+def generate_computed_fields_prompt(param):
     SYSTEM_PROMPT = 'You are a seasoned Javascript developer.'
 
     USER_INPUT_PREFIX = '''Please write concise JS code to automatically update computed fields on a web page form. The form definition is in "form definition" section. The computation logic is in "computation logic" section. Computed field values are obtained by calculating values from other fields in the form using the computation logic.
@@ -53,23 +78,16 @@ Follow the steps above, that's all you need to do, no more words needed.
         });
     </script>'''
 
-    prompt = USER_INPUT_PREFIX + prompt
-    response = openai.ChatCompletion.create(
-    model="gpt-3.5-turbo",
-    temperature=0,
+    prompt = USER_INPUT_PREFIX + param
+
     messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": EXAMPLE_USER_INPUT},
             {"role": "assistant", "content": EXAMPLE_ASSISTANT_RESPONSE},
             {"role": "user", "content": prompt}
         ]
-    )
-    result = response['choices'][0]['message']['content']
-    print('prompt:\n', prompt)
-    print('result:\n', result)
-    print('usage:\n', response['usage'])
-    
-    return result
+
+    return messages
 
 
 ########################################################################################################################
