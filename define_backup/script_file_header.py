@@ -489,6 +489,7 @@ from .models import *
 template_head = '''{% extends "admin/change_form.html" %}
 
 {% block extrahead %}
+{{ block.super }}
 '''
 
 template_end = '''
