@@ -3,8 +3,8 @@ from django.db.models import Q, F
 from django.dispatch import receiver
 from django.db.models.signals import post_save, m2m_changed, post_delete
 import json
-
 from pypinyin import lazy_pinyin
+from django.conf import settings
 
 from formdesign.hsscbase_class import HsscBase, HsscPymBase
 from define.models import Component, Role, RelateFieldModel, DicList, Medicine
@@ -460,7 +460,12 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         if form_events or computation_logic:
             change_form_template = f'"{self.name.lower()}_change_form.html"'
             # generate custom template JS script
-            template_script = generate_js_script(generate_params)
+            if settings.DEBUG:
+                # 开发环境下的逻辑
+                template_script = generate_js_script(generate_params)
+            else:
+                # 生产环境下的逻辑
+                template_script = "<script>// 当前生产环境无法生成Template JavaScript，请切换到开发环境执行！</script>"         
 
         # construct model footer script
         footer_script = self._create_model_footer_script(is_base_form)
