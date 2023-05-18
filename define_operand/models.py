@@ -6,6 +6,7 @@ import json
 import re
 
 from pypinyin import lazy_pinyin
+from django.conf import settings
 
 from formdesign.hsscbase_class import HsscBase, HsscPymBase
 from define.models import Component, Role, RelateFieldModel, DicList, Medicine
@@ -465,7 +466,6 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
                 template_script = generate_js_script(generate_params)
             if (form_event_rules):
                 template_script = generate_form_event_js_script(form_event_rules)
-                print("template_script: ", template_script)
 
         # construct model footer script
         footer_script = self._create_model_footer_script(is_base_form)
