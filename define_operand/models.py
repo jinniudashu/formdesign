@@ -3,13 +3,14 @@ from django.db.models import Q, F
 from django.dispatch import receiver
 from django.db.models.signals import post_save, m2m_changed, post_delete
 import json
+import re
 
 from pypinyin import lazy_pinyin
 
 from formdesign.hsscbase_class import HsscBase, HsscPymBase
 from define.models import Component, Role, RelateFieldModel, DicList, Medicine
 from define_icpc.models import Icpc
-from define_operand.utils import generate_js_script
+from define_operand.utils import generate_js_script, generate_form_event_js_script
 
 # 内核模型定义
 class CoreModel(HsscBase):
@@ -385,8 +386,8 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         
         computation_logic = []  # 计算字段清单
         service_fields = {}  # 表单字段清单
-        form_events = []  # 表单事件清单, 表单事件{'expression': '表达式', 'operand': '作业'}
-        generate_params = {'form_events': form_events, 'computed_fields': ''}  # 提示信息清单
+        form_event_rules = []  # 表单事件规则清单
+        generate_params = {'form_event_rules': form_event_rules, 'computed_fields': ''}  # 提示信息清单
 
         is_base_form = self._is_base_form_service()
         
@@ -446,21 +447,25 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
                 generate_params['computed_fields'] = f'- form definition: {service_fields}\n- computation logic: {computation_logic}'
 
         # 判断当前服务的服务规则中的条件事件是否是表单事件，如果是生成表单事件清单
-        form_event_items = ServiceRule.objects.filter(service=self, event_rule__event_type="FORM_EVENT")
-        if form_event_items.exists():
-            # 生成表单事件清单
-            for item in form_event_items:
-                form_events.append({'expression': item.event_rule.expression, 'operand': item.system_operand.func})
-            # 生成提示信息
-            generate_params['form_events'] = form_events
+        service_rules = ServiceRule.objects.filter(service=self, event_rule__event_type="FORM_EVENT")
+        if service_rules.exists():
+            # 生成表单事件规则清单
+            for rule in service_rules:
+                form_event_rule = self._extract_dict_info(rule.event_rule.expression)
+                form_event_rule['form_event_action'] = rule.system_operand.func
+                form_event_rules.append(form_event_rule)
 
         # construct template script        
         template_script = None
         # 设置change_form_template，例如：change_form_template = 'a3101_change_form.html'
-        if form_events or computation_logic:
+        if form_event_rules or computation_logic:
             change_form_template = f'"{self.name.lower()}_change_form.html"'
             # generate custom template JS script
-            template_script = generate_js_script(generate_params)
+            if (computation_logic):
+                template_script = generate_js_script(generate_params)
+            if (form_event_rules):
+                template_script = generate_form_event_js_script(form_event_rules)
+                print("template_script: ", template_script)
 
         # construct model footer script
         footer_script = self._create_model_footer_script(is_base_form)
@@ -582,6 +587,26 @@ class {service_name}_HeaderForm(ModelForm):
         model = {service_name}
         fields = {header_fields}
         '''
+
+    # 从表达式中提取字典信息
+    def _extract_dict_info(self, expression):
+        result = {}
+        # 使用"and"拆分表达式
+        expressions = expression.split(" and ")
+        for expr in expressions:
+            # 提取字段名部分
+            field_name_matches = re.findall(r"\.intersection\((.*?)\)", expr)
+            if field_name_matches:
+                field_name = field_name_matches[0]
+
+                # 提取字符串集合部分
+                sets_matches  = re.findall(r"\{([^}]*)\}", expr)
+                if sets_matches:
+                    sets = sets_matches[0].split("', '")
+                    set_list = [item.strip("'") for item in sets]
+                    result[field_name] = set_list
+
+        return result
 
 
 # 作业基础信息表

@@ -11,11 +11,6 @@ def generate_js_script(params):
 
     # prompt = {'form_events': form_events, 'computed_fields': ''}  # 提示信息清单
     # 根据prompt调用不同的提示生成脚本
-    if params.get('form_events'):
-        form_events = params.get('form_events')
-        form_event = form_events[0]
-        messages = generate_form_assistance_prompt(form_event['expression'])
-    
     if params.get('computed_fields'):
         messages = generate_computed_fields_prompt(params.get('computed_fields'))
 
@@ -28,66 +23,6 @@ def generate_js_script(params):
     print('usage:\n', response['usage'])
     
     return result
-
-
-def generate_form_assistance_prompt(param):
-    SYSTEM_PROMPT = 'You are a seasoned Javascript developer.'
-
-    USER_INPUT_PREFIX = '''Your task is to write a piece of JavaScript code, but before that, please read a python logic expression to refer to its business logic. When this expression is true, it means that a business event has occurred: the values of the fields involved are in conflict.
-After you understand this point, please write a concise JavaScript code that uses the same logic rules to monitor whether the corresponding field values ​​involved in a web page form matches with the rules. If so, an alert pops up to warn the user: the relevant fields value has a conflicting.
-The specific requirements for the implementation code are as follows:
-Use the 'document. addEventListener' method to listen for the DOMContentLoaded event and execute a callback function when the page is loaded.
-The callback function should include the following steps:
-1. Use document.getElementById to retrieve the DOM elements of all fields involved in the given python expression in angle brackets. Follow this naming convention: the field name prefixed with "id_" is the field ID.
-2. Write a function named as "form_event" to implement the event expression logic, which accepts the fields values as arguments, and returns a boolean. Use the same logic given in the python expression.
-3. Write an update function named as "update_input", evaluate if the related fields value matches the form event condition when user inputs into related field. If so, alert the user. The format of the warning message is "<value1> conflicts with <value2>!"
-4. Add input event listeners to the DOM elements of related fields involved above, used "update_input" as callback.
-5. This code will be injected into a web page, so please put the code in the <script></script> tag.
-Follow the required steps above and the example below, step by step.
-The Python expression in angle brackets are used to illustrate business logic: < '''
-
-    EXAMPLE_USER_INPUT = '''len({'糖尿病'}.intersection(boolfield_zhen_duan)) == 1 and len({'葡萄糖'}.intersection(boolfield_yao_pin_ming_cheng)) == 1'''
-
-    EXAMPLE_USER_INPUT = USER_INPUT_PREFIX + EXAMPLE_USER_INPUT + " >"
-
-    EXAMPLE_ASSISTANT_RESPONSE = '''<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Retrieve DOM elements of all fields involved in the expression logic.
-        const boolfield_zhen_duan = document.getElementById("id_boolfield_zhen_duan");
-        const boolfield_yao_pin_ming_cheng = document.getElementById("id_boolfield_yao_pin_ming_cheng");
-
-        // A function implementing the event expression logic. It accepts the field values as arguments, and returns a boolean
-        const form_event = (zhen_duan, yao_pin_ming_cheng) => {
-            return new Set(['糖尿病']).has(boolfield_zhen_duan) && new Set(['葡萄糖']).has(boolfield_yao_pin_ming_cheng);
-        };
-
-        // Evaluate if the related fields value matches the form event condition, if so, alert the user
-        const update_input = () => {
-            const zhen_duan = boolfield_zhen_duan.value;
-            const yao_pin_ming_cheng = boolfield_yao_pin_ming_cheng.value;
-            form_event_value = form_event(zhen_duan, yao_pin_ming_cheng);
-            // If form_event() returns true, then alert the user that the valeus are conflicting
-            if (form_event_value) {
-                alert("<糖尿病>与<葡萄糖>冲突");
-            }
-        };
-
-        // Add input event listener to related fields
-        boolfield_zhen_duan.addEventListener("input", update_input);
-        boolfield_yao_pin_ming_cheng.addEventListener("input", update_input);
-    });
-</script>'''
-
-    prompt = USER_INPUT_PREFIX + param + " >"
-
-    messages=[
-            {"role": "system", "content": SYSTEM_PROMPT},
-            {"role": "user", "content": EXAMPLE_USER_INPUT},
-            {"role": "assistant", "content": EXAMPLE_ASSISTANT_RESPONSE},
-            {"role": "user", "content": prompt}
-        ]
-
-    return messages
 
 
 def generate_computed_fields_prompt(param):
@@ -193,3 +128,127 @@ def keyword_search(s, keywords_list):
         search()
     keywords = sorted(set(match), key=match.index)
     return keywords
+
+
+########################################################################################################################
+def generate_form_event_js_script(rules):
+    """
+    {boolfield_ji_bing_ming_cheng: ['非胰岛素依赖型糖尿病', '胰岛素依赖型糖尿病'], boolfield_yao_pin_ming: ['5%葡萄糖注射液(新）', '5%葡萄糖氯化钠注射液', '10%葡萄糖(新）'], form_event_action: 'WARN'},
+    {boolfield_ji_bing_ming_cheng: ['低血糖症'], boolfield_yao_pin_ming: ['甘精胰岛素注射液', '门冬胰岛素50注射液'], form_event_action: 'PROHIBIT'},
+    {boolfield_ji_bing_ming_cheng: ['肾盂肾炎', '肾小球性肾炎/肾病'], boolfield_yao_pin_ming: ['格华止片(盐酸二甲双胍片)', '圣邦杰(盐酸二甲双胍片)'], form_event_action: 'WARN'}
+    """
+    import json
+    rules_string = json.dumps(rules, ensure_ascii=False)
+
+    template_script_header = '''
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // 表单事件规则配置列表
+        const content_conflict_rules = '''
+    
+    
+    template_script_body = '''
+
+        // 定义全局变量，用于存储被跟踪的字段当前值
+        const current_values = {
+            boolfield_ji_bing_ming_cheng: null,
+            boolfield_yao_pin_ming: null
+        }
+
+        // 定义表单事件动作，接受一个选项，来自表单事件规则列表
+        const form_event_action = (action, conflict_items) => {
+            // 把冲突项目数组转换为字符串
+            const conflict_items_string = conflict_items.join('、');
+            if (action === 'WARN') {
+                // 警告用户内容冲突
+                alert(`表单内容冲突：${conflict_items_string}`);
+            } else if (action === 'PROHIBIT') {
+                alert(`表单内容冲突：${conflict_items_string}`);
+                // 禁止保存表单
+                document.querySelector('input[name="_save"]').disabled = true;
+            }
+        }
+
+        // 检测是否发生符合特定规则的表单事件. 接受一条来自表单事件规则列表的规则, 如果发生表单事件，执行规则配置表中指定的表单事件动作
+        const detect_form_event = (rule) => {
+            const events = {
+                event_0 : new Set(rule.boolfield_ji_bing_ming_cheng).has(current_values.boolfield_ji_bing_ming_cheng),
+                event_1 : current_values.boolfield_yao_pin_ming.filter(item => rule.boolfield_yao_pin_ming.includes(item)).length > 0,
+            }
+            // 相与所有事件结果，如果全部为真，返回真
+            if (Object.values(events).every(value => value === true)) {
+                // 构造冲突项列表
+                const conflict_items = [];
+                for (const key in current_values) {
+                    const value = current_values[key];
+                    // 如果值是数组，找出冲突项
+                    if (Array.isArray(value)) {
+                        const conflictingItems = value.filter(item => rule.boolfield_yao_pin_ming.includes(item));
+                        if (conflictingItems.length > 0) {
+                            conflict_items.push(conflictingItems.join(', '));
+                        }
+                    } else {
+                        conflict_items.push(value);
+                    }
+                }                
+
+                form_event_action(rule.form_event_action, conflict_items)
+            }
+        };
+
+        // 选择字段对应的dom元素，django admin 自动补全单选下拉框，创建一个新的MutationObserver实例，监听变化。
+        const boolfield_ji_bing_ming_cheng = document.querySelector('.form-row.field-boolfield_ji_bing_ming_cheng .related-widget-wrapper');
+        // Create a new MutationObserver instance
+        const observer_boolfield_ji_bing_ming_cheng = new MutationObserver(function(mutationsList, observer) {
+            for (let mutation of mutationsList) {
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    const spanElement = boolfield_ji_bing_ming_cheng.querySelector('span.select2-selection__rendered');
+                    if (spanElement.hasAttribute('title')) {
+                        const title = spanElement.getAttribute('title').trim();
+                        // 检查字段内容是否发生变化
+                        if (title !== current_values.boolfield_ji_bing_ming_cheng) {
+                            current_values.boolfield_ji_bing_ming_cheng = title;
+                            // 检查保存按钮是否被禁用，如果是，启用
+                            document.querySelector('input[name="_save"]').disabled = false;
+                            // 如果疾病名称在规则列表中，检查表单事件
+                            content_conflict_rules.find(item => {
+                                if (item.boolfield_ji_bing_ming_cheng.includes(current_values.boolfield_ji_bing_ming_cheng)) {
+                                    detect_form_event(item);
+                                }
+                            });
+                        }
+                    }            
+                }
+            }
+        });
+        observer_boolfield_ji_bing_ming_cheng.observe(boolfield_ji_bing_ming_cheng, { childList: true, subtree: true });
+
+        // 选择字段对应的dom元素，django admin 自动补全多选下拉框，创建一个新的MutationObserver实例，监听变化。
+        const boolfield_yao_pin_ming = document.querySelector('.form-row.field-boolfield_yao_pin_ming .related-widget-wrapper');
+        // Create a new MutationObserver instance
+        const observer_boolfield_yao_pin_ming = new MutationObserver(function(mutationsList, observer) {
+            for (let mutation of mutationsList) {
+                if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                    const spanElement = boolfield_yao_pin_ming.querySelector('ul.select2-selection__rendered');
+                    const liElements = spanElement.querySelectorAll('li.select2-selection__choice');
+                    const titleArray = Array.from(liElements, li => li.getAttribute('title').trim());
+                    // 检查字段内容是否发生变化
+                    if (JSON.stringify(titleArray) !== JSON.stringify(current_values.boolfield_yao_pin_ming)) {
+                        current_values.boolfield_yao_pin_ming = titleArray;
+                        // 检查保存按钮是否被禁用，如果是，启用
+                        document.querySelector('input[name="_save"]').disabled = false;
+                        // 如果药品名称在规则列表中，检查表单事件
+                        content_conflict_rules.find(item => {
+                            if (item.boolfield_yao_pin_ming.filter(item => current_values.boolfield_yao_pin_ming.includes(item)).length > 0) {
+                                detect_form_event(item);
+                            }
+                        });
+                    }
+                }
+            }
+        });
+        observer_boolfield_yao_pin_ming.observe(boolfield_yao_pin_ming, { childList: true, subtree: true });
+    });
+</script>
+'''
+    return template_script_header + rules_string + template_script_body
