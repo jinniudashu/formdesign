@@ -6190,12 +6190,11 @@
             "hssc_id": "0c89031c-9e23-11ec-aa2c-fe35a7065cdd",
             "pym": "ywzx",
             "name_icpc": "A6201",
-            "description": null,
+            "description": "",
             "api_fields": null,
             "components": [
                 "de9ad1a8-9aa1-11ec-bde1-8a6e55faf877",
-                "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-                "1287193a-a52a-11ec-a478-2ec403f6c47b"
+                "deb93f26-9aa1-11ec-bde1-8a6e55faf877"
             ]
         },
         {
@@ -6600,6 +6599,7 @@
                 "deb35b74-9aa1-11ec-bde1-8a6e55faf877",
                 "deb416fe-9aa1-11ec-bde1-8a6e55faf877",
                 "2cc86fcc-b89b-11ec-aad8-322924405212",
+                "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
                 "dedebd28-9aa1-11ec-bde1-8a6e55faf877",
                 "dee098fa-9aa1-11ec-bde1-8a6e55faf877"
             ]
@@ -6628,6 +6628,7 @@
             "api_fields": "[{\"scheduled_time\": \"boolfield_yu_yue_shi_jian\"}]",
             "components": [
                 "deb85c6e-9aa1-11ec-bde1-8a6e55faf877",
+                "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
                 "3d2ec7e0-df4f-11ed-ba67-0242ac120003"
             ]
         },
@@ -6846,6 +6847,7 @@
             "api_fields": null,
             "components": [
                 "deb85c6e-9aa1-11ec-bde1-8a6e55faf877",
+                "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
                 "98dbd7f4-a52b-11ec-9b14-2ec403f6c47b"
             ]
         },
@@ -7658,16 +7660,6 @@
             "hssc_id": "7b847e8c-dd93-11ec-8544-4889e7cf38c9",
             "form": "0c89031c-9e23-11ec-aa2c-fe35a7065cdd",
             "component": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
-            "is_required": false,
-            "api_field": null,
-            "position": 100
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7b85690b-dd93-11ec-87f5-4889e7cf38c9",
-            "form": "0c89031c-9e23-11ec-aa2c-fe35a7065cdd",
-            "component": "1287193a-a52a-11ec-a478-2ec403f6c47b",
             "is_required": false,
             "api_field": null,
             "position": 100
@@ -11168,6 +11160,36 @@
             "hssc_id": "d537714a-f228-11ed-9e3f-0242ac120003",
             "form": "7f149618-a4c6-11ec-a7bb-cecec7a0e139",
             "component": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
+            "is_required": false,
+            "api_field": null,
+            "position": 100
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "496bb002-fa9a-11ed-807c-0242ac120003",
+            "form": "0d137dbc-9e23-11ec-aa2c-fe35a7065cdd",
+            "component": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
+            "is_required": false,
+            "api_field": null,
+            "position": 100
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "7e4843b2-fa9a-11ed-807c-0242ac120003",
+            "form": "0d1b5014-9e23-11ec-aa2c-fe35a7065cdd",
+            "component": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
+            "is_required": false,
+            "api_field": null,
+            "position": 100
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "ba384a8e-fa9a-11ed-807c-0242ac120003",
+            "form": "0cd1dcea-9e23-11ec-aa2c-fe35a7065cdd",
+            "component": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
             "is_required": false,
             "api_field": null,
             "position": 100
@@ -15122,7 +15144,7 @@
             "detection_scope": "CURRENT_SERVICE",
             "event_type": "FORM_EVENT",
             "weight": 1,
-            "expression": "len({'非胰岛素依赖糖尿病，胰岛素依赖糖尿病'}.intersection(boolfield_ji_bing_ming_cheng)) >= 1 and len({'5%葡萄糖注射液（新），5%葡萄糖氯化钠注射液，10%葡萄糖(新）'}.intersection(boolfield_yao_pin_ming)) >= 1",
+            "expression": "len({'非胰岛素依赖型糖尿病', '胰岛素依赖型糖尿病'}.intersection(boolfield_ji_bing_ming_cheng)) >= 1 and len({'5%葡萄糖氯化钠注射液', '10%葡萄糖(新）', '5%葡萄糖注射液(新）'}.intersection(boolfield_yao_pin_ming)) >= 1",
             "expression_fields": "boolfield_ji_bing_ming_cheng,boolfield_yao_pin_ming"
         },
         {
@@ -15134,7 +15156,7 @@
             "detection_scope": "CURRENT_SERVICE",
             "event_type": "FORM_EVENT",
             "weight": 1,
-            "expression": "len({'低血糖症'}.intersection(boolfield_ji_bing_ming_cheng)) == 1 and len({'甘精胰岛素注射液，门冬胰岛素50注射液'}.intersection(boolfield_yao_pin_ming)) >= 1",
+            "expression": "len({'低血糖症'}.intersection(boolfield_ji_bing_ming_cheng)) == 1 and len({'甘精胰岛素注射液', '门冬胰岛素50注射液'}.intersection(boolfield_yao_pin_ming)) >= 1",
             "expression_fields": "boolfield_ji_bing_ming_cheng,boolfield_yao_pin_ming"
         },
         {
@@ -15146,7 +15168,7 @@
             "detection_scope": "CURRENT_SERVICE",
             "event_type": "FORM_EVENT",
             "weight": 1,
-            "expression": "len({'肾盂肾炎，肾小球性肾炎/肾病'}.intersection(boolfield_ji_bing_ming_cheng)) >= 1 and len({'圣邦杰（盐酸二甲双胍片），格华止片(盐酸二甲双胍片)'}.intersection(boolfield_yao_pin_ming)) == 1",
+            "expression": "len({'肾盂肾炎', '肾小球性肾炎/肾病'}.intersection(boolfield_ji_bing_ming_cheng)) >= 1 and len({'格华止片(盐酸二甲双胍片)', '圣邦杰（盐酸二甲双胍片）'}.intersection(boolfield_yao_pin_ming)) == 1",
             "expression_fields": "boolfield_ji_bing_ming_cheng,boolfield_yao_pin_ming"
         }
     ],
@@ -15619,7 +15641,7 @@
             "hssc_id": "c4ab6ffe-f141-11ed-856d-4889e7cf38c9",
             "event_rule": "c4ab0a2b-f141-11ed-96f2-4889e7cf38c9",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
-            "char_value": "非胰岛素依赖糖尿病，胰岛素依赖糖尿病",
+            "char_value": "非胰岛素依赖型糖尿病, 胰岛素依赖型糖尿病",
             "operator": 4,
             "number_value": 1.0,
             "connection_operator": 0
@@ -15630,7 +15652,7 @@
             "hssc_id": "c4ab9708-f141-11ed-a847-4889e7cf38c9",
             "event_rule": "c4ab0a2b-f141-11ed-96f2-4889e7cf38c9",
             "field": "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
-            "char_value": "5%葡萄糖注射液（新），5%葡萄糖氯化钠注射液，10%葡萄糖(新）",
+            "char_value": "5%葡萄糖注射液(新）, 5%葡萄糖氯化钠注射液, 10%葡萄糖(新）",
             "operator": 4,
             "number_value": 1.0,
             "connection_operator": null
@@ -15652,7 +15674,7 @@
             "hssc_id": "ca7e3dd0-f226-11ed-8b14-0242ac120003",
             "event_rule": "ca7e0d2e-f226-11ed-8b14-0242ac120003",
             "field": "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
-            "char_value": "甘精胰岛素注射液，门冬胰岛素50注射液",
+            "char_value": "甘精胰岛素注射液, 门冬胰岛素50注射液",
             "operator": 4,
             "number_value": 1.0,
             "connection_operator": null
@@ -15663,7 +15685,7 @@
             "hssc_id": "addad41a-f229-11ed-826c-0242ac120003",
             "event_rule": "addab7b4-f229-11ed-826c-0242ac120003",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
-            "char_value": "肾盂肾炎，肾小球性肾炎/肾病",
+            "char_value": "肾盂肾炎, 肾小球性肾炎/肾病",
             "operator": 4,
             "number_value": 1.0,
             "connection_operator": 0
@@ -15674,7 +15696,7 @@
             "hssc_id": "addae978-f229-11ed-826c-0242ac120003",
             "event_rule": "addab7b4-f229-11ed-826c-0242ac120003",
             "field": "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
-            "char_value": "圣邦杰（盐酸二甲双胍片），格华止片(盐酸二甲双胍片)",
+            "char_value": "圣邦杰（盐酸二甲双胍片）, 格华止片(盐酸二甲双胍片)",
             "operator": 0,
             "number_value": 1.0,
             "connection_operator": null
@@ -16715,6 +16737,22 @@
             "complete_feedback": 0,
             "reminders": 1,
             "message": "该药品使用有风险",
+            "interval_rule": null,
+            "interval_time": null,
+            "is_active": true
+        },
+        {
+            "label": "诊后回访规则",
+            "name": null,
+            "hssc_id": "4cf52632-fa9e-11ed-915b-0242ac120003",
+            "service": "9fb42996-b6dd-11ec-8425-0ebea05fc526",
+            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
+            "system_operand": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
+            "next_service": "5e7ae356-e406-11ec-9d3a-42585b16dcd4",
+            "passing_data": 1,
+            "complete_feedback": 0,
+            "reminders": 2,
+            "message": null,
             "interval_rule": null,
             "interval_time": null,
             "is_active": true
