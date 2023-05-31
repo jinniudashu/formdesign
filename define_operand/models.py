@@ -316,12 +316,15 @@ admin.site.register({name}, {name}Admin)
         return f'''
     {field['name']} = models.{f_type}(upload_to='uploads/', {f_required}verbose_name='{field['label']}')'''
 
-
 # 业务表单定义
 class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     components = models.ManyToManyField(Component, through='FormComponentsSetting', verbose_name="字段")
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
+    Form_class = [(1, '调查类'), (2, '诊断类'), (3, '治疗类')]
+    form_class = models.PositiveSmallIntegerField(choices=Form_class, null=True, verbose_name="表单类型")
+    Form_style = [('Detail', '详情'), ('List', '列表')]
+    form_style = models.CharField(max_length=20, choices=Form_style, default='Detail', verbose_name="表单风格")
     api_fields = models.JSONField(null=True, blank=True, verbose_name="API字段")
 
     class Meta:
@@ -733,7 +736,9 @@ class SystemOperand(HsscBase):
 class EventRule(HsscPymBase):
     description = models.TextField(max_length=255, blank=True, null=True, verbose_name="表达式")
     Detection_scope = [('ALL', '所有历史表单'), ('CURRENT_SERVICE', '本次服务表单'), ('LAST_WEEK_SERVICES', '过去7天表单')]
-    detection_scope = models.CharField(max_length=100, choices=Detection_scope, default='CURRENT_SERVICE', blank=True, null=True, verbose_name='检测范围')
+    detection_scope = models.CharField(max_length=100, choices=Detection_scope, default='CURRENT_SERVICE', blank=True, null=True, verbose_name='检测时间范围')
+    Form_class = [(0, '所有类型'), (1, '调查类'), (2, '诊断类'), (3, '治疗类')]
+    form_class_scope = models.PositiveSmallIntegerField(choices=Form_class, default=0, verbose_name='表单类型范围')
     Event_type = [('FORM_EVENT', '表单事件'), ('SCHEDULE_EVENT', '调度事件')]
     event_type = models.CharField(max_length=100, choices=Event_type, default='SCHEDULE_EVENT', verbose_name="事件类型")
     weight = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="权重")

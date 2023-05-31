@@ -31,7 +31,7 @@ class EventExpressionInline(admin.TabularInline):
 
 @admin.register(EventRule)
 class EventRuleAdmin(admin.ModelAdmin):
-    list_display = ('label', 'description', 'expression', 'detection_scope', 'event_type')
+    list_display = ('label', 'description', 'expression', 'detection_scope', 'form_class_scope', 'event_type')
     list_display_links = ['label', 'description']
     search_fields=['label', 'name', 'pym']
     readonly_fields = ['hssc_id']
@@ -84,7 +84,7 @@ class BuessinessFormAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), 'description', ('api_fields', 'name', 'hssc_id'), )
+            'fields': (('label', 'name_icpc'), 'description', ('form_class', 'form_style'), ('api_fields', 'name', 'hssc_id'), )
         }),
     )
     search_fields = ['name', 'label', 'pym']
