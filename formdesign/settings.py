@@ -32,7 +32,7 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 OPENAI_API_KEY = env('OPENAI_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1', ]
 ALLOWED_HOSTS = ["127.0.0.1", "design.tpacn.com", "design.tpahn.com", ]

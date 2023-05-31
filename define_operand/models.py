@@ -9,8 +9,8 @@ from pypinyin import lazy_pinyin
 from django.conf import settings
 
 from formdesign.hsscbase_class import HsscBase, HsscPymBase
-from define.models import Component, Role, RelateFieldModel, DicList, Medicine
-from define_icpc.models import Icpc
+from define.models import Component, Role, RelateFieldModel, DicList, DicDetail, Medicine
+from define_icpc.models import *
 from define_operand.utils import generate_js_script, generate_form_event_js_script
 
 # 内核模型定义
@@ -198,8 +198,8 @@ admin.site.register({name}, {name}Admin)
         return serializers_script
 
     # generate model field script
-    def _create_model_field_script(self, component, form):
-        script = ''
+    def _create_model_field_script(self, component, form, default_value=None):
+        script = get_default_instance =''
         field = component.content_object.__dict__
         component_type = component.content_type.__dict__['model']
 
@@ -207,9 +207,9 @@ admin.site.register({name}, {name}Admin)
         is_blank = not form.formcomponentssetting_set.get(component=component).is_required
 
         if component_type == 'characterfield':
-            script = self._create_char_field_script(field, is_blank)
+            script = self._create_char_field_script(field, is_blank, default_value)
         elif component_type == 'numberfield':
-            script = self._create_number_field_script(field, is_blank)
+            script = self._create_number_field_script(field, is_blank, default_value)
         elif component_type == 'dtfield':
             script = self._create_datetime_field_script(field, is_blank)
         elif component_type == 'relatedfield':
@@ -217,20 +217,21 @@ admin.site.register({name}, {name}Admin)
                 field['foreign_key'] = component.content_object.related_content.name.capitalize()
             else:
                 field['foreign_key'] = component.content_object.related_content.related_content
-            script = self._create_related_field_script(field, is_blank)
+            field['foreign_key_type'] = component.content_object.related_content.related_content_type
+            script, get_default_instance = self._create_related_field_script(field, is_blank, default_value)
         elif component_type == 'filefield':
             script = self._create_file_field_script(field, is_blank)
-        return script
+        return script, get_default_instance
 
     # 生成字符型字段定义脚本
-    def _create_char_field_script(self, field, is_blank):
+    def _create_char_field_script(self, field, is_blank, default_value=None):
         if field['type'] == 'CharField':
             f_type = 'CharField'
         else:
             f_type = 'TextField'
 
-        if field['default']:
-            f_default = f'default="{field["default"]}", '
+        if default_value:
+            f_default = f'default="{default_value}", '
         else:
             f_default = ''
 
@@ -240,7 +241,7 @@ admin.site.register({name}, {name}Admin)
     {field['name']} = models.{f_type}(max_length={field['length']}, {f_default}{f_required}verbose_name='{field['label']}')'''
 
     # 生成数字型字段定义脚本
-    def _create_number_field_script(self, field, is_blank):
+    def _create_number_field_script(self, field, is_blank, default_value=None):
         if field['type'] == 'IntegerField':
             f_type = 'IntegerField'
             f_dicimal = ''
@@ -264,8 +265,8 @@ admin.site.register({name}, {name}Admin)
         # else:
         #     f_down_limit = ''
 
-        if field['default']:
-            f_default = f'default={field["default"]}, '
+        if default_value:
+            f_default = f'default={default_value}, '
         else:
             f_default = ''
 
@@ -293,16 +294,41 @@ admin.site.register({name}, {name}Admin)
     {field['name']} = models.{f_type}({f_default}{f_required}verbose_name='{field['label']}')'''
 
     # 生成关联型字段定义脚本
-    def _create_related_field_script(self, field, is_blank):
+    def _create_related_field_script(self, field, is_blank, default_value=None):
+        related_field_script = ''
+        # 构造“设置缺省值”字符串
+        f_default = get_default_instance = ''
+        if default_value:
+            if field['foreign_key_type'] == 'icpc':
+                try:
+                    default_instance = eval(field['foreign_key']).objects.get(iname=default_value)
+                    get_default_instance = f'''
+def get_{self.name}_{field["name"]}_instance():
+    return {field["foreign_key"]}.objects.get(iname="{default_value}")\n\n'''
+                    f_default = f'default=get_{self.name}_{field["name"]}_instance, '
+                except:
+                    print("缺省值设置错误，没有对应的实例！")
+            elif field['foreign_key_type'] == 'dictionaries':
+                try:
+                    default_instance = DicDetail.objects.get(value=default_value)
+                    get_default_instance = f'''
+def get_{self.name}_{field.name}_instance():
+    return {field["foreign_key"]}.objects.get(value="{default_value}")\n\n'''
+                    f_default = f'default=get_{self.name}_{field.name}_instance, '
+                except:
+                    print("缺省值设置错误，没有对应的实例！")
+        
         if field['type'] in ['Select', 'RadioSelect']:
             f_required = f'null=True, blank={str(is_blank)}, '
-            return f'''
-    {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, {f_required}verbose_name='{field['label']}')'''
+            related_field_script = f'''
+    {field['name']} = models.ForeignKey({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', on_delete=models.CASCADE, {f_default}{f_required}verbose_name='{field['label']}')'''
+            return related_field_script, get_default_instance
 
         elif field['type'] in ['SelectMultiple', 'CheckboxSelectMultiple']:
             f_required = f'blank={str(is_blank)}, '
-            return f'''
+            related_field_script = f'''
     {field['name']} = models.ManyToManyField({field['foreign_key']}, related_name='{field['foreign_key'].lower()}_for_{field['name']}_{self.name}', {f_required}verbose_name='{field['label']}')'''
+            return related_field_script, get_default_instance
 
     # 生成文件型字段定义脚本
     def _create_file_field_script(self, field, is_blank):
@@ -344,6 +370,7 @@ class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
 class FormComponentsSetting(HsscBase):
     form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="表单")
     component = models.ForeignKey(Component, on_delete=models.CASCADE, verbose_name="字段")
+    default_value = models.CharField(max_length=255, null=True, blank=True, verbose_name="默认值")
     is_required = models.BooleanField(default=False, verbose_name="是否必填")
     Api_field = [('charge_staff', '责任人'), ('operator', '作业人员'), ('scheduled_time', '计划执行时间')]
     api_field = models.CharField(max_length=50, choices=Api_field, null=True, blank=True, verbose_name="对接系统接口")
@@ -387,7 +414,8 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         modeladmin_body = {}
         fieldssets = autocomplete_fields = radio_fields = search_fields = change_form_template =''
         form_script = ''
-        
+        get_default_instances = ''
+
         computation_logic = []  # 计算字段清单
         service_fields = {}  # 表单字段清单
         form_event_rules = []  # 表单事件规则清单
@@ -413,14 +441,16 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             form_fields = ''
             for form_components in FormComponentsSetting.objects.filter(form=form).order_by('position'):
                 component=form_components.component
+                default_value = form_components.default_value
 
                 # 获取服务所有表单字段用户构造表单字段清单
                 service_fields[component.name] = component.label
                 
                 # construct fields script
-                _script = self._create_model_field_script(component, form)
+                _script, _get_default_instance = self._create_model_field_script(component, form, default_value)
 
                 fields_script = fields_script + _script
+                get_default_instances = get_default_instances + _get_default_instance
                 
                 # construct admin body fields script
                 form_fields = form_fields + f'"{component.content_object.name}", '
@@ -493,7 +523,7 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         serializers_script = self._create_serializers_script()
 
         # construct model script
-        model_script = f'{head_script}{fields_script}{footer_script}\n'
+        model_script = f'{get_default_instances}{head_script}{fields_script}{footer_script}\n'
         
         return model_script, admin_script, serializers_script, form_script, template_script
 
