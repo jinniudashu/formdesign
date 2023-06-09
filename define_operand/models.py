@@ -307,7 +307,7 @@ def get_{self.name}_{field["name"]}_instance():
     return {field["foreign_key"]}.objects.get(iname="{default_value}")\n\n'''
                     f_default = f'default=get_{self.name}_{field["name"]}_instance, '
                 except:
-                    print("缺省值设置错误，没有对应的实例！")
+                    print("缺省值设置错误，没有对应的实例！", self.name, field["name"], default_value)
             elif field['foreign_key_type'] == 'dictionaries':
                 try:
                     default_instance = DicDetail.objects.get(value=default_value)
@@ -316,7 +316,7 @@ def get_{self.name}_{field.name}_instance():
     return {field["foreign_key"]}.objects.get(value="{default_value}")\n\n'''
                     f_default = f'default=get_{self.name}_{field.name}_instance, '
                 except:
-                    print("缺省值设置错误，没有对应的实例！")
+                    print("缺省值设置错误，没有对应的实例！", self.name, field["name"], default_value)
         
         if field['type'] in ['Select', 'RadioSelect']:
             f_required = f'null=True, blank={str(is_blank)}, '
@@ -487,6 +487,8 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             for rule in service_rules:
                 form_event_rule = self._extract_dict_info(rule.event_rule.expression)
                 form_event_rule['form_event_action'] = rule.system_operand.func
+                form_event_rule['detection_scope'] = rule.event_rule.detection_scope
+                form_event_rule['form_class_scope'] = rule.event_rule.form_class_scope
                 form_event_rules.append(form_event_rule)
 
         # construct template script        

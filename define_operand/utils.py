@@ -132,21 +132,57 @@ def keyword_search(s, keywords_list):
 
 ########################################################################################################################
 def generate_form_event_js_script(rules):
-    """
-    {boolfield_ji_bing_ming_cheng: ['非胰岛素依赖型糖尿病', '胰岛素依赖型糖尿病'], boolfield_yao_pin_ming: ['5%葡萄糖注射液(新）', '5%葡萄糖氯化钠注射液', '10%葡萄糖(新）'], form_event_action: 'WARN'},
-    {boolfield_ji_bing_ming_cheng: ['低血糖症'], boolfield_yao_pin_ming: ['甘精胰岛素注射液', '门冬胰岛素50注射液'], form_event_action: 'PROHIBIT'},
-    {boolfield_ji_bing_ming_cheng: ['肾盂肾炎', '肾小球性肾炎/肾病'], boolfield_yao_pin_ming: ['格华止片(盐酸二甲双胍片)', '圣邦杰(盐酸二甲双胍片)'], form_event_action: 'WARN'}
-    """
     import json
-    rules_string = json.dumps(rules, ensure_ascii=False)
 
     template_script_header = '''
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>    
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', async function() {
         // 表单事件规则配置列表
         const content_conflict_rules = '''
     
-    
+    rules_string = json.dumps(rules, ensure_ascii=False)
+
+    template_script_get_context = '''
+        // 根据表单检测范围，从CustomerServiceLog获取历史记录，构造boolfield_ji_bing_ming_cheng数组上下文
+        const customerId = Cookies.get('customer_id');
+        const period = 'ALL';  // 'ALL' or 'LAST_WEEK_SERVICES'
+        const form_class = 0;  // 指定表单类别
+        const fetchCustomerServiceLog = async (customerId, period=null, form_class=0) => {
+            let url = `http://127.0.0.1:8000/core/api/customer_service_log/?customer=${customerId}`;
+            if (period !== null) {
+                url += `&period=${period}`;
+            }
+            if (form_class > 0) {
+                url += `&form_class=${form_class}`;
+            }    
+            try {
+                const response = await fetch(url, {
+                    headers: {
+                        'Accept': 'application/json',
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('HTTP error ' + response.status);
+                }
+                const result = await response.json();
+                // 将获取的boolfield_ji_bing_ming_cheng历史记录保存在数组中返回
+                const logs = JSON.parse(result);
+                arrayValue = logs.filter(log => log.fields.data.hasOwnProperty('boolfield_ji_bing_ming_cheng'))
+                    .map(log => {
+                        s = log.fields.data.boolfield_ji_bing_ming_cheng;
+                        v = s.replace("{", "").replace("}", "").replace(/'/g, "")
+                        return {value: v, datetime: log.fields.created_time};
+                    });
+                return arrayValue;
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+        const context_boolfield_ji_bing_ming_cheng = await fetchCustomerServiceLog(customerId, period, form_class);
+        console.log(context_boolfield_ji_bing_ming_cheng);
+    '''    
+
     template_script_body = '''
 
         // 定义全局变量，用于存储被跟踪的字段当前值
@@ -171,14 +207,33 @@ def generate_form_event_js_script(rules):
 
         // 检测是否发生符合特定规则的表单事件. 接受一条来自表单事件规则列表的规则, 如果发生表单事件，执行规则配置表中指定的表单事件动作
         const detect_form_event = (rule) => {
-            const events = {
+            if (!current_values.boolfield_yao_pin_ming) return;
+
+            // 构造冲突项列表
+            const conflict_items = [];
+
+            const events_context = {
+                event_0 : context_boolfield_ji_bing_ming_cheng.filter(item => rule.boolfield_ji_bing_ming_cheng.includes(item.value)).length > 0,
+                event_1 : current_values.boolfield_yao_pin_ming.filter(item => rule.boolfield_yao_pin_ming.includes(item)).length > 0,
+            }
+            // 检测是否发生上下文冲突
+            if (Object.values(events_context).every(value => value === true)) {
+                // 对于上下文冲突，添加产生冲突的具体疾病名称
+                if (events_context.event_0) {
+                    const conflictingDiseases = context_boolfield_ji_bing_ming_cheng.filter(item => rule.boolfield_ji_bing_ming_cheng.includes(item.value)).map(item => item.value);
+                    if (conflictingDiseases.length > 0) {
+                        conflict_items.push(conflictingDiseases.join(', '));
+                    }
+                }
+                form_event_action(rule.form_event_action, conflict_items)
+            }
+
+            const events_input = {
                 event_0 : new Set(rule.boolfield_ji_bing_ming_cheng).has(current_values.boolfield_ji_bing_ming_cheng),
                 event_1 : current_values.boolfield_yao_pin_ming.filter(item => rule.boolfield_yao_pin_ming.includes(item)).length > 0,
             }
-            // 相与所有事件结果，如果全部为真，返回真
-            if (Object.values(events).every(value => value === true)) {
-                // 构造冲突项列表
-                const conflict_items = [];
+            // 相与所有输入事件结果，如果全部为真，返回真
+            if (Object.values(events_input).every(value => value === true)) {
                 for (const key in current_values) {
                     const value = current_values[key];
                     // 如果值是数组，找出冲突项
@@ -190,8 +245,7 @@ def generate_form_event_js_script(rules):
                     } else {
                         conflict_items.push(value);
                     }
-                }                
-
+                }
                 form_event_action(rule.form_event_action, conflict_items)
             }
         };
@@ -251,4 +305,4 @@ def generate_form_event_js_script(rules):
     });
 </script>
 '''
-    return template_script_header + rules_string + template_script_body
+    return template_script_header + rules_string + template_script_get_context + template_script_body
