@@ -28,6 +28,7 @@ Backup_models = [
     FileField,
     BuessinessForm,
     FormComponentsSetting,
+    FormListComponentsSetting,
     ComputeComponentsSetting,
     Service,
     BuessinessFormsSetting,

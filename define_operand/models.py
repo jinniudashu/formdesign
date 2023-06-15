@@ -198,13 +198,16 @@ admin.site.register({name}, {name}Admin)
         return serializers_script
 
     # generate model field script
-    def _create_model_field_script(self, component, form, default_value=None):
+    def _create_model_field_script(self, component, form, default_value=None, is_list=False):
         script = get_default_instance =''
         field = component.content_object.__dict__
         component_type = component.content_type.__dict__['model']
 
         # 从表单组件设置中间表中获取is_required属性
-        is_blank = not form.formcomponentssetting_set.get(component=component).is_required
+        if is_list:
+            is_blank = not form.formlistcomponentssetting_set.get(component=component).is_required
+        else:
+            is_blank = not form.formcomponentssetting_set.get(component=component).is_required
 
         if component_type == 'characterfield':
             script = self._create_char_field_script(field, is_blank, default_value)
@@ -345,12 +348,11 @@ def get_{self.name}_{field.name}_instance():
 # 业务表单定义
 class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
-    components = models.ManyToManyField(Component, through='FormComponentsSetting', verbose_name="字段")
+    components = models.ManyToManyField(Component, through='FormComponentsSetting', related_name='components_in_forms', verbose_name="字段")
+    list_components = models.ManyToManyField(Component, through='FormListComponentsSetting', related_name='list_components_in_forms', verbose_name="列表字段")
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
     Form_class = [(1, '调查类'), (2, '诊断类'), (3, '治疗类')]
     form_class = models.PositiveSmallIntegerField(choices=Form_class, null=True, verbose_name="表单类型")
-    Form_style = [('Detail', '详情'), ('List', '列表')]
-    form_style = models.CharField(max_length=20, choices=Form_style, default='Detail', verbose_name="表单风格")
     api_fields = models.JSONField(null=True, blank=True, verbose_name="API字段")
 
     class Meta:
@@ -377,7 +379,22 @@ class FormComponentsSetting(HsscBase):
     position = models.PositiveSmallIntegerField(default=100, verbose_name="位置顺序")
 
     class Meta:
-        verbose_name = '表单组件设置'
+        verbose_name = '表单字段设置'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return str(self.form.name) + '_' + str(self.component.name)
+
+# 业务表单列表字段设置
+class FormListComponentsSetting(HsscBase):
+    form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="表单")
+    component = models.ForeignKey(Component, on_delete=models.CASCADE, verbose_name="字段")
+    default_value = models.CharField(max_length=255, null=True, blank=True, verbose_name="默认值")
+    is_required = models.BooleanField(default=False, verbose_name="是否必填")
+    position = models.PositiveSmallIntegerField(default=100, verbose_name="位置顺序")
+
+    class Meta:
+        verbose_name = '表单列表字段设置'
         verbose_name_plural = verbose_name
 
     def __str__(self):
@@ -409,12 +426,15 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
     def _create_model_script(self):
         # construct model script
         head_script = f'class {self.name.capitalize()}(HsscFormModel):'
-
-        fields_script = header_fields = ''
+        head_script_list = f'''class {self.name.capitalize()}_list(models.Model):
+    {self.name.lower()} = models.ForeignKey({self.name.capitalize()}, on_delete=models.CASCADE, verbose_name='{self.label}')'''
+        model_list_script = ''
+        admin_script = admin_listInline_script = ''
+        fields_script = list_fields_script = header_fields = ''
         modeladmin_body = {}
-        fieldssets = autocomplete_fields = radio_fields = search_fields = change_form_template =''
+        fieldssets = autocomplete_fields = radio_fields = search_fields = change_form_template = inlines = list_autocomplete_fields = list_radio_fields = ''
         form_script = ''
-        get_default_instances = ''
+        get_default_instances = get_default_list_instances = ''
 
         computation_logic = []  # 计算字段清单
         service_fields = {}  # 表单字段清单
@@ -438,7 +458,7 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             fieldssets = f'\n        ("基本信息", {{"fields": (({header_fields}),)}}), '
 
         for form in self.buessiness_forms.all():
-            form_fields = ''
+            form_fields = form_list_fields = ''
             for form_components in FormComponentsSetting.objects.filter(form=form).order_by('position'):
                 component=form_components.component
                 default_value = form_components.default_value
@@ -467,6 +487,34 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
                         # construct admin autocomplete_fields script
                         autocomplete_fields = autocomplete_fields + f'"{field_name}", '
             
+            for form_list_components in FormListComponentsSetting.objects.filter(form=form).order_by('position'):
+                component=form_list_components.component
+                default_value = form_list_components.default_value
+
+                # 获取服务所有表单字段用户构造表单字段清单
+                service_fields[component.name] = component.label
+                
+                # construct fields script
+                _script, _get_default_instance = self._create_model_field_script(component, form, default_value, True)
+
+                list_fields_script = list_fields_script + _script
+                get_default_list_instances = get_default_list_instances + _get_default_instance
+                
+                # construct admin body fields script
+                # form_list_fields = form_list_fields + f'"{component.content_object.name}", '
+
+                # 如果是关联字段，构造ModelAdmin body内容
+                if component.content_object.__class__.__name__ == 'RelatedField':
+                    field_name = component.content_object.name
+                    # 如果是关联字典，则判断是否单选，如果是单选，是否Radio
+                    if component.content_object.related_content.related_content_type == 'dictionaries':
+                        if component.content_object.__dict__['type'] == 'RadioSelect':
+                            list_radio_fields = list_radio_fields + f'"{field_name}": admin.VERTICAL, '  # 或admin.HORIZONTAL
+                    # 否则是关联实体或关联ICPC，需要autocomplete_fields
+                    else:
+                        # construct admin autocomplete_fields script
+                        list_autocomplete_fields = list_autocomplete_fields + f'"{field_name}", '
+
             # construct admin fieldset script
             fieldssets = fieldssets + f'\n        ("{form.label}", {{"fields": ({form_fields})}}), '
 
@@ -479,6 +527,15 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
                     computation_logic.append(item.description)
                 # 生成提示信息
                 generate_params['computed_fields'] = f'- form definition: {service_fields}\n- computation logic: {computation_logic}'
+
+            # construct model_list script
+            if list_fields_script:
+                footer_script_list = f'''
+    class Meta:
+        verbose_name = '{self.label}明细'
+        verbose_name_plural = verbose_name
+                '''
+                model_list_script = f'{get_default_list_instances}{head_script_list}{list_fields_script}{footer_script_list}'
 
         # 判断当前服务的服务规则中的条件事件是否是表单事件，如果是生成表单事件清单
         service_rules = ServiceRule.objects.filter(service=self, event_rule__event_type="FORM_EVENT")
@@ -518,14 +575,22 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             modeladmin_body['search_fields'] = search_fields
         if change_form_template:
             modeladmin_body['change_form_template'] = change_form_template
+        if list_fields_script:
+            modeladmin_body['inlines'] = f'[{self.name.capitalize()}_listInline, ]'
+            admin_listInline_script = f'''
+class {self.name.capitalize()}_listInline(admin.TabularInline):
+    model = {self.name.capitalize()}_list
+    extra = 1
+    autocomplete_fields = [{list_autocomplete_fields}]
+            '''
 
         # construct admin script
-        admin_script = self._create_admin_script(modeladmin_body)
+        admin_script = admin_listInline_script + self._create_admin_script(modeladmin_body)
         # construct serializers script
         serializers_script = self._create_serializers_script()
-
+            
         # construct model script
-        model_script = f'{get_default_instances}{head_script}{fields_script}{footer_script}\n'
+        model_script = f'{get_default_instances}{head_script}{fields_script}{footer_script}\n{model_list_script}'
         
         return model_script, admin_script, serializers_script, form_script, template_script
 
@@ -539,6 +604,8 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
                 if key == 'radio_fields':
                     modeladmin_body = modeladmin_body + f'    {key} = {{{value}}}\n'
                 elif key == 'change_form_template':
+                    modeladmin_body = modeladmin_body + f'    {key} = {value}\n'
+                elif key == 'inlines':
                     modeladmin_body = modeladmin_body + f'    {key} = {value}\n'
                 else:
                     modeladmin_body = modeladmin_body + f'    {key} = [{value}]\n'
@@ -965,6 +1032,7 @@ class Project(HsscBase):
 
     def get_queryset_by_model(self, model_name):
         # 返回project对应model的queryset
+        forms_qs = BuessinessForm.objects.filter(service__in=self.services.all())
         if model_name == 'Service':
             return self.services.all()
         elif model_name == 'ManagedEntity':
@@ -974,7 +1042,7 @@ class Project(HsscBase):
         elif model_name == 'BuessinessFormsSetting':
             return BuessinessFormsSetting.objects.filter(service__in=self.services.all()).distinct()
         elif model_name == 'Component':
-            return Component.objects.filter(buessinessform__in=BuessinessForm.objects.filter(service__in=self.services.all())).distinct()
+            return Component.objects.filter(Q(components_in_forms__in=forms_qs) | Q(list_components_in_forms__in=forms_qs)).distinct()
         elif model_name == 'ServicePackage':
             return self.service_packages.all()
         elif model_name == 'ServicePackageDetail':
@@ -988,7 +1056,22 @@ class Project(HsscBase):
         elif model_name == 'Role':
             return self.roles.all()
         elif model_name == 'DicList':
-            return DicList.objects.filter(name__in=[component.content_object.related_content.related_content.lower() for component in Component.objects.filter(buessinessform__in=BuessinessForm.objects.filter(service__in=self.services.all())).distinct() if component.content_object.__class__.__name__=='RelatedField'])
+            return DicList.objects.filter(name__in=[component.content_object.related_content.related_content.lower() for component in Component.objects.filter(Q(components_in_forms__in=forms_qs) | Q(list_components_in_forms__in=forms_qs)).distinct() if component.content_object.__class__.__name__=='RelatedField'])
+        
         else:
             # model_name in ['SystemOperand', 'CycleUnit', 'Medicine']
             return eval(model_name).objects.all()
+        
+
+# class Men_zhen_chu_fang_biao_listInline(admin.TabularInline):
+#     model = Men_zhen_chu_fang_biao_list
+#     extra = 1
+#     autocomplete_fields = ["boolfield_yao_pin_ming", ]
+
+# class Men_zhen_chu_fang_biaoAdmin(HsscFormAdmin):
+#     fieldssets = [
+#         ("基本信息", {"fields": ((),)}), 
+#         ("药物处方", {"fields": ("boolfield_ji_bing_ming_cheng", )}), ]
+#     autocomplete_fields = ["boolfield_ji_bing_ming_cheng", ]
+#     change_form_template = "men_zhen_chu_fang_biao_change_form.html"
+#     inlines = [Men_zhen_chu_fang_biao_listInline, ]

@@ -62,11 +62,16 @@ class FormComponentsSettingInline(admin.TabularInline):
     exclude = ['label', 'name', 'hssc_id']
     autocomplete_fields = ['component']
 
+class FormListComponentsSettingInline(admin.TabularInline):
+    model = FormListComponentsSetting
+    exclude = ['label', 'name', 'hssc_id']
+    autocomplete_fields = ['component']
+
 class ComputeComponentsSettingInline(admin.TabularInline):
     model = ComputeComponentsSetting
     exclude = ['label', 'name', 'hssc_id']
     # autocomplete_fields = ['component']
-    extra = 0
+    extra = 1
 
     # component下拉框只显示与当前BuessinessForm实例相关联的component实例
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
@@ -84,14 +89,14 @@ class BuessinessFormAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), 'description', ('form_class', 'form_style'), ('api_fields', 'name', 'hssc_id'), )
+            'fields': (('label', 'name_icpc'), 'description', 'form_class', ('api_fields', 'name', 'hssc_id'), )
         }),
     )
     search_fields = ['name', 'label', 'pym']
     filter_horizontal = ("components",)
     readonly_fields = ['api_fields', 'name', 'hssc_id']
-    inlines = [FormComponentsSettingInline, ComputeComponentsSettingInline]
-    autocomplete_fields = ['name_icpc',]
+    inlines = [FormComponentsSettingInline, ComputeComponentsSettingInline, FormListComponentsSettingInline]
+    autocomplete_fields = ['name_icpc', ]
 
     def save_formset(self, request, form, formset, change):
         # 更新api_fields
