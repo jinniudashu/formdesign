@@ -13,18 +13,18 @@ services:
       - -c
       - |
         python manage.py migrate
-        python manage.py runserver 0.0.0.0:8000
+        uwsgi --ini formdesign_uwsgi.ini
     volumes:
       - app:/app/
     env_file:
       - ./.env
     networks:
       - web
-    labels:
-      - "traefik.enable=true" # <== Enable traefik on itself to view dashboard and assign subdomain to view it
-      - "traefik.http.routers.design-http.rule=Host(`design.tpacn.com`)" # <== Setting the domain for the dashboard
-      - "traefik.http.routers.design-http.entrypoints=web" # <== Enabling the entrypoint for the whoami service
-      - "traefik.http.services.design-http.loadbalancer.server.port=8000" # <== Enabling the port for the whoami service
+    # labels:
+    #   - "traefik.enable=true" # <== Enable traefik on itself to view dashboard and assign subdomain to view it
+    #   - "traefik.http.routers.design-http.rule=Host(`design.tpacn.com`)" # <== Setting the domain for the dashboard
+    #   - "traefik.http.routers.design-http.entrypoints=web" # <== Enabling the entrypoint for the whoami service
+    #   - "traefik.http.services.design-http.loadbalancer.server.port=8000" # <== Enabling the port for the whoami service
 
 volumes:
   app:

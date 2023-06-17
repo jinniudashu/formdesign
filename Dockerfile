@@ -18,3 +18,9 @@ RUN pip install -r requirements.txt
 # RUN apk del .tmp-build-deps
 
 COPY . /app/
+
+# Expose the port uWSGI will listen on
+EXPOSE 8000
+
+# Run uWSGI
+CMD ["uwsgi", "--ini", "formdesign_uwsgi.ini"]
