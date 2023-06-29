@@ -1,30 +1,53 @@
 version: "3"
 
-networks:
-  web:
+volumes: # 自定义数据卷
+  media_vol: #定义数据卷同步存放web项目用户上传到media文件夹的数据
+  static_vol: #定义数据卷同步存放web项目static文件夹的数据
+
+networks: # 自定义网络(默认桥接), 不使用links通信
+  nginx_network:
     external: true
+    # driver: bridge
 
 services:
-  app:
+  design:
     image: jinniudashu/design:v1
     container_name: design
-    command: 
-      - sh
-      - -c
-      - |
-        python manage.py migrate
-        uwsgi --ini formdesign_uwsgi.ini
-    volumes:
-      - app:/app/
+    # command: ["./app/start.sh"]
     env_file:
       - ./.env
+    # expose:
+    #   - "8000"
+    # ports:
+    #   - "8000:8000"
+    environment:
+      - DJANGO_DEBUG=0
+    volumes:
+      - static_vol:/app/static # 以数据卷挂载容器内static文件
+      - media_vol:/app/media # 以数据卷挂载容器内用户上传媒体文件
+      - ./compose/uwsgi:/tmp # 挂载uwsgi日志
     networks:
-      - web
-    # labels:
-    #   - "traefik.enable=true" # <== Enable traefik on itself to view dashboard and assign subdomain to view it
-    #   - "traefik.http.routers.design-http.rule=Host(`design.tpacn.com`)" # <== Setting the domain for the dashboard
-    #   - "traefik.http.routers.design-http.entrypoints=web" # <== Enabling the entrypoint for the whoami service
-    #   - "traefik.http.services.design-http.loadbalancer.server.port=8000" # <== Enabling the port for the whoami service
+      - nginx_network
+    restart: always
+    tty: true
+    stdin_open: true
 
-volumes:
-  app:
+  nginx:
+    # build: . # 指定Dockerfile文件所在目录
+    image: nginx-nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    # expose:
+    #   - "80"
+    volumes:
+      - ./ssl:/usr/share/nginx/ssl # 挂载ssl证书目录
+      - ./log:/var/log/nginx # 挂载日志
+      - static_vol:/vol/static # 挂载静态文件
+      - media_vol:/vol/media # 挂载用户上传媒体文件
+    networks:
+      - nginx_network
+    restart: always
+    # depends_on:
+    #   - design

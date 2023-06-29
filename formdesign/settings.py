@@ -32,7 +32,8 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 OPENAI_API_KEY = env('OPENAI_API_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+# DEBUG = True
+DEBUG = bool(int(env('DJANGO_DEBUG', default=0)))
 
 # ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1', ]
 ALLOWED_HOSTS = ["127.0.0.1", "design.tpacn.com", "design.tpahn.com", ]
@@ -144,8 +145,12 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+print('STATIC_ROOT:', STATIC_ROOT)
+print('MEDIA_ROOT:', MEDIA_ROOT)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
