@@ -11,9 +11,10 @@ RUN pip install -r requirements.txt
 
 COPY . /app/
 
+RUN apt-get update && apt-get install -y dos2unix # 如果基础镜像是 Debian 或 Ubuntu
 # 给start.sh可执行权限
 COPY ./start.sh /app/start.sh
-RUN chmod +x /app/start.sh
-RUN ls -la /app
+RUN dos2unix /app/start.sh && chmod +x /app/start.sh
+
 # 数据迁移，并使用uwsgi启动服务
 ENTRYPOINT /bin/bash /app/start.sh

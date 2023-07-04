@@ -36,7 +36,7 @@ OPENAI_API_KEY = env('OPENAI_API_KEY')
 DEBUG = bool(int(env('DJANGO_DEBUG', default=0)))
 
 # ALLOWED_HOSTS = ['localhost', '0.0.0.0', '127.0.0.1', ]
-ALLOWED_HOSTS = ["127.0.0.1", "design.tpacn.com", "design.tpahn.com", ]
+ALLOWED_HOSTS = ["127.0.0.1", "design.tpacn.com", ]
 
 
 # Application definition
@@ -149,8 +149,6 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-print('STATIC_ROOT:', STATIC_ROOT)
-print('MEDIA_ROOT:', MEDIA_ROOT)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

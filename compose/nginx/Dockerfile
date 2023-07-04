@@ -8,10 +8,23 @@ COPY ./uwsgi_params /etc/nginx/uwsgi_params
 
 USER root
 
-RUN mkdir -p /vol/static
-RUN chmod 755 /vol/static
-RUN mkdir -p /vol/media
-RUN chmod 755 /vol/media
+RUN mkdir -p /vol/log/nginx
+RUN chmod 755 /vol/log/nginx
+
+RUN mkdir -p /vol/design/static
+RUN chmod 755 /vol/design/static
+RUN mkdir -p /vol/design/media
+RUN chmod 755 /vol/design/media
+
+RUN mkdir -p /vol/clinic/static
+RUN chmod 755 /vol/clinic/static
+RUN mkdir -p /vol/clinic/media
+RUN chmod 755 /vol/clinic/media
+
+RUN mkdir -p /vol/dental/static
+RUN chmod 755 /vol/dental/static
+RUN mkdir -p /vol/dental/media
+RUN chmod 755 /vol/dental/media
 
 # 创建ssl证书保存文件夹
 RUN mkdir -p /usr/share/nginx/ssl

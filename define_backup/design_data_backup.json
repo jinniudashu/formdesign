@@ -5625,7 +5625,7 @@
             "label": "药品名",
             "name": "boolfield_yao_pin_ming",
             "name_icpc": null,
-            "type": "SelectMultiple",
+            "type": "Select",
             "related_content": "de896698-9aa1-11ec-bde1-8a6e55faf877"
         },
         {
@@ -6568,14 +6568,15 @@
             "form_class": 3,
             "api_fields": null,
             "components": [
+                "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877"
+            ],
+            "list_components": [
                 "1bf942da-c5ce-11ec-b9d4-725badf7393d",
                 "2b80da60-c5ce-11ec-b819-725badf7393d",
                 "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
-                "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
                 "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
                 "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
-            ],
-            "list_components": []
+            ]
         },
         {
             "label": "健康教育",
@@ -8929,61 +8930,6 @@
             "is_required": false,
             "api_field": null,
             "position": 100
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7bd91978-dd93-11ec-a07b-4889e7cf38c9",
-            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
-            "component": "1bf942da-c5ce-11ec-b9d4-725badf7393d",
-            "default_value": null,
-            "is_required": false,
-            "api_field": null,
-            "position": 6
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7bd9b5a6-dd93-11ec-ba08-4889e7cf38c9",
-            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
-            "component": "2b80da60-c5ce-11ec-b819-725badf7393d",
-            "default_value": null,
-            "is_required": false,
-            "api_field": null,
-            "position": 5
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7bda791a-dd93-11ec-8239-4889e7cf38c9",
-            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
-            "component": "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
-            "default_value": null,
-            "is_required": false,
-            "api_field": null,
-            "position": 4
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7bdb1537-dd93-11ec-badf-4889e7cf38c9",
-            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
-            "component": "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-            "default_value": null,
-            "is_required": false,
-            "api_field": null,
-            "position": 3
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7bdbb180-dd93-11ec-ab10-4889e7cf38c9",
-            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
-            "component": "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
-            "default_value": null,
-            "is_required": false,
-            "api_field": null,
-            "position": 2
         },
         {
             "label": null,
@@ -11802,7 +11748,58 @@
             "position": 100
         }
     ],
-    "formlistcomponentssetting": [],
+    "formlistcomponentssetting": [
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "90d13a3c-1a77-11ee-86eb-0242ac170002",
+            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
+            "component": "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
+            "default_value": null,
+            "is_required": true,
+            "position": 100
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "90d1558a-1a77-11ee-86eb-0242ac170002",
+            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
+            "component": "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
+            "default_value": null,
+            "is_required": false,
+            "position": 200
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "90d16458-1a77-11ee-86eb-0242ac170002",
+            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
+            "component": "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
+            "default_value": null,
+            "is_required": false,
+            "position": 300
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "90d17268-1a77-11ee-86eb-0242ac170002",
+            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
+            "component": "2b80da60-c5ce-11ec-b819-725badf7393d",
+            "default_value": null,
+            "is_required": false,
+            "position": 400
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "90d1828a-1a77-11ee-86eb-0242ac170002",
+            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
+            "component": "1bf942da-c5ce-11ec-b9d4-725badf7393d",
+            "default_value": null,
+            "is_required": false,
+            "position": 500
+        }
+    ],
     "computecomponentssetting": [
         {
             "label": null,

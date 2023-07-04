@@ -1,6 +1,7 @@
 ## Docker部署说明
 ### 开发环境
 1. 生成镜像：docker-compose -f docker-compose-build.yml build
+   Mac环境：docker buildx build --platform linux/x86_64 design:v1 . --load
 2. tag: docker tag design:v1 jinniudashu/design:v1
 3. push: docker push jinniudashu/design:v1
 ### 生产环境
