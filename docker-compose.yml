@@ -186,8 +186,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./design/ssl:/usr/share/nginx/ssl # 挂载ssl证书目录cd 
-      - ./design/log:/var/log/nginx # 挂载日志
+      - ./nginx/ssl:/usr/share/nginx/ssl # 挂载ssl证书目录cd 
+      - ./nginx/log:/var/log/nginx # 挂载日志
       - clinic_static_vol:/vol/clinic/static # 挂载静态文件
       - clinic_media_vol:/vol/clinic/media # 挂载用户上传媒体文件
       - dental_static_vol:/vol/dental/static # 挂载静态文件
