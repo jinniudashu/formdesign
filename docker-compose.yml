@@ -3,10 +3,13 @@ version: "3"
 volumes: # 自定义数据卷
   clinic_static_vol:
   clinic_media_vol:
+  clinic_backup_vol:
   dental_static_vol:
   dental_media_vol:
+  dental_backup_vol:
   design_static_vol: #定义数据卷同步存放web项目static文件夹的数据
   design_media_vol: #定义数据卷同步存放web项目用户上传到media文件夹的数据
+  design_backup_vol: #定义数据卷同步存放web项目备份文件夹的数据
   clinic-pgdata: # postgres数据文件目录
   dental-pgdata: # postgres数据文件目录
 
@@ -36,6 +39,7 @@ services:
     volumes:
       - clinic_static_vol:/app/static # 以数据卷挂载容器内static文件
       - clinic_media_vol:/app/uploads # 以数据卷挂载容器内用户上传媒体文件
+      - clinic_backup_vol:/app/backup # 以数据卷挂载容器内备份文件
     networks:
       - clinic_network
       - nginx_network # <== Connect to the web network
@@ -104,6 +108,7 @@ services:
     volumes:
       - dental_static_vol:/app/static # 以数据卷挂载容器内static文件
       - dental_media_vol:/app/uploads # 以数据卷挂载容器内用户上传媒体文件
+      - dental_backup_vol:/app/backup # 以数据卷挂载容器内备份文件
     networks:
       - dental_network
       - nginx_network # <== Connect to the web network
@@ -165,6 +170,7 @@ services:
     volumes:
       - design_static_vol:/app/static # 以数据卷挂载容器内static文件
       - design_media_vol:/app/media # 以数据卷挂载容器内用户上传媒体文件
+      - design_backup_vol:/app/backup # 以数据卷挂载容器内备份文件
       - ./design/compose/uwsgi:/tmp # 挂载uwsgi日志
     networks:
       - nginx_network
