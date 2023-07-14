@@ -172,7 +172,7 @@ def generate_form_event_js_script(rules, domain, class_name):
                 arrayValue = logs.filter(log => log.fields.data.hasOwnProperty('{keys[0]}'))
                     .map(log => {{
                         s = log.fields.data.{keys[0]};
-                        v = s.replace("{", "").replace("}", "").replace(/'/g, "")
+                        v = s.replace("{{", "").replace("}}", "").replace(/'/g, "")
                         return {{value: v, datetime: log.fields.created_time}};
                     }});
                 return arrayValue;
@@ -185,7 +185,6 @@ def generate_form_event_js_script(rules, domain, class_name):
     '''    
 
     template_script_body = f'''
-
         // 定义全局变量，用于存储被跟踪的字段当前值
         const current_values = {{
             {keys[0]}: null,
