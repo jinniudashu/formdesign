@@ -110,13 +110,13 @@ class GenerateFormsScriptMixin(object):
     生成models.py, admin.py, serializers.py 定义脚本
     '''
     # 生成models, admin, forms脚本
-    def generate_script(self):
+    def generate_script(self, domain):
         script = {}
-        script['models'], script['admin'], script['serializers'], script['forms'], script['templates'] = self._create_model_script()
+        script['models'], script['admin'], script['serializers'], script['forms'], script['templates'] = self._create_model_script(domain)
         return script
 
     # generate model and admin script
-    def _create_model_script(self):
+    def _create_model_script(self, domain):
         # construct model script
         head_script = f'class {self.name.capitalize()}(HsscFormModel):'
         fields_script = ''
@@ -423,7 +423,7 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             return False
 
     # generate model and admin script
-    def _create_model_script(self):
+    def _create_model_script(self, domain):
         # construct model script
         head_script = f'class {self.name.capitalize()}(HsscFormModel):'
         head_script_list = f'''class {self.name.capitalize()}_list(models.Model):
@@ -557,7 +557,7 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             if (computation_logic):
                 template_script = generate_js_script(generate_params)
             if (form_event_rules):
-                template_script = generate_form_event_js_script(form_event_rules)
+                template_script = generate_form_event_js_script(form_event_rules, domain, self.name.lower())
 
         # construct model footer script
         footer_script = self._create_model_footer_script(is_base_form)
@@ -1015,6 +1015,7 @@ class ExternalServiceFieldsMapping(HsscBase):
 
 # 项目定义
 class Project(HsscBase):
+    domain = models.CharField(max_length=255, null=True, blank=True, verbose_name="域名")
     description = models.CharField(max_length=255, null=True, blank=True, verbose_name='项目描述')  # 项目描述
     roles = models.ManyToManyField(Role, blank=True, verbose_name='角色')  # 项目角色
     services = models.ManyToManyField(Service, blank=True, verbose_name="服务")

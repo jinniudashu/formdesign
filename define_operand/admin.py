@@ -6,11 +6,11 @@ from define_backup.export_source_code import export_source_code
 
 @admin.register(Project)
 class ProjectAdmin(admin.ModelAdmin):
-    list_display = ('id', 'label', 'name', 'description', 'hssc_id')
+    list_display = ('id', 'label', 'name', 'domain', 'description', 'hssc_id')
     list_display_links = ('id', 'label')
     fieldsets = (
         (None, {
-            'fields': (('label', 'name'), ('description'), 'roles', 'services', 'service_packages', 'service_rules', 'external_services')
+            'fields': (('label', 'name'), ('domain', 'description'), 'roles', 'services', 'service_packages', 'service_rules', 'external_services')
         }),
     )
     search_fields = ('name', 'label')
