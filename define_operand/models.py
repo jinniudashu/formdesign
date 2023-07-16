@@ -392,6 +392,7 @@ class FormListComponentsSetting(HsscBase):
     default_value = models.CharField(max_length=255, null=True, blank=True, verbose_name="默认值")
     is_required = models.BooleanField(default=False, verbose_name="是否必填")
     position = models.PositiveSmallIntegerField(default=100, verbose_name="位置顺序")
+    autofill_fields = models.BooleanField(default=False, verbose_name="自动填充")
 
     class Meta:
         verbose_name = '表单列表字段设置'
@@ -440,6 +441,7 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         service_fields = {}  # 表单字段清单
         form_event_rules = []  # 表单事件规则清单
         generate_params = {'form_event_rules': form_event_rules, 'computed_fields': ''}  # 提示信息清单
+        autofill_fields = False  # 是否自动填充关联字段
 
         is_base_form = self._is_base_form_service()
         
@@ -490,6 +492,8 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             for form_list_components in FormListComponentsSetting.objects.filter(form=form).order_by('position'):
                 component=form_list_components.component
                 default_value = form_list_components.default_value
+                if form_list_components.autofill_fields:
+                    autofill_fields = True
 
                 # 获取服务所有表单字段用户构造表单字段清单
                 service_fields[component.name] = component.label
@@ -557,7 +561,7 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             if (computation_logic):
                 template_script = generate_js_script(generate_params)
             if (form_event_rules):
-                template_script = generate_form_event_js_script(form_event_rules, domain, self.name.lower())
+                template_script = generate_form_event_js_script(form_event_rules, domain, self.name.lower(), autofill_fields)
 
         # construct model footer script
         footer_script = self._create_model_footer_script(is_base_form)

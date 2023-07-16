@@ -131,26 +131,97 @@ def keyword_search(s, keywords_list):
 
 
 ########################################################################################################################
-def generate_form_event_js_script(rules, domain, class_name):
+def generate_form_event_js_script(rules, domain, class_name, autofill_fields):
     import json
 
-    template_script_header = '''
-<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>    
-<script>
-    document.addEventListener('DOMContentLoaded', async function() {
-        // 表单事件规则配置列表
-        const content_conflict_rules = '''
-    
     rules_string = json.dumps(rules, ensure_ascii=False)
     keys = list(rules[0].keys())
 
+    template_script_header = f'''
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>    
+<script>
+    document.addEventListener('DOMContentLoaded', async function() {{
+        const fetchCustomerServiceLogURL = "http://{domain}/core/api/customer_service_log/";
+        const autocompleteFieldsURL = "http://{domain}/core/api/get_medicine_item/";
+
+        // 表单事件规则配置列表
+        const content_conflict_rules = '''
+    
+    if autofill_fields:
+        template_script_autofill_fields = '''
+        // ******************************************
+        // 自动补全字典明细相关字段
+        // ******************************************
+        // 从明细表表头提取表头数组，用于获取字段名称数组
+        let headTr = document.querySelector('table thead tr')
+        headTr.removeChild(headTr.firstElementChild)
+        headTr.removeChild(headTr.lastElementChild)
+        const thElements = headTr.querySelectorAll('th')
+
+        // 自动补全字典字段
+        const autocompleteFields = async (node) => {
+            const fetchMedicineItem = async (itemId) => {
+                let url = autocompleteFieldsURL + `?itemId=${itemId}`
+                try {
+                    const response = await fetch(url, { headers: {'Accept': 'application/json',} });
+                    if (!response.ok) {
+                        throw new Error('HTTP error ' + response.status);
+                    }
+                    const result = await response.json();
+                    return result;
+                } catch (error) {
+                    console.error('Error:', error);
+                    return null;
+                }
+            }
+
+            // 获取item纪录明细
+            const itemId = node.parentElement.parentElement.parentElement.parentElement.firstElementChild.value
+            const medicineItem = await fetchMedicineItem(itemId)
+
+            // 当前node字段名
+            let parts = node.id.split('-')
+            parts.pop()
+            let node_field_name = parts.pop()
+            // 当前tr
+            const tr = node.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement
+            console.log('id:', itemId, node.getAttribute('title').trim())
+            // 查找对应的<td>元素.input/select元素，填充相关属性字段
+            thElements.forEach(th => {
+                // 从表头类名解析出字段名
+                let fieldName = th.className.split(' ')[0].split('-')[1]  
+                if (fieldName !== node_field_name) {
+                    // 获取类名，用于从tr中查找节点
+                    let classStr = '.field-' + fieldName
+                    // 获取表头title，用于从item字典中查找对应键值
+                    let title = th.innerText
+                    console.log(title, ':', medicineItem[title])
+                    // 获取节点
+                    let relate_node = tr.querySelector(classStr).firstElementChild
+                    // 根据类型写入键值
+                    if (relate_node.nodeName === 'INPUT') {
+                        relate_node.value = medicineItem[title]
+                    } else if (relate_node.nodeName === 'DIV') {
+                        relate_node.firstElementChild.value = medicineItem[title]
+                    }
+                }
+            })
+        }'''
+
+        template_script_call_autofill_fields = '''
+                    // 填充字典相关属性字段
+                    autocompleteFields(node)'''
+    else:
+        template_script_autofill_fields = ''
+        template_script_call_autofill_fields = ''
+        
     template_script_get_context = f'''
         // 根据表单检测范围，从CustomerServiceLog获取历史记录，构造{keys[0]}数组上下文
         const customerId = Cookies.get('customer_id');
         const period = 'ALL';  // 'ALL' or 'LAST_WEEK_SERVICES'
         const form_class = 0;  // 指定表单类别
         const fetchCustomerServiceLog = async (customerId, period=null, form_class=0) => {{
-            let url = `http://{domain}/core/api/customer_service_log/?customer=${{customerId}}`;
+            let url = fetchCustomerServiceLogURL + `?customer=${{customerId}}`
             if (period !== null) {{
                 url += `&period=${{period}}`;
             }}
@@ -182,6 +253,7 @@ def generate_form_event_js_script(rules, domain, class_name):
         }}
         const context_{keys[0]} = await fetchCustomerServiceLog(customerId, period, form_class);
         console.log(context_{keys[0]});
+        {template_script_autofill_fields}
     '''    
 
     template_script_body = f'''
@@ -290,12 +362,13 @@ def generate_form_event_js_script(rules, domain, class_name):
                 if (title !== current_values.{keys[1]}) {{
                     current_values.{keys[1]} = title;
                     document.querySelector('input[name="_save"]').disabled = false;
-                    console.log(title)
+                    // 规则冲突检测
                     content_conflict_rules.find(item => {{
                         if (item.{keys[1]}.includes(current_values.{keys[1]})) {{
                             detect_form_event(item);
                         }}
                     }});
+                    {template_script_call_autofill_fields}
                 }}
             }}
         }}
