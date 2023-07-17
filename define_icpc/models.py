@@ -62,6 +62,15 @@ class IcpcBase(models.Model):
     class Meta:
         abstract = True
 
+class HintFields(models.Model):
+    hint_fields = models.CharField(max_length=255, blank=True, null=True, verbose_name="提示字段")
+
+    def __str__(self):
+        return 'ICPC提示字段'
+
+    class Meta:
+        verbose_name = "ICPC提示字段"
+        verbose_name_plural = verbose_name
 
 # ICPC子类抽象类
 class IcpcSubBase(IcpcBase):

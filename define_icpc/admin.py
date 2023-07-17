@@ -1,7 +1,7 @@
 from django.contrib import admin
 
-from .models import Icpc, Icpc1_register_logins, Icpc2_reservation_investigations, Icpc3_symptoms_and_problems, Icpc4_physical_examination_and_tests, Icpc5_evaluation_and_diagnoses, Icpc6_prescribe_medicines, Icpc7_treatments, Icpc8_other_health_interventions, Icpc9_referral_consultations, Icpc10_test_results_and_statistics
-
+from .models import Icpc, HintFields, Icpc1_register_logins, Icpc2_reservation_investigations, Icpc3_symptoms_and_problems, Icpc4_physical_examination_and_tests, Icpc5_evaluation_and_diagnoses, Icpc6_prescribe_medicines, Icpc7_treatments, Icpc8_other_health_interventions, Icpc9_referral_consultations, Icpc10_test_results_and_statistics
+from .forms import HintFieldsForm
 
 @admin.register(Icpc)
 class IcpcAdmin(admin.ModelAdmin):
@@ -16,6 +16,15 @@ class IcpcAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
+@admin.register(HintFields)
+class HintFieldsAdmin(admin.ModelAdmin):
+    list_display = ['hint_fields']
+    form = HintFieldsForm
+
+    def save_model(self, request, obj, form, change):
+        # 在保存模型前，将逗号分隔的字符串转换为列表
+        obj.hint_fields = form.cleaned_data.get('hint_fields')
+        super().save_model(request, obj, form, change)
 
 class SubIcpcAdmin(admin.ModelAdmin):
     list_display = ['icpc_code','icode','iname','iename','include','criteria','exclude','consider','icd10','icpc2','note','pym']

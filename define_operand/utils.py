@@ -131,8 +131,9 @@ def keyword_search(s, keywords_list):
 
 
 ########################################################################################################################
-def generate_form_event_js_script(rules, domain, class_name, autofill_fields):
+def generate_form_event_js_script(rules, domain, class_name, autofill_fields, show_icpc_hint):
     import json
+    from define_icpc.models import HintFields
 
     rules_string = json.dumps(rules, ensure_ascii=False)
     keys = list(rules[0].keys())
@@ -141,23 +142,84 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields):
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>    
 <script>
     document.addEventListener('DOMContentLoaded', async function() {{
-        const fetchCustomerServiceLogURL = "http://{domain}/core/api/customer_service_log/";
-        const autocompleteFieldsURL = "http://{domain}/core/api/get_medicine_item/";
+        const domain = '{domain}';
+        const fetchCustomerServiceLogURL = `http://${{domain}}/core/api/customer_service_log/`;
+        const autocompleteFieldsURL = `http://${{domain}}/core/api/get_medicine_item/`;
+        const fetchIcpcItemURL = `http://${{domain}}/core/api/get_icpc_item/`;
 
         // 表单事件规则配置列表
         const content_conflict_rules = '''
     
+    if show_icpc_hint:
+        hint_fields = HintFields.objects.all().last().hint_fields.split(',')
+        template_script_show_icpc_hint = f'''
+        // ******************************************
+        // 显示字段提示
+        // ******************************************
+        const showIcpcHint = async (node) => {{
+            const fetchIcpcItem = async (node_field_name, itemId) => {{
+                let url = fetchIcpcItemURL + `?fieldName=${{node_field_name}}&itemId=${{itemId}}`
+                try {{
+                    const response = await fetch(url, {{ headers: {{'Accept': 'application/json',}} }});
+                    if (!response.ok) {{
+                        throw new Error('HTTP error ' + response.status);
+                    }}
+                    const result = await response.json();
+                    return result;
+                }} catch (error) {{
+                    console.error('Error:', error);
+                    return null;
+                }}
+            }}
+
+            // 1. 从node获取字段名称、itemId
+            // 当前node字段名
+            let parts = node.id.split('-')
+            parts.pop()
+            let node_field_name = parts.pop().substr(3)
+            // 获取itemId
+            const itemId = node.parentElement.parentElement.parentElement.parentElement.firstElementChild.value
+
+            // 2. fetch API获取item详细信息
+            const icpcItem = await fetchIcpcItem(node_field_name, itemId)
+
+            // 3. 显示字段提示
+            const hintFields = {hint_fields}
+            const parentNode = node.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement
+            // 构造提示div
+            let hintDiv = document.createElement("div")
+            hintDiv.id = "dynamic_hint"; 
+            hintFields.forEach(field => {{
+                console.log(field, ":", icpcItem[field])
+                let textContent = icpcItem[field]
+                if ((textContent === null) || (textContent === undefined))
+                    textContent = ''
+                let newLabel = document.createElement("div")
+                newLabel.textContent = `${{field}}: ${{textContent}}`
+                hintDiv.appendChild(newLabel)
+                hintDiv.appendChild(document.createElement("p"))
+            }})
+            existingHintDiv = parentNode.parentElement.querySelector('#dynamic_hint')
+            if (existingHintDiv) {{
+                parentNode.parentElement.removeChild(existingHintDiv)
+            }}
+            parentNode.insertAdjacentElement('afterend', hintDiv);
+        }}
+        '''
+        template_script_call_show_icpc_hint = '''
+                    // 显示字段提示
+                    showIcpcHint(node)'''
+    else:
+        template_script_show_icpc_hint = ''
+        template_script_call_show_icpc_hint = ''
+
     if autofill_fields:
         template_script_autofill_fields = '''
         // ******************************************
         // 自动补全字典明细相关字段
         // ******************************************
         // 从明细表表头提取表头数组，用于获取字段名称数组
-        let headTr = document.querySelector('table thead tr')
-        headTr.removeChild(headTr.firstElementChild)
-        headTr.removeChild(headTr.lastElementChild)
-        const thElements = headTr.querySelectorAll('th')
-
+        const thElements = document.querySelector('table thead tr').querySelectorAll('th')
         // 自动补全字典字段
         const autocompleteFields = async (node) => {
             const fetchMedicineItem = async (itemId) => {
@@ -188,21 +250,23 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields):
             console.log('id:', itemId, node.getAttribute('title').trim())
             // 查找对应的<td>元素.input/select元素，填充相关属性字段
             thElements.forEach(th => {
-                // 从表头类名解析出字段名
-                let fieldName = th.className.split(' ')[0].split('-')[1]  
-                if (fieldName !== node_field_name) {
-                    // 获取类名，用于从tr中查找节点
-                    let classStr = '.field-' + fieldName
-                    // 获取表头title，用于从item字典中查找对应键值
-                    let title = th.innerText
-                    console.log(title, ':', medicineItem[title])
-                    // 获取节点
-                    let relate_node = tr.querySelector(classStr).firstElementChild
-                    // 根据类型写入键值
-                    if (relate_node.nodeName === 'INPUT') {
-                        relate_node.value = medicineItem[title]
-                    } else if (relate_node.nodeName === 'DIV') {
-                        relate_node.firstElementChild.value = medicineItem[title]
+                if ((th.className) && (th.className !== 'original')) {
+                    // 从表头类名解析出字段名
+                    let fieldName = th.className.split(' ')[0].split('-')[1]  
+                    if (fieldName !== node_field_name) {
+                        // 获取类名，用于从tr中查找节点
+                        let classStr = '.field-' + fieldName
+                        // 获取表头title，用于从item字典中查找对应键值
+                        let title = th.innerText
+                        console.log(title, ':', medicineItem[title])
+                        // 获取节点
+                        let relate_node = tr.querySelector(classStr).firstElementChild
+                        // 根据类型写入键值
+                        if (relate_node.nodeName === 'INPUT') {
+                            relate_node.value = medicineItem[title]
+                        } else if (relate_node.nodeName === 'DIV') {
+                            relate_node.firstElementChild.value = medicineItem[title]
+                        }
                     }
                 }
             })
@@ -253,6 +317,7 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields):
         }}
         const context_{keys[0]} = await fetchCustomerServiceLog(customerId, period, form_class);
         console.log(context_{keys[0]});
+        {template_script_show_icpc_hint}
         {template_script_autofill_fields}
     '''    
 
@@ -346,6 +411,7 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields):
                             detect_form_event(item);
                         }}
                     }});
+                    {template_script_call_show_icpc_hint}
                 }}
             }}
         }}
