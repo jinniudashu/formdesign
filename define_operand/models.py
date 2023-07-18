@@ -559,12 +559,12 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         # construct template script        
         template_script = None
         # 设置change_form_template，例如：change_form_template = 'a3101_change_form.html'
-        if form_event_rules or computation_logic:
+        if computation_logic or form_event_rules or autofill_fields or show_hint:
             change_form_template = f'"{self.name.lower()}_change_form.html"'
             # generate custom template JS script
             if (computation_logic):
                 template_script = generate_js_script(generate_params)
-            if (form_event_rules):
+            if (form_event_rules or autofill_fields or show_hint):
                 template_script = generate_form_event_js_script(form_event_rules, domain, self.name.lower(), autofill_fields, show_hint)
 
         # construct model footer script

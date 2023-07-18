@@ -143,12 +143,45 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
 <script>
     document.addEventListener('DOMContentLoaded', async function() {{
         const domain = '{domain}';
+        
+        // 根据表单检测范围，从CustomerServiceLog获取历史记录，构造{keys[0]}数组上下文
+        const customerId = Cookies.get('customer_id');
+        const period = 'ALL';  // 'ALL' or 'LAST_WEEK_SERVICES'
+        const form_class = 0;  // 指定表单类别
         const fetchCustomerServiceLogURL = `http://${{domain}}/core/api/customer_service_log/`;
-        const autocompleteFieldsURL = `http://${{domain}}/core/api/get_medicine_item/`;
-        const fetchIcpcItemURL = `http://${{domain}}/core/api/get_icpc_item/`;
-
-        // 表单事件规则配置列表
-        const content_conflict_rules = '''
+        const fetchCustomerServiceLog = async (customerId, period=null, form_class=0) => {{
+            let url = fetchCustomerServiceLogURL + `?customer=${{customerId}}`
+            if (period !== null) {{
+                url += `&period=${{period}}`;
+            }}
+            if (form_class > 0) {{
+                url += `&form_class=${{form_class}}`;
+            }}
+            try {{
+                const response = await fetch(url, {{
+                    headers: {{
+                        'Accept': 'application/json',
+                    }}
+                }});
+                if (!response.ok) {{
+                    throw new Error('HTTP error ' + response.status);
+                }}
+                const result = await response.json();
+                // 将获取的{keys[0]}历史记录保存在数组中返回
+                const logs = JSON.parse(result);
+                arrayValue = logs.filter(log => log.fields.data.hasOwnProperty('{keys[0]}'))
+                    .map(log => {{
+                        s = log.fields.data.{keys[0]};
+                        v = s.replace("{{", "").replace("}}", "").replace(/'/g, "")
+                        return {{value: v, datetime: log.fields.created_time}};
+                    }});
+                return arrayValue;
+            }} catch (error) {{
+                console.error('Error:', error);
+            }}
+        }}
+        const context_{keys[0]} = await fetchCustomerServiceLog(customerId, period, form_class);
+        console.log(context_{keys[0]});'''
     
     if show_icpc_hint:
         hint_fields = HintFields.objects.all().last().hint_fields.split(',')
@@ -157,6 +190,7 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
         // 显示字段提示
         // ******************************************
         const showIcpcHint = async (node) => {{
+            const fetchIcpcItemURL = `http://${{domain}}/core/api/get_icpc_item/`;
             const fetchIcpcItem = async (node_field_name, itemId) => {{
                 let url = fetchIcpcItemURL + `?fieldName=${{node_field_name}}&itemId=${{itemId}}`
                 try {{
@@ -204,8 +238,7 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
                 parentNode.parentElement.removeChild(existingHintDiv)
             }}
             parentNode.insertAdjacentElement('afterend', hintDiv);
-        }}
-        '''
+        }}'''
         template_script_call_show_icpc_hint = '''
                     // 显示字段提示
                     showIcpcHint(node)'''
@@ -222,6 +255,7 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
         const thElements = document.querySelector('table thead tr').querySelectorAll('th')
         // 自动补全字典字段
         const autocompleteFields = async (node) => {
+            const autocompleteFieldsURL = `http://${domain}/core/api/get_medicine_item/`;
             const fetchMedicineItem = async (itemId) => {
                 let url = autocompleteFieldsURL + `?itemId=${itemId}`
                 try {
@@ -271,79 +305,36 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
                 }
             })
         }'''
-
         template_script_call_autofill_fields = '''
                     // 填充字典相关属性字段
                     autocompleteFields(node)'''
     else:
         template_script_autofill_fields = ''
         template_script_call_autofill_fields = ''
-        
-    template_script_get_context = f'''
-        // 根据表单检测范围，从CustomerServiceLog获取历史记录，构造{keys[0]}数组上下文
-        const customerId = Cookies.get('customer_id');
-        const period = 'ALL';  // 'ALL' or 'LAST_WEEK_SERVICES'
-        const form_class = 0;  // 指定表单类别
-        const fetchCustomerServiceLog = async (customerId, period=null, form_class=0) => {{
-            let url = fetchCustomerServiceLogURL + `?customer=${{customerId}}`
-            if (period !== null) {{
-                url += `&period=${{period}}`;
-            }}
-            if (form_class > 0) {{
-                url += `&form_class=${{form_class}}`;
-            }}
-            try {{
-                const response = await fetch(url, {{
-                    headers: {{
-                        'Accept': 'application/json',
-                    }}
-                }});
-                if (!response.ok) {{
-                    throw new Error('HTTP error ' + response.status);
-                }}
-                const result = await response.json();
-                // 将获取的{keys[0]}历史记录保存在数组中返回
-                const logs = JSON.parse(result);
-                arrayValue = logs.filter(log => log.fields.data.hasOwnProperty('{keys[0]}'))
-                    .map(log => {{
-                        s = log.fields.data.{keys[0]};
-                        v = s.replace("{{", "").replace("}}", "").replace(/'/g, "")
-                        return {{value: v, datetime: log.fields.created_time}};
-                    }});
-                return arrayValue;
-            }} catch (error) {{
-                console.error('Error:', error);
-            }}
-        }}
-        const context_{keys[0]} = await fetchCustomerServiceLog(customerId, period, form_class);
-        console.log(context_{keys[0]});
-        {template_script_show_icpc_hint}
-        {template_script_autofill_fields}
-    '''    
-
-    template_script_body = f'''
-        // 定义全局变量，用于存储被跟踪的字段当前值
-        const current_values = {{
-            {keys[0]}: null,
-            {keys[1]}: null
-        }}
-
-        // 定义表单事件动作，接受一个选项，来自表单事件规则列表
-        const form_event_action = (action, conflict_items) => {{
-            // 把冲突项目数组转换为字符串
-            const conflict_items_string = conflict_items.join('、');
-            if (action === 'WARN') {{
-                // 警告用户内容冲突
-                alert(`表单内容冲突：${{conflict_items_string}}`);
-            }} else if (action === 'PROHIBIT') {{
-                alert(`表单内容冲突：${{conflict_items_string}}`);
-                // 禁止保存表单
-                document.querySelector('input[name="_save"]').disabled = true;
-            }}
-        }}
-
-        // 检测是否发生符合特定规则的表单事件. 接受一条来自表单事件规则列表的规则, 如果发生表单事件，执行规则配置表中指定的表单事件动作
+    
+    if rules:
+        template_script_detect_event = f'''
+        // ******************************************
+        // 检测是否发生符合特定规则的表单事件
+        // ******************************************
+        // 表单事件规则
+        const content_conflict_rules = {rules_string}
+        // 接受一条来自表单事件规则列表的规则, 如果发生表单事件，执行规则配置表中指定的表单事件动作
         const detect_form_event = (rule) => {{
+            // 定义表单事件动作，接受一个选项，来自表单事件规则列表
+            const form_event_action = (action, conflict_items) => {{
+                // 把冲突项目数组转换为字符串
+                const conflict_items_string = conflict_items.join('、');
+                if (action === 'WARN') {{
+                    // 警告用户内容冲突
+                    alert(`表单内容冲突：${{conflict_items_string}}`);
+                }} else if (action === 'PROHIBIT') {{
+                    alert(`表单内容冲突：${{conflict_items_string}}`);
+                    // 禁止保存表单
+                    document.querySelector('input[name="_save"]').disabled = true;
+                }}
+            }}
+
             if (!current_values.{keys[1]}) return;
 
             // 构造冲突项列表
@@ -385,7 +376,30 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
                 }}
                 form_event_action(rule.form_event_action, conflict_items)
             }}
-        }};
+        }};'''
+        template_script_call_detect_event_0 = f'''
+                    // 检测是否发生符合特定规则的表单事件
+                    content_conflict_rules.find(item => {{
+                        if (item.{keys[0]}.includes(current_values.{keys[0]})) {{
+                            detect_form_event(item);
+                        }}
+                    }});'''
+        template_script_call_detect_event_1 = f'''
+                    // 检测是否发生符合特定规则的表单事件
+                    content_conflict_rules.find(item => {{
+                        if (item.{keys[1]}.includes(current_values.{keys[1]})) {{
+                            detect_form_event(item);
+                        }}
+                    }});'''
+    else:
+        template_script_detect_event = ''
+        template_script_call_detect_event_0 = ''
+        template_script_call_detect_event_1 = ''
+
+    template_script_body = f'''
+        {template_script_detect_event}
+        {template_script_show_icpc_hint}
+        {template_script_autofill_fields}
 
         // 创建观察器，接受一个回调函数为参数
         function createObserver(callback) {{
@@ -399,6 +413,12 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
         }}
         const mutationObserverConfig = {{ childList: true, subtree: true }}
 
+        // 定义全局变量，用于存储被跟踪的字段当前值
+        const current_values = {{
+            {keys[0]}: null,
+            {keys[1]}: null
+        }}
+
         // {keys[0]}变化处理
         function {keys[0]}HandleChanges(node) {{
             if (node.hasAttribute('title')) {{
@@ -406,11 +426,7 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
                 if (title !== current_values.{keys[0]}) {{
                     current_values.{keys[0]} = title;
                     document.querySelector('input[name="_save"]').disabled = false;
-                    content_conflict_rules.find(item => {{
-                        if (item.{keys[0]}.includes(current_values.{keys[0]})) {{
-                            detect_form_event(item);
-                        }}
-                    }});
+                    {template_script_call_detect_event_0}
                     {template_script_call_show_icpc_hint}
                 }}
             }}
@@ -428,12 +444,7 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
                 if (title !== current_values.{keys[1]}) {{
                     current_values.{keys[1]} = title;
                     document.querySelector('input[name="_save"]').disabled = false;
-                    // 规则冲突检测
-                    content_conflict_rules.find(item => {{
-                        if (item.{keys[1]}.includes(current_values.{keys[1]})) {{
-                            detect_form_event(item);
-                        }}
-                    }});
+                    {template_script_call_detect_event_1}
                     {template_script_call_autofill_fields}
                 }}
             }}
@@ -481,4 +492,4 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
     }});
 </script>
 '''
-    return template_script_header + rules_string + template_script_get_context + template_script_body
+    return template_script_header + template_script_body
