@@ -136,14 +136,15 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
     from define_icpc.models import HintFields
 
     rules_string = json.dumps(rules, ensure_ascii=False)
-    keys = list(rules[0].keys())
+    # keys = list(rules[0].keys())
+    keys = ['boolfield_ji_bing_ming_cheng', 'boolfield_yao_pin_ming']
 
     template_script_header = f'''
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>    
 <script>
     document.addEventListener('DOMContentLoaded', async function() {{
         const domain = '{domain}';
-        
+
         // 根据表单检测范围，从CustomerServiceLog获取历史记录，构造{keys[0]}数组上下文
         const customerId = Cookies.get('customer_id');
         const period = 'ALL';  // 'ALL' or 'LAST_WEEK_SERVICES'
@@ -313,6 +314,20 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
         template_script_call_autofill_fields = ''
     
     if rules:
+        template_script_call_detect_event_0 = f'''
+                    // 检测是否发生符合特定规则的表单事件
+                    content_conflict_rules.find(item => {{
+                        if (item.{keys[0]}.includes(current_values.{keys[0]})) {{
+                            detect_form_event(item);
+                        }}
+                    }});'''
+        template_script_call_detect_event_1 = f'''
+                    // 检测是否发生符合特定规则的表单事件
+                    content_conflict_rules.find(item => {{
+                        if (item.{keys[1]}.includes(current_values.{keys[1]})) {{
+                            detect_form_event(item);
+                        }}
+                    }});'''
         template_script_detect_event = f'''
         // ******************************************
         // 检测是否发生符合特定规则的表单事件
@@ -376,21 +391,9 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
                 }}
                 form_event_action(rule.form_event_action, conflict_items)
             }}
-        }};'''
-        template_script_call_detect_event_0 = f'''
-                    // 检测是否发生符合特定规则的表单事件
-                    content_conflict_rules.find(item => {{
-                        if (item.{keys[0]}.includes(current_values.{keys[0]})) {{
-                            detect_form_event(item);
-                        }}
-                    }});'''
-        template_script_call_detect_event_1 = f'''
-                    // 检测是否发生符合特定规则的表单事件
-                    content_conflict_rules.find(item => {{
-                        if (item.{keys[1]}.includes(current_values.{keys[1]})) {{
-                            detect_form_event(item);
-                        }}
-                    }});'''
+        }};
+
+        '''
     else:
         template_script_detect_event = ''
         template_script_call_detect_event_0 = ''

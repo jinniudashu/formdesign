@@ -616,6 +616,12 @@
             "pym": "xypj"
         },
         {
+            "label": "药品计量单位",
+            "name": "yao_pin_dan_wei",
+            "hssc_id": "ec599eaa-c116-11ec-b731-2617a93150cd",
+            "pym": "ypjldw"
+        },
+        {
             "label": "药品分类",
             "name": "yao_pin_fen_lei",
             "hssc_id": "d8aabe7c-c5ce-11ec-b819-725badf7393d",
@@ -746,27 +752,72 @@
             "name": "shi_fou_an_pai_zhi_liao_ji_hua",
             "hssc_id": "874451d0-123e-11ed-92ab-da42fac10474",
             "pym": "sfapzljh"
-        },
-        {
-            "label": "药品管理属性",
-            "name": "yao_pin_guan_li_shu_xing",
-            "hssc_id": "bc6dfcaa-3117-11ee-9718-0242ac170003",
-            "pym": "ypglsx"
-        },
-        {
-            "label": "医保报销类别",
-            "name": "yi_bao_bao_xiao_lei_bie",
-            "hssc_id": "6ab0932c-3118-11ee-bdd7-0242ac170003",
-            "pym": "ybbxlb"
-        },
-        {
-            "label": "药剂类型",
-            "name": "yao_ji_lei_xing",
-            "hssc_id": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "pym": "yjlx"
         }
     ],
     "dicdetail": [
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "ec5a48c8-c116-11ec-b731-2617a93150cd",
+            "pym": null,
+            "diclist": "ec599eaa-c116-11ec-b731-2617a93150cd",
+            "value": "支",
+            "icpc": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "ec5a88f6-c116-11ec-b731-2617a93150cd",
+            "pym": null,
+            "diclist": "ec599eaa-c116-11ec-b731-2617a93150cd",
+            "value": "盒",
+            "icpc": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "ec5ab66e-c116-11ec-b731-2617a93150cd",
+            "pym": null,
+            "diclist": "ec599eaa-c116-11ec-b731-2617a93150cd",
+            "value": "粒",
+            "icpc": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "ec5af732-c116-11ec-b731-2617a93150cd",
+            "pym": null,
+            "diclist": "ec599eaa-c116-11ec-b731-2617a93150cd",
+            "value": "片",
+            "icpc": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "ec5b2d9c-c116-11ec-b731-2617a93150cd",
+            "pym": null,
+            "diclist": "ec599eaa-c116-11ec-b731-2617a93150cd",
+            "value": "袋",
+            "icpc": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "ec5b619a-c116-11ec-b731-2617a93150cd",
+            "pym": null,
+            "diclist": "ec599eaa-c116-11ec-b731-2617a93150cd",
+            "value": "瓶",
+            "icpc": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "ec5b93fe-c116-11ec-b731-2617a93150cd",
+            "pym": null,
+            "diclist": "ec599eaa-c116-11ec-b731-2617a93150cd",
+            "value": "ml",
+            "icpc": null
+        },
         {
             "label": null,
             "name": null,
@@ -3187,231 +3238,6 @@
             "diclist": "874451d0-123e-11ed-92ab-da42fac10474",
             "value": "否",
             "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "80845e14-3117-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "d8aabe7c-c5ce-11ec-b819-725badf7393d",
-            "value": "皮肤科类",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "8084758e-3117-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "d8aabe7c-c5ce-11ec-b819-725badf7393d",
-            "value": "妇科类",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "bc6e2a4a-3117-11ee-9718-0242ac170003",
-            "pym": null,
-            "diclist": "bc6dfcaa-3117-11ee-9718-0242ac170003",
-            "value": "西药类",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "bc6e3e68-3117-11ee-9718-0242ac170003",
-            "pym": null,
-            "diclist": "bc6dfcaa-3117-11ee-9718-0242ac170003",
-            "value": "中药类",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "bc6e4ba6-3117-11ee-9718-0242ac170003",
-            "pym": null,
-            "diclist": "bc6dfcaa-3117-11ee-9718-0242ac170003",
-            "value": "基药类",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "bc6e5a2e-3117-11ee-9718-0242ac170003",
-            "pym": null,
-            "diclist": "bc6dfcaa-3117-11ee-9718-0242ac170003",
-            "value": "非处方药类",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "fc6d04d6-3117-11ee-9718-0242ac170003",
-            "pym": null,
-            "diclist": "d8aabe7c-c5ce-11ec-b819-725badf7393d",
-            "value": "疫苗类",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "0fa30474-3118-11ee-a195-0242ac170003",
-            "pym": null,
-            "diclist": "bc6dfcaa-3117-11ee-9718-0242ac170003",
-            "value": "疫苗类",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "0fa31b58-3118-11ee-a195-0242ac170003",
-            "pym": null,
-            "diclist": "bc6dfcaa-3117-11ee-9718-0242ac170003",
-            "value": "耗材类",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "6ab0c13a-3118-11ee-bdd7-0242ac170003",
-            "pym": null,
-            "diclist": "6ab0932c-3118-11ee-bdd7-0242ac170003",
-            "value": "甲类",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "6ab0d3be-3118-11ee-bdd7-0242ac170003",
-            "pym": null,
-            "diclist": "6ab0932c-3118-11ee-bdd7-0242ac170003",
-            "value": "乙类",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7d39d5ce-3142-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "value": "胶囊",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7d39e8e8-3142-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "value": "片剂",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7d39f572-3142-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "value": "粉剂",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7d3a0198-3142-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "value": "丸剂",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7d3a0ef4-3142-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "value": "贴剂",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7d3a1b06-3142-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "value": "膏剂",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7d3a27c2-3142-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "value": "滴剂",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7d3a3550-3142-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "value": "栓剂",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7d3a439c-3142-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "value": "颗粒剂",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7d3a547c-3142-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "value": "糖浆",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7d3a67dc-3142-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "value": "口服液",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7d3a79de-3142-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "value": "溶液",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7d3a8a96-3142-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "value": "注射剂",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7d3a96b2-3142-11ee-a2ad-0242ac170003",
-            "pym": null,
-            "diclist": "7d39a540-3142-11ee-a2ad-0242ac170003",
-            "value": "中药",
-            "icpc": null
         }
     ],
     "managedentity": [
@@ -3822,9 +3648,9 @@
         },
         {
             "hssc_id": "fbdc40fe-c115-11ec-b731-2617a93150cd",
-            "pym": "gg",
-            "label": "规格",
-            "name": "boolfield_gui_ge",
+            "pym": "ypgg",
+            "label": "药品规格",
+            "name": "boolfield_yao_pin_gui_ge",
             "name_icpc": null,
             "type": "CharField",
             "length": 255,
@@ -4012,9 +3838,9 @@
         },
         {
             "hssc_id": "2b80da60-c5ce-11ec-b819-725badf7393d",
-            "pym": "cyjl",
-            "label": "常用剂量",
-            "name": "boolfield_chang_yong_ji_liang",
+            "pym": "dcyyl",
+            "label": "单次用药量",
+            "name": "boolfield_dan_ci_yong_yao_liang",
             "name_icpc": null,
             "type": "CharField",
             "length": 255,
@@ -4022,9 +3848,19 @@
         },
         {
             "hssc_id": "33bc581c-c5ce-11ec-b9d4-725badf7393d",
-            "pym": "ybypmldyypbm",
-            "label": "医保药品目录对应药品编码",
-            "name": "boolfield_yi_bao_yao_pin_mu_lu_dui_ying_yao_pin_bian_ma",
+            "pym": "dzybmc",
+            "label": "对照医保名称",
+            "name": "boolfield_dui_zhao_yi_bao_ming_cheng",
+            "name_icpc": null,
+            "type": "CharField",
+            "length": 255,
+            "default": null
+        },
+        {
+            "hssc_id": "3e18992e-c5ce-11ec-b9d4-725badf7393d",
+            "pym": "dzjymc",
+            "label": "对照基药名称",
+            "name": "boolfield_dui_zhao_ji_yao_ming_cheng",
             "name_icpc": null,
             "type": "CharField",
             "length": 255,
@@ -4579,56 +4415,6 @@
             "type": "CharField",
             "length": 255,
             "default": null
-        },
-        {
-            "hssc_id": "2420aa4a-3114-11ee-a195-0242ac170003",
-            "pym": "gjjbypmlmc",
-            "label": "国家基本药品目录名称",
-            "name": "boolfield_guo_jia_ji_ben_yao_pin_mu_lu_ming_cheng",
-            "name_icpc": null,
-            "type": "CharField",
-            "length": 255,
-            "default": null
-        },
-        {
-            "hssc_id": "648c6162-3116-11ee-afc4-0242ac170003",
-            "pym": "pym",
-            "label": "拼音码",
-            "name": "boolfield_pin_yin_ma",
-            "name_icpc": null,
-            "type": "CharField",
-            "length": 255,
-            "default": null
-        },
-        {
-            "hssc_id": "2c4feec6-3117-11ee-b246-0242ac170003",
-            "pym": "yybz",
-            "label": "用药备注",
-            "name": "boolfield_yong_yao_bei_zhu",
-            "name_icpc": null,
-            "type": "CharField",
-            "length": 255,
-            "default": null
-        },
-        {
-            "hssc_id": "41ee8cfa-3118-11ee-bdd7-0242ac170003",
-            "pym": "blfy",
-            "label": "不良反应",
-            "name": "boolfield_bu_liang_fan_ying",
-            "name_icpc": null,
-            "type": "CharField",
-            "length": 255,
-            "default": null
-        },
-        {
-            "hssc_id": "ad99a114-3141-11ee-b246-0242ac170003",
-            "pym": "cfjldw",
-            "label": "处方计量单位",
-            "name": "boolfield_chu_fang_ji_liang_dan_wei",
-            "name_icpc": null,
-            "type": "CharField",
-            "length": 255,
-            "default": null
         }
     ],
     "numberfield": [
@@ -5078,6 +4864,15 @@
     ],
     "relatedfield": [
         {
+            "hssc_id": "873f9a88-c13e-11ec-b731-2617a93150cd",
+            "pym": "ypdw",
+            "label": "药品单位",
+            "name": "boolfield_yao_pin_dan_wei",
+            "name_icpc": null,
+            "type": "Select",
+            "related_content": "ec599eaa-c116-11ec-b731-2617a93150cd"
+        },
+        {
             "hssc_id": "5f80d88c-c5ca-11ec-b819-725badf7393d",
             "pym": "xypj",
             "label": "信誉评级",
@@ -5085,6 +4880,33 @@
             "name_icpc": null,
             "type": "Select",
             "related_content": "e9c6e170-c5cb-11ec-b9d4-725badf7393d"
+        },
+        {
+            "hssc_id": "77226cfe-c5ce-11ec-b819-725badf7393d",
+            "pym": "cfjldw",
+            "label": "处方计量单位",
+            "name": "boolfield_chu_fang_ji_liang_dan_wei",
+            "name_icpc": null,
+            "type": "Select",
+            "related_content": "ec599eaa-c116-11ec-b731-2617a93150cd"
+        },
+        {
+            "hssc_id": "654dfc0a-c5ce-11ec-b819-725badf7393d",
+            "pym": "rkjldw",
+            "label": "入库计量单位",
+            "name": "boolfield_ru_ku_ji_liang_dan_wei",
+            "name_icpc": null,
+            "type": "Select",
+            "related_content": "ec599eaa-c116-11ec-b731-2617a93150cd"
+        },
+        {
+            "hssc_id": "6da75824-c5ce-11ec-b819-725badf7393d",
+            "pym": "xsjldw",
+            "label": "销售计量单位",
+            "name": "boolfield_xiao_shou_ji_liang_dan_wei",
+            "name_icpc": null,
+            "type": "Select",
+            "related_content": "ec599eaa-c116-11ec-b731-2617a93150cd"
         },
         {
             "hssc_id": "ca6c7ec4-c5cc-11ec-b819-725badf7393d",
@@ -6120,33 +5942,6 @@
             "name_icpc": null,
             "type": "Select",
             "related_content": "2fad9d1e-cbd4-11ed-ab05-ee2fa480f37d"
-        },
-        {
-            "hssc_id": "d5c0c7a0-3117-11ee-9718-0242ac170003",
-            "pym": "ypglsx",
-            "label": "药品管理属性",
-            "name": "boolfield_yao_pin_guan_li_shu_xing",
-            "name_icpc": null,
-            "type": "CheckboxSelectMultiple",
-            "related_content": "bc6dfcaa-3117-11ee-9718-0242ac170003"
-        },
-        {
-            "hssc_id": "78e2f746-3118-11ee-afc4-0242ac170003",
-            "pym": "ybbxlb",
-            "label": "医保报销类别",
-            "name": "boolfield_yi_bao_bao_xiao_lei_bie",
-            "name_icpc": null,
-            "type": "RadioSelect",
-            "related_content": "6ab0932c-3118-11ee-bdd7-0242ac170003"
-        },
-        {
-            "hssc_id": "8f456a76-3142-11ee-a2bb-0242ac170003",
-            "pym": "yjlx",
-            "label": "药剂类型",
-            "name": "boolfield_yao_ji_lei_xing",
-            "name_icpc": null,
-            "type": "Select",
-            "related_content": "7d39a540-3142-11ee-a2ad-0242ac170003"
         }
     ],
     "filefield": [
@@ -6456,6 +6251,7 @@
             "api_fields": null,
             "components": [
                 "1bf942da-c5ce-11ec-b9d4-725badf7393d",
+                "873f9a88-c13e-11ec-b731-2617a93150cd",
                 "decabc92-9aa1-11ec-bde1-8a6e55faf877",
                 "decba0ee-9aa1-11ec-bde1-8a6e55faf877",
                 "1cad2116-a52a-11ec-a478-2ec403f6c47b",
@@ -6507,7 +6303,7 @@
             "pym": "ypjbxxb",
             "name_icpc": null,
             "description": "",
-            "form_class": 1,
+            "form_class": null,
             "api_fields": null,
             "components": [
                 "2c4ebf36-d5b7-11ec-a897-52d938fbdf73",
@@ -6517,18 +6313,16 @@
                 "fbdc40fe-c115-11ec-b731-2617a93150cd",
                 "2b80da60-c5ce-11ec-b819-725badf7393d",
                 "33bc581c-c5ce-11ec-b9d4-725badf7393d",
+                "3e18992e-c5ce-11ec-b9d4-725badf7393d",
+                "4a10254e-c5ce-11ec-b9d4-725badf7393d",
+                "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
+                "77226cfe-c5ce-11ec-b819-725badf7393d",
+                "654dfc0a-c5ce-11ec-b819-725badf7393d",
+                "6da75824-c5ce-11ec-b819-725badf7393d",
                 "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
                 "5dc1e618-c5ce-11ec-b9d4-725badf7393d",
                 "f8c022f2-df4e-11ed-ba67-0242ac120003",
-                "0b9aad02-df4f-11ed-ba67-0242ac120003",
-                "2420aa4a-3114-11ee-a195-0242ac170003",
-                "648c6162-3116-11ee-afc4-0242ac170003",
-                "2c4feec6-3117-11ee-b246-0242ac170003",
-                "d5c0c7a0-3117-11ee-9718-0242ac170003",
-                "41ee8cfa-3118-11ee-bdd7-0242ac170003",
-                "78e2f746-3118-11ee-afc4-0242ac170003",
-                "ad99a114-3141-11ee-b246-0242ac170003",
-                "8f456a76-3142-11ee-a2bb-0242ac170003"
+                "0b9aad02-df4f-11ed-ba67-0242ac120003"
             ],
             "list_components": []
         },
@@ -6774,15 +6568,14 @@
             "form_class": 3,
             "api_fields": null,
             "components": [
-                "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
                 "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "list_components": [
                 "1bf942da-c5ce-11ec-b9d4-725badf7393d",
                 "2b80da60-c5ce-11ec-b819-725badf7393d",
+                "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
                 "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-                "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
-                "2c4feec6-3117-11ee-b246-0242ac170003"
+                "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
             ]
         },
         {
@@ -6913,7 +6706,7 @@
             "name_icpc": "A6501",
             "description": "",
             "form_class": 1,
-            "api_fields": "[{\"scheduled_time\": \"boolfield_yu_yue_shi_jian\"}, {\"charge_staff\": \"boolfield_ze_ren_ren\"}]",
+            "api_fields": "[{\"scheduled_time\": \"boolfield_yu_yue_shi_jian\"}]",
             "components": [
                 "deb85c6e-9aa1-11ec-bde1-8a6e55faf877",
                 "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
@@ -7744,7 +7537,9 @@
             "form_class": 2,
             "api_fields": null,
             "components": [
-                "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877"
+                "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
+                "6a4b6984-9e93-11ec-a013-aa434405c3fc",
+                "5b880f4c-9e93-11ec-b91b-aa434405c3fc"
             ],
             "list_components": []
         }
@@ -7771,7 +7566,7 @@
             "default_value": null,
             "is_required": false,
             "api_field": null,
-            "position": 2,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -8161,6 +7956,18 @@
         {
             "label": null,
             "name": null,
+            "hssc_id": "7b884f42-dd93-11ec-ab0c-4889e7cf38c9",
+            "form": "0ce866ae-9e23-11ec-aa2c-fe35a7065cdd",
+            "component": "873f9a88-c13e-11ec-b731-2617a93150cd",
+            "default_value": null,
+            "is_required": false,
+            "api_field": null,
+            "position": 100,
+            "show_hint": false
+        },
+        {
+            "label": null,
+            "name": null,
             "hssc_id": "7b88eb61-dd93-11ec-844b-4889e7cf38c9",
             "form": "0ce866ae-9e23-11ec-aa2c-fe35a7065cdd",
             "component": "decabc92-9aa1-11ec-bde1-8a6e55faf877",
@@ -8343,9 +8150,9 @@
             "name": null,
             "hssc_id": "7b945d39-dd93-11ec-b967-4889e7cf38c9",
             "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "afe6851a-c115-11ec-9685-2617a93150cd",
+            "component": "2c4ebf36-d5b7-11ec-a897-52d938fbdf73",
             "default_value": null,
-            "is_required": true,
+            "is_required": false,
             "api_field": null,
             "position": 100,
             "show_hint": false
@@ -8355,11 +8162,11 @@
             "name": null,
             "hssc_id": "7b94f943-dd93-11ec-a1dd-4889e7cf38c9",
             "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "648c6162-3116-11ee-afc4-0242ac170003",
+            "component": "18cfcb9a-d11a-11ec-ab0d-823d1f108281",
             "default_value": null,
-            "is_required": true,
+            "is_required": false,
             "api_field": null,
-            "position": 110,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -8367,11 +8174,11 @@
             "name": null,
             "hssc_id": "7b95959e-dd93-11ec-affd-4889e7cf38c9",
             "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "18cfcb9a-d11a-11ec-ab0d-823d1f108281",
+            "component": "1bf942da-c5ce-11ec-b9d4-725badf7393d",
             "default_value": null,
-            "is_required": true,
+            "is_required": false,
             "api_field": null,
-            "position": 120,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -8379,11 +8186,23 @@
             "name": null,
             "hssc_id": "7b9658f5-dd93-11ec-b2c1-4889e7cf38c9",
             "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "component": "afe6851a-c115-11ec-9685-2617a93150cd",
+            "default_value": null,
+            "is_required": false,
+            "api_field": null,
+            "position": 100,
+            "show_hint": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "7b971c4a-dd93-11ec-b0d9-4889e7cf38c9",
+            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
             "component": "fbdc40fe-c115-11ec-b731-2617a93150cd",
             "default_value": null,
-            "is_required": true,
+            "is_required": false,
             "api_field": null,
-            "position": 130,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -8393,9 +8212,9 @@
             "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
             "component": "2b80da60-c5ce-11ec-b819-725badf7393d",
             "default_value": null,
-            "is_required": true,
+            "is_required": false,
             "api_field": null,
-            "position": 150,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -8403,11 +8222,47 @@
             "name": null,
             "hssc_id": "7b98ca05-dd93-11ec-91b4-4889e7cf38c9",
             "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
+            "component": "33bc581c-c5ce-11ec-b9d4-725badf7393d",
             "default_value": null,
-            "is_required": true,
+            "is_required": false,
             "api_field": null,
-            "position": 160,
+            "position": 100,
+            "show_hint": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "7b998d3a-dd93-11ec-adee-4889e7cf38c9",
+            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "component": "3e18992e-c5ce-11ec-b9d4-725badf7393d",
+            "default_value": null,
+            "is_required": false,
+            "api_field": null,
+            "position": 100,
+            "show_hint": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "7b9a2971-dd93-11ec-91c8-4889e7cf38c9",
+            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "component": "4a10254e-c5ce-11ec-b9d4-725badf7393d",
+            "default_value": null,
+            "is_required": false,
+            "api_field": null,
+            "position": 100,
+            "show_hint": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "7b9aeb09-dd93-11ec-b821-4889e7cf38c9",
+            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "component": "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
+            "default_value": null,
+            "is_required": false,
+            "api_field": null,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -8415,11 +8270,35 @@
             "name": null,
             "hssc_id": "7b9b8731-dd93-11ec-b709-4889e7cf38c9",
             "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "1bf942da-c5ce-11ec-b9d4-725badf7393d",
+            "component": "77226cfe-c5ce-11ec-b819-725badf7393d",
             "default_value": null,
-            "is_required": true,
+            "is_required": false,
             "api_field": null,
-            "position": 170,
+            "position": 100,
+            "show_hint": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "7b9c4a9e-dd93-11ec-bffc-4889e7cf38c9",
+            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "component": "654dfc0a-c5ce-11ec-b819-725badf7393d",
+            "default_value": null,
+            "is_required": false,
+            "api_field": null,
+            "position": 100,
+            "show_hint": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "7b9ce6bf-dd93-11ec-a71f-4889e7cf38c9",
+            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "component": "6da75824-c5ce-11ec-b819-725badf7393d",
+            "default_value": null,
+            "is_required": false,
+            "api_field": null,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -8427,11 +8306,11 @@
             "name": null,
             "hssc_id": "7b9daa3d-dd93-11ec-9ab8-4889e7cf38c9",
             "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "2c4feec6-3117-11ee-b246-0242ac170003",
+            "component": "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
             "default_value": null,
             "is_required": false,
             "api_field": null,
-            "position": 180,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -8441,9 +8320,9 @@
             "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
             "component": "5dc1e618-c5ce-11ec-b9d4-725badf7393d",
             "default_value": null,
-            "is_required": true,
+            "is_required": false,
             "api_field": null,
-            "position": 200,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -8659,7 +8538,7 @@
             "default_value": null,
             "is_required": false,
             "api_field": null,
-            "position": 2,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -9679,7 +9558,7 @@
             "default_value": null,
             "is_required": true,
             "api_field": "scheduled_time",
-            "position": 100,
+            "position": 1,
             "show_hint": false
         },
         {
@@ -12102,8 +11981,8 @@
             "component": "3d2ec7e0-df4f-11ed-ba67-0242ac120003",
             "default_value": null,
             "is_required": false,
-            "api_field": "charge_staff",
-            "position": 110,
+            "api_field": null,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -12111,11 +11990,11 @@
             "name": null,
             "hssc_id": "712ecb32-ed49-11ed-a403-0242ac120003",
             "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "d5c0c7a0-3117-11ee-9718-0242ac170003",
+            "component": "f8c022f2-df4e-11ed-ba67-0242ac120003",
             "default_value": null,
-            "is_required": true,
+            "is_required": false,
             "api_field": null,
-            "position": 210,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -12125,9 +12004,9 @@
             "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
             "component": "0b9aad02-df4f-11ed-ba67-0242ac120003",
             "default_value": null,
-            "is_required": true,
+            "is_required": false,
             "api_field": null,
-            "position": 280,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -12137,10 +12016,10 @@
             "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
             "component": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
             "default_value": null,
-            "is_required": true,
+            "is_required": false,
             "api_field": null,
             "position": 1,
-            "show_hint": false
+            "show_hint": true
         },
         {
             "label": null,
@@ -12151,7 +12030,7 @@
             "default_value": null,
             "is_required": false,
             "api_field": null,
-            "position": 1,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -12163,7 +12042,7 @@
             "default_value": null,
             "is_required": false,
             "api_field": null,
-            "position": 1,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -12175,7 +12054,7 @@
             "default_value": null,
             "is_required": false,
             "api_field": null,
-            "position": 120,
+            "position": 100,
             "show_hint": false
         },
         {
@@ -12224,114 +12103,30 @@
             "is_required": false,
             "api_field": null,
             "position": 100,
-            "show_hint": true
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7092954a-2b57-11ee-9718-0242ac170003",
-            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
-            "component": "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
-            "default_value": null,
-            "is_required": true,
-            "api_field": null,
-            "position": 2,
             "show_hint": false
         },
         {
             "label": null,
             "name": null,
-            "hssc_id": "5896af36-3119-11ee-afc4-0242ac170003",
-            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "f8c022f2-df4e-11ed-ba67-0242ac120003",
-            "default_value": null,
-            "is_required": true,
-            "api_field": null,
-            "position": 270,
-            "show_hint": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "5896c7b4-3119-11ee-afc4-0242ac170003",
-            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "41ee8cfa-3118-11ee-bdd7-0242ac170003",
-            "default_value": null,
-            "is_required": true,
-            "api_field": null,
-            "position": 290,
-            "show_hint": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "5896d5ec-3119-11ee-afc4-0242ac170003",
-            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "2c4ebf36-d5b7-11ec-a897-52d938fbdf73",
-            "default_value": null,
-            "is_required": true,
-            "api_field": null,
-            "position": 230,
-            "show_hint": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "5896e33e-3119-11ee-afc4-0242ac170003",
-            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "2420aa4a-3114-11ee-a195-0242ac170003",
-            "default_value": null,
+            "hssc_id": "f4aa83a4-011a-11ee-9434-0242ac120003",
+            "form": "f4aa4d44-011a-11ee-9434-0242ac120003",
+            "component": "6a4b6984-9e93-11ec-a013-aa434405c3fc",
+            "default_value": "高血糖症，非胰岛素依赖型糖尿病",
             "is_required": false,
             "api_field": null,
-            "position": 240,
+            "position": 100,
             "show_hint": false
         },
         {
             "label": null,
             "name": null,
-            "hssc_id": "5896f0e0-3119-11ee-afc4-0242ac170003",
-            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "33bc581c-c5ce-11ec-b9d4-725badf7393d",
-            "default_value": null,
+            "hssc_id": "f4aa957e-011a-11ee-9434-0242ac120003",
+            "form": "f4aa4d44-011a-11ee-9434-0242ac120003",
+            "component": "5b880f4c-9e93-11ec-b91b-aa434405c3fc",
+            "default_value": "妊娠期糖尿病",
             "is_required": false,
             "api_field": null,
-            "position": 250,
-            "show_hint": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "5896fe32-3119-11ee-afc4-0242ac170003",
-            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "78e2f746-3118-11ee-afc4-0242ac170003",
-            "default_value": null,
-            "is_required": false,
-            "api_field": null,
-            "position": 260,
-            "show_hint": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "af7aab5c-3143-11ee-bdd7-0242ac170003",
-            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "ad99a114-3141-11ee-b246-0242ac170003",
-            "default_value": null,
-            "is_required": true,
-            "api_field": null,
-            "position": 140,
-            "show_hint": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "af7ac592-3143-11ee-bdd7-0242ac170003",
-            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "8f456a76-3142-11ee-a2bb-0242ac170003",
-            "default_value": null,
-            "is_required": true,
-            "api_field": null,
-            "position": 190,
+            "position": 100,
             "show_hint": false
         }
     ],
@@ -12383,12 +12178,12 @@
         {
             "label": null,
             "name": null,
-            "hssc_id": "f61895e6-311c-11ee-9402-0242ac170003",
+            "hssc_id": "17d70e54-249a-11ee-90c3-ee2fa480f37c",
             "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
-            "component": "2c4feec6-3117-11ee-b246-0242ac170003",
+            "component": "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
             "default_value": null,
             "is_required": false,
-            "position": 100,
+            "position": 140,
             "autofill_fields": true
         }
     ],
@@ -16145,12 +15940,12 @@
             "name": "kai_ju_zhu_she_lei_chu_fang",
             "hssc_id": "302378de-c9f2-11ec-b369-168d53e8234e",
             "pym": "kjzslcf",
-            "description": "",
+            "description": "用药途径 == ''注射类''",
             "detection_scope": "CURRENT_SERVICE",
             "form_class_scope": 3,
             "event_type": "SCHEDULE_EVENT",
             "weight": 1,
-            "expression": "len({'静滴或静注'}.intersection(boolfield_yong_yao_tu_jing)) == 1",
+            "expression": "len({'注射类'}.intersection(boolfield_yong_yao_tu_jing)) == 1",
             "expression_fields": "boolfield_yong_yao_tu_jing"
         },
         {
@@ -16606,7 +16401,7 @@
             "hssc_id": "3023c596-c9f2-11ec-b369-168d53e8234e",
             "event_rule": "302378de-c9f2-11ec-b369-168d53e8234e",
             "field": "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-            "char_value": "静滴或静注",
+            "char_value": "注射类",
             "operator": 0,
             "number_value": 1.0,
             "connection_operator": null
