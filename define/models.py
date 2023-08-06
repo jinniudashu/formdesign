@@ -241,28 +241,22 @@ class Role(HsscPymBase):
 class Medicine(HsscPymBase):
     yp_code = models.CharField(max_length=10, null=True, verbose_name="药品编码")
     specification = models.CharField(max_length=100, null=True, verbose_name="规格")
-    measure = models.CharField(max_length=30, null=True, verbose_name="单位")
-    mz_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="门诊参考单价")
-    usage = models.CharField(max_length=60, null=True, verbose_name="用药疗程")
-    dosage = models.CharField(max_length=60, null=True, verbose_name="单次用药量")
+    cf_measure = models.CharField(max_length=30, null=True, verbose_name="处方剂量单位")
+    dosage = models.CharField(max_length=60, null=True, verbose_name="常用剂量")
+    usage = models.CharField(max_length=60, null=True, verbose_name="用药途径")
+    fypc = models.CharField(max_length=255, null=True, verbose_name="用药频次")
+    fyzysxhbz = models.CharField(max_length=255, null=True, verbose_name="用药备注")
     type = models.CharField(max_length=40, null=True, verbose_name="药剂类型")
-    yp_sort = models.CharField(max_length=60, null=True, verbose_name="药品分类名称")
-    current_storage = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="当前库存")
-    cf_measure = models.CharField(max_length=30, null=True, verbose_name="处方计量单位")
-    xs_measure = models.CharField(max_length=30, null=True, verbose_name="销售计量单位")
-    cf_dosage = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="常用单次处方用量(处方单位)")
-    not_cfyp = models.BooleanField(default=False, verbose_name="非处方药标记")
-    mzcf_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="门诊处方价格")
-    is_use = models.BooleanField(default=True, verbose_name="是否使用中")
+    yp_sort = models.CharField(max_length=60, null=True, verbose_name="药品分类")
+    ypglsx = models.CharField(max_length=60, null=True, verbose_name="药品管理属性")
     ypty_name = models.CharField(max_length=200, null=True, verbose_name="药品通用名称")
     gjjbyp = models.CharField(max_length=100, null=True, verbose_name="国家基本药品目录名称")
     ybypbm = models.CharField(max_length=100, null=True, verbose_name="医保药品目录对应药品编码")
-    ybyplb = models.CharField(max_length=2, null=True, verbose_name="药品报销类别（甲类、乙类）")
+    ybyplb = models.CharField(max_length=2, null=True, verbose_name="医保报销类别")
     syz = models.CharField(max_length=255, null=True, verbose_name="适应症")
     bsyz = models.CharField(max_length=255, null=True, verbose_name="不适应症")
-    fytj = models.CharField(max_length=255, null=True, verbose_name="用药途径")
-    fypc = models.CharField(max_length=255, null=True, verbose_name="用药频次")
-    fyzysxhbz = models.CharField(max_length=255, null=True, verbose_name="服用注意事项和备注")
+    blfy = models.CharField(max_length=255, null=True, verbose_name="不良反应")
+    mz_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="门诊参考单价")
 
     class Meta:
         verbose_name = "药品基本信息表"
@@ -279,48 +273,21 @@ class MedicineImport(models.Model):
     PYM = models.CharField(max_length=100, null=True, verbose_name="拼音码")
     YPName = models.CharField(max_length=200, null=True, verbose_name="药品名称")
     Specification = models.CharField(max_length=100, null=True, verbose_name="规格")
-    Measure = models.CharField(max_length=30, null=True, verbose_name="单位")
-    MZPrice = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="门诊参考单价")
-    Usage = models.CharField(max_length=60, null=True, verbose_name="用法")
-    Dosage = models.CharField(max_length=60, null=True, verbose_name="用量")
+    CFMeasure = models.CharField(max_length=30, null=True, verbose_name="处方剂量单位")
+    Dosage = models.CharField(max_length=60, null=True, verbose_name="常用剂量")
+    Usage = models.CharField(max_length=60, null=True, verbose_name="用药途径")
+    Frequency = models.CharField(max_length=255, null=True, verbose_name="用药频次")
+    Note = models.CharField(max_length=255, null=True, verbose_name="用药备注")
     Type = models.CharField(max_length=40, null=True, verbose_name="药剂类型")
-    YPSort = models.CharField(max_length=60, null=True, verbose_name="药品分类名称")
-    MaxStorage = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="最大库存")
-    MinStorage = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="最小库存")
-    CurrentStorage = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="当前库存")
-    CFMeasure = models.CharField(max_length=30, null=True, verbose_name="处方计量单位")
-    XSMeasure = models.CharField(max_length=30, null=True, verbose_name="销售计量单位")
-    RK2XS = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="计量单位换算（入库销售）")
-    XS2CF = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="计量单位换算（销售处方）")
-    AllowBreak = models.BooleanField(default=False, verbose_name="允许拆散销售")
-    PricePercentLS = models.DecimalField(max_digits=5, decimal_places=2, null=True, verbose_name="拆散零售价制定比例")
-    PricePercentXS = models.DecimalField(max_digits=5, decimal_places=2, null=True, verbose_name="正常销售价制定比例")
-    EconomyBatch = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="经济批量")
-    MinBuy = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="最小订货量")
-    CountForCode = models.CharField(max_length=10, null=True, verbose_name="价值分类码")
-    CFDosage = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="常用单次处方用量(处方单位)")
-    NotCFYP = models.BooleanField(default=False, verbose_name="非处方药标记")
-    IsSurveillant = models.BooleanField(default=False, verbose_name="是否为监测使用")
-    Cycle = models.BooleanField(default=False, verbose_name="循环盘点标志")
-    LastCycleDate = models.DateTimeField(null=True, verbose_name="上次盘点时间")
-    Anaphylaxis = models.BooleanField(default=False, verbose_name="药品过敏标识")
-    isXY = models.BooleanField(default=False, verbose_name="为西药")
-    isAppliance = models.BooleanField(default=False, verbose_name="为医用器材(耗材)")
-    isCHN = models.BooleanField(default=False, verbose_name="为中药药材")
-    isNew = models.BooleanField(default=False, verbose_name="新药标识")
-    WJH = models.CharField(max_length=50, null=True, verbose_name="存放货架号")
-    CFCM = models.CharField(max_length=30, null=True, verbose_name="存放的层位码")
-    MZPriceCF = models.DecimalField(max_digits=10, decimal_places=2, null=True, verbose_name="门诊处方价格")
-    IsUse = models.BooleanField(default=True, verbose_name="是否使用中")
+    YPClass = models.CharField(max_length=60, null=True, verbose_name="药品分类")
+    DrugAdministrationAttributes = models.CharField(max_length=60, null=True, verbose_name="药品管理属性")
     YptyName = models.CharField(max_length=200, null=True, verbose_name="药品通用名称")
-    gjjbyp = models.CharField(max_length=100, null=True, verbose_name="国家基本药品目录名称")
-    ybypbm = models.CharField(max_length=100, null=True, verbose_name="医保药品目录对应药品编码")
-    ybyplb = models.CharField(max_length=2, null=True, verbose_name="药品报销类别（甲类、乙类）")
-    syz = models.CharField(max_length=255, null=True, verbose_name="适应症")
-    bsyz = models.CharField(max_length=255, null=True, verbose_name="不适应症")
-    fytj = models.CharField(max_length=255, null=True, verbose_name="服用途径")
-    fypc = models.CharField(max_length=255, null=True, verbose_name="服用频次")
-    fyzysxhbz = models.CharField(max_length=255, null=True, verbose_name="服用注意事项和备注")
+    Gjjbyp = models.CharField(max_length=100, null=True, verbose_name="国家基本药品目录名称")
+    Ybypbm = models.CharField(max_length=100, null=True, verbose_name="医保药品目录对应药品编码")
+    Ybyplb = models.CharField(max_length=2, null=True, verbose_name="医保报销类别")
+    Indications = models.CharField(max_length=255, null=True, verbose_name="适应症")
+    Incompatibility = models.CharField(max_length=255, null=True, verbose_name="不适应症")
+    AdverseReactions = models.CharField(max_length=255, null=True, verbose_name="不良反应")
 
     class Meta:
         verbose_name = "药品基本信息导入表"
@@ -336,30 +303,23 @@ def medicine_import():
     # 字段映射
     field_map = {
         'label' : 'YPName',
-        'yp_code' : 'YPCode', # "药品编码"
-        'specification' : 'Specification', # "规格"
-        'measure' : 'Measure', # "单位"
-        'mz_price' : 'MZPrice', # "门诊参考单价"
-        'usage' : 'Usage', # "用法"
-        'dosage' : 'Dosage', # "用量"
-        'type' : 'Type', # "药剂类型"
-        'yp_sort' : 'YPSort', # "药品分类名称"
-        'current_storage' : 'CurrentStorage', # "当前库存"
-        'cf_measure' : 'CFMeasure', # "处方计量单位"
-        'xs_measure' : 'XSMeasure', # "销售计量单位"
-        'cf_dosage' : 'CFDosage', # "处方单位"
-        'not_cfyp' : 'NotCFYP', # "非处方药标记"
-        'mzcf_price' : 'MZPriceCF', # "门诊处方价格"
-        'is_use' : 'IsUse', # "是否使用中"
-        'ypty_name' : 'YptyName', # "药品通用名称"
-        'gjjbyp' : 'gjjbyp', # "国家基本药品目录名称"
-        'ybypbm' : 'ybypbm', # "医保药品目录对应药品编码"
-        'ybyplb' : 'ybyplb', # "药品报销类别（甲类、乙类）"
-        'syz' : 'syz', # "适应症"
-        'bsyz' : 'bsyz', # "不适应症"
-        'fytj' : 'fytj', # "服用途径"
-        'fypc' : 'fypc', # "服用频次"
-        'fyzysxhbz' : 'fyzysxhbz', # "服用注意事项和备注"
+        'yp_code' : 'YPCode',  # "药品编码"
+        'specification' : 'Specification',  # "规格"
+        'cf_measure' : 'CFMeasure',  # "处方剂量单位"
+        'dosage' : 'Dosage',  # "常用剂量"
+        'usage' : 'Usage',  # "用药途径"
+        'fypc' : 'Frequency',  # "用药频次"
+        'fyzysxhbz' : 'Note',  # "用药备注"
+        'type' : 'Type',  # "药剂类型"
+        'yp_sort' : 'YPClass',  # "药品分类"
+        'ypglsx' : 'DrugAdministrationAttributes',  # "药品管理属性"
+        'ypty_name' : 'YptyName',  # "药品通用名称"
+        'gjjbyp' : 'Gjjbyp',  # "国家基本药品目录名称"
+        'ybypbm' : 'Ybypbm',  # "医保药品目录对应药品编码"
+        'ybyplb' : 'Ybyplb',  # "医保报销类别"
+        'syz' : 'Indications',  # "适应症"
+        'bsyz' : 'Incompatibility',  # "不适应症"
+        'blfy' : 'AdverseReactions',  # "不良反应"
     }
 
     # 逐条导入MedicineImport的记录至Medicine
@@ -372,6 +332,3 @@ def medicine_import():
                 # 将值赋给Medicine
                 setattr(medicine, field.name, value)
         medicine.save()
-
-
-
