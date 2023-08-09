@@ -604,12 +604,6 @@
             "pym": "dbz"
         },
         {
-            "label": "用药途径",
-            "name": "yong_yao_tu_jing",
-            "hssc_id": "ff2df74a-bf7e-11ec-8dcd-6afc6c25d902",
-            "pym": "yytj"
-        },
-        {
             "label": "信誉评级",
             "name": "xin_yu_ping_ji",
             "hssc_id": "e9c6e170-c5cb-11ec-b9d4-725badf7393d",
@@ -2422,33 +2416,6 @@
             "diclist": "bf10e8da-b091-11ec-b42a-5ed0e34457d3",
             "value": "阳性",
             "icpc": "U9802"
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ff333b92-bf7e-11ec-8dcd-6afc6c25d902",
-            "pym": null,
-            "diclist": "ff2df74a-bf7e-11ec-8dcd-6afc6c25d902",
-            "value": "口服",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ff352092-bf7e-11ec-8dcd-6afc6c25d902",
-            "pym": null,
-            "diclist": "ff2df74a-bf7e-11ec-8dcd-6afc6c25d902",
-            "value": "注射",
-            "icpc": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ff357d76-bf7e-11ec-8dcd-6afc6c25d902",
-            "pym": null,
-            "diclist": "ff2df74a-bf7e-11ec-8dcd-6afc6c25d902",
-            "value": "外用",
-            "icpc": null
         },
         {
             "label": null,
@@ -4629,6 +4596,16 @@
             "type": "CharField",
             "length": 255,
             "default": null
+        },
+        {
+            "hssc_id": "48c8a4fa-3651-11ee-895b-0242ac170002",
+            "pym": "yytj",
+            "label": "用药途径",
+            "name": "boolfield_yong_yao_tu_jing",
+            "name_icpc": null,
+            "type": "CharField",
+            "length": 255,
+            "default": null
         }
     ],
     "numberfield": [
@@ -5699,15 +5676,6 @@
             "related_content": "60bf01ea-b091-11ec-9cae-5ed0e34457d3"
         },
         {
-            "hssc_id": "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-            "pym": "yytj",
-            "label": "用药途径",
-            "name": "boolfield_yong_yao_tu_jing",
-            "name_icpc": null,
-            "type": "Select",
-            "related_content": "ff2df74a-bf7e-11ec-8dcd-6afc6c25d902"
-        },
-        {
             "hssc_id": "5dc1e618-c5ce-11ec-b9d4-725badf7393d",
             "pym": "ypfl",
             "label": "药品分类",
@@ -6517,18 +6485,18 @@
                 "fbdc40fe-c115-11ec-b731-2617a93150cd",
                 "2b80da60-c5ce-11ec-b819-725badf7393d",
                 "33bc581c-c5ce-11ec-b9d4-725badf7393d",
-                "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-                "5dc1e618-c5ce-11ec-b9d4-725badf7393d",
-                "f8c022f2-df4e-11ed-ba67-0242ac120003",
-                "0b9aad02-df4f-11ed-ba67-0242ac120003",
                 "2420aa4a-3114-11ee-a195-0242ac170003",
                 "648c6162-3116-11ee-afc4-0242ac170003",
                 "2c4feec6-3117-11ee-b246-0242ac170003",
-                "d5c0c7a0-3117-11ee-9718-0242ac170003",
                 "41ee8cfa-3118-11ee-bdd7-0242ac170003",
-                "78e2f746-3118-11ee-afc4-0242ac170003",
                 "ad99a114-3141-11ee-b246-0242ac170003",
-                "8f456a76-3142-11ee-a2bb-0242ac170003"
+                "5dc1e618-c5ce-11ec-b9d4-725badf7393d",
+                "f8c022f2-df4e-11ed-ba67-0242ac120003",
+                "0b9aad02-df4f-11ed-ba67-0242ac120003",
+                "d5c0c7a0-3117-11ee-9718-0242ac170003",
+                "78e2f746-3118-11ee-afc4-0242ac170003",
+                "8f456a76-3142-11ee-a2bb-0242ac170003",
+                "48c8a4fa-3651-11ee-895b-0242ac170002"
             ],
             "list_components": []
         },
@@ -6778,11 +6746,12 @@
                 "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "list_components": [
+                "2c4ebf36-d5b7-11ec-a897-52d938fbdf73",
                 "1bf942da-c5ce-11ec-b9d4-725badf7393d",
                 "2b80da60-c5ce-11ec-b819-725badf7393d",
-                "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
+                "2c4feec6-3117-11ee-b246-0242ac170003",
                 "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
-                "2c4feec6-3117-11ee-b246-0242ac170003"
+                "48c8a4fa-3651-11ee-895b-0242ac170002"
             ]
         },
         {
@@ -7058,9 +7027,7 @@
             "form_class": 2,
             "api_fields": null,
             "components": [
-                "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
-                "6a4b6984-9e93-11ec-a013-aa434405c3fc",
-                "5b880f4c-9e93-11ec-b91b-aa434405c3fc"
+                "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877"
             ],
             "list_components": []
         },
@@ -8396,18 +8363,6 @@
             "is_required": true,
             "api_field": null,
             "position": 150,
-            "show_hint": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7b98ca05-dd93-11ec-91b4-4889e7cf38c9",
-            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
-            "component": "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-            "default_value": null,
-            "is_required": true,
-            "api_field": null,
-            "position": 160,
             "show_hint": false
         },
         {
@@ -9929,34 +9884,10 @@
             "form": "0c7bdb06-9e23-11ec-aa2c-fe35a7065cdd",
             "component": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
             "default_value": "非胰岛素依赖型糖尿病",
-            "is_required": false,
+            "is_required": true,
             "api_field": null,
             "position": 100,
-            "show_hint": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7c0e7719-dd93-11ec-8a61-4889e7cf38c9",
-            "form": "0c7bdb06-9e23-11ec-aa2c-fe35a7065cdd",
-            "component": "6a4b6984-9e93-11ec-a013-aa434405c3fc",
-            "default_value": "高血脂症，胰岛素依赖糖尿病",
-            "is_required": false,
-            "api_field": null,
-            "position": 100,
-            "show_hint": false
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "7c0f1376-dd93-11ec-ba02-4889e7cf38c9",
-            "form": "0c7bdb06-9e23-11ec-aa2c-fe35a7065cdd",
-            "component": "5b880f4c-9e93-11ec-b91b-aa434405c3fc",
-            "default_value": "妊娠糖尿病",
-            "is_required": false,
-            "api_field": null,
-            "position": 100,
-            "show_hint": false
+            "show_hint": true
         },
         {
             "label": null,
@@ -12140,7 +12071,7 @@
             "is_required": true,
             "api_field": null,
             "position": 1,
-            "show_hint": false
+            "show_hint": true
         },
         {
             "label": null,
@@ -12221,7 +12152,7 @@
             "form": "f4aa4d44-011a-11ee-9434-0242ac120003",
             "component": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
             "default_value": "胰岛素依赖型糖尿病",
-            "is_required": false,
+            "is_required": true,
             "api_field": null,
             "position": 100,
             "show_hint": true
@@ -12333,6 +12264,18 @@
             "api_field": null,
             "position": 190,
             "show_hint": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "651d0268-3651-11ee-a576-0242ac170002",
+            "form": "a2fc46f0-c115-11ec-9685-2617a93150cd",
+            "component": "48c8a4fa-3651-11ee-895b-0242ac170002",
+            "default_value": null,
+            "is_required": true,
+            "api_field": null,
+            "position": 160,
+            "show_hint": false
         }
     ],
     "formlistcomponentssetting": [
@@ -12345,17 +12288,6 @@
             "default_value": null,
             "is_required": false,
             "position": 100,
-            "autofill_fields": true
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "17d6f82e-249a-11ee-90c3-ee2fa480f37c",
-            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
-            "component": "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-            "default_value": null,
-            "is_required": false,
-            "position": 110,
             "autofill_fields": true
         },
         {
@@ -12388,8 +12320,30 @@
             "component": "2c4feec6-3117-11ee-b246-0242ac170003",
             "default_value": null,
             "is_required": false,
-            "position": 100,
+            "position": 140,
             "autofill_fields": true
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "91ad9d42-3651-11ee-a576-0242ac170002",
+            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
+            "component": "48c8a4fa-3651-11ee-895b-0242ac170002",
+            "default_value": null,
+            "is_required": false,
+            "position": 110,
+            "autofill_fields": false
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "9b609ef8-365a-11ee-94cc-0242ac170002",
+            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
+            "component": "2c4ebf36-d5b7-11ec-a897-52d938fbdf73",
+            "default_value": null,
+            "is_required": false,
+            "position": 150,
+            "autofill_fields": false
         }
     ],
     "computecomponentssetting": [
@@ -16007,8 +15961,8 @@
             "form_class_scope": 1,
             "event_type": "SCHEDULE_EVENT",
             "weight": 1,
-            "expression": "len({'烦渴','多尿','体重减轻'}.intersection(boolfield_tang_niao_bing_zheng_zhuang )) == 3",
-            "expression_fields": "boolfield_tang_niao_bing_zheng_zhuang"
+            "expression": "len({'烦渴', '体重减轻', '多尿'}.intersection(boolfield_zheng_zhuang)) == 3",
+            "expression_fields": "boolfield_zheng_zhuang"
         },
         {
             "label": "非胰岛素依赖性糖尿病诊断规则",
@@ -16137,8 +16091,8 @@
             "form_class_scope": 1,
             "event_type": "SCHEDULE_EVENT",
             "weight": 1,
-            "expression": "len({'胰岛素依赖糖尿病', '非胰岛素依赖糖尿病'}.intersection(boolfield_ji_bing_ming_cheng)) == 1 and len({'10%葡萄糖', '5%葡萄糖氯化钠注射液', '5%葡萄糖注射液(新)'}.intersection(boolfield_yao_pin_ming)) >= 1",
-            "expression_fields": "boolfield_ji_bing_ming_cheng,boolfield_yao_pin_ming"
+            "expression": "len({'非胰岛素依赖型糖尿病', '胰岛素依赖型糖尿病', '非胰岛素依赖性糖尿病，胰岛素依赖性糖尿病'}.intersection(boolfield_ji_bing_ming_cheng)) == 1 and len({'葡萄糖'}.intersection(boolfield_yao_pin_tong_yong_ming)) == 1",
+            "expression_fields": "boolfield_ji_bing_ming_cheng,boolfield_yao_pin_tong_yong_ming"
         },
         {
             "label": "开具注射类处方",
@@ -16150,7 +16104,7 @@
             "form_class_scope": 3,
             "event_type": "SCHEDULE_EVENT",
             "weight": 1,
-            "expression": "len({'静滴或静注'}.intersection(boolfield_yong_yao_tu_jing)) == 1",
+            "expression": "len({'皮下注射', '静注', '静滴'}.intersection(boolfield_yong_yao_tu_jing)) == 1",
             "expression_fields": "boolfield_yong_yao_tu_jing"
         },
         {
@@ -16371,7 +16325,7 @@
             "form_class_scope": 1,
             "event_type": "FORM_EVENT",
             "weight": 1,
-            "expression": "len({'非胰岛素依赖型糖尿病', '胰岛素依赖型糖尿病'}.intersection(boolfield_ji_bing_ming_cheng)) >= 1 and len({'5%葡萄糖氯化钠注射液', '10%葡萄糖(新）', '5%葡萄糖注射液(新）'}.intersection(boolfield_yao_pin_ming)) >= 1",
+            "expression": "len({'非胰岛素依赖型糖尿病', '胰岛素依赖型糖尿病，非胰岛素依赖性糖尿病，胰岛素依赖性糖尿病，'}.intersection(boolfield_ji_bing_ming_cheng)) >= 1 and len({'5%葡萄糖氯化钠注射液', '5%葡萄糖注射液(新）', '10%葡萄糖(新）'}.intersection(boolfield_yao_pin_ming)) >= 1",
             "expression_fields": "boolfield_ji_bing_ming_cheng,boolfield_yao_pin_ming"
         },
         {
@@ -16407,7 +16361,7 @@
             "name": null,
             "hssc_id": "a9235528-abda-11ec-a639-1ac10aeebbc4",
             "event_rule": "a922d698-abda-11ec-a639-1ac10aeebbc4",
-            "field": "1cad2116-a52a-11ec-a478-2ec403f6c47b",
+            "field": "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
             "char_value": "烦渴,多尿,体重减轻",
             "operator": 0,
             "number_value": 3.0,
@@ -16584,7 +16538,7 @@
             "hssc_id": "ebbeabf2-b6d5-11ec-8121-0ebea05fc526",
             "event_rule": "ebbdfb30-b6d5-11ec-8121-0ebea05fc526",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
-            "char_value": "非胰岛素依赖糖尿病,胰岛素依赖糖尿病",
+            "char_value": "非胰岛素依赖型糖尿病,胰岛素依赖型糖尿病,非胰岛素依赖性糖尿病，胰岛素依赖性糖尿病",
             "operator": 0,
             "number_value": 1.0,
             "connection_operator": 0
@@ -16594,19 +16548,8 @@
             "name": null,
             "hssc_id": "ebbf0476-b6d5-11ec-8121-0ebea05fc526",
             "event_rule": "ebbdfb30-b6d5-11ec-8121-0ebea05fc526",
-            "field": "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
-            "char_value": "5%葡萄糖注射液(新),5%葡萄糖氯化钠注射液,  10%葡萄糖",
-            "operator": 4,
-            "number_value": 1.0,
-            "connection_operator": null
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "3023c596-c9f2-11ec-b369-168d53e8234e",
-            "event_rule": "302378de-c9f2-11ec-b369-168d53e8234e",
-            "field": "db0aa7e6-bf7e-11ec-8dcd-6afc6c25d902",
-            "char_value": "静滴或静注",
+            "field": "2c4ebf36-d5b7-11ec-a897-52d938fbdf73",
+            "char_value": "葡萄糖",
             "operator": 0,
             "number_value": 1.0,
             "connection_operator": null
@@ -16870,7 +16813,7 @@
             "hssc_id": "c4ab6ffe-f141-11ed-856d-4889e7cf38c9",
             "event_rule": "c4ab0a2b-f141-11ed-96f2-4889e7cf38c9",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
-            "char_value": "非胰岛素依赖型糖尿病, 胰岛素依赖型糖尿病",
+            "char_value": "非胰岛素依赖型糖尿病, 胰岛素依赖型糖尿病，非胰岛素依赖性糖尿病，胰岛素依赖性糖尿病，",
             "operator": 4,
             "number_value": 1.0,
             "connection_operator": 0
@@ -16926,6 +16869,17 @@
             "event_rule": "addab7b4-f229-11ed-826c-0242ac120003",
             "field": "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
             "char_value": "圣邦杰（盐酸二甲双胍片）, 格华止片(盐酸二甲双胍片)",
+            "operator": 0,
+            "number_value": 1.0,
+            "connection_operator": null
+        },
+        {
+            "label": null,
+            "name": null,
+            "hssc_id": "741aae3e-3654-11ee-895b-0242ac170002",
+            "event_rule": "302378de-c9f2-11ec-b369-168d53e8234e",
+            "field": "48c8a4fa-3651-11ee-895b-0242ac170002",
+            "char_value": "静滴,静注,皮下注射",
             "operator": 0,
             "number_value": 1.0,
             "connection_operator": null
@@ -17209,14 +17163,14 @@
             "service": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
             "event_rule": "05d0c7fa-afc9-11ec-9129-925bd788f441",
             "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
-            "next_service": "e0398a04-9aa1-11ec-bde1-8a6e55faf877",
+            "next_service": "9fb42996-b6dd-11ec-8425-0ebea05fc526",
             "passing_data": 2,
             "complete_feedback": 0,
             "reminders": 1,
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": false
+            "is_active": true
         },
         {
             "label": null,
@@ -17875,22 +17829,6 @@
             "is_active": true
         },
         {
-            "label": "诊后7天回访",
-            "name": null,
-            "hssc_id": "40c1bd12-c97a-11ed-a572-0242ac120003",
-            "service": "1b8b3fba-c974-11ed-a1d5-0242ac120003",
-            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
-            "system_operand": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
-            "next_service": "5e7ae356-e406-11ec-9d3a-42585b16dcd4",
-            "passing_data": 1,
-            "complete_feedback": 1,
-            "reminders": 0,
-            "message": null,
-            "interval_rule": null,
-            "interval_time": null,
-            "is_active": true
-        },
-        {
             "label": "评估糖尿病控制不稳定",
             "name": null,
             "hssc_id": "9398f974-c97a-11ed-a572-0242ac120003",
@@ -17971,16 +17909,32 @@
             "is_active": true
         },
         {
-            "label": "诊后回访规则",
+            "label": "非胰岛素依赖糖尿病诊后回访规则",
             "name": null,
             "hssc_id": "4cf52632-fa9e-11ed-915b-0242ac120003",
             "service": "9fb42996-b6dd-11ec-8425-0ebea05fc526",
             "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
-            "system_operand": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
+            "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
             "next_service": "5e7ae356-e406-11ec-9d3a-42585b16dcd4",
             "passing_data": 1,
-            "complete_feedback": 0,
+            "complete_feedback": 1,
             "reminders": 2,
+            "message": null,
+            "interval_rule": null,
+            "interval_time": null,
+            "is_active": true
+        },
+        {
+            "label": "胰岛素依赖型糖尿病诊后回访规则",
+            "name": null,
+            "hssc_id": "4e881b7e-3650-11ee-895b-0242ac170002",
+            "service": "9086ce2c-c976-11ed-a229-0242ac120003",
+            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
+            "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
+            "next_service": "5e7ae356-e406-11ec-9d3a-42585b16dcd4",
+            "passing_data": 1,
+            "complete_feedback": 1,
+            "reminders": 1,
             "message": null,
             "interval_rule": null,
             "interval_time": null,
@@ -18086,11 +18040,16 @@
                 "758e1b9e-d119-11ec-b369-823d1f108281",
                 "dfd4d48a-3301-11ed-872a-0242ac120004",
                 "26733f12-3302-11ed-872a-0242ac120004",
+                "b8253e10-de66-11ec-990e-9a796a47c5af",
                 "a6fb98ac-c978-11ed-8f38-0242ac120003",
                 "da68b788-c978-11ed-8f38-0242ac120003",
-                "40c1bd12-c97a-11ed-a572-0242ac120003",
                 "9398f974-c97a-11ed-a572-0242ac120003",
-                "35f12842-ed46-11ed-bb86-0242ac120003"
+                "35f12842-ed46-11ed-bb86-0242ac120003",
+                "1b87bedc-f16b-11ed-aee9-4889e7cf38c9",
+                "783cf524-f227-11ed-be30-0242ac120003",
+                "04767108-f22a-11ed-963f-0242ac120003",
+                "4cf52632-fa9e-11ed-915b-0242ac120003",
+                "4e881b7e-3650-11ee-895b-0242ac170002"
             ],
             "external_services": []
         },
