@@ -719,7 +719,7 @@ class {service_name}_HeaderForm(ModelForm):
         return result
 
 
-# 作业基础信息表
+# 基础作业信息表
 class Service(GenerateServiceScriptMixin, HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     buessiness_forms = models.ManyToManyField(BuessinessForm, through='BuessinessFormsSetting', verbose_name="作业表单")
@@ -748,6 +748,8 @@ class Service(GenerateServiceScriptMixin, HsscPymBase):
     resource_devices = models.CharField(max_length=255, blank=True, null=True, verbose_name='配套设备')
     resource_knowledge = models.CharField(max_length=255, blank=True, null=True, verbose_name='服务知识')
     generate_script_order = models.PositiveSmallIntegerField(default=100, verbose_name='生成脚本顺序')
+    arrange_service_package = models.OneToOneField('ServicePackage', blank=True, null=True, on_delete=models.CASCADE, verbose_name='安排服务包')    
+    arrange_service = models.OneToOneField('self', blank=True, null=True, on_delete=models.SET_NULL, verbose_name='安排服务')    
 
     class Meta:
         verbose_name = "服务"
@@ -761,6 +763,7 @@ class Service(GenerateServiceScriptMixin, HsscPymBase):
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
+
 
 class BuessinessFormsSetting(HsscBase):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, verbose_name="作业")
@@ -792,6 +795,7 @@ class ServicePackage(HsscPymBase):
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
+
 
 class CycleUnit(HsscPymBase):
     cycle_unit = models.CharField(max_length=255, blank=True, null=True, verbose_name='周期单位')
