@@ -327,8 +327,9 @@ def medicine_import():
         medicine = Medicine()
         for field in medicine._meta.fields:
             if field.name in field_map:
-                # 从MedicineImport中取出对应字段的值
+                # 从MedicineImport中取出对应字段的值，去除首尾空格
                 value = getattr(medicine_import, field_map.get(field.name))
+                stripped_value = value.strip()
                 # 将值赋给Medicine
-                setattr(medicine, field.name, value)
+                setattr(medicine, field.name, stripped_value)
         medicine.save()

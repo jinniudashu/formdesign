@@ -143,7 +143,7 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>    
 <script>
     document.addEventListener('DOMContentLoaded', async function() {{
-        const domain = '{domain}';
+        const domain = Cookies.get('environment') === 'dev' ? '127.0.0.1:8000' : '{domain}';
 
         // 根据表单检测范围，从CustomerServiceLog获取历史记录，构造{keys[0]}数组上下文
         const customerId = Cookies.get('customer_id');
