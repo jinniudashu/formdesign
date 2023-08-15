@@ -16366,8 +16366,8 @@
             "form_class_scope": 1,
             "event_type": "SCHEDULE_EVENT",
             "weight": 1,
-            "expression": "len({'非胰岛素依赖型糖尿病', '胰岛素依赖型糖尿病', '非胰岛素依赖性糖尿病，胰岛素依赖性糖尿病'}.intersection(boolfield_ji_bing_ming_cheng)) == 1 and len({'葡萄糖'}.intersection(boolfield_yao_pin_tong_yong_ming)) == 1",
-            "expression_fields": "boolfield_ji_bing_ming_cheng,boolfield_yao_pin_tong_yong_ming"
+            "expression": "len({'非胰岛素依赖型糖尿病', '胰岛素依赖性糖尿病', '胰岛素依赖型糖尿病', '非胰岛素依赖性糖尿病'}.intersection(boolfield_ji_bing_ming_cheng)) == 1 and len({'葡萄糖'}.intersection(boolfield_yao_pin_tong_yong_ming_cheng)) == 1",
+            "expression_fields": "boolfield_ji_bing_ming_cheng,boolfield_yao_pin_tong_yong_ming_cheng"
         },
         {
             "label": "开具注射类处方",
@@ -16600,8 +16600,8 @@
             "form_class_scope": 1,
             "event_type": "FORM_EVENT",
             "weight": 1,
-            "expression": "len({'非胰岛素依赖型糖尿病', '胰岛素依赖型糖尿病，非胰岛素依赖性糖尿病，胰岛素依赖性糖尿病，'}.intersection(boolfield_ji_bing_ming_cheng)) >= 1 and len({'50%葡萄糖', '盐酸氨溴索葡萄糖注射液(坦刻抒）', '口服葡萄糖粉', '10%葡萄糖', '（奥诺）葡萄糖酸钙锌口服液', '葡萄糖酸氯已定软膏（顺峰宝宝）', '葡萄糖酸亚铁糖浆', '盐酸氨溴索葡萄糖注射液(耐邦）', '5%葡萄糖注射液(新）', '盐酸氨溴索葡萄糖注射液', '5%葡萄糖氯化钠注射液', '葡萄糖酸钙注射液', '5%葡萄糖（新）', '10%葡萄糖注射液', '10%葡萄糖(新）', '（奥泰灵）盐酸氨基葡萄糖胶囊', '氨基葡萄糖胶囊/奥泰灵', '复方葡萄糖酸钙口服液', '葡萄糖酸锌口服液（三精）'}.intersection(boolfield_yao_pin_ming_cheng)) == 1",
-            "expression_fields": "boolfield_ji_bing_ming_cheng,boolfield_yao_pin_ming_cheng"
+            "expression": "len({'非胰岛素依赖型糖尿病', '胰岛素依赖性糖尿病', '胰岛素依赖型糖尿病', '非胰岛素依赖性糖尿病'}.intersection(boolfield_ji_bing_ming_cheng)) >= 1 and len({'50%葡萄糖', '盐酸氨溴索葡萄糖注射液(坦刻抒）', '口服葡萄糖粉', '10%葡萄糖', '（奥诺）葡萄糖酸钙锌口服液', '葡萄糖酸氯已定软膏（顺峰宝宝）', '葡萄糖酸亚铁糖浆', '盐酸氨溴索葡萄糖注射液(耐邦）', '5%葡萄糖注射液(新）', '盐酸氨溴索葡萄糖注射液', '5%葡萄糖氯化钠注射液', '葡萄糖酸钙注射液', '5%葡萄糖（新）', '10%葡萄糖注射液', '10%葡萄糖(新）', '（奥泰灵）盐酸氨基葡萄糖胶囊', '氨基葡萄糖胶囊/奥泰灵', '复方葡萄糖酸钙口服液', '葡萄糖酸锌口服液（三精）'}.intersection(boolfield_yao_pin_ming)) == 1",
+            "expression_fields": "boolfield_ji_bing_ming_cheng,boolfield_yao_pin_ming"
         },
         {
             "label": "胰岛素不适用规则",
@@ -16652,7 +16652,7 @@
             "form_class_scope": 0,
             "event_type": "SCHEDULE_EVENT",
             "weight": 1,
-            "expression": "len({'胰岛素依赖型糖尿病，胰岛素依赖性糖尿病，'}.intersection(boolfield_yi_chuan_xing_ji_bing)) == 1 or len({'非胰岛素依赖型糖尿病', '非胰岛素依赖性糖尿病，'}.intersection(boolfield_jia_zu_xing_ji_bing)) == 1",
+            "expression": "len({'胰岛素依赖型糖尿病', '胰岛素依赖性糖尿病'}.intersection(boolfield_yi_chuan_xing_ji_bing)) == 1 or len({'非胰岛素依赖型糖尿病', '非胰岛素依赖性糖尿病，'}.intersection(boolfield_jia_zu_xing_ji_bing)) == 1",
             "expression_fields": "boolfield_yi_chuan_xing_ji_bing,boolfield_jia_zu_xing_ji_bing"
         }
     ],
@@ -16839,7 +16839,7 @@
             "hssc_id": "ebbeabf2-b6d5-11ec-8121-0ebea05fc526",
             "event_rule": "ebbdfb30-b6d5-11ec-8121-0ebea05fc526",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
-            "char_value": "非胰岛素依赖型糖尿病,胰岛素依赖型糖尿病,非胰岛素依赖性糖尿病，胰岛素依赖性糖尿病",
+            "char_value": "非胰岛素依赖型糖尿病,胰岛素依赖型糖尿病,非胰岛素依赖性糖尿病,胰岛素依赖性糖尿病",
             "operator": 0,
             "number_value": 1.0,
             "connection_operator": 0
@@ -17114,7 +17114,7 @@
             "hssc_id": "c4ab6ffe-f141-11ed-856d-4889e7cf38c9",
             "event_rule": "c4ab0a2b-f141-11ed-96f2-4889e7cf38c9",
             "field": "ded4c1a6-9aa1-11ec-bde1-8a6e55faf877",
-            "char_value": "非胰岛素依赖型糖尿病, 胰岛素依赖型糖尿病，非胰岛素依赖性糖尿病，胰岛素依赖性糖尿病，",
+            "char_value": "非胰岛素依赖型糖尿病,胰岛素依赖型糖尿病,非胰岛素依赖性糖尿病,胰岛素依赖性糖尿病",
             "operator": 4,
             "number_value": 1.0,
             "connection_operator": 0
@@ -17124,7 +17124,7 @@
             "name": null,
             "hssc_id": "c4ab9708-f141-11ed-a847-4889e7cf38c9",
             "event_rule": "c4ab0a2b-f141-11ed-96f2-4889e7cf38c9",
-            "field": "18cfcb9a-d11a-11ec-ab0d-823d1f108281",
+            "field": "dec637d0-9aa1-11ec-bde1-8a6e55faf877",
             "char_value": "葡萄糖酸氯已定软膏（顺峰宝宝）, 葡萄糖酸钙注射液, 氨基葡萄糖胶囊/奥泰灵, 复方葡萄糖酸钙口服液, 盐酸氨溴索葡萄糖注射液, 盐酸氨溴索葡萄糖注射液(坦刻抒）, 葡萄糖酸锌口服液（三精）, 50%葡萄糖, 5%葡萄糖（新）, 5%葡萄糖注射液(新）, （奥诺）葡萄糖酸钙锌口服液, 5%葡萄糖氯化钠注射液, （奥泰灵）盐酸氨基葡萄糖胶囊, 10%葡萄糖注射液, 10%葡萄糖(新）, 10%葡萄糖, 葡萄糖酸亚铁糖浆, 口服葡萄糖粉, 盐酸氨溴索葡萄糖注射液(耐邦）",
             "operator": 0,
             "number_value": 1.0,
@@ -17202,7 +17202,7 @@
             "hssc_id": "7670b70c-3a44-11ee-9757-0242ac170003",
             "event_rule": "7670974a-3a44-11ee-9757-0242ac170003",
             "field": "0178473c-cab3-11ec-a675-8e39d789b675",
-            "char_value": "胰岛素依赖型糖尿病，胰岛素依赖性糖尿病，",
+            "char_value": "胰岛素依赖型糖尿病,胰岛素依赖性糖尿病",
             "operator": 0,
             "number_value": 1.0,
             "connection_operator": 1
