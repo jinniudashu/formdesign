@@ -106,6 +106,9 @@ class HsscFormAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
 
+        # Store the obj in the request for later retrieval in save_formset
+        request._saved_obj = obj
+                
         # 把服务进程状态修改为已完成
         proc = obj.pid
         if proc:
@@ -120,7 +123,22 @@ class HsscFormAdmin(admin.ModelAdmin):
 
         # 发送服务作业完成信号
         print('发送操作完成信号, From service.admin.HsscFormAdmin.save_model：', obj.pid)
-        operand_finished.send(sender=self, pid=obj.pid, request=request, form_data=form_data2)
+        operand_finished.send(sender=self, pid=obj.pid, request=request, form_data=form_data2, formset_data=None)
+
+    def save_formset(self, request, form, formset, change):
+        super().save_formset(request, form, formset, change)
+        # Retrieve obj from the request
+        obj = getattr(request, '_saved_obj', None)
+
+        print('obj:', obj, obj.pid)
+        print('表头：', form.cleaned_data, '明细：', formset.cleaned_data)
+
+        import copy
+        form_data = copy.copy(form.cleaned_data)
+        formset_data = copy.copy(formset.cleaned_data)
+
+        print('发送操作完成信号, From service.admin.HsscFormAdmin.save_formset', formset_data)
+        operand_finished.send(sender=self, pid=obj.pid, request=request, form_data=form_data, formset_data=formset_data)
 
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
         context.update({
