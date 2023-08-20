@@ -192,6 +192,12 @@ class CustomerScheduleListAdmin(admin.ModelAdmin):
     readonly_fields = ['customer', 'plan_serial_number', ]
     inlines = [CustomerScheduleInline, ]
 
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        # 设置当前CustomerScheduleList实例的is_ready = True
+        obj.is_ready = True
+        obj.save()
+
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
         context.update({
             'show_save': True,
@@ -291,9 +297,6 @@ class CustomerSchedulePackageAdmin(HsscFormAdmin):
             # 更新服务进程entry为'customerschedulelist/id/change/'
             schedule_list.schedule_package.pid.entry = f'/clinic/service/customerschedulelist/{schedule_list.id}/change'
             schedule_list.schedule_package.pid.save()
-            # 设置计划生成schedule已完成
-            schedule_list.is_ready = True
-            schedule_list.save()
 
 clinic_site.register(CustomerSchedulePackage, CustomerSchedulePackageAdmin)
 admin.site.register(CustomerSchedulePackage, CustomerSchedulePackageAdmin)
