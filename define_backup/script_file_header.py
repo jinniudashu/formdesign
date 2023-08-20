@@ -28,6 +28,7 @@ class CustomerSchedulePackage(HsscFormModel):
 class CustomerScheduleList(HsscFormModel):
     plan_serial_number = models.CharField(max_length=255, null=True, blank=True, verbose_name='服务计划')
     schedule_package = models.ForeignKey(CustomerSchedulePackage, null=True, on_delete=models.CASCADE, verbose_name='服务包')
+    is_ready = models.BooleanField(default=False, verbose_name='已生成schedules')
     
     class Meta:
         verbose_name = '客户服务计划'
@@ -46,8 +47,10 @@ class CustomerScheduleDraft(HsscBase):
     Default_beginning_time = [(0, '无'), (1, '当前系统时间'), (2, '首个服务开始时间'), (3, '上个服务结束时间'), (4, '客户出生日期')]
     default_beginning_time = models.PositiveSmallIntegerField(choices=Default_beginning_time, default=0, verbose_name='执行时间基准')
     base_interval = models.DurationField(blank=True, null=True, verbose_name='基准间隔', help_text='例如：3 days, 22:00:00')
+    # 根据当前service的值动态筛选有服务权限的服务人员
     scheduled_operator = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True, blank=True, verbose_name='服务人员')
-    priority_operator = models.ForeignKey(VirtualStaff, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="优先操作员")
+    # 优先操作人员仅限工作小组
+    priority_operator = models.ForeignKey(VirtualStaff, on_delete=models.SET_NULL, limit_choices_to={'is_workgroup': True}, blank=True, null=True, verbose_name="优先操作员")
     overtime = models.DurationField(blank=True, null=True, verbose_name='超期时限')
     
     class Meta:
@@ -216,7 +219,25 @@ class CustomerScheduleDraftInline(admin.TabularInline):
     can_delete = False
     # verbose_name_plural = '服务项目安排'
     exclude = ["hssc_id", "label", "name", ]
-    autocomplete_fields = ["scheduled_operator", ]
+    # autocomplete_fields = ["scheduled_operator", ]
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "scheduled_operator":
+            obj_id = request.resolver_match.kwargs.get('object_id')
+            if obj_id:
+                draft_instance = self.model.objects.get(id=obj_id)
+                print(obj_id, 'draft_instance:', draft_instance)
+                if draft_instance and draft_instance.service:
+                    # 获取所有该service关联的roles
+                    roles = draft_instance.service.role.all()
+                    print('roles:', roles)
+                    # 过滤Staff的记录，仅选择那些其role在上述roles里的记录
+                    kwargs["queryset"] = Staff.objects.filter(role__in=roles)
+                else:
+                    kwargs["queryset"] = Staff.objects.none()
+            else:
+                kwargs["queryset"] = Staff.objects.none()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_queryset(self, request):
         # 重写get_queryset方法，设置缺省overtime为服务的overtime
@@ -246,6 +267,7 @@ class CustomerSchedulePackageAdmin(HsscFormAdmin):
                 creater = schedule_package.creater,
                 plan_serial_number = schedule_package.servicepackage.label + '--' + schedule_package.created_time.strftime('%Y-%m-%d') + '--' + schedule_package.operator.name,
                 schedule_package = schedule_package,
+                is_ready = False
             )
 
             from core.business_functions import get_services_schedule
@@ -269,6 +291,9 @@ class CustomerSchedulePackageAdmin(HsscFormAdmin):
             # 更新服务进程entry为'customerschedulelist/id/change/'
             schedule_list.schedule_package.pid.entry = f'/clinic/service/customerschedulelist/{schedule_list.id}/change'
             schedule_list.schedule_package.pid.save()
+            # 设置计划生成schedule已完成
+            schedule_list.is_ready = True
+            schedule_list.save()
 
 clinic_site.register(CustomerSchedulePackage, CustomerSchedulePackageAdmin)
 admin.site.register(CustomerSchedulePackage, CustomerSchedulePackageAdmin)
