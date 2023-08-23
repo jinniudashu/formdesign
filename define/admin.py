@@ -47,6 +47,7 @@ class FileFieldAdmin(admin.ModelAdmin):
 
 @admin.register(Component)
 class ComponentAdmin(admin.ModelAdmin):
+    list_display = ['label', 'name']
     search_fields=['label', 'pym']
     readonly_fields = [field.name for field in Component._meta.fields]
     actions = None

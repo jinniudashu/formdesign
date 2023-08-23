@@ -135,10 +135,8 @@ class Component(HsscPymBase):
 @receiver(post_save, sender=FileField, weak=True, dispatch_uid=None)
 def fields_post_save_handler(sender, instance, created, **kwargs):
     if instance.name_icpc:
-        component_name = instance.name_icpc.icpc_code
         component_label = instance.name_icpc.iname
     else:
-        component_name = instance.name
         component_label = instance.label
     content_type = ContentType.objects.get(app_label='define', model=sender.__name__.lower())
     print(content_type, ':', instance.name)
@@ -146,13 +144,13 @@ def fields_post_save_handler(sender, instance, created, **kwargs):
         Component.objects.create(
             content_type = content_type, 
             object_id = instance.id, 
-            name = component_name, 
+            name = instance.name, 
             label = component_label,
             hssc_id = instance.hssc_id
         )
     else:
         Component.objects.filter(hssc_id=instance.hssc_id).update(
-            name = component_name,
+            name = instance.name,
             label = instance.label, 
             content_type = content_type,
             object_id = instance.id,
