@@ -44,7 +44,7 @@ class CustomerScheduleDraft(HsscBase):
     cycle_unit = models.ForeignKey(CycleUnit, on_delete=models.CASCADE, default=1, blank=True, null=True, verbose_name='周期单位')
     cycle_frequency = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="每周期频次")
     cycle_times = models.PositiveSmallIntegerField(blank=True, null=True, default=1, verbose_name="天数")
-    Default_beginning_time = [(0, '无'), (1, '当前系统时间'), (2, '首个服务开始时间'), (3, '上个服务结束时间'), (4, '客户出生日期')]
+    Default_beginning_time = [(0, '指定开始时间'), (1, '当前系统时间'), (2, '首个服务开始时间'), (3, '上个服务结束时间'), (4, '客户出生日期')]
     default_beginning_time = models.PositiveSmallIntegerField(choices=Default_beginning_time, default=0, verbose_name='执行时间基准')
     base_interval = models.DurationField(blank=True, null=True, verbose_name='基准间隔', help_text='例如：3 days, 22:00:00')
     # 根据当前service的值动态筛选有服务权限的服务人员
@@ -66,7 +66,7 @@ class CustomerSchedule(HsscFormModel):
     service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='服务项目')
     scheduled_time = models.DateTimeField(blank=True, null=True, verbose_name='计划执行时间')
     scheduled_operator = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True, blank=True, verbose_name='服务人员')
-    priority_operator = models.ForeignKey(VirtualStaff, on_delete=models.SET_NULL, blank=True, null=True, verbose_name="优先操作员")
+    priority_operator = models.ForeignKey(VirtualStaff, on_delete=models.SET_NULL, limit_choices_to={'is_workgroup': True}, blank=True, null=True, verbose_name="优先操作员")
     reference_operation = models.ManyToManyField(OperationProc, blank=True, limit_choices_to=Q(customer=F('customer'), service__service_type=2, created_time__gte=datetime.now() - timedelta(days=7)), verbose_name='引用表单')
     overtime = models.DurationField(blank=True, null=True, verbose_name='超期时限')
     is_assigned = models.BooleanField(default=False, verbose_name='已生成任务')
