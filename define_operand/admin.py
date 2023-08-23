@@ -158,6 +158,7 @@ class ServicePackageDetailInline(admin.TabularInline):
     model = ServicePackageDetail
     exclude = ['name', 'label', 'hssc_id', 'pym']
     autocomplete_fields = ['service']
+    extra = 1
 
 @admin.register(ServicePackage)
 class ServicePackageAdmin(admin.ModelAdmin):
