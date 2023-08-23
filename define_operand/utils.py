@@ -214,6 +214,7 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
             let node_field_name = parts.pop().substr(3)
             // 获取itemId
             const itemId = node.parentElement.parentElement.parentElement.parentElement.firstElementChild.value
+            if (!itemId) return
 
             // 2. fetch API获取item详细信息
             const icpcItem = await fetchIcpcItem(node_field_name, itemId)
@@ -439,6 +440,7 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
         const {keys[0]} = document.querySelector('.form-row.field-{keys[0]} .related-widget-wrapper span.select2-selection__rendered');
         const observer_{keys[0]} = createObserver({keys[0]}HandleChanges);
         observer_{keys[0]}.observe({keys[0]}, mutationObserverConfig)
+        showIcpcHint({keys[0]})
 
         // {keys[1]}变化处理
         function {keys[1]}HandleChanges(node) {{
