@@ -66,7 +66,7 @@ class CustomerSchedule(HsscFormModel):
     schedule_package = models.ForeignKey(CustomerSchedulePackage, null=True, blank=True, on_delete=models.CASCADE, verbose_name='服务包')
     service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True, verbose_name='服务项目')
     scheduled_time = models.DateTimeField(blank=True, null=True, verbose_name='计划执行时间')
-    scheduled_operator = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True, blank=True, verbose_name='服务人员')
+    scheduled_operator = models.ForeignKey(Staff, on_delete=models.CASCADE, null=True, blank=True, verbose_name='计划服务人员')
     priority_operator = models.ForeignKey(VirtualStaff, on_delete=models.SET_NULL, limit_choices_to={'is_workgroup': True}, blank=True, null=True, verbose_name="优先操作员")
     reference_operation = models.ManyToManyField(OperationProc, blank=True, limit_choices_to=Q(customer=F('customer'), service__service_type=2, created_time__gte=datetime.now() - timedelta(days=7)), verbose_name='引用表单')
     overtime = models.DurationField(blank=True, null=True, verbose_name='超期时限')
@@ -170,7 +170,7 @@ class HsscFormAdmin(admin.ModelAdmin):
 class CustomerScheduleAdmin(HsscFormAdmin):
     exclude = ["hssc_id", "label", "name", "operator", "creater", "pid", "cpid", "slug", "created_time", "updated_time", "pym", 'customer_schedule_list', 'schedule_package', ]
     autocomplete_fields = ["scheduled_operator", ]
-    list_display = ['service', 'scheduled_time', 'scheduled_operator', 'overtime', 'is_assigned']
+    list_display = ['customer', 'service', 'scheduled_time', 'scheduled_operator', 'priority_operator', 'pid', 'overtime', 'is_assigned', 'operator', 'creater', ]
     list_editable = ['scheduled_time', 'scheduled_operator', 'overtime', 'is_assigned']
     readonly_fields = ['customer', 'service']
     filter_horizontal = ('reference_operation',)
@@ -278,7 +278,7 @@ class CustomerSchedulePackageAdmin(HsscFormAdmin):
             )
 
             from core.business_functions import get_services_schedule
-            schedule = get_services_schedule(instances)
+            schedule = get_services_schedule(instances, schedule_package.start_time)
             # 创建客户服务日程
             for item in schedule:
                 CustomerSchedule.objects.create(
