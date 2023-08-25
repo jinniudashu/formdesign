@@ -154,11 +154,11 @@ class HsscFormAdmin(admin.ModelAdmin):
         return super().render_change_form(request, context, add, change, form_url, obj)
 
     def response_change(self, request, obj):
-        # 如果是创建服务包计划，保存后跳转到修改服务计划列表的页面
-        if obj.__class__.__name__ == 'CustomerSchedulePackage':
-            schedule_list = CustomerScheduleList.objects.get(schedule_package=obj)
-            print('Change CustomerSchedulePackage', obj, 'to', schedule_list)
-            return redirect(f'/clinic/service/customerschedulelist/{schedule_list.id}/change/')
+        # # 如果是创建服务包计划，保存后跳转到修改服务计划列表的页面
+        # if obj.__class__.__name__ == 'CustomerSchedulePackage':
+        #     schedule_list = CustomerScheduleList.objects.get(schedule_package=obj)
+        #     print('Change CustomerSchedulePackage', obj, 'to', schedule_list)
+        #     return redirect(f'/clinic/service/customerschedulelist/{schedule_list.id}/change/')
 
         # 按照service.route_to的配置跳转
         if obj.pid.service.route_to == 'CUSTOMER_HOMEPAGE':
