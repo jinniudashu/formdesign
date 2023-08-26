@@ -220,31 +220,30 @@ class CustomerScheduleDraftAdmin(admin.ModelAdmin):
 clinic_site.register(CustomerScheduleDraft, CustomerScheduleDraftAdmin)
 admin.site.register(CustomerScheduleDraft, CustomerScheduleDraftAdmin)
 
+from django.forms import ModelForm
+class CustomCustomerScheduleDraftForm(ModelForm):
+    class Meta:
+        model = CustomerScheduleDraft
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # 如果这个表单的实例已经有一个选择的service
+        if self.instance and self.instance.service:
+            from core.models import Staff
+            # 获取所有该service关联的roles
+            roles = self.instance.service.role.all()
+            # 过滤选择Staff.role在roles里的员工
+            self.fields['scheduled_operator'].queryset = Staff.objects.filter(role__in=roles).distinct()
+
 class CustomerScheduleDraftInline(admin.TabularInline):
     model = CustomerScheduleDraft
+    form = CustomCustomerScheduleDraftForm
     extra = 0
     can_delete = False
     # verbose_name_plural = '服务项目安排'
     exclude = ["hssc_id", "label", "name", ]
     # autocomplete_fields = ["scheduled_operator", ]
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "scheduled_operator":
-            obj_id = request.resolver_match.kwargs.get('object_id')
-            if obj_id:
-                draft_instance = self.model.objects.get(id=obj_id)
-                print(obj_id, 'draft_instance:', draft_instance)
-                if draft_instance and draft_instance.service:
-                    # 获取所有该service关联的roles
-                    roles = draft_instance.service.role.all()
-                    print('roles:', roles)
-                    # 过滤Staff的记录，仅选择那些其role在上述roles里的记录
-                    kwargs["queryset"] = Staff.objects.filter(role__in=roles)
-                else:
-                    kwargs["queryset"] = Staff.objects.none()
-            else:
-                kwargs["queryset"] = Staff.objects.none()
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_queryset(self, request):
         # 重写get_queryset方法，设置缺省overtime为服务的overtime
