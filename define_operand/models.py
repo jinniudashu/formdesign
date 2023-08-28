@@ -277,9 +277,6 @@ admin.site.register({name}, {name}Admin)
 
         return f'''
     {field['name']} = models.{f_type}({f_dicimal}{f_default}{f_required}verbose_name='{field['label']}')'''
-    # {field['name']}_standard_value = models.{f_type}({f_dicimal}{f_standard_value}{f_required}verbose_name='{field['label']}标准值')
-    # {field['name']}_up_limit = models.{f_type}({f_dicimal}{f_up_limit}{f_required}verbose_name='{field['label']}上限')
-    # {field['name']}_down_limit = models.{f_type}({f_dicimal}{f_down_limit}{f_required}verbose_name='{field['label']}下限')'''
 
     # 生成日期型字段定义脚本
     def _create_datetime_field_script(self, field, is_blank):
@@ -930,11 +927,9 @@ class EventExpression(HsscBase):
     Operator = [(0, '=='), (1, '!='), (2, '>'), (3, '<'), (4, '>='), (5, '<=')]
     operator = models.PositiveSmallIntegerField(choices=Operator, null=True, verbose_name='操作符')
     number_value = models.FloatField(blank=True, null=True, verbose_name="数字值")
-    # value = models.CharField(max_length=255, null=True, verbose_name="值")
     Connection_operator = [(0, 'and'), (1, 'or')]
     connection_operator = models.PositiveSmallIntegerField(choices=Connection_operator, blank=True, null=True, verbose_name='连接操作符')
     
-
     class Meta:
         verbose_name = '事件表达式'
         verbose_name_plural = verbose_name
@@ -942,32 +937,6 @@ class EventExpression(HsscBase):
 
     def __str__(self):
         return str(self.event_rule.label)
-
-    # def create_value(self):
-    #     def _is_number(s):
-    #     # 判断传入的字符串是否是数字
-    #         try:
-    #             float(s)
-    #             return True
-    #         except ValueError:
-    #             pass
-        
-    #         try:
-    #             import unicodedata
-    #             unicodedata.numeric(s)
-    #             return True
-    #         except (TypeError, ValueError):
-    #             pass
-    #         return False
-
-    #     if _is_number(self.value):
-    #         self.number_value = self.value
-    #     else:
-    #         self.char_value = self.value.replace("'", "")  # 值为集合
-    #         value_set = set(self.char_value.replace(" ", "").split(','))
-    #         self.number_value = len(value_set)
-    #         self.operator = 0
-    #     self.save()    
 
 
 # 服务规则设置
@@ -1074,17 +1043,3 @@ class Project(HsscBase):
         else:
             # model_name in ['SystemOperand', 'CycleUnit', 'Medicine']
             return eval(model_name).objects.all()
-        
-
-# class Men_zhen_chu_fang_biao_listInline(admin.TabularInline):
-#     model = Men_zhen_chu_fang_biao_list
-#     extra = 1
-#     autocomplete_fields = ["boolfield_yao_pin_ming", ]
-
-# class Men_zhen_chu_fang_biaoAdmin(HsscFormAdmin):
-#     fieldssets = [
-#         ("基本信息", {"fields": ((),)}), 
-#         ("药物处方", {"fields": ("boolfield_ji_bing_ming_cheng", )}), ]
-#     autocomplete_fields = ["boolfield_ji_bing_ming_cheng", ]
-#     change_form_template = "men_zhen_chu_fang_biao_change_form.html"
-#     inlines = [Men_zhen_chu_fang_biao_listInline, ]
