@@ -5,5 +5,5 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    image: design:v1
+    image: jinniudashu/design:v1
   
