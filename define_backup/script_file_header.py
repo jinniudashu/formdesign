@@ -91,7 +91,7 @@ from django.shortcuts import redirect
 
 from core.admin import clinic_site
 from core.signals import operand_finished
-from core.business_functions import create_customer_service_log
+from core.business_functions import get_services_schedule, create_customer_service_log
 from service.models import *
 
 
@@ -260,6 +260,7 @@ class CustomerSchedulePackageAdmin(HsscFormAdmin):
 
         if instances:
             schedule_package = instances[0].schedule_package
+            schedules = get_services_schedule(instances, schedule_package.start_time)
 
             # 生成CustomerScheduleList记录
             schedule_list = CustomerScheduleList.objects.create(
@@ -271,21 +272,19 @@ class CustomerSchedulePackageAdmin(HsscFormAdmin):
                 is_ready = False
             )
 
-            from core.business_functions import get_services_schedule
-            schedule = get_services_schedule(instances, schedule_package.start_time)
             # 创建客户服务日程
-            for item in schedule:
+            for schedule in schedules:
                 CustomerSchedule.objects.create(
                     customer_schedule_list = schedule_list,
                     customer=schedule_package.customer,
                     operator=schedule_package.operator,
                     creater=schedule_package.creater,
                     schedule_package=schedule_package,
-                    service=item['service'],
-                    scheduled_time=item['scheduled_time'],
-                    scheduled_operator=item['scheduled_operator'],
-                    priority_operator=item['priority_operator'],
-                    overtime=item['overtime'],
+                    service=schedule['service'],
+                    scheduled_time=schedule['scheduled_time'],
+                    scheduled_operator=schedule['scheduled_operator'],
+                    priority_operator=schedule['priority_operator'],
+                    overtime=schedule['overtime'],
                     pid=schedule_package.pid
                 )
 
