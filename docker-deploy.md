@@ -4,14 +4,7 @@
    Mac环境：docker buildx build --platform linux/x86_64 design:v1 . --load
 2. push: docker push jinniudashu/design:v1
 ### 生产环境
-1. 进入项目目录：cd design
-2. 查看容器：docker ps
-3. 停止容器：docker stop design
-4. 删除容器：docker rm design
-5. 查看镜像：docker images
-6. 删除镜像：docker rmi design:v1
-7. 查看volume：docker volume ls
-8. 删除volume：docker volume rm design_app
-9. 下载镜像：docker pull jinniudashu/design:v1
-10. 启动容器：docker-compose up
-11. 浏览器访问，修改密码
+1. 进入项目目录：docker-compose down
+2. 删除镜像：docker rmi jinniudashu/design:v1
+3. 下载镜像：docker pull jinniudashu/design:v1
+4. 启动容器：docker-compose up
