@@ -126,23 +126,27 @@ class HsscFormAdmin(admin.ModelAdmin):
         # 把表单内容存入CustomerServiceLog
         create_customer_service_log(form_data1, obj)
 
-        # 发送服务作业完成信号
-        print('发送操作完成信号, From service.admin.HsscFormAdmin.save_model：', obj.pid)
-        operand_finished.send(sender=self, pid=obj.pid, request=request, form_data=form_data2, formset_data=None)
+        if any(key.endswith('-TOTAL_FORMS') for key in request.POST):
+            # 表单数据包含InlineModelAdmin 实例, 由save_formset发送服务作业完成信号
+            pass
+        else:
+            # 表单数据不包含InlineModelAdmin 实例, 直接发送服务作业完成信号
+            print('发送操作完成信号, From service.admin.HsscFormAdmin.save_model：', obj.pid)
+            operand_finished.send(sender=self, pid=obj.pid, request=request, form_data=form_data2, formset_data=None)
 
     def save_formset(self, request, form, formset, change):
         super().save_formset(request, form, formset, change)
         # Retrieve obj from the request
         obj = getattr(request, '_saved_obj', None)
 
-        print('obj:', obj, obj.pid)
-        print('表头：', form.cleaned_data, '明细：', formset.cleaned_data)
-
         import copy
         form_data = copy.copy(form.cleaned_data)
         formset_data = copy.copy(formset.cleaned_data)
 
-        print('发送操作完成信号, From service.admin.HsscFormAdmin.save_formset', formset_data)
+        # 把表单明细内容存入CustomerServiceLog
+        create_customer_service_log(formset_data, obj)
+
+        print('发送formset操作完成信号, From service.admin.HsscFormAdmin.save_formset', formset_data)
         operand_finished.send(sender=self, pid=obj.pid, request=request, form_data=form_data, formset_data=formset_data)
 
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
