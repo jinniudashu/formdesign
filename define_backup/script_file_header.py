@@ -116,19 +116,16 @@ class HsscFormAdmin(admin.ModelAdmin):
             # 保存obj到request for later retrieval in save_formset
             request._saved_obj = obj                
         else: # 表单数据不包含InlineModelAdmin 实例, 由save_model发送服务作业完成信号
-            import copy
-            form_data1 = copy.copy(form.cleaned_data)
-            form_data2 = copy.copy(form.cleaned_data)
             # 把表单内容存入CustomerServiceLog
-            log = create_customer_service_log(form_data1, None, obj)
+            log = create_customer_service_log(form.cleaned_data, None, obj)
 
             # 把服务进程状态修改为已完成
             proc = obj.pid
             if proc:
                 proc.update_state('RTC')
 
-            print('save_model发送操作完成信号：', obj.pid)
-            operand_finished.send(sender=self, pid=obj.pid, request=request, form_data=form_data2, formset_data=None)
+            print('操作完成(save_model)：', obj.pid)
+            operand_finished.send(sender=self, pid=obj.pid, request=request, form_data=form.cleaned_data, formset_data=None)
 
     def save_formset(self, request, form, formset, change):
         super().save_formset(request, form, formset, change)
@@ -136,9 +133,11 @@ class HsscFormAdmin(admin.ModelAdmin):
         # Retrieve obj from the request
         obj = getattr(request, '_saved_obj', None)
 
-        import copy
-        form_data = copy.copy(form.cleaned_data)
-        formset_data = copy.copy(formset.cleaned_data)
+        form_data = form.cleaned_data
+       # 使用formset.forms获取每个form的实例
+        # formset_data = [form.instance for form in formset.forms]
+        formset_data = formset.cleaned_data
+
         # 把表单明细内容存入CustomerServiceLog
         log = create_customer_service_log(form_data, formset_data, obj)
 
@@ -147,7 +146,7 @@ class HsscFormAdmin(admin.ModelAdmin):
         if proc:
             proc.update_state('RTC')
 
-        print('save_formset发送操作完成信号：', obj.pid)
+        print('操作完成(save_formset)：', obj.pid)
         operand_finished.send(sender=self, pid=obj.pid, request=request, form_data=form_data, formset_data=formset_data)
 
     def render_change_form(self, request, context, add=False, change=False, form_url='', obj=None):
