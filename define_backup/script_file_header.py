@@ -299,6 +299,11 @@ class CustomerSchedulePackageAdmin(HsscFormAdmin):
             schedule_list.is_ready = True  # 完成一次创建服务包计划安排事务
             schedule_list.save()
 
+            # 把服务进程状态修改为已完成
+            proc = schedule_package.pid
+            if proc:
+                proc.update_state('RTC')
+            
 clinic_site.register(CustomerSchedulePackage, CustomerSchedulePackageAdmin)
 admin.site.register(CustomerSchedulePackage, CustomerSchedulePackageAdmin)
 
