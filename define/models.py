@@ -108,6 +108,14 @@ class FileField(HsscFieldBase):
         verbose_name = "文件字段"
         verbose_name_plural = "文件字段"
 
+# 系统字段
+class SystemReservedField(HsscFieldBase):
+    FIELD_TYPE = [('charge_staff', '责任人'), ('operator', '作业人员'), ('scheduled_time', '计划执行时间'), ('duration', '时长'), ('frequency', '频次')]
+    type = models.CharField(max_length=50, choices=FIELD_TYPE, default='ImageField', verbose_name="类型")
+
+    class Meta:
+        verbose_name = "系统字段"
+        verbose_name_plural = "系统字段"
 
 # 字段列表
 class Component(HsscPymBase):
