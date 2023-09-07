@@ -119,11 +119,6 @@ class HsscFormAdmin(admin.ModelAdmin):
             # 把表单内容存入CustomerServiceLog
             log = create_customer_service_log(form.cleaned_data, None, obj)
 
-            # 把服务进程状态修改为已完成
-            proc = obj.pid
-            if proc:
-                proc.update_state('RTC')
-
             print('操作完成(save_model)：', obj.pid)
             operand_finished.send(sender=self, pid=obj.pid, request=request, form_data=form.cleaned_data, formset_data=None)
 
@@ -140,11 +135,6 @@ class HsscFormAdmin(admin.ModelAdmin):
 
         # 把表单明细内容存入CustomerServiceLog
         log = create_customer_service_log(form_data, formset_data, obj)
-
-        # 把服务进程状态修改为已完成
-        proc = obj.pid
-        if proc:
-            proc.update_state('RTC')
 
         print('操作完成(save_formset)：', obj.pid)
         operand_finished.send(sender=self, pid=obj.pid, request=request, form_data=form_data, formset_data=formset_data)
