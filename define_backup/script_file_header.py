@@ -129,8 +129,6 @@ class HsscFormAdmin(admin.ModelAdmin):
         obj = getattr(request, '_saved_obj', None)
 
         form_data = form.cleaned_data
-       # 使用formset.forms获取每个form的实例
-        # formset_data = [form.instance for form in formset.forms]
         formset_data = formset.cleaned_data
 
         # 把表单明细内容存入CustomerServiceLog
@@ -169,7 +167,7 @@ class CustomerScheduleAdmin(HsscFormAdmin):
     list_editable = ['scheduled_time', 'scheduled_operator', 'overtime', 'is_assigned']
     readonly_fields = ['customer', 'service']
     filter_horizontal = ('reference_operation',)
-    ordering = ('scheduled_time',)
+    ordering = ('customer_schedule_list', 'created_time', 'scheduled_time',)
 
 clinic_site.register(CustomerSchedule, CustomerScheduleAdmin)
 admin.site.register(CustomerSchedule, CustomerScheduleAdmin)
@@ -248,14 +246,19 @@ class CustomerSchedulePackageAdmin(HsscFormAdmin):
     readonly_fields = ['customer', 'servicepackage']
     inlines = [CustomerScheduleDraftInline, ]
 
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        request._saved_obj = obj                
+
     def save_formset(self, request, form, formset, change):
-        instances = formset.save()
+        # Retrieve obj from the request
+        schedule_package = getattr(request, '_saved_obj', None)
+        formset.save()
         instances = formset.queryset
 
         if instances:
-            schedule_package = instances[0].schedule_package
             schedules = get_services_schedule(instances, schedule_package.start_time)
-
+            
             # 生成CustomerScheduleList记录
             schedule_list = CustomerScheduleList.objects.create(
                 customer = schedule_package.customer,
