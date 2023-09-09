@@ -839,6 +839,26 @@ class SystemOperand(HsscBase):
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
+# 系统自动作业参数
+class SystemOperandParameter(HsscBase):
+    description = models.TextField(max_length=255, blank=True, null=True, verbose_name="说明")
+    parameter1 = models.CharField(max_length=255, blank=True, null=True, verbose_name="系统参数1")
+    form_field1 = models.CharField(max_length=255, blank=True, null=True, verbose_name="对应业务字段1")
+    parameter2 = models.CharField(max_length=255, blank=True, null=True, verbose_name="系统参数2")
+    form_field2 = models.CharField(max_length=255, blank=True, null=True, verbose_name="对应业务字段2")
+    parameter3 = models.CharField(max_length=255, blank=True, null=True, verbose_name="系统参数3")
+    form_field3 = models.CharField(max_length=255, blank=True, null=True, verbose_name="对应业务字段3")
+
+    class Meta:
+        verbose_name = '系统自动作业参数'
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
+    def save(self, *args, **kwargs):
+        if self.name is None or self.name == '':
+            self.name = f'{"_".join(lazy_pinyin(self.label))}'
+        super().save(*args, **kwargs)
+
 
 # 事件规则表
 class EventRule(HsscPymBase):
@@ -947,6 +967,7 @@ class ServiceRule(HsscBase):
     next_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='next_service', verbose_name='后续服务')
     Receive_form = [(0, '否'), (1, '接收，不可编辑'), (2, '接收，可以编辑')]  # 接收表单数据
     passing_data = models.PositiveSmallIntegerField(choices=Receive_form, default=0,  blank=True, null=True, verbose_name='接收表单')
+    system_operand_parameter = models.ForeignKey(SystemOperandParameter, on_delete=models.CASCADE, blank=True, null=True, verbose_name='系统作业参数')
     Complete_feedback = [(0, '否'), (1, '返回完成状态'), (2, '返回表单')]
     complete_feedback = models.PositiveSmallIntegerField(choices=Complete_feedback, default=0,  blank=True, null=True, verbose_name='完成反馈')
     Reminders = [(0, '客户'), (1, '服务人员'), (2, '服务小组')]

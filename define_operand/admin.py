@@ -177,8 +177,8 @@ class ServicePackageAdmin(admin.ModelAdmin):
 
 @admin.register(ServiceRule)
 class ServiceRuleAdmin(admin.ModelAdmin):
-    list_display = ['label', 'service', 'event_rule', 'system_operand', 'next_service', 'passing_data', 'complete_feedback', 'is_active']
-    list_editable = ['service', 'event_rule', 'system_operand', 'next_service', 'passing_data', 'complete_feedback', 'is_active']
+    list_display = ['label', 'service', 'event_rule', 'system_operand', 'next_service', 'passing_data', 'system_operand_parameter','complete_feedback', 'is_active']
+    list_editable = ['service', 'event_rule', 'system_operand', 'next_service', 'passing_data', 'system_operand_parameter','complete_feedback', 'is_active']
     list_display_links = ['label', ]
     readonly_fields = ['name', 'hssc_id']
     autocomplete_fields = ['service', 'next_service', 'event_rule']
@@ -202,11 +202,15 @@ class ManagedEntityAdmin(admin.ModelAdmin):
     readonly_fields = ['hssc_id', 'pym', 'name', 'model_name', 'header_fields_json']
 
 
-# @admin.register(SystemOperand)
-# class SystemOperandAdmin(admin.ModelAdmin):
-#     list_display = ('operand_type', 'label', 'name', 'func', 'parameters')
-#     ordering = ('id',)
+@admin.register(SystemOperand)
+class SystemOperandAdmin(admin.ModelAdmin):
+    list_display = ('operand_type', 'label', 'name', 'func', 'parameters')
+    ordering = ('id',)
 
+@admin.register(SystemOperandParameter)
+class SystemOperandParameterAdmin(admin.ModelAdmin):
+    list_display = ('label', 'parameter1', 'form_field1', 'parameter2', 'form_field2', 'parameter3', 'form_field3', 'description')
+    ordering = ('id',)
 
 class ExtenalServiceFieldsMappingInline(admin.TabularInline):
     model = ExternalServiceFieldsMapping

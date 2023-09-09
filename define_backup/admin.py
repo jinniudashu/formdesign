@@ -14,6 +14,7 @@ from .models import SourceCode, DesignBackup, IcpcBackup
 # 不备份在其他表新增内容时自动插入内容的表，Component, RelateFieldModel
 Backup_models = [
     SystemOperand,
+    SystemOperandParameter,
     CycleUnit,
     Role, 
     IcpcList,
