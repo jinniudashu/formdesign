@@ -177,8 +177,8 @@ class ServicePackageAdmin(admin.ModelAdmin):
 
 @admin.register(ServiceRule)
 class ServiceRuleAdmin(admin.ModelAdmin):
-    list_display = ['label', 'service', 'event_rule', 'system_operand', 'next_service', 'passing_data', 'system_operand_parameter','complete_feedback', 'is_active']
-    list_editable = ['service', 'event_rule', 'system_operand', 'next_service', 'passing_data', 'system_operand_parameter','complete_feedback', 'is_active']
+    list_display = ['label', 'service', 'event_rule', 'system_operand', 'next_service', 'passing_data', 'apply_to_group','complete_feedback', 'is_active']
+    list_editable = ['service', 'event_rule', 'system_operand', 'next_service', 'passing_data', 'apply_to_group','complete_feedback', 'is_active']
     list_display_links = ['label', ]
     readonly_fields = ['name', 'hssc_id']
     autocomplete_fields = ['service', 'next_service', 'event_rule']

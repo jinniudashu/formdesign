@@ -108,16 +108,6 @@ class FileField(HsscFieldBase):
         verbose_name = "文件字段"
         verbose_name_plural = "文件字段"
 
-# 系统字段
-class SystemReservedField(HsscFieldBase):
-    FIELD_TYPE = [('charge_staff', '责任人'), ('operator', '作业人员'), ('scheduled_time', '计划执行时间'), ('duration', '时长'), ('frequency', '频次')]
-    # FIELD_TYPE = [('hssc_charge_staff', '责任人'), ('hssc_operator', '作业人员'), ('hssc_scheduled_time', '计划执行时间'), ('hssc_duration', '时长'), ('hssc_frequency', '频次')]
-    type = models.CharField(max_length=50, choices=FIELD_TYPE, default='ImageField', verbose_name="类型")
-
-    class Meta:
-        verbose_name = "系统API字段"
-        verbose_name_plural = "系统API字段"
-
 # 字段列表
 class Component(HsscPymBase):
     q  = Q(app_label='define') & (
@@ -134,6 +124,24 @@ class Component(HsscPymBase):
         verbose_name = "业务字段汇总"
         verbose_name_plural = verbose_name
         ordering = ['id']
+
+# 系统字段
+class SystemReservedField(HsscPymBase):
+    component = models.ForeignKey(Component, on_delete=models.CASCADE, null=True, verbose_name="业务字段")
+    FIELD_TYPE = [('hssc_group_no', '组别'), ('hssc_charge_staff', '责任人'), ('hssc_operator', '作业人员'), ('hssc_scheduled_time', '计划执行时间'), ('hssc_duration', '天数'), ('hssc_frequency', '频次')]
+    type = models.CharField(max_length=50, choices=FIELD_TYPE, verbose_name="系统API字段")
+
+    class Meta:
+        verbose_name = "系统API字段"
+        verbose_name_plural = "系统API字段"
+
+    def save(self, *args, **kwargs):
+        self.label = self.component.label
+        self.name = self.type
+        if self.label:
+            self.pym = ''.join(lazy_pinyin(self.label, style=Style.FIRST_LETTER))
+                
+        super().save(*args, **kwargs)
 
 
 # 如果保存字段表，则更新Component表

@@ -47,10 +47,9 @@ class FileFieldAdmin(admin.ModelAdmin):
 
 @admin.register(SystemReservedField)
 class SystemReservedFieldAdmin(admin.ModelAdmin):
-    list_display = ['label', 'name']
-    readonly_fields = ['hssc_id', 'pym']
+    list_display = ['label', 'type', 'name']
+    readonly_fields = ['hssc_id', 'pym', 'name', 'label']
     search_fields=['label', 'pym', 'name']
-    autocomplete_fields = ['name_icpc']
 
 @admin.register(Component)
 class ComponentAdmin(admin.ModelAdmin):

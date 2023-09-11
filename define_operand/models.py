@@ -967,7 +967,7 @@ class ServiceRule(HsscBase):
     next_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='next_service', verbose_name='后续服务')
     Receive_form = [(0, '否'), (1, '接收，不可编辑'), (2, '接收，可以编辑')]  # 接收表单数据
     passing_data = models.PositiveSmallIntegerField(choices=Receive_form, default=0,  blank=True, null=True, verbose_name='接收表单')
-    system_operand_parameter = models.ForeignKey(SystemOperandParameter, on_delete=models.CASCADE, blank=True, null=True, verbose_name='系统作业参数')
+    apply_to_group = models.BooleanField(choices=[(False, '否'), (True, '是')], default=False, verbose_name='应用于分组')
     Complete_feedback = [(0, '否'), (1, '返回完成状态'), (2, '返回表单')]
     complete_feedback = models.PositiveSmallIntegerField(choices=Complete_feedback, default=0,  blank=True, null=True, verbose_name='完成反馈')
     Reminders = [(0, '客户'), (1, '服务人员'), (2, '服务小组')]
