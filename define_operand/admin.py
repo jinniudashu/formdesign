@@ -95,21 +95,8 @@ class BuessinessFormAdmin(admin.ModelAdmin):
     search_fields = ['name', 'label', 'pym']
     filter_horizontal = ("components",)
     readonly_fields = ['api_fields', 'name', 'hssc_id']
-    inlines = [FormComponentsSettingInline, ComputeComponentsSettingInline, FormListComponentsSettingInline]
+    inlines = [FormComponentsSettingInline, FormListComponentsSettingInline, ComputeComponentsSettingInline]
     autocomplete_fields = ['name_icpc', ]
-
-    def save_formset(self, request, form, formset, change):
-        # 更新api_fields
-        import json
-        instances = formset.save()
-        if instances:
-            form = instances[0].form
-            api_fields = [{form_components.api_field: form_components.component.content_object.name} for form_components in FormComponentsSetting.objects.filter(form=form, api_field__isnull=False)]
-            if api_fields:
-                form.api_fields = json.dumps(api_fields)
-            else:
-                form.api_fields = None
-            form.save()
 
 
 class BuessinessFormsSettingInline(admin.TabularInline):

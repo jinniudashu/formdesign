@@ -9,7 +9,7 @@ from pypinyin import lazy_pinyin
 from django.conf import settings
 
 from formdesign.hsscbase_class import HsscBase, HsscPymBase
-from define.models import Component, Role, RelateFieldModel, DicList, DicDetail, Medicine
+from define.models import Component, SystemReservedField, Role, RelateFieldModel, DicList, DicDetail, Medicine
 from define_icpc.models import *
 from define_operand.utils import generate_js_script, generate_form_event_js_script
 
@@ -365,14 +365,29 @@ class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
 
         super().save(*args, **kwargs)
 
+        # 检查表单字段是否有系统API字段，如果有，将API字段添加到api_fields中
+        # 获取当前表单关联的所有component的ID
+        form_components_ids = self.components.all().values_list('id', flat=True)
+        list_components_ids = self.list_components.all().values_list('id', flat=True)
+        
+        # 查找与这些ID匹配的SystemReservedField记录
+        matched_system_fields = SystemReservedField.objects.filter(component_id__in=form_components_ids | list_components_ids)
+        
+        # 构建字典
+        api_fields_dict = {system_field.type: system_field.component.name for system_field in matched_system_fields}
+        
+        # 将字典保存到api_fields字段
+        self.api_fields = api_fields_dict
+        # 执行restore_design时需注释掉，否则会报主键重复错误
+        super().save(*args, **kwargs)
+
+
 # 业务表单字段设置
 class FormComponentsSetting(HsscBase):
     form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="表单")
     component = models.ForeignKey(Component, on_delete=models.CASCADE, verbose_name="字段")
     default_value = models.CharField(max_length=255, null=True, blank=True, verbose_name="默认值")
     is_required = models.BooleanField(default=False, verbose_name="是否必填")
-    Api_field = [('charge_staff', '责任人'), ('operator', '作业人员'), ('scheduled_time', '计划执行时间')]
-    api_field = models.CharField(max_length=50, choices=Api_field, null=True, blank=True, verbose_name="对接系统接口")
     position = models.PositiveSmallIntegerField(default=100, verbose_name="位置顺序")
     show_hint = models.BooleanField(default=False, verbose_name="显示提示")
 

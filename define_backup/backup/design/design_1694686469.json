@@ -4965,7 +4965,7 @@
             "name_icpc": null,
             "type": "IntegerField",
             "max_digits": 10,
-            "decimal_places": 0,
+            "decimal_places": 2,
             "standard_value": null,
             "up_limit": null,
             "down_limit": null,
@@ -6272,14 +6272,6 @@
             "pym": "yysj",
             "component": "deb85c6e-9aa1-11ec-bde1-8a6e55faf877",
             "type": "hssc_scheduled_time"
-        },
-        {
-            "label": "组别",
-            "name": "hssc_group_no",
-            "hssc_id": "ae79b131-5300-11ee-a7ce-4889e7cf38c9",
-            "pym": "zb",
-            "component": "4c4cd1d8-509b-11ee-a2c3-4889e7cf38c9",
-            "type": "hssc_group_no"
         }
     ],
     "buessinessform": [
@@ -6841,8 +6833,7 @@
             "form_class": 3,
             "api_fields": {
                 "hssc_frequency": "boolfield_yong_yao_pin_ci",
-                "hssc_duration": "boolfield_yong_yao_liao_cheng",
-                "hssc_group_no": "boolfield_zu_bie"
+                "hssc_duration": "boolfield_yong_yao_liao_cheng"
             },
             "components": [
                 "a6c0522e-bf7e-11ec-843b-6afc6c25d902",
@@ -6853,7 +6844,6 @@
                 "2b80da60-c5ce-11ec-b819-725badf7393d",
                 "2c4feec6-3117-11ee-b246-0242ac170003",
                 "48c8a4fa-3651-11ee-895b-0242ac170002",
-                "4c4cd1d8-509b-11ee-a2c3-4889e7cf38c9",
                 "dec637d0-9aa1-11ec-bde1-8a6e55faf877"
             ]
         },
@@ -12059,17 +12049,6 @@
             "is_required": false,
             "position": 110,
             "autofill_fields": true
-        },
-        {
-            "label": null,
-            "name": null,
-            "hssc_id": "ec6e3e5a-5300-11ee-92c3-4889e7cf38c9",
-            "form": "0ce117aa-9e23-11ec-aa2c-fe35a7065cdd",
-            "component": "4c4cd1d8-509b-11ee-a2c3-4889e7cf38c9",
-            "default_value": null,
-            "is_required": false,
-            "position": 150,
-            "autofill_fields": false
         }
     ],
     "computecomponentssetting": [
@@ -17300,7 +17279,7 @@
             "system_operand": "73f20134-4d80-11ee-868d-4889e7cf38c9",
             "next_service": "1b8b3fba-c974-11ed-a1d5-0242ac120003",
             "passing_data": 1,
-            "apply_to_group": true,
+            "apply_to_group": false,
             "complete_feedback": 1,
             "reminders": 1,
             "message": null,

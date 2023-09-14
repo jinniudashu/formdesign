@@ -17300,7 +17300,7 @@
             "system_operand": "73f20134-4d80-11ee-868d-4889e7cf38c9",
             "next_service": "1b8b3fba-c974-11ed-a1d5-0242ac120003",
             "passing_data": 1,
-            "apply_to_group": true,
+            "apply_to_group": false,
             "complete_feedback": 1,
             "reminders": 1,
             "message": null,
