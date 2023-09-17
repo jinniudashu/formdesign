@@ -856,26 +856,6 @@ class SystemOperand(HsscBase):
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
         super().save(*args, **kwargs)
 
-# 系统自动作业参数
-class SystemOperandParameter(HsscBase):
-    description = models.TextField(max_length=255, blank=True, null=True, verbose_name="说明")
-    parameter1 = models.CharField(max_length=255, blank=True, null=True, verbose_name="系统参数1")
-    form_field1 = models.CharField(max_length=255, blank=True, null=True, verbose_name="对应业务字段1")
-    parameter2 = models.CharField(max_length=255, blank=True, null=True, verbose_name="系统参数2")
-    form_field2 = models.CharField(max_length=255, blank=True, null=True, verbose_name="对应业务字段2")
-    parameter3 = models.CharField(max_length=255, blank=True, null=True, verbose_name="系统参数3")
-    form_field3 = models.CharField(max_length=255, blank=True, null=True, verbose_name="对应业务字段3")
-
-    class Meta:
-        verbose_name = '系统自动作业参数'
-        verbose_name_plural = verbose_name
-        ordering = ['id']
-
-    def save(self, *args, **kwargs):
-        if self.name is None or self.name == '':
-            self.name = f'{"_".join(lazy_pinyin(self.label))}'
-        super().save(*args, **kwargs)
-
 
 # 事件规则表
 class EventRule(HsscPymBase):

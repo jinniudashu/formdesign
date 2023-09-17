@@ -200,7 +200,6 @@ class FieldsType(Enum):
         # 需要导出的模块清单
         exported_models=[
             SystemOperand,
-            SystemOperandParameter,
             CycleUnit,
             Role,
             BuessinessForm,

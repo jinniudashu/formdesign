@@ -194,11 +194,6 @@ class SystemOperandAdmin(admin.ModelAdmin):
     list_display = ('operand_type', 'label', 'name', 'func', 'parameters')
     ordering = ('id',)
 
-@admin.register(SystemOperandParameter)
-class SystemOperandParameterAdmin(admin.ModelAdmin):
-    list_display = ('label', 'parameter1', 'form_field1', 'parameter2', 'form_field2', 'parameter3', 'form_field3', 'description')
-    ordering = ('id',)
-
 class ExtenalServiceFieldsMappingInline(admin.TabularInline):
     model = ExternalServiceFieldsMapping
     exclude = ['name', 'label', 'hssc_id']
