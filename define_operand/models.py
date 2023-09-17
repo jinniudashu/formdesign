@@ -551,10 +551,12 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             # construct model_list script
             if list_fields_script:
                 footer_script_list = f'''
+
     class Meta:
         verbose_name = '{self.label}明细'
         verbose_name_plural = verbose_name
-                '''
+
+'''
                 model_list_script = f'{get_default_list_instances}{head_script_list}{list_fields_script}{footer_script_list}'
 
         # 判断当前服务的服务规则中的条件事件是否是表单事件，如果是生成表单事件清单
