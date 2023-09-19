@@ -7949,9 +7949,7 @@
             "name_icpc": null,
             "description": "",
             "form_class": 2,
-            "api_fields": {
-                "hssc_operator": "boolfield_hui_zhen_ren"
-            },
+            "api_fields": {},
             "components": [
                 "deb93f26-9aa1-11ec-bde1-8a6e55faf877",
                 "d10f2cc2-5621-11ee-a441-0242ac170002"
