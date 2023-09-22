@@ -8,3 +8,4 @@ env/
 db.sqlite3
 data/
 .dockercommand
+.DS_Store
