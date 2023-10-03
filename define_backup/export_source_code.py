@@ -206,6 +206,7 @@ class FieldsType(Enum):
             ManagedEntity,
             Service,
             BuessinessFormsSetting,
+            L1Service,
             ServicePackage,
             ServicePackageDetail,
             EventRule,

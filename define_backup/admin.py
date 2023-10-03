@@ -34,6 +34,7 @@ Backup_models = [
     ServicePackage,
     Service,
     BuessinessFormsSetting,
+    L1Service,
     EventRule,
     EventExpression,
     ServicePackageDetail,
