@@ -1,0 +1,127 @@
+{
+    "script": {
+        "service": {
+            "models": "service models script test",
+            "admin": "service admin script",
+            "serializers": "service serializers script",
+            "forms": "service forms script"
+        },
+        "dictionaries": {
+            "models": "dictionaries models script",
+            "admin": "dictionaries admin script",
+            "serializers": "dictionaries serializers script",
+            "forms": ""
+        },
+        "icpc": {
+            "models": "icpc models script",
+            "admin": "icpc admin script",
+            "serializers": "icpc serializers script",
+            "forms": ""
+        },
+        "core": {
+            "hsscbase_class": "core hsscbase_class script"
+        },
+        "templates": {
+            "template1": "templates template1 script",
+            "template2": "templates template2 script",
+            "template3": "templates template3 script",
+            "template4": "templates template4 script"
+        }
+    },
+    "data": {
+        "dictionaries": [{"a": "a1"}, {"b": "b2"}],
+        "icpc": [
+            {
+                "model": "icpc.Icpc1_register_logins",
+                "fields": {
+                    "icpc_code": "Z6201",
+                    "icode": "Z62",
+                    "iname": "用户注册",
+                    "iename": "Administrative procedure",
+                    "include": null,
+                    "criteria": null,
+                    "exclude": null,
+                    "consider": null,
+                    "icd10": null,
+                    "icpc2": null,
+                    "note": null,
+                    "pym": "yhzc"
+                }
+            },
+            {
+                "model": "icpc.Icpc1_register_logins",
+                "fields": {
+                    "icpc_code": "Z6202",
+                    "icode": "Z62",
+                    "iname": "健康管理师注册",
+                    "iename": null,
+                    "include": null,
+                    "criteria": null,
+                    "exclude": null,
+                    "consider": null,
+                    "icd10": null,
+                    "icpc2": null,
+                    "note": null,
+                    "pym": "jkglszc"
+                }
+            }
+        ],
+        "core": {
+            "systemoperand": [
+                {
+                    "label": "推荐后续服务",
+                    "name": "recommend_next_service",
+                    "hssc_id": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
+                    "func": "RECOMMEND_NEXT_SERVICE",
+                    "parameters": "service_id",
+                    "description": "",
+                    "operand_type": "SCHEDULE_OPERAND"
+                },
+                {
+                    "label": "生成后续服务",
+                    "name": "create_next_service",
+                    "hssc_id": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
+                    "func": "CREATE_NEXT_SERVICE",
+                    "parameters": "service_id",
+                    "description": "",
+                    "operand_type": "SCHEDULE_OPERAND"
+                },
+                {
+                    "label": "生成批次服务",
+                    "name": "create_batch_services",
+                    "hssc_id": "73f20134-4d80-11ee-868d-4889e7cf38c9",
+                    "func": "CREATE_BATCH_SERVICES",
+                    "parameters": null,
+                    "description": null,
+                    "operand_type": "SCHEDULE_OPERAND"
+                }
+            ],
+            "cycleunit": [
+                {
+                    "label": "每月",
+                    "name": "mei_yue",
+                    "hssc_id": "35fa425e-33da-11ed-bef9-4889e7cf38c9",
+                    "pym": "my",
+                    "cycle_unit": "每月",
+                    "days": 30
+                },
+                {
+                    "label": "每季",
+                    "name": "mei_ji",
+                    "hssc_id": "3c106df0-33da-11ed-8f68-4889e7cf38c9",
+                    "pym": "mj",
+                    "cycle_unit": "每季",
+                    "days": 90
+                },
+                {
+                    "label": "每年",
+                    "name": "mei_nian",
+                    "hssc_id": "47c8180c-33da-11ed-b72f-4889e7cf38c9",
+                    "pym": "mn",
+                    "cycle_unit": "每年",
+                    "days": 365
+                }
+            ]
+        }
+    }
+}

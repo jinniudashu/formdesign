@@ -14,7 +14,7 @@ attrs==22.2.0
 beautifulsoup4==4.12.2
 black==23.3.0
 bleach==6.0.0
-cachetools==5.3.0
+cachetools==5.3.1
 certifi==2021.10.8
 cffi==1.15.1
 chardet==5.1.0
@@ -117,6 +117,7 @@ pyasn1-modules==0.2.8
 pycparser==2.21
 pydantic==1.10.7
 Pygments==2.14.0
+pymerkle==6.1.0
 pyparsing==3.0.9
 pyperclip==1.8.2
 pypinyin==0.44.0

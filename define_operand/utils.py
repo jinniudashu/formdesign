@@ -85,6 +85,54 @@ Follow the steps above, that's all you need to do, no more words needed.
 
 
 ########################################################################################################################
+# Compare script
+########################################################################################################################
+# Mock implementation for Pymerkle due to the lack of the actual library in this environment
+
+class MockMerkleTree:
+    def __init__(self, data):
+        self.data = data
+        self.root_hash = self._hash_data(data)
+        
+    def _hash_data(self, data):
+        if isinstance(data, dict):
+            combined_data = "".join([key + str(self._hash_data(value)) for key, value in data.items()])
+            return hash(combined_data)
+        elif isinstance(data, list):
+            combined_data = "".join([str(self._hash_data(item)) for item in data])
+            return hash(combined_data)
+        else:
+            return hash(data)
+
+    def validate(self, other_tree):
+        return self.root_hash == other_tree.root_hash
+
+
+def identify_changes(original_data, new_data):
+    original_tree = MockMerkleTree(original_data)
+    new_tree = MockMerkleTree(new_data)
+    
+    changes = []
+
+    def _compare(node1, node2, path=[]):
+        if isinstance(node1, dict) and isinstance(node2, dict):
+            for key in set(node1.keys()).union(node2.keys()):
+                if key not in node1 or key not in node2 or MockMerkleTree(node1[key]).root_hash != MockMerkleTree(node2[key]).root_hash:
+                    changes.append("/".join(path + [key]))
+                    _compare(node1.get(key, {}), node2.get(key, {}), path + [key])
+        elif isinstance(node1, list) and isinstance(node2, list):
+            for idx, (item1, item2) in enumerate(zip(node1, node2)):
+                if MockMerkleTree(item1).root_hash != MockMerkleTree(item2).root_hash:
+                    changes.append("/".join(path + [str(idx)]))
+                    _compare(item1, item2, path + [str(idx)])
+        elif node1 != node2:
+            changes.append("/".join(path))
+    
+    _compare(original_data, new_data)
+    return changes
+
+
+########################################################################################################################
 # keyword_search
 ########################################################################################################################
 
