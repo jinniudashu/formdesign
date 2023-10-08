@@ -131,6 +131,47 @@ def identify_changes(original_data, new_data):
     _compare(original_data, new_data)
     return changes
 
+def identify_leaf_changes(original_data, new_data):
+    changes = {
+        "added": [],
+        "deleted": [],
+        "updated": []
+    }
+
+    def _compare(node1, node2, path=[]):
+        if isinstance(node1, dict) and isinstance(node2, dict):
+            for key in set(node1.keys()).union(node2.keys()):
+                new_path = path + [key]
+                if key not in node1:
+                    if not isinstance(node2[key], (dict, list)):
+                        changes["added"].append("/".join(new_path))
+                elif key not in node2:
+                    if not isinstance(node1[key], (dict, list)):
+                        changes["deleted"].append("/".join(new_path))
+                elif MockMerkleTree(node1[key]).root_hash != MockMerkleTree(node2[key]).root_hash:
+                    if not isinstance(node1[key], (dict, list)) and not isinstance(node2[key], (dict, list)):
+                        changes["updated"].append("/".join(new_path))
+                    else:
+                        _compare(node1[key], node2[key], new_path)
+        elif isinstance(node1, list) and isinstance(node2, list):
+            max_len = max(len(node1), len(node2))
+            for idx in range(max_len):
+                new_path = path + [str(idx)]
+                if idx >= len(node1):
+                    if not isinstance(node2[idx], (dict, list)):
+                        changes["added"].append("/".join(new_path))
+                elif idx >= len(node2):
+                    if not isinstance(node1[idx], (dict, list)):
+                        changes["deleted"].append("/".join(new_path))
+                elif MockMerkleTree(node1[idx]).root_hash != MockMerkleTree(node2[idx]).root_hash:
+                    if not isinstance(node1[idx], (dict, list)) and not isinstance(node2[idx], (dict, list)):
+                        changes["updated"].append("/".join(new_path))
+                    else:
+                        _compare(node1[idx], node2[idx], new_path)
+
+    _compare(original_data, new_data)
+    return changes
+
 
 ########################################################################################################################
 # keyword_search

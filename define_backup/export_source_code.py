@@ -8,6 +8,7 @@ from define_operand.models import *
 from define_icpc.models import *
 from .models import SourceCode
 from .script_file_header import *
+from define_operand.utils import identify_leaf_changes
 
 
 # 导出作业脚本, 被define_operand.admin调用
@@ -283,9 +284,7 @@ class FieldsType(Enum):
     # **************************
     # 比较新旧版本差异，输出差异节点
     # **************************
-    from define_operand.utils import identify_changes
-    # 获取旧版本source_code
     old_script = SourceCode.objects.filter(project=project).order_by('-id')[1]
     old_source_code = json.loads(old_script.code)
-    change = identify_changes(old_source_code, source_code)
+    change = identify_leaf_changes(old_source_code, source_code)
     print('差异节点：', change)  
