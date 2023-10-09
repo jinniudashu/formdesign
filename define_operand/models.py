@@ -374,7 +374,7 @@ class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
         matched_system_fields = SystemReservedField.objects.filter(component_id__in=form_components_ids | list_components_ids)
         
         # 构建字典
-        api_fields_dict = {system_field.type: system_field.component.name for system_field in matched_system_fields}
+        api_fields_dict = {system_field.type: {"field_name": system_field.component.name, "default_value": system_field.default_value} for system_field in matched_system_fields}
         
         # 将字典保存到api_fields字段
         self.api_fields = api_fields_dict
