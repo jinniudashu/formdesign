@@ -610,6 +610,12 @@ class {self.name.capitalize()}Form(ModelForm):
             {{"__init__": lambda self, *args, **kwargs: {self.name.capitalize()}_listForm.__init__(self, user=request.user, *args, **kwargs)}}
         )
         kwargs["form"] = FormWithUser
+
+        # 获取数据库记录数
+        record_count = self.model.objects.filter({self.name.lower()}=obj).count() if obj else 0
+        # 根据记录数设置extra的值
+        self.extra = 1 if record_count == 0 else 0        
+        
         return super().get_formset(request, obj, **kwargs)
 ''' if system_api_fields_default_values else ''
             else:
@@ -671,7 +677,14 @@ class {self.name.capitalize()}_listInline(admin.TabularInline):
     model = {self.name.capitalize()}_list
     extra = 1
     autocomplete_fields = [{list_autocomplete_fields}]
-            '''
+
+    def get_formset(self, request, obj=None, **kwargs):
+        # 获取数据库记录数
+        record_count = self.model.objects.filter({self.name.lower()}=obj).count() if obj else 0
+        # 根据记录数设置extra的值
+        self.extra = 1 if record_count == 0 else 0        
+        return super().get_formset(request, obj, **kwargs)
+'''
             if admin_customize_form:
                 admin_listInline_script = admin_listInline_script + admin_customize_form
         else:
