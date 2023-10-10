@@ -145,6 +145,31 @@ class SystemReservedField(HsscPymBase):
                 
         super().save(*args, **kwargs)
 
+        # 扫描使用当前字段的表单FormComponentsSetting和FormListComponentsSetting，将API字段添加到其对应的BuessinessForm.api_fields中
+        # Query for BuessinessForm instances that use self.component
+        from define_operand.models import BuessinessForm
+        related_forms = BuessinessForm.objects.filter(
+            models.Q(components=self.component) |
+            models.Q(list_components=self.component)
+        )
+
+        # Iterate over the related BuessinessForm instances and update api_fields
+        for form in related_forms:
+            # Fetch the existing api_fields JSON from the BuessinessForm instance
+            api_fields = form.api_fields or {}
+
+            # Build the api_fields_dict
+            api_fields_dict = {
+                self.type: {
+                    "field_name": self.component.name,
+                    "default_value": self.default_value
+                }
+            }
+
+            # Update the api_fields JSON on the BuessinessForm instance
+            api_fields.update(api_fields_dict)
+            form.api_fields = api_fields
+            form.save()
 
 # 如果保存字段表，则更新Component表
 @receiver(post_save, sender=CharacterField, weak=True, dispatch_uid=None)

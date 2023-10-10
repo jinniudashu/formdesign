@@ -88,13 +88,11 @@ class CustomerSchedule(HsscFormModel):
 
 service_admin_file_head = '''from django.contrib import admin
 from django.shortcuts import redirect
-from django import forms
 
 from core.admin import clinic_site
 from core.signals import operand_finished
 from core.business_functions import get_services_schedule, create_customer_service_log
 from service.models import *
-
 
 class HsscFormAdmin(admin.ModelAdmin):
     list_fields = ['name', 'id']
@@ -305,50 +303,13 @@ admin.site.register(CustomerSchedulePackage, CustomerSchedulePackageAdmin)
 # Service表单Admin
 # **********************************************************************************************************************
 
-class Hui_zhen_jian_yi_fu_wuForm(forms.ModelForm):
-    class Meta:
-        model = Hui_zhen_jian_yi_fu_wu
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
-        super().__init__(*args, **kwargs)
-        operator_customer = Customer.objects.get(id=self.user.id) if self.user else None
-        operator_staff = operator_customer.staff if operator_customer else None
-        operator_virtualstaff = operator_staff.virtualstaff if operator_staff else None
-        # 判断人员字段的类型
-        model_name = self._meta.model._meta.get_field('boolfield_hui_zhen_ze_ren_ren').remote_field.model.__name__
-        print('人员字段类型', model_name)
-        if model_name == 'VirtualStaff':
-            self.initial['boolfield_hui_zhen_ze_ren_ren'] = operator_virtualstaff
-        elif model_name == 'Staff':
-            self.initial['boolfield_hui_zhen_ze_ren_ren'] = operator_staff
-        elif model_name == 'Customer':
-            self.initial['boolfield_hui_zhen_ze_ren_ren'] = operator_customer
-
-class Hui_zhen_jian_yi_fu_wuAdmin(HsscFormAdmin):
-    fieldssets = [
-        ("基本信息", {"fields": ((),)}), 
-        ("会诊建议表", {"fields": ("boolfield_zheng_zhuang", "boolfield_hui_zhen_ze_ren_ren", )}), ]
-    autocomplete_fields = ["boolfield_zheng_zhuang", "boolfield_hui_zhen_ze_ren_ren", ]
-    inlines = [Hui_zhen_jian_yi_fu_wu_listInline, ]
-
-    def get_form(self, request, obj=None, **kwargs):
-        FormWithUser = type(
-            'FormWithUser',
-            (Hui_zhen_jian_yi_fu_wuForm,),
-            {'__init__': lambda self, *args, **kwargs: Hui_zhen_jian_yi_fu_wuForm.__init__(self, user=request.user, *args, **kwargs)}
-        )
-        kwargs['form'] = FormWithUser
-        return super().get_form(request, obj, **kwargs)
-
 '''
 
 # service\forms.py文件头
 service_forms_file_head = '''from django.forms import ModelForm
-
+from django.utils import timezone
+from core.models import Customer
 '''
-
 
 # forms/models.py文件头
 forms_models_file_head = '''from django.db import models

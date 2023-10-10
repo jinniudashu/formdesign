@@ -365,23 +365,6 @@ class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
 
         super().save(*args, **kwargs)
 
-        # 检查表单字段是否有系统API字段，如果有，将API字段添加到api_fields中
-        # 获取当前表单关联的所有component的ID
-        form_components_ids = self.components.all().values_list('id', flat=True)
-        list_components_ids = self.list_components.all().values_list('id', flat=True)
-        
-        # 查找与这些ID匹配的SystemReservedField记录
-        matched_system_fields = SystemReservedField.objects.filter(component_id__in=form_components_ids | list_components_ids)
-        
-        # 构建字典
-        api_fields_dict = {system_field.type: {"field_name": system_field.component.name, "default_value": system_field.default_value} for system_field in matched_system_fields}
-        
-        # 将字典保存到api_fields字段
-        self.api_fields = api_fields_dict
-        # 执行restore_design时需注释掉，否则会报主键重复错误
-        super().save(*args, **kwargs)
-
-
 # 业务表单字段设置
 class FormComponentsSetting(HsscBase):
     form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="表单")
@@ -446,7 +429,8 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         admin_script = admin_listInline_script = ''
         fields_script = list_fields_script = header_fields = ''
         modeladmin_body = {}
-        fieldssets = autocomplete_fields = radio_fields = search_fields = change_form_template = inlines = list_autocomplete_fields = list_radio_fields = ''
+        fieldssets = autocomplete_fields = radio_fields = search_fields = change_form_template = inlines = list_autocomplete_fields = list_radio_fields= admin_customize_form = ''
+        system_api_fields_default_values = []
         form_script = ''
         get_default_instances = get_default_list_instances = ''
 
@@ -534,6 +518,63 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
                     else:
                         # construct admin autocomplete_fields script
                         list_autocomplete_fields = list_autocomplete_fields + f'"{field_name}", '
+            
+            if form.api_fields:
+                for _, field_info in form.api_fields.items():
+                    _default_value = field_info.get('default_value', None)
+                    _field_name = field_info.get('field_name', None)
+                    if _default_value:
+                        system_api_fields_default_values.append({_default_value: _field_name})
+                        print('system_api_fields_default_values:', system_api_fields_default_values)
+            if system_api_fields_default_values:
+                if list_fields_script:
+                    form_script = form_script + f'''
+from service.models import {self.name.capitalize()}_list
+class {self.name.capitalize()}_listForm(ModelForm):
+    class Meta:
+        model = {self.name.capitalize()}_list
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs) 
+        if not self.initial.get('{system_api_fields_default_values[0]["CurrentOperator"]}', None):
+            operator_customer = Customer.objects.get(id=self.user.id) if self.user else None
+            operator_staff = operator_customer.staff if operator_customer else None
+            operator_virtualstaff = operator_staff.virtualstaff if operator_staff else None
+            # 判断人员字段的类型
+            model_name = self._meta.model._meta.get_field('{system_api_fields_default_values[0]["CurrentOperator"]}').remote_field.model.__name__
+            if model_name == 'VirtualStaff':
+                self.initial['{system_api_fields_default_values[0]["CurrentOperator"]}'] = operator_virtualstaff
+            elif model_name == 'Staff':
+                self.initial['{system_api_fields_default_values[0]["CurrentOperator"]}'] = operator_staff
+            elif model_name == 'Customer':
+                self.initial['{system_api_fields_default_values[0]["CurrentOperator"]}'] = operator_customer
+'''
+                else:
+                    form_script = form_script + f'''
+from service.models import {self.name.capitalize()}
+class {self.name.capitalize()}Form(ModelForm):
+    class Meta:
+        model = {self.name.capitalize()}
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs) 
+        if not self.initial.get('{system_api_fields_default_values[0]["CurrentOperator"]}', None):
+            operator_customer = Customer.objects.get(id=self.user.id) if self.user else None
+            operator_staff = operator_customer.staff if operator_customer else None
+            operator_virtualstaff = operator_staff.virtualstaff if operator_staff else None
+            # 判断人员字段的类型
+            model_name = self._meta.model._meta.get_field('{system_api_fields_default_values[0]["CurrentOperator"]}').remote_field.model.__name__
+            if model_name == 'VirtualStaff':
+                self.initial['{system_api_fields_default_values[0]["CurrentOperator"]}'] = operator_virtualstaff
+            elif model_name == 'Staff':
+                self.initial['{system_api_fields_default_values[0]["CurrentOperator"]}'] = operator_staff
+            elif model_name == 'Customer':
+                self.initial['{system_api_fields_default_values[0]["CurrentOperator"]}'] = operator_customer
+'''
 
             # construct admin fieldset script
             fieldssets = fieldssets + f'\n        ("{form.label}", {{"fields": ({form_fields})}}), '
@@ -557,7 +598,33 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         verbose_name_plural = verbose_name
 
 '''
+                
                 model_list_script = f'{get_default_list_instances}{head_script_list}{list_fields_script}{footer_script_list}'
+
+                admin_customize_form = f'''
+    def get_formset(self, request, obj=None, **kwargs):{admin_customize_form}
+        from service.forms import {self.name.capitalize()}_listForm
+        FormWithUser = type(
+            "FormWithUser",
+            ({self.name.capitalize()}_listForm,),
+            {{"__init__": lambda self, *args, **kwargs: {self.name.capitalize()}_listForm.__init__(self, user=request.user, *args, **kwargs)}}
+        )
+        kwargs["form"] = FormWithUser
+        return super().get_formset(request, obj, **kwargs)
+''' if system_api_fields_default_values else ''
+            else:
+                admin_customize_form = f'''
+    def get_form(self, request, obj=None, **kwargs):{admin_customize_form}
+        from service.forms import {self.name.capitalize()}Form
+        FormWithUser = type(
+            "FormWithUser",
+            ({self.name.capitalize()}Form,),
+            {{"__init__": lambda self, *args, **kwargs: {self.name.capitalize()}Form.__init__(self, user=request.user, *args, **kwargs)}}
+        )
+        kwargs["form"] = FormWithUser
+        return super().get_form(request, obj, **kwargs)
+''' if system_api_fields_default_values else ''
+
 
         # 判断当前服务的服务规则中的条件事件是否是表单事件，如果是生成表单事件清单
         service_rules = ServiceRule.objects.filter(service=self, event_rule__event_type="FORM_EVENT")
@@ -605,6 +672,12 @@ class {self.name.capitalize()}_listInline(admin.TabularInline):
     extra = 1
     autocomplete_fields = [{list_autocomplete_fields}]
             '''
+            if admin_customize_form:
+                admin_listInline_script = admin_listInline_script + admin_customize_form
+        else:
+            if admin_customize_form:
+                modeladmin_body['admin_customize_form'] = admin_customize_form
+
 
         # construct admin script
         admin_script = admin_listInline_script + self._create_admin_script(modeladmin_body)
@@ -629,6 +702,8 @@ class {self.name.capitalize()}_listInline(admin.TabularInline):
                     modeladmin_body = modeladmin_body + f'    {key} = {value}\n'
                 elif key == 'inlines':
                     modeladmin_body = modeladmin_body + f'    {key} = {value}\n'
+                elif key == 'admin_customize_form':
+                    modeladmin_body = modeladmin_body + f'{value}\n'
                 else:
                     modeladmin_body = modeladmin_body + f'    {key} = [{value}]\n'
 

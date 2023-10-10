@@ -26,11 +26,11 @@ Backup_models = [
     DTField,
     RelatedField,
     FileField,
-    SystemReservedField,
     BuessinessForm,
     FormComponentsSetting,
     FormListComponentsSetting,
     ComputeComponentsSetting,
+    SystemReservedField,  # restore_design时需要在BuessinessForm恢复之后再恢复
     ServicePackage,
     Service,
     BuessinessFormsSetting,

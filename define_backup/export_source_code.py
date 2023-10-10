@@ -284,7 +284,8 @@ class FieldsType(Enum):
     # **************************
     # 比较新旧版本差异，输出差异节点
     # **************************
-    old_script = SourceCode.objects.filter(project=project).order_by('-id')[1]
-    old_source_code = json.loads(old_script.code)
-    change = identify_leaf_changes(old_source_code, source_code)
-    print('差异节点：', change)  
+    if SourceCode.objects.filter(project=project).count() > 1:
+        old_script = SourceCode.objects.filter(project=project).order_by('-id')[1]
+        old_source_code = json.loads(old_script.code)
+        change = identify_leaf_changes(old_source_code, source_code)
+        print('差异节点：', change)  
