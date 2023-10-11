@@ -429,8 +429,8 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
         admin_script = admin_listInline_script = ''
         fields_script = list_fields_script = header_fields = ''
         modeladmin_body = {}
-        fieldssets = autocomplete_fields = radio_fields = search_fields = change_form_template = inlines = list_autocomplete_fields = list_radio_fields= admin_customize_form = ''
-        system_api_fields_default_values = []
+        fieldssets = autocomplete_fields = radio_fields = search_fields = change_form_template = inlines = list_autocomplete_fields = list_radio_fields= inline_admin_customize_form = admin_customize_form = ''
+        system_api_fields_default_values = {}
         form_script = ''
         get_default_instances = get_default_list_instances = ''
 
@@ -520,61 +520,27 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
                         list_autocomplete_fields = list_autocomplete_fields + f'"{field_name}", '
             
             if form.api_fields:
-                for _, field_info in form.api_fields.items():
-                    _default_value = field_info.get('default_value', None)
-                    _field_name = field_info.get('field_name', None)
-                    if _default_value:
-                        system_api_fields_default_values.append({_default_value: _field_name})
-                        print('system_api_fields_default_values:', system_api_fields_default_values)
+                system_api_fields_default_values = {'components': [], 'list_components': []}
+                # Get components that are in SystemReservedField and related to BuessinessForm
+                system_reserved_components = SystemReservedField.objects.filter(component__components_in_forms=form).values_list('component', flat=True)
+
+                # Classify the components into FormComponentsSetting or FormListComponentsSetting
+                for component_id in system_reserved_components:
+                    if FormComponentsSetting.objects.filter(form=form, component_id=component_id).exists():
+                        system_api_fields_default_values['components'].append(component_id)
+                    elif FormListComponentsSetting.objects.filter(form=form, component_id=component_id).exists():
+                        system_api_fields_default_values['list_components'].append(component_id)
+
+                print('system_api_fields_default_values:', system_api_fields_default_values)
+
+            # 实现系统API字段默认值。根据API字段的是否是列表表单，生成相应自定义ModelForm
             if system_api_fields_default_values:
-                if list_fields_script:
-                    form_script = form_script + f'''
-from service.models import {self.name.capitalize()}_list
-class {self.name.capitalize()}_listForm(ModelForm):
-    class Meta:
-        model = {self.name.capitalize()}_list
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
-        super().__init__(*args, **kwargs) 
-        if not self.initial.get('{system_api_fields_default_values[0]["CurrentOperator"]}', None):
-            operator_customer = Customer.objects.get(id=self.user.id) if self.user else None
-            operator_staff = operator_customer.staff if operator_customer else None
-            operator_virtualstaff = operator_staff.virtualstaff if operator_staff else None
-            # 判断人员字段的类型
-            model_name = self._meta.model._meta.get_field('{system_api_fields_default_values[0]["CurrentOperator"]}').remote_field.model.__name__
-            if model_name == 'VirtualStaff':
-                self.initial['{system_api_fields_default_values[0]["CurrentOperator"]}'] = operator_virtualstaff
-            elif model_name == 'Staff':
-                self.initial['{system_api_fields_default_values[0]["CurrentOperator"]}'] = operator_staff
-            elif model_name == 'Customer':
-                self.initial['{system_api_fields_default_values[0]["CurrentOperator"]}'] = operator_customer
-'''
-                else:
-                    form_script = form_script + f'''
-from service.models import {self.name.capitalize()}
-class {self.name.capitalize()}Form(ModelForm):
-    class Meta:
-        model = {self.name.capitalize()}
-        fields = '__all__'
-
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
-        super().__init__(*args, **kwargs) 
-        if not self.initial.get('{system_api_fields_default_values[0]["CurrentOperator"]}', None):
-            operator_customer = Customer.objects.get(id=self.user.id) if self.user else None
-            operator_staff = operator_customer.staff if operator_customer else None
-            operator_virtualstaff = operator_staff.virtualstaff if operator_staff else None
-            # 判断人员字段的类型
-            model_name = self._meta.model._meta.get_field('{system_api_fields_default_values[0]["CurrentOperator"]}').remote_field.model.__name__
-            if model_name == 'VirtualStaff':
-                self.initial['{system_api_fields_default_values[0]["CurrentOperator"]}'] = operator_virtualstaff
-            elif model_name == 'Staff':
-                self.initial['{system_api_fields_default_values[0]["CurrentOperator"]}'] = operator_staff
-            elif model_name == 'Customer':
-                self.initial['{system_api_fields_default_values[0]["CurrentOperator"]}'] = operator_customer
-'''
+                if system_api_fields_default_values['list_components']:
+                    form_script = form_script + self._create_customized_form_script(f'{self.name.capitalize()}_list', system_api_fields_default_values[0]["CurrentOperator"])
+                    inline_admin_customize_form = self._create_admin_customize_form_script(True)
+                elif system_api_fields_default_values['components']:
+                    form_script = form_script + self._create_customized_form_script(self.name.capitalize(), system_api_fields_default_values[0]["CurrentOperator"])
+                    admin_customize_form = self._create_admin_customize_form_script(False)                    
 
             # construct admin fieldset script
             fieldssets = fieldssets + f'\n        ("{form.label}", {{"fields": ({form_fields})}}), '
@@ -598,39 +564,8 @@ class {self.name.capitalize()}Form(ModelForm):
         verbose_name_plural = verbose_name
 
 '''
-                
+
                 model_list_script = f'{get_default_list_instances}{head_script_list}{list_fields_script}{footer_script_list}'
-
-                admin_customize_form = f'''
-    def get_formset(self, request, obj=None, **kwargs):{admin_customize_form}
-        from service.forms import {self.name.capitalize()}_listForm
-        FormWithUser = type(
-            "FormWithUser",
-            ({self.name.capitalize()}_listForm,),
-            {{"__init__": lambda self, *args, **kwargs: {self.name.capitalize()}_listForm.__init__(self, user=request.user, *args, **kwargs)}}
-        )
-        kwargs["form"] = FormWithUser
-
-        # 获取数据库记录数
-        record_count = self.model.objects.filter({self.name.lower()}=obj).count() if obj else 0
-        # 根据记录数设置extra的值
-        self.extra = 1 if record_count == 0 else 0        
-        
-        return super().get_formset(request, obj, **kwargs)
-''' if system_api_fields_default_values else ''
-            else:
-                admin_customize_form = f'''
-    def get_form(self, request, obj=None, **kwargs):{admin_customize_form}
-        from service.forms import {self.name.capitalize()}Form
-        FormWithUser = type(
-            "FormWithUser",
-            ({self.name.capitalize()}Form,),
-            {{"__init__": lambda self, *args, **kwargs: {self.name.capitalize()}Form.__init__(self, user=request.user, *args, **kwargs)}}
-        )
-        kwargs["form"] = FormWithUser
-        return super().get_form(request, obj, **kwargs)
-''' if system_api_fields_default_values else ''
-
 
         # 判断当前服务的服务规则中的条件事件是否是表单事件，如果是生成表单事件清单
         service_rules = ServiceRule.objects.filter(service=self, event_rule__event_type="FORM_EVENT")
@@ -670,6 +605,8 @@ class {self.name.capitalize()}Form(ModelForm):
             modeladmin_body['search_fields'] = search_fields
         if change_form_template:
             modeladmin_body['change_form_template'] = change_form_template
+        if admin_customize_form:
+            modeladmin_body['admin_customize_form'] = admin_customize_form
         if list_fields_script:
             modeladmin_body['inlines'] = f'[{self.name.capitalize()}_listInline, ]'
             admin_listInline_script = f'''
@@ -682,15 +619,10 @@ class {self.name.capitalize()}_listInline(admin.TabularInline):
         # 获取数据库记录数
         record_count = self.model.objects.filter({self.name.lower()}=obj).count() if obj else 0
         # 根据记录数设置extra的值
-        self.extra = 1 if record_count == 0 else 0        
+        self.extra = 1 if record_count == 0 else 0
+        {inline_admin_customize_form}
         return super().get_formset(request, obj, **kwargs)
 '''
-            if admin_customize_form:
-                admin_listInline_script = admin_listInline_script + admin_customize_form
-        else:
-            if admin_customize_form:
-                modeladmin_body['admin_customize_form'] = admin_customize_form
-
 
         # construct admin script
         admin_script = admin_listInline_script + self._create_admin_script(modeladmin_body)
@@ -800,6 +732,58 @@ class {service_name}_HeaderForm(ModelForm):
         fields = {header_fields}
         '''
 
+    # generate admin customized form script
+    def _create_admin_customize_form_script(self, is_inline):
+        if is_inline:
+            script = f'''
+                    from service.forms import {self.name.capitalize()}_listForm
+                    FormWithUser = type(
+                        "FormWithUser",
+                        ({self.name.capitalize()}_listForm,),
+                        {{"__init__": lambda self, *args, **kwargs: {self.name.capitalize()}_listForm.__init__(self, user=request.user, *args, **kwargs)}}
+                    )
+                    kwargs["form"] = FormWithUser
+            '''
+        else:
+            script = f'''
+                def get_form(self, request, obj=None, **kwargs):
+                    from service.forms import {self.name.capitalize()}Form
+                    FormWithUser = type(
+                        "FormWithUser",
+                        ({self.name.capitalize()}Form,),
+                        {{"__init__": lambda self, *args, **kwargs: {self.name.capitalize()}Form.__init__(self, user=request.user, *args, **kwargs)}}
+                    )
+                    kwargs["form"] = FormWithUser
+                    return super().get_form(request, obj, **kwargs)
+            ''' 
+        return script
+    
+    # generate customized form scirpt
+    def _create_customized_form_script(self, model_name, field_name):        
+        return f'''
+from service.models import {model_name}
+class {model_name}Form(ModelForm):
+    class Meta:
+        model = {model_name}
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs) 
+        if not self.initial.get('{field_name}', None):
+            operator_customer = Customer.objects.get(id=self.user.id) if self.user else None
+            operator_staff = operator_customer.staff if operator_customer else None
+            operator_virtualstaff = operator_staff.virtualstaff if operator_staff else None
+            # 判断人员字段的类型
+            model_name = self._meta.model._meta.get_field('{field_name}').remote_field.model.__name__
+            if model_name == 'VirtualStaff':
+                self.initial['{field_name}'] = operator_virtualstaff
+            elif model_name == 'Staff':
+                self.initial['{field_name}'] = operator_staff
+            elif model_name == 'Customer':
+                self.initial['{field_name}'] = operator_customer
+'''
+
     # 从表达式中提取字典信息
     def _extract_dict_info(self, expression):
         result = {}
@@ -821,7 +805,7 @@ class {service_name}_HeaderForm(ModelForm):
         return result
 
 
-# 基础作业信息表
+# 服务作业信息表
 class Service(GenerateServiceScriptMixin, HsscPymBase):
     name_icpc = models.OneToOneField(Icpc, on_delete=models.CASCADE, blank=True, null=True, verbose_name="ICPC编码")
     buessiness_forms = models.ManyToManyField(BuessinessForm, through='BuessinessFormsSetting', verbose_name="作业表单")
@@ -880,7 +864,7 @@ class BuessinessFormsSetting(HsscBase):
     def __str__(self):
         return str(self.buessiness_form)
 
-# 基础作业信息表
+# 服务任务信息表
 class L1Service(HsscPymBase):
     start_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='start_service', verbose_name='起始作业')
     end_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='end_service', verbose_name='结束作业')
