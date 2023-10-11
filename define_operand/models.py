@@ -527,9 +527,9 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
                         api_field_name = v['field_name']
                         api_component = Component.objects.get(name=api_field_name)
                         if api_component in form.components.all():
-                            system_api_fields_default_values['components'].append(api_field_name)
+                            system_api_fields_default_values['components'].append(v)
                         elif api_component in form.list_components.all():
-                            system_api_fields_default_values['list_components'].append(api_field_name)
+                            system_api_fields_default_values['list_components'].append(v)
                 print('system_api_fields_default_values:', system_api_fields_default_values)
 
                 # 实现系统API字段默认值。根据API字段的是否是列表表单，生成相应自定义ModelForm
@@ -757,8 +757,8 @@ class {service_name}_HeaderForm(ModelForm):
         return script
     
     # generate customized form scirpt
-    def _create_customized_form_script(self, model_name, field_name):        
-        return f'''
+    def _create_customized_form_script(self, model_name, api_field):
+        script_header = f'''
 from service.models import {model_name}
 class {model_name}Form(ModelForm):
     class Meta:
@@ -768,19 +768,26 @@ class {model_name}Form(ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super().__init__(*args, **kwargs) 
-        if not self.initial.get('{field_name}', None):
+        if not self.initial.get('{api_field['field_name']}', None):'''
+        if api_field['default_value'] == 'CurrentOperator':  
+            script = script_header + f'''
             operator_customer = Customer.objects.get(id=self.user.id) if self.user else None
             operator_staff = operator_customer.staff if operator_customer else None
             operator_virtualstaff = operator_staff.virtualstaff if operator_staff else None
             # 判断人员字段的类型
-            model_name = self._meta.model._meta.get_field('{field_name}').remote_field.model.__name__
+            model_name = self._meta.model._meta.get_field('{api_field['field_name']}').remote_field.model.__name__
             if model_name == 'VirtualStaff':
-                self.initial['{field_name}'] = operator_virtualstaff
+                self.initial['{api_field['field_name']}'] = operator_virtualstaff
             elif model_name == 'Staff':
-                self.initial['{field_name}'] = operator_staff
+                self.initial['{api_field['field_name']}'] = operator_staff
             elif model_name == 'Customer':
-                self.initial['{field_name}'] = operator_customer
+                self.initial['{api_field['field_name']}'] = operator_customer
 '''
+        elif api_field['default_value'] == 'SystemTime':
+            script = script_header + f'''
+            self.initial['{api_field['field_name']}'] = timezone.now()
+'''
+        return script
 
     # 从表达式中提取字典信息
     def _extract_dict_info(self, expression):
