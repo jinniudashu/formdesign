@@ -521,26 +521,24 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             
             if form.api_fields:
                 system_api_fields_default_values = {'components': [], 'list_components': []}
-                # Get components that are in SystemReservedField and related to BuessinessForm
-                system_reserved_components = SystemReservedField.objects.filter(component__components_in_forms=form).values_list('component', flat=True)
 
-                # Classify the components into FormComponentsSetting or FormListComponentsSetting
-                for component_id in system_reserved_components:
-                    if FormComponentsSetting.objects.filter(form=form, component_id=component_id).exists():
-                        system_api_fields_default_values['components'].append(component_id)
-                    elif FormListComponentsSetting.objects.filter(form=form, component_id=component_id).exists():
-                        system_api_fields_default_values['list_components'].append(component_id)
-
+                for _, v in form.api_fields.items():
+                    if v['default_value']:
+                        api_field_name = v['field_name']
+                        api_component = Component.objects.get(name=api_field_name)
+                        if api_component in form.components.all():
+                            system_api_fields_default_values['components'].append(api_field_name)
+                        elif api_component in form.list_components.all():
+                            system_api_fields_default_values['list_components'].append(api_field_name)
                 print('system_api_fields_default_values:', system_api_fields_default_values)
 
-            # 实现系统API字段默认值。根据API字段的是否是列表表单，生成相应自定义ModelForm
-            if system_api_fields_default_values:
+                # 实现系统API字段默认值。根据API字段的是否是列表表单，生成相应自定义ModelForm
                 if system_api_fields_default_values['list_components']:
-                    form_script = form_script + self._create_customized_form_script(f'{self.name.capitalize()}_list', system_api_fields_default_values[0]["CurrentOperator"])
+                    form_script = form_script + self._create_customized_form_script(f'{self.name.capitalize()}_list', system_api_fields_default_values['list_components'][0])
                     inline_admin_customize_form = self._create_admin_customize_form_script(True)
                 elif system_api_fields_default_values['components']:
-                    form_script = form_script + self._create_customized_form_script(self.name.capitalize(), system_api_fields_default_values[0]["CurrentOperator"])
-                    admin_customize_form = self._create_admin_customize_form_script(False)                    
+                    form_script = form_script + self._create_customized_form_script(self.name.capitalize(), system_api_fields_default_values['components'][0])
+                    admin_customize_form = self._create_admin_customize_form_script(False)
 
             # construct admin fieldset script
             fieldssets = fieldssets + f'\n        ("{form.label}", {{"fields": ({form_fields})}}), '
@@ -736,25 +734,25 @@ class {service_name}_HeaderForm(ModelForm):
     def _create_admin_customize_form_script(self, is_inline):
         if is_inline:
             script = f'''
-                    from service.forms import {self.name.capitalize()}_listForm
-                    FormWithUser = type(
-                        "FormWithUser",
-                        ({self.name.capitalize()}_listForm,),
-                        {{"__init__": lambda self, *args, **kwargs: {self.name.capitalize()}_listForm.__init__(self, user=request.user, *args, **kwargs)}}
-                    )
-                    kwargs["form"] = FormWithUser
+        from service.forms import {self.name.capitalize()}_listForm
+        FormWithUser = type(
+            "FormWithUser",
+            ({self.name.capitalize()}_listForm,),
+            {{"__init__": lambda self, *args, **kwargs: {self.name.capitalize()}_listForm.__init__(self, user=request.user, *args, **kwargs)}}
+        )
+        kwargs["form"] = FormWithUser
             '''
         else:
             script = f'''
-                def get_form(self, request, obj=None, **kwargs):
-                    from service.forms import {self.name.capitalize()}Form
-                    FormWithUser = type(
-                        "FormWithUser",
-                        ({self.name.capitalize()}Form,),
-                        {{"__init__": lambda self, *args, **kwargs: {self.name.capitalize()}Form.__init__(self, user=request.user, *args, **kwargs)}}
-                    )
-                    kwargs["form"] = FormWithUser
-                    return super().get_form(request, obj, **kwargs)
+    def get_form(self, request, obj=None, **kwargs):
+        from service.forms import {self.name.capitalize()}Form
+        FormWithUser = type(
+            "FormWithUser",
+            ({self.name.capitalize()}Form,),
+            {{"__init__": lambda self, *args, **kwargs: {self.name.capitalize()}Form.__init__(self, user=request.user, *args, **kwargs)}}
+        )
+        kwargs["form"] = FormWithUser
+        return super().get_form(request, obj, **kwargs)
             ''' 
         return script
     
