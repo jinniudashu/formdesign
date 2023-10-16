@@ -18755,6 +18755,23 @@
             "interval_rule": null,
             "interval_time": null,
             "is_active": true
+        },
+        {
+            "label": "会诊后药物干预",
+            "name": null,
+            "hssc_id": "71aababe-6bff-11ee-9a15-0242ac170003",
+            "service": "6dcdd3cc-5692-11ee-a441-0242ac170002",
+            "event_rule": "e04e6e6a-a46f-11ec-a15f-8eb5dc41bbac",
+            "system_operand": "e0ddd4ae-a42f-11ec-94e2-4889e7cf38c9",
+            "next_service": "e0305c18-9aa1-11ec-bde1-8a6e55faf877",
+            "passing_data": 1,
+            "apply_to_group": false,
+            "complete_feedback": 0,
+            "reminders": 1,
+            "message": null,
+            "interval_rule": null,
+            "interval_time": null,
+            "is_active": true
         }
     ],
     "project": [
