@@ -873,7 +873,6 @@ class BuessinessFormsSetting(HsscBase):
 class L1Service(HsscPymBase):
     start_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='start_service', verbose_name='起始作业')
     end_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='end_service', verbose_name='结束作业')
-    include_services = models.ManyToManyField(Service, blank=True, related_name='include_services', verbose_name='包含作业')
     role = models.ManyToManyField(Role, blank=True, verbose_name="服务岗位")
 
     class Meta:

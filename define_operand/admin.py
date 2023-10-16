@@ -141,7 +141,7 @@ class L1ServiceAdmin(admin.ModelAdmin):
     ordering = ['id']
     readonly_fields = ['hssc_id']
     filter_horizontal = ("role",)
-    autocomplete_fields = ["start_service", "end_service", "include_services", ]
+    autocomplete_fields = ["start_service", "end_service", ]
 
 
 @admin.register(CycleUnit)
