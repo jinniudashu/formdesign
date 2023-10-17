@@ -152,6 +152,13 @@ class HsscFormAdmin(admin.ModelAdmin):
         #     print('Change CustomerSchedulePackage', obj, 'to', schedule_list)
         #     return redirect(f'/clinic/service/customerschedulelist/{schedule_list.id}/change/')
 
+        # 查找以obj.pid为父进程的所有子进程
+        children_procs = obj.pid.children()
+        print('children:', children_procs)
+        # 过滤出proc.operator为None的进程,构造列表
+        none_operator_procs = [proc for proc in children_procs if proc.operator == None]
+        print('none_operator_procs:', none_operator_procs)
+        
         # 按照service.route_to的配置跳转
         if obj.pid.service.route_to == 'CUSTOMER_HOMEPAGE':
             return redirect(obj.customer)
