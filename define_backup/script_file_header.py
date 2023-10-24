@@ -88,6 +88,7 @@ class CustomerSchedule(HsscFormModel):
 
 service_admin_file_head = '''from django.contrib import admin
 from django.shortcuts import redirect
+from django.forms import ModelForm
 
 from core.admin import clinic_site
 from core.signals import operand_finished
@@ -154,10 +155,11 @@ class HsscFormAdmin(admin.ModelAdmin):
 
         # 查找以obj.pid为父进程的所有子进程
         children_procs = obj.pid.children()
-        print('children:', children_procs)
         # 过滤出proc.operator为None的进程,构造列表
         none_operator_procs = [proc for proc in children_procs if proc.operator == None]
-        print('none_operator_procs:', none_operator_procs)
+        # 进入人工指派操作员页面
+        if none_operator_procs:
+            return redirect('/clinic/assign_operator/' + str(obj.pid.id) + '/')
         
         # 按照service.route_to的配置跳转
         if obj.pid.service.route_to == 'CUSTOMER_HOMEPAGE':
