@@ -8083,7 +8083,7 @@
         },
         {
             "label": "双向转诊表转出",
-            "name": "shuang_xiang_zhuan_zhen_biao_zhuan_chu",
+            "name": "shuang_xiang_zhuan_zhen_biao___zhuan_chu",
             "hssc_id": "6dc54034-8600-11ee-a856-0242ac170003",
             "pym": "sxzzbzc",
             "name_icpc": null,
@@ -15360,7 +15360,7 @@
         },
         {
             "label": "双向转诊转出",
-            "name": "shuang_xiang_zhuan_zhen_zhuan_chu",
+            "name": "shuang_xiang_zhuan_zhen___zhuan_chu",
             "hssc_id": "eaf65506-8601-11ee-9620-0242ac170003",
             "pym": "sxzzzc",
             "name_icpc": null,
