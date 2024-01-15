@@ -128,7 +128,7 @@ class Component(HsscPymBase):
 # 系统字段
 class SystemReservedField(HsscPymBase):
     component = models.ForeignKey(Component, on_delete=models.CASCADE, null=True, verbose_name="业务字段")
-    FIELD_TYPE = [('hssc_group_no', '组别'), ('hssc_charge_staff', '责任人'), ('hssc_operator', '作业人员'), ('hssc_scheduled_time', '计划执行时间'), ('hssc_duration', '天数'), ('hssc_frequency', '频次')]
+    FIELD_TYPE = [('hssc_group_no', '组别'), ('hssc_charge_staff', '责任人'), ('hssc_operator', '作业人员'), ('hssc_scheduled_time', '计划执行时间'), ('hssc_duration', '天数'), ('hssc_frequency', '频次'), ('hssc_name', '姓名'), ('hssc_customer_number', '居民档案号'),  ('hssc_phone_no', '联系电话'), ('hssc_address', '家庭地址')]
     type = models.CharField(max_length=50, choices=FIELD_TYPE, verbose_name="系统API字段")
     SYSTEM_DefaultValue = [('CurrentOperator', '当前用户'), ('SystemTime', '当前时间')]
     default_value = models.CharField(max_length=50, choices=SYSTEM_DefaultValue, null=True, blank=True, verbose_name="默认值")
