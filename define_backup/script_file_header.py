@@ -6,7 +6,7 @@ service_models_file_head = '''from django.db import models
 
 from icpc.models import *
 from dictionaries.models import *
-from core.models import HsscFormModel, OperationProc, VirtualStaff, Staff, Institution, Service, ServicePackage, Customer, CycleUnit, Medicine
+from core.models import HsscFormModel, ManagedEntity, OperationProc, VirtualStaff, Staff, Institution, Service, ServicePackage, Customer, CycleUnit, Medicine
 from core.hsscbase_class import HsscBase
 
 from django.db.models import Q, F
@@ -14,6 +14,20 @@ from django.utils import timezone
 from datetime import timedelta
 
 from pypinyin import lazy_pinyin
+
+def get_profile_name(customer):
+    # 获取客户基本信息表model和系统API字段，用于查询hssc_customer_number和hssc_name
+    customer_entity = ManagedEntity.objects.get(name='customer')
+    customer_profile_model = customer_entity.base_form.service_set.all()[0].name.capitalize()
+    api_fields_map = customer_entity.base_form.api_fields
+    hssc_name_field = api_fields_map.get('hssc_name', None).get('field_name')
+    profile = eval(customer_profile_model).objects.filter(customer=customer).last()
+    if profile:
+        hssc_name = getattr(profile, hssc_name_field)
+        if hssc_name:
+            return hssc_name
+    return None
+
 
 class CustomerSchedulePackage(HsscFormModel):
     servicepackage = models.ForeignKey(ServicePackage, on_delete=models.CASCADE, verbose_name='服务包')

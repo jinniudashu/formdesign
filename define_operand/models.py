@@ -690,7 +690,8 @@ clinic_site.register({name}, {name}Admin)
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.customer.name
+        name = get_profile_name(self.customer)
+        return name if name else self.customer.user.username
 
         '''
 
