@@ -114,6 +114,13 @@ class HsscFormAdmin(admin.ModelAdmin):
     exclude = ["hssc_id", "label", "name", "customer", "operator", "creater", "pid", "cpid", "slug", "created_time", "updated_time", "pym"]
     view_on_site = False
 
+    def has_change_permission(self, request, obj=None):
+        # 修改表单时如果表单操作员与当前用户不一致，不允许修改
+        if obj: 
+            if request.user.customer != obj.pid.operator:
+                return False
+        return super().has_change_permission(request, obj)
+
     def change_view(self, request, object_id, form_url='', extra_context=None):
         extra_context = extra_context or {}
         # base_form = 'base_form'
