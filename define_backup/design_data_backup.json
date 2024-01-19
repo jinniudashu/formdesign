@@ -19377,7 +19377,7 @@
             "label": "会诊申请",
             "name": null,
             "hssc_id": "b37067f0-5692-11ee-ad57-0242ac170002",
-            "service": "e03f9d54-9aa1-11ec-bde1-8a6e55faf877",
+            "service": "9fb42996-b6dd-11ec-8425-0ebea05fc526",
             "event_rule": "0180c9d6-5692-11ee-b25d-0242ac170002",
             "system_operand": "e0dee611-a42f-11ec-8e78-4889e7cf38c9",
             "next_service": "48e716b8-5692-11ee-85c2-0242ac170002",
