@@ -369,6 +369,7 @@ class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
 class FormComponentsSetting(HsscBase):
     form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="表单")
     component = models.ForeignKey(Component, on_delete=models.CASCADE, verbose_name="字段")
+    inherit_value = models.BooleanField(default=True, verbose_name="继承值")
     default_value = models.CharField(max_length=255, null=True, blank=True, verbose_name="默认值")
     is_required = models.BooleanField(default=False, verbose_name="是否必填")
     position = models.PositiveSmallIntegerField(default=100, verbose_name="位置顺序")
@@ -385,6 +386,7 @@ class FormComponentsSetting(HsscBase):
 class FormListComponentsSetting(HsscBase):
     form = models.ForeignKey(BuessinessForm, on_delete=models.CASCADE, verbose_name="表单")
     component = models.ForeignKey(Component, on_delete=models.CASCADE, verbose_name="字段")
+    inherit_value = models.BooleanField(default=True, verbose_name="继承值")
     default_value = models.CharField(max_length=255, null=True, blank=True, verbose_name="默认值")
     is_required = models.BooleanField(default=False, verbose_name="是否必填")
     position = models.PositiveSmallIntegerField(default=100, verbose_name="位置顺序")
@@ -1057,7 +1059,7 @@ class ServiceRule(HsscBase):
     system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, blank=True, null=True, verbose_name='系统作业')
     next_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='next_service', verbose_name='后续服务')
     receive_data_from = models.ManyToManyField(Service, blank=True, related_name='receive_data_from', verbose_name='接收数据')
-    Receive_form = [(0, '否'), (1, '接收，不可编辑'), (2, '接收，可以编辑')]  # 接收表单数据
+    Receive_form = [(0, '否'), (1, '接收'),]  # 接收表单数据
     passing_data = models.PositiveSmallIntegerField(choices=Receive_form, default=0,  blank=True, null=True, verbose_name='接收表单')
     apply_to_group = models.BooleanField(choices=[(False, '否'), (True, '是')], default=False, verbose_name='使用分组')
     Complete_feedback = [(0, '否'), (1, '返回完成状态'), (2, '返回表单')]
