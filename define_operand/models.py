@@ -350,6 +350,7 @@ class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
     description = models.TextField(max_length=255, null=True, blank=True, verbose_name="表单说明")
     Form_class = [(1, '调查类'), (2, '诊断类'), (3, '治疗类')]
     form_class = models.PositiveSmallIntegerField(choices=Form_class, null=True, verbose_name="表单类型")
+    form_fields = models.JSONField(null=True, blank=True, verbose_name="表单字段")
     api_fields = models.JSONField(null=True, blank=True, verbose_name="API字段")
 
     class Meta:
@@ -363,7 +364,24 @@ class BuessinessForm(GenerateFormsScriptMixin, HsscPymBase):
         if self.name is None or self.name == '':
             self.name = f'{"_".join(lazy_pinyin(self.label))}'
 
+        # 收集表单字段设置
+        form_fields = list(self.formcomponentssetting_set.values('component__name', 'component__label', 'inherit_value', 'default_value', 'is_required', 'position', 'show_hint'))
+        form_list_fields = list(self.formlistcomponentssetting_set.values('component__name', 'component__label', 'inherit_value', 'default_value', 'is_required', 'position', 'autofill_fields'))
+        computed_fields = list(self.computecomponentssetting_set.values('component__name', 'component__label', 'description'))
+
+        # 组装成字典
+        fields_dict = {
+            'form_fields': form_fields,
+            'form_list_fields': form_list_fields,
+            'computed_fields': computed_fields
+        }
+        
+        # 将字典转换为JSON并保存
+        self.form_fields = json.dumps(fields_dict)
+
+        # 调用超类的save方法
         super().save(*args, **kwargs)
+
 
 # 业务表单字段设置
 class FormComponentsSetting(HsscBase):
@@ -1058,7 +1076,6 @@ class ServiceRule(HsscBase):
     event_rule = models.ForeignKey(EventRule, on_delete=models.CASCADE,  blank=True, null=True, verbose_name='条件事件')
     system_operand = models.ForeignKey(SystemOperand, on_delete=models.CASCADE, blank=True, null=True, verbose_name='系统作业')
     next_service = models.ForeignKey(Service, on_delete=models.CASCADE, blank=True, null=True, related_name='next_service', verbose_name='后续服务')
-    receive_data_from = models.ManyToManyField(Service, blank=True, related_name='receive_data_from', verbose_name='接收数据')
     Receive_form = [(0, '否'), (1, '接收'),]  # 接收表单数据
     passing_data = models.PositiveSmallIntegerField(choices=Receive_form, default=0,  blank=True, null=True, verbose_name='接收表单')
     apply_to_group = models.BooleanField(choices=[(False, '否'), (True, '是')], default=False, verbose_name='使用分组')

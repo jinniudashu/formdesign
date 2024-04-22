@@ -89,7 +89,7 @@ class BuessinessFormAdmin(admin.ModelAdmin):
     list_display_links = ['label', 'name',]
     fieldsets = (
         (None, {
-            'fields': (('label', 'name_icpc'), 'description', 'form_class', ('api_fields', 'name', 'hssc_id'), )
+            'fields': (('label', 'name_icpc'), 'description', 'form_class', 'form_fields', ('api_fields', 'name', 'hssc_id'), )
         }),
     )
     search_fields = ['name', 'label', 'pym']
@@ -177,7 +177,6 @@ class ServiceRuleAdmin(admin.ModelAdmin):
     list_display = ['label', 'service', 'event_rule', 'system_operand', 'next_service', 'passing_data', 'apply_to_group','complete_feedback', 'is_active']
     list_editable = ['service', 'event_rule', 'system_operand', 'next_service', 'passing_data', 'apply_to_group','complete_feedback', 'is_active']
     list_display_links = ['label', ]
-    filter_horizontal = ('receive_data_from',)
     readonly_fields = ['name', 'hssc_id']
     autocomplete_fields = ['service', 'next_service', 'event_rule']
     ordering = ['id']

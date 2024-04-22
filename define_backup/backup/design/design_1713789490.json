@@ -18877,7 +18877,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": null,
@@ -18894,7 +18895,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": null,
@@ -18911,7 +18913,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": null,
@@ -18928,7 +18931,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": null,
@@ -18945,7 +18949,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": null,
@@ -18962,7 +18967,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": null,
@@ -18979,7 +18985,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": null,
@@ -18996,7 +19003,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": null,
@@ -19013,7 +19021,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "二型糖尿病诊断",
@@ -19030,7 +19039,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": null,
@@ -19047,7 +19057,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": null,
@@ -19064,7 +19075,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": null,
@@ -19081,7 +19093,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": null,
@@ -19098,7 +19111,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "注射类药品治疗规则",
@@ -19115,7 +19129,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "空腹血糖超过正常值且有糖尿病症状",
@@ -19132,7 +19147,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "建档调查规则",
@@ -19149,7 +19165,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "二型糖尿病推荐诊断规则",
@@ -19166,7 +19183,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "申请空腹血糖检查服务",
@@ -19183,7 +19201,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": false
+            "is_active": false,
+            "receive_data_from": []
         },
         {
             "label": "糖尿病监测评估",
@@ -19200,7 +19219,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "糖尿病监测评估不稳定",
@@ -19217,7 +19237,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "预约完成",
@@ -19234,7 +19255,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "派单规则",
@@ -19251,7 +19273,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "诊所拒绝接单",
@@ -19268,7 +19291,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "首次到店",
@@ -19285,7 +19309,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "首次未到店",
@@ -19302,7 +19327,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "结束门诊",
@@ -19319,7 +19345,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "理赔申请提交成功",
@@ -19336,7 +19363,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "保险理赔审核不通过",
@@ -19353,7 +19381,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "门诊结束",
@@ -19370,7 +19399,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "门诊结束",
@@ -19387,7 +19417,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "理赔申请审核通过",
@@ -19404,7 +19435,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "理赔申请审核不通过",
@@ -19421,7 +19453,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "门诊未结束",
@@ -19438,7 +19471,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "诊所安排复诊",
@@ -19455,7 +19489,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "重新预约完成",
@@ -19472,7 +19507,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "诊所安排服务完成",
@@ -19489,7 +19525,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "重新申请理赔",
@@ -19506,7 +19543,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "门诊记录会诊完成",
@@ -19523,7 +19561,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "诊所接单",
@@ -19540,7 +19579,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "诊所接单完成",
@@ -19557,7 +19597,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "安排服务计划",
@@ -19574,7 +19615,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "拒绝安排服务计划",
@@ -19591,7 +19633,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "计划安排完成",
@@ -19608,7 +19651,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "复诊安排完成",
@@ -19625,7 +19669,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "复诊到店",
@@ -19642,7 +19687,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "复诊未到店",
@@ -19659,7 +19705,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "二型糖尿病推荐运动处方",
@@ -19676,7 +19723,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "一型糖尿病诊断",
@@ -19693,7 +19741,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "评估糖尿病控制不稳定",
@@ -19710,7 +19759,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "血糖检查完成返回复诊",
@@ -19727,7 +19777,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "test",
@@ -19744,7 +19795,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "test1",
@@ -19761,7 +19813,8 @@
             "message": "无法开具处方",
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "test2",
@@ -19778,7 +19831,8 @@
             "message": "该药品使用有风险",
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "非胰岛素依赖糖尿病诊后回访规则",
@@ -19795,7 +19849,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "胰岛素依赖型糖尿病诊后回访规则",
@@ -19812,7 +19867,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "回访患者评价低",
@@ -19829,7 +19885,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "二型糖尿病初期推荐服务包",
@@ -19846,7 +19903,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "一型糖尿病初期推荐服务包",
@@ -19863,7 +19921,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "糖尿病遗传性判断",
@@ -19880,7 +19939,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "会诊申请",
@@ -19897,7 +19957,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "分发会诊建议",
@@ -19914,7 +19975,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "形成会诊结果",
@@ -19931,7 +19993,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "会诊后药物干预",
@@ -19948,7 +20011,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "院外监测空腹血糖异常",
@@ -19965,7 +20029,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "转诊转出",
@@ -19982,7 +20047,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "预约通知",
@@ -19999,7 +20065,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "空腹血糖检查结果通知",
@@ -20016,7 +20083,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         },
         {
             "label": "门诊发药通知",
@@ -20033,7 +20101,8 @@
             "message": null,
             "interval_rule": null,
             "interval_time": null,
-            "is_active": true
+            "is_active": true,
+            "receive_data_from": []
         }
     ],
     "project": [
