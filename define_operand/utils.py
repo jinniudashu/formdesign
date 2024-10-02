@@ -220,7 +220,7 @@ def keyword_search(s, keywords_list):
 
 
 ########################################################################################################################
-def generate_form_event_js_script(rules, domain, class_name, autofill_fields, show_icpc_hint):
+def generate_form_event_js_script(rules, class_name, autofill_fields, show_icpc_hint):
     import json
     from define_icpc.models import HintFields
 
@@ -232,13 +232,13 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
 <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>    
 <script>
     document.addEventListener('DOMContentLoaded', async function() {{
-        const domain = Cookies.get('environment') === 'dev' ? '127.0.0.1:8000' : '{domain}';
+        const domain = window.location.origin;
 
         // 根据表单检测范围，从CustomerServiceLog获取历史记录，构造{keys[0]}数组上下文
         const customerId = Cookies.get('customer_id');
         const period = 'ALL';  // 'ALL' or 'LAST_WEEK_SERVICES'
         const form_class = 0;  // 指定表单类别
-        const fetchCustomerServiceLogURL = `http://${{domain}}/core/api/customer_service_log/`;
+        const fetchCustomerServiceLogURL = `${{domain}}/core/api/customer_service_log/`;
         const fetchCustomerServiceLog = async (customerId, period=null, form_class=0) => {{
             let url = fetchCustomerServiceLogURL + `?customer=${{customerId}}`
             if (period !== null) {{
@@ -280,7 +280,7 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
         // 显示字段提示
         // ******************************************
         const showIcpcHint = async (node) => {{
-            const fetchIcpcItemURL = `http://${{domain}}/core/api/get_icpc_item/`;
+            const fetchIcpcItemURL = `${{domain}}/core/api/get_icpc_item/`;
             const fetchIcpcItem = async (node_field_name, itemId) => {{
                 let url = fetchIcpcItemURL + `?fieldName=${{node_field_name}}&itemId=${{itemId}}`
                 try {{
@@ -346,7 +346,7 @@ def generate_form_event_js_script(rules, domain, class_name, autofill_fields, sh
         const thElements = document.querySelector('table thead tr').querySelectorAll('th')
         // 自动补全字典字段
         const autocompleteFields = async (node) => {
-            const autocompleteFieldsURL = `http://${domain}/core/api/get_medicine_item/`;
+            const autocompleteFieldsURL = `${domain}/core/api/get_medicine_item/`;
             const fetchMedicineItem = async (itemId) => {
                 let url = autocompleteFieldsURL + `?itemId=${itemId}`
                 try {

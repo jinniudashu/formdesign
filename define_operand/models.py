@@ -110,13 +110,13 @@ class GenerateFormsScriptMixin(object):
     生成models.py, admin.py, serializers.py 定义脚本
     '''
     # 生成models, admin, forms脚本
-    def generate_script(self, domain):
+    def generate_script(self):
         script = {}
-        script['models'], script['admin'], script['serializers'], script['forms'], script['templates'] = self._create_model_script(domain)
+        script['models'], script['admin'], script['serializers'], script['forms'], script['templates'] = self._create_model_script()
         return script
 
     # generate model and admin script
-    def _create_model_script(self, domain):
+    def _create_model_script(self):
         # construct model script
         head_script = f'class {self.name.capitalize()}(HsscFormModel):'
         fields_script = ''
@@ -440,7 +440,7 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             return False
 
     # generate model and admin script
-    def _create_model_script(self, domain):
+    def _create_model_script(self):
         # construct model script
         head_script = f'class {self.name.capitalize()}(HsscFormModel):'
         head_script_list = f'''class {self.name.capitalize()}_list(models.Model):
@@ -605,7 +605,7 @@ class GenerateServiceScriptMixin(GenerateFormsScriptMixin):
             if (computation_logic):
                 template_script = generate_js_script(generate_params)
             if (form_event_rules or autofill_fields or show_hint):
-                template_script = generate_form_event_js_script(form_event_rules, domain, self.name.lower(), autofill_fields, show_hint)
+                template_script = generate_form_event_js_script(form_event_rules, self.name.lower(), autofill_fields, show_hint)
 
         # construct model footer script
         footer_script = self._create_model_footer_script(is_base_form)

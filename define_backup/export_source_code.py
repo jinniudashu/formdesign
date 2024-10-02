@@ -14,7 +14,7 @@ from define_operand.utils import identify_leaf_changes
 # 导出作业脚本, 被define_operand.admin调用
 def export_source_code(project):
     # 导出forms models.py, admin.py, serializers.py脚本
-    def __get_models_admin_serializer_forms_script(query_set, domain):
+    def __get_models_admin_serializer_forms_script(query_set):
         file_header = {
             'models_file_head': service_models_file_head,
             'admin_file_head': service_admin_file_head,
@@ -29,7 +29,7 @@ def export_source_code(project):
         templates_script = {}
 
         for item in query_set:
-            script = item.generate_script(domain)  # 生成最新脚本
+            script = item.generate_script()  # 生成最新脚本
             models_script = f'{models_script}{script["models"]}'
             admin_script = f'{admin_script}{script["admin"]}'
             serializers_script = f'{serializers_script}{script["serializers"]}'
@@ -244,7 +244,7 @@ class FieldsType(Enum):
 
     # 生成apps['service']的脚本和用于计算字段的自定义template，生成服务类型为“用户业务服务”的服务
     project_queryset = project.get_queryset_by_model('Service').filter(service_type=2).order_by('-id')
-    source_code['script']['service'] = __get_models_admin_serializer_forms_script(project_queryset, project.domain)  # 导出App:service脚本
+    source_code['script']['service'] = __get_models_admin_serializer_forms_script(project_queryset)  # 导出App:service脚本
     source_code['script']['templates'] = source_code['script']['service']['templates']
     source_code['script']['service'].pop('templates')
 
